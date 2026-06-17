@@ -34,6 +34,9 @@
             "version": "2017-03-31",
             "operations": [
                 {
+                    "target": "com.amazonaws.glue#AssociateGlossaryTerms"
+                },
+                {
                     "target": "com.amazonaws.glue#BatchCreatePartition"
                 },
                 {
@@ -62,6 +65,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#BatchGetDevEndpoints"
+                },
+                {
+                    "target": "com.amazonaws.glue#BatchGetIterableForms"
                 },
                 {
                     "target": "com.amazonaws.glue#BatchGetJobs"
@@ -133,6 +139,12 @@
                     "target": "com.amazonaws.glue#CreateDevEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.glue#CreateGlossary"
+                },
+                {
+                    "target": "com.amazonaws.glue#CreateGlossaryTerm"
+                },
+                {
                     "target": "com.amazonaws.glue#CreateGlueIdentityCenterConfiguration"
                 },
                 {
@@ -190,6 +202,15 @@
                     "target": "com.amazonaws.glue#CreateWorkflow"
                 },
                 {
+                    "target": "com.amazonaws.glue#DeleteAsset"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteAssetType"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteAttachment"
+                },
+                {
                     "target": "com.amazonaws.glue#DeleteBlueprint"
                 },
                 {
@@ -227,6 +248,15 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteDevEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteFormType"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteGlossary"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteGlossaryTerm"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteGlueIdentityCenterConfiguration"
@@ -302,6 +332,15 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DescribeIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.glue#DisassociateGlossaryTerms"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetAsset"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetAssetType"
                 },
                 {
                     "target": "com.amazonaws.glue#GetBlueprint"
@@ -401,6 +440,15 @@
                 },
                 {
                     "target": "com.amazonaws.glue#GetEntityRecords"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetFormType"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetGlossary"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetGlossaryTerm"
                 },
                 {
                     "target": "com.amazonaws.glue#GetGlueIdentityCenterConfiguration"
@@ -550,6 +598,9 @@
                     "target": "com.amazonaws.glue#ImportCatalogToGlue"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListAssetTypes"
+                },
+                {
                     "target": "com.amazonaws.glue#ListBlueprints"
                 },
                 {
@@ -592,7 +643,19 @@
                     "target": "com.amazonaws.glue#ListEntities"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListFormTypes"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListGlossaries"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListGlossaryTerms"
+                },
+                {
                     "target": "com.amazonaws.glue#ListIntegrationResourceProperties"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListIterableForms"
                 },
                 {
                     "target": "com.amazonaws.glue#ListJobs"
@@ -634,10 +697,22 @@
                     "target": "com.amazonaws.glue#ModifyIntegration"
                 },
                 {
+                    "target": "com.amazonaws.glue#PutAsset"
+                },
+                {
+                    "target": "com.amazonaws.glue#PutAssetType"
+                },
+                {
+                    "target": "com.amazonaws.glue#PutAttachment"
+                },
+                {
                     "target": "com.amazonaws.glue#PutDataCatalogEncryptionSettings"
                 },
                 {
                     "target": "com.amazonaws.glue#PutDataQualityProfileAnnotation"
+                },
+                {
+                    "target": "com.amazonaws.glue#PutFormType"
                 },
                 {
                     "target": "com.amazonaws.glue#PutResourcePolicy"
@@ -668,6 +743,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#RunStatement"
+                },
+                {
+                    "target": "com.amazonaws.glue#Search"
                 },
                 {
                     "target": "com.amazonaws.glue#SearchTables"
@@ -785,6 +863,12 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateDevEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateGlossary"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateGlossaryTerm"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration"
@@ -2686,6 +2770,226 @@
                 }
             }
         },
+        "com.amazonaws.glue#AssetDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#AssetFormEntry": {
+            "type": "structure",
+            "members": {
+                "FormTypeId": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type that defines this form's schema.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.glue#FormContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON content of the form, conforming to the schema of the specified form type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A form on an asset, consisting of the form type identifier and its JSON content.</p>"
+            }
+        },
+        "com.amazonaws.glue#AssetFormKey": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#AssetFormMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#AssetFormKey"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#AssetFormEntry"
+            }
+        },
+        "com.amazonaws.glue#AssetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1087
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\:\\/\\.\\_\\*]+$"
+            }
+        },
+        "com.amazonaws.glue#AssetName": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#AssetTypeFormKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
+            }
+        },
+        "com.amazonaws.glue#AssetTypeFormReference": {
+            "type": "structure",
+            "members": {
+                "FormTypeIdentifier": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the referenced form type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a form type that is included in an asset type.</p>"
+            }
+        },
+        "com.amazonaws.glue#AssetTypeFormsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#AssetTypeFormKey"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#AssetTypeFormReference"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.glue#AssetTypeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.glue#AssetTypeItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an asset type.</p>"
+            }
+        },
+        "com.amazonaws.glue#AssetTypeItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#AssetTypeItem"
+            }
+        },
+        "com.amazonaws.glue#AssetTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
+            }
+        },
+        "com.amazonaws.glue#AssociateGlossaryTerms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#AssociateGlossaryTermsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#AssociateGlossaryTermsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates one or more glossary terms with an asset in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/assets/{Identifier}/associate-glossary-terms",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#AssociateGlossaryTermsRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to associate glossary terms with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GlossaryTermIdentifiers": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of glossary term identifiers to associate with the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#AssociateGlossaryTermsResponse": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
+                    }
+                },
+                "GlossaryTerms": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms now associated with the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#AthenaConnectorSource": {
             "type": "structure",
             "members": {
@@ -2739,6 +3043,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies a connector to an Amazon Athena data source.</p>"
+            }
+        },
+        "com.amazonaws.glue#AttachmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.glue#AttemptCount": {
@@ -3868,6 +4182,91 @@
                     "target": "com.amazonaws.glue#DevEndpointNames",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>DevEndpoints</code> not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#BatchGetIterableForms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#BatchGetIterableFormsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#BatchGetIterableFormsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves multiple items from an iterable form on an asset in Glue Data Catalog in a single request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/assets/{AssetIdentifier}/iterable-forms/{IterableFormName}/batch-get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchGetIterableFormsRequest": {
+            "type": "structure",
+            "members": {
+                "AssetIdentifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form to retrieve items from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ItemIdentifiers": {
+                    "target": "com.amazonaws.glue#ItemIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of item identifiers to retrieve. Each identifier can be an item ID or item name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#BatchGetIterableFormsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#IterableFormItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of retrieved iterable form items.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.glue#ItemErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of errors for items that could not be retrieved.</p>"
                     }
                 }
             },
@@ -11433,6 +11832,216 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#CreateGlossary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateGlossaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateGlossaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a business glossary in Glue Data Catalog. A glossary is a container for glossary terms that define business concepts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/glossaries",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#CreateGlossaryRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the glossary.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#CreateGlossaryResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the glossary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#CreateGlossaryTerm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateGlossaryTermRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateGlossaryTermResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a glossary term within a business glossary in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/glossary-terms",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#CreateGlossaryTermRequest": {
+            "type": "structure",
+            "members": {
+                "GlossaryIdentifier": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary in which to create the term.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryTermName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary term.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the glossary term.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A long description of the glossary term.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#CreateGlossaryTermResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term.</p>"
+                    }
+                },
+                "GlossaryId": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary containing this term.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryTermName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary term.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long description of the glossary term.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#CreateGlueIdentityCenterConfiguration": {
             "type": "operation",
             "input": {
@@ -13650,6 +14259,9 @@
                 "smithy.api#documentation": "<p>Specifies an XML classifier for <code>CreateClassifier</code> to create.</p>"
             }
         },
+        "com.amazonaws.glue#CreatedAt": {
+            "type": "timestamp"
+        },
         "com.amazonaws.glue#CreatedTimestamp": {
             "type": "string"
         },
@@ -15666,6 +16278,195 @@
                 "smithy.api#pattern": "[^<>&'\"]"
             }
         },
+        "com.amazonaws.glue#DeleteAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an asset from Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/assets/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteAssetRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteAssetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteAssetType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteAssetTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteAssetTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an asset type from Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/asset-types/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteAssetTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteAssetTypeResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a form attachment from an asset in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/assets/{Identifier}/attachments/{AttachmentName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset from which to delete the attachment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentName": {
+                    "target": "com.amazonaws.glue#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attachment to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#DeleteBehavior": {
             "type": "enum",
             "members": {
@@ -16417,6 +17218,183 @@
             }
         },
         "com.amazonaws.glue#DeleteDevEndpointResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteFormType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteFormTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteFormTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a form type from Glue Data Catalog. A form type cannot be deleted if it is still referenced by an asset type.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/form-types/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteFormTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteFormTypeResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteGlossary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteGlossaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteGlossaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a business glossary from Glue Data Catalog. A glossary cannot be deleted if it still contains glossary terms.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/glossaries/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteGlossaryRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteGlossaryResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteGlossaryTerm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteGlossaryTermRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteGlossaryTermResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a glossary term from Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/glossary-terms/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteGlossaryTermRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteGlossaryTermResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -18648,6 +19626,93 @@
                 "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
             }
         },
+        "com.amazonaws.glue#DisassociateGlossaryTerms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DisassociateGlossaryTermsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DisassociateGlossaryTermsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the association of one or more glossary terms from an asset in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/assets/{Identifier}/disassociate-glossary-terms",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#DisassociateGlossaryTermsRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to disassociate glossary terms from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GlossaryTermIdentifiers": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of glossary term identifiers to disassociate from the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DisassociateGlossaryTermsResponse": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
+                    }
+                },
+                "GlossaryTerms": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remaining glossary terms associated with the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#DisplayName": {
             "type": "string",
             "traits": {
@@ -20597,6 +21662,63 @@
                 "smithy.api#documentation": "<p>Specifies configuration properties for a Find Matches task run.</p>"
             }
         },
+        "com.amazonaws.glue#FormContent": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#FormTypeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.glue#FormTypeItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#FormTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a form type.</p>"
+            }
+        },
+        "com.amazonaws.glue#FormTypeItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#FormTypeItem"
+            }
+        },
+        "com.amazonaws.glue#FormTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z]\\w*$"
+            }
+        },
+        "com.amazonaws.glue#FormTypeSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                }
+            }
+        },
         "com.amazonaws.glue#FormatString": {
             "type": "string",
             "traits": {
@@ -20665,6 +21787,202 @@
         },
         "com.amazonaws.glue#GenericString": {
             "type": "string"
+        },
+        "com.amazonaws.glue#GetAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetAssetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetAssetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the metadata for an asset in Glue Data Catalog, including its forms, additional attachments, and associated glossary terms.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/assets/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#GetAssetInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetAssetOutput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#AssetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.glue#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.glue#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset was last updated.</p>"
+                    }
+                },
+                "AssetTypeId": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type for this asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GlossaryTerms": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the glossary terms associated with the asset.</p>"
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms on the asset, keyed by form name.</p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional attachments on the asset for more context, keyed by attachment name.</p>"
+                    }
+                },
+                "IterableForms": {
+                    "target": "com.amazonaws.glue#IterableFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The iterable forms available on the asset, keyed by form name (for example, <code>columns</code>). Use the form name with <code>ListIterableForms</code> or <code>BatchGetIterableForms</code> to retrieve the form's items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetAssetType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetAssetTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetAssetTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves an asset type in Glue Data Catalog by its identifier.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/asset-types/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#GetAssetTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetAssetTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset type.</p>"
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetTypeFormsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms that make up the asset type, keyed by form name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.glue#GetBlueprint": {
             "type": "operation",
@@ -23280,6 +24598,240 @@
                     "target": "com.amazonaws.glue#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetFormType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetFormTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetFormTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a form type in Glue Data Catalog by its identifier.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/form-types/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#GetFormTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetFormTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#FormTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form type.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#FormTypeSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Smithy IDL schema of the form type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetGlossary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetGlossaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetGlossaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a business glossary in Glue Data Catalog by its identifier.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/glossaries/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#GetGlossaryRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetGlossaryResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the glossary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetGlossaryTerm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetGlossaryTermRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetGlossaryTermResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a glossary term in Glue Data Catalog by its identifier.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/glossary-terms/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#GetGlossaryTermRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetGlossaryTermResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term.</p>"
+                    }
+                },
+                "GlossaryId": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary containing this term.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryTermName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary term.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long description of the glossary term.</p>"
                     }
                 }
             },
@@ -27513,6 +29065,124 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#GlossaryId": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#GlossaryItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the glossary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a business glossary.</p>"
+            }
+        },
+        "com.amazonaws.glue#GlossaryItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#GlossaryItem"
+            }
+        },
+        "com.amazonaws.glue#GlossaryLongDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.glue#GlossaryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.glue#GlossaryShortDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermId": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#GlossaryTermIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#GlossaryTermId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryTermName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary term.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a glossary term.</p>"
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#GlossaryTermItem"
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.glue#GlueEncryptionException": {
             "type": "structure",
             "members": {
@@ -29836,6 +31506,192 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.glue#ItemDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#ItemError": {
+            "type": "structure",
+            "members": {
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item that caused the error.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.glue#ItemErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.glue#ItemErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that occurred when retrieving an iterable form item.</p>"
+            }
+        },
+        "com.amazonaws.glue#ItemErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#ItemErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ItemError"
+            }
+        },
+        "com.amazonaws.glue#ItemErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#ItemId": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#ItemIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1087
+                }
+            }
+        },
+        "com.amazonaws.glue#ItemIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ItemIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.glue#ItemName": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#IterableFormEntry": {
+            "type": "structure",
+            "members": {
+                "FormTypeId": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The form type identifier of the iterable form (for example, <code>columns</code>), used to retrieve its items via <code>ListIterableForms</code> or <code>BatchGetIterableForms</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An iterable form available on an asset, identified by its form type.</p>"
+            }
+        },
+        "com.amazonaws.glue#IterableFormItem": {
+            "type": "structure",
+            "members": {
+                "ItemId": {
+                    "target": "com.amazonaws.glue#ItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the item.</p>"
+                    }
+                },
+                "ItemName": {
+                    "target": "com.amazonaws.glue#ItemName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the item.</p>"
+                    }
+                },
+                "GlossaryTerms": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the glossary terms associated with the item.</p>"
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms on the item, keyed by form name.</p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional attachments on the item for more context, keyed by attachment name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A full iterable form item with its forms.</p>"
+            }
+        },
+        "com.amazonaws.glue#IterableFormItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IterableFormItem"
+            }
+        },
+        "com.amazonaws.glue#IterableFormKey": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#IterableFormListItem": {
+            "type": "structure",
+            "members": {
+                "ItemId": {
+                    "target": "com.amazonaws.glue#ItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the item.</p>"
+                    }
+                },
+                "ItemName": {
+                    "target": "com.amazonaws.glue#ItemName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the item.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#ItemDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the item.</p>"
+                    }
+                },
+                "GlossaryTerms": {
+                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the glossary terms associated with the item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an item in an iterable form.</p>"
+            }
+        },
+        "com.amazonaws.glue#IterableFormListItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IterableFormListItem"
+            }
+        },
+        "com.amazonaws.glue#IterableFormMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#IterableFormKey"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#IterableFormEntry"
+            }
+        },
+        "com.amazonaws.glue#IterableFormName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*(::[a-zA-Z][a-zA-Z0-9_]*)?$"
+            }
+        },
         "com.amazonaws.glue#JDBCConnectionType": {
             "type": "enum",
             "members": {
@@ -31901,6 +33757,85 @@
                 "smithy.api#documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
             }
         },
+        "com.amazonaws.glue#ListAssetTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListAssetTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListAssetTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the asset types defined in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/asset-types",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListAssetTypesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListAssetTypesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#AssetTypeItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of asset type items.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#ListBlueprints": {
             "type": "operation",
             "input": {
@@ -32962,6 +34897,252 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#ListFormTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListFormTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListFormTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the form types defined in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/form-types",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListFormTypesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListFormTypesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#FormTypeItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of form type items.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#ListGlossaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListGlossariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListGlossariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists business glossaries in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/glossaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListGlossariesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListGlossariesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#GlossaryItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of glossary items.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#ListGlossaryTerms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListGlossaryTermsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListGlossaryTermsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists glossary terms within a business glossary in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/glossary-terms",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListGlossaryTermsRequest": {
+            "type": "structure",
+            "members": {
+                "GlossaryIdentifier": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary whose terms to list.</p>",
+                        "smithy.api#httpQuery": "glossaryIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListGlossaryTermsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#GlossaryTermItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of glossary term items.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#ListIntegrationResourceProperties": {
             "type": "operation",
             "input": {
@@ -33036,6 +35217,104 @@
                     "target": "com.amazonaws.glue#String1024",
                     "traits": {
                         "smithy.api#documentation": "<p>This is the pagination token for the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#ListIterableForms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListIterableFormsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListIterableFormsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the items in an iterable form on an asset in Glue Data Catalog. For example, lists the columns of a table asset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/assets/{AssetIdentifier}/iterable-forms/{IterableFormName}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListIterableFormsRequest": {
+            "type": "structure",
+            "members": {
+                "AssetIdentifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form to list items from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListIterableFormsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#IterableFormListItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of iterable form items.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
                     }
                 }
             },
@@ -34817,6 +37096,34 @@
         },
         "com.amazonaws.glue#MessageString": {
             "type": "string"
+        },
+        "com.amazonaws.glue#MetadataDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.glue#MetadataFormContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300000
+                }
+            }
+        },
+        "com.amazonaws.glue#MetadataFormTypeIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?![\\.:])([\\w.]+(::))?[A-Z]\\w*$"
+            }
         },
         "com.amazonaws.glue#MetadataInfo": {
             "type": "structure",
@@ -37382,6 +39689,352 @@
                 }
             }
         },
+        "com.amazonaws.glue#PutAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#PutAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#PutAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates an asset in Glue Data Catalog. If the asset already exists, this operation updates it; otherwise, a new asset is created.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/assets",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#PutAssetRequest": {
+            "type": "structure",
+            "members": {
+                "AssetTypeId": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type for the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset. If an asset with this identifier already exists, it is updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#AssetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset.</p>"
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms to set on the asset, keyed by form name. Each entry specifies the form type and its JSON content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#PutAssetResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#AssetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.glue#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset was created.</p>"
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms attached to the asset, keyed by form name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#PutAssetType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#PutAssetTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#PutAssetTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates an asset type in Glue Data Catalog. An asset type defines the structure of assets by specifying which forms they include. If an asset type with the given name already exists, it is updated.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/asset-types",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#PutAssetTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetTypeFormsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms that make up the asset type, keyed by form name. Each entry references the form type that defines the form's schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#PutAssetTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset type.</p>"
+                    }
+                },
+                "Forms": {
+                    "target": "com.amazonaws.glue#AssetTypeFormsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms that make up the asset type, keyed by form name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#PutAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#PutAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#PutAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a form to an asset or an iterable form item in Glue Data Catalog. If an attachment with the same name already exists, it is overwritten.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/assets/{AssetIdentifier}/attachment",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#PutAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "AssetIdentifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to attach the form to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment targets an item within the iterable form rather than the asset itself.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>"
+                    }
+                },
+                "AttachmentName": {
+                    "target": "com.amazonaws.glue#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.glue#MetadataFormContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON content of the form, conforming to the schema of the specified form type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FormTypeId": {
+                    "target": "com.amazonaws.glue#MetadataFormTypeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type for this attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#PutAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "AssetId": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form, if the attachment targets an item.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
+                    }
+                },
+                "AttachmentName": {
+                    "target": "com.amazonaws.glue#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attachment.</p>"
+                    }
+                },
+                "FormTypeId": {
+                    "target": "com.amazonaws.glue#MetadataFormTypeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type for this attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#PutDataCatalogEncryptionSettings": {
             "type": "operation",
             "input": {
@@ -37483,6 +40136,95 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Left blank.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#PutFormType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#PutFormTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#PutFormTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a form type in Glue Data Catalog. A form type defines the schema for structured metadata that can be attached to assets.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/form-types",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#PutFormTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#FormTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form type. Must start with an uppercase letter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#FormTypeSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Smithy IDL schema definition for the form type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#PutFormTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#FormTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form type.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#FormTypeSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Smithy IDL schema of the form type.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -41251,10 +43993,411 @@
                 }
             }
         },
+        "com.amazonaws.glue#Search": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#SearchInput"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#SearchOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for assets in Glue Data Catalog using full-text search, filters, sorting, and aggregations. Returns matching assets with relevance-ranked results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchAttributeFilter": {
+            "type": "structure",
+            "members": {
+                "Attribute": {
+                    "target": "com.amazonaws.glue#SearchAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute name to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.glue#SearchFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator. Valid values are <code>equals</code>, <code>greaterThan</code>, <code>greaterThanOrEquals</code>, <code>lessThan</code>, <code>lessThanOrEquals</code>, and <code>notExists</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.glue#SearchFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to compare against.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that compares an attribute value using an operator.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchFilterClause": {
+            "type": "union",
+            "members": {
+                "AndAllFilters": {
+                    "target": "com.amazonaws.glue#SearchFilterClauseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter clauses that must all match (logical AND).</p>"
+                    }
+                },
+                "OrAnyFilters": {
+                    "target": "com.amazonaws.glue#SearchFilterClauseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter clauses where at least one must match (logical OR).</p>"
+                    }
+                },
+                "AttributeFilter": {
+                    "target": "com.amazonaws.glue#SearchAttributeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter on a single attribute value.</p>"
+                    }
+                },
+                "MapFilter": {
+                    "target": "com.amazonaws.glue#SearchMapFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter on a map attribute's key-value pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter clause that supports nested boolean logic. Exactly one of <code>andAllFilters</code>, <code>orAnyFilters</code>, <code>attributeFilter</code>, or <code>mapFilter</code> must be specified.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchFilterClauseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#SearchFilterClause"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchFilterLongValue": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.glue#SearchFilterOperator": {
+            "type": "enum",
+            "members": {
+                "equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "equals"
+                    }
+                },
+                "greaterThan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "greaterThan"
+                    }
+                },
+                "greaterThanOrEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "greaterThanOrEquals"
+                    }
+                },
+                "lessThan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lessThan"
+                    }
+                },
+                "lessThanOrEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lessThanOrEquals"
+                    }
+                },
+                "notExists": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "notExists"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchFilterStringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchFilterValue": {
+            "type": "union",
+            "members": {
+                "StringValue": {
+                    "target": "com.amazonaws.glue#SearchFilterStringValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string filter value.</p>"
+                    }
+                },
+                "LongValue": {
+                    "target": "com.amazonaws.glue#SearchFilterLongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A long integer filter value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter value. Exactly one of <code>stringValue</code> or <code>longValue</code> must be specified.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchInput": {
+            "type": "structure",
+            "members": {
+                "SearchText": {
+                    "target": "com.amazonaws.glue#SearchText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to search for. At least one of <code>searchText</code> or <code>filterClause</code> must be provided.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#SearchMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#SearchNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                },
+                "Sort": {
+                    "target": "com.amazonaws.glue#SearchSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort criteria for the search results.</p>"
+                    }
+                },
+                "FilterClause": {
+                    "target": "com.amazonaws.glue#SearchFilterClause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter clause to apply to the search. Supports nested AND/OR logic with attribute-level and map-level filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#SearchMapFilter": {
+            "type": "structure",
+            "members": {
+                "Attribute": {
+                    "target": "com.amazonaws.glue#SearchAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map attribute name to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.glue#SearchMapKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key within the map attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.glue#SearchMapFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to compare against.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter on a map attribute's key-value pair.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchMapFilterValue": {
+            "type": "union",
+            "members": {
+                "StringValue": {
+                    "target": "com.amazonaws.glue#SearchFilterStringValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string filter value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map filter value. Currently supports string comparison only.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchMapKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.glue#SearchNextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#SearchOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#SearchResultItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of assets matching the search criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#SearchNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#SearchPropertyPredicates": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#PropertyPredicate"
+            }
+        },
+        "com.amazonaws.glue#SearchResultItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the matched asset.</p>"
+                    }
+                },
+                "AssetName": {
+                    "target": "com.amazonaws.glue#SearchResultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the matched asset.</p>"
+                    }
+                },
+                "AssetDescription": {
+                    "target": "com.amazonaws.glue#AssetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the matched asset.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.glue#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the matched asset was last updated.</p>"
+                    }
+                },
+                "AssetTypeId": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type for the matched asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single search result item representing a matched asset.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchResultItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#SearchResultItem"
+            }
+        },
+        "com.amazonaws.glue#SearchResultName": {
+            "type": "string"
+        },
+        "com.amazonaws.glue#SearchSort": {
+            "type": "structure",
+            "members": {
+                "Attribute": {
+                    "target": "com.amazonaws.glue#SearchAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute to sort by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Order": {
+                    "target": "com.amazonaws.glue#SearchSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order. Valid values are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort criteria for search results.</p>"
+            }
+        },
+        "com.amazonaws.glue#SearchSortOrder": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#SearchTables": {
@@ -41359,6 +44502,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#SearchText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.glue#SecretArn": {
@@ -48145,6 +51297,226 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#UpdateGlossary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateGlossaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateGlossaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a business glossary in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/glossaries/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateGlossaryRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name of the glossary.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the glossary.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateGlossaryResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the glossary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateGlossaryTerm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateGlossaryTermRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateGlossaryTermResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a glossary term in Glue Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/glossary-terms/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateGlossaryTermRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryTermName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name of the glossary term.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated short description of the glossary term.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated long description of the glossary term.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateGlossaryTermResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#GlossaryTermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary term.</p>"
+                    }
+                },
+                "GlossaryId": {
+                    "target": "com.amazonaws.glue#GlossaryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the glossary containing this term.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#GlossaryTermName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the glossary term.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long description of the glossary term.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration": {
             "type": "operation",
             "input": {
@@ -49637,6 +53009,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Specifies an XML classifier to be updated.</p>"
             }
+        },
+        "com.amazonaws.glue#UpdatedAt": {
+            "type": "timestamp"
         },
         "com.amazonaws.glue#UpdatedTimestamp": {
             "type": "string"

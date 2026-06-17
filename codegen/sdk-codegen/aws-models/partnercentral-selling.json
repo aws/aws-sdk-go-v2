@@ -12004,7 +12004,7 @@
         "com.amazonaws.partnercentralselling#ProspectingTaskArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:partnercentral-selling:.*:.*:catalog/.*/task/task-[0-9a-z]{14}$"
+                "smithy.api#pattern": "^arn:aws:partnercentral-selling:.*:.*:catalog/.*/prospecting-from-engagement-task/task-[0-9a-z]{14}$"
             }
         },
         "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier": {

@@ -10752,7 +10752,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^$|^https://(?!(?:10|127|169\\.254|192\\.168|172\\.(?:1[6-9]|2[0-9]|3[01]))\\.)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\\.[a-zA-Z]{2,}(?::[0-9]{1,5})?(?:/[a-zA-Z0-9\\-._~%!$&'()*+,;=:'@]*(?:/[a-zA-Z0-9\\-._~%!$&'()*+,;=:'@]*)*)?(?:\\?[a-zA-Z0-9\\-._~%!$&'()*+,;=:'/@?]+)?$"
+                "smithy.api#pattern": "^$|^https://(?!(?:10|127|169\\.254|192\\.168|172\\.(?:1[6-9]|2[0-9]|3[01]))\\.)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\\.[a-zA-Z]{2,}(?::[0-9]{1,5})?(?:/[a-zA-Z0-9\\-._~%!$&'()*+,;=:']*)?$"
             }
         },
         "com.amazonaws.opensearch#KeyStoreAccessOption": {
@@ -16250,6 +16250,12 @@
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration settings to modify for the OpenSearch application.</p>"
+                    }
+                },
+                "iamIdentityCenterOptions": {
+                    "target": "com.amazonaws.opensearch#IamIdentityCenterOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for integrating IAM Identity Center with the OpenSearch\n            application.</p>"
                     }
                 }
             },

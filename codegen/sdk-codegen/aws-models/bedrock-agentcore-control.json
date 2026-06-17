@@ -774,6 +774,26 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AllowedWorkloadConfiguration": {
+            "type": "structure",
+            "members": {
+                "hostingEnvironments": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HostingEnvironmentListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of hosting environments whose workloads are allowed to invoke the target. At launch, the only supported hosting environment is AgentCore Gateway.</p>"
+                    }
+                },
+                "workloadIdentities": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityNameListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of workload identities that are allowed to invoke the target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that restricts which workloads in the request's identity chain are allowed to invoke the target, identified by their hosting environments and workload identities. At launch, this is supported only for AgentCore Runtime targets, and the allowed workloads are AgentCore Gateways.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AmazonBedrockAgentCoreControl": {
             "type": "service",
             "version": "2023-06-05",
@@ -839,6 +859,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayTargetResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointResource"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessResource"
@@ -2043,13 +2066,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret for the Atlassian OAuth2 provider. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret for the Atlassian OAuth2 provider. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -3169,13 +3192,13 @@
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret for the Coinbase Developer Platform. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the API key secret for the Coinbase Developer Platform. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "apiKeySecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the API key secret. This includes the secret ID and the JSON key used to extract the API key secret value from the secret. Required when <code>apiKeySecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the API key secret. This includes the secret ID and the JSON key used to extract the API key secret value from the secret. Required when <code>apiKeySecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "walletSecret": {
@@ -3189,13 +3212,13 @@
                 "walletSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the wallet secret for the Coinbase Developer Platform. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the wallet secret for the Coinbase Developer Platform. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "walletSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the wallet secret. This includes the secret ID and the JSON key used to extract the wallet secret value from the secret. Required when <code>walletSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the wallet secret. This includes the secret ID and the JSON key used to extract the wallet secret value from the secret. Required when <code>walletSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 }
             },
@@ -3222,13 +3245,13 @@
                 "apiKeySecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the API key secret value from the AWS Secrets Manager secret.</p>"
+                        "smithy.api#documentation": "<p>The JSON key used to extract the API key secret value from the Amazon Web Services Secrets Manager secret.</p>"
                     }
                 },
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "walletSecretArn": {
@@ -3240,13 +3263,13 @@
                 "walletSecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the wallet secret value from the AWS Secrets Manager secret.</p>"
+                        "smithy.api#documentation": "<p>The JSON key used to extract the wallet secret value from the Amazon Web Services Secrets Manager secret.</p>"
                     }
                 },
                 "walletSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the wallet secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the wallet secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -3332,7 +3355,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 2
                 }
             }
@@ -3605,6 +3628,136 @@
                 "smithy.api#documentation": "<p>This exception is thrown when there is a conflict performing an operation</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tool or operation name (for example, <code>retrieve</code> or <code>webSearch</code>).</p>",
+                        "smithy.api#length": {
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An agent-facing description override for this tool.</p>",
+                        "smithy.api#length": {
+                            "max": 2000
+                        }
+                    }
+                },
+                "parameterValues": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters to set as fixed or default values when provisioning this tool.</p>"
+                    }
+                },
+                "parameterOverrides": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters to expose to the agent at runtime, with optional description overrides.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a single tool within a connector.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorConfiguration"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterOverride": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON Pointer path identifying the parameter (for example, <code>/numberOfResults</code> or <code>/filter</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An agent-facing description override for this parameter.</p>"
+                    }
+                },
+                "visible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this parameter is visible to the agent. If not specified, uses the service default.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a parameter override for a connector tool, allowing you to control parameter visibility and descriptions.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterOverrides": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterOverride"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorSource": {
+            "type": "structure",
+            "members": {
+                "connectorId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the connector integration (for example, <code>bedrock-knowledge-bases</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source identifying the connector integration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration identifying which connector to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnabledConnectors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tool names to enable from this connector. If absent, all tools provided by the connector are enabled.</p>"
+                    }
+                },
+                "configurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-tool configurations for the connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a connector integration target. Connectors provide pre-built integrations with Amazon Web Services services and third-party tools.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ConsolidationConfiguration": {
@@ -4100,13 +4253,13 @@
                 "apiKeySecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the API key. This includes the secret ID and the JSON key used to extract the API key value from the secret. Required when <code>apiKeySecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the API key. This includes the secret ID and the JSON key used to extract the API key value from the secret. Required when <code>apiKeySecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the API key secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "tags": {
@@ -4135,14 +4288,14 @@
                 "apiKeySecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the API key value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the API key value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#property": {}
                     }
                 },
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {}
                     }
                 },
@@ -5282,6 +5435,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated with the gateway.</p>"
                     }
                 },
+                "customTransformConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CustomTransformConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom transformation configuration for the gateway. This configuration defines how the gateway transforms requests and responses.</p>"
+                    }
+                },
                 "interceptorConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
                     "traits": {
@@ -5304,6 +5463,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ExceptionLevel",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>"
+                    }
+                },
+                "webAclArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WebAclArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL associated with the gateway.</p>"
+                    }
+                },
+                "wafConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
                     }
                 }
             },
@@ -5524,8 +5695,7 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#TargetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the gateway target. The name must be unique within the gateway.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the gateway target. The name must be unique within the gateway.</p>"
                     }
                 },
                 "description": {
@@ -5712,13 +5882,117 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Operation to create a Harness.</p>",
+                "smithy.api#documentation": "<p>Operation to create a harness.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
                     "uri": "/harnesses"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation to create a harness endpoint.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/harnesses/{harnessId}/endpoints"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness to create an endpoint for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpointName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint. Must start with a letter and contain only alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The harness version that the endpoint points to and serves invocations from.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the endpoint.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to apply to the endpoint resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint that was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CreateHarnessRequest": {
@@ -6081,7 +6355,7 @@
                 "clientSecretArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Secret",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client secret in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {},
                         "smithy.api#required": {}
                     }
@@ -6089,14 +6363,14 @@
                 "clientSecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the client secret value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the client secret value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#property": {}
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {}
                     }
                 },
@@ -6958,6 +7232,13 @@
                         "smithy.api#documentation": "<p>The validation mode for the policy creation. Determines how Cedar analyzer validation results are handled during policy creation. FAIL_ON_ANY_FINDINGS (default) runs the Cedar analyzer to validate the policy against the Cedar schema and tool context, failing creation if the analyzer detects any validation issues to ensure strict conformance. IGNORE_ALL_FINDINGS runs the Cedar analyzer but allows policy creation even if validation issues are detected, useful for testing or when the policy schema is evolving. Use FAIL_ON_ANY_FINDINGS for production policies to ensure correctness, and IGNORE_ALL_FINDINGS only when you understand and accept the analyzer findings.</p>"
                     }
                 },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The enforcement mode for the policy. Run this policy in <code>LOG_ONLY</code> mode to collect data on how it affects your application. Once you are satisfied with the data gathered, switch the policy to <code>ACTIVE</code>. Defaults to <code>ACTIVE</code>.</p>"
+                    }
+                },
                 "policyEngineId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
                     "traits": {
@@ -7033,6 +7314,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the policy. A status of <code>ACTIVE</code> indicates the policy is ready for use.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The enforcement mode of the created policy.</p>"
                     }
                 },
                 "definition": {
@@ -7964,6 +8252,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom JWT authorizer configuration.</p>"
                     }
+                },
+                "allowedWorkloadConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedWorkloadConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that restricts which workloads in the request's identity chain are allowed to invoke the target, identified by their hosting environments and workload identities. At launch, this is supported only for AgentCore Runtime targets, and the allowed workloads are AgentCore Gateways.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8048,13 +8342,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "onBehalfOfTokenExchangeConfig": {
@@ -8166,6 +8460,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Input for a custom reflection configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CustomTransformConfiguration": {
+            "type": "structure",
+            "members": {
+                "lambda": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LambdaTransformConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lambda configuration for custom transformations. This configuration defines how the gateway uses a Lambda function to transform data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for custom transformations applied to requests and responses through the gateway. This structure defines how the gateway transforms data.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#DataSourceConfig": {
@@ -8559,7 +8867,7 @@
                 "smithy.api#length": {
                     "max": 2048
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9+/=\\-_\\s]*$",
+                "smithy.api#pattern": "^(wallet-auth:)?[a-zA-Z0-9+/=\\-_\\s]*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9778,6 +10086,91 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation to delete a harness endpoint.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/harnesses/{harnessId}/endpoints/{endpointName}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness that the endpoint belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpointName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint that was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessRequest": {
             "type": "structure",
             "members": {
@@ -9795,6 +10188,13 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "deleteManagedMemory": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to delete the managed memory on harness deletion. Default: true. If false, the memory is disassociated and becomes a regular customer-owned resource.</p>",
+                        "smithy.api#httpQuery": "deleteManagedMemory"
                     }
                 }
             },
@@ -10541,6 +10941,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The enforcement mode of the deleted policy.</p>"
+                    }
+                },
                 "definition": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
                     "traits": {
@@ -10972,6 +11379,18 @@
                 "smithy.api#documentation": "<p>Configuration for an Amazon EFS access point filesystem mounted into the AgentCore Runtime. EFS access points provide shared file storage accessible from your AgentCore Runtime sessions.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#EnabledConnectors": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#EncryptionFailure": {
             "type": "structure",
             "members": {
@@ -11010,6 +11429,27 @@
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EnforcementMode": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "LOG_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG_ONLY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#default": "ACTIVE",
+                "smithy.api#documentation": "<p>The enforcement mode for a policy. Run this policy in <code>LOG_ONLY</code> mode to collect data on how it affects your application. Once you are satisfied with the data gathered, switch the policy to <code>ACTIVE</code>.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#EntryPoints": {
@@ -12162,8 +12602,7 @@
         "com.amazonaws.bedrockagentcorecontrol#GatewayName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([0-9a-zA-Z][-]?){1,100}$",
-                "smithy.api#sensitive": {}
+                "smithy.api#pattern": "^([0-9a-zA-Z][-]?){1,48}$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GatewayNextToken": {
@@ -13098,7 +13537,7 @@
                 "apiKeySecretArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Secret",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {},
                         "smithy.api#required": {}
                     }
@@ -13106,14 +13545,14 @@
                 "apiKeySecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the API key value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the API key value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#property": {}
                     }
                 },
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {}
                     }
                 },
@@ -14279,6 +14718,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the gateway.</p>"
                     }
                 },
+                "customTransformConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CustomTransformConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom transformation configuration for the gateway. This configuration defines how the gateway transforms requests and responses.</p>"
+                    }
+                },
                 "interceptorConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
                     "traits": {
@@ -14301,6 +14746,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ExceptionLevel",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>"
+                    }
+                },
+                "webAclArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WebAclArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL associated with the gateway.</p>"
+                    }
+                },
+                "wafConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
                     }
                 }
             },
@@ -14638,13 +15095,87 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Operation to get a single Harness.</p>",
+                "smithy.api#documentation": "<p>Operation to get a single harness.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
                     "uri": "/harnesses/{harnessId}"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetHarnessEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetHarnessEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetHarnessEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation to get a single harness endpoint.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/harnesses/{harnessId}/endpoints/{endpointName}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetHarnessEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness that the endpoint belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpointName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetHarnessEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GetHarnessRequest": {
@@ -14656,6 +15187,13 @@
                         "smithy.api#documentation": "<p>The ID of the harness to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "harnessVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific version of the harness to retrieve. If omitted, returns the current Harness configuration, including its status.</p>",
+                        "smithy.api#httpQuery": "harnessVersion"
                     }
                 }
             },
@@ -14849,7 +15387,7 @@
                 "clientSecretArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Secret",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client secret in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {},
                         "smithy.api#required": {}
                     }
@@ -14857,14 +15395,14 @@
                 "clientSecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the client secret value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the client secret value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#property": {}
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {}
                     }
                 },
@@ -16308,6 +16846,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The current enforcement mode of the policy.</p>"
+                    }
+                },
                 "definition": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
                     "traits": {
@@ -16452,6 +16997,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the policy.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The current enforcement mode of the policy.</p>"
                     }
                 }
             },
@@ -17020,13 +17572,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -17076,13 +17628,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -17117,49 +17669,55 @@
                 "harnessId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The ID of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "harnessName": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The name of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The status of the harness.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "harnessVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the harness. Incremented on every successful UpdateHarness.</p>"
                     }
                 },
                 "executionRoleArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>IAM role the Harness assumes when running.</p>",
+                        "smithy.api#documentation": "<p>IAM role the harness assumes when running.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The createdAt time of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The createdAt time of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updatedAt time of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The updatedAt time of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17173,28 +17731,28 @@
                 "systemPrompt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSystemPrompt",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system prompt of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The system prompt of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tools": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessTools",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tools of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The tools of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "skills": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkills",
                     "traits": {
-                        "smithy.api#documentation": "<p>The skills of the Harness.</p>",
+                        "smithy.api#documentation": "<p>The skills of the harness.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "allowedTools": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessAllowedTools",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allowed tools of the Harness. All tools are allowed by default.</p>",
+                        "smithy.api#documentation": "<p>The allowed tools of the harness. All tools are allowed by default.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17221,7 +17779,7 @@
                 "environmentVariables": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EnvironmentVariablesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Environment variables exposed in the environment in which the Harness operates.</p>"
+                        "smithy.api#documentation": "<p>Environment variables exposed in the environment in which the harness operates.</p>"
                     }
                 },
                 "authorizerConfiguration": {
@@ -17259,7 +17817,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Representation of a Harness.</p>"
+                "smithy.api#documentation": "<p>Representation of a harness.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessAgentCoreBrowserConfig": {
@@ -17468,6 +18026,22 @@
                 "smithy.api#pattern": "^arn:([^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:harness/[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessAwsSkillPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^([^*?\\[\\]]|\\*)+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessAwsSkillPaths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#HarnessAwsSkillPath"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HarnessBedrockApiFormat": {
             "type": "enum",
             "members": {
@@ -17551,6 +18125,188 @@
             "traits": {
                 "smithy.api#documentation": "Code Interpreter ARN for Harness tool configuration. Accepts both managed (aws.codeinterpreter.v1) and custom code interpreter ARNs.",
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessDisabledMemoryConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Explicitly opt out of memory.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoint": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness that the endpoint belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "harnessName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harness that the endpoint belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpointName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the endpoint was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the endpoint was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "liveVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The harness version that the endpoint is currently serving.</p>"
+                    }
+                },
+                "targetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The harness version that the endpoint points to. While an update is in progress, this can differ from the live version until the endpoint finishes transitioning.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the endpoint.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the endpoint's last create or update operation failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Representation of a harness endpoint. An endpoint is a named, stable reference to a specific version of a harness that callers invoke, allowing the underlying version to be updated without changing how the agent is invoked.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:([^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:harness/[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}/endpoint/[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GetHarnessEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnessEndpoints"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessEndpoint"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoint"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessEnvironmentArtifact": {
@@ -17763,6 +18519,84 @@
                 "smithy.api#documentation": "<p>Configuration for a LiteLLM model provider, enabling connection to third-party model providers.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessManagedMemoryConfiguration": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MemoryArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the managed AgentCore Memory resource. Read-only on Get, ignored on Create/Update input.</p>"
+                    }
+                },
+                "strategies": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessManagedMemoryStrategyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Strategy types to enable. Defaults to [SEMANTIC, SUMMARIZATION].</p>"
+                    }
+                },
+                "eventExpiryDuration": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event retention in days. Defaults to 30.</p>",
+                        "smithy.api#range": {
+                            "min": 3,
+                            "max": 365
+                        }
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer-managed KMS key. Defaults to AWS-owned key. Not updatable after creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for managed memory creation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessManagedMemoryStrategyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#HarnessManagedMemoryStrategyType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessManagedMemoryStrategyType": {
+            "type": "enum",
+            "members": {
+                "SEMANTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEMANTIC"
+                    }
+                },
+                "SUMMARIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUMMARIZATION"
+                    }
+                },
+                "USER_PREFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_PREFERENCE"
+                    }
+                },
+                "EPISODIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EPISODIC"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HarnessMemoryConfiguration": {
             "type": "union",
             "members": {
@@ -17770,6 +18604,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#HarnessAgentCoreMemoryConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The AgentCore Memory configuration.</p>"
+                    }
+                },
+                "managedMemoryConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessManagedMemoryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Harness creates and manages a memory resource in the customer's account.</p>"
+                    }
+                },
+                "disabled": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessDisabledMemoryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explicitly opt out of memory.</p>"
                     }
                 }
             },
@@ -17933,6 +18779,9 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnesses"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersions"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#UpdateHarness"
                 }
             ]
@@ -17957,10 +18806,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A git repository containing the skill.</p>"
                     }
+                },
+                "awsSkills": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkillAwsSkillsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Skills baked into the harness's underlying Runtime.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A skill available to the agent.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessSkillAwsSkillsSource": {
+            "type": "structure",
+            "members": {
+                "paths": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessAwsSkillPaths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally filter allowed skills with glob syntax, e.g., ['core-skills/*'].</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Passed to show that AWS Skills should be included.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitAuth": {
@@ -18017,7 +18886,7 @@
                 "smithy.api#length": {
                     "min": 8
                 },
-                "smithy.api#pattern": "^https://"
+                "smithy.api#pattern": "^https://[^#@]+$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessSkillPath": {
@@ -18194,6 +19063,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the harness was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "harnessVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version of the harness.</p>"
                     }
                 }
             },
@@ -18401,6 +19276,85 @@
                 "smithy.api#documentation": "<p>Strategy-specific truncation configuration.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^([1-9][0-9]{0,4})$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessVersionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersionSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessVersionSummary": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "harnessName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harness.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the harness.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "harnessVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the harness that this summary describes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this harness version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this harness version was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this harness version was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason why the create or update operation for this harness version failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a single version of a harness.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HeaderName": {
             "type": "string",
             "traits": {
@@ -18409,6 +19363,48 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_-]{0,255}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HostingEnvironment": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BedrockAgentcoreResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hosting environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A hosting environment whose workloads are allowed to invoke the target. At launch, the only supported hosting environment is AgentCore Gateway.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HostingEnvironmentListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#HostingEnvironment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HttpApiSchemaConfiguration": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ApiSchemaConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The API schema configuration for an HTTP target. This schema defines the API structure that the target exposes.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HttpHeaderKey": {
@@ -18469,6 +19465,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeTargetConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The AgentCore Runtime target configuration for HTTP-based communication with an agent runtime.</p>"
+                    }
+                },
+                "passthrough": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PassthroughTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The passthrough configuration for the HTTP target. A passthrough target forwards requests directly to an external HTTP endpoint.</p>"
                     }
                 }
             },
@@ -18632,13 +19634,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "issuer": {
@@ -18764,6 +19766,141 @@
                 "smithy.api#documentation": "<p> The configuration parameters that control how the foundation model behaves during evaluation, including response generation settings. </p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceConnectorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceConnectorSource": {
+            "type": "structure",
+            "members": {
+                "connectorId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the inference connector (for example, <code>bedrock-mantle</code>, <code>openai</code>, or <code>anthropic</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source identifying the inference connector.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceConnectorTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceConnectorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration identifying which inference connector to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a connector-based inference target. This configuration uses a built-in connector that provides predefined rules for a large language model (LLM) provider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceOperationConfiguration": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceOperationPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request path for this operation (for example, <code>/v1/messages</code> or <code>/v1/responses</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "providerPath": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceOperationPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider path to forward requests to, if it differs from the request path. For example, <code>/anthropic/v1/messages</code> when the provider expects a different path than the client-facing <code>/v1/messages</code>.</p>"
+                    }
+                },
+                "models": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModelEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of models supported for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a specific inference operation, including its request path and the models that the operation supports.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceOperationConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#InferenceOperationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceOperationPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^/[a-zA-Z0-9\\-\\._/]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceProviderTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PassthroughEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS endpoint of the inference provider that the gateway forwards requests to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelMapping": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModelMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that translates client-facing model IDs to the model IDs expected by the provider.</p>"
+                    }
+                },
+                "operations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceOperationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-operation configurations that map request paths to the models supported for each operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a provider-based inference target. This configuration explicitly defines the endpoint, model mapping, and operations used to route requests to a large language model (LLM) provider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InferenceTargetConfiguration": {
+            "type": "union",
+            "members": {
+                "connector": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceConnectorTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector-based inference configuration. Use this option to route requests to an LLM provider through a built-in connector that includes predefined provider rules.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceProviderTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider-based inference configuration. Use this option to explicitly configure the endpoint, model mapping, and operations for an LLM provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an inference target. An inference target routes requests to a large language model (LLM) provider, either through a built-in connector or an explicitly configured provider.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#InlineContent": {
             "type": "string",
             "traits": {
@@ -18804,12 +19941,13 @@
                 "insightId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InsightId",
                     "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the insight to run.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A reference to an insight analysis to run against sessions."
+                "smithy.api#documentation": "<p>A reference to an insight analysis to run against sessions during evaluation. Insights provide deeper analysis beyond individual evaluator scores, including failure detection, user intent clustering, and execution summarization.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#InsightId": {
@@ -18854,10 +19992,68 @@
                         "smithy.api#documentation": "<p>Indicates whether to pass request headers as input into the interceptor. When set to true, request headers will be passed.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "payloadFilter": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that determines which parts of the request or response payload are passed as input to the interceptor.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The input configuration of the interceptor.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadExclusion": {
+            "type": "enum",
+            "members": {
+                "RESPONSE_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE_BODY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadExclusionSelector": {
+            "type": "union",
+            "members": {
+                "field": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadExclusion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to exclude from the interceptor input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A selector that identifies a payload field to exclude from the interceptor input.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadExclusionSelectorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadExclusionSelector"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadFilter": {
+            "type": "structure",
+            "members": {
+                "exclude": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorPayloadExclusionSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of selectors that identify payload fields to exclude from the interceptor input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter that controls which fields of the request or response payload are included in the input to the interceptor.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#InternalServerException": {
@@ -19033,7 +20229,7 @@
                     "min": 1,
                     "max": 170
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-]+))?$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LambdaInterceptorConfiguration": {
@@ -19049,6 +20245,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The lambda configuration for the interceptor</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LambdaTransformConfiguration": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LambdaFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function. This function is invoked by the gateway to transform data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lambda configuration for custom transformations. This structure defines the Lambda function that the gateway invokes to transform data.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration": {
@@ -19100,13 +20310,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -20433,6 +21643,9 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
                 },
                 {
@@ -20587,6 +21800,190 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ListHarnessEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnessEndpointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnessEndpointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation to list the endpoints of a harness.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/harnesses/{harnessId}/endpoints"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "endpoints"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListHarnessEndpointsRequest": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness whose endpoints are listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListHarnessEndpointsResponse": {
+            "type": "structure",
+            "members": {
+                "endpoints": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of harness endpoints.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation to list the versions of a Harness.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/harnesses/{harnessId}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "harnessVersions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness whose versions are listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "harnessVersions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of harness version summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ListHarnesses": {
             "type": "operation",
             "input": {
@@ -20610,7 +22007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Operation to list Harnesses.</p>",
+                "smithy.api#documentation": "<p>Operation to list harnesses.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -22569,7 +23966,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#McpLambdaTargetConfiguration": {
@@ -22675,6 +24073,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ApiGatewayTargetConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for an Amazon API Gateway target.</p>"
+                    }
+                },
+                "connector": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector integration configuration for the Model Context Protocol target. This configuration defines how the gateway uses a pre-built connector to communicate with the target.</p>"
                     }
                 }
             },
@@ -22804,6 +24208,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResources",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for streaming memory record data to external resources.</p>"
+                    }
+                },
+                "managedByResourceArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the resource managing this memory (e.g. a harness). When set, strategy\nmodifications and deletion are only allowed through the managing resource."
                     }
                 }
             },
@@ -23141,6 +24551,12 @@
                         "smithy.api#documentation": "<p>The timestamp when the memory was last updated.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "managedByResourceArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the resource managing this memory (e.g. a harness). Null if not managed."
+                    }
                 }
             },
             "traits": {
@@ -23328,13 +24744,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "tenantId": {
@@ -23369,8 +24785,59 @@
                 "smithy.api#documentation": "<p>Output configuration for a Microsoft OAuth2 provider.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ModelEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ModelEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ModelEntry": {
+            "type": "structure",
+            "members": {
+                "model": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModelPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model ID or glob pattern that identifies the model (for example, <code>anthropic.claude-opus-*</code> or <code>openai.gpt-oss-*</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A model entry that specifies a model supported for an inference operation.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ModelId": {
             "type": "string"
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ModelMapping": {
+            "type": "structure",
+            "members": {
+                "providerPrefix": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProviderPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider prefix configuration used for model ID translation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that translates model IDs between client-facing names and provider model IDs.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ModelPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@]+(/[a-zA-Z0-9\\-\\._\\*\\?@]+)*$"
+            }
         },
         "com.amazonaws.bedrockagentcorecontrol#ModifyConsolidationConfiguration": {
             "type": "union",
@@ -24493,6 +25960,79 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#PassthroughEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https://[a-zA-Z0-9\\-\\.]+(:[0-9]{1,5})?(/.*)?$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PassthroughProtocolType": {
+            "type": "enum",
+            "members": {
+                "MCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MCP"
+                    }
+                },
+                "A2A": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "A2A"
+                    }
+                },
+                "INFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFERENCE"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PassthroughTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PassthroughEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS endpoint that the gateway forwards requests to for this passthrough target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "protocolType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PassthroughProtocolType",
+                    "traits": {
+                        "smithy.api#documentation": "The application protocol the passthrough target implements. Required for passthrough targets.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpApiSchemaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API schema configuration that defines the structure of the passthrough target's API.</p>"
+                    }
+                },
+                "stickinessConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StickinessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session stickiness configuration for the passthrough target. This configuration routes requests within the same session to the same target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an HTTP passthrough target. A passthrough target forwards requests directly to an external HTTP endpoint.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorId": {
             "type": "string",
             "traits": {
@@ -25116,6 +26656,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The current enforcement mode of the policy.</p>"
+                    }
+                },
                 "definition": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
                     "traits": {
@@ -25172,6 +26719,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The generated policy asset information within the policy definition structure. This contains information identifying a generated policy asset from the AI-powered policy generation process within the AgentCore Policy system. Each asset contains a Cedar policy statement generated from natural language input, along with associated metadata and analysis findings to help users evaluate and select the most appropriate policy option.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An AgentCore policy statement that defines the access control rules. The statement can be a Cedar policy or a guardrails definition.</p>"
                     }
                 }
             },
@@ -25797,6 +27350,21 @@
                 }
             ]
         },
+        "com.amazonaws.bedrockagentcorecontrol#PolicyStatement": {
+            "type": "structure",
+            "members": {
+                "statement": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Statement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the AgentCore policy statement. Contains the policy logic, which can be a Cedar policy or a guardrails definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An AgentCore policy statement, which supports plain Cedar policies as well as guardrails definitions.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#PolicyStatus": {
             "type": "enum",
             "members": {
@@ -25900,6 +27468,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the policy.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The current enforcement mode of the policy.</p>"
                     }
                 }
             },
@@ -26055,6 +27630,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The protocol configuration for an agent runtime. This structure defines how the agent runtime communicates with clients.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ProviderPrefix": {
+            "type": "structure",
+            "members": {
+                "strip": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether clients can omit the provider prefix from model IDs. If <code>true</code>, the gateway accepts model IDs without the prefix and restores the full prefixed form before forwarding to the provider. The default is <code>false</code>.</p>"
+                    }
+                },
+                "separator": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#default": ".",
+                        "smithy.api#documentation": "<p>The single character that separates the provider prefix from the model name (for example, <code>.</code>). The default is <code>.</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that controls how a provider prefix is applied to model IDs during translation.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PutResourcePolicy": {
@@ -27099,6 +28700,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The qualifier for the agent runtime, used to target a specific endpoint version. If not specified, the default endpoint is used.</p>"
                     }
+                },
+                "schema": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpApiSchemaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API schema configuration that defines the structure of the runtime target's API.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27242,13 +28849,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -27447,13 +29054,13 @@
                 "secretArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a secret in AWS Secrets Manager.</p>"
+                "smithy.api#documentation": "<p>Contains information about a secret in Amazon Web Services Secrets Manager.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SecretArn": {
@@ -27486,20 +29093,20 @@
                 "secretId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS Secrets Manager secret that stores the secret value.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Secrets Manager secret that stores the secret value.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the secret value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the secret value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a reference to a secret stored in AWS Secrets Manager.</p>"
+                "smithy.api#documentation": "<p>Contains a reference to a secret stored in Amazon Web Services Secrets Manager.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SecretSourceType": {
@@ -28097,13 +29704,13 @@
                 "clientSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the client secret. This includes the secret ID and the JSON key used to extract the client secret value from the secret. Required when <code>clientSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the client secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -28416,6 +30023,40 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#StickinessConfiguration": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression that identifies where to extract the session identifier from the request (for example, <code>$context.header.x-session-id</code>).</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeout": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StickinessTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session stickiness timeout, in seconds. After this duration of inactivity, the session affinity expires. Valid values range from 1 to 86400.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for session-sticky routing to a target. Session stickiness routes requests that share a session identifier to the same target.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#StickinessTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 86400
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#StrategyConfiguration": {
             "type": "structure",
             "members": {
@@ -28591,13 +30232,13 @@
                 "appSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the app secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the app secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "appSecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the app secret. This includes the secret ID and the JSON key used to extract the app secret value from the secret. Required when <code>appSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the app secret. This includes the secret ID and the JSON key used to extract the app secret value from the secret. Required when <code>appSecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "authorizationPrivateKey": {
@@ -28611,13 +30252,13 @@
                 "authorizationPrivateKeySource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the authorization private key. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the authorization private key. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "authorizationPrivateKeyConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the authorization private key. This includes the secret ID and the JSON key used to extract the authorization private key value from the secret. Required when <code>authorizationPrivateKeySource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the authorization private key. This includes the secret ID and the JSON key used to extract the authorization private key value from the secret. Required when <code>authorizationPrivateKeySource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "authorizationId": {
@@ -28651,13 +30292,13 @@
                 "appSecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the app secret value from the AWS Secrets Manager secret.</p>"
+                        "smithy.api#documentation": "<p>The JSON key used to extract the app secret value from the Amazon Web Services Secrets Manager secret.</p>"
                     }
                 },
                 "appSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the app secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the app secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "authorizationPrivateKeyArn": {
@@ -28669,13 +30310,13 @@
                 "authorizationPrivateKeyJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the authorization private key value from the AWS Secrets Manager secret.</p>"
+                        "smithy.api#documentation": "<p>The JSON key used to extract the authorization private key value from the Amazon Web Services Secrets Manager secret.</p>"
                     }
                 },
                 "authorizationPrivateKeySource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the authorization private key. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the authorization private key. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>"
                     }
                 },
                 "authorizationId": {
@@ -29175,6 +30816,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTP target configuration. Use this to route gateway requests to an HTTP-based endpoint such as an AgentCore Runtime.</p>"
                     }
+                },
+                "inference": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InferenceTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inference configuration for the target. This configuration routes requests to a large language model (LLM) provider.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29387,6 +31034,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Priority for resolving resource URI conflicts across targets. Lower values take precedence. Defaults to 1000 when not set.</p>"
                     }
+                },
+                "lastSynchronizedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the target was last synchronized.</p>"
+                    }
+                },
+                "authorizationData": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizationData"
+                },
+                "targetType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the target.</p>"
+                    }
+                },
+                "listingMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listing mode for the target. MCP resources for <code>DEFAULT</code> targets are cached at the control plane for faster access. MCP resources for <code>DYNAMIC</code> targets are retrieved dynamically when listing tools.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29457,6 +31125,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An entry in a target traffic split configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TargetType": {
+            "type": "enum",
+            "members": {
+                "OPEN_API_SCHEMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN_API_SCHEMA"
+                    }
+                },
+                "SMITHY_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMITHY_MODEL"
+                    }
+                },
+                "MCP_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MCP_SERVER"
+                    }
+                },
+                "LAMBDA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAMBDA"
+                    }
+                },
+                "API_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_GATEWAY"
+                    }
+                },
+                "CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTOR"
+                    }
+                },
+                "AGENTCORE_RUNTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENTCORE_RUNTIME"
+                    }
+                },
+                "PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSTHROUGH"
+                    }
+                },
+                "PROVIDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVIDER"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#Temperature": {
@@ -29654,7 +31381,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tool definition for a gateway target. This structure defines a tool that the target exposes through the Model Context Protocol.</p>"
+                "smithy.api#documentation": "<p>A tool definition for a gateway target. This structure defines a tool that the target exposes through the Model Context Protocol.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ToolDefinitions": {
@@ -30374,13 +32102,13 @@
                 "apiKeySecretConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the AWS Secrets Manager secret that stores the API key. This includes the secret ID and the JSON key used to extract the API key value from the secret. Required when <code>apiKeySecretSource</code> is set to <code>EXTERNAL</code>.</p>"
+                        "smithy.api#documentation": "<p>A reference to the Amazon Web Services Secrets Manager secret that stores the API key. This includes the secret ID and the JSON key used to extract the API key value from the secret. Required when <code>apiKeySecretSource</code> is set to <code>EXTERNAL</code>.</p>"
                     }
                 },
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in AWS Secrets Manager.</p>"
+                        "smithy.api#documentation": "<p>The source type of the API key secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>"
                     }
                 }
             },
@@ -30394,7 +32122,7 @@
                 "apiKeySecretArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Secret",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {},
                         "smithy.api#required": {}
                     }
@@ -30402,14 +32130,14 @@
                 "apiKeySecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the API key value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the API key value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#property": {}
                     }
                 },
                 "apiKeySecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {}
                     }
                 },
@@ -31035,6 +32763,12 @@
                         "smithy.api#documentation": "<p>The updated ARN of the KMS key used to encrypt the gateway.</p>"
                     }
                 },
+                "customTransformConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CustomTransformConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated custom transformation configuration for the gateway. This configuration defines how the gateway transforms requests and responses.</p>"
+                    }
+                },
                 "interceptorConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
                     "traits": {
@@ -31051,6 +32785,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ExceptionLevel",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>"
+                    }
+                },
+                "wafConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated Amazon Web Services WAF configuration for the gateway.</p>"
                     }
                 }
             },
@@ -31157,6 +32897,12 @@
                         "smithy.api#documentation": "<p>The updated ARN of the KMS key used to encrypt the gateway.</p>"
                     }
                 },
+                "customTransformConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CustomTransformConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom transformation configuration for the gateway. This configuration defines how the gateway transforms requests and responses.</p>"
+                    }
+                },
                 "interceptorConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
                     "traits": {
@@ -31179,6 +32925,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ExceptionLevel",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>"
+                    }
+                },
+                "webAclArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WebAclArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL associated with the gateway.</p>"
+                    }
+                },
+                "wafConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
                     }
                 }
             },
@@ -31410,8 +33168,7 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#TargetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated name for the gateway target.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The updated name for the gateway target.</p>"
                     }
                 },
                 "description": {
@@ -31589,13 +33346,112 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Operation to update a Harness.</p>",
+                "smithy.api#documentation": "<p>Operation to update a harness.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
                     "uri": "/harnesses/{harnessId}"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation to update a harness endpoint.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/harnesses/{harnessId}/endpoints/{endpointName}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "harnessId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the harness that the endpoint belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpointName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The harness version that the endpoint points to. If not specified, the existing value is retained.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the endpoint. If not specified, the existing value is retained.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#UpdateHarnessRequest": {
@@ -31928,7 +33784,7 @@
                 "clientSecretArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Secret",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client secret in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {},
                         "smithy.api#required": {}
                     }
@@ -31936,14 +33792,14 @@
                 "clientSecretJsonKey": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretJsonKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON key used to extract the client secret value from the AWS Secrets Manager secret.</p>",
+                        "smithy.api#documentation": "<p>The JSON key used to extract the client secret value from the Amazon Web Services Secrets Manager secret.</p>",
                         "smithy.api#property": {}
                     }
                 },
                 "clientSecretSource": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SecretSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in AWS Secrets Manager.</p>",
+                        "smithy.api#documentation": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
                         "smithy.api#property": {}
                     }
                 },
@@ -32796,6 +34652,13 @@
                         "smithy.api#default": "FAIL_ON_ANY_FINDINGS",
                         "smithy.api#documentation": "<p>The validation mode for the policy update. Determines how Cedar analyzer validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs the Cedar analyzer and fails the update if validation issues are detected, ensuring the policy conforms to the Cedar schema and tool context. IGNORE_ALL_FINDINGS runs the Cedar analyzer but allows updates despite validation warnings. Use FAIL_ON_ANY_FINDINGS to ensure policy correctness during updates, especially when modifying policy logic or conditions.</p>"
                     }
+                },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The enforcement mode for the policy. Run this policy in <code>LOG_ONLY</code> mode to collect data on how it affects your application. Once you are satisfied with the data gathered, switch the policy to <code>ACTIVE</code>. If you omit this field, the policy's existing enforcement mode is unchanged.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32857,6 +34720,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the updated policy.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "enforcementMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EnforcementMode",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>The current enforcement mode of the updated policy.</p>"
                     }
                 },
                 "definition": {
@@ -34158,6 +36028,47 @@
                 "smithy.api#pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#WafConfiguration": {
+            "type": "structure",
+            "members": {
+                "failureMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#WafFailureMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure mode that determines how the gateway handles requests when Amazon Web Services WAF is unreachable or times out. Valid values include:</p> <ul> <li> <p> <code>FAIL_CLOSE</code> - The gateway blocks requests when Amazon Web Services WAF cannot be evaluated.</p> </li> <li> <p> <code>FAIL_OPEN</code> - The gateway allows requests when Amazon Web Services WAF cannot be evaluated.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway. This configuration controls how the gateway behaves when the associated web ACL cannot be evaluated.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#WafFailureMode": {
+            "type": "enum",
+            "members": {
+                "FAIL_CLOSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL_CLOSE"
+                    }
+                },
+                "FAIL_OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL_OPEN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#WebAclArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9\\-]+:wafv2:[a-z0-9\\-]+:[0-9]{12}:regional/webacl/.+$"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#WeightedOverride": {
             "type": "structure",
             "members": {
@@ -34267,6 +36178,19 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityType"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityNameListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityNameType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityNameType": {
