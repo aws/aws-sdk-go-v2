@@ -43,7 +43,7 @@ type UpdateFHIRDatastoreInput struct {
 	// The identity provider configuration for the data store.
 	IdentityProviderConfiguration *types.IdentityProviderConfiguration
 
-	// The NLP configuration for the data store.
+	// The natural language processing (NLP) configuration for the data store.
 	NlpConfiguration *types.NlpConfiguration
 
 	// The profile configuration for the data store.

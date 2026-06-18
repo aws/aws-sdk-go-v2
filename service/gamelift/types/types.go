@@ -1425,6 +1425,13 @@ type FleetAttributes struct {
 	// receiving a CreateGameSession request, Amazon GameLift Servers checks that the
 	// player (identified by CreatorId ) has created fewer than game session limit in
 	// the specified time period.
+	//
+	// The purpose of this policy is to prevent a single player from consuming a large
+	// share of available hosting resources. For example, setting
+	// NewGameSessionsPerCreator to 4 and PolicyPeriodInMinutes to 10 limits each
+	// player to creating 4 game sessions every 10 minutes. Setting these values too
+	// high (for example, 200 game sessions every 1000 minutes) still allows a single
+	// player to rapidly consume resources. We recommend keeping these values small.
 	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy
 
 	//  The Amazon Resource Name ([ARN] ) associated with the GameLift script resource that
@@ -1744,13 +1751,15 @@ type GameServer struct {
 //
 // Part of: [ContainerGroupDefinition]
 //
-// Returned by: [DescribeContainerGroupDefinition], [ListContainerGroupDefinitions], [UpdateContainerGroupDefinition]
+// Returned by: [CreateContainerGroupDefinition], [DescribeContainerGroupDefinition], [ListContainerGroupDefinitions], [ListContainerGroupDefinitionVersions], [UpdateContainerGroupDefinition]
 //
 // [ListContainerGroupDefinitions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html
 // [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+// [ListContainerGroupDefinitionVersions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html
 // [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
 // [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput
 // [DescribeContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html
+// [CreateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html
 type GameServerContainerDefinition struct {
 
 	// The container definition identifier. Container names are unique within a
@@ -1772,6 +1781,12 @@ type GameServerContainerDefinition struct {
 	// container to a container fleet. For a more specific identifier, see
 	// ResolvedImageDigest .
 	ImageUri *string
+
+	// Linux-specific modifications that are applied to the default Docker container
+	// configuration, such as Linux capabilities. For more information see [LinuxCapabilities].
+	//
+	// [LinuxCapabilities]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html
+	LinuxCapabilities *LinuxCapabilities
 
 	// A mount point that binds a path inside the container to a file or directory on
 	// the host system and lets it access the file or directory.
@@ -1875,6 +1890,12 @@ type GameServerContainerDefinitionInput struct {
 	//
 	// [ContainerDefinition::environment]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment
 	EnvironmentOverride []ContainerEnvironment
+
+	// Linux-specific modifications that are applied to the default Docker container
+	// configuration, such as Linux capabilities. For more information see [LinuxCapabilities].
+	//
+	// [LinuxCapabilities]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html
+	LinuxCapabilities *LinuxCapabilities
 
 	// A mount point that binds a path inside the container to a file or directory on
 	// the host system and lets it access the file or directory.
@@ -2148,7 +2169,9 @@ type GameSession struct {
 	GameSessionData *string
 
 	// An identifier for the game session that is unique across all regions. The value
-	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
+	// is always a full ARN in the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// .
 	GameSessionId *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift Servers
@@ -2244,7 +2267,9 @@ type GameSessionConnectionInfo struct {
 	DnsName *string
 
 	// An identifier for the game session that is unique across all regions. The value
-	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
+	// is always a full ARN in the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// .
 	GameSessionArn *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift Servers
@@ -2364,9 +2389,10 @@ type GameSessionPlacement struct {
 	GameProperties []GameProperty
 
 	// An identifier for the game session that is unique across all regions. The value
-	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
-	// This value is the same as GameSessionId . This value isn't final until placement
-	// status is FULFILLED .
+	// is always a full ARN in the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// . This value is the same as GameSessionId .
+	// This value isn't final until placement status is FULFILLED .
 	GameSessionArn *string
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -2377,9 +2403,10 @@ type GameSessionPlacement struct {
 	GameSessionData *string
 
 	// An identifier for the game session that is unique across all regions. The value
-	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
-	// This value is the same as GameSessionArn . This value isn't final until
-	// placement status is FULFILLED .
+	// is always a full ARN in the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// . This value is the same as GameSessionArn .
+	// This value isn't final until placement status is FULFILLED .
 	GameSessionId *string
 
 	// A descriptive label that is associated with a game session. Session names do
@@ -2437,7 +2464,9 @@ type GameSessionPlacement struct {
 	PlayerGatewayStatus PlayerGatewayStatus
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
-	// latency that a player experiences when connected to Amazon Web Services Regions.
+	// latency that a player experiences when connected to a fleet location (Amazon Web
+	// Services Regions or custom locations for Amazon GameLift Servers Anywhere
+	// fleets).
 	PlayerLatencies []PlayerLatency
 
 	// The port number for the game session. To connect to a Amazon GameLift Servers
@@ -2751,6 +2780,39 @@ type LaunchTemplateSpecification struct {
 	// default version for a launch template. If none is set, the default is the first
 	// version created.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// A set of Linux capabilities that are added to a container's default Docker
+// configuration for a container defined in the [ContainerGroupDefinition]. For more detailed information
+// about these Linux capabilities, see the [capabilities(7)]Linux manual page.
+//
+// Modifying capabilities on an existing container: To remove a capability, update
+// the Include list with only the needed capabilities. To revert back to default
+// capabilities, omit LinuxCapabilities within the ContainerDefinition.
+//
+// Part of: [GameServerContainerDefinition], [GameServerContainerDefinitionInput], [SupportContainerDefinition], [SupportContainerDefinitionInput]
+//
+// Returned by: [CreateContainerGroupDefinition], [DescribeContainerGroupDefinition], [ListContainerGroupDefinitions], [ListContainerGroupDefinitionVersions], [UpdateContainerGroupDefinition]
+//
+// [SupportContainerDefinitionInput]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_SupportContainerDefinitionInput.html
+// [ListContainerGroupDefinitions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html
+// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+// [ListContainerGroupDefinitionVersions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html
+// [GameServerContainerDefinitionInput]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput.html
+// [GameServerContainerDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinition.html
+// [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
+// [capabilities(7)]: https://man7.org/linux/man-pages/man7/capabilities.7.html
+// [DescribeContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html
+// [SupportContainerDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_SupportContainerDefinition.html
+// [CreateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html
+type LinuxCapabilities struct {
+
+	// The list of Linux capabilities to add to the container's default configuration.
+	// Specify each capability as a string from the set of supported capability names
+	// (for example, NET_BIND_SERVICE or SYS_PTRACE ).
+	Include []LinuxCapability
 
 	noSmithyDocumentSerde
 }
@@ -3273,9 +3335,10 @@ type PlacedPlayerSession struct {
 type Player struct {
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
-	// latency that a player experiences when connected to Amazon Web Services Regions.
-	// If this property is present, FlexMatch considers placing the match only in
-	// Regions for which latency is reported.
+	// latency that a player experiences when connected to a fleet location (Amazon Web
+	// Services Regions or custom locations for Amazon GameLift Servers Anywhere
+	// fleets). If this property is present, FlexMatch considers placing the match only
+	// in Regions for which latency is reported.
 	//
 	// If a matchmaker has a rule that evaluates player latency, players must report
 	// latency in order to be matched. If no latency is reported in this scenario,
@@ -3376,9 +3439,11 @@ type PlayerGatewayConfiguration struct {
 
 // Regional latency information for a player, used when requesting a new game
 // session. This value indicates the amount of time lag that exists when the player
-// is connected to a fleet in the specified Region. The relative difference between
-// a player's latency values for multiple Regions are used to determine which
-// fleets are best suited to place a new game session for the player.
+// is connected to a fleet in the specified location (an Amazon Web Services Region
+// or a custom location for Amazon GameLift Servers Anywhere fleets). The relative
+// difference between a player's latency values for multiple locations are used to
+// determine which fleets are best suited to place a new game session for the
+// player.
 type PlayerLatency struct {
 
 	// Amount of time that represents the time lag experienced by the player when
@@ -3388,7 +3453,9 @@ type PlayerLatency struct {
 	// A unique identifier for a player associated with the latency data.
 	PlayerId *string
 
-	// Name of the Region that is associated with the latency value.
+	// Name of the Region or custom location that is associated with the latency
+	// value. For Amazon GameLift Servers Anywhere fleets, use the custom location
+	// name.
 	RegionIdentifier *string
 
 	noSmithyDocumentSerde
@@ -3458,7 +3525,8 @@ type PlayerSession struct {
 
 	// An identifier for the game session that is unique across all regions that the
 	// player session is connected to. The value is always a full ARN in the following
-	// format: arn:aws:gamelift:::gamesession// .
+	// format: For Home Region game session - arn:aws:gamelift:::gamesession// . For
+	// Remote Location game session - arn:aws:gamelift:::gamesession/// .
 	GameSessionId *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift Servers
@@ -3599,6 +3667,13 @@ type PriorityConfigurationOverride struct {
 // receiving a CreateGameSession request, Amazon GameLift Servers checks that the
 // player (identified by CreatorId ) has created fewer than game session limit in
 // the specified time period.
+//
+// The purpose of this policy is to prevent a single player from consuming a large
+// share of available hosting resources. For example, setting
+// NewGameSessionsPerCreator to 4 and PolicyPeriodInMinutes to 10 limits each
+// player to creating 4 game sessions every 10 minutes. Setting these values too
+// high (for example, 200 game sessions every 1000 minutes) still allows a single
+// player to rapidly consume resources. We recommend keeping these values small.
 type ResourceCreationLimitPolicy struct {
 
 	// A policy that puts limits on the number of game sessions that a player can
@@ -3939,13 +4014,15 @@ type ServerProcess struct {
 //
 // Part of: [ContainerGroupDefinition]
 //
-// Returned by: [DescribeContainerGroupDefinition], [ListContainerGroupDefinitions], [UpdateContainerGroupDefinition]
+// Returned by: [CreateContainerGroupDefinition], [DescribeContainerGroupDefinition], [ListContainerGroupDefinitions], [ListContainerGroupDefinitionVersions], [UpdateContainerGroupDefinition]
 //
 // [ListContainerGroupDefinitions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html
 // [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+// [ListContainerGroupDefinitionVersions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html
 // [GameServerContainerDefinitionInput]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput.html
 // [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
 // [DescribeContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html
+// [CreateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html
 type SupportContainerDefinition struct {
 
 	// The container definition identifier. Container names are unique within a
@@ -3974,6 +4051,12 @@ type SupportContainerDefinition struct {
 	// The URI to the image that Amazon GameLift Servers deploys to a container fleet.
 	// For a more specific identifier, see ResolvedImageDigest .
 	ImageUri *string
+
+	// Linux-specific modifications that are applied to the default Docker container
+	// configuration, such as Linux capabilities. For more information see [LinuxCapabilities].
+	//
+	// [LinuxCapabilities]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html
+	LinuxCapabilities *LinuxCapabilities
 
 	// The amount of memory that Amazon GameLift Servers makes available to the
 	// container. If memory limits aren't set for an individual container, the
@@ -4082,6 +4165,12 @@ type SupportContainerDefinitionInput struct {
 	// reasons to flag a container as unhealthy and restart it. If an essential
 	// container fails a health check, the entire container group restarts.
 	HealthCheck *ContainerHealthCheck
+
+	// Linux-specific modifications that are applied to the default Docker container
+	// configuration, such as Linux capabilities. For more information see [LinuxCapabilities].
+	//
+	// [LinuxCapabilities]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html
+	LinuxCapabilities *LinuxCapabilities
 
 	// A specified amount of memory (in MiB) to reserve for this container. If you
 	// don't specify a container-specific memory limit, the container shares the

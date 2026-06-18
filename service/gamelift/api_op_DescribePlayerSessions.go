@@ -58,7 +58,8 @@ type DescribePlayerSessionsInput struct {
 
 	// An identifier for the game session that is unique across all regions to
 	// retrieve player sessions for. The value is always a full ARN in the following
-	// format: arn:aws:gamelift:::gamesession// .
+	// format: For Home Region game session - arn:aws:gamelift:::gamesession// . For
+	// Remote Location game session - arn:aws:gamelift:::gamesession/// .
 	GameSessionId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to

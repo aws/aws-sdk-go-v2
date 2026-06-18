@@ -4323,6 +4323,47 @@ type ClarifyTextConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for automatic patching of the instance group. When
+// configured, the system automatically applies security patch AMI updates to the
+// instance group.
+type ClusterAutoPatchConfig struct {
+
+	// The strategy for applying patches to instances in the group.
+	//
+	// This member is required.
+	PatchingStrategy ClusterPatchingStrategy
+
+	// The deployment configuration for rolling patch updates, including rollback
+	// settings and batch sizes. Only applicable when using a rolling patching
+	// strategy.
+	DeploymentConfig *DeploymentConfiguration
+
+	// The schedule for automatic patching, including the next patch date.
+	PatchSchedule *ClusterPatchSchedule
+
+	noSmithyDocumentSerde
+}
+
+// The auto-patching configuration details for the instance group, including the
+// patching strategy and schedule.
+type ClusterAutoPatchConfigDetails struct {
+
+	// The currently active patch schedule that the system will execute.
+	CurrentPatchSchedule *ClusterPatchScheduleDetails
+
+	// The deployment configuration for rolling patch updates.
+	DeploymentConfig *DeploymentConfiguration
+
+	// The requested patch schedule. Differs from CurrentPatchSchedule when a
+	// reschedule request is pending.
+	DesiredPatchSchedule *ClusterPatchScheduleDetails
+
+	// The strategy used for applying patches to instances in the group.
+	PatchingStrategy ClusterPatchingStrategy
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the autoscaling configuration for a HyperPod cluster.
 type ClusterAutoScalingConfig struct {
 
@@ -4561,6 +4602,10 @@ type ClusterInstanceGroupDetails struct {
 	// The configuration to use when updating the AMI versions.
 	ActiveSoftwareUpdateConfig *DeploymentConfiguration
 
+	// The auto-patching configuration for the instance group, including the current
+	// patching strategy and next scheduled patch date.
+	AutoPatchConfig *ClusterAutoPatchConfigDetails
+
 	// The instance capacity requirements for the instance group.
 	CapacityRequirements *ClusterCapacityRequirements
 
@@ -4571,8 +4616,15 @@ type ClusterInstanceGroupDetails struct {
 	// The ID of the Amazon Machine Image (AMI) currently in use by the instance group.
 	CurrentImageId *string
 
+	// The version of the HyperPod-managed AMI currently running on the instance group.
+	CurrentImageReleaseVersion *string
+
 	// The ID of the Amazon Machine Image (AMI) desired for the instance group.
 	DesiredImageId *string
+
+	// The desired version of the HyperPod-managed AMI for the instance group. This
+	// may differ from the current version when an update is pending.
+	DesiredImageReleaseVersion *string
 
 	// The execution role for the instance group to assume.
 	ExecutionRole *string
@@ -4721,6 +4773,10 @@ type ClusterInstanceGroupSpecification struct {
 	// This member is required.
 	InstanceGroupName *string
 
+	// The configuration for automatic OS security patching. If present, the system
+	// automatically applies PATCH AMI updates to this instance group.
+	AutoPatchConfig *ClusterAutoPatchConfig
+
 	// Specifies the capacity requirements for the instance group.
 	CapacityRequirements *ClusterCapacityRequirements
 
@@ -4750,6 +4806,11 @@ type ClusterInstanceGroupSpecification struct {
 	// your UpdateClusterSoftware request, then all of the instance groups are patched
 	// with the specified image.
 	ImageId *string
+
+	// The version of the HyperPod-managed AMI to use for the instance group. Uses
+	// semantic versioning in the format MAJOR.MINOR.PATCH (for example, 1.2.3 ). If
+	// omitted, the latest available version is used.
+	ImageReleaseVersion *string
 
 	// The instance requirements for the instance group, including the instance types
 	// to use. Use this to create a flexible instance group that supports multiple
@@ -5126,8 +5187,15 @@ type ClusterNodeDetails struct {
 	// The ID of the Amazon Machine Image (AMI) currently in use by the node.
 	CurrentImageId *string
 
+	// The version of the HyperPod-managed AMI currently running on the node.
+	CurrentImageReleaseVersion *string
+
 	// The ID of the Amazon Machine Image (AMI) desired for the node.
 	DesiredImageId *string
+
+	// The desired version of the HyperPod-managed AMI for the node. This may differ
+	// from the current version when an update is pending.
+	DesiredImageReleaseVersion *string
 
 	// The status of the image version for the cluster node.
 	ImageVersionStatus ClusterImageVersionStatus
@@ -5228,6 +5296,9 @@ type ClusterNodeSummary struct {
 	// This member is required.
 	LaunchTime *time.Time
 
+	// The version of the HyperPod-managed AMI currently running on the node.
+	CurrentImageReleaseVersion *string
+
 	// The status of the image version for the cluster node.
 	ImageVersionStatus ClusterImageVersionStatus
 
@@ -5288,6 +5359,27 @@ type ClusterOrchestratorSlurmConfig struct {
 	// The strategy for managing partitions for the Slurm configuration. Valid values
 	// are Managed , Overwrite , and Merge .
 	SlurmConfigStrategy ClusterSlurmConfigStrategy
+
+	noSmithyDocumentSerde
+}
+
+// The schedule configuration for automatic patching.
+type ClusterPatchSchedule struct {
+
+	// The date and time of the next scheduled automatic patch. The system sets this
+	// automatically when a patch is detected. Use this field to reschedule the patch
+	// to a different date.
+	NextPatchDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The schedule details for automatic patching, including the next scheduled patch
+// date.
+type ClusterPatchScheduleDetails struct {
+
+	// The date and time of the next scheduled automatic patch.
+	NextPatchDate *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -5604,6 +5696,9 @@ type ClusterSummary struct {
 	//
 	// This member is required.
 	CreationTime *time.Time
+
+	// The aggregate status of the image version across the cluster's instance groups.
+	ImageVersionStatus ClusterImageVersionStatus
 
 	// A list of Amazon Resource Names (ARNs) of the training plans associated with
 	// this cluster.
@@ -23916,6 +24011,10 @@ type UpdateClusterSoftwareInstanceGroupSpecification struct {
 	//
 	// This member is required.
 	InstanceGroupName *string
+
+	// The version of the HyperPod-managed AMI to update to for the instance group.
+	// Uses semantic versioning in the format MAJOR.MINOR.PATCH .
+	ImageReleaseVersion *string
 
 	noSmithyDocumentSerde
 }

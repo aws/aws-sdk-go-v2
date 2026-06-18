@@ -54,8 +54,8 @@ type ListDurableExecutionsByFunctionInput struct {
 	// $LATEST version.
 	Qualifier *string
 
-	// Set to true to return results in reverse chronological order (newest first).
-	// Default is false.
+	// Set to true to return results in chronological order (oldest first). Default is
+	// false.
 	ReverseOrder *bool
 
 	// Filter executions that started after this timestamp (ISO 8601 format).

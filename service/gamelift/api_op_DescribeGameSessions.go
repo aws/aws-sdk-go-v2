@@ -80,8 +80,9 @@ type DescribeGameSessionsInput struct {
 	FleetId *string
 
 	// An identifier for the game session that is unique across all regions to
-	// retrieve. The value is always a full ARN in the following format:
-	// arn:aws:gamelift:::gamesession// .
+	// retrieve. The value is always a full ARN in the following format: For Home
+	// Region game session - arn:aws:gamelift:::gamesession// . For Remote Location
+	// game session - arn:aws:gamelift:::gamesession/// .
 	GameSessionId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to

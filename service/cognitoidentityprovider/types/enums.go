@@ -963,6 +963,27 @@ func (RiskLevelType) Values() []RiskLevelType {
 	}
 }
 
+type SecurityPolicyType string
+
+// Enum values for SecurityPolicyType
+const (
+	SecurityPolicyTypeTlsV1      SecurityPolicyType = "TLS_V1"
+	SecurityPolicyTypeTlsV122021 SecurityPolicyType = "TLS_V1_2_2021"
+	SecurityPolicyTypeTlsV132025 SecurityPolicyType = "TLS_V1_3_2025"
+)
+
+// Values returns all known values for SecurityPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicyType) Values() []SecurityPolicyType {
+	return []SecurityPolicyType{
+		"TLS_V1",
+		"TLS_V1_2_2021",
+		"TLS_V1_3_2025",
+	}
+}
+
 type StatusType string
 
 // Enum values for StatusType

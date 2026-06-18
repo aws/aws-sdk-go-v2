@@ -2827,6 +2827,21 @@ type UpgradePolicyResponse struct {
 // An object representing the VPC configuration to use for an Amazon EKS cluster.
 type VpcConfigRequest struct {
 
+	// Specifies the control plane egress routing mode for the cluster. If the cluster
+	// is set to AWS_MANAGED , Amazon EKS manages the egress path from the control
+	// plane and you don't need to configure NAT gateways or other routing
+	// infrastructure for control plane traffic. If the cluster is set to
+	// CUSTOMER_ROUTED , you manage the egress path from the control plane in your VPC
+	// subnets. You are responsible for ensuring that the control plane can reach
+	// required endpoints such as webhook servers and OIDC providers. The default value
+	// is AWS_MANAGED . Once set to CUSTOMER_ROUTED , this setting cannot be changed
+	// back to AWS_MANAGED on the same cluster.
+	//
+	// [Learn more about control plane egress routing in the Amazon EKS User Guide.]
+	//
+	// [Learn more about control plane egress routing in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html
+	ControlPlaneEgressMode ControlPlaneEgressModeType
+
 	// Set this value to true to enable private access for your cluster's Kubernetes
 	// API server endpoint. If you enable private access, Kubernetes API requests from
 	// within your cluster's VPC use the private VPC endpoint. The default value for
@@ -2890,6 +2905,16 @@ type VpcConfigResponse struct {
 	// Managed node groups use this security group for control-plane-to-data-plane
 	// communication.
 	ClusterSecurityGroupId *string
+
+	// The current control plane egress routing mode for the cluster. If the cluster
+	// is set to AWS_MANAGED , Amazon EKS manages the egress path from the control
+	// plane. If the cluster is set to CUSTOMER_ROUTED , you manage the egress path
+	// from the control plane in your VPC subnets.
+	//
+	// [Learn more about control plane egress routing in the Amazon EKS User Guide.]
+	//
+	// [Learn more about control plane egress routing in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html
+	ControlPlaneEgressMode ControlPlaneEgressModeType
 
 	// This parameter indicates whether the Amazon EKS private API server endpoint is
 	// enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes

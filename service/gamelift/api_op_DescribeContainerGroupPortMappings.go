@@ -33,11 +33,11 @@ import (
 //
 // # Results
 //
-// This operation returns the fleet ID, location, container group definition ARN,
-// container group type, compute name (for game server container groups), instance
-// ID, and a list of ContainerGroupPortMapping objects. Each object contains the
-// container name, runtime ID, and a list of port mappings that show how container
-// ports map to connection ports on the instance.
+// This operation returns the fleet ID, fleet ARN, location, container group
+// definition ARN, container group type, compute name (for game server container
+// groups), instance ID, and a list of ContainerGroupPortMapping objects. Each
+// object contains the container name, runtime ID, and a list of port mappings that
+// show how container ports map to connection ports on the instance.
 //
 // # Learn more
 //
@@ -133,6 +133,14 @@ type DescribeContainerGroupPortMappingsOutput struct {
 	// The type of container group that was specified in the request. Valid values are
 	// GAME_SERVER or PER_INSTANCE .
 	ContainerGroupType types.ContainerGroupType
+
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 . In a
+	// GameLift fleet ARN, the resource ID matches the FleetId value.
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+	FleetArn *string
 
 	// A unique identifier for the container fleet.
 	FleetId *string

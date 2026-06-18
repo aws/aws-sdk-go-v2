@@ -35,6 +35,22 @@ import (
 // continuous polling to track the request's status using [DescribeVpcPeeringConnections], or by monitoring fleet
 // events for success or failure using [DescribeFleetEvents].
 //
+// Amazon GameLift Servers uses the caller's credentials to update peer-VPC
+// resources. The IAM user that calls this operation must have the following Amazon
+// EC2 permissions enabled:
+//
+//   - ec2:AcceptVpcPeeringConnection
+//
+//   - ec2:AuthorizeSecurityGroupEgress
+//
+//   - ec2:AuthorizeSecurityGroupIngress
+//
+//   - ec2:CreateRoute
+//
+//   - ec2:DescribeRouteTables
+//
+//   - ec2:DescribeSecurityGroups
+//
 // # Related actions
 //
 // [All APIs by task]

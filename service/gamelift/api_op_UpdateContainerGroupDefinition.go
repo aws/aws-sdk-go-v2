@@ -33,8 +33,8 @@ import (
 //     that you want to change only. All other values remain the same as the source
 //     version.
 //
-//   - Change a game server container definition. Provide the updated container
-//     definition.
+//   - Change a game server container definition. Provide a complete set of
+//     container definitions, including the updated definition.
 //
 //   - Add or change a support container definition. Provide a complete set of
 //     container definitions, including the updated definition.

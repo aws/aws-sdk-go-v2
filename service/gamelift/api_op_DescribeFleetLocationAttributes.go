@@ -29,8 +29,7 @@ import (
 //
 // If successful, a LocationAttributes object is returned for each requested
 // location. If the fleet does not have a requested location, no information is
-// returned. This operation does not return the home Region. To get information on
-// a fleet's home Region, call DescribeFleetAttributes .
+// returned.
 //
 // # Learn more
 //

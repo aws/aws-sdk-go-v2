@@ -1,0 +1,8 @@
+{
+    "id": "c9bb359e-ca98-4c8f-9146-aebe585eb3f5",
+    "type": "documentation",
+    "description": "Documentation updates clarifying CancelCapacityReservation cancellable states",
+    "modules": [
+        "service/ec2"
+    ]
+}

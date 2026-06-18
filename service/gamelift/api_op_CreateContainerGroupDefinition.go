@@ -68,11 +68,11 @@ import (
 //
 //   - ContainerGroupType ( GAME_SERVER )
 //
-//   - OperatingSystem (omit to use default value)
+//   - OperatingSystem
 //
-//   - TotalMemoryLimitMebibytes (omit to use default value)
+//   - TotalMemoryLimitMebibytes
 //
-//   - TotalVcpuLimit (omit to use default value)
+//   - TotalVcpuLimit
 //
 //   - At least one GameServerContainerDefinition
 //
@@ -82,7 +82,7 @@ import (
 //
 //   - PortConfiguration
 //
-//   - ServerSdkVersion (omit to use default value)
+//   - ServerSdkVersion
 //
 //   - Create a per-instance container group definition. Provide the following
 //     required parameter values:
@@ -91,11 +91,11 @@ import (
 //
 //   - ContainerGroupType ( PER_INSTANCE )
 //
-//   - OperatingSystem (omit to use default value)
+//   - OperatingSystem
 //
-//   - TotalMemoryLimitMebibytes (omit to use default value)
+//   - TotalMemoryLimitMebibytes
 //
-//   - TotalVcpuLimit (omit to use default value)
+//   - TotalVcpuLimit
 //
 //   - At least one SupportContainerDefinition
 //

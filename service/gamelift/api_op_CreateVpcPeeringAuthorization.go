@@ -43,6 +43,22 @@ import (
 // The authorization remains valid for 24 hours unless it is canceled. You must
 // create or delete the peering connection while the authorization is valid.
 //
+// Amazon GameLift Servers uses the caller's credentials to update peer-VPC
+// resources. The IAM user that calls this operation must have the following Amazon
+// EC2 permissions enabled:
+//
+//   - ec2:AcceptVpcPeeringConnection
+//
+//   - ec2:AuthorizeSecurityGroupEgress
+//
+//   - ec2:AuthorizeSecurityGroupIngress
+//
+//   - ec2:CreateRoute
+//
+//   - ec2:DescribeRouteTables
+//
+//   - ec2:DescribeSecurityGroups
+//
 // # Related actions
 //
 // [All APIs by task]

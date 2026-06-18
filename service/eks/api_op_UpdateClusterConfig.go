@@ -119,7 +119,9 @@ type UpdateClusterConfigInput struct {
 	// remove this configuration after the cluster is created.
 	RemoteNetworkConfig *types.RemoteNetworkConfigRequest
 
-	// An object representing the VPC configuration to use for an Amazon EKS cluster.
+	// An object representing the VPC configuration to use for the cluster update. You
+	// can use this parameter to update the control plane egress mode, the subnets used
+	// by the cluster, the security groups, and the endpoint access settings.
 	ResourcesVpcConfig *types.VpcConfigRequest
 
 	// Update the configuration of the block storage capability of your EKS Auto Mode

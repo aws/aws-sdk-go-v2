@@ -1,0 +1,8 @@
+{
+    "id": "713238b0-2a17-4146-af3f-779aef4dbb02",
+    "type": "feature",
+    "description": "Adds Support for ordered allocation strategies- BEST-FIT-PROGRESSIVE-ORDERED or SPOT-CAPACITY-OPTIMIZED-PRIORITIZED",
+    "modules": [
+        "service/batch"
+    ]
+}

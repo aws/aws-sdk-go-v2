@@ -5458,6 +5458,36 @@ type MemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a specific set of metrics to collect for a service.
+type MetricConfiguration struct {
+
+	// The list of metric names to configure. The supported metric names are
+	// CPUUtilization and MemoryUtilization .
+	//
+	// This member is required.
+	MetricNames []string
+
+	// The resolution, in seconds, at which to collect the metrics. The valid values
+	// are 20 and 60 .
+	//
+	// This member is required.
+	ResolutionSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The optional monitoring configuration for a service, which defines the
+// resolution for the service-level CPUUtilization and MemoryUtilization Amazon
+// CloudWatch metrics. When not specified, Amazon ECS uses the default resolution
+// of 60 seconds.
+type MonitoringConfiguration struct {
+
+	// The list of metric configurations for the service monitoring.
+	MetricConfigurations []MetricConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The details for a volume mount point that's used in a container definition.
 type MountPoint struct {
 
@@ -7236,6 +7266,12 @@ type ServiceRevision struct {
 
 	// The load balancers the service revision uses.
 	LoadBalancers []LoadBalancer
+
+	// The optional monitoring configuration for the service, which defines the
+	// resolution for the service-level CPUUtilization and MemoryUtilization Amazon
+	// CloudWatch metrics. When not specified, Amazon ECS uses the default resolution
+	// of 60 seconds.
+	Monitoring *MonitoringConfiguration
 
 	// The network configuration for a task or service.
 	NetworkConfiguration *NetworkConfiguration

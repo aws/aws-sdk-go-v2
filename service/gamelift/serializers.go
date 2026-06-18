@@ -6595,6 +6595,13 @@ func serializeCBOR_GameServerContainerDefinitionInput(v *types.GameServerContain
 		}
 		vm["ServerSdkVersion"] = ser
 	}
+	if v.LinuxCapabilities != nil {
+		ser, err := serializeCBOR_LinuxCapabilities(v.LinuxCapabilities)
+		if err != nil {
+			return nil, err
+		}
+		vm["LinuxCapabilities"] = ser
+	}
 	return vm, nil
 }
 
@@ -6851,6 +6858,35 @@ func serializeCBOR_LaunchTemplateSpecification(v *types.LaunchTemplateSpecificat
 		vm["Version"] = ser
 	}
 	return vm, nil
+}
+
+func serializeCBOR_LinuxCapabilities(v *types.LinuxCapabilities) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Include != nil {
+		ser, err := serializeCBOR_LinuxCapabilityList(v.Include)
+		if err != nil {
+			return nil, err
+		}
+		vm["Include"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LinuxCapability(v types.LinuxCapability) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_LinuxCapabilityList(v []types.LinuxCapability) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_LinuxCapability(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
 }
 
 func serializeCBOR_ListComputeInputStatus(v types.ListComputeInputStatus) (smithycbor.Value, error) {
@@ -7572,6 +7608,13 @@ func serializeCBOR_SupportContainerDefinitionInput(v *types.SupportContainerDefi
 			return nil, err
 		}
 		vm["Vcpu"] = ser
+	}
+	if v.LinuxCapabilities != nil {
+		ser, err := serializeCBOR_LinuxCapabilities(v.LinuxCapabilities)
+		if err != nil {
+			return nil, err
+		}
+		vm["LinuxCapabilities"] = ser
 	}
 	return vm, nil
 }

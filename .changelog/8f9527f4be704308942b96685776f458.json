@@ -1,0 +1,8 @@
+{
+    "id": "8f9527f4-be70-4308-942b-96685776f458",
+    "type": "feature",
+    "description": "Added optional startFromHead parameter to FilterLogEvents enabling descending timestamp order (newest first) when set to false. Default true preserves existing ascending order. Reverse sorting requires a startTime on or after Jan 1, 2024.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

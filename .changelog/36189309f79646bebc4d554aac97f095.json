@@ -1,0 +1,8 @@
+{
+    "id": "36189309-f796-46be-bc4d-554aac97f095",
+    "type": "feature",
+    "description": "Amazon ECS services now support high resolution (20 second) CloudWatch metrics for CPUUtilization and MemoryUtilization. Use these metrics for faster service auto scaling.",
+    "modules": [
+        "service/ecs"
+    ]
+}

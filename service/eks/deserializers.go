@@ -18899,6 +18899,15 @@ func awsRestjson1_deserializeDocumentVpcConfigResponse(v **types.VpcConfigRespon
 				sv.ClusterSecurityGroupId = ptr.String(jtv)
 			}
 
+		case "controlPlaneEgressMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlPlaneEgressModeType to be of type string, got %T instead", value)
+				}
+				sv.ControlPlaneEgressMode = types.ControlPlaneEgressModeType(jtv)
+			}
+
 		case "endpointPrivateAccess":
 			if value != nil {
 				jtv, ok := value.(bool)

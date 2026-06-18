@@ -322,32 +322,13 @@ type ComputeResource struct {
 
 	// The maximum number of vCPUs that a compute environment can support.
 	//
-	// With BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED and
-	// SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot
-	// Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to
-	// exceed maxvCpus to meet your capacity requirements. In this event, Batch never
-	// exceeds maxvCpus by more than a single instance.
+	// With any allocation strategy except BEST_FIT using On-Demand ( EC2 ) compute
+	// resources, Batch might need to exceed maxvCpus to meet your capacity
+	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
+	// instance.
 	//
 	// This member is required.
 	MaxvCpus *int32
-
-	// The VPC subnets where the compute resources are launched. These subnets must be
-	// within the same VPC. Fargate compute resources can contain up to 16 subnets. For
-	// more information, see [VPCs and subnets]in the Amazon VPC User Guide.
-	//
-	// Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more
-	// information, see [Local Zones]in the Amazon EC2 User Guide for Linux Instances, [Amazon EKS and Amazon Web Services Local Zones] in the
-	// Amazon EKS User Guide and [Amazon ECS clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts]in the Amazon ECS Developer Guide.
-	//
-	// Batch on Fargate doesn't currently support Local Zones.
-	//
-	// [VPCs and subnets]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
-	// [Amazon ECS clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-regions-zones.html#clusters-local-zones
-	// [Local Zones]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-local-zones
-	// [Amazon EKS and Amazon Web Services Local Zones]: https://docs.aws.amazon.com/eks/latest/userguide/local-zones.html
-	//
-	// This member is required.
-	Subnets []string
 
 	// The type of compute environment: EC2 , SPOT , FARGATE , or FARGATE_SPOT . For
 	// more information, see [Compute environments]in the Batch User Guide.
@@ -392,6 +373,27 @@ type ComputeResource struct {
 	// instance types with lower cost vCPUs. If additional instances of the previously
 	// selected instance types aren't available, Batch selects new instance types.
 	//
+	// BEST_FIT_PROGRESSIVE_ORDERED This is an advanced allocation strategy only for
+	// customers who want to control which instance types are preferred during scaling.
+	//
+	// Placing large instance types at the top of the list may result in
+	// over-provisioning for small jobs. Placing small instance types at the top may
+	// cause the compute environment to reach Amazon EC2 instance count limits before
+	// reaching maxvCpus .
+	//
+	// Batch selects instance types in the order they appear in the instanceTypes
+	// list. When an instance family is specified, sizes within that family are
+	// expanded using BEST_FIT_PROGRESSIVE logic—preferring sizes that best fit the
+	// jobs, with larger sizes as fallback. Instance types that cannot meet the
+	// resource requirements of the jobs are skipped. This strategy is only available
+	// for On-Demand Instance ( EC2 ) compute resources.
+	//
+	// If an instance family and an explicit instance type from that family both
+	// appear in instanceTypes , the explicit type takes its listed position and is
+	// excluded from the family expansion. For example, in ["m7a.4xlarge", "m7a",
+	// "m6a"] , m7a.4xlarge is always placed first and is excluded from the m7a family
+	// expansion.
+	//
 	// SPOT_CAPACITY_OPTIMIZED Batch selects one or more instance types that are large
 	// enough to meet the requirements of the jobs in the queue. Its preference is for
 	// instance types that are less likely to be interrupted. This allocation strategy
@@ -402,11 +404,29 @@ type ComputeResource struct {
 	// are the least likely to be interrupted and have the lowest possible price. This
 	// allocation strategy is only available for Spot Instance compute resources.
 	//
-	// With BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED and
-	// SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot
-	// Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to
-	// exceed maxvCpus to meet your capacity requirements. In this event, Batch never
-	// exceeds maxvCpus by more than a single instance.
+	// SPOT_CAPACITY_OPTIMIZED_PRIORITIZED This is an advanced allocation strategy for
+	// customers who want to influence instance type selection during scaling. This
+	// strategy optimizes for capacity first, and honors instance type priorities on a
+	// best-effort basis (priorities are honored when they do not significantly reduce
+	// available Spot capacity).
+	//
+	// Placing large instance types at the top of the list may result in
+	// over-provisioning for small jobs. Placing small instance types at the top may
+	// cause the compute environment to reach Amazon EC2 instance count limits before
+	// reaching maxvCpus .
+	//
+	// Batch selects instance types in the order they appear in the instanceTypes
+	// list, but optimizes for capacity first. The customer-defined priority is honored
+	// on a best-effort basis. When Spot Instance capacity pools are similarly
+	// available, priority order is respected. When capacity is constrained, Batch
+	// selects from the most available pools regardless of priority to minimize the
+	// likelihood of Spot Instance interruptions. This strategy is only available for
+	// Spot Instance compute resources.
+	//
+	// With any allocation strategy except BEST_FIT using On-Demand ( EC2 ) compute
+	// resources, Batch might need to exceed maxvCpus to meet your capacity
+	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
+	// instance.
 	//
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	// [Allocation strategies]: https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html
@@ -595,6 +615,24 @@ type ComputeResource struct {
 	// [Amazon EC2 spot fleet role]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
 	SpotIamFleetRole *string
 
+	// The VPC subnets where the compute resources are launched. These subnets must be
+	// within the same VPC. Fargate compute resources can contain up to 16 subnets. For
+	// more information, see [VPCs and subnets]in the Amazon VPC User Guide. This parameter is required
+	// for compute environments using EC2 , SPOT , FARGATE , or FARGATE_SPOT compute
+	// resources.
+	//
+	// Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more
+	// information, see [Local Zones]in the Amazon EC2 User Guide for Linux Instances, [Amazon EKS and Amazon Web Services Local Zones] in the
+	// Amazon EKS User Guide and [Amazon ECS clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts]in the Amazon ECS Developer Guide.
+	//
+	// Batch on Fargate doesn't currently support Local Zones.
+	//
+	// [VPCs and subnets]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+	// [Amazon ECS clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-regions-zones.html#clusters-local-zones
+	// [Local Zones]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-local-zones
+	// [Amazon EKS and Amazon Web Services Local Zones]: https://docs.aws.amazon.com/eks/latest/userguide/local-zones.html
+	Subnets []string
+
 	// Key-value pair tags to be applied to Amazon EC2 resources that are launched in
 	// the compute environment. For Batch, these take the form of "String1": "String2"
 	// , where String1 is the tag key and String2 is the tag value (for example, {
@@ -637,6 +675,27 @@ type ComputeResourceUpdate struct {
 	// instance types with lower cost vCPUs. If additional instances of the previously
 	// selected instance types aren't available, Batch selects new instance types.
 	//
+	// BEST_FIT_PROGRESSIVE_ORDERED This is an advanced allocation strategy only for
+	// customers who want to control which instance types are preferred during scaling.
+	//
+	// Placing large instance types at the top of the list may result in
+	// over-provisioning for small jobs. Placing small instance types at the top may
+	// cause the compute environment to reach Amazon EC2 instance count limits before
+	// reaching maxvCpus .
+	//
+	// Batch selects instance types in the order they appear in the instanceTypes
+	// list. When an instance family is specified, sizes within that family are
+	// expanded using BEST_FIT_PROGRESSIVE logic—preferring sizes that best fit the
+	// jobs, with larger sizes as fallback. Instance types that cannot meet the
+	// resource requirements of the jobs are skipped. This strategy is only available
+	// for On-Demand Instance ( EC2 ) compute resources.
+	//
+	// If an instance family and an explicit instance type from that family both
+	// appear in instanceTypes , the explicit type takes its listed position and is
+	// excluded from the family expansion. For example, in ["m7a.4xlarge", "m7a",
+	// "m6a"] , m7a.4xlarge is always placed first and is excluded from the m7a family
+	// expansion.
+	//
 	// SPOT_CAPACITY_OPTIMIZED Batch selects one or more instance types that are large
 	// enough to meet the requirements of the jobs in the queue. Its preference is for
 	// instance types that are less likely to be interrupted. This allocation strategy
@@ -647,11 +706,29 @@ type ComputeResourceUpdate struct {
 	// are the least likely to be interrupted and have the lowest possible price. This
 	// allocation strategy is only available for Spot Instance compute resources.
 	//
-	// With BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED and
-	// SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot
-	// Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to
-	// exceed maxvCpus to meet your capacity requirements. In this event, Batch never
-	// exceeds maxvCpus by more than a single instance.
+	// SPOT_CAPACITY_OPTIMIZED_PRIORITIZED This is an advanced allocation strategy for
+	// customers who want to influence instance type selection during scaling. This
+	// strategy optimizes for capacity first, and honors instance type priorities on a
+	// best-effort basis (priorities are honored when they do not significantly reduce
+	// available Spot capacity).
+	//
+	// Placing large instance types at the top of the list may result in
+	// over-provisioning for small jobs. Placing small instance types at the top may
+	// cause the compute environment to reach Amazon EC2 instance count limits before
+	// reaching maxvCpus .
+	//
+	// Batch selects instance types in the order they appear in the instanceTypes
+	// list, but optimizes for capacity first. The customer-defined priority is honored
+	// on a best-effort basis. When Spot Instance capacity pools are similarly
+	// available, priority order is respected. When capacity is constrained, Batch
+	// selects from the most available pools regardless of priority to minimize the
+	// likelihood of Spot Instance interruptions. This strategy is only available for
+	// Spot Instance compute resources.
+	//
+	// With any allocation strategy except BEST_FIT using On-Demand ( EC2 ) compute
+	// resources, Batch might need to exceed maxvCpus to meet your capacity
+	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
+	// instance.
 	//
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	// [Allocation strategies]: https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html
@@ -842,11 +919,10 @@ type ComputeResourceUpdate struct {
 
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach.
 	//
-	// With BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED and
-	// SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot
-	// Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to
-	// exceed maxvCpus to meet your capacity requirements. In this event, Batch never
-	// exceeds maxvCpus by more than a single instance.
+	// With any allocation strategy except BEST_FIT using On-Demand ( EC2 ) compute
+	// resources, Batch might need to exceed maxvCpus to meet your capacity
+	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
+	// instance.
 	MaxvCpus *int32
 
 	// The minimum number of vCPUs that an environment should maintain (even if the

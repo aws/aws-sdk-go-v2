@@ -307,6 +307,12 @@ type UpdateServiceInput struct {
 	// [CreateDeployment]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
 	LoadBalancers []types.LoadBalancer
 
+	// The optional monitoring configuration for the service, which defines the
+	// resolution for the service-level CPUUtilization and MemoryUtilization Amazon
+	// CloudWatch metrics. When not specified, Amazon ECS uses the default resolution
+	// of 60 seconds.
+	Monitoring *types.MonitoringConfiguration
+
 	// An object representing the network configuration for the service.
 	//
 	// This parameter triggers a new service deployment.

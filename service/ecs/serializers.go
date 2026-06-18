@@ -7630,6 +7630,63 @@ func awsAwsjson11_serializeDocumentMemoryMiBRequest(v *types.MemoryMiBRequest, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMetricConfiguration(v *types.MetricConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricNames != nil {
+		ok := object.Key("metricNames")
+		if err := awsAwsjson11_serializeDocumentMetricNamesList(v.MetricNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResolutionSeconds != nil {
+		ok := object.Key("resolutionSeconds")
+		ok.Integer(*v.ResolutionSeconds)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricConfigurationList(v []types.MetricConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMetricConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricNamesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMonitoringConfiguration(v *types.MonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricConfigurations != nil {
+		ok := object.Key("metricConfigurations")
+		if err := awsAwsjson11_serializeDocumentMetricConfigurationList(v.MetricConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMountPoint(v *types.MountPoint, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9547,6 +9604,13 @@ func awsAwsjson11_serializeOpDocumentCreateServiceInput(v *CreateServiceInput, v
 	if v.LoadBalancers != nil {
 		ok := object.Key("loadBalancers")
 		if err := awsAwsjson11_serializeDocumentLoadBalancers(v.LoadBalancers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Monitoring != nil {
+		ok := object.Key("monitoring")
+		if err := awsAwsjson11_serializeDocumentMonitoringConfiguration(v.Monitoring, ok); err != nil {
 			return err
 		}
 	}
@@ -11758,6 +11822,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.LoadBalancers != nil {
 		ok := object.Key("loadBalancers")
 		if err := awsAwsjson11_serializeDocumentLoadBalancers(v.LoadBalancers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Monitoring != nil {
+		ok := object.Key("monitoring")
+		if err := awsAwsjson11_serializeDocumentMonitoringConfiguration(v.Monitoring, ok); err != nil {
 			return err
 		}
 	}

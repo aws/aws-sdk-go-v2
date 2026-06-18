@@ -1,0 +1,8 @@
+{
+    "id": "1f369b00-1414-48ea-bcf5-652b9d1243b8",
+    "type": "feature",
+    "description": "Converging and fixing existing documentation gaps in Lambda SDK",
+    "modules": [
+        "service/lambda"
+    ]
+}

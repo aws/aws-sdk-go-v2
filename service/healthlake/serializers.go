@@ -1112,6 +1112,13 @@ func awsAwsjson10_serializeOpDocumentCreateFHIRDatastoreInput(v *CreateFHIRDatas
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnalyticsConfiguration != nil {
+		ok := object.Key("AnalyticsConfiguration")
+		if err := awsAwsjson10_serializeDocumentAnalyticsConfiguration(v.AnalyticsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -1134,9 +1141,23 @@ func awsAwsjson10_serializeOpDocumentCreateFHIRDatastoreInput(v *CreateFHIRDatas
 		}
 	}
 
+	if v.NlpConfiguration != nil {
+		ok := object.Key("NlpConfiguration")
+		if err := awsAwsjson10_serializeDocumentNlpConfiguration(v.NlpConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PreloadDataConfig != nil {
 		ok := object.Key("PreloadDataConfig")
 		if err := awsAwsjson10_serializeDocumentPreloadDataConfig(v.PreloadDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProfileConfiguration != nil {
+		ok := object.Key("ProfileConfiguration")
+		if err := awsAwsjson10_serializeDocumentProfileConfiguration(v.ProfileConfiguration, ok); err != nil {
 			return err
 		}
 	}

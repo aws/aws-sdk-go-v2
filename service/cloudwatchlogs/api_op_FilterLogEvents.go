@@ -45,6 +45,9 @@ import (
 //
 // The returned log events are sorted by event timestamp, the timestamp when the
 // event was ingested by CloudWatch Logs, and the ID of the PutLogEvents request.
+// By default, the events are returned in ascending timestamp order (oldest first).
+// To return events in descending timestamp order (newest first), set the
+// startFromHead parameter to false .
 //
 // If you are using CloudWatch cross-account observability, you can use this
 // operation in a monitoring account and view data from the linked source accounts.
@@ -132,6 +135,20 @@ type FilterLogEventsInput struct {
 	// previous call.)
 	NextToken *string
 
+	// If the value is true, the earliest log events are returned first. If the value
+	// is false, the latest log events are returned first. The default value is true.
+	//
+	// The startFromHead parameter sets the sort direction on the first request. On
+	// subsequent requests, the nextToken determines the sort direction. To continue
+	// paginating in the same direction, provide the returned nextToken . If you
+	// provide both nextToken and startFromHead , the direction of the nextToken is
+	// used.
+	//
+	// Setting startFromHead to false is supported only when startTime is on or after
+	// Jan 1, 2024 00:00:00 UTC . A request with startFromHead set to false and a
+	// startTime before this date returns an InvalidParameterException .
+	StartFromHead *bool
+
 	// The start of the time range, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC . Events with a timestamp before this time are not returned.
 	StartTime *int64
@@ -151,8 +168,8 @@ type FilterLogEventsOutput struct {
 	// The matched events.
 	Events []types.FilteredLogEvent
 
-	// The token to use when requesting the next set of items. The token expires after
-	// 24 hours.
+	// The token for the next set of items in the sorting direction specified by the
+	// startFromHead parameter in the first request. The token expires after 24 hours.
 	//
 	// If the results don't include a nextToken , then pagination is finished.
 	NextToken *string

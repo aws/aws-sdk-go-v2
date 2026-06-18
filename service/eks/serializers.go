@@ -7360,6 +7360,11 @@ func awsRestjson1_serializeDocumentVpcConfigRequest(v *types.VpcConfigRequest, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ControlPlaneEgressMode) > 0 {
+		ok := object.Key("controlPlaneEgressMode")
+		ok.String(string(v.ControlPlaneEgressMode))
+	}
+
 	if v.EndpointPrivateAccess != nil {
 		ok := object.Key("endpointPrivateAccess")
 		ok.Boolean(*v.EndpointPrivateAccess)

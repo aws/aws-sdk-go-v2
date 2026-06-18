@@ -9801,6 +9801,11 @@ func awsAwsjson11_serializeOpDocumentFilterLogEventsInput(v *FilterLogEventsInpu
 		ok.String(*v.NextToken)
 	}
 
+	if v.StartFromHead != nil {
+		ok := object.Key("startFromHead")
+		ok.Boolean(*v.StartFromHead)
+	}
+
 	if v.StartTime != nil {
 		ok := object.Key("startTime")
 		ok.Long(*v.StartTime)

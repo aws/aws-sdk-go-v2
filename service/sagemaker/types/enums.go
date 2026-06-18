@@ -2153,8 +2153,10 @@ type ClusterImageVersionStatus string
 
 // Enum values for ClusterImageVersionStatus
 const (
-	ClusterImageVersionStatusUpToDate        ClusterImageVersionStatus = "UpToDate"
-	ClusterImageVersionStatusUpdateAvailable ClusterImageVersionStatus = "UpdateAvailable"
+	ClusterImageVersionStatusUpToDate               ClusterImageVersionStatus = "UpToDate"
+	ClusterImageVersionStatusUpdateAvailable        ClusterImageVersionStatus = "UpdateAvailable"
+	ClusterImageVersionStatusSecurityUpdateRequired ClusterImageVersionStatus = "SecurityUpdateRequired"
+	ClusterImageVersionStatusEndOfLife              ClusterImageVersionStatus = "EndOfLife"
 )
 
 // Values returns all known values for ClusterImageVersionStatus. Note that this
@@ -2165,6 +2167,8 @@ func (ClusterImageVersionStatus) Values() []ClusterImageVersionStatus {
 	return []ClusterImageVersionStatus{
 		"UpToDate",
 		"UpdateAvailable",
+		"SecurityUpdateRequired",
+		"EndOfLife",
 	}
 }
 
@@ -2532,6 +2536,25 @@ func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
 	return []ClusterNodeRecovery{
 		"Automatic",
 		"None",
+	}
+}
+
+type ClusterPatchingStrategy string
+
+// Enum values for ClusterPatchingStrategy
+const (
+	ClusterPatchingStrategyWhenIdle    ClusterPatchingStrategy = "WhenIdle"
+	ClusterPatchingStrategyWhenAllIdle ClusterPatchingStrategy = "WhenAllIdle"
+)
+
+// Values returns all known values for ClusterPatchingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterPatchingStrategy) Values() []ClusterPatchingStrategy {
+	return []ClusterPatchingStrategy{
+		"WhenIdle",
+		"WhenAllIdle",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "2e9f9032-c53b-4218-91a2-249422c7b1c0",
+    "type": "feature",
+    "description": "Adds support for ECS high-resolution predefined scaling metrics (ECSServiceAverageCPUUtilizationHighResolution, ECSServiceAverageMemoryUtilizationHighResolution) enabling 20-second metric periods for faster scaling",
+    "modules": [
+        "service/applicationautoscaling"
+    ]
+}

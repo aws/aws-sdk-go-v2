@@ -2350,14 +2350,14 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CapacityProviderConfig != nil {
-		if err := validateCapacityProviderConfig(v.CapacityProviderConfig); err != nil {
-			invalidParams.AddNested("CapacityProviderConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.TenancyConfig != nil {
 		if err := validateTenancyConfig(v.TenancyConfig); err != nil {
 			invalidParams.AddNested("TenancyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CapacityProviderConfig != nil {
+		if err := validateCapacityProviderConfig(v.CapacityProviderConfig); err != nil {
+			invalidParams.AddNested("CapacityProviderConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -2158,7 +2158,10 @@ type OperationUpdate struct {
 	// within a child context.
 	ParentId *string
 
-	// The payload for successful operations.
+	// The payload for successful operations. The maximum payload size is 6 MB for
+	// synchronous EXECUTION operations (RequestResponse invocationType), 1 MB for
+	// asynchronous EXECUTION (Event invocationType) and CHAINED_INVOKE operations,
+	// and 256 KB for CONTEXT , STEP , WAIT , and CALLBACK operations.
 	Payload *string
 
 	// Options for step operations.

@@ -2531,6 +2531,58 @@ func validateMemoryMiBRequest(v *types.MemoryMiBRequest) error {
 	}
 }
 
+func validateMetricConfiguration(v *types.MetricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricConfiguration"}
+	if v.MetricNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricNames"))
+	}
+	if v.ResolutionSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolutionSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricConfigurationList(v []types.MetricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricConfigurationList"}
+	for i := range v {
+		if err := validateMetricConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoringConfiguration"}
+	if v.MetricConfigurations != nil {
+		if err := validateMetricConfigurationList(v.MetricConfigurations); err != nil {
+			invalidParams.AddNested("MetricConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	if v == nil {
 		return nil
@@ -3374,6 +3426,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.VpcLatticeConfigurations != nil {
 		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
 			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Monitoring != nil {
+		if err := validateMonitoringConfiguration(v.Monitoring); err != nil {
+			invalidParams.AddNested("Monitoring", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4409,6 +4466,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.VpcLatticeConfigurations != nil {
 		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
 			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Monitoring != nil {
+		if err := validateMonitoringConfiguration(v.Monitoring); err != nil {
+			invalidParams.AddNested("Monitoring", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -246,6 +246,8 @@ const (
 	EBSMetricNameVolumeWriteOpsPerSecond   EBSMetricName = "VolumeWriteOpsPerSecond"
 	EBSMetricNameVolumeReadBytesPerSecond  EBSMetricName = "VolumeReadBytesPerSecond"
 	EBSMetricNameVolumeWriteBytesPerSecond EBSMetricName = "VolumeWriteBytesPerSecond"
+	EBSMetricNameVolumeIopsExceeded        EBSMetricName = "VolumeIOPSExceeded"
+	EBSMetricNameVolumeThroughputExceeded  EBSMetricName = "VolumeThroughputExceeded"
 )
 
 // Values returns all known values for EBSMetricName. Note that this can be
@@ -258,6 +260,8 @@ func (EBSMetricName) Values() []EBSMetricName {
 		"VolumeWriteOpsPerSecond",
 		"VolumeReadBytesPerSecond",
 		"VolumeWriteBytesPerSecond",
+		"VolumeIOPSExceeded",
+		"VolumeThroughputExceeded",
 	}
 }
 
@@ -1275,6 +1279,8 @@ const (
 	ExportableVolumeFieldUtilizationMetricsVolumeWriteOpsPerSecondMaximum                   ExportableVolumeField = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
 	ExportableVolumeFieldUtilizationMetricsVolumeReadBytesPerSecondMaximum                  ExportableVolumeField = "UtilizationMetricsVolumeReadBytesPerSecondMaximum"
 	ExportableVolumeFieldUtilizationMetricsVolumeWriteBytesPerSecondMaximum                 ExportableVolumeField = "UtilizationMetricsVolumeWriteBytesPerSecondMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeIopsExceededMaximum                        ExportableVolumeField = "UtilizationMetricsVolumeIOPSExceededMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeThroughputExceededMaximum                  ExportableVolumeField = "UtilizationMetricsVolumeThroughputExceededMaximum"
 	ExportableVolumeFieldLookbackPeriodInDays                                               ExportableVolumeField = "LookbackPeriodInDays"
 	ExportableVolumeFieldCurrentConfigurationVolumeType                                     ExportableVolumeField = "CurrentConfigurationVolumeType"
 	ExportableVolumeFieldCurrentConfigurationVolumeBaselineIops                             ExportableVolumeField = "CurrentConfigurationVolumeBaselineIOPS"
@@ -1319,6 +1325,8 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
 		"UtilizationMetricsVolumeReadBytesPerSecondMaximum",
 		"UtilizationMetricsVolumeWriteBytesPerSecondMaximum",
+		"UtilizationMetricsVolumeIOPSExceededMaximum",
+		"UtilizationMetricsVolumeThroughputExceededMaximum",
 		"LookbackPeriodInDays",
 		"CurrentConfigurationVolumeType",
 		"CurrentConfigurationVolumeBaselineIOPS",

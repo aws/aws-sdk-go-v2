@@ -56,6 +56,11 @@ type UpdateCanaryInput struct {
 	// This member is required.
 	Name *string
 
+	// A list of locations (Amazon Web Services Regions) to add as replicas for the
+	// canary. Each location specifies a Region and optional VPC configuration for the
+	// replica. You can add up to 50 replica locations.
+	AddReplicaLocations []types.AddReplicaLocationInput
+
 	// A structure that contains the configuration for canary artifacts, including the
 	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 	ArtifactConfig *types.ArtifactConfigInput
@@ -120,6 +125,11 @@ type UpdateCanaryInput struct {
 	//
 	// [DeleteCanary]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
 	ProvisionedResourceCleanup types.ProvisionedResourceCleanupSetting
+
+	// A list of locations (Amazon Web Services Regions) to remove as replicas for the
+	// canary. You must specify at least one location to remove. All replicas can be
+	// removed in a single API call and you cannot remove the primary location.
+	RemoveReplicaLocations []string
 
 	// A structure that contains the timeout value that is used for each individual
 	// run of the canary.

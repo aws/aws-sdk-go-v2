@@ -1,0 +1,8 @@
+{
+    "id": "454a6f42-ed39-4af3-91bf-e66a549df23c",
+    "type": "feature",
+    "description": "CloudWatch Synthetics adds support for multi-location canaries. Customers can now monitor their endpoints from multiple locations with centralized management from a primary location. The SDK includes new parameters for configuring multiple locations and tracking their state.",
+    "modules": [
+        "service/synthetics"
+    ]
+}

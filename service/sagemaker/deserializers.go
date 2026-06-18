@@ -53749,6 +53749,61 @@ func awsAwsjson11_deserializeDocumentClarifyTextConfig(v **types.ClarifyTextConf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterAutoPatchConfigDetails(v **types.ClusterAutoPatchConfigDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterAutoPatchConfigDetails
+	if *v == nil {
+		sv = &types.ClusterAutoPatchConfigDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentPatchSchedule":
+			if err := awsAwsjson11_deserializeDocumentClusterPatchScheduleDetails(&sv.CurrentPatchSchedule, value); err != nil {
+				return err
+			}
+
+		case "DeploymentConfig":
+			if err := awsAwsjson11_deserializeDocumentDeploymentConfiguration(&sv.DeploymentConfig, value); err != nil {
+				return err
+			}
+
+		case "DesiredPatchSchedule":
+			if err := awsAwsjson11_deserializeDocumentClusterPatchScheduleDetails(&sv.DesiredPatchSchedule, value); err != nil {
+				return err
+			}
+
+		case "PatchingStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterPatchingStrategy to be of type string, got %T instead", value)
+				}
+				sv.PatchingStrategy = types.ClusterPatchingStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterAutoScalingConfigOutput(v **types.ClusterAutoScalingConfigOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -54371,6 +54426,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				return err
 			}
 
+		case "AutoPatchConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterAutoPatchConfigDetails(&sv.AutoPatchConfig, value); err != nil {
+				return err
+			}
+
 		case "CapacityRequirements":
 			if err := awsAwsjson11_deserializeDocumentClusterCapacityRequirements(&sv.CapacityRequirements, value); err != nil {
 				return err
@@ -54398,6 +54458,15 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				sv.CurrentImageId = ptr.String(jtv)
 			}
 
+		case "CurrentImageReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageReleaseVersion to be of type string, got %T instead", value)
+				}
+				sv.CurrentImageReleaseVersion = ptr.String(jtv)
+			}
+
 		case "DesiredImageId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54405,6 +54474,15 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 					return fmt.Errorf("expected ImageId to be of type string, got %T instead", value)
 				}
 				sv.DesiredImageId = ptr.String(jtv)
+			}
+
+		case "DesiredImageReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageReleaseVersion to be of type string, got %T instead", value)
+				}
+				sv.DesiredImageReleaseVersion = ptr.String(jtv)
 			}
 
 		case "ExecutionRole":
@@ -55413,6 +55491,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 				sv.CurrentImageId = ptr.String(jtv)
 			}
 
+		case "CurrentImageReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageReleaseVersion to be of type string, got %T instead", value)
+				}
+				sv.CurrentImageReleaseVersion = ptr.String(jtv)
+			}
+
 		case "DesiredImageId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -55420,6 +55507,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 					return fmt.Errorf("expected ImageId to be of type string, got %T instead", value)
 				}
 				sv.DesiredImageId = ptr.String(jtv)
+			}
+
+		case "DesiredImageReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageReleaseVersion to be of type string, got %T instead", value)
+				}
+				sv.DesiredImageReleaseVersion = ptr.String(jtv)
 			}
 
 		case "ImageVersionStatus":
@@ -55716,6 +55812,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeSummary(v **types.ClusterNodeSum
 
 	for key, value := range shape {
 		switch key {
+		case "CurrentImageReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageReleaseVersion to be of type string, got %T instead", value)
+				}
+				sv.CurrentImageReleaseVersion = ptr.String(jtv)
+			}
+
 		case "ImageVersionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -56006,6 +56111,53 @@ func awsAwsjson11_deserializeDocumentClusterPartitionNames(v *[]string, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterPatchScheduleDetails(v **types.ClusterPatchScheduleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterPatchScheduleDetails
+	if *v == nil {
+		sv = &types.ClusterPatchScheduleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextPatchDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.NextPatchDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -56615,6 +56767,15 @@ func awsAwsjson11_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ImageVersionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterImageVersionStatus to be of type string, got %T instead", value)
+				}
+				sv.ImageVersionStatus = types.ClusterImageVersionStatus(jtv)
 			}
 
 		case "TrainingPlanArns":

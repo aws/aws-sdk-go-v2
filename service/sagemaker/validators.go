@@ -9507,6 +9507,26 @@ func validateClarifyTextConfig(v *types.ClarifyTextConfig) error {
 	}
 }
 
+func validateClusterAutoPatchConfig(v *types.ClusterAutoPatchConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterAutoPatchConfig"}
+	if len(v.PatchingStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PatchingStrategy"))
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateDeploymentConfiguration(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterAutoScalingConfig(v *types.ClusterAutoScalingConfig) error {
 	if v == nil {
 		return nil
@@ -9587,6 +9607,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.ScheduledUpdateConfig != nil {
 		if err := validateScheduledUpdateConfig(v.ScheduledUpdateConfig); err != nil {
 			invalidParams.AddNested("ScheduledUpdateConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoPatchConfig != nil {
+		if err := validateClusterAutoPatchConfig(v.AutoPatchConfig); err != nil {
+			invalidParams.AddNested("AutoPatchConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.KubernetesConfig != nil {
