@@ -2148,6 +2148,18 @@
                     "traits": {
                         "smithy.api#enumValue": "VolumeWriteBytesPerSecond"
                     }
+                },
+                "VOLUME_IOPS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeIOPSExceeded"
+                    }
+                },
+                "VOLUME_THROUGHPUT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeThroughputExceeded"
+                    }
                 }
             }
         },
@@ -2215,7 +2227,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#EBSMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VolumeReadOpsPerSecond</code> - The completed read operations per second\n                    from the volume in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeWriteOpsPerSecond</code> - The completed write operations per\n                    second to the volume in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeReadBytesPerSecond</code> - The bytes read per second from the\n                    volume in a specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeWriteBytesPerSecond</code> - The bytes written to the volume in a\n                    specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VolumeReadOpsPerSecond</code> - The completed read operations per second\n                    from the volume in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeWriteOpsPerSecond</code> - The completed write operations per\n                    second to the volume in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeReadBytesPerSecond</code> - The bytes read per second from the\n                    volume in a specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeWriteBytesPerSecond</code> - The bytes written to the volume in a\n                    specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeIOPSExceeded</code> - Indicates whether the volume's\n                    provisioned IOPS performance was exceeded in a specified period of time.\n                    A value of <code>1</code> means the provisioned IOPS were exceeded; a value of\n                    <code>0</code> means they were not.</p>\n               <p>Unit: None</p>\n            </li>\n            <li>\n               <p>\n                  <code>VolumeThroughputExceeded</code> - Indicates whether the volume's\n                    provisioned throughput performance was exceeded in a specified period of\n                    time. A value of <code>1</code> means the provisioned throughput was exceeded;\n                    a value of <code>0</code> means it was not.</p>\n               <p>Unit: None</p>\n            </li>\n         </ul>"
                     }
                 },
                 "statistic": {
@@ -5989,6 +6001,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UtilizationMetricsVolumeWriteBytesPerSecondMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeIOPSExceededMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeThroughputExceededMaximum"
                     }
                 },
                 "LOOKBACK_PERIOD_IN_DAYS": {

@@ -2052,13 +2052,13 @@
                 "InstanceConnectionPortRange": {
                     "target": "com.amazonaws.gamelift#ConnectionPortRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of port numbers to open on each fleet instance. A fleet's connection ports map\n            to container ports that are configured in the fleet's container group definitions. </p>\n         <p>By default, Amazon GameLift Servers calculates an optimal port range based on your fleet\n            configuration. To use the calculated range, don't set this parameter. The values\n            are:</p>\n         <ul>\n            <li>\n               <p>Port range: 4192 to a number calculated based on your fleet configuration.\n                    Amazon GameLift Servers uses the following formula: <code>4192 + [# of game server container\n                        groups per fleet instance] * [# of container ports in the game server\n                        container group definition] + [# of container ports in the game server\n                        container group definition]</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can also choose to manually set this parameter. When manually setting this\n            parameter, you must use port numbers that match the fleet's inbound permissions port\n            range.</p>\n         <note>\n            <p>If you set values manually, Amazon GameLift Servers no longer calculates a port range for you,\n                even if you later remove the manual settings. </p>\n         </note>\n         <p>The port range must not overlap with the Amazon GameLift Servers reserved port range\n            <code>4092-4191</code>. This range is reserved for internal Amazon GameLift Servers\n            services.</p>"
+                        "smithy.api#documentation": "<p>The set of port numbers to open on each fleet instance. A fleet's connection ports map\n            to container ports that are configured in the fleet's container group definitions. </p>\n         <p>By default, Amazon GameLift Servers calculates an optimal port range based on your fleet\n            configuration. To use the calculated range, don't set this parameter. The values\n            are:</p>\n         <ul>\n            <li>\n               <p>Port range: 4192 to a number calculated based on your fleet configuration.\n                    Amazon GameLift Servers uses the following formula: <code>4192 + [# of game server container\n                        groups per fleet instance] * [# of container ports in the game server\n                        container group definition] + [# of container ports in the per instance\n                        container group definition]</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can also choose to manually set this parameter. When manually setting this\n            parameter, you must use port numbers that match the fleet's inbound permissions port\n            range.</p>\n         <note>\n            <p>If you set values manually, Amazon GameLift Servers no longer calculates a port range for you,\n                even if you later remove the manual settings. </p>\n         </note>\n         <p>The port range must not overlap with the Amazon GameLift Servers reserved port range\n            <code>4092-4191</code>. This range is reserved for internal Amazon GameLift Servers\n            services.</p>"
                     }
                 },
                 "InstanceInboundPermissions": {
                     "target": "com.amazonaws.gamelift#IpPermissionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address ranges and port settings that allow inbound traffic to access game\n            server processes and other processes on this fleet. As a best practice, when remotely\n            accessing a fleet instance, we recommend opening ports only when you need them and\n            closing them when you're finished.</p>\n         <p>By default, Amazon GameLift Servers calculates an optimal port range based on your fleet\n            configuration. To use the calculated range, don't set this parameter. The values\n            are:</p>\n         <ul>\n            <li>\n               <p>Protocol: UDP</p>\n            </li>\n            <li>\n               <p>Port range: 4192 to a number calculated based on your fleet configuration. Amazon GameLift Servers uses the\n                    following formula: <code>4192 + [# of game server container groups per fleet\n                        instance] * [# of container ports in the game server container group\n                        definition] + [# of container ports in the game server container group\n                        definition]</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can also choose to manually set this parameter. When manually setting this\n            parameter, you must use port numbers that match the fleet's connection port\n            range.</p>\n         <note>\n            <p>If you set values manually, Amazon GameLift Servers no longer calculates a port range for you,\n                even if you later remove the manual settings. </p>\n         </note>\n         <p>The port range must not overlap with the Amazon GameLift Servers reserved port range\n            <code>4092-4191</code>. This range is reserved for internal Amazon GameLift Servers\n            services.</p>"
+                        "smithy.api#documentation": "<p>The IP address ranges and port settings that allow inbound traffic to access game\n            server processes and other processes on this fleet. As a best practice, when remotely\n            accessing a fleet instance, we recommend opening ports only when you need them and\n            closing them when you're finished.</p>\n         <p>By default, Amazon GameLift Servers calculates an optimal port range based on your fleet\n            configuration. To use the calculated range, don't set this parameter. The values\n            are:</p>\n         <ul>\n            <li>\n               <p>Protocol: UDP</p>\n            </li>\n            <li>\n               <p>Port range: 4192 to a number calculated based on your fleet configuration. Amazon GameLift Servers uses the\n                    following formula: <code>4192 + [# of game server container groups per fleet\n                        instance] * [# of container ports in the game server container group\n                        definition] + [# of container ports in the per instance container group\n                        definition]</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can also choose to manually set this parameter. When manually setting this\n            parameter, you must use port numbers that match the fleet's connection port\n            range.</p>\n         <note>\n            <p>If you set values manually, Amazon GameLift Servers no longer calculates a port range for you,\n                even if you later remove the manual settings. </p>\n         </note>\n         <p>The port range must not overlap with the Amazon GameLift Servers reserved port range\n            <code>4092-4191</code>. This range is reserved for internal Amazon GameLift Servers\n            services.</p>"
                     }
                 },
                 "GameServerContainerGroupsPerInstance": {
@@ -2070,7 +2070,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type to use for all instances in the fleet. For multi-location\n            fleets, the instance type must be available in the home region and all remote locations.\n            Instance type determines the computing resources and processing power that's available\n            to host your game servers. This includes including CPU, memory, storage, and networking\n            capacity. </p>\n         <p>By default, Amazon GameLift Servers selects an instance type that fits the needs of your container\n            groups and is available in all selected fleet locations. You can also choose to manually\n            set this parameter. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon Elastic Compute Cloud\n                Instance Types</a> for detailed descriptions of Amazon EC2 instance types.</p>\n         <p>You can't update this fleet property later.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type to use for all instances in the fleet. For multi-location\n            fleets, the instance type must be available in the home region and all remote locations.\n            Instance type determines the computing resources and processing power that's available\n            to host your game servers. This includes including CPU, memory, storage, and networking\n            capacity. </p>\n         <p>By default, Amazon GameLift Servers uses the <code>c5.large</code> instance type. If this instance\n            type does not have sufficient resources for your container groups, you can choose a\n            different instance type that better fits your needs. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon Elastic Compute Cloud Instance Types</a> for detailed descriptions\n            of Amazon EC2 instance types.</p>\n         <p>You can't update this fleet property later.</p>"
                     }
                 },
                 "BillingType": {
@@ -2172,7 +2172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Container</p>\n         <p>Creates a <code>ContainerGroupDefinition</code> that describes a set of containers for\n      hosting your game server with Amazon GameLift Servers managed containers hosting. An Amazon GameLift Servers container group\n      is similar to a container task or pod. Use container group definitions when you create a\n      container fleet with <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html\">CreateContainerFleet</a>. </p>\n         <p>A container group definition determines how Amazon GameLift Servers deploys your containers to each\n      instance in a container fleet. You can maintain multiple versions of a container group\n      definition.</p>\n         <p>There are two types of container groups:</p>\n         <ul>\n            <li>\n               <p>A <b>game server container group</b> has the containers that run\n          your game server application and supporting software. A game server container group can\n          have these container types:</p>\n               <ul>\n                  <li>\n                     <p>Game server container. This container runs your game server. You can define one\n              game server container in a game server container group.</p>\n                  </li>\n                  <li>\n                     <p>Support container. This container runs software in parallel with your game server.\n              You can define up to 8 support containers in a game server group.</p>\n                  </li>\n               </ul>\n               <p>When building a game server container group definition, you can choose to bundle your\n          game server executable and all dependent software into a single game server container.\n          Alternatively, you can separate the software into one game server container and one or\n          more support containers.</p>\n               <p>On a container fleet instance, a game server container group can be deployed multiple\n          times (depending on the compute resources of the instance). This means that all containers\n          in the container group are replicated together.</p>\n            </li>\n            <li>\n               <p>A <b>per-instance container group</b> has containers for processes\n          that aren't replicated on a container fleet instance. This might include background\n          services, logging, test processes, or processes that need to persist independently of the\n          game server container group. When building a per-instance container group, you can define\n          up to 10 support containers.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This operation requires Identity and Access Management (IAM) permissions to access container images in\n        Amazon ECR repositories. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html\"> IAM permissions\n          for Amazon GameLift Servers</a> for help setting the appropriate permissions.</p>\n         </note>\n         <p>\n            <b>Request options</b>\n         </p>\n         <p>Use this operation to make the following types of requests. You can specify values for the\n      minimum required parameters and customize optional values later.</p>\n         <ul>\n            <li>\n               <p>Create a game server container group definition. Provide the following required parameter values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Name</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ContainerGroupType</code> (<code>GAME_SERVER</code>)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>OperatingSystem</code> (omit to use default value)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalMemoryLimitMebibytes</code> (omit to use default value)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalVcpuLimit </code>(omit to use default value)</p>\n                  </li>\n                  <li>\n                     <p>At least one <code>GameServerContainerDefinition</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ContainerName</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ImageUrl</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PortConfiguration</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ServerSdkVersion</code> (omit to use default value)</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Create a per-instance container group definition. Provide the following required parameter\n          values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Name</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ContainerGroupType</code> (<code>PER_INSTANCE</code>)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>OperatingSystem</code> (omit to use default value)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalMemoryLimitMebibytes</code> (omit to use default value)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalVcpuLimit </code>(omit to use default value)</p>\n                  </li>\n                  <li>\n                     <p>At least one <code>SupportContainerDefinition</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ContainerName</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ImageUrl</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Results</b>\n         </p>\n         <p>If successful, this request creates a <code>ContainerGroupDefinition</code> resource and\n      assigns a unique ARN value. You can update most properties of a container group definition by\n      calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>, and optionally save the update as a new version.</p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Container</p>\n         <p>Creates a <code>ContainerGroupDefinition</code> that describes a set of containers for\n      hosting your game server with Amazon GameLift Servers managed containers hosting. An Amazon GameLift Servers container group\n      is similar to a container task or pod. Use container group definitions when you create a\n      container fleet with <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html\">CreateContainerFleet</a>. </p>\n         <p>A container group definition determines how Amazon GameLift Servers deploys your containers to each\n      instance in a container fleet. You can maintain multiple versions of a container group\n      definition.</p>\n         <p>There are two types of container groups:</p>\n         <ul>\n            <li>\n               <p>A <b>game server container group</b> has the containers that run\n          your game server application and supporting software. A game server container group can\n          have these container types:</p>\n               <ul>\n                  <li>\n                     <p>Game server container. This container runs your game server. You can define one\n              game server container in a game server container group.</p>\n                  </li>\n                  <li>\n                     <p>Support container. This container runs software in parallel with your game server.\n              You can define up to 8 support containers in a game server group.</p>\n                  </li>\n               </ul>\n               <p>When building a game server container group definition, you can choose to bundle your\n          game server executable and all dependent software into a single game server container.\n          Alternatively, you can separate the software into one game server container and one or\n          more support containers.</p>\n               <p>On a container fleet instance, a game server container group can be deployed multiple\n          times (depending on the compute resources of the instance). This means that all containers\n          in the container group are replicated together.</p>\n            </li>\n            <li>\n               <p>A <b>per-instance container group</b> has containers for processes\n          that aren't replicated on a container fleet instance. This might include background\n          services, logging, test processes, or processes that need to persist independently of the\n          game server container group. When building a per-instance container group, you can define\n          up to 10 support containers.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This operation requires Identity and Access Management (IAM) permissions to access container images in\n        Amazon ECR repositories. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html\"> IAM permissions\n          for Amazon GameLift Servers</a> for help setting the appropriate permissions.</p>\n         </note>\n         <p>\n            <b>Request options</b>\n         </p>\n         <p>Use this operation to make the following types of requests. You can specify values for the\n      minimum required parameters and customize optional values later.</p>\n         <ul>\n            <li>\n               <p>Create a game server container group definition. Provide the following required parameter values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Name</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ContainerGroupType</code> (<code>GAME_SERVER</code>)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>OperatingSystem</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalMemoryLimitMebibytes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalVcpuLimit</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>At least one <code>GameServerContainerDefinition</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ContainerName</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ImageUrl</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PortConfiguration</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ServerSdkVersion</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Create a per-instance container group definition. Provide the following required parameter\n          values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Name</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ContainerGroupType</code> (<code>PER_INSTANCE</code>)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>OperatingSystem</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalMemoryLimitMebibytes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TotalVcpuLimit</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>At least one <code>SupportContainerDefinition</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ContainerName</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ImageUrl</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Results</b>\n         </p>\n         <p>If successful, this request creates a <code>ContainerGroupDefinition</code> resource and\n      assigns a unique ARN value. You can update most properties of a container group definition by\n      calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>, and optionally save the update as a new version.</p>"
             }
         },
         "com.amazonaws.gamelift#CreateContainerGroupDefinitionInput": {
@@ -2797,7 +2797,7 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.gamelift#IdStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Custom string that uniquely identifies the new game session request. This is useful\n            for ensuring that game session requests with the same idempotency token are processed\n            only once. Subsequent requests with the same string return the original\n                <code>GameSession</code> object, with an updated status. Maximum token length is 48\n            characters. If provided, this string is included in the new game session's ID.\n            The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>. Idempotency tokens remain in use for 30 days after a game session has ended;\n            game session objects are retained for this time period and then deleted.</p>"
+                        "smithy.api#documentation": "<p>Custom string that uniquely identifies the new game session request. This is useful\n            for ensuring that game session requests with the same idempotency token are processed\n            only once. Subsequent requests with the same string return the original\n                <code>GameSession</code> object, with an updated status. Maximum token length is 48\n            characters. If provided, this string is included in the new game session's ID.\n            The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>. Idempotency tokens remain in use for 30 days after a game session has ended;\n            game session objects are retained for this time period and then deleted.</p>"
                     }
                 },
                 "GameSessionData": {
@@ -3278,7 +3278,7 @@
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to add a player to. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to add a player to. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3357,7 +3357,7 @@
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to add players to. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to add players to. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3504,7 +3504,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Requests authorization to create or delete a peer connection between the VPC for your\n            Amazon GameLift Servers fleet and a virtual private cloud (VPC) in your Amazon Web Services account. VPC peering enables the game servers on\n            your fleet to communicate directly with other Amazon Web Services resources. After you've received\n            authorization, use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html\">CreateVpcPeeringConnection</a> to establish the peering connection. For more\n            information, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with Amazon GameLift Servers\n                Fleets</a>.</p>\n         <p>You can peer with VPCs that are owned by any Amazon Web Services account you have access to,\n            including the account that you use to manage your Amazon GameLift Servers fleets. You cannot peer with\n            VPCs that are in different Regions.</p>\n         <p>To request authorization to create a connection, call this operation from the Amazon Web Services\n            account with the VPC that you want to peer to your Amazon GameLift Servers fleet. For example, to enable\n            your game servers to retrieve data from a DynamoDB table, use the account that manages\n            that DynamoDB resource. Identify the following values: (1) The ID of the VPC that you\n            want to peer with, and (2) the ID of the Amazon Web Services account that you use to manage Amazon GameLift Servers. If\n            successful, VPC peering is authorized for the specified VPC. </p>\n         <p>To request authorization to delete a connection, call this operation from the Amazon Web Services\n            account with the VPC that is peered with your Amazon GameLift Servers fleet. Identify the following\n            values: (1) VPC ID that you want to delete the peering connection for, and (2) ID of the\n            Amazon Web Services account that you use to manage Amazon GameLift Servers. </p>\n         <p>The authorization remains valid for 24 hours unless it is canceled. You must create or\n            delete the peering connection while the authorization is valid. </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Requests authorization to create or delete a peer connection between the VPC for your\n            Amazon GameLift Servers fleet and a virtual private cloud (VPC) in your Amazon Web Services account. VPC peering enables the game servers on\n            your fleet to communicate directly with other Amazon Web Services resources. After you've received\n            authorization, use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html\">CreateVpcPeeringConnection</a> to establish the peering connection. For more\n            information, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with Amazon GameLift Servers\n                Fleets</a>.</p>\n         <p>You can peer with VPCs that are owned by any Amazon Web Services account you have access to,\n            including the account that you use to manage your Amazon GameLift Servers fleets. You cannot peer with\n            VPCs that are in different Regions.</p>\n         <p>To request authorization to create a connection, call this operation from the Amazon Web Services\n            account with the VPC that you want to peer to your Amazon GameLift Servers fleet. For example, to enable\n            your game servers to retrieve data from a DynamoDB table, use the account that manages\n            that DynamoDB resource. Identify the following values: (1) The ID of the VPC that you\n            want to peer with, and (2) the ID of the Amazon Web Services account that you use to manage Amazon GameLift Servers. If\n            successful, VPC peering is authorized for the specified VPC. </p>\n         <p>To request authorization to delete a connection, call this operation from the Amazon Web Services\n            account with the VPC that is peered with your Amazon GameLift Servers fleet. Identify the following\n            values: (1) VPC ID that you want to delete the peering connection for, and (2) ID of the\n            Amazon Web Services account that you use to manage Amazon GameLift Servers. </p>\n         <p>The authorization remains valid for 24 hours unless it is canceled. You must create or\n            delete the peering connection while the authorization is valid. </p>\n         <note>\n            <p>Amazon GameLift Servers uses the caller's credentials to update peer-VPC resources. The IAM user\n                that calls this operation must have the following Amazon EC2 permissions enabled:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>ec2:AcceptVpcPeeringConnection</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:AuthorizeSecurityGroupEgress</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:AuthorizeSecurityGroupIngress</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:CreateRoute</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:DescribeRouteTables</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:DescribeSecurityGroups</code>\n                  </p>\n               </li>\n            </ul>\n         </note>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateVpcPeeringAuthorizationInput": {
@@ -3568,7 +3568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Establishes a VPC peering connection between a virtual private cloud (VPC) in an Amazon Web Services account with the VPC\n            for your Amazon GameLift Servers fleet. VPC peering enables the game servers on your fleet to communicate\n            directly with other Amazon Web Services resources. You can peer with VPCs in any Amazon Web Services account that\n            you have access to, including the account that you use to manage your Amazon GameLift Servers fleets. You\n            cannot peer with VPCs that are in different Regions. For more information, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC\n                Peering with Amazon GameLift Servers Fleets</a>.</p>\n         <p>Before calling this operation to establish the peering connection, you first need to\n            use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html\">CreateVpcPeeringAuthorization</a> and identify the VPC you want to peer with.\n            Once the authorization for the specified VPC is issued, you have 24 hours to establish\n            the connection. These two operations handle all tasks necessary to peer the two VPCs,\n            including acceptance, updating routing tables, etc. </p>\n         <p>To establish the connection, call this operation from the Amazon Web Services account that is used\n            to manage the Amazon GameLift Servers fleets. Identify the following values: (1) The ID of the fleet you\n            want to be enable a VPC peering connection for; (2) The Amazon Web Services account with the VPC that\n            you want to peer with; and (3) The ID of the VPC you want to peer with. This operation\n            is asynchronous. If successful, a connection request is created. You can use continuous\n            polling to track the request's status using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html\">DescribeVpcPeeringConnections</a> , or by monitoring fleet events for success\n            or failure using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html\">DescribeFleetEvents</a> . </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Establishes a VPC peering connection between a virtual private cloud (VPC) in an Amazon Web Services account with the VPC\n            for your Amazon GameLift Servers fleet. VPC peering enables the game servers on your fleet to communicate\n            directly with other Amazon Web Services resources. You can peer with VPCs in any Amazon Web Services account that\n            you have access to, including the account that you use to manage your Amazon GameLift Servers fleets. You\n            cannot peer with VPCs that are in different Regions. For more information, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC\n                Peering with Amazon GameLift Servers Fleets</a>.</p>\n         <p>Before calling this operation to establish the peering connection, you first need to\n            use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html\">CreateVpcPeeringAuthorization</a> and identify the VPC you want to peer with.\n            Once the authorization for the specified VPC is issued, you have 24 hours to establish\n            the connection. These two operations handle all tasks necessary to peer the two VPCs,\n            including acceptance, updating routing tables, etc. </p>\n         <p>To establish the connection, call this operation from the Amazon Web Services account that is used\n            to manage the Amazon GameLift Servers fleets. Identify the following values: (1) The ID of the fleet you\n            want to be enable a VPC peering connection for; (2) The Amazon Web Services account with the VPC that\n            you want to peer with; and (3) The ID of the VPC you want to peer with. This operation\n            is asynchronous. If successful, a connection request is created. You can use continuous\n            polling to track the request's status using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html\">DescribeVpcPeeringConnections</a> , or by monitoring fleet events for success\n            or failure using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html\">DescribeFleetEvents</a> . </p>\n         <note>\n            <p>Amazon GameLift Servers uses the caller's credentials to update peer-VPC resources. The IAM user\n                that calls this operation must have the following Amazon EC2 permissions enabled:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>ec2:AcceptVpcPeeringConnection</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:AuthorizeSecurityGroupEgress</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:AuthorizeSecurityGroupIngress</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:CreateRoute</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:DescribeRouteTables</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>ec2:DescribeSecurityGroups</code>\n                  </p>\n               </li>\n            </ul>\n         </note>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateVpcPeeringConnectionInput": {
@@ -5027,7 +5027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Container</p>\n         <p>Retrieves the port mappings for a container group running on a container fleet. Port\n            mappings show how container ports are mapped to connection ports on the fleet instance.\n            Use this operation to find the connection port for a specific container on a fleet\n            instance.</p>\n         <p>\n            <b>Request options</b>\n         </p>\n         <ul>\n            <li>\n               <p>Get port mappings for a game server container group. Provide the fleet ID,\n                set <code>ContainerGroupType</code> to <code>GAME_SERVER</code>, and specify the\n                <code>ComputeName</code> for the game server container group.</p>\n            </li>\n            <li>\n               <p>Get port mappings for a per-instance container group. Provide the fleet ID,\n                set <code>ContainerGroupType</code> to <code>PER_INSTANCE</code>, and specify the\n                <code>InstanceId</code> for the instance.</p>\n            </li>\n            <li>\n               <p>Optionally filter results to a single container by providing a\n                <code>ContainerName</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Results</b>\n         </p>\n         <p>This operation returns the fleet ID, location, container group definition\n            ARN, container group type, compute name (for game server container groups), instance ID,\n            and a list of <code>ContainerGroupPortMapping</code> objects. Each object contains the\n            container name, runtime ID, and a list of port mappings that show how container ports map\n            to connection ports on the instance.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html\">Connect to\n            containers</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html\">Create a\n            container group definition</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Container</p>\n         <p>Retrieves the port mappings for a container group running on a container fleet. Port\n            mappings show how container ports are mapped to connection ports on the fleet instance.\n            Use this operation to find the connection port for a specific container on a fleet\n            instance.</p>\n         <p>\n            <b>Request options</b>\n         </p>\n         <ul>\n            <li>\n               <p>Get port mappings for a game server container group. Provide the fleet ID,\n                set <code>ContainerGroupType</code> to <code>GAME_SERVER</code>, and specify the\n                <code>ComputeName</code> for the game server container group.</p>\n            </li>\n            <li>\n               <p>Get port mappings for a per-instance container group. Provide the fleet ID,\n                set <code>ContainerGroupType</code> to <code>PER_INSTANCE</code>, and specify the\n                <code>InstanceId</code> for the instance.</p>\n            </li>\n            <li>\n               <p>Optionally filter results to a single container by providing a\n                <code>ContainerName</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Results</b>\n         </p>\n         <p>This operation returns the fleet ID, fleet ARN, location, container group definition\n            ARN, container group type, compute name (for game server container groups), instance ID,\n            and a list of <code>ContainerGroupPortMapping</code> objects. Each object contains the\n            container name, runtime ID, and a list of port mappings that show how container ports map\n            to connection ports on the instance.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html\">Connect to\n            containers</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html\">Create a\n            container group definition</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#DescribeContainerGroupPortMappingsInput": {
@@ -5079,6 +5079,12 @@
                     "target": "com.amazonaws.gamelift#FleetId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the container fleet.</p>"
+                    }
+                },
+                "FleetArn": {
+                    "target": "com.amazonaws.gamelift#FleetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that is assigned to a Amazon GameLift Servers fleet resource and uniquely identifies it. ARNs are unique across all Regions. Format is <code>arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>. In a GameLift fleet ARN, the resource ID matches the <code>FleetId</code>\n            value.</p>"
                     }
                 },
                 "Location": {
@@ -5533,7 +5539,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves information on a fleet's remote locations, including life-cycle status and\n            any suspended fleet activity. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get data for specific locations, provide a fleet identifier and a list of\n                    locations. Location data is returned in the order that it is requested. </p>\n            </li>\n            <li>\n               <p>To get data for all locations, provide a fleet identifier only. Location data\n                    is returned in no particular order. </p>\n            </li>\n         </ul>\n         <p>When requesting attributes for multiple locations, use the pagination parameters to\n            retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>LocationAttributes</code> object is returned for each requested\n            location. If the fleet does not have a requested location, no information is returned.\n            This operation does not return the home Region. To get information on a fleet's home\n            Region, call <code>DescribeFleetAttributes</code>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting\n                up Amazon GameLift Servers fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\">\n                Amazon GameLift Servers service locations</a> for managed hosting</p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves information on a fleet's remote locations, including life-cycle status and\n            any suspended fleet activity. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get data for specific locations, provide a fleet identifier and a list of\n                    locations. Location data is returned in the order that it is requested. </p>\n            </li>\n            <li>\n               <p>To get data for all locations, provide a fleet identifier only. Location data\n                    is returned in no particular order. </p>\n            </li>\n         </ul>\n         <p>When requesting attributes for multiple locations, use the pagination parameters to\n            retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>LocationAttributes</code> object is returned for each requested\n            location. If the fleet does not have a requested location, no information is returned.\n            </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting\n                up Amazon GameLift Servers fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\">\n                Amazon GameLift Servers service locations</a> for managed hosting</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6164,7 +6170,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to retrieve. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to retrieve. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "AliasId": {
@@ -6406,7 +6412,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to retrieve. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to retrieve. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "AliasId": {
@@ -6811,7 +6817,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to retrieve player sessions for. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to retrieve player sessions for. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "PlayerId": {
@@ -12993,10 +12999,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon GameLift Servers server SDK version that the game server is integrated with. Only game servers\n      using 5.2.0 or higher are compatible with container fleets.</p>"
                     }
+                },
+                "LinuxCapabilities": {
+                    "target": "com.amazonaws.gamelift#LinuxCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Linux-specific modifications that are applied to the default Docker container configuration, such as Linux capabilities. For more information see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html\">LinuxCapabilities</a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the game server container in an existing game server container group. A game\n      server container identifies a container image with your game server build. A game server\n      container is automatically considered essential; if an essential container fails, the entire\n      container group restarts.</p>\n         <p>You can update a container definition and deploy the updates to an existing fleet. When\n      creating or updating a game server container group definition, use the property \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput</a>. </p>\n         <p>\n            <b>Part of:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition</a>\n         </p>\n         <p>\n            <b>Returned by:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html\">DescribeContainerGroupDefinition</a>, \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html\">ListContainerGroupDefinitions</a>, \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>\n         </p>"
+                "smithy.api#documentation": "<p>Describes the game server container in an existing game server container group. A game\n      server container identifies a container image with your game server build. A game server\n      container is automatically considered essential; if an essential container fails, the entire\n      container group restarts.</p>\n         <p>You can update a container definition and deploy the updates to an existing fleet. When\n      creating or updating a game server container group definition, use the property \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput\">https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput</a>. </p>\n         <p>\n            <b>Part of:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition</a>\n         </p>\n         <p>\n            <b>Returned by:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html\">CreateContainerGroupDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html\">DescribeContainerGroupDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html\">ListContainerGroupDefinitions</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html\">ListContainerGroupDefinitionVersions</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#GameServerContainerDefinitionInput": {
@@ -13050,6 +13062,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon GameLift Servers server SDK version that the game server is integrated with. Only game servers\n      using 5.2.0 or higher are compatible with container fleets.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LinuxCapabilities": {
+                    "target": "com.amazonaws.gamelift#LinuxCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Linux-specific modifications that are applied to the default Docker container configuration, such as Linux capabilities. For more information see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html\">LinuxCapabilities</a>.</p>"
                     }
                 }
             },
@@ -14039,7 +14057,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "Name": {
@@ -14182,7 +14200,7 @@
                 "GameSessionArn": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "IpAddress": {
@@ -14335,13 +14353,13 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>. This value is the same as <code>GameSessionArn</code>. This value isn't final until placement status is\n            <code>FULFILLED</code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>. This value is the same as <code>GameSessionArn</code>. This value isn't final until placement status is\n            <code>FULFILLED</code>.</p>"
                     }
                 },
                 "GameSessionArn": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>. This value is the same as <code>GameSessionId</code>. This value isn't final until placement status is\n                <code>FULFILLED</code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>. This value is the same as <code>GameSessionId</code>. This value isn't final until placement status is\n                <code>FULFILLED</code>.</p>"
                     }
                 },
                 "GameSessionRegion": {
@@ -14353,7 +14371,7 @@
                 "PlayerLatencies": {
                     "target": "com.amazonaws.gamelift#PlayerLatencyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions.</p>"
+                        "smithy.api#documentation": "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to a fleet location (Amazon Web Services Regions or custom locations for Amazon GameLift Servers Anywhere fleets).</p>"
                     }
                 },
                 "StartTime": {
@@ -14871,7 +14889,7 @@
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to get logs for. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to get logs for. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15000,7 +15018,7 @@
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions for which to retrieve player connection details. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions for which to retrieve player connection details. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15023,7 +15041,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions for which the player connection details were retrieved. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions for which the player connection details were retrieved. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "PlayerConnectionDetails": {
@@ -15538,6 +15556,259 @@
             "traits": {
                 "smithy.api#documentation": "<p>The requested operation would cause the resource to exceed the allowed service limit.\n            Resolve the issue before retrying.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.gamelift#LinuxCapabilities": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.gamelift#LinuxCapabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Linux capabilities to add to the container's default configuration.\n      Specify each capability as a string from the set of supported capability names (for example,\n      <code>NET_BIND_SERVICE</code> or <code>SYS_PTRACE</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of Linux capabilities that are added to a container's default Docker configuration\n      for a container defined in the <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition</a>. For more detailed information about these Linux\n      capabilities, see the <a href=\"https://man7.org/linux/man-pages/man7/capabilities.7.html\">capabilities(7)</a> Linux manual page.</p>\n         <p>\n            <b>Modifying capabilities on an existing container:</b> To\n      remove a capability, update the <code>Include</code> list with only the needed capabilities.\n      To revert back to default capabilities, omit <code>LinuxCapabilities</code> within the\n      ContainerDefinition.</p>\n         <p>\n            <b>Part of: </b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinition.html\">GameServerContainerDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput.html\">GameServerContainerDefinitionInput</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_SupportContainerDefinition.html\">SupportContainerDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_SupportContainerDefinitionInput.html\">SupportContainerDefinitionInput</a>\n         </p>\n         <p>\n            <b>Returned by: </b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html\">CreateContainerGroupDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html\">DescribeContainerGroupDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html\">ListContainerGroupDefinitions</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html\">ListContainerGroupDefinitionVersions</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>\n         </p>"
+            }
+        },
+        "com.amazonaws.gamelift#LinuxCapability": {
+            "type": "enum",
+            "members": {
+                "AUDIT_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIT_CONTROL"
+                    }
+                },
+                "AUDIT_WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIT_WRITE"
+                    }
+                },
+                "BLOCK_SUSPEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK_SUSPEND"
+                    }
+                },
+                "CHOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHOWN"
+                    }
+                },
+                "DAC_OVERRIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAC_OVERRIDE"
+                    }
+                },
+                "DAC_READ_SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAC_READ_SEARCH"
+                    }
+                },
+                "FOWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOWNER"
+                    }
+                },
+                "FSETID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FSETID"
+                    }
+                },
+                "IPC_LOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPC_LOCK"
+                    }
+                },
+                "IPC_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPC_OWNER"
+                    }
+                },
+                "KILL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KILL"
+                    }
+                },
+                "LEASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEASE"
+                    }
+                },
+                "LINUX_IMMUTABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_IMMUTABLE"
+                    }
+                },
+                "MAC_ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_ADMIN"
+                    }
+                },
+                "MAC_OVERRIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_OVERRIDE"
+                    }
+                },
+                "MKNOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MKNOD"
+                    }
+                },
+                "NET_ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NET_ADMIN"
+                    }
+                },
+                "NET_BIND_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NET_BIND_SERVICE"
+                    }
+                },
+                "NET_BROADCAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NET_BROADCAST"
+                    }
+                },
+                "NET_RAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NET_RAW"
+                    }
+                },
+                "SETFCAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETFCAP"
+                    }
+                },
+                "SETGID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETGID"
+                    }
+                },
+                "SETPCAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETPCAP"
+                    }
+                },
+                "SETUID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETUID"
+                    }
+                },
+                "SYS_ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_ADMIN"
+                    }
+                },
+                "SYS_BOOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_BOOT"
+                    }
+                },
+                "SYS_CHROOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_CHROOT"
+                    }
+                },
+                "SYS_MODULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_MODULE"
+                    }
+                },
+                "SYS_NICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_NICE"
+                    }
+                },
+                "SYS_PACCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_PACCT"
+                    }
+                },
+                "SYS_PTRACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_PTRACE"
+                    }
+                },
+                "SYS_RAWIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_RAWIO"
+                    }
+                },
+                "SYS_RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_RESOURCE"
+                    }
+                },
+                "SYS_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_TIME"
+                    }
+                },
+                "SYS_TTY_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYS_TTY_CONFIG"
+                    }
+                },
+                "SYSLOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSLOG"
+                    }
+                },
+                "WAKE_ALARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAKE_ALARM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.gamelift#LinuxCapabilityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamelift#LinuxCapability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 37
+                }
             }
         },
         "com.amazonaws.gamelift#ListAliases": {
@@ -17546,7 +17817,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested resources was not found. The resource was either not created yet or deleted.</p>",
+                "smithy.api#documentation": "<p>The requested resource was not found. The resource was either not created yet or deleted.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -17696,7 +17967,7 @@
                 "LatencyInMs": {
                     "target": "com.amazonaws.gamelift#LatencyMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions. If this property is present, FlexMatch considers placing the match only in\n            Regions for which latency is reported. </p>\n         <p>If a matchmaker has a rule that evaluates player latency, players must report latency\n            in order to be matched. If no latency is reported in this scenario, FlexMatch assumes that\n            no Regions are available to the player and the ticket is not matchable. </p>"
+                        "smithy.api#documentation": "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to a fleet location (Amazon Web Services Regions or custom locations for Amazon GameLift Servers Anywhere fleets). If this property is present, FlexMatch considers placing the match only in\n            Regions for which latency is reported. </p>\n         <p>If a matchmaker has a rule that evaluates player latency, players must report latency\n            in order to be matched. If no latency is reported in this scenario, FlexMatch assumes that\n            no Regions are available to the player and the ticket is not matchable. </p>"
                     }
                 }
             },
@@ -17922,7 +18193,7 @@
                 "RegionIdentifier": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the Region that is associated with the latency value.</p>"
+                        "smithy.api#documentation": "<p>Name of the Region or custom location that is associated with the latency value. For\n            Amazon GameLift Servers Anywhere fleets, use the custom location name.</p>"
                     }
                 },
                 "LatencyInMilliseconds": {
@@ -17933,7 +18204,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Regional latency information for a player, used when requesting a new game session.\n            This value indicates the amount of time lag that exists when the player is connected to\n            a fleet in the specified Region. The relative difference between a player's latency\n            values for multiple Regions are used to determine which fleets are best suited to place\n            a new game session for the player. </p>"
+                "smithy.api#documentation": "<p>Regional latency information for a player, used when requesting a new game session.\n            This value indicates the amount of time lag that exists when the player is connected to\n            a fleet in the specified location (an Amazon Web Services Region or a custom location for Amazon GameLift Servers Anywhere fleets). The relative difference between a player's latency\n            values for multiple locations are used to determine which fleets are best suited to place\n            a new game session for the player. </p>"
             }
         },
         "com.amazonaws.gamelift#PlayerLatencyList": {
@@ -17992,7 +18263,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions that the player session is connected to. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions that the player session is connected to. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>"
                     }
                 },
                 "FleetId": {
@@ -18715,7 +18986,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A policy that puts limits on the number of game sessions that a player can create\n            within a specified span of time. With this policy, you can control players' ability to\n            consume available resources.</p>\n         <p>The policy is evaluated when a player tries to create a new game session. On receiving\n            a <code>CreateGameSession</code> request, Amazon GameLift Servers checks that the player (identified by\n                <code>CreatorId</code>) has created fewer than game session limit in the specified\n            time period.</p>"
+                "smithy.api#documentation": "<p>A policy that puts limits on the number of game sessions that a player can create\n            within a specified span of time. With this policy, you can control players' ability to\n            consume available resources.</p>\n         <p>The policy is evaluated when a player tries to create a new game session. On receiving\n            a <code>CreateGameSession</code> request, Amazon GameLift Servers checks that the player (identified by\n                <code>CreatorId</code>) has created fewer than game session limit in the specified\n            time period.</p>\n         <p>The purpose of this policy is to prevent a single player from consuming a large share of\n            available hosting resources. For example, setting <code>NewGameSessionsPerCreator</code> to\n            <code>4</code> and <code>PolicyPeriodInMinutes</code> to <code>10</code> limits each player\n            to creating 4 game sessions every 10 minutes. Setting these values too high (for example,\n            200 game sessions every 1000 minutes) still allows a single player to rapidly consume\n            resources. We recommend keeping these values small.</p>"
             }
         },
         "com.amazonaws.gamelift#ResumeGameServerGroup": {
@@ -19511,7 +19782,7 @@
                 "PlayerLatencies": {
                     "target": "com.amazonaws.gamelift#PlayerLatencyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions. This information is used to try to place the new game session where it\n            can offer the best possible gameplay experience for the players. \n            </p>"
+                        "smithy.api#documentation": "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to a fleet location (Amazon Web Services Regions or custom locations for Amazon GameLift Servers Anywhere fleets). This information is used to try to place the new game session where it\n            can offer the best possible gameplay experience for the players. \n            </p>"
                     }
                 },
                 "DesiredPlayerSessions": {
@@ -19597,7 +19868,7 @@
                 "GameSessionArn": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>. When using FlexMatch as a standalone matchmaking\n            solution, this parameter is not needed. </p>"
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>. When using FlexMatch as a standalone matchmaking\n            solution, this parameter is not needed. </p>"
                     }
                 },
                 "Players": {
@@ -19958,10 +20229,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of vCPU units that are reserved for the container. If no resources are\n      reserved, the container shares the total vCPU limit for the container group.</p>\n         <p>\n            <b>Related data type: </b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition TotalVcpuLimit</a>\n         </p>"
                     }
+                },
+                "LinuxCapabilities": {
+                    "target": "com.amazonaws.gamelift#LinuxCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Linux-specific modifications that are applied to the default Docker container configuration, such as Linux capabilities. For more information see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html\">LinuxCapabilities</a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a support container in a container group. A support container might be in a game\n      server container group or a per-instance container group. Support containers don't run game\n      server processes.</p>\n         <p>You can update a support container definition and deploy the updates to an existing fleet.\n      When creating or updating a game server container group definition, use the property \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput.html\">GameServerContainerDefinitionInput</a>. </p>\n         <p>\n            <b>Part of:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition</a>\n         </p>\n         <p>\n            <b>Returned by:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html\">DescribeContainerGroupDefinition</a>, \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html\">ListContainerGroupDefinitions</a>, \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>\n         </p>"
+                "smithy.api#documentation": "<p>Describes a support container in a container group. A support container might be in a game\n      server container group or a per-instance container group. Support containers don't run game\n      server processes.</p>\n         <p>You can update a support container definition and deploy the updates to an existing fleet.\n      When creating or updating a game server container group definition, use the property \n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameServerContainerDefinitionInput.html\">GameServerContainerDefinitionInput</a>. </p>\n         <p>\n            <b>Part of:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition</a>\n         </p>\n         <p>\n            <b>Returned by:</b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html\">CreateContainerGroupDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html\">DescribeContainerGroupDefinition</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html\">ListContainerGroupDefinitions</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html\">ListContainerGroupDefinitionVersions</a>,\n      <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html\">UpdateContainerGroupDefinition</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#SupportContainerDefinitionInput": {
@@ -20029,6 +20306,12 @@
                     "target": "com.amazonaws.gamelift#ContainerVcpu",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of vCPU units to reserve for this container. The container can use more\n      resources when needed, if available. If you don't reserve CPU units for this container, it\n      shares the container group's total vCPU limit. </p>\n         <p>\n            <b>Related data type: </b>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html\">ContainerGroupDefinition</a> TotalCpuLimit\n    </p>"
+                    }
+                },
+                "LinuxCapabilities": {
+                    "target": "com.amazonaws.gamelift#LinuxCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Linux-specific modifications that are applied to the default Docker container configuration, such as Linux capabilities. For more information see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html\">LinuxCapabilities</a>.</p>"
                     }
                 }
             },
@@ -20345,7 +20628,7 @@
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to be terminated. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to be terminated. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20811,7 +21094,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Container</p>\n         <p>Updates properties in an existing container group definition. This operation doesn't\n      replace the definition. Instead, it creates a new version of the definition and saves it\n      separately. You can access all versions that you choose to retain.</p>\n         <p>The only property you can't update is the container group type.</p>\n         <p>\n            <b>Request options:</b>\n         </p>\n         <ul>\n            <li>\n               <p>Update based on the latest version of the container group definition. Specify the\n          container group definition name only, or use an ARN value without a version number.\n          Provide updated values for the properties that you want to change only. All other values\n          remain the same as the latest version.</p>\n            </li>\n            <li>\n               <p>Update based on a specific version of the container group definition. Specify the\n          container group definition name and a source version number, or use an ARN value with a\n          version number. Provide updated values for the properties that you want to change only.\n          All other values remain the same as the source version.</p>\n            </li>\n            <li>\n               <p>Change a game server container definition. Provide the updated container\n          definition.</p>\n            </li>\n            <li>\n               <p>Add or change a support container definition. Provide a complete set of container\n          definitions, including the updated definition.</p>\n            </li>\n            <li>\n               <p>Remove a support container definition. Provide a complete set of container\n          definitions, excluding the definition to remove. If the container group has only one\n          support container definition, provide an empty set.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Results:</b>\n         </p>\n         <p>If successful, this operation returns the complete properties of the new container group\n      definition version.</p>\n         <p>If the container group definition version is used in an active fleets, the update\n      automatically initiates a new fleet deployment of the new version. You can track a fleet's \n      deployments using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListFleetDeployments.html\">ListFleetDeployments</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Container</p>\n         <p>Updates properties in an existing container group definition. This operation doesn't\n      replace the definition. Instead, it creates a new version of the definition and saves it\n      separately. You can access all versions that you choose to retain.</p>\n         <p>The only property you can't update is the container group type.</p>\n         <p>\n            <b>Request options:</b>\n         </p>\n         <ul>\n            <li>\n               <p>Update based on the latest version of the container group definition. Specify the\n          container group definition name only, or use an ARN value without a version number.\n          Provide updated values for the properties that you want to change only. All other values\n          remain the same as the latest version.</p>\n            </li>\n            <li>\n               <p>Update based on a specific version of the container group definition. Specify the\n          container group definition name and a source version number, or use an ARN value with a\n          version number. Provide updated values for the properties that you want to change only.\n          All other values remain the same as the source version.</p>\n            </li>\n            <li>\n               <p>Change a game server container definition. Provide a complete set of container\n          definitions, including the updated definition.</p>\n            </li>\n            <li>\n               <p>Add or change a support container definition. Provide a complete set of container\n          definitions, including the updated definition.</p>\n            </li>\n            <li>\n               <p>Remove a support container definition. Provide a complete set of container\n          definitions, excluding the definition to remove. If the container group has only one\n          support container definition, provide an empty set.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Results:</b>\n         </p>\n         <p>If successful, this operation returns the complete properties of the new container group\n      definition version.</p>\n         <p>If the container group definition version is used in an active fleets, the update\n      automatically initiates a new fleet deployment of the new version. You can track a fleet's \n      deployments using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListFleetDeployments.html\">ListFleetDeployments</a>.</p>"
             }
         },
         "com.amazonaws.gamelift#UpdateContainerGroupDefinitionInput": {
@@ -21141,7 +21424,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Updates permissions that allow inbound traffic to connect to game sessions in the\n            fleet. </p>\n         <p>To update settings, specify the fleet ID to be updated and specify the changes to be\n            made. List the permissions you want to add in\n                <code>InboundPermissionAuthorizations</code>, and permissions you want to remove in\n                <code>InboundPermissionRevocations</code>. Permissions to be removed must match\n            existing fleet permissions. </p>\n         <p>If successful, the fleet ID for the updated fleet is returned. For fleets with remote\n            locations, port setting updates can take time to propagate across all locations. You can\n            check the status of updates in each location by calling\n                <code>DescribeFleetPortSettings</code> with a location name.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Updates permissions that allow inbound traffic to connect to game sessions in the\n            fleet. </p>\n         <p>To update settings, specify the fleet ID to be updated and specify the changes to be\n            made. List the permissions you want to add in\n                <code>InboundPermissionAuthorizations</code>, and permissions you want to remove in\n                <code>InboundPermissionRevocations</code>. Permissions to be removed must match\n            existing fleet permissions. </p>\n         <p>If successful, the fleet identifiers for the updated fleet are returned. For fleets with remote\n            locations, port setting updates can take time to propagate across all locations. You can\n            check the status of updates in each location by calling\n                <code>DescribeFleetPortSettings</code> with a location name.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#UpdateFleetPortSettingsInput": {
@@ -21241,7 +21524,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2 (FleetIQ)</p>\n         <p>Updates Amazon GameLift Servers FleetIQ-specific\n            properties for a game server group. Many Auto Scaling group properties are updated on\n            the Auto Scaling group directly, including the launch template, Auto Scaling policies,\n            and maximum/minimum/desired instance counts.</p>\n         <p>To update the game server group, specify the game server group ID and provide the\n            updated values. Before applying the updates, the new values are validated to ensure that\n            Amazon GameLift Servers FleetIQ can continue to perform instance balancing activity. If successful, a\n                <code>GameServerGroup</code> object is returned.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift Servers FleetIQ\n                Guide</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2 (FleetIQ)</p>\n         <p>Updates Amazon GameLift Servers FleetIQ-specific\n            properties for a game server group. Many Auto Scaling group properties are updated on\n            the Auto Scaling group directly, including the launch template, Auto Scaling policies,\n            and maximum/minimum/desired instance counts.</p>\n         <p>To update the game server group, specify the game server group ID and provide the\n            updated values. Before applying the updates, the new values are validated to ensure that\n            Amazon GameLift Servers FleetIQ can continue to perform instance balancing activity. If successful, a\n                <code>GameServerGroup</code> object is returned.</p>\n         <note>\n            <p>Target tracking Auto Scaling policies on the Auto Scaling group cannot be\n                updated through the Amazon Web Services Management Console. Instead, use the Amazon Elastic Compute Cloud Auto Scaling\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html\">\n                  <code>PutScalingPolicy</code>\n               </a> API action to update these policies.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift Servers FleetIQ\n                Guide</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#UpdateGameServerGroupInput": {
@@ -21396,7 +21679,7 @@
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to update. The value is always a full ARN in the following format: \n    <code>arn:aws:gamelift:<location>::gamesession/<fleet ID>/<ID string></code>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for the game session that is unique across all regions to update. The value is always a full ARN in the following format: For Home Region game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<ID string></code>. For Remote Location game session - <code>arn:aws:gamelift:<home_region>::gamesession/<fleet ID>/<location>/<ID string></code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

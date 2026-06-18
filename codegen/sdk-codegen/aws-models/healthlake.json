@@ -58,12 +58,12 @@
                 "Status": {
                     "target": "com.amazonaws.healthlake#AnalyticsStatus",
                     "traits": {
-                        "smithy.api#documentation": "<para>The status of the analytics configuration.</para>"
+                        "smithy.api#documentation": "<p>The status of the analytics configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<para>The analytics configuration for a data store.</para>"
+                "smithy.api#documentation": "<p>The analytics configuration for a data store.</p>"
             }
         },
         "com.amazonaws.healthlake#AnalyticsStatus": {
@@ -227,7 +227,7 @@
                 "DatastoreTypeVersion": {
                     "target": "com.amazonaws.healthlake#FHIRVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The FHIR release version supported by the data store. Current support is for version\n            <code>R4</code>.</p>",
+                        "smithy.api#documentation": "<p>The FHIR release version supported by the data store. Current support is for version\n         <code>R4</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -260,6 +260,24 @@
                     "target": "com.amazonaws.healthlake#IdentityProviderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The identity provider configuration to use for the data store.</p>"
+                    }
+                },
+                "AnalyticsConfiguration": {
+                    "target": "com.amazonaws.healthlake#AnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analytics configuration for the data store.</p>"
+                    }
+                },
+                "NlpConfiguration": {
+                    "target": "com.amazonaws.healthlake#NlpConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The natural language processing (NLP) configuration for the data store.</p>"
+                    }
+                },
+                "ProfileConfiguration": {
+                    "target": "com.amazonaws.healthlake#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile configuration for the data store.</p>"
                     }
                 }
             },
@@ -400,7 +418,7 @@
                 "DatastoreTypeVersion": {
                     "target": "com.amazonaws.healthlake#FHIRVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The FHIR release version supported by the data store. Current support is for version\n            <code>R4</code>.</p>",
+                        "smithy.api#documentation": "<p>The FHIR release version supported by the data store. Current support is for version\n         <code>R4</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -438,19 +456,19 @@
                 "NlpConfiguration": {
                     "target": "com.amazonaws.healthlake#NlpConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<para>The natural language processing (NLP) configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The natural language processing (NLP) configuration for the data store.</p>"
                     }
                 },
                 "AnalyticsConfiguration": {
                     "target": "com.amazonaws.healthlake#AnalyticsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<para>The analytics configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The analytics configuration for the data store.</p>"
                     }
                 },
                 "ProfileConfiguration": {
                     "target": "com.amazonaws.healthlake#ProfileConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<para>The profile configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The profile configuration for the data store.</p>"
                     }
                 }
             },
@@ -972,7 +990,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The error information for <code>CreateFHIRDatastore</code> and\n            <code>DeleteFHIRDatastore</code> actions.</p>"
+                "smithy.api#documentation": "<p>The error information for <code>CreateFHIRDatastore</code> and\n         <code>DeleteFHIRDatastore</code> actions.</p>"
             }
         },
         "com.amazonaws.healthlake#ErrorMessage": {
@@ -1951,7 +1969,7 @@
                 "AuthorizationStrategy": {
                     "target": "com.amazonaws.healthlake#AuthorizationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorization strategy selected when the HealthLake data store is created.</p>\n         <note>\n            <p>HealthLake provides support for both SMART on FHIR V1 and V2 as described below.</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>SMART_ON_FHIR_V1</code> – Support for only SMART on FHIR V1, which\n                  includes <code>read</code> (read/search) and <code>write</code>\n                  (create/update/delete) permissions.</p>\n               </li>\n               <li>\n                  <p>\n                     <code>SMART_ON_FHIR</code> – Support for both SMART on FHIR V1 and V2,\n                  which includes <code>create</code>, <code>read</code>, <code>update</code>,\n                     <code>delete</code>, and <code>search</code> permissions.</p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS_AUTH</code> – The default HealthLake authorization\n                  strategy; not affiliated with SMART on FHIR.</p>\n               </li>\n            </ul>\n         </note>",
+                        "smithy.api#documentation": "<p>The authorization strategy selected when the HealthLake data store is created.</p>\n         <note>\n            <p>HealthLake provides support for both SMART on FHIR V1 and V2 as described below.</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>SMART_ON_FHIR_V1</code> – Support for only SMART on FHIR V1, which\n                  includes <code>read</code> (read/search) and <code>write</code>\n                  (create/update/delete) permissions.</p>\n               </li>\n               <li>\n                  <p>\n                     <code>SMART_ON_FHIR</code> – Support for both SMART on FHIR V1 and V2,\n                  which includes <code>create</code>, <code>read</code>, <code>update</code>,\n                  <code>delete</code>, and <code>search</code> permissions.</p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS_AUTH</code> – The default HealthLake authorization\n                  strategy; not affiliated with SMART on FHIR.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1965,7 +1983,7 @@
                 "Metadata": {
                     "target": "com.amazonaws.healthlake#ConfigurationMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON metadata elements to use in your identity provider configuration. Required\n         elements are listed based on the launch specification of the SMART application. For more\n         information on all possible elements, see <a href=\"https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata\">Metadata</a> in SMART's App Launch specification.</p>\n         <p>\n            <code>authorization_endpoint</code>: The URL to the OAuth2 authorization\n         endpoint.</p>\n         <p>\n            <code>grant_types_supported</code>: An array of grant types that are supported at the\n         token endpoint. You must provide at least one grant type option. Valid options are\n            <code>authorization_code</code> and <code>client_credentials</code>.</p>\n         <p>\n            <code>token_endpoint</code>: The URL to the OAuth2 token endpoint.</p>\n         <p>\n            <code>capabilities</code>: An array of strings of the SMART capabilities that the\n         authorization server supports.</p>\n         <p>\n            <code>code_challenge_methods_supported</code>: An array of strings of supported PKCE\n         code challenge methods. You must include the <code>S256</code> method in the array of PKCE\n         code challenge methods.</p>"
+                        "smithy.api#documentation": "<p>The JSON metadata elements to use in your identity provider configuration. Required\n         elements are listed based on the launch specification of the SMART application. For more\n         information on all possible elements, see <a href=\"https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata\">Metadata</a> in SMART's App Launch specification.</p>\n         <p>\n            <code>authorization_endpoint</code>: The URL to the OAuth2 authorization\n         endpoint.</p>\n         <p>\n            <code>grant_types_supported</code>: An array of grant types that are supported at the\n         token endpoint. You must provide at least one grant type option. Valid options are\n         <code>authorization_code</code> and <code>client_credentials</code>.</p>\n         <p>\n            <code>token_endpoint</code>: The URL to the OAuth2 token endpoint.</p>\n         <p>\n            <code>capabilities</code>: An array of strings of the SMART capabilities that the\n         authorization server supports.</p>\n         <p>\n            <code>code_challenge_methods_supported</code>: An array of strings of supported PKCE\n         code challenge methods. You must include the <code>S256</code> method in the array of PKCE\n         code challenge methods.</p>"
                     }
                 },
                 "IdpLambdaArn": {
@@ -2637,12 +2655,12 @@
                 "Status": {
                     "target": "com.amazonaws.healthlake#NlpStatus",
                     "traits": {
-                        "smithy.api#documentation": "<para>The status of the NLP configuration.</para>"
+                        "smithy.api#documentation": "<p>The status of the NLP configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<para>The natural language processing (NLP) configuration for a data store.</para>"
+                "smithy.api#documentation": "<p>The natural language processing (NLP) configuration for a data store.</p>"
             }
         },
         "com.amazonaws.healthlake#NlpStatus": {
@@ -2720,12 +2738,12 @@
                 "DefaultProfiles": {
                     "target": "com.amazonaws.healthlake#DefaultProfiles",
                     "traits": {
-                        "smithy.api#documentation": "<para>The list of default profiles for the data store.</para>"
+                        "smithy.api#documentation": "<p>The list of default profiles for the data store.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<para>The profile configuration for a data store.</para>"
+                "smithy.api#documentation": "<p>The profile configuration for a data store.</p>"
             }
         },
         "com.amazonaws.healthlake#ResourceNotFoundException": {
@@ -2913,7 +2931,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Start importing bulk FHIR data into an ACTIVE data store. The import job imports FHIR\n         data found in the <code>InputDataConfig</code> object and stores processing results in the\n            <code>JobOutputDataConfig</code> object.</p>"
+                "smithy.api#documentation": "<p>Start importing bulk FHIR data into an ACTIVE data store. The import job imports FHIR\n         data found in the <code>InputDataConfig</code> object and stores processing results in the\n         <code>JobOutputDataConfig</code> object.</p>"
             }
         },
         "com.amazonaws.healthlake#StartFHIRImportJobRequest": {
@@ -3217,7 +3235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<para>Update the properties of a FHIR-enabled data store.</para>"
+                "smithy.api#documentation": "<p>Update the properties of a FHIR-enabled data store.</p>"
             }
         },
         "com.amazonaws.healthlake#UpdateFHIRDatastoreRequest": {
@@ -3226,38 +3244,38 @@
                 "DatastoreId": {
                     "target": "com.amazonaws.healthlake#DatastoreId",
                     "traits": {
-                        "smithy.api#documentation": "<para>The data store identifier.</para>",
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DatastoreName": {
                     "target": "com.amazonaws.healthlake#DatastoreName",
                     "traits": {
-                        "smithy.api#documentation": "<para>The data store name.</para>"
-                    }
-                },
-                "AnalyticsConfiguration": {
-                    "target": "com.amazonaws.healthlake#AnalyticsConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<para>The analytics configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The data store name.</p>"
                     }
                 },
                 "NlpConfiguration": {
                     "target": "com.amazonaws.healthlake#NlpConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<para>The NLP configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The natural language processing (NLP) configuration for the data store.</p>"
+                    }
+                },
+                "AnalyticsConfiguration": {
+                    "target": "com.amazonaws.healthlake#AnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analytics configuration for the data store.</p>"
                     }
                 },
                 "ProfileConfiguration": {
                     "target": "com.amazonaws.healthlake#ProfileConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<para>The profile configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The profile configuration for the data store.</p>"
                     }
                 },
                 "IdentityProviderConfiguration": {
                     "target": "com.amazonaws.healthlake#IdentityProviderConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<para>The identity provider configuration for the data store.</para>"
+                        "smithy.api#documentation": "<p>The identity provider configuration for the data store.</p>"
                     }
                 }
             },
@@ -3271,7 +3289,7 @@
                 "DatastoreProperties": {
                     "target": "com.amazonaws.healthlake#DatastoreProperties",
                     "traits": {
-                        "smithy.api#documentation": "<para>The data store properties.</para>",
+                        "smithy.api#documentation": "<p>The data store properties.</p>",
                         "smithy.api#required": {}
                     }
                 }
