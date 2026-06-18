@@ -1,3 +1,7 @@
+# v1.62.0 (2026-06-18)
+
+* **Feature**: In order to support the new TLS Self-Service feature, this change adds SecurityPolicyType to CustomDomainConfigType. During CreateUserPoolDomain and UpdateUserPoolDomain this is used to select a custom domain's TLS enforcement, and for DescribeUserPoolDomain it informs users about the current TLS.
+
 # v1.61.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.56.0 (2026-06-18)
+
+* **Feature**: Amazon GameLift Servers has launched support for customizing Linux capabilities in container fleets. You can now specify additional Linux capabilities for containers in a container group definition, giving you finer control over the default Docker capabilities available to your containers.
+
 # v1.55.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

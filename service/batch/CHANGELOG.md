@@ -1,3 +1,7 @@
+# v1.66.0 (2026-06-18)
+
+* **Feature**: Adds Support for ordered allocation strategies- BEST-FIT-PROGRESSIVE-ORDERED or SPOT-CAPACITY-OPTIMIZED-PRIORITIZED
+
 # v1.65.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

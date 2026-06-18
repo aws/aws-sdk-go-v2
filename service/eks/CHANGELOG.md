@@ -1,3 +1,7 @@
+# v1.87.0 (2026-06-18)
+
+* **Feature**: Adds support for configurable control plane egress routing in Amazon EKS, allowing you to route control plane egress traffic through your VPC and control how the control plane reaches resources in your network such as webhook servers and OIDC providers.
+
 # v1.86.0 (2026-06-12)
 
 * **Feature**: Patches missing enum values for EKS updates

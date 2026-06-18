@@ -1,3 +1,7 @@
+# v1.85.0 (2026-06-18)
+
+* **Feature**: Amazon ECS services now support high resolution (20 second) CloudWatch metrics for CPUUtilization and MemoryUtilization. Use these metrics for faster service auto scaling.
+
 # v1.84.0 (2026-06-17)
 
 * **Feature**: Releasing the ability to bring-your-own task-definition for CreateExpressGatewayService and UpdateGatewayExpressService

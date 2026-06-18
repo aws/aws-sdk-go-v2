@@ -1,3 +1,7 @@
+# v1.44.0 (2026-06-18)
+
+* **Feature**: CloudWatch Synthetics adds support for multi-location canaries. Customers can now monitor their endpoints from multiple locations with centralized management from a primary location. The SDK includes new parameters for configuring multiple locations and tracking their state.
+
 # v1.43.5 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

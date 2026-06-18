@@ -1,3 +1,7 @@
+# v1.54.0 (2026-06-18)
+
+* **Feature**: This release surfaces two new metrics Volume IOPS Exceeded and Volume Throughput Exceeded into EBS volume rightsizing recommendations.
+
 # v1.53.0 (2026-06-08)
 
 * **Feature**: Adds new Idle Recommendation Resource types in the AWS Compute Optimizer API

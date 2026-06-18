@@ -1,8 +1,0 @@
-{
-    "id": "8c84dc34-195c-43ed-965b-8465e534d14d",
-    "type": "feature",
-    "description": "In order to support the new TLS Self-Service feature, this change adds SecurityPolicyType to CustomDomainConfigType. During CreateUserPoolDomain and UpdateUserPoolDomain this is used to select a custom domain's TLS enforcement, and for DescribeUserPoolDomain it informs users about the current TLS.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

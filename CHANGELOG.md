@@ -1,3 +1,33 @@
+# Release (2026-06-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.43.0](service/applicationautoscaling/CHANGELOG.md#v1430-2026-06-18)
+  * **Feature**: Adds support for ECS high-resolution predefined scaling metrics (ECSServiceAverageCPUUtilizationHighResolution, ECSServiceAverageMemoryUtilizationHighResolution) enabling 20-second metric periods for faster scaling
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.66.0](service/batch/CHANGELOG.md#v1660-2026-06-18)
+  * **Feature**: Adds Support for ordered allocation strategies- BEST-FIT-PROGRESSIVE-ORDERED or SPOT-CAPACITY-OPTIMIZED-PRIORITIZED
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.77.0](service/cloudwatchlogs/CHANGELOG.md#v1770-2026-06-18)
+  * **Feature**: Added optional startFromHead parameter to FilterLogEvents enabling descending timestamp order (newest first) when set to false. Default true preserves existing ascending order. Reverse sorting requires a startTime on or after Jan 1, 2024.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.62.0](service/cognitoidentityprovider/CHANGELOG.md#v1620-2026-06-18)
+  * **Feature**: In order to support the new TLS Self-Service feature, this change adds SecurityPolicyType to CustomDomainConfigType. During CreateUserPoolDomain and UpdateUserPoolDomain this is used to select a custom domain's TLS enforcement, and for DescribeUserPoolDomain it informs users about the current TLS.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.54.0](service/computeoptimizer/CHANGELOG.md#v1540-2026-06-18)
+  * **Feature**: This release surfaces two new metrics Volume IOPS Exceeded and Volume Throughput Exceeded into EBS volume rightsizing recommendations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.307.1](service/ec2/CHANGELOG.md#v13071-2026-06-18)
+  * **Documentation**: Documentation updates clarifying CancelCapacityReservation cancellable states
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.85.0](service/ecs/CHANGELOG.md#v1850-2026-06-18)
+  * **Feature**: Amazon ECS services now support high resolution (20 second) CloudWatch metrics for CPUUtilization and MemoryUtilization. Use these metrics for faster service auto scaling.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.87.0](service/eks/CHANGELOG.md#v1870-2026-06-18)
+  * **Feature**: Adds support for configurable control plane egress routing in Amazon EKS, allowing you to route control plane egress traffic through your VPC and control how the control plane reaches resources in your network such as webhook servers and OIDC providers.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.56.0](service/gamelift/CHANGELOG.md#v1560-2026-06-18)
+  * **Feature**: Amazon GameLift Servers has launched support for customizing Linux capabilities in container fleets. You can now specify additional Linux capabilities for containers in a container group definition, giving you finer control over the default Docker capabilities available to your containers.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.39.0](service/healthlake/CHANGELOG.md#v1390-2026-06-18)
+  * **Feature**: Adding New Configurations to the FHIR Create Datastore. The new configurations include NLP Configuration, AnalyticsConfiguration, ProfileConfiguration
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.93.0](service/lambda/CHANGELOG.md#v1930-2026-06-18)
+  * **Feature**: Converging and fixing existing documentation gaps in Lambda SDK
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.256.0](service/sagemaker/CHANGELOG.md#v12560-2026-06-18)
+  * **Feature**: Adds support for automatic AMI patching on HyperPod clusters. Customers can configure patching strategies to automatically apply security patch with zero job termination. Customers can also specify an AMI version at instance group level and update cluster software to a certain AMI version.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.44.0](service/synthetics/CHANGELOG.md#v1440-2026-06-18)
+  * **Feature**: CloudWatch Synthetics adds support for multi-location canaries. Customers can now monitor their endpoints from multiple locations with centralized management from a primary location. The SDK includes new parameters for configuring multiple locations and tracking their state.
+
 # Release (2026-06-17)
 
 ## Module Highlights

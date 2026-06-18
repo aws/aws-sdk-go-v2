@@ -1,8 +1,0 @@
-{
-    "id": "9c737a14-62a2-4d5b-9ee8-b732a2e85b27",
-    "type": "feature",
-    "description": "Adding New Configurations to the FHIR Create Datastore. The new configurations include NLP Configuration, AnalyticsConfiguration, ProfileConfiguration",
-    "modules": [
-        "service/healthlake"
-    ]
-}

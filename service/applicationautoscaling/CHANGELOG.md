@@ -1,3 +1,7 @@
+# v1.43.0 (2026-06-18)
+
+* **Feature**: Adds support for ECS high-resolution predefined scaling metrics (ECSServiceAverageCPUUtilizationHighResolution, ECSServiceAverageMemoryUtilizationHighResolution) enabling 20-second metric periods for faster scaling
+
 # v1.42.2 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.307.1 (2026-06-18)
+
+* **Documentation**: Documentation updates clarifying CancelCapacityReservation cancellable states
+
 # v1.307.0 (2026-06-10)
 
 * **Feature**: This release adds support for AMI Watermark which a structured identifier that helps in tracking AMI provenance
