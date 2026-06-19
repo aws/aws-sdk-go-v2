@@ -1,3 +1,17 @@
+# Release (2026-06-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.61.0](service/appstream/CHANGELOG.md#v1610-2026-06-19)
+  * **Feature**: Amazon WorkSpaces Agent Access now supports domain-joined fleets for enterprise identity integration, real-time agent observation with instant stop controls, and MCP tool forwarding for lower-latency, cost-effective desktop tool access.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.56.0](service/bedrockagent/CHANGELOG.md#v1560-2026-06-19)
+  * **Feature**: Add support for metadata-only retrieval on GetFlow, GetFlowVersion, and GetPrompt APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.177.0](service/connect/CHANGELOG.md#v11770-2026-06-19)
+  * **Feature**: This is the release for point based scoring system and the evaluation form validation project
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.146.0](service/glue/CHANGELOG.md#v11460-2026-06-19)
+  * **Feature**: Adds the SearchAssets operation for discovering assets in the AWS Glue Data Catalog using full-text search and filters. Minor naming refinements across the Glossary Terms and Attachment APIs for consistency.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.72.0](service/opensearch/CHANGELOG.md#v1720-2026-06-19)
+  * **Feature**: This release introduces data source attachment APIs, enabling users to attach and detach Amazon OpenSearch Service domains and Amazon OpenSearch Serverless collections to an OpenSearch application.
+
 # Release (2026-06-18)
 
 ## Module Highlights

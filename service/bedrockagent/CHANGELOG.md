@@ -1,3 +1,7 @@
+# v1.56.0 (2026-06-19)
+
+* **Feature**: Add support for metadata-only retrieval on GetFlow, GetFlowVersion, and GetPrompt APIs.
+
 # v1.55.0 (2026-06-17)
 
 * **Feature**: Launching Bedrock Managed Knowledge Bases. Added support for resource-based policies on Knowledge Base resources, enabling cross-account access for Managed Knowledge Bases.

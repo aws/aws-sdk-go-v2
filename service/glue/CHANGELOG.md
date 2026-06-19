@@ -1,3 +1,7 @@
+# v1.146.0 (2026-06-19)
+
+* **Feature**: Adds the SearchAssets operation for discovering assets in the AWS Glue Data Catalog using full-text search and filters. Minor naming refinements across the Glossary Terms and Attachment APIs for consistency.
+
 # v1.145.0 (2026-06-17)
 
 * **Feature**: This release adds support for Search and Discovery in AWS Glue, letting you and your applications search Data Catalog assets such as table and enrich them with business context and glossary terms.

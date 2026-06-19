@@ -1,3 +1,7 @@
+# v1.61.0 (2026-06-19)
+
+* **Feature**: Amazon WorkSpaces Agent Access now supports domain-joined fleets for enterprise identity integration, real-time agent observation with instant stop controls, and MCP tool forwarding for lower-latency, cost-effective desktop tool access.
+
 # v1.60.5 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

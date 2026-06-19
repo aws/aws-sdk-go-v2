@@ -1,8 +1,0 @@
-{
-    "id": "adbef25c-f5c5-4bd9-8f0b-6557926797a8",
-    "type": "feature",
-    "description": "Adds the SearchAssets operation for discovering assets in the AWS Glue Data Catalog using full-text search and filters. Minor naming refinements across the Glossary Terms and Attachment APIs for consistency.",
-    "modules": [
-        "service/glue"
-    ]
-}

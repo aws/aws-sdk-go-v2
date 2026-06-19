@@ -1,3 +1,7 @@
+# v1.72.0 (2026-06-19)
+
+* **Feature**: This release introduces data source attachment APIs, enabling users to attach and detach Amazon OpenSearch Service domains and Amazon OpenSearch Serverless collections to an OpenSearch application.
+
 # v1.71.0 (2026-06-17)
 
 * **Feature**: Adds support for configuring IAM Identity Center options on existing OpenSearch applications via the UpdateApplication API.
