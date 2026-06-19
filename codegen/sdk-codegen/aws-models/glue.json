@@ -745,7 +745,7 @@
                     "target": "com.amazonaws.glue#RunStatement"
                 },
                 {
-                    "target": "com.amazonaws.glue#Search"
+                    "target": "com.amazonaws.glue#SearchAssets"
                 },
                 {
                     "target": "com.amazonaws.glue#SearchTables"
@@ -2935,7 +2935,7 @@
                 "smithy.api#documentation": "<p>Associates one or more glossary terms with an asset in Glue Data Catalog.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/assets/{Identifier}/associate-glossary-terms",
+                    "uri": "/assets/{AssetIdentifier}/associate-glossary-terms",
                     "code": 200
                 }
             }
@@ -2943,7 +2943,7 @@
         "com.amazonaws.glue#AssociateGlossaryTermsRequest": {
             "type": "structure",
             "members": {
-                "Identifier": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset to associate glossary terms with.</p>",
@@ -2973,7 +2973,7 @@
         "com.amazonaws.glue#AssociateGlossaryTermsResponse": {
             "type": "structure",
             "members": {
-                "Identifier": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -16424,7 +16424,7 @@
                 "smithy.api#documentation": "<p>Deletes a form attachment from an asset in Glue Data Catalog.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/assets/{Identifier}/attachments/{AttachmentName}",
+                    "uri": "/assets/{AssetIdentifier}/attachments/{AttachmentName}",
                     "code": 200
                 }
             }
@@ -16432,12 +16432,26 @@
         "com.amazonaws.glue#DeleteAttachmentRequest": {
             "type": "structure",
             "members": {
-                "Identifier": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset from which to delete the attachment.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment is deleted from an item within the iterable form rather than from the asset itself.</p>",
+                        "smithy.api#httpQuery": "iterableFormName"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>",
+                        "smithy.api#httpQuery": "itemIdentifier"
                     }
                 },
                 "AttachmentName": {
@@ -16456,7 +16470,7 @@
         "com.amazonaws.glue#DeleteAttachmentResponse": {
             "type": "structure",
             "members": {
-                "Identifier": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -19658,7 +19672,7 @@
                 "smithy.api#documentation": "<p>Removes the association of one or more glossary terms from an asset in Glue Data Catalog.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/assets/{Identifier}/disassociate-glossary-terms",
+                    "uri": "/assets/{AssetIdentifier}/disassociate-glossary-terms",
                     "code": 200
                 }
             }
@@ -19666,7 +19680,7 @@
         "com.amazonaws.glue#DisassociateGlossaryTermsRequest": {
             "type": "structure",
             "members": {
-                "Identifier": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset to disassociate glossary terms from.</p>",
@@ -19696,7 +19710,7 @@
         "com.amazonaws.glue#DisassociateGlossaryTermsResponse": {
             "type": "structure",
             "members": {
-                "Identifier": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -40000,7 +40014,7 @@
         "com.amazonaws.glue#PutAttachmentResponse": {
             "type": "structure",
             "members": {
-                "AssetId": {
+                "AssetIdentifier": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -43993,13 +44007,13 @@
                 }
             }
         },
-        "com.amazonaws.glue#Search": {
+        "com.amazonaws.glue#SearchAssets": {
             "type": "operation",
             "input": {
-                "target": "com.amazonaws.glue#SearchInput"
+                "target": "com.amazonaws.glue#SearchAssetsInput"
             },
             "output": {
-                "target": "com.amazonaws.glue#SearchOutput"
+                "target": "com.amazonaws.glue#SearchAssetsOutput"
             },
             "errors": [
                 {
@@ -44019,7 +44033,7 @@
                 "smithy.api#documentation": "<p>Searches for assets in Glue Data Catalog using full-text search, filters, sorting, and aggregations. Returns matching assets with relevance-ranked results.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/search",
+                    "uri": "/search-assets",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -44028,6 +44042,64 @@
                     "items": "Items",
                     "pageSize": "MaxResults"
                 }
+            }
+        },
+        "com.amazonaws.glue#SearchAssetsInput": {
+            "type": "structure",
+            "members": {
+                "SearchText": {
+                    "target": "com.amazonaws.glue#SearchText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to search for. At least one of <code>searchText</code> or <code>filterClause</code> must be provided.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#SearchMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#SearchNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                },
+                "Sort": {
+                    "target": "com.amazonaws.glue#SearchSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort criteria for the search results.</p>"
+                    }
+                },
+                "FilterClause": {
+                    "target": "com.amazonaws.glue#SearchFilterClause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter clause to apply to the search. Supports nested AND/OR logic with attribute-level and map-level filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#SearchAssetsOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.glue#SearchResultItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of assets matching the search criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#SearchNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.glue#SearchAttribute": {
@@ -44187,44 +44259,6 @@
                 "smithy.api#documentation": "<p>A filter value. Exactly one of <code>stringValue</code> or <code>longValue</code> must be specified.</p>"
             }
         },
-        "com.amazonaws.glue#SearchInput": {
-            "type": "structure",
-            "members": {
-                "SearchText": {
-                    "target": "com.amazonaws.glue#SearchText",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The text to search for. At least one of <code>searchText</code> or <code>filterClause</code> must be provided.</p>"
-                    }
-                },
-                "MaxResults": {
-                    "target": "com.amazonaws.glue#SearchMaxResults",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
-                    }
-                },
-                "NextToken": {
-                    "target": "com.amazonaws.glue#SearchNextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
-                    }
-                },
-                "Sort": {
-                    "target": "com.amazonaws.glue#SearchSort",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The sort criteria for the search results.</p>"
-                    }
-                },
-                "FilterClause": {
-                    "target": "com.amazonaws.glue#SearchFilterClause",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The filter clause to apply to the search. Supports nested AND/OR logic with attribute-level and map-level filters.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#input": {}
-            }
-        },
         "com.amazonaws.glue#SearchMapFilter": {
             "type": "structure",
             "members": {
@@ -44288,26 +44322,6 @@
         },
         "com.amazonaws.glue#SearchNextToken": {
             "type": "string"
-        },
-        "com.amazonaws.glue#SearchOutput": {
-            "type": "structure",
-            "members": {
-                "Items": {
-                    "target": "com.amazonaws.glue#SearchResultItemList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The list of assets matching the search criteria.</p>"
-                    }
-                },
-                "NextToken": {
-                    "target": "com.amazonaws.glue#SearchNextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A continuation token, present if the current segment is not the last.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#output": {}
-            }
         },
         "com.amazonaws.glue#SearchPropertyPredicates": {
             "type": "list",

@@ -9554,6 +9554,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.bedrockagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>",
+                        "smithy.api#httpQuery": "includedData"
+                    }
                 }
             },
             "traits": {
@@ -9703,6 +9710,13 @@
                         "smithy.api#documentation": "<p>The version of the flow for which to get information.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.bedrockagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>",
+                        "smithy.api#httpQuery": "includedData"
                     }
                 }
             },
@@ -10080,6 +10094,13 @@
                         "smithy.api#documentation": "<p>The version of the prompt about which you want to retrieve information. Omit this field to return information about the working draft of the prompt.</p>",
                         "smithy.api#httpQuery": "promptVersion"
                     }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.bedrockagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>",
+                        "smithy.api#httpQuery": "includedData"
+                    }
                 }
             },
             "traits": {
@@ -10383,6 +10404,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#IncludedData": {
+            "type": "enum",
+            "members": {
+                "ALL_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_DATA"
+                    }
+                },
+                "METADATA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_ONLY"
                     }
                 }
             }
