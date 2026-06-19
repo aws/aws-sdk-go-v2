@@ -29094,14 +29094,14 @@ func awsAwsjson11_deserializeOpErrorRunStatement(response *smithyhttp.Response, 
 	}
 }
 
-type awsAwsjson11_deserializeOpSearch struct {
+type awsAwsjson11_deserializeOpSearchAssets struct {
 }
 
-func (*awsAwsjson11_deserializeOpSearch) ID() string {
+func (*awsAwsjson11_deserializeOpSearchAssets) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsAwsjson11_deserializeOpSearch) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsAwsjson11_deserializeOpSearchAssets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -29119,9 +29119,9 @@ func (m *awsAwsjson11_deserializeOpSearch) HandleDeserialize(ctx context.Context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorSearch(response, &metadata)
+		return out, metadata, awsAwsjson11_deserializeOpErrorSearchAssets(response, &metadata)
 	}
-	output := &SearchOutput{}
+	output := &SearchAssetsOutput{}
 	out.Result = output
 
 	var buff [1024]byte
@@ -29141,7 +29141,7 @@ func (m *awsAwsjson11_deserializeOpSearch) HandleDeserialize(ctx context.Context
 		return out, metadata, err
 	}
 
-	err = awsAwsjson11_deserializeOpDocumentSearchOutput(&output, shape)
+	err = awsAwsjson11_deserializeOpDocumentSearchAssetsOutput(&output, shape)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -29155,7 +29155,7 @@ func (m *awsAwsjson11_deserializeOpSearch) HandleDeserialize(ctx context.Context
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorSearch(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+func awsAwsjson11_deserializeOpErrorSearchAssets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -77427,18 +77427,18 @@ func awsAwsjson11_deserializeOpDocumentAssociateGlossaryTermsOutput(v **Associat
 
 	for key, value := range shape {
 		switch key {
-		case "GlossaryTerms":
-			if err := awsAwsjson11_deserializeDocumentGlossaryTermIdList(&sv.GlossaryTerms, value); err != nil {
-				return err
-			}
-
-		case "Identifier":
+		case "AssetIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
 				}
-				sv.Identifier = ptr.String(jtv)
+				sv.AssetIdentifier = ptr.String(jtv)
+			}
+
+		case "GlossaryTerms":
+			if err := awsAwsjson11_deserializeDocumentGlossaryTermIdList(&sv.GlossaryTerms, value); err != nil {
+				return err
 			}
 
 		default:
@@ -80138,13 +80138,13 @@ func awsAwsjson11_deserializeOpDocumentDeleteAttachmentOutput(v **DeleteAttachme
 
 	for key, value := range shape {
 		switch key {
-		case "Identifier":
+		case "AssetIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
 				}
-				sv.Identifier = ptr.String(jtv)
+				sv.AssetIdentifier = ptr.String(jtv)
 			}
 
 		default:
@@ -81784,18 +81784,18 @@ func awsAwsjson11_deserializeOpDocumentDisassociateGlossaryTermsOutput(v **Disas
 
 	for key, value := range shape {
 		switch key {
-		case "GlossaryTerms":
-			if err := awsAwsjson11_deserializeDocumentGlossaryTermIdList(&sv.GlossaryTerms, value); err != nil {
-				return err
-			}
-
-		case "Identifier":
+		case "AssetIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
 				}
-				sv.Identifier = ptr.String(jtv)
+				sv.AssetIdentifier = ptr.String(jtv)
+			}
+
+		case "GlossaryTerms":
+			if err := awsAwsjson11_deserializeDocumentGlossaryTermIdList(&sv.GlossaryTerms, value); err != nil {
+				return err
 			}
 
 		default:
@@ -88604,13 +88604,13 @@ func awsAwsjson11_deserializeOpDocumentPutAttachmentOutput(v **PutAttachmentOutp
 
 	for key, value := range shape {
 		switch key {
-		case "AssetId":
+		case "AssetIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
 				}
-				sv.AssetId = ptr.String(jtv)
+				sv.AssetIdentifier = ptr.String(jtv)
 			}
 
 		case "AttachmentName":
@@ -89344,7 +89344,7 @@ func awsAwsjson11_deserializeOpDocumentRunStatementOutput(v **RunStatementOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchOutput(v **SearchOutput, value interface{}) error {
+func awsAwsjson11_deserializeOpDocumentSearchAssetsOutput(v **SearchAssetsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -89357,9 +89357,9 @@ func awsAwsjson11_deserializeOpDocumentSearchOutput(v **SearchOutput, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *SearchOutput
+	var sv *SearchAssetsOutput
 	if *v == nil {
-		sv = &SearchOutput{}
+		sv = &SearchAssetsOutput{}
 	} else {
 		sv = *v
 	}

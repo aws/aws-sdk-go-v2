@@ -438,6 +438,42 @@ func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPrior
 	}
 }
 
+type ContactEvaluationAttributeComparisonType string
+
+// Enum values for ContactEvaluationAttributeComparisonType
+const (
+	ContactEvaluationAttributeComparisonTypeExact ContactEvaluationAttributeComparisonType = "EXACT"
+)
+
+// Values returns all known values for ContactEvaluationAttributeComparisonType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactEvaluationAttributeComparisonType) Values() []ContactEvaluationAttributeComparisonType {
+	return []ContactEvaluationAttributeComparisonType{
+		"EXACT",
+	}
+}
+
+type ContactEvaluationAttributeKey string
+
+// Enum values for ContactEvaluationAttributeKey
+const (
+	ContactEvaluationAttributeKeyContactAgentId ContactEvaluationAttributeKey = "ContactAgentId"
+)
+
+// Values returns all known values for ContactEvaluationAttributeKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactEvaluationAttributeKey) Values() []ContactEvaluationAttributeKey {
+	return []ContactEvaluationAttributeKey{
+		"ContactAgentId",
+	}
+}
+
 type ContactFlowModuleState string
 
 // Enum values for ContactFlowModuleState
@@ -1266,6 +1302,7 @@ type EvaluationFormScoringMode string
 const (
 	EvaluationFormScoringModeQuestionOnly EvaluationFormScoringMode = "QUESTION_ONLY"
 	EvaluationFormScoringModeSectionOnly  EvaluationFormScoringMode = "SECTION_ONLY"
+	EvaluationFormScoringModePointsBased  EvaluationFormScoringMode = "POINTS_BASED"
 )
 
 // Values returns all known values for EvaluationFormScoringMode. Note that this
@@ -1276,6 +1313,7 @@ func (EvaluationFormScoringMode) Values() []EvaluationFormScoringMode {
 	return []EvaluationFormScoringMode{
 		"QUESTION_ONLY",
 		"SECTION_ONLY",
+		"POINTS_BASED",
 	}
 }
 
@@ -1315,6 +1353,48 @@ func (EvaluationFormSingleSelectQuestionDisplayMode) Values() []EvaluationFormSi
 	return []EvaluationFormSingleSelectQuestionDisplayMode{
 		"DROPDOWN",
 		"RADIO",
+	}
+}
+
+type EvaluationFormValidationFindingSeverity string
+
+// Enum values for EvaluationFormValidationFindingSeverity
+const (
+	EvaluationFormValidationFindingSeverityWarning EvaluationFormValidationFindingSeverity = "WARNING"
+	EvaluationFormValidationFindingSeverityError   EvaluationFormValidationFindingSeverity = "ERROR"
+)
+
+// Values returns all known values for EvaluationFormValidationFindingSeverity.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormValidationFindingSeverity) Values() []EvaluationFormValidationFindingSeverity {
+	return []EvaluationFormValidationFindingSeverity{
+		"WARNING",
+		"ERROR",
+	}
+}
+
+type EvaluationFormValidationStatus string
+
+// Enum values for EvaluationFormValidationStatus
+const (
+	EvaluationFormValidationStatusInProgress EvaluationFormValidationStatus = "IN_PROGRESS"
+	EvaluationFormValidationStatusCompleted  EvaluationFormValidationStatus = "COMPLETED"
+	EvaluationFormValidationStatusFailed     EvaluationFormValidationStatus = "FAILED"
+)
+
+// Values returns all known values for EvaluationFormValidationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormValidationStatus) Values() []EvaluationFormValidationStatus {
+	return []EvaluationFormValidationStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 
@@ -2652,6 +2732,25 @@ func (ParticipantType) Values() []ParticipantType {
 		"AGENT",
 		"CUSTOMER",
 		"THIRDPARTY",
+	}
+}
+
+type PerformanceCategoryName string
+
+// Enum values for PerformanceCategoryName
+const (
+	PerformanceCategoryNameNeedsImprovement    PerformanceCategoryName = "NEEDS_IMPROVEMENT"
+	PerformanceCategoryNameExceedsExpectations PerformanceCategoryName = "EXCEEDS_EXPECTATIONS"
+)
+
+// Values returns all known values for PerformanceCategoryName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceCategoryName) Values() []PerformanceCategoryName {
+	return []PerformanceCategoryName{
+		"NEEDS_IMPROVEMENT",
+		"EXCEEDS_EXPECTATIONS",
 	}
 }
 

@@ -38,6 +38,11 @@ type GetFlowInput struct {
 	// This member is required.
 	FlowIdentifier *string
 
+	// Controls the scope of data returned. Set to METADATA_ONLY to return only
+	// resource metadata. Set to ALL_DATA or omit this field to return the full
+	// response.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
 }
 

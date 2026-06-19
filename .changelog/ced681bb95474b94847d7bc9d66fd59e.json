@@ -1,0 +1,8 @@
+{
+    "id": "ced681bb-9547-4b94-847d-7bc9d66fd59e",
+    "type": "feature",
+    "description": "This is the release for point based scoring system and the evaluation form validation project",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -3890,21 +3890,21 @@ func (m *validateOpRunStatement) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpSearch struct {
+type validateOpSearchAssets struct {
 }
 
-func (*validateOpSearch) ID() string {
+func (*validateOpSearchAssets) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpSearch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpSearchAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*SearchInput)
+	input, ok := in.Parameters.(*SearchAssetsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpSearchInput(input); err != nil {
+	if err := validateOpSearchAssetsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5746,8 +5746,8 @@ func addOpRunStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRunStatement{}, middleware.After)
 }
 
-func addOpSearchValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpSearch{}, middleware.After)
+func addOpSearchAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchAssets{}, middleware.After)
 }
 
 func addOpStartBlueprintRunValidationMiddleware(stack *middleware.Stack) error {
@@ -11048,8 +11048,8 @@ func validateOpAssociateGlossaryTermsInput(v *AssociateGlossaryTermsInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateGlossaryTermsInput"}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
 	}
 	if v.GlossaryTermIdentifiers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlossaryTermIdentifiers"))
@@ -12178,8 +12178,8 @@ func validateOpDeleteAttachmentInput(v *DeleteAttachmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAttachmentInput"}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
 	}
 	if v.AttachmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttachmentName"))
@@ -12811,8 +12811,8 @@ func validateOpDisassociateGlossaryTermsInput(v *DisassociateGlossaryTermsInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateGlossaryTermsInput"}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
 	}
 	if v.GlossaryTermIdentifiers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlossaryTermIdentifiers"))
@@ -14552,11 +14552,11 @@ func validateOpRunStatementInput(v *RunStatementInput) error {
 	}
 }
 
-func validateOpSearchInput(v *SearchInput) error {
+func validateOpSearchAssetsInput(v *SearchAssetsInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "SearchInput"}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAssetsInput"}
 	if v.Sort != nil {
 		if err := validateSearchSort(v.Sort); err != nil {
 			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))

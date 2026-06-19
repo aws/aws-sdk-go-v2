@@ -69,7 +69,7 @@ type PutAttachmentInput struct {
 type PutAttachmentOutput struct {
 
 	// The unique identifier of the asset.
-	AssetId *string
+	AssetIdentifier *string
 
 	// The name of the attachment.
 	AttachmentName *string

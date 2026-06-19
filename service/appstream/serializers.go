@@ -5505,6 +5505,11 @@ func awsAwsjson11_serializeDocumentAgentAccessConfig(v *types.AgentAccessConfig,
 		}
 	}
 
+	if len(v.UserControlMode) > 0 {
+		ok := object.Key("UserControlMode")
+		ok.String(string(v.UserControlMode))
+	}
+
 	return nil
 }
 
@@ -5537,6 +5542,11 @@ func awsAwsjson11_serializeDocumentAgentAccessConfigForUpdate(v *types.AgentAcce
 		if err := awsAwsjson11_serializeDocumentAgentAccessSettingList(v.Settings, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UserControlMode) > 0 {
+		ok := object.Key("UserControlMode")
+		ok.String(string(v.UserControlMode))
 	}
 
 	return nil

@@ -830,6 +830,25 @@ func (FlowValidationType) Values() []FlowValidationType {
 	}
 }
 
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataAllData      IncludedData = "ALL_DATA"
+	IncludedDataMetadataOnly IncludedData = "METADATA_ONLY"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"ALL_DATA",
+		"METADATA_ONLY",
+	}
+}
+
 type IncludeExclude string
 
 // Enum values for IncludeExclude

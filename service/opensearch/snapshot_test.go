@@ -134,6 +134,18 @@ func TestCheckSnapshot_AssociatePackages(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AuthorizeVpcEndpointAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AuthorizeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
@@ -362,6 +374,18 @@ func TestCheckSnapshot_DeregisterCapability(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDataSourceAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataSourceAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDataSourceAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -554,6 +578,18 @@ func TestCheckSnapshot_DescribeVpcEndpoints(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DetachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DissociatePackage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DissociatePackage(context.Background(), nil, func(o *Options) {
@@ -715,6 +751,18 @@ func TestCheckSnapshot_ListApplications(t *testing.T) {
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataSourceAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataSourceAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataSourceAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1189,6 +1237,18 @@ func TestUpdateSnapshot_AssociatePackages(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AttachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AuthorizeVpcEndpointAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AuthorizeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
@@ -1417,6 +1477,18 @@ func TestUpdateSnapshot_DeregisterCapability(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDataSourceAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataSourceAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDataSourceAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -1609,6 +1681,18 @@ func TestUpdateSnapshot_DescribeVpcEndpoints(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DetachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DissociatePackage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DissociatePackage(context.Background(), nil, func(o *Options) {
@@ -1770,6 +1854,18 @@ func TestUpdateSnapshot_ListApplications(t *testing.T) {
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataSourceAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataSourceAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataSourceAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

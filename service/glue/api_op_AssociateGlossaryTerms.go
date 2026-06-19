@@ -28,15 +28,15 @@ func (c *Client) AssociateGlossaryTerms(ctx context.Context, params *AssociateGl
 
 type AssociateGlossaryTermsInput struct {
 
+	// The unique identifier of the asset to associate glossary terms with.
+	//
+	// This member is required.
+	AssetIdentifier *string
+
 	// The list of glossary term identifiers to associate with the asset.
 	//
 	// This member is required.
 	GlossaryTermIdentifiers []string
-
-	// The unique identifier of the asset to associate glossary terms with.
-	//
-	// This member is required.
-	Identifier *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
@@ -47,11 +47,11 @@ type AssociateGlossaryTermsInput struct {
 
 type AssociateGlossaryTermsOutput struct {
 
+	// The unique identifier of the asset.
+	AssetIdentifier *string
+
 	// The glossary terms now associated with the asset.
 	GlossaryTerms []string
-
-	// The unique identifier of the asset.
-	Identifier *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

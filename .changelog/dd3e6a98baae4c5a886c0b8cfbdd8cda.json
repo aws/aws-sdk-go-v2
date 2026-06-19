@@ -1,0 +1,8 @@
+{
+    "id": "dd3e6a98-baae-4c5a-886c-0b8cfbdd8cda",
+    "type": "feature",
+    "description": "Amazon WorkSpaces Agent Access now supports domain-joined fleets for enterprise identity integration, real-time agent observation with instant stop controls, and MCP tool forwarding for lower-latency, cost-effective desktop tool access.",
+    "modules": [
+        "service/appstream"
+    ]
+}

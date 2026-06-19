@@ -8314,7 +8314,7 @@ func TestOpRunStatementSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
-func TestOpSearchSRAOperationOrder(t *testing.T) {
+func TestOpSearchAssetsSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
 		"Retry",
@@ -8331,7 +8331,7 @@ func TestOpSearchSRAOperationOrder(t *testing.T) {
 			captureMiddlewareStack(&captured),
 		},
 	})
-	_, err := svc.Search(context.Background(), nil)
+	_, err := svc.SearchAssets(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}

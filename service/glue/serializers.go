@@ -14477,14 +14477,14 @@ func (m *awsAwsjson11_serializeOpRunStatement) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpSearch struct {
+type awsAwsjson11_serializeOpSearchAssets struct {
 }
 
-func (*awsAwsjson11_serializeOpSearch) ID() string {
+func (*awsAwsjson11_serializeOpSearchAssets) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpSearch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson11_serializeOpSearchAssets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
@@ -14496,7 +14496,7 @@ func (m *awsAwsjson11_serializeOpSearch) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*SearchInput)
+	input, ok := in.Parameters.(*SearchAssetsInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -14517,10 +14517,10 @@ func (m *awsAwsjson11_serializeOpSearch) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.Search")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.SearchAssets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentSearchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchAssetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -30177,6 +30177,11 @@ func awsAwsjson11_serializeOpDocumentAssociateGlossaryTermsInput(v *AssociateGlo
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetIdentifier != nil {
+		ok := object.Key("AssetIdentifier")
+		ok.String(*v.AssetIdentifier)
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -30187,11 +30192,6 @@ func awsAwsjson11_serializeOpDocumentAssociateGlossaryTermsInput(v *AssociateGlo
 		if err := awsAwsjson11_serializeDocumentGlossaryTermIdList(v.GlossaryTermIdentifiers, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Identifier != nil {
-		ok := object.Key("Identifier")
-		ok.String(*v.Identifier)
 	}
 
 	return nil
@@ -32164,14 +32164,24 @@ func awsAwsjson11_serializeOpDocumentDeleteAttachmentInput(v *DeleteAttachmentIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetIdentifier != nil {
+		ok := object.Key("AssetIdentifier")
+		ok.String(*v.AssetIdentifier)
+	}
+
 	if v.AttachmentName != nil {
 		ok := object.Key("AttachmentName")
 		ok.String(*v.AttachmentName)
 	}
 
-	if v.Identifier != nil {
-		ok := object.Key("Identifier")
-		ok.String(*v.Identifier)
+	if v.ItemIdentifier != nil {
+		ok := object.Key("ItemIdentifier")
+		ok.String(*v.ItemIdentifier)
+	}
+
+	if v.IterableFormName != nil {
+		ok := object.Key("IterableFormName")
+		ok.String(*v.IterableFormName)
 	}
 
 	return nil
@@ -32885,6 +32895,11 @@ func awsAwsjson11_serializeOpDocumentDisassociateGlossaryTermsInput(v *Disassoci
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetIdentifier != nil {
+		ok := object.Key("AssetIdentifier")
+		ok.String(*v.AssetIdentifier)
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -32895,11 +32910,6 @@ func awsAwsjson11_serializeOpDocumentDisassociateGlossaryTermsInput(v *Disassoci
 		if err := awsAwsjson11_serializeDocumentGlossaryTermIdList(v.GlossaryTermIdentifiers, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Identifier != nil {
-		ok := object.Key("Identifier")
-		ok.String(*v.Identifier)
 	}
 
 	return nil
@@ -36201,7 +36211,7 @@ func awsAwsjson11_serializeOpDocumentRunStatementInput(v *RunStatementInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeOpDocumentSearchInput(v *SearchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchAssetsInput(v *SearchAssetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

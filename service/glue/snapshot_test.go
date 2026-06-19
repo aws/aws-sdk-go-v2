@@ -2906,11 +2906,11 @@ func TestCheckSnapshot_RunStatement(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_Search(t *testing.T) {
+func TestCheckSnapshot_SearchAssets(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.Search(context.Background(), nil, func(o *Options) {
+	_, err := svc.SearchAssets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "Search")
+			return testSnapshot(stack, "SearchAssets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6445,11 +6445,11 @@ func TestUpdateSnapshot_RunStatement(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_Search(t *testing.T) {
+func TestUpdateSnapshot_SearchAssets(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.Search(context.Background(), nil, func(o *Options) {
+	_, err := svc.SearchAssets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "Search")
+			return updateSnapshot(stack, "SearchAssets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

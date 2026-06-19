@@ -14,22 +14,22 @@ import (
 // Searches for assets in Glue Data Catalog using full-text search, filters,
 // sorting, and aggregations. Returns matching assets with relevance-ranked
 // results.
-func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func(*Options)) (*SearchOutput, error) {
+func (c *Client) SearchAssets(ctx context.Context, params *SearchAssetsInput, optFns ...func(*Options)) (*SearchAssetsOutput, error) {
 	if params == nil {
-		params = &SearchInput{}
+		params = &SearchAssetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Search", params, optFns, c.addOperationSearchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchAssets", params, optFns, c.addOperationSearchAssetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*SearchOutput)
+	out := result.(*SearchAssetsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type SearchInput struct {
+type SearchAssetsInput struct {
 
 	// The filter clause to apply to the search. Supports nested AND/OR logic with
 	// attribute-level and map-level filters.
@@ -51,7 +51,7 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
-type SearchOutput struct {
+type SearchAssetsOutput struct {
 
 	// The list of assets matching the search criteria.
 	Items []types.SearchResultItem
@@ -65,19 +65,19 @@ type SearchOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearch{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchAssets{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearch{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchAssets{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Search"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchAssets"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -129,10 +129,10 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpSearchValidationMiddleware(stack); err != nil {
+	if err = addOpSearchAssetsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearch(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAssets(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -162,8 +162,8 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	return nil
 }
 
-// SearchPaginatorOptions is the paginator options for Search
-type SearchPaginatorOptions struct {
+// SearchAssetsPaginatorOptions is the paginator options for SearchAssets
+type SearchAssetsPaginatorOptions struct {
 	// The maximum number of results to return in the response.
 	Limit int32
 
@@ -172,22 +172,22 @@ type SearchPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// SearchPaginator is a paginator for Search
-type SearchPaginator struct {
-	options   SearchPaginatorOptions
-	client    SearchAPIClient
-	params    *SearchInput
+// SearchAssetsPaginator is a paginator for SearchAssets
+type SearchAssetsPaginator struct {
+	options   SearchAssetsPaginatorOptions
+	client    SearchAssetsAPIClient
+	params    *SearchAssetsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewSearchPaginator returns a new SearchPaginator
-func NewSearchPaginator(client SearchAPIClient, params *SearchInput, optFns ...func(*SearchPaginatorOptions)) *SearchPaginator {
+// NewSearchAssetsPaginator returns a new SearchAssetsPaginator
+func NewSearchAssetsPaginator(client SearchAssetsAPIClient, params *SearchAssetsInput, optFns ...func(*SearchAssetsPaginatorOptions)) *SearchAssetsPaginator {
 	if params == nil {
-		params = &SearchInput{}
+		params = &SearchAssetsInput{}
 	}
 
-	options := SearchPaginatorOptions{}
+	options := SearchAssetsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -196,7 +196,7 @@ func NewSearchPaginator(client SearchAPIClient, params *SearchInput, optFns ...f
 		fn(&options)
 	}
 
-	return &SearchPaginator{
+	return &SearchAssetsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -206,12 +206,12 @@ func NewSearchPaginator(client SearchAPIClient, params *SearchInput, optFns ...f
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *SearchPaginator) HasMorePages() bool {
+func (p *SearchAssetsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next Search page.
-func (p *SearchPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchOutput, error) {
+// NextPage retrieves the next SearchAssets page.
+func (p *SearchAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchAssetsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -228,7 +228,7 @@ func (p *SearchPaginator) NextPage(ctx context.Context, optFns ...func(*Options)
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.Search(ctx, &params, optFns...)
+	result, err := p.client.SearchAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -247,17 +247,17 @@ func (p *SearchPaginator) NextPage(ctx context.Context, optFns ...func(*Options)
 	return result, nil
 }
 
-// SearchAPIClient is a client that implements the Search operation.
-type SearchAPIClient interface {
-	Search(context.Context, *SearchInput, ...func(*Options)) (*SearchOutput, error)
+// SearchAssetsAPIClient is a client that implements the SearchAssets operation.
+type SearchAssetsAPIClient interface {
+	SearchAssets(context.Context, *SearchAssetsInput, ...func(*Options)) (*SearchAssetsOutput, error)
 }
 
-var _ SearchAPIClient = (*Client)(nil)
+var _ SearchAssetsAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opSearch(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSearchAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "Search",
+		OperationName: "SearchAssets",
 	}
 }

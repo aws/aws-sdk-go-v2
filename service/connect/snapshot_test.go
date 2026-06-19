@@ -2054,6 +2054,18 @@ func TestCheckSnapshot_GetEffectiveHoursOfOperations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEvaluationFormValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvaluationFormValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEvaluationFormValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFederationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFederationToken(context.Background(), nil, func(o *Options) {
@@ -3499,6 +3511,18 @@ func TestCheckSnapshot_StartEmailContact(t *testing.T) {
 	_, err := svc.StartEmailContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartEmailContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartEvaluationFormValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartEvaluationFormValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartEvaluationFormValidation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6493,6 +6517,18 @@ func TestUpdateSnapshot_GetEffectiveHoursOfOperations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEvaluationFormValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvaluationFormValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEvaluationFormValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFederationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFederationToken(context.Background(), nil, func(o *Options) {
@@ -7938,6 +7974,18 @@ func TestUpdateSnapshot_StartEmailContact(t *testing.T) {
 	_, err := svc.StartEmailContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartEmailContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartEvaluationFormValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartEvaluationFormValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartEvaluationFormValidation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

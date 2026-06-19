@@ -29,15 +29,15 @@ func (c *Client) DisassociateGlossaryTerms(ctx context.Context, params *Disassoc
 
 type DisassociateGlossaryTermsInput struct {
 
+	// The unique identifier of the asset to disassociate glossary terms from.
+	//
+	// This member is required.
+	AssetIdentifier *string
+
 	// The list of glossary term identifiers to disassociate from the asset.
 	//
 	// This member is required.
 	GlossaryTermIdentifiers []string
-
-	// The unique identifier of the asset to disassociate glossary terms from.
-	//
-	// This member is required.
-	Identifier *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
@@ -48,11 +48,11 @@ type DisassociateGlossaryTermsInput struct {
 
 type DisassociateGlossaryTermsOutput struct {
 
+	// The unique identifier of the asset.
+	AssetIdentifier *string
+
 	// The remaining glossary terms associated with the asset.
 	GlossaryTerms []string
-
-	// The unique identifier of the asset.
-	Identifier *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

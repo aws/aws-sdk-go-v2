@@ -3330,6 +3330,26 @@ func (m *validateOpGetEffectiveHoursOfOperations) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEvaluationFormValidation struct {
+}
+
+func (*validateOpGetEvaluationFormValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEvaluationFormValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEvaluationFormValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEvaluationFormValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFederationToken struct {
 }
 
@@ -5670,6 +5690,26 @@ func (m *validateOpStartEmailContact) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartEvaluationFormValidation struct {
+}
+
+func (*validateOpStartEvaluationFormValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartEvaluationFormValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartEvaluationFormValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartEvaluationFormValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartOutboundChatContact struct {
 }
 
@@ -7974,6 +8014,10 @@ func addOpGetEffectiveHoursOfOperationsValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetEffectiveHoursOfOperations{}, middleware.After)
 }
 
+func addOpGetEvaluationFormValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEvaluationFormValidation{}, middleware.After)
+}
+
 func addOpGetFederationTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFederationToken{}, middleware.After)
 }
@@ -8440,6 +8484,10 @@ func addOpStartContactStreamingValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartEmailContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartEmailContact{}, middleware.After)
+}
+
+func addOpStartEvaluationFormValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartEvaluationFormValidation{}, middleware.After)
 }
 
 func addOpStartOutboundChatContactValidationMiddleware(stack *middleware.Stack) error {
@@ -9776,6 +9824,11 @@ func validateEvaluationFormMultiSelectQuestionOption(v *types.EvaluationFormMult
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
+	if v.PointsConfiguration != nil {
+		if err := validateQuestionOptionPointsConfiguration(v.PointsConfiguration); err != nil {
+			invalidParams.AddNested("PointsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9853,6 +9906,11 @@ func validateEvaluationFormNumericQuestionOption(v *types.EvaluationFormNumericQ
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormNumericQuestionOption"}
+	if v.PointsConfiguration != nil {
+		if err := validateQuestionOptionPointsConfiguration(v.PointsConfiguration); err != nil {
+			invalidParams.AddNested("PointsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9923,6 +9981,11 @@ func validateEvaluationFormQuestion(v *types.EvaluationFormQuestion) error {
 			invalidParams.AddNested("Enablement", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ScoringConfiguration != nil {
+		if err := validateEvaluationFormQuestionScoringConfiguration(v.ScoringConfiguration); err != nil {
+			invalidParams.AddNested("ScoringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9937,6 +10000,23 @@ func validateEvaluationFormQuestionAutomationAnswerSource(v *types.EvaluationFor
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormQuestionAutomationAnswerSource"}
 	if len(v.SourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationFormQuestionScoringConfiguration(v *types.EvaluationFormQuestionScoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormQuestionScoringConfiguration"}
+	if v.ScoreThresholds != nil {
+		if err := validateEvaluationFormScoreThresholdList(v.ScoreThresholds); err != nil {
+			invalidParams.AddNested("ScoreThresholds", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9979,6 +10059,38 @@ func validateEvaluationFormQuestionTypeProperties(v types.EvaluationFormQuestion
 	}
 }
 
+func validateEvaluationFormScoreThreshold(v *types.EvaluationFormScoreThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormScoreThreshold"}
+	if len(v.PerformanceCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PerformanceCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationFormScoreThresholdList(v []types.EvaluationFormScoreThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormScoreThresholdList"}
+	for i := range v {
+		if err := validateEvaluationFormScoreThreshold(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluationFormScoringStrategy(v *types.EvaluationFormScoringStrategy) error {
 	if v == nil {
 		return nil
@@ -9989,6 +10101,11 @@ func validateEvaluationFormScoringStrategy(v *types.EvaluationFormScoringStrateg
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.ScoreThresholds != nil {
+		if err := validateEvaluationFormScoreThresholdList(v.ScoreThresholds); err != nil {
+			invalidParams.AddNested("ScoreThresholds", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10013,6 +10130,11 @@ func validateEvaluationFormSection(v *types.EvaluationFormSection) error {
 	} else if v.Items != nil {
 		if err := validateEvaluationFormItemsList(v.Items); err != nil {
 			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScoreThresholds != nil {
+		if err := validateEvaluationFormScoreThresholdList(v.ScoreThresholds); err != nil {
+			invalidParams.AddNested("ScoreThresholds", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10090,6 +10212,11 @@ func validateEvaluationFormSingleSelectQuestionOption(v *types.EvaluationFormSin
 	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PointsConfiguration != nil {
+		if err := validateQuestionOptionPointsConfiguration(v.PointsConfiguration); err != nil {
+			invalidParams.AddNested("PointsConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11121,6 +11248,18 @@ func validatePrimaryValuesSet(v []types.PrimaryValue) error {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuestionOptionPointsConfiguration(v *types.QuestionOptionPointsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuestionOptionPointsConfiguration"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -15638,6 +15777,24 @@ func validateOpGetEffectiveHoursOfOperationsInput(v *GetEffectiveHoursOfOperatio
 	}
 }
 
+func validateOpGetEvaluationFormValidationInput(v *GetEvaluationFormValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEvaluationFormValidationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EvaluationFormId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFederationTokenInput(v *GetFederationTokenInput) error {
 	if v == nil {
 		return nil
@@ -17740,6 +17897,24 @@ func validateOpStartEmailContactInput(v *StartEmailContactInput) error {
 		if err := validateEmailAttachments(v.Attachments); err != nil {
 			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartEvaluationFormValidationInput(v *StartEvaluationFormValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartEvaluationFormValidationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EvaluationFormId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

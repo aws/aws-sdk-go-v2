@@ -3299,6 +3299,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFlowInput(v *GetFlowInput, encoder *
 		}
 	}
 
+	if len(v.IncludedData) > 0 {
+		encoder.SetQuery("includedData").String(string(v.IncludedData))
+	}
+
 	return nil
 }
 
@@ -3457,6 +3461,10 @@ func awsRestjson1_serializeOpHttpBindingsGetFlowVersionInput(v *GetFlowVersionIn
 		if err := encoder.SetURI("flowVersion").String(*v.FlowVersion); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IncludedData) > 0 {
+		encoder.SetQuery("includedData").String(string(v.IncludedData))
 	}
 
 	return nil
@@ -3784,6 +3792,10 @@ func (m *awsRestjson1_serializeOpGetPrompt) HandleSerialize(ctx context.Context,
 func awsRestjson1_serializeOpHttpBindingsGetPromptInput(v *GetPromptInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.IncludedData) > 0 {
+		encoder.SetQuery("includedData").String(string(v.IncludedData))
 	}
 
 	if v.PromptIdentifier == nil || len(*v.PromptIdentifier) == 0 {

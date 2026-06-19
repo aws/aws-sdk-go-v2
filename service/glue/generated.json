@@ -245,7 +245,7 @@
         "api_op_ResetJobBookmark.go",
         "api_op_ResumeWorkflowRun.go",
         "api_op_RunStatement.go",
-        "api_op_Search.go",
+        "api_op_SearchAssets.go",
         "api_op_SearchTables.go",
         "api_op_StartBlueprintRun.go",
         "api_op_StartColumnStatisticsTaskRun.go",
