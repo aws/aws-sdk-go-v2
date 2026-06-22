@@ -39,6 +39,9 @@ type UpdateRouterInputInput struct {
 	// the configuration is not supported.
 	Configuration types.RouterInputConfiguration
 
+	// The content quality analysis configuration for the router input.
+	ContentQualityAnalysisConfiguration types.RouterContentQualityAnalysisConfiguration
+
 	// The updated maintenance configuration settings for the router input, including
 	// any changes to preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration

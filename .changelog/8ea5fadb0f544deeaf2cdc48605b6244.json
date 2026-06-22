@@ -1,0 +1,8 @@
+{
+    "id": "8ea5fadb-0f54-4dee-af2c-dc48605b6244",
+    "type": "feature",
+    "description": "Adds support for scratch ephemeral storage mounted at tmp",
+    "modules": [
+        "service/omics"
+    ]
+}

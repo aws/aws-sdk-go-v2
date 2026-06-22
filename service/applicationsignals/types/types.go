@@ -153,6 +153,110 @@ type AuditTargetEntityMemberSlo struct {
 
 func (*AuditTargetEntityMemberSlo) isAuditTargetEntity() {}
 
+// Parameters for targeted delete by ARN list.
+type BatchDeleteByResourceArns struct {
+
+	// Instrumentation type: BREAKPOINT or PROBE.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// List of resource ARNs to delete.
+	//
+	// This member is required.
+	ResourceArns []string
+
+	noSmithyDocumentSerde
+}
+
+// Union type for batch delete target selection. Exactly one of the two modes must
+// be specified.
+//
+// The following types satisfy this interface:
+//
+//	BatchDeleteDeletionTargetMemberResourceArns
+//	BatchDeleteDeletionTargetMemberScope
+type BatchDeleteDeletionTarget interface {
+	isBatchDeleteDeletionTarget()
+}
+
+// Delete specific configurations by ARN list.
+type BatchDeleteDeletionTargetMemberResourceArns struct {
+	Value BatchDeleteByResourceArns
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchDeleteDeletionTargetMemberResourceArns) isBatchDeleteDeletionTarget() {}
+
+// Delete all configurations matching the specified scope.
+type BatchDeleteDeletionTargetMemberScope struct {
+	Value BatchDeleteScope
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchDeleteDeletionTargetMemberScope) isBatchDeleteDeletionTarget() {}
+
+// Represents an error that occurred when attempting to delete a configuration.
+type BatchDeleteError struct {
+
+	// Error code indicating the type of failure.
+	//
+	// This member is required.
+	Code BatchDeleteErrorCode
+
+	// Descriptive error message.
+	//
+	// This member is required.
+	Message *string
+
+	// ARN of the configuration that failed to delete.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Scope parameters for bulk delete by scope.
+type BatchDeleteScope struct {
+
+	// Environment identifier for the instrumentation configurations.
+	//
+	// This member is required.
+	Environment *string
+
+	// Instrumentation type: BREAKPOINT or PROBE.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// Service name for the instrumentation configurations.
+	//
+	// This member is required.
+	Service *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a successfully deleted instrumentation configuration.
+type BatchDeleteSuccessfulDeletion struct {
+
+	// Location hash of the deleted configuration (populated only when deleting by
+	// scope).
+	LocationHash *string
+
+	// ARN of the deleted configuration (populated only when deleting by ARN list).
+	ResourceArn *string
+
+	// Signal type of the deleted configuration (populated only when deleting by
+	// scope).
+	SignalType *string
+
+	noSmithyDocumentSerde
+}
+
 // An array of structures, where each structure includes an error indicating that
 // one of the requests in the array was not valid.
 type BatchUpdateExclusionWindowsError struct {
@@ -243,6 +347,61 @@ type CanaryEntity struct {
 	noSmithyDocumentSerde
 }
 
+// A union that defines what data to capture when the instrumentation point is
+// hit. Specify CodeCapture for code-level capture settings.
+//
+// The following types satisfy this interface:
+//
+//	CaptureConfigurationMemberCodeCapture
+type CaptureConfiguration interface {
+	isCaptureConfiguration()
+}
+
+// Capture settings for code-level instrumentation, including arguments, return
+// values, stack traces, local variables, and safety limits.
+type CaptureConfigurationMemberCodeCapture struct {
+	Value CodeCaptureConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CaptureConfigurationMemberCodeCapture) isCaptureConfiguration() {}
+
+// Guardrails that prevent instrumentation from impacting application performance
+// by limiting how much data is captured.
+type CaptureLimitsConfig struct {
+
+	// The maximum nesting depth to traverse inside collections. Defaults to 3.
+	MaxCollectionDepth *int32
+
+	// The maximum number of items to capture from any collection to prevent large
+	// payloads. Defaults to 10.
+	MaxCollectionWidth *int32
+
+	// The maximum number of fields to capture for any object. Defaults to 10.
+	MaxFieldsPerObject *int32
+
+	// The maximum number of times the instrumentation point can be hit before it is
+	// automatically disabled. Defaults to 100.
+	MaxHits *int32
+
+	// The maximum depth for nested object traversal when capturing structured data.
+	// Defaults to 3.
+	MaxObjectDepth *int32
+
+	// The maximum number of stack frames to capture in stack traces. Defaults to 2.
+	MaxStackFrames *int32
+
+	// The maximum total size, in bytes, of a captured stack trace. Defaults to 1000.
+	MaxStackTraceSize *int32
+
+	// The maximum length of captured string values in characters. Strings longer than
+	// this are truncated. Defaults to 128.
+	MaxStringLength *int32
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains information about a change event that occurred for a
 // service, such as a deployment or configuration change.
 type ChangeEvent struct {
@@ -312,6 +471,70 @@ type ChangeEvent struct {
 
 	// The name of the user who initiated this change event, if available.
 	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines what data to capture for code-level instrumentation, including
+// arguments, return values, stack traces, local variables, and safety limits.
+type CodeCaptureConfiguration struct {
+
+	// Safety limits that bound what is captured, including hit counts, string length,
+	// collection depth, and stack trace size.
+	//
+	// This member is required.
+	CaptureLimits *CaptureLimitsConfig
+
+	// The function arguments to capture. Omit to capture defaults, use an empty list
+	// to capture none, use ["*"] to capture all arguments, or specify argument names
+	// to capture selectively (up to 10 entries).
+	CaptureArguments []string
+
+	// The local variables to capture by name. Omit or pass an empty list to capture
+	// none. You can specify up to 20 names.
+	CaptureLocals []string
+
+	// Whether to capture the return value. Defaults to false.
+	CaptureReturn *bool
+
+	// Whether to capture a stack trace when the instrumentation point is hit.
+	// Defaults to true.
+	CaptureStackTrace *bool
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a code location to instrument, including the programming language,
+// code unit, class, method, file path, and optional line number.
+type CodeLocation struct {
+
+	// The source file path relative to the project or source root, such as
+	// src/payment/PaymentProcessor.java or src/payment/PaymentProcessor.py .
+	//
+	// This member is required.
+	FilePath *string
+
+	// The programming language for this instrumentation point, such as Java, Python,
+	// or JavaScript.
+	//
+	// This member is required.
+	Language ProgrammingLanguage
+
+	// The class or type name that contains the method. This is required for Java and
+	// optional for Python module-level functions.
+	ClassName *string
+
+	// The package, module, or namespace that contains the target code, for example
+	// com.amazon.payment or payment_service .
+	CodeUnit *string
+
+	// The line number to instrument. Provide this to disambiguate overloaded methods
+	// and to target a specific line when needed.
+	LineNumber *int32
+
+	// The method or function name to instrument, such as validateCreditCard or
+	// __init__ .
+	MethodName *string
 
 	noSmithyDocumentSerde
 }
@@ -554,6 +777,175 @@ type GroupingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The full instrumentation configuration, including the instrumentation type,
+// service, environment, signal type, location details, stable location hash,
+// capture settings, filters, expiration, creation time, and ARN.
+type InstrumentationConfiguration struct {
+
+	// ARN for the instrumentation configuration
+	//
+	// This member is required.
+	ARN *string
+
+	// The capture settings for this instrumentation configuration.
+	//
+	// This member is required.
+	CaptureConfiguration CaptureConfiguration
+
+	// The timestamp when this instrumentation configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The environment where the service is running.
+	//
+	// This member is required.
+	Environment *string
+
+	// The type of instrumentation for this configuration.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The location where this instrumentation is applied.
+	//
+	// This member is required.
+	Location Location
+
+	// The stable hash derived from the location that uniquely identifies this
+	// instrumentation point within the service and environment.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The service that this instrumentation configuration targets.
+	//
+	// This member is required.
+	Service *string
+
+	// The telemetry signal type for this instrumentation configuration.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// Client-side filters that determine which instances apply this instrumentation.
+	AttributeFilters []map[string]string
+
+	// An optional short description of the instrumentation configuration.
+	Description *string
+
+	// The timestamp when this configuration expires.
+	ExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The status of a single instrumentation configuration reported by an SDK
+// instance.
+type InstrumentationConfigurationStatusReport struct {
+
+	// The type of instrumentation configuration being reported.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The stable hash of the instrumentation location that identifies the
+	// configuration being reported.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The telemetry signal type for this instrumentation configuration.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// The status of the instrumentation configuration: READY , ERROR , ACTIVE , or
+	// DISABLED .
+	//
+	// This member is required.
+	Status InstrumentationConfigurationStatus
+
+	// The timestamp when the status event occurred.
+	//
+	// This member is required.
+	Time *time.Time
+
+	// The error cause when the status is ERROR , such as the file or method not being
+	// found.
+	ErrorCause InstrumentationErrorCause
+
+	noSmithyDocumentSerde
+}
+
+// An instrumentation configuration that omits service and environment because
+// they are provided at a higher level, such as in a list response.
+type InstrumentationConfigurationWithoutServiceEnv struct {
+
+	// ARN for the instrumentation configuration
+	//
+	// This member is required.
+	ARN *string
+
+	// The capture settings for this instrumentation configuration.
+	//
+	// This member is required.
+	CaptureConfiguration CaptureConfiguration
+
+	// The timestamp when this instrumentation configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The type of instrumentation for this configuration.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The location where this instrumentation is applied.
+	//
+	// This member is required.
+	Location Location
+
+	// The stable hash derived from the location that identifies this instrumentation
+	// point.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The telemetry signal type for this instrumentation configuration.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// Client-side filters that determine which instances apply this instrumentation.
+	AttributeFilters []map[string]string
+
+	// An optional short description of the instrumentation configuration.
+	Description *string
+
+	// The timestamp when this configuration expires.
+	ExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A status event for an instrumentation configuration returned by
+// GetInstrumentationConfigurationStatus . Events include the timestamp and, for
+// errors, an error cause.
+type InstrumentationStatusEvent struct {
+
+	// The time when the status was reported, rounded to the nearest minute.
+	//
+	// This member is required.
+	Time *time.Time
+
+	// The error cause when the status is ERROR .
+	ErrorCause InstrumentationErrorCause
+
+	noSmithyDocumentSerde
+}
+
 // The time period used to evaluate the SLO. It can be either a calendar interval
 // or rolling interval.
 //
@@ -584,6 +976,56 @@ type IntervalMemberRollingInterval struct {
 }
 
 func (*IntervalMemberRollingInterval) isInterval() {}
+
+// A union that identifies the location to instrument. Specify a CodeLocation for
+// code-level instrumentation.
+//
+// The following types satisfy this interface:
+//
+//	LocationMemberCodeLocation
+type Location interface {
+	isLocation()
+}
+
+// A code location for code-level instrumentation, including language, code unit,
+// class, method, file path, and optional line number.
+type LocationMemberCodeLocation struct {
+	Value CodeLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*LocationMemberCodeLocation) isLocation() {}
+
+// Union type for identifying an instrumentation configuration by code location or
+// locationHash. Used in Get/Delete/GetStatus operations to allow flexible
+// identification.
+//
+// The following types satisfy this interface:
+//
+//	LocationIdentifierMemberCodeLocation
+//	LocationIdentifierMemberLocationHash
+type LocationIdentifier interface {
+	isLocationIdentifier()
+}
+
+// The full code location specification (will be hashed internally)
+type LocationIdentifierMemberCodeLocation struct {
+	Value CodeLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*LocationIdentifierMemberCodeLocation) isLocationIdentifier() {}
+
+// The pre-computed location hash (16-character hex string)
+type LocationIdentifierMemberLocationHash struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*LocationIdentifierMemberLocationHash) isLocationIdentifier() {}
 
 // This structure defines the metric used for a service level indicator, including
 // the metric name, namespace, and dimensions
@@ -1958,6 +2400,43 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// A status event that could not be processed by the service.
+type UnprocessedStatusEvent struct {
+
+	// The reason why this status event could not be processed, such as throttling or
+	// validation errors.
+	//
+	// This member is required.
+	FailedReason UnprocessedStatusEventFailureReason
+
+	// The type of instrumentation configuration for the unprocessed status event.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The stable hash of the instrumentation location for the unprocessed event.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The telemetry signal type for the unprocessed status event.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// The status that failed to be processed.
+	//
+	// This member is required.
+	Status InstrumentationConfigurationStatus
+
+	// The timestamp of the status event that failed to be processed.
+	//
+	// This member is required.
+	Time *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The object that defines the time length of an exclusion window.
 type Window struct {
 
@@ -1987,6 +2466,10 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAuditTargetEntity()                      {}
+func (*UnknownUnionMember) isBatchDeleteDeletionTarget()              {}
+func (*UnknownUnionMember) isCaptureConfiguration()                   {}
 func (*UnknownUnionMember) isCompositeSliComponent()                  {}
 func (*UnknownUnionMember) isInterval()                               {}
+func (*UnknownUnionMember) isLocation()                               {}
+func (*UnknownUnionMember) isLocationIdentifier()                     {}
 func (*UnknownUnionMember) isMonitoredRequestCountMetricDataQueries() {}

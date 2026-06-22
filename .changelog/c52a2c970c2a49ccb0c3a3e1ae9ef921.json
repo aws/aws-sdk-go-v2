@@ -1,0 +1,8 @@
+{
+    "id": "c52a2c97-0c2a-49cc-b0c3-a3e1ae9ef921",
+    "type": "feature",
+    "description": "CloudWatch Logs Updates - New APIs introduced to support syslog ingestion to a log group. For more information, see CloudWatch Logs API documentation.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

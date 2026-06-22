@@ -2172,6 +2172,51 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 	}
 }
 
+func validateBlackFramesConfiguration(v *types.BlackFramesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlackFramesConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.ThresholdSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThresholdSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentQualityAnalysisFeatureConfiguration(v *types.ContentQualityAnalysisFeatureConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentQualityAnalysisFeatureConfiguration"}
+	if v.BlackFrames != nil {
+		if err := validateBlackFramesConfiguration(v.BlackFrames); err != nil {
+			invalidParams.AddNested("BlackFrames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FrozenFrames != nil {
+		if err := validateFrozenFramesConfiguration(v.FrozenFrames); err != nil {
+			invalidParams.AddNested("FrozenFrames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SilentAudio != nil {
+		if err := validateSilentAudioConfiguration(v.SilentAudio); err != nil {
+			invalidParams.AddNested("SilentAudio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDestinationConfigurationRequest(v *types.DestinationConfigurationRequest) error {
 	if v == nil {
 		return nil
@@ -2336,6 +2381,24 @@ func validateFlowTransitEncryptionKeyConfiguration(v types.FlowTransitEncryption
 			invalidParams.AddNested("[SecretsManager]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFrozenFramesConfiguration(v *types.FrozenFramesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrozenFramesConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.ThresholdSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThresholdSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2809,6 +2872,25 @@ func validateRistRouterOutputConfiguration(v *types.RistRouterOutputConfiguratio
 	}
 }
 
+func validateRouterContentQualityAnalysisConfiguration(v types.RouterContentQualityAnalysisConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterContentQualityAnalysisConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterContentQualityAnalysisConfigurationMemberContentLevel:
+		if err := validateContentQualityAnalysisFeatureConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[ContentLevel]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRouterInputConfiguration(v types.RouterInputConfiguration) error {
 	if v == nil {
 		return nil
@@ -3097,6 +3179,24 @@ func validateSetSourceRequest(v *types.SetSourceRequest) error {
 		if err := validateFlowTransitEncryption(v.RouterIntegrationTransitDecryption); err != nil {
 			invalidParams.AddNested("RouterIntegrationTransitDecryption", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSilentAudioConfiguration(v *types.SilentAudioConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SilentAudioConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.ThresholdSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThresholdSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3656,6 +3756,11 @@ func validateOpCreateRouterInputInput(v *CreateRouterInputInput) error {
 	if v.MaintenanceConfiguration != nil {
 		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
 			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentQualityAnalysisConfiguration != nil {
+		if err := validateRouterContentQualityAnalysisConfiguration(v.ContentQualityAnalysisConfiguration); err != nil {
+			invalidParams.AddNested("ContentQualityAnalysisConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4646,6 +4751,11 @@ func validateOpUpdateRouterInputInput(v *UpdateRouterInputInput) error {
 	if v.MaintenanceConfiguration != nil {
 		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
 			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentQualityAnalysisConfiguration != nil {
+		if err := validateRouterContentQualityAnalysisConfiguration(v.ContentQualityAnalysisConfiguration); err != nil {
+			invalidParams.AddNested("ContentQualityAnalysisConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

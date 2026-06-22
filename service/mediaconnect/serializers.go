@@ -1277,6 +1277,13 @@ func awsRestjson1_serializeOpDocumentCreateRouterInputInput(v *CreateRouterInput
 		}
 	}
 
+	if v.ContentQualityAnalysisConfiguration != nil {
+		ok := object.Key("contentQualityAnalysisConfiguration")
+		if err := awsRestjson1_serializeDocumentRouterContentQualityAnalysisConfiguration(v.ContentQualityAnalysisConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaintenanceConfiguration != nil {
 		ok := object.Key("maintenanceConfiguration")
 		if err := awsRestjson1_serializeDocumentMaintenanceConfiguration(v.MaintenanceConfiguration, ok); err != nil {
@@ -7085,6 +7092,13 @@ func awsRestjson1_serializeOpDocumentUpdateRouterInputInput(v *UpdateRouterInput
 		}
 	}
 
+	if v.ContentQualityAnalysisConfiguration != nil {
+		ok := object.Key("contentQualityAnalysisConfiguration")
+		if err := awsRestjson1_serializeDocumentRouterContentQualityAnalysisConfiguration(v.ContentQualityAnalysisConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaintenanceConfiguration != nil {
 		ok := object.Key("maintenanceConfiguration")
 		if err := awsRestjson1_serializeDocumentMaintenanceConfiguration(v.MaintenanceConfiguration, ok); err != nil {
@@ -7962,6 +7976,51 @@ func awsRestjson1_serializeDocumentBlackFrames(v *types.BlackFrames, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBlackFramesConfiguration(v *types.BlackFramesConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.ThresholdSeconds != nil {
+		ok := object.Key("thresholdSeconds")
+		ok.Integer(*v.ThresholdSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContentQualityAnalysisFeatureConfiguration(v *types.ContentQualityAnalysisFeatureConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlackFrames != nil {
+		ok := object.Key("blackFrames")
+		if err := awsRestjson1_serializeDocumentBlackFramesConfiguration(v.BlackFrames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FrozenFrames != nil {
+		ok := object.Key("frozenFrames")
+		if err := awsRestjson1_serializeDocumentFrozenFramesConfiguration(v.FrozenFrames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SilentAudio != nil {
+		ok := object.Key("silentAudio")
+		if err := awsRestjson1_serializeDocumentSilentAudioConfiguration(v.SilentAudio, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefaultMaintenanceConfiguration(v *types.DefaultMaintenanceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8288,6 +8347,23 @@ func awsRestjson1_serializeDocumentFmtpRequest(v *types.FmtpRequest, value smith
 }
 
 func awsRestjson1_serializeDocumentFrozenFrames(v *types.FrozenFrames, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.ThresholdSeconds != nil {
+		ok := object.Key("thresholdSeconds")
+		ok.Integer(*v.ThresholdSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFrozenFramesConfiguration(v *types.FrozenFramesConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -8894,6 +8970,24 @@ func awsRestjson1_serializeDocumentRistRouterOutputConfiguration(v *types.RistRo
 		ok.Integer(*v.DestinationPort)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouterContentQualityAnalysisConfiguration(v types.RouterContentQualityAnalysisConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RouterContentQualityAnalysisConfigurationMemberContentLevel:
+		av := object.Key("contentLevel")
+		if err := awsRestjson1_serializeDocumentContentQualityAnalysisFeatureConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -9563,6 +9657,23 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 }
 
 func awsRestjson1_serializeDocumentSilentAudio(v *types.SilentAudio, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.ThresholdSeconds != nil {
+		ok := object.Key("thresholdSeconds")
+		ok.Integer(*v.ThresholdSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSilentAudioConfiguration(v *types.SilentAudioConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

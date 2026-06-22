@@ -16,6 +16,38 @@ import (
 // to all log groups, a subset of log groups, or a data source name and type
 // combination in the account.
 //
+// PutAccountPolicy is an account-wide administrative operation intended for
+// CloudWatch Logs administrators. Because it affects all log groups (or a broad
+// subset) in the account, you should grant logs:PutAccountPolicy permissions only
+// to administrators who manage logging configuration across the account, not to
+// application teams or individual log group owners.
+//
+// # Conflict resolution between account-level and log-group-level policies
+//
+// When both an account-level policy and a log-group-level policy of the same type
+// apply to a log group, the resolution depends on the policy type:
+//
+//   - Data protection — The two policies are cumulative. Any sensitive term
+//     specified in either the account-level or the log-group-level policy is masked.
+//
+//   - Subscription filters — Account-level and log-group-level subscription
+//     filters are additive. A log group can have up to 1 account-level and up to 2
+//     log-group-level subscription filters.
+//
+//   - Transformers — A log-group-level transformer overrides the account-level
+//     transformer. If a log group has its own transformer, it ignores the
+//     account-level transformer policy.
+//
+//   - Field index policies — If a log group has its own field index policy
+//     (created with PutIndexPolicy ), any account-level policy that uses
+//     LogGroupNamePrefix selection criteria or has no selection criteria is ignored
+//     for that log group. However, account-level policies that use DataSourceName
+//     and DataSourceType selection criteria still apply alongside the
+//     log-group-level policy.
+//
+//   - Metric extraction policies — Metric extraction policies are account-level
+//     only and have no log-group-level equivalent, so no conflict resolution applies.
+//
 // For field index policies, you can configure indexed fields as facets to enable
 // interactive exploration of your logs. Facets provide value distributions and
 // counts for indexed fields in the CloudWatch Logs Insights console without

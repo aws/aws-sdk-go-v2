@@ -8513,6 +8513,11 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.String(*v.RunId)
 	}
 
+	if len(v.ScratchStorageMode) > 0 {
+		ok := object.Key("scratchStorageMode")
+		ok.String(string(v.ScratchStorageMode))
+	}
+
 	if v.StorageCapacity != nil {
 		ok := object.Key("storageCapacity")
 		ok.Integer(*v.StorageCapacity)
@@ -10132,6 +10137,11 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		if err := awsRestjson1_serializeDocumentTagMap(v.RunTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ScratchStorageMode) > 0 {
+		ok := object.Key("scratchStorageMode")
+		ok.String(string(v.ScratchStorageMode))
 	}
 
 	if v.StorageCapacity != nil {

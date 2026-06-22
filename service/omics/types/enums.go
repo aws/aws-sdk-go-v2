@@ -832,6 +832,25 @@ func (SchemaValueType) Values() []SchemaValueType {
 	}
 }
 
+type ScratchStorageMode string
+
+// Enum values for ScratchStorageMode
+const (
+	ScratchStorageModeLocal  ScratchStorageMode = "LOCAL"
+	ScratchStorageModeShared ScratchStorageMode = "SHARED"
+)
+
+// Values returns all known values for ScratchStorageMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScratchStorageMode) Values() []ScratchStorageMode {
+	return []ScratchStorageMode{
+		"LOCAL",
+		"SHARED",
+	}
+}
+
 type SequenceStoreStatus string
 
 // Enum values for SequenceStoreStatus

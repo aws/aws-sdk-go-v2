@@ -642,6 +642,11 @@ func awsRestjson1_serializeOpDocumentCreateEventInput(v *CreateEventInput, value
 		ok.Double(smithytime.FormatEpochSeconds(*v.EventTimestamp))
 	}
 
+	if len(v.ExtractionMode) > 0 {
+		ok := object.Key("extractionMode")
+		ok.String(string(v.ExtractionMode))
+	}
+
 	if v.Metadata != nil {
 		ok := object.Key("metadata")
 		if err := awsRestjson1_serializeDocumentMetadataMap(v.Metadata, ok); err != nil {

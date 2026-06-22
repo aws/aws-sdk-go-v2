@@ -1,0 +1,8 @@
+{
+    "id": "8bfc2f4f-9b07-43d0-a56b-331655b8897a",
+    "type": "feature",
+    "description": "Adds an optional extractionMode field to CreateEvent. SKIP retains the event in short-term memory but excludes it from long-term memory extraction.",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

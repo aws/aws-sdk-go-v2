@@ -144,8 +144,17 @@ type AssociateVirtualInterfaceOutput struct {
 	OwnerAccount *string
 
 	// The rate limit (bandwidth allocation) applied to the virtual interface. The
-	// possible values are 50 Mbps , 100 Mbps , 200 Mbps , 300 Mbps , 400 Mbps , 500
-	// Mbps , 1 Gbps , 2 Gbps , 5 Gbps , or 10 Gbps .
+	// value must be one of the supported bandwidth values and cannot exceed the
+	// bandwidth of the parent connection or LAG. Supported values: 50Mbps , 100Mbps ,
+	// 200Mbps , 300Mbps , 400Mbps , 500Mbps , 600Mbps , 700Mbps , 800Mbps , 900Mbps ,
+	// 1Gbps , 1.2Gbps , 1.5Gbps , 1.8Gbps , 2Gbps , 2.1Gbps , 2.4Gbps , 2.7Gbps ,
+	// 3Gbps , 3.2Gbps , 3.6Gbps , 4Gbps , 5Gbps , 6Gbps , 7Gbps , 8Gbps , 9Gbps ,
+	// 10Gbps , 12Gbps , 15Gbps , 18Gbps , 20Gbps , 21Gbps , 24Gbps , 27Gbps , 30Gbps ,
+	// 32Gbps , 36Gbps , 40Gbps , 50Gbps , 60Gbps , 70Gbps , 80Gbps , 100Gbps , 120Gbps
+	// , 150Gbps , 180Gbps , 200Gbps , 210Gbps , 240Gbps , 270Gbps , 300Gbps , 320Gbps
+	// , 360Gbps , 400Gbps , 450Gbps , 480Gbps , 500Gbps , 540Gbps , 600Gbps , 700Gbps
+	// , 800Gbps , 900Gbps , 1Tbps , 1.1Tbps , 1.2Tbps , 1.3Tbps , 1.4Tbps , 1.5Tbps ,
+	// 1.6Tbps .
 	RateLimit *string
 
 	// The Amazon Web Services Region where the virtual interface is located.

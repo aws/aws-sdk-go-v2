@@ -69,6 +69,11 @@ type CreateEventInput struct {
 	// the request, but does not return an error.
 	ClientToken *string
 
+	// Controls long-term memory extraction for this event. When set to SKIP , the
+	// event is stored in short-term memory but is excluded from long-term memory
+	// extraction. If not specified, the event is processed for extraction as usual.
+	ExtractionMode types.ExtractionMode
+
 	// The key-value metadata to attach to the event.
 	Metadata map[string]types.MetadataValue
 

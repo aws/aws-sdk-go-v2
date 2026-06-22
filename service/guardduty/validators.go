@@ -110,6 +110,26 @@ func (m *validateOpCreateFilter) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInvestigation struct {
+}
+
+func (*validateOpCreateInvestigation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInvestigation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInvestigationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInvestigationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIPSet struct {
 }
 
@@ -770,6 +790,26 @@ func (m *validateOpGetFindingsStatistics) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInvestigation struct {
+}
+
+func (*validateOpGetInvestigation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInvestigation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInvestigationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInvestigationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIPSet struct {
 }
 
@@ -1085,6 +1125,26 @@ func (m *validateOpListFindings) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInvestigations struct {
+}
+
+func (*validateOpListInvestigations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInvestigations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInvestigationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInvestigationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1610,6 +1670,10 @@ func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
 }
 
+func addOpCreateInvestigationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInvestigation{}, middleware.After)
+}
+
 func addOpCreateIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIPSet{}, middleware.After)
 }
@@ -1742,6 +1806,10 @@ func addOpGetFindingsStatisticsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetFindingsStatistics{}, middleware.After)
 }
 
+func addOpGetInvestigationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInvestigation{}, middleware.After)
+}
+
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIPSet{}, middleware.After)
 }
@@ -1804,6 +1872,10 @@ func addOpListFiltersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFindings{}, middleware.After)
+}
+
+func addOpListInvestigationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInvestigations{}, middleware.After)
 }
 
 func addOpListIPSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -2342,6 +2414,24 @@ func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	}
 	if v.FindingCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingCriteria"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInvestigationInput(v *CreateInvestigationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInvestigationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.TriggerPrompt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerPrompt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2945,6 +3035,24 @@ func validateOpGetFindingsStatisticsInput(v *GetFindingsStatisticsInput) error {
 	}
 }
 
+func validateOpGetInvestigationInput(v *GetInvestigationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInvestigationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.InvestigationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestigationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetIPSetInput(v *GetIPSetInput) error {
 	if v == nil {
 		return nil
@@ -3205,6 +3313,21 @@ func validateOpListFindingsInput(v *ListFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFindingsInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInvestigationsInput(v *ListInvestigationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInvestigationsInput"}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}

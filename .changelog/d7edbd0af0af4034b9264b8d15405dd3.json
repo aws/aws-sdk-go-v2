@@ -1,0 +1,8 @@
+{
+    "id": "d7edbd0a-f0af-4034-b926-4b8d15405dd3",
+    "type": "feature",
+    "description": "This release adds support for AMI Watermark and Allowed AMIs integration",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "5ea1b502-2df1-433b-9677-f5778b4ab2a3",
+    "type": "feature",
+    "description": "AWS MediaConnect now supports Content Quality Analysis for Router Inputs, enabling detection of black frames, frozen frames, and silent audio with configurable thresholds.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

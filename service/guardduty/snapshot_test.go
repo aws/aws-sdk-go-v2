@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateFilter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInvestigation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIPSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIPSet(context.Background(), nil, func(o *Options) {
@@ -518,6 +530,18 @@ func TestCheckSnapshot_GetFindingsStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInvestigation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInvitationsCount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInvitationsCount(context.Background(), nil, func(o *Options) {
@@ -739,6 +763,18 @@ func TestCheckSnapshot_ListFindings(t *testing.T) {
 	_, err := svc.ListFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInvestigations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInvestigations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1165,6 +1201,18 @@ func TestUpdateSnapshot_CreateFilter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInvestigation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIPSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIPSet(context.Background(), nil, func(o *Options) {
@@ -1561,6 +1609,18 @@ func TestUpdateSnapshot_GetFindingsStatistics(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInvestigation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInvitationsCount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInvitationsCount(context.Background(), nil, func(o *Options) {
@@ -1782,6 +1842,18 @@ func TestUpdateSnapshot_ListFindings(t *testing.T) {
 	_, err := svc.ListFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInvestigations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInvestigations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

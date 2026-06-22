@@ -89,6 +89,9 @@ type PutDeliverySourceInput struct {
 	//   - For Amazon Bedrock AgentCore Gateway, the valid values are APPLICATION_LOGS
 	//   and TRACES .
 	//
+	//   - For Amazon Bedrock AgentCore Payments, the valid values are APPLICATION_LOGS
+	//   and TRACES .
+	//
 	//   - For CloudFront, the valid value is ACCESS_LOGS .
 	//
 	//   - For DevOps Agent, the valid value is APPLICATION_LOGS .
@@ -105,6 +108,13 @@ type PutDeliverySourceInput struct {
 	//   , AUTO_MODE_COMPUTE_LOGS , AUTO_MODE_IPAM_LOGS , and
 	//   AUTO_MODE_LOAD_BALANCING_LOGS .
 	//
+	//   - For Amazon EKS Capability Logs, the valid values are EKS_CAPABILITY_ACK_LOGS
+	//   , EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS ,
+	//   EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS ,
+	//   EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS ,
+	//   EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS , EKS_CAPABILITY_ARGOCD_SERVER_LOGS ,
+	//   and EKS_CAPABILITY_KRO_LOGS .
+	//
 	//   - For Entity Resolution, the valid value is WORKFLOW_LOGS .
 	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
@@ -117,7 +127,8 @@ type PutDeliverySourceInput struct {
 	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS , PCS_JOBCOMP_LOGS , and
 	//   PCS_SCHEDULER_AUDIT_LOGS .
 	//
-	//   - For Quick, the valid values are CHAT_LOGS and FEEDBACK_LOGS .
+	//   - For Quick, the valid values are AGENT_HOURS_LOGS , CHAT_LOGS , FEEDBACK_LOGS
+	//   , and INDEX_USAGE_LOGS .
 	//
 	//   - For Amazon Web Services RTB Fabric, the valid values is APPLICATION_LOGS .
 	//

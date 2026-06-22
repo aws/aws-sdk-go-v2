@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchDeleteInstrumentationConfigurations struct {
+}
+
+func (*validateOpBatchDeleteInstrumentationConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteInstrumentationConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteInstrumentationConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteInstrumentationConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetServiceLevelObjectiveBudgetReport struct {
 }
 
@@ -50,6 +70,26 @@ func (m *validateOpBatchUpdateExclusionWindows) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInstrumentationConfiguration struct {
+}
+
+func (*validateOpCreateInstrumentationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInstrumentationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInstrumentationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInstrumentationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateServiceLevelObjective struct {
 }
 
@@ -70,6 +110,26 @@ func (m *validateOpCreateServiceLevelObjective) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteInstrumentationConfiguration struct {
+}
+
+func (*validateOpDeleteInstrumentationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInstrumentationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInstrumentationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInstrumentationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteServiceLevelObjective struct {
 }
 
@@ -85,6 +145,46 @@ func (m *validateOpDeleteServiceLevelObjective) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteServiceLevelObjectiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInstrumentationConfiguration struct {
+}
+
+func (*validateOpGetInstrumentationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInstrumentationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInstrumentationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInstrumentationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInstrumentationConfigurationStatus struct {
+}
+
+func (*validateOpGetInstrumentationConfigurationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInstrumentationConfigurationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInstrumentationConfigurationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInstrumentationConfigurationStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -165,6 +265,26 @@ func (m *validateOpListEntityEvents) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEntityEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInstrumentationConfigurations struct {
+}
+
+func (*validateOpListInstrumentationConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInstrumentationConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInstrumentationConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInstrumentationConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +470,26 @@ func (m *validateOpPutGroupingConfiguration) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReportInstrumentationConfigurationStatus struct {
+}
+
+func (*validateOpReportInstrumentationConfigurationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReportInstrumentationConfigurationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReportInstrumentationConfigurationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReportInstrumentationConfigurationStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -410,6 +550,10 @@ func (m *validateOpUpdateServiceLevelObjective) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchDeleteInstrumentationConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteInstrumentationConfigurations{}, middleware.After)
+}
+
 func addOpBatchGetServiceLevelObjectiveBudgetReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetServiceLevelObjectiveBudgetReport{}, middleware.After)
 }
@@ -418,12 +562,28 @@ func addOpBatchUpdateExclusionWindowsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpBatchUpdateExclusionWindows{}, middleware.After)
 }
 
+func addOpCreateInstrumentationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInstrumentationConfiguration{}, middleware.After)
+}
+
 func addOpCreateServiceLevelObjectiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServiceLevelObjective{}, middleware.After)
 }
 
+func addOpDeleteInstrumentationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInstrumentationConfiguration{}, middleware.After)
+}
+
 func addOpDeleteServiceLevelObjectiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteServiceLevelObjective{}, middleware.After)
+}
+
+func addOpGetInstrumentationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInstrumentationConfiguration{}, middleware.After)
+}
+
+func addOpGetInstrumentationConfigurationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInstrumentationConfigurationStatus{}, middleware.After)
 }
 
 func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -440,6 +600,10 @@ func addOpListAuditFindingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListEntityEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEntityEvents{}, middleware.After)
+}
+
+func addOpListInstrumentationConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInstrumentationConfigurations{}, middleware.After)
 }
 
 func addOpListServiceDependenciesValidationMiddleware(stack *middleware.Stack) error {
@@ -476,6 +640,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutGroupingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutGroupingConfiguration{}, middleware.After)
+}
+
+func addOpReportInstrumentationConfigurationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReportInstrumentationConfigurationStatus{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -583,6 +751,69 @@ func validateAuditTargets(v []types.AuditTarget) error {
 	}
 }
 
+func validateBatchDeleteByResourceArns(v *types.BatchDeleteByResourceArns) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteByResourceArns"}
+	if v.ResourceArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArns"))
+	}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchDeleteDeletionTarget(v types.BatchDeleteDeletionTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteDeletionTarget"}
+	switch uv := v.(type) {
+	case *types.BatchDeleteDeletionTargetMemberResourceArns:
+		if err := validateBatchDeleteByResourceArns(&uv.Value); err != nil {
+			invalidParams.AddNested("[ResourceArns]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BatchDeleteDeletionTargetMemberScope:
+		if err := validateBatchDeleteScope(&uv.Value); err != nil {
+			invalidParams.AddNested("[Scope]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchDeleteScope(v *types.BatchDeleteScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteScope"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBurnRateConfiguration(v *types.BurnRateConfiguration) error {
 	if v == nil {
 		return nil
@@ -643,6 +874,58 @@ func validateCanaryEntity(v *types.CanaryEntity) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CanaryEntity"}
 	if v.CanaryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CanaryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaptureConfiguration(v types.CaptureConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaptureConfiguration"}
+	switch uv := v.(type) {
+	case *types.CaptureConfigurationMemberCodeCapture:
+		if err := validateCodeCaptureConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[CodeCapture]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeCaptureConfiguration(v *types.CodeCaptureConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeCaptureConfiguration"}
+	if v.CaptureLimits == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaptureLimits"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeLocation(v *types.CodeLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeLocation"}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -813,6 +1096,50 @@ func validateGroupingAttributeDefinitions(v []types.GroupingAttributeDefinition)
 	}
 }
 
+func validateInstrumentationConfigurationStatusList(v []types.InstrumentationConfigurationStatusReport) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstrumentationConfigurationStatusList"}
+	for i := range v {
+		if err := validateInstrumentationConfigurationStatusReport(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstrumentationConfigurationStatusReport(v *types.InstrumentationConfigurationStatusReport) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstrumentationConfigurationStatusReport"}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if len(v.SignalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SignalType"))
+	}
+	if v.LocationHash == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationHash"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Time == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Time"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInterval(v types.Interval) error {
 	if v == nil {
 		return nil
@@ -827,6 +1154,44 @@ func validateInterval(v types.Interval) error {
 	case *types.IntervalMemberRollingInterval:
 		if err := validateRollingInterval(&uv.Value); err != nil {
 			invalidParams.AddNested("[RollingInterval]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocation(v types.Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Location"}
+	switch uv := v.(type) {
+	case *types.LocationMemberCodeLocation:
+		if err := validateCodeLocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[CodeLocation]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocationIdentifier(v types.LocationIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationIdentifier"}
+	switch uv := v.(type) {
+	case *types.LocationIdentifierMemberCodeLocation:
+		if err := validateCodeLocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[CodeLocation]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1163,6 +1528,25 @@ func validateWindow(v *types.Window) error {
 	}
 }
 
+func validateOpBatchDeleteInstrumentationConfigurationsInput(v *BatchDeleteInstrumentationConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteInstrumentationConfigurationsInput"}
+	if v.DeletionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeletionTarget"))
+	} else if v.DeletionTarget != nil {
+		if err := validateBatchDeleteDeletionTarget(v.DeletionTarget); err != nil {
+			invalidParams.AddNested("DeletionTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetServiceLevelObjectiveBudgetReportInput(v *BatchGetServiceLevelObjectiveBudgetReportInput) error {
 	if v == nil {
 		return nil
@@ -1197,6 +1581,49 @@ func validateOpBatchUpdateExclusionWindowsInput(v *BatchUpdateExclusionWindowsIn
 	if v.RemoveExclusionWindows != nil {
 		if err := validateExclusionWindows(v.RemoveExclusionWindows); err != nil {
 			invalidParams.AddNested("RemoveExclusionWindows", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInstrumentationConfigurationInput(v *CreateInstrumentationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInstrumentationConfigurationInput"}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if len(v.SignalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SignalType"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	} else if v.Location != nil {
+		if err := validateLocation(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CaptureConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaptureConfiguration"))
+	} else if v.CaptureConfiguration != nil {
+		if err := validateCaptureConfiguration(v.CaptureConfiguration); err != nil {
+			invalidParams.AddNested("CaptureConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1246,6 +1673,37 @@ func validateOpCreateServiceLevelObjectiveInput(v *CreateServiceLevelObjectiveIn
 	}
 }
 
+func validateOpDeleteInstrumentationConfigurationInput(v *DeleteInstrumentationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstrumentationConfigurationInput"}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if len(v.SignalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SignalType"))
+	}
+	if v.LocationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationIdentifier"))
+	} else if v.LocationIdentifier != nil {
+		if err := validateLocationIdentifier(v.LocationIdentifier); err != nil {
+			invalidParams.AddNested("LocationIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteServiceLevelObjectiveInput(v *DeleteServiceLevelObjectiveInput) error {
 	if v == nil {
 		return nil
@@ -1253,6 +1711,68 @@ func validateOpDeleteServiceLevelObjectiveInput(v *DeleteServiceLevelObjectiveIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceLevelObjectiveInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInstrumentationConfigurationInput(v *GetInstrumentationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInstrumentationConfigurationInput"}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if len(v.SignalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SignalType"))
+	}
+	if v.LocationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationIdentifier"))
+	} else if v.LocationIdentifier != nil {
+		if err := validateLocationIdentifier(v.LocationIdentifier); err != nil {
+			invalidParams.AddNested("LocationIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInstrumentationConfigurationStatusInput(v *GetInstrumentationConfigurationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInstrumentationConfigurationStatusInput"}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
+	}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if len(v.SignalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SignalType"))
+	}
+	if v.LocationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationIdentifier"))
+	} else if v.LocationIdentifier != nil {
+		if err := validateLocationIdentifier(v.LocationIdentifier); err != nil {
+			invalidParams.AddNested("LocationIdentifier", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1335,6 +1855,27 @@ func validateOpListEntityEventsInput(v *ListEntityEventsInput) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInstrumentationConfigurationsInput(v *ListInstrumentationConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInstrumentationConfigurationsInput"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if len(v.InstrumentationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstrumentationType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1509,6 +2050,31 @@ func validateOpPutGroupingConfigurationInput(v *PutGroupingConfigurationInput) e
 	} else if v.GroupingAttributeDefinitions != nil {
 		if err := validateGroupingAttributeDefinitions(v.GroupingAttributeDefinitions); err != nil {
 			invalidParams.AddNested("GroupingAttributeDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpReportInstrumentationConfigurationStatusInput(v *ReportInstrumentationConfigurationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportInstrumentationConfigurationStatusInput"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.Environment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
+	}
+	if v.Configurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configurations"))
+	} else if v.Configurations != nil {
+		if err := validateInstrumentationConfigurationStatusList(v.Configurations); err != nil {
+			invalidParams.AddNested("Configurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

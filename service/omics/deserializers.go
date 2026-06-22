@@ -9507,6 +9507,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				sv.RunOutputUri = ptr.String(jtv)
 			}
 
+		case "scratchStorageMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScratchStorageMode to be of type string, got %T instead", value)
+				}
+				sv.ScratchStorageMode = types.ScratchStorageMode(jtv)
+			}
+
 		case "startedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22500,6 +22509,15 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 		case "runTags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.RunTags, value); err != nil {
 				return err
+			}
+
+		case "scratchStorageMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScratchStorageMode to be of type string, got %T instead", value)
+				}
+				sv.ScratchStorageMode = types.ScratchStorageMode(jtv)
 			}
 
 		case "storageCapacity":

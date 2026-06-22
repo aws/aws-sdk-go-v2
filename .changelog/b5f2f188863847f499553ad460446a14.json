@@ -1,0 +1,8 @@
+{
+    "id": "b5f2f188-8638-47f4-9955-3ad460446a14",
+    "type": "feature",
+    "description": "Added AI-powered investigations that automatically analyze security findings, correlate related activity, and produce structured summaries with risk assessment, confidence scoring, MITRE technique classification, and actionable next steps.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

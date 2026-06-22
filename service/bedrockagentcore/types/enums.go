@@ -380,6 +380,23 @@ func (ExtractionJobStatus) Values() []ExtractionJobStatus {
 	}
 }
 
+type ExtractionMode string
+
+// Enum values for ExtractionMode
+const (
+	ExtractionModeSkip ExtractionMode = "SKIP"
+)
+
+// Values returns all known values for ExtractionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtractionMode) Values() []ExtractionMode {
+	return []ExtractionMode{
+		"SKIP",
+	}
+}
+
 type HarnessBedrockApiFormat string
 
 // Enum values for HarnessBedrockApiFormat

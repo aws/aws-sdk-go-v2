@@ -806,6 +806,24 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type RouterContentQualityAnalysisType string
+
+// Enum values for RouterContentQualityAnalysisType
+const (
+	RouterContentQualityAnalysisTypeContentLevel RouterContentQualityAnalysisType = "CONTENT_LEVEL"
+)
+
+// Values returns all known values for RouterContentQualityAnalysisType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterContentQualityAnalysisType) Values() []RouterContentQualityAnalysisType {
+	return []RouterContentQualityAnalysisType{
+		"CONTENT_LEVEL",
+	}
+}
+
 type RouterInputProtocol string
 
 // Enum values for RouterInputProtocol

@@ -1,0 +1,8 @@
+{
+    "id": "f574c215-8f22-4d40-9a77-3b9e2a63daf7",
+    "type": "feature",
+    "description": "Updated the Amazon Quick Spaces API to remove unsupported SPACE and ARTIFACT values from the SpaceQuickSightResourceType enum.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

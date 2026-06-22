@@ -177,6 +177,11 @@ type StartRunInput struct {
 	// The ID of a run to duplicate.
 	RunId *string
 
+	// Optional configuration for enabling scratch ephemeral storage mounted at /tmp.
+	// If not specified, this will default to SHARED. This configuration is applicable
+	// only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
+	ScratchStorageMode types.ScratchStorageMode
+
 	// The STATIC storage capacity (in gibibytes, GiB) for this run. The default run
 	// storage capacity is 1200 GiB. If your requested storage capacity is unavailable,
 	// the system rounds up the value to the nearest 1200 GiB multiple. If the

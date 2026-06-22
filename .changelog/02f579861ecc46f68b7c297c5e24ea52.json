@@ -1,0 +1,8 @@
+{
+    "id": "02f57986-1ecc-46f6-8b7c-297c5e24ea52",
+    "type": "feature",
+    "description": "Initial release of the AWS Lambda Core SDK with APIs to create, manage, and tag network connectors that enable Lambda compute resources to access private resources in your Amazon VPC.",
+    "modules": [
+        "service/lambdacore"
+    ]
+}

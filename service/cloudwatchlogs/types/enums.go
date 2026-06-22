@@ -913,6 +913,23 @@ func (SuppressionUnit) Values() []SuppressionUnit {
 	}
 }
 
+type SyslogSourceType string
+
+// Enum values for SyslogSourceType
+const (
+	SyslogSourceTypeVpce SyslogSourceType = "VPCE"
+)
+
+// Values returns all known values for SyslogSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyslogSourceType) Values() []SyslogSourceType {
+	return []SyslogSourceType{
+		"VPCE",
+	}
+}
+
 type Type string
 
 // Enum values for Type
