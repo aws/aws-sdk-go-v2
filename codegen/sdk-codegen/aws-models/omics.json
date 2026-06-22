@@ -3839,6 +3839,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>"
                     }
+                },
+                "scratchStorageMode": {
+                    "target": "com.amazonaws.omics#ScratchStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If not specified, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8710,6 +8716,12 @@
                     "target": "com.amazonaws.omics#NetworkingMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for run networking behavior. If absent, this will default to RESTRICTED.</p>"
+                    }
+                },
+                "scratchStorageMode": {
+                    "target": "com.amazonaws.omics#ScratchStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If absent, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>"
                     }
                 },
                 "configuration": {
@@ -17603,6 +17615,25 @@
                 ]
             }
         },
+        "com.amazonaws.omics#ScratchStorageMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "LOCAL",
+                        "value": "LOCAL"
+                    },
+                    {
+                        "name": "SHARED",
+                        "value": "SHARED"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.omics#SecurityGroupId": {
             "type": "string",
             "traits": {
@@ -19308,6 +19339,12 @@
                     "target": "com.amazonaws.omics#NetworkingMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional configuration for run networking behavior. If not specified, this will default to RESTRICTED.</p>"
+                    }
+                },
+                "scratchStorageMode": {
+                    "target": "com.amazonaws.omics#ScratchStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If not specified, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>"
                     }
                 },
                 "configurationName": {

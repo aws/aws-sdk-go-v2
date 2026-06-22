@@ -3638,6 +3638,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The key-value metadata to attach to the event.</p>"
                     }
+                },
+                "extractionMode": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls long-term memory extraction for this event. When set to <code>SKIP</code>, the event is stored in short-term memory but is excluded from long-term memory extraction. If not specified, the event is processed for extraction as usual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5796,6 +5802,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionMode": {
+            "type": "enum",
+            "members": {
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIP"
                     }
                 }
             }

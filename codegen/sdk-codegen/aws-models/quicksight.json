@@ -64068,12 +64068,6 @@
                         "smithy.api#enumValue": "KNOWLEDGE_BASE"
                     }
                 },
-                "SPACE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SPACE"
-                    }
-                },
                 "ACTION_CONNECTOR": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -64084,12 +64078,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DATA_SET"
-                    }
-                },
-                "ARTIFACT": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ARTIFACT"
                     }
                 }
             }

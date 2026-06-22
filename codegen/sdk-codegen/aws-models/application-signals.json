@@ -41,13 +41,28 @@
             "version": "2024-04-15",
             "operations": [
                 {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteInstrumentationConfigurations"
+                },
+                {
                     "target": "com.amazonaws.applicationsignals#BatchGetServiceLevelObjectiveBudgetReport"
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#BatchUpdateExclusionWindows"
                 },
                 {
+                    "target": "com.amazonaws.applicationsignals#CreateInstrumentationConfiguration"
+                },
+                {
                     "target": "com.amazonaws.applicationsignals#DeleteGroupingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#DeleteInstrumentationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#GetInstrumentationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#GetInstrumentationConfigurationStatus"
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#GetService"
@@ -60,6 +75,9 @@
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#ListGroupingAttributeDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ListInstrumentationConfigurations"
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#ListServiceDependencies"
@@ -84,6 +102,9 @@
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#PutGroupingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ReportInstrumentationConfigurationStatus"
                 },
                 {
                     "target": "com.amazonaws.applicationsignals#StartDiscovery"
@@ -734,6 +755,281 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.applicationsignals#BatchDeleteByResourceArns": {
+            "type": "structure",
+            "members": {
+                "ResourceArns": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteResourceArnList",
+                    "traits": {
+                        "smithy.api#documentation": "List of resource ARNs to delete.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Instrumentation type: BREAKPOINT or PROBE.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Parameters for targeted delete by ARN list."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteDeletionTarget": {
+            "type": "union",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteScope",
+                    "traits": {
+                        "smithy.api#documentation": "Delete all configurations matching the specified scope."
+                    }
+                },
+                "ResourceArns": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteByResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "Delete specific configurations by ARN list."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Union type for batch delete target selection.\nExactly one of the two modes must be specified."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteError": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the configuration that failed to delete.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "Error code indicating the type of failure.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Descriptive error message.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents an error that occurred when attempting to delete a configuration."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteErrorCode": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration already deleted or expired.",
+                        "smithy.api#enumValue": "ResourceNotFoundException"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Insufficient permissions to delete the configuration.",
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Internal service error for this item.",
+                        "smithy.api#enumValue": "InternalServiceException"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error codes for batch delete item-level failures."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#BatchDeleteError"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of errors in batch delete response."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteInstrumentationConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#BatchDeleteInstrumentationConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#BatchDeleteInstrumentationConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes multiple instrumentation configurations in a single request.\nSupports two mutually exclusive selection methods:\n- By scope: Delete all configurations matching a Service + Environment + InstrumentationType\n- By ARN list: Delete specific configurations by providing a list of resource ARNs",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/batch-delete-instrumentation-configurations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteInstrumentationConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "DeletionTarget": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteDeletionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "The deletion target - either bulk by scope or targeted by ARN list.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteInstrumentationConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "DeletedCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Number of configurations successfully deleted.\nWhen deleting by scope, this is the total count of deleted items.\nWhen deleting by ARN list, this equals the length of SuccessfulDeletions.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SuccessfulDeletions": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteSuccessfulDeletionList",
+                    "traits": {
+                        "smithy.api#documentation": "List of successfully deleted configurations.\nDeleting by scope populates SignalType and LocationHash per item.\nDeleting by ARN list populates ResourceArn per item.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.applicationsignals#BatchDeleteErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "List of configurations that failed to delete.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteResourceArnList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 20,
+                        "max": 2048
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List of resource ARNs for batch delete by ARN list.\nMaximum 50 ARNs per request.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteScope": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service name for the instrumentation configurations.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9:/+=,.@_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Environment identifier for the instrumentation configurations.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9:/+=,.@_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Instrumentation type: BREAKPOINT or PROBE.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Scope parameters for bulk delete by scope."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteSuccessfulDeletion": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the deleted configuration (populated only when deleting by ARN list)."
+                    }
+                },
+                "SignalType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Signal type of the deleted configuration (populated only when deleting by scope)."
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Location hash of the deleted configuration (populated only when deleting by scope)."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents a successfully deleted instrumentation configuration."
+            }
+        },
+        "com.amazonaws.applicationsignals#BatchDeleteSuccessfulDeletionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#BatchDeleteSuccessfulDeletion"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of successful deletions in batch delete response."
+            }
+        },
         "com.amazonaws.applicationsignals#BatchGetServiceLevelObjectiveBudgetReport": {
             "type": "operation",
             "input": {
@@ -1020,6 +1316,108 @@
                 "smithy.api#documentation": "<p>A structure that contains identifying information for a CloudWatch Synthetics canary entity used in audit targeting.</p>"
             }
         },
+        "com.amazonaws.applicationsignals#CaptureConfiguration": {
+            "type": "union",
+            "members": {
+                "CodeCapture": {
+                    "target": "com.amazonaws.applicationsignals#CodeCaptureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Capture settings for code-level instrumentation, including arguments, return values, stack traces, local variables, and safety limits.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union that defines what data to capture when the instrumentation point is hit. Specify <code>CodeCapture</code> for code-level capture settings.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#CaptureLimitsConfig": {
+            "type": "structure",
+            "members": {
+                "MaxHits": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of times the instrumentation point can be hit before it is automatically disabled. Defaults to 100.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "MaxStringLength": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum length of captured string values in characters. Strings longer than this are truncated. Defaults to 128.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "MaxCollectionWidth": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to capture from any collection to prevent large payloads. Defaults to 10.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                },
+                "MaxCollectionDepth": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum nesting depth to traverse inside collections. Defaults to 3.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                },
+                "MaxStackFrames": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of stack frames to capture in stack traces. Defaults to 2.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                },
+                "MaxStackTraceSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum total size, in bytes, of a captured stack trace. Defaults to 1000.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "MaxObjectDepth": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum depth for nested object traversal when capturing structured data. Defaults to 3.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                },
+                "MaxFieldsPerObject": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of fields to capture for any object. Defaults to 10.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Guardrails that prevent instrumentation from impacting application performance by limiting how much data is captured.</p>"
+            }
+        },
         "com.amazonaws.applicationsignals#ChangeEvent": {
             "type": "structure",
             "members": {
@@ -1110,6 +1508,116 @@
                 }
             }
         },
+        "com.amazonaws.applicationsignals#CodeCaptureConfiguration": {
+            "type": "structure",
+            "members": {
+                "CaptureArguments": {
+                    "target": "com.amazonaws.applicationsignals#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function arguments to capture. Omit to capture defaults, use an empty list to capture none, use <code>[\"*\"]</code> to capture all arguments, or specify argument names to capture selectively (up to 10 entries).</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
+                },
+                "CaptureReturn": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to capture the return value. Defaults to false.</p>"
+                    }
+                },
+                "CaptureStackTrace": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to capture a stack trace when the instrumentation point is hit. Defaults to true.</p>"
+                    }
+                },
+                "CaptureLocals": {
+                    "target": "com.amazonaws.applicationsignals#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The local variables to capture by name. Omit or pass an empty list to capture none. You can specify up to 20 names.</p>",
+                        "smithy.api#length": {
+                            "max": 20
+                        }
+                    }
+                },
+                "CaptureLimits": {
+                    "target": "com.amazonaws.applicationsignals#CaptureLimitsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Safety limits that bound what is captured, including hit counts, string length, collection depth, and stack trace size.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines what data to capture for code-level instrumentation, including arguments, return values, stack traces, local variables, and safety limits.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#CodeLocation": {
+            "type": "structure",
+            "members": {
+                "Language": {
+                    "target": "com.amazonaws.applicationsignals#ProgrammingLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The programming language for this instrumentation point, such as Java, Python, or JavaScript.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CodeUnit": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package, module, or namespace that contains the target code, for example <code>com.amazon.payment</code> or <code>payment_service</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "ClassName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The class or type name that contains the method. This is required for Java and optional for Python module-level functions.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "MethodName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method or function name to instrument, such as <code>validateCreditCard</code> or <code>__init__</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 80
+                        }
+                    }
+                },
+                "FilePath": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source file path relative to the project or source root, such as <code>src/payment/PaymentProcessor.java</code> or <code>src/payment/PaymentProcessor.py</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "LineNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line number to instrument. Provide this to disambiguate overloaded methods and to target a specific line when needed.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a code location to instrument, including the programming language, code unit, class, method, file path, and optional line number.</p>"
+            }
+        },
         "com.amazonaws.applicationsignals#CompositeSliComponent": {
             "type": "union",
             "members": {
@@ -1189,6 +1697,226 @@
                         "smithy.api#enumValue": "DIRECT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.applicationsignals#CreateInstrumentationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#CreateInstrumentationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#CreateInstrumentationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a dynamic instrumentation configuration for a specific code or endpoint location within a service and environment. Configurations are immutable after creation.</p> <p>For <code>BREAKPOINT</code> type configurations, they expire after 24 hours unless a shorter expiration is provided. For <code>PROBE</code> type configurations, they persist until explicitly deleted; an expiration cannot be set for <code>PROBE</code> configurations.</p> <p>If a configuration already exists for the same service, environment, signal type, and location, this operation returns a conflict instead of overwriting it. Use attribute filters and capture settings to control where the instrumentation runs and which data is collected.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/create-instrumentation-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#CreateInstrumentationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Type of instrumentation: BREAKPOINT (temporary) or PROBE (permanent)",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service to instrument. This should match the <code>service.name</code> resource attribute reported by the application.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9:/+=,.@_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment that the service is running in, such as <code>eks:cluster-prod/namespace</code> or <code>ec2:production</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9:/+=,.@_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type to emit for this instrumentation. The supported value is <code>SNAPSHOT</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.applicationsignals#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where instrumentation should be applied. Specify a <code>CodeLocation</code> for code-level instrumentation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional short description (up to 50 characters) that explains the purpose of this instrumentation.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "For BREAKPOINT: optional, defaults to 24 hours, must be between 5 min and 24 hours.\nFor PROBE: not supported. PROBE configurations are permanent and persist until explicitly deleted."
+                    }
+                },
+                "AttributeFilters": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Client-side filters that target specific instances. Each object in the array is AND-matched on its keys, and multiple objects are OR-matched to decide where to apply the instrumentation.</p>"
+                    }
+                },
+                "CaptureConfiguration": {
+                    "target": "com.amazonaws.applicationsignals#CaptureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies what to capture when the instrumentation point is hit. Specify <code>CodeCapture</code> for code-level capture settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.applicationsignals#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of key-value pairs to associate with the instrumentation configuration. Tags can help you organize and categorize your resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#CreateInstrumentationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instrumentation that was created, echoed from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service name for the instrumentation configuration, echoed from the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment for the instrumentation configuration, echoed from the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type for the instrumentation configuration, echoed from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.applicationsignals#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where instrumentation is applied, echoed from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stable hash computed from the location that uniquely identifies this instrumentation point within the service, environment, and signal type.</p>",
+                        "smithy.api#length": {
+                            "min": 16,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional description that was stored with the instrumentation configuration.</p>"
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp after which this configuration is no longer served to clients. Present only for <code>BREAKPOINT</code> configurations; <code>PROBE</code> configurations do not expire.</p>"
+                    }
+                },
+                "AttributeFilters": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute filters returned with the configuration so SDKs can perform client-side targeting.</p>"
+                    }
+                },
+                "CaptureConfiguration": {
+                    "target": "com.amazonaws.applicationsignals#CaptureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capture settings that were stored for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-generated creation timestamp for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN for the created instrumentation configuration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationsignals#CreateServiceLevelObjective": {
@@ -1345,6 +2073,100 @@
         "com.amazonaws.applicationsignals#DeleteGroupingConfigurationOutput": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#DeleteInstrumentationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#DeleteInstrumentationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#DeleteInstrumentationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified instrumentation configuration. SDKs remove the instrumentation during their next sync after the configuration is deleted or expires.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-instrumentation-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#DeleteInstrumentationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Type of instrumentation configuration (BREAKPOINT or PROBE).\nRequired to identify the configuration to delete.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service name for the instrumentation configuration.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Environment name for the instrumentation configuration.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "Signal type for the instrumentation configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationIdentifier": {
+                    "target": "com.amazonaws.applicationsignals#LocationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "Location identifier - either full code location or a pre-computed hash.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#DeleteInstrumentationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "DeletionStatus": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationDeletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the delete request. The value is <code>DELETED</code> when the configuration has been removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -1540,6 +2362,71 @@
                 }
             }
         },
+        "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilterGroup": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 50
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A string-to-string map of OpenTelemetry resource attributes and values that must all match for the instrumentation to run on an instance.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilterGroup"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of attribute filter groups used to target specific instances. Each filter group must match all of its keys (AND), and multiple groups are OR-matched to decide whether an instance applies the instrumentation. Filters are evaluated client-side by the SDK.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#DynamicInstrumentationDeletionStatus": {
+            "type": "enum",
+            "members": {
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a delete request for an instrumentation configuration. The value is <code>DELETED</code> after a successful deletion.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType": {
+            "type": "enum",
+            "members": {
+                "SNAPSHOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPSHOT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The telemetry signal type for instrumentation.</p> <ul> <li> <p> <code>SNAPSHOT</code> - Captures a snapshot of the instrumentation point.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.applicationsignals#Edge": {
             "type": "structure",
             "members": {
@@ -1673,6 +2560,284 @@
         },
         "com.amazonaws.applicationsignals#FaultDescription": {
             "type": "string"
+        },
+        "com.amazonaws.applicationsignals#GetInstrumentationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#GetInstrumentationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#GetInstrumentationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of a single instrumentation configuration identified by service, environment, signal type, and location. Use this to audit or display configuration details.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-instrumentation-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#GetInstrumentationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Type of instrumentation configuration (BREAKPOINT or PROBE).\nRequired to identify the configuration to retrieve.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service name for the instrumentation configuration.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Environment name for the instrumentation configuration.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "Signal type for the instrumentation configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationIdentifier": {
+                    "target": "com.amazonaws.applicationsignals#LocationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "Location identifier - either full code location or a pre-computed hash.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#GetInstrumentationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "Configuration": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complete instrumentation configuration, including its location hash, capture settings, filters, expiration, and creation time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#GetInstrumentationConfigurationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#GetInstrumentationConfigurationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#GetInstrumentationConfigurationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status history for a single instrumentation configuration during a specified time range. The response lists when the configuration was ACTIVE, READY, ERROR, or DISABLED.</p> <p>If no status or time window is provided, the operation defaults to ACTIVE events from the last hour.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-instrumentation-configuration-status"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "outputToken": "NextToken",
+                    "items": "Events"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#GetInstrumentationConfigurationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Type of instrumentation configuration (BREAKPOINT or PROBE).\nRequired to identify the configuration to retrieve.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service name for the instrumentation configuration.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Environment name for the instrumentation configuration.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "Signal type for the instrumentation configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationIdentifier": {
+                    "target": "com.amazonaws.applicationsignals#LocationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "Location identifier - either full code location or a pre-computed hash.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The single status to query for. If omitted, only <code>ACTIVE</code> status events are returned.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range to retrieve status events for. <code>StartTime</code> and <code>EndTime</code> must both be provided together or both be omitted. When both are omitted, the time range defaults to the last hour.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range to retrieve status events for. <code>StartTime</code> and <code>EndTime</code> must both be provided together or both be omitted. When both are omitted, the time range defaults to the last hour.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The maximum number of status events to return in one call. The default is 60.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the token returned by a previous call to retrieve the next page of status events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#GetInstrumentationConfigurationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service name echoed from the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment echoed from the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type echoed from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.applicationsignals#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code location echoed from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status that was queried. If not specified in the request, this is <code>ACTIVE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationStatusEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of status events within the requested time window, sorted with the most recent first. Error events include an error cause.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to continue retrieving status events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationsignals#GetService": {
             "type": "operation",
@@ -1957,6 +3122,460 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\s+\\-=\\._:/@]*$"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfiguration": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instrumentation for this configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service that this instrumentation configuration targets.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment where the service is running.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.applicationsignals#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where this instrumentation is applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stable hash derived from the location that uniquely identifies this instrumentation point within the service and environment.</p>",
+                        "smithy.api#length": {
+                            "min": 16,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional short description of the instrumentation configuration.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this configuration expires.</p>"
+                    }
+                },
+                "AttributeFilters": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Client-side filters that determine which instances apply this instrumentation.</p>"
+                    }
+                },
+                "CaptureConfiguration": {
+                    "target": "com.amazonaws.applicationsignals#CaptureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capture settings for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this instrumentation configuration was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN for the instrumentation configuration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The full instrumentation configuration, including the instrumentation type, service, environment, signal type, location details, stable location hash, capture settings, filters, expiration, creation time, and ARN.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN for an instrumentation configuration\nFormat: arn:${Partition}:application-signals:${Region}:${Account}:instrumentationConfig/${service}/${environment}/${signalType}/${locationHash}\nNote: service and environment can contain '/' and ':', so we use a permissive pattern that only validates\nthe ARN prefix structure and the 16-character lowercase hex locationHash suffix.",
+                "smithy.api#pattern": "^arn:[^:]+:application-signals:[^:]+:[0-9]{12}:instrumentationConfig/.+/[0-9a-f]{16}$"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an instrumentation configuration on a host.</p> <ul> <li> <p> <code>READY</code> - The configuration has been applied but has not been hit yet.</p> </li> <li> <p> <code>ERROR</code> - Applying the configuration failed; see the error cause.</p> </li> <li> <p> <code>ACTIVE</code> - The configuration has been hit and is capturing data.</p> </li> <li> <p> <code>DISABLED</code> - The configuration was disabled, for example because a limit was reached.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationStatusReport"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationStatusReport": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instrumentation configuration being reported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stable hash of the instrumentation location that identifies the configuration being reported.</p>",
+                        "smithy.api#length": {
+                            "min": 16,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the instrumentation configuration: <code>READY</code>, <code>ERROR</code>, <code>ACTIVE</code>, or <code>DISABLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Time": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the status event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCause": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationErrorCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error cause when the status is <code>ERROR</code>, such as the file or method not being found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a single instrumentation configuration reported by an SDK instance.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationWithoutServiceEnv": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instrumentation for this configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.applicationsignals#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where this instrumentation is applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stable hash derived from the location that identifies this instrumentation point.</p>",
+                        "smithy.api#length": {
+                            "min": 16,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional short description of the instrumentation configuration.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this configuration expires.</p>"
+                    }
+                },
+                "AttributeFilters": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationAttributeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Client-side filters that determine which instances apply this instrumentation.</p>"
+                    }
+                },
+                "CaptureConfiguration": {
+                    "target": "com.amazonaws.applicationsignals#CaptureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capture settings for this instrumentation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this instrumentation configuration was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN for the instrumentation configuration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An instrumentation configuration that omits service and environment because they are provided at a higher level, such as in a list response.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationsPage": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service name associated with the returned configurations.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment associated with the returned configurations.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Changed": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether there are configuration changes since the provided <code>SyncedAt</code> timestamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LatestConfigurations": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationsWithoutServiceEnv",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current set of active instrumentation configurations for the service and environment. Items omit service and environment because they are provided in the request.</p>"
+                    }
+                },
+                "SyncedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server timestamp to supply on the next sync call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SyncInterval": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suggested number of seconds to wait before the next sync request. This is at least 60 seconds to prevent excessive polling.</p>",
+                        "smithy.api#range": {
+                            "min": 60
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to continue listing configurations when more results are available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationConfigurationsWithoutServiceEnv": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationWithoutServiceEnv"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of instrumentation configurations that omit service and environment, used when those values are provided elsewhere in the response.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationErrorCause": {
+            "type": "enum",
+            "members": {
+                "FILE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_NOT_FOUND"
+                    }
+                },
+                "METHOD_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METHOD_NOT_FOUND"
+                    }
+                },
+                "LINE_NOT_EXECUTABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE_NOT_EXECUTABLE"
+                    }
+                },
+                "OVERLOADED_METHODS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERLOADED_METHODS"
+                    }
+                },
+                "LANGUAGE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LANGUAGE_MISMATCH"
+                    }
+                },
+                "RUNTIME_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNTIME_ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reason why applying an instrumentation configuration failed.</p> <ul> <li> <p> <code>FILE_NOT_FOUND</code> - The specified file or file location could not be located.</p> </li> <li> <p> <code>METHOD_NOT_FOUND</code> - The specified method or function does not exist.</p> </li> <li> <p> <code>LINE_NOT_EXECUTABLE</code> - The specified line does not contain executable code.</p> </li> <li> <p> <code>OVERLOADED_METHODS</code> - Multiple overloaded methods were found; provide a line number to disambiguate.</p> </li> <li> <p> <code>LANGUAGE_MISMATCH</code> - The language specified in the configuration does not match the service.</p> </li> <li> <p> <code>RUNTIME_ERROR</code> - A runtime error occurred while applying the instrumentation.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationStatusEvent": {
+            "type": "structure",
+            "members": {
+                "Time": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the status was reported, rounded to the nearest minute.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCause": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationErrorCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error cause when the status is <code>ERROR</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A status event for an instrumentation configuration returned by <code>GetInstrumentationConfigurationStatus</code>. Events include the timestamp and, for errors, an error cause.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationStatusEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#InstrumentationStatusEvent"
+            }
+        },
+        "com.amazonaws.applicationsignals#InstrumentationType": {
+            "type": "enum",
+            "members": {
+                "BREAKPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Temporary instrumentation that expires automatically (default 24 hours)",
+                        "smithy.api#enumValue": "BREAKPOINT"
+                    }
+                },
+                "PROBE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Permanent instrumentation that persists until explicitly deleted",
+                        "smithy.api#enumValue": "PROBE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type of instrumentation configuration"
             }
         },
         "com.amazonaws.applicationsignals#Interval": {
@@ -2334,6 +3953,102 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ListInstrumentationConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#ListInstrumentationConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationsPage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all active instrumentation configurations for a service and environment. SDKs use this operation to sync configurations and apply client-side filters locally.</p> <p>Include the previous <code>SyncedAt</code> value to perform incremental syncs. When no changes are detected, the response sets <code>Changed</code> to <code>false</code> and omits configuration details.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-instrumentation-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "outputToken": "NextToken",
+                    "items": "LatestConfigurations"
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ListInstrumentationConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service to retrieve instrumentation configurations for.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9:/+=,.@_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment that the service is running in.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9:/+=,.@_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "Type of instrumentation configuration (BREAKPOINT or PROBE).\nRequired to determine which backing store to query.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SyncedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp from the last successful sync. When provided, the response returns <code>Changed</code> as <code>false</code> if nothing is new since this time, or returns the latest configurations when changes exist.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 50,
+                        "smithy.api#documentation": "<p>The maximum number of configurations to return in one call. The default is 50 and the maximum is 100.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the token returned by a previous call to retrieve the next page of configurations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationsignals#ListServiceDependencies": {
@@ -3247,6 +4962,44 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.applicationsignals#Location": {
+            "type": "union",
+            "members": {
+                "CodeLocation": {
+                    "target": "com.amazonaws.applicationsignals#CodeLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code location for code-level instrumentation, including language, code unit, class, method, file path, and optional line number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union that identifies the location to instrument. Specify a <code>CodeLocation</code> for code-level instrumentation.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#LocationIdentifier": {
+            "type": "union",
+            "members": {
+                "CodeLocation": {
+                    "target": "com.amazonaws.applicationsignals#CodeLocation",
+                    "traits": {
+                        "smithy.api#documentation": "The full code location specification (will be hashed internally)"
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The pre-computed location hash (16-character hex string)",
+                        "smithy.api#length": {
+                            "min": 16,
+                            "max": 16
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Union type for identifying an instrumentation configuration by code location or locationHash.\nUsed in Get/Delete/GetStatus operations to allow flexible identification."
+            }
+        },
         "com.amazonaws.applicationsignals#LogGroupReferences": {
             "type": "list",
             "member": {
@@ -3670,6 +5423,32 @@
                 }
             }
         },
+        "com.amazonaws.applicationsignals#ProgrammingLanguage": {
+            "type": "enum",
+            "members": {
+                "JAVA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Java"
+                    }
+                },
+                "PYTHON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Python"
+                    }
+                },
+                "JAVASCRIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Javascript"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The programming language of the instrumentation point. Java, Python, and JavaScript are currently supported.</p>"
+            }
+        },
         "com.amazonaws.applicationsignals#PutGroupingConfiguration": {
             "type": "operation",
             "input": {
@@ -3742,6 +5521,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The recurrence rule for the SLO time window exclusion .</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#ReportInstrumentationConfigurationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#ReportInstrumentationConfigurationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#ReportInstrumentationConfigurationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Reports the status of one or more instrumentation configurations from SDK instances. Use this to record when configurations become ready, hit errors, become active, or are disabled by limits.</p> <p>Report <code>READY</code>, <code>ERROR</code>, and <code>DISABLED</code> when the status changes. Report <code>ACTIVE</code> periodically (for example, every minute) while instrumentation is running.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/report-instrumentation-configuration-status"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ReportInstrumentationConfigurationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service that the reported configurations belong to.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment that the service is running in.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Configurations": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of configuration status reports (up to 100) that include the instrumentation type, signal type, location hash, status, timestamp, and optional error cause.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ReportInstrumentationConfigurationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service name echoed from the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment echoed from the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnprocessedStatusEvents": {
+                    "target": "com.amazonaws.applicationsignals#UnprocessedStatusEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status events that failed to be processed. Each entry includes the configuration identifiers, status, timestamp, and a reason for the failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationsignals#RequestBasedServiceLevelIndicator": {
@@ -5321,6 +7203,23 @@
         "com.amazonaws.applicationsignals#Stat": {
             "type": "string"
         },
+        "com.amazonaws.applicationsignals#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 80
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.applicationsignals#Tag": {
             "type": "structure",
             "members": {
@@ -5463,6 +7362,92 @@
         },
         "com.amazonaws.applicationsignals#TotalBudgetSeconds": {
             "type": "integer"
+        },
+        "com.amazonaws.applicationsignals#UnprocessedStatusEvent": {
+            "type": "structure",
+            "members": {
+                "InstrumentationType": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instrumentation configuration for the unprocessed status event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.applicationsignals#DynamicInstrumentationSignalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry signal type for the unprocessed status event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stable hash of the instrumentation location for the unprocessed event.</p>",
+                        "smithy.api#length": {
+                            "min": 16,
+                            "max": 16
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.applicationsignals#InstrumentationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status that failed to be processed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Time": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the status event that failed to be processed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailedReason": {
+                    "target": "com.amazonaws.applicationsignals#UnprocessedStatusEventFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why this status event could not be processed, such as throttling or validation errors.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A status event that could not be processed by the service.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#UnprocessedStatusEventFailureReason": {
+            "type": "enum",
+            "members": {
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reason an instrumentation status event could not be processed.</p> <ul> <li> <p> <code>THROTTLED</code> - The request exceeded allowed throughput.</p> </li> <li> <p> <code>INTERNAL_ERROR</code> - An internal server error occurred while processing the event.</p> </li> <li> <p> <code>VALIDATION_ERROR</code> - The event failed validation.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.applicationsignals#UnprocessedStatusEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#UnprocessedStatusEvent"
+            }
         },
         "com.amazonaws.applicationsignals#UntagResource": {
             "type": "operation",

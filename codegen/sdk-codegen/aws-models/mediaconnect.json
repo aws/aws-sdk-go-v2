@@ -1577,7 +1577,7 @@
                 "State": {
                     "target": "com.amazonaws.mediaconnect#State",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates whether the <code>BlackFrames</code> metric is enabled or disabled..</p>",
+                        "smithy.api#documentation": "<p> Indicates whether the <code>BlackFrames</code> metric is enabled or disabled.</p>",
                         "smithy.api#jsonName": "state"
                     }
                 },
@@ -1591,6 +1591,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Configures settings for the <code>BlackFrames</code> metric.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#BlackFramesConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.mediaconnect#ContentQualityAnalysisState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether black frames detection is enabled or disabled.</p>",
+                        "smithy.api#jsonName": "state",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThresholdSeconds": {
+                    "target": "com.amazonaws.mediaconnect#RouterCqaThresholdSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive seconds of black frames that MediaConnect must detect before it reports an issue.</p>",
+                        "smithy.api#jsonName": "thresholdSeconds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detects black frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.</p>"
             }
         },
         "com.amazonaws.mediaconnect#Bridge": {
@@ -2086,6 +2110,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconnect#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[!-~]+$"
+            }
+        },
         "com.amazonaws.mediaconnect#Colorimetry": {
             "type": "enum",
             "members": {
@@ -2167,6 +2200,35 @@
                         "smithy.api#enumValue": "DISCONNECTED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediaconnect#ContentQualityAnalysisFeatureConfiguration": {
+            "type": "structure",
+            "members": {
+                "BlackFrames": {
+                    "target": "com.amazonaws.mediaconnect#BlackFramesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for black frames detection.</p>",
+                        "smithy.api#jsonName": "blackFrames"
+                    }
+                },
+                "FrozenFrames": {
+                    "target": "com.amazonaws.mediaconnect#FrozenFramesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for frozen frames detection.</p>",
+                        "smithy.api#jsonName": "frozenFrames"
+                    }
+                },
+                "SilentAudio": {
+                    "target": "com.amazonaws.mediaconnect#SilentAudioConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for silent audio detection.</p>",
+                        "smithy.api#jsonName": "silentAudio"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the content quality analysis features for the router input.</p>"
             }
         },
         "com.amazonaws.mediaconnect#ContentQualityAnalysisState": {
@@ -2774,11 +2836,18 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.mediaconnect#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the request to ensure idempotency.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#jsonName": "clientToken"
+                    }
+                },
+                "ContentQualityAnalysisConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#RouterContentQualityAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content quality analysis configuration for the router input.</p>",
+                        "smithy.api#jsonName": "contentQualityAnalysisConfiguration"
                     }
                 }
             },
@@ -2896,7 +2965,7 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.mediaconnect#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the request to ensure idempotency.</p>",
                         "smithy.api#idempotencyToken": {},
@@ -3060,7 +3129,7 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.mediaconnect#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the request to ensure idempotency.</p>",
                         "smithy.api#idempotencyToken": {},
@@ -5832,6 +5901,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Configures settings for the <code>FrozenFrames</code> metric.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#FrozenFramesConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.mediaconnect#ContentQualityAnalysisState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether frozen frames detection is enabled or disabled.</p>",
+                        "smithy.api#jsonName": "state",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThresholdSeconds": {
+                    "target": "com.amazonaws.mediaconnect#RouterCqaThresholdSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive seconds of a frozen frame that MediaConnect must detect before it reports an issue.</p>",
+                        "smithy.api#jsonName": "thresholdSeconds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detects frozen video frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.</p>"
             }
         },
         "com.amazonaws.mediaconnect#Gateway": {
@@ -13119,6 +13212,41 @@
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$"
             }
         },
+        "com.amazonaws.mediaconnect#RouterContentQualityAnalysisConfiguration": {
+            "type": "union",
+            "members": {
+                "ContentLevel": {
+                    "target": "com.amazonaws.mediaconnect#ContentQualityAnalysisFeatureConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content quality analysis configuration.</p>",
+                        "smithy.api#jsonName": "contentLevel"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content quality analysis configuration for the router input.</p> <important> <p>The content quality analysis feature only monitors the first video stream and the first audio stream it encounters within the router input source.</p> </important>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RouterContentQualityAnalysisType": {
+            "type": "enum",
+            "members": {
+                "CONTENT_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_LEVEL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#RouterCqaThresholdSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 60
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#RouterInput": {
             "type": "structure",
             "members": {
@@ -13312,6 +13440,24 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The current maintenance schedule details for this router input.</p>",
                         "smithy.api#jsonName": "maintenanceSchedule"
+                    }
+                },
+                "ContentQualityAnalysisType": {
+                    "target": "com.amazonaws.mediaconnect#RouterContentQualityAnalysisType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of content quality analysis applied to the router input.</p>",
+                        "smithy.api#jsonName": "contentQualityAnalysisType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentQualityAnalysisConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#RouterContentQualityAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The content quality analysis configuration for the router input.</p>",
+                        "smithy.api#jsonName": "contentQualityAnalysisConfiguration",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -15266,6 +15412,30 @@
                 "smithy.api#documentation": "<p>Configures settings for the <code>SilentAudio</code> metric. </p>"
             }
         },
+        "com.amazonaws.mediaconnect#SilentAudioConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.mediaconnect#ContentQualityAnalysisState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether silent audio detection is enabled or disabled.</p>",
+                        "smithy.api#jsonName": "state",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThresholdSeconds": {
+                    "target": "com.amazonaws.mediaconnect#RouterCqaThresholdSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive seconds of silence that MediaConnect must detect before it reports an issue.</p>",
+                        "smithy.api#jsonName": "thresholdSeconds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detects silent audio in the router input's source content and reports it through a CloudWatch metric, an EventBridge event, and a router input message.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#Source": {
             "type": "structure",
             "members": {
@@ -15330,14 +15500,14 @@
                 "SenderControlPort": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The IP address that the flow communicates with to initiate connection with the sender.</p>",
+                        "smithy.api#documentation": "<p> The port that the flow uses to send outbound requests to initiate connection with the sender.</p>",
                         "smithy.api#jsonName": "senderControlPort"
                     }
                 },
                 "SenderIpAddress": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The port that the flow uses to send outbound requests to initiate connection with the sender.</p>",
+                        "smithy.api#documentation": "<p> The IP address that the flow communicates with to initiate connection with the sender.</p>",
                         "smithy.api#jsonName": "senderIpAddress"
                     }
                 },
@@ -18928,6 +19098,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated maintenance configuration settings for the router input, including any changes to preferred maintenance windows and schedules.</p>",
                         "smithy.api#jsonName": "maintenanceConfiguration"
+                    }
+                },
+                "ContentQualityAnalysisConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#RouterContentQualityAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content quality analysis configuration for the router input.</p>",
+                        "smithy.api#jsonName": "contentQualityAnalysisConfiguration"
                     }
                 }
             },

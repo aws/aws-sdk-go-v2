@@ -6053,6 +6053,13 @@
                         "smithy.api#jsonName": "saslScram",
                         "smithy.api#required": {}
                     }
+                },
+                "MTLS": {
+                    "target": "com.amazonaws.kafka#KafkaClusterMTLSAuthentication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for mTLS client authentication.</p>",
+                        "smithy.api#jsonName": "mTLS"
+                    }
                 }
             },
             "traits": {
@@ -6169,6 +6176,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of encryption in transit to the Apache Kafka cluster.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterMTLSAuthentication": {
+            "type": "structure",
+            "members": {
+                "SecretArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret.</p>",
+                        "smithy.api#jsonName": "secretArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for mTLS client authentication.</p>"
             }
         },
         "com.amazonaws.kafka#KafkaClusterSaslScramAuthentication": {
