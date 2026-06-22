@@ -1,8 +1,0 @@
-{
-    "id": "816f4642-86b9-4be4-be0b-7c4c2814b90f",
-    "type": "feature",
-    "description": "Lambda MicroVMs GA launch. Lambda MicroVMs enable isolated and highly responsive execution of user-supplied or LLM-generated code.",
-    "modules": [
-        "service/lambdamicrovms"
-    ]
-}

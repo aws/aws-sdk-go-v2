@@ -1,3 +1,33 @@
+# Release (2026-06-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.23.0](service/applicationsignals/CHANGELOG.md#v1230-2026-06-22)
+  * **Feature**: Application Signals now supports dynamic instrumentation and Service Events telemetry. Add instrumentation at runtime without restarts, and use fine-grained profiling data to quickly pinpoint latency and error root causes.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.32.0](service/bedrockagentcore/CHANGELOG.md#v1320-2026-06-22)
+  * **Feature**: Adds an optional extractionMode field to CreateEvent. SKIP retains the event in short-term memory but excludes it from long-term memory extraction.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.78.0](service/cloudwatchlogs/CHANGELOG.md#v1780-2026-06-22)
+  * **Feature**: CloudWatch Logs Updates - New APIs introduced to support syslog ingestion to a log group. For more information, see CloudWatch Logs API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.41.0](service/directconnect/CHANGELOG.md#v1410-2026-06-22)
+  * **Feature**: Added VIF rate limiting support for AWS Direct Connect, allowing customers to set bandwidth allocations on virtual interfaces to manage traffic on dedicated connections.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.308.0](service/ec2/CHANGELOG.md#v13080-2026-06-22)
+  * **Feature**: This release adds support for AMI Watermark and Allowed AMIs integration
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.80.0](service/guardduty/CHANGELOG.md#v1800-2026-06-22)
+  * **Feature**: Added AI-powered investigations that automatically analyze security findings, correlate related activity, and produce structured summaries with risk assessment, confidence scoring, MITRE technique classification, and actionable next steps.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.53.0](service/kafka/CHANGELOG.md#v1530-2026-06-22)
+  * **Feature**: Amazon MSK Replicator now supports mTLS authentication when connecting to external Apache Kafka clusters, enabling customers to replicate data from clusters that require mutual TLS for client authentication. This capability is supported when replicating to Amazon MSK Express brokers.
+* `github.com/aws/aws-sdk-go-v2/service/lambdacore`: [v1.0.0](service/lambdacore/CHANGELOG.md#v100-2026-06-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of the AWS Lambda Core SDK with APIs to create, manage, and tag network connectors that enable Lambda compute resources to access private resources in your Amazon VPC.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.0.0](service/lambdamicrovms/CHANGELOG.md#v100-2026-06-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Lambda MicroVMs GA launch. Lambda MicroVMs enable isolated and highly responsive execution of user-supplied or LLM-generated code.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.51.0](service/mediaconnect/CHANGELOG.md#v1510-2026-06-22)
+  * **Feature**: AWS MediaConnect now supports Content Quality Analysis for Router Inputs, enabling detection of black frames, frozen frames, and silent audio with configurable thresholds.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.46.0](service/omics/CHANGELOG.md#v1460-2026-06-22)
+  * **Feature**: Adds support for scratch ephemeral storage mounted at tmp
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.115.0](service/quicksight/CHANGELOG.md#v11150-2026-06-22)
+  * **Feature**: Updated the Amazon Quick Spaces API to remove unsupported SPACE and ARTIFACT values from the SpaceQuickSightResourceType enum.
+
 # Release (2026-06-19)
 
 ## Module Highlights

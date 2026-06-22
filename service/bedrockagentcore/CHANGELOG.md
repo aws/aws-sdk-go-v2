@@ -1,3 +1,7 @@
+# v1.32.0 (2026-06-22)
+
+* **Feature**: Adds an optional extractionMode field to CreateEvent. SKIP retains the event in short-term memory but excludes it from long-term memory extraction.
+
 # v1.31.0 (2026-06-17)
 
 * **Feature**: AgentCore Harness service will be Generally Available at NYS 2026 with this Treb release. Harness will support invoking specific endpoints via the qualifier parameter, AWS Skills for pre-built agent capabilities, and improved validation for skill git source URLs.
