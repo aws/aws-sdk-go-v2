@@ -1595,9 +1595,7 @@ func validateKafkaClusterClientAuthentication(v *types.KafkaClusterClientAuthent
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterClientAuthentication"}
-	if v.SaslScram == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SaslScram"))
-	} else if v.SaslScram != nil {
+	if v.SaslScram != nil {
 		if err := validateKafkaClusterSaslScramAuthentication(v.SaslScram); err != nil {
 			invalidParams.AddNested("SaslScram", err.(smithy.InvalidParamsError))
 		}
