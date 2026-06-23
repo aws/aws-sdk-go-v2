@@ -6048,10 +6048,8 @@
                 "SaslScram": {
                     "target": "com.amazonaws.kafka#KafkaClusterSaslScramAuthentication",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication.</p>",
-                        "smithy.api#jsonName": "saslScram",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "saslScram"
                     }
                 },
                 "MTLS": {
