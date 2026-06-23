@@ -244,3 +244,10 @@ func (m *endpointPrefix_opListActionsMiddleware) HandleFinalize(ctx context.Cont
 func addEndpointPrefix_opListActionsMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opListActionsMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
+
+// ListActionsAPIClient is a client that implements the ListActions operation.
+type ListActionsAPIClient interface {
+	ListActions(context.Context, *ListActionsInput, ...func(*Options)) (*ListActionsOutput, error)
+}
+
+var _ ListActionsAPIClient = (*Client)(nil)

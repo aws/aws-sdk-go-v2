@@ -354,6 +354,10 @@ func (c *Client) invokeEventStreamOperation(
 
 	finalizeClientEndpointResolverOptions(&options)
 
+	if err := c.addCommonMiddlewares(stack, options, opID); err != nil {
+		return nil, metadata, err
+	}
+
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
 			return nil, metadata, err

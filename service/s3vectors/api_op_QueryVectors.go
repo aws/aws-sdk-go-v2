@@ -4,6 +4,7 @@ package s3vectors
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/document"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
 	"github.com/aws/smithy-go/middleware"
@@ -173,3 +174,83 @@ func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
+
+// QueryVectorsPaginatorOptions is the paginator options for QueryVectors
+type QueryVectorsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// QueryVectorsPaginator is a paginator for QueryVectors
+type QueryVectorsPaginator struct {
+	options   QueryVectorsPaginatorOptions
+	client    QueryVectorsAPIClient
+	params    *QueryVectorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewQueryVectorsPaginator returns a new QueryVectorsPaginator
+func NewQueryVectorsPaginator(client QueryVectorsAPIClient, params *QueryVectorsInput, optFns ...func(*QueryVectorsPaginatorOptions)) *QueryVectorsPaginator {
+	if params == nil {
+		params = &QueryVectorsInput{}
+	}
+
+	options := QueryVectorsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &QueryVectorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *QueryVectorsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next QueryVectors page.
+func (p *QueryVectorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*QueryVectorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.QueryVectors(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// QueryVectorsAPIClient is a client that implements the QueryVectors operation.
+type QueryVectorsAPIClient interface {
+	QueryVectors(context.Context, *QueryVectorsInput, ...func(*Options)) (*QueryVectorsOutput, error)
+}
+
+var _ QueryVectorsAPIClient = (*Client)(nil)

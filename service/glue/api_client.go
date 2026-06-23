@@ -882,6 +882,14 @@ func newServiceMetadataMiddleware(region, operation string) *awsmiddleware.Regis
 	}
 }
 
+func newServiceMetadataMiddleware(region, operation string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: operation,
+	}
+}
+
 func addRecursionDetection(stack *middleware.Stack) error {
 	return stack.Build.Add(&awsmiddleware.RecursionDetection{}, middleware.After)
 }
