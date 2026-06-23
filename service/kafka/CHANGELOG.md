@@ -1,3 +1,7 @@
+# v1.54.0 (2026-06-23)
+
+* **Feature**: Amazon MSK Replicator now supports mTLS authentication when connecting to external Apache Kafka clusters, enabling customers to replicate data from clusters that require mutual TLS for client authentication. This capability is supported when replicating to Amazon MSK Express brokers.
+
 # v1.53.0 (2026-06-22)
 
 * **Feature**: Amazon MSK Replicator now supports mTLS authentication when connecting to external Apache Kafka clusters, enabling customers to replicate data from clusters that require mutual TLS for client authentication. This capability is supported when replicating to Amazon MSK Express brokers.

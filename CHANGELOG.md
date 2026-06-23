@@ -1,3 +1,9 @@
+# Release (2026-06-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.54.0](service/kafka/CHANGELOG.md#v1540-2026-06-23)
+  * **Feature**: Amazon MSK Replicator now supports mTLS authentication when connecting to external Apache Kafka clusters, enabling customers to replicate data from clusters that require mutual TLS for client authentication. This capability is supported when replicating to Amazon MSK Express brokers.
+
 # Release (2026-06-22)
 
 ## Module Highlights
