@@ -9,12 +9,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a certificate. You can use this function to specify whether to opt in
-// to or out of recording your certificate in a certificate transparency log and
-// exporting. For more information, see [Opting Out of Certificate Transparency Logging]and [Certificate Manager Exportable Managed Certificates].
+// Updates a certificate. You can use this function to specify whether to export
+// your certificate. Certificate transparency logging opt-out is no longer
+// available. For more information, see [Certificate Transparency Logging]and [Certificate Manager Exportable Managed Certificates].
 //
-// [Opting Out of Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
 // [Certificate Manager Exportable Managed Certificates]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
+// [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
 func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCertificateOptionsInput, optFns ...func(*Options)) (*UpdateCertificateOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateOptionsInput{}
@@ -40,10 +40,11 @@ type UpdateCertificateOptionsInput struct {
 	CertificateArn *string
 
 	// Use to update the options for your certificate. Currently, you can specify
-	// whether to add your certificate to a transparency log or export your
-	// certificate. Certificate transparency makes it possible to detect SSL/TLS
-	// certificates that have been mistakenly or maliciously issued. Certificates that
-	// have not been logged typically produce an error message in a browser.
+	// whether to export your certificate. Certificate transparency logging opt-out is
+	// no longer available. All public certificates are recorded in a certificate
+	// transparency log. For more information, see [Certificate Transparency Logging].
+	//
+	// [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
 	//
 	// This member is required.
 	Options *types.CertificateOptions

@@ -14030,6 +14030,15 @@ func awsRestjson1_deserializeDocumentControlPlanePlacementResponse(v **types.Con
 				sv.GroupName = ptr.String(jtv)
 			}
 
+		case "spreadLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpreadLevel to be of type string, got %T instead", value)
+				}
+				sv.SpreadLevel = types.SpreadLevel(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14629,6 +14638,46 @@ func awsRestjson1_deserializeDocumentErrorDetails(v *[]types.ErrorDetail, value 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEtcdPlacementResponse(v **types.EtcdPlacementResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EtcdPlacementResponse
+	if *v == nil {
+		sv = &types.EtcdPlacementResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "spreadLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpreadLevel to be of type string, got %T instead", value)
+				}
+				sv.SpreadLevel = types.SpreadLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -17226,6 +17275,20 @@ func awsRestjson1_deserializeDocumentOutpostConfigResponse(v **types.OutpostConf
 				return err
 			}
 
+		case "etcdInstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EtcdInstanceType = ptr.String(jtv)
+			}
+
+		case "etcdPlacement":
+			if err := awsRestjson1_deserializeDocumentEtcdPlacementResponse(&sv.EtcdPlacement, value); err != nil {
+				return err
+			}
+
 		case "outpostArns":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.OutpostArns, value); err != nil {
 				return err
@@ -18834,6 +18897,15 @@ func awsRestjson1_deserializeDocumentVpcConfigResponse(v **types.VpcConfigRespon
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ClusterSecurityGroupId = ptr.String(jtv)
+			}
+
+		case "controlPlaneEgressMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlPlaneEgressModeType to be of type string, got %T instead", value)
+				}
+				sv.ControlPlaneEgressMode = types.ControlPlaneEgressModeType(jtv)
 			}
 
 		case "endpointPrivateAccess":

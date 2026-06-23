@@ -938,6 +938,26 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about a data source attachment, including its identifier,
+// data source ARN, and current status.
+type DataSourceAttachmentSummary struct {
+
+	// The unique identifier assigned to the data source attachment.
+	AttachmentId *string
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	DataSourceArn *string
+
+	// The current status of the data source attachment. Valid values are PENDING ,
+	// ATTACHED , and FAILED .
+	Status DataSourceAttachmentStatus
+
+	noSmithyDocumentSerde
+}
+
 // Details about a direct-query data source.
 type DataSourceDetails struct {
 
@@ -3316,6 +3336,28 @@ type WindowStartTime struct {
 	//
 	// This member is required.
 	Minutes int64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for creating a new workspace when attaching a data source to an
+// OpenSearch application. The workspace is created after the data source is
+// successfully attached.
+type WorkspaceConfigurationInput struct {
+
+	// The name of the workspace to create. Must be between 1 and 40 characters and
+	// can contain alphanumeric characters, parentheses, brackets, hyphens,
+	// underscores, and spaces.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of workspace to create, which determines the use-case features enabled
+	// for the workspace. Valid values are OBSERVABILITY , SECURITY_ANALYTICS , and
+	// SEARCH .
+	//
+	// This member is required.
+	WorkspaceType *string
 
 	noSmithyDocumentSerde
 }

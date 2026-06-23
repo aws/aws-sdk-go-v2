@@ -95,6 +95,10 @@ type AgentAccessConfig struct {
 	// sessions.
 	ScreenshotsUploadEnabled *bool
 
+	// The user control mode for agent sessions. This setting determines how users can
+	// interact with agent sessions.
+	UserControlMode UserControlMode
+
 	noSmithyDocumentSerde
 }
 
@@ -119,6 +123,10 @@ type AgentAccessConfigForUpdate struct {
 	// The list of agent access settings that define permissions for each agent action.
 	Settings []AgentAccessSetting
 
+	// The user control mode for agent sessions. This setting determines how users can
+	// interact with agent sessions.
+	UserControlMode UserControlMode
+
 	noSmithyDocumentSerde
 }
 
@@ -126,9 +134,9 @@ type AgentAccessConfigForUpdate struct {
 // action and whether it is enabled or disabled.
 type AgentAccessSetting struct {
 
-	// The agent action to configure. Valid values are COMPUTER_VISION and
-	// COMPUTER_INPUT. If you enable COMPUTER_INPUT, you must also enable
-	// COMPUTER_VISION.
+	// The agent action to configure. Valid values are COMPUTER_VISION,
+	// COMPUTER_INPUT, and FORWARD_MCP_TOOLS. If you enable COMPUTER_INPUT, you must
+	// also enable COMPUTER_VISION.
 	//
 	// This member is required.
 	AgentAction AgentAction

@@ -809,6 +809,79 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson10_serializeOpUpdateFHIRDatastore struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateFHIRDatastore) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateFHIRDatastore) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFHIRDatastoreInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("HealthLake.UpdateFHIRDatastore")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateFHIRDatastoreInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsAwsjson10_serializeDocumentAnalyticsConfiguration(v *types.AnalyticsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDatastoreFilter(v *types.DatastoreFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -833,6 +906,17 @@ func awsAwsjson10_serializeDocumentDatastoreFilter(v *types.DatastoreFilter, val
 		ok.String(string(v.DatastoreStatus))
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentDefaultProfiles(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -896,6 +980,18 @@ func awsAwsjson10_serializeDocumentKmsEncryptionConfig(v *types.KmsEncryptionCon
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentNlpConfiguration(v *types.NlpConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentOutputDataConfig(v types.OutputDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -921,6 +1017,20 @@ func awsAwsjson10_serializeDocumentPreloadDataConfig(v *types.PreloadDataConfig,
 	if len(v.PreloadDataType) > 0 {
 		ok := object.Key("PreloadDataType")
 		ok.String(string(v.PreloadDataType))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProfileConfiguration(v *types.ProfileConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultProfiles != nil {
+		ok := object.Key("DefaultProfiles")
+		if err := awsAwsjson10_serializeDocumentDefaultProfiles(v.DefaultProfiles, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1002,6 +1112,13 @@ func awsAwsjson10_serializeOpDocumentCreateFHIRDatastoreInput(v *CreateFHIRDatas
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnalyticsConfiguration != nil {
+		ok := object.Key("AnalyticsConfiguration")
+		if err := awsAwsjson10_serializeDocumentAnalyticsConfiguration(v.AnalyticsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -1024,9 +1141,23 @@ func awsAwsjson10_serializeOpDocumentCreateFHIRDatastoreInput(v *CreateFHIRDatas
 		}
 	}
 
+	if v.NlpConfiguration != nil {
+		ok := object.Key("NlpConfiguration")
+		if err := awsAwsjson10_serializeDocumentNlpConfiguration(v.NlpConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PreloadDataConfig != nil {
 		ok := object.Key("PreloadDataConfig")
 		if err := awsAwsjson10_serializeDocumentPreloadDataConfig(v.PreloadDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProfileConfiguration != nil {
+		ok := object.Key("ProfileConfiguration")
+		if err := awsAwsjson10_serializeDocumentProfileConfiguration(v.ProfileConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -1337,6 +1468,51 @@ func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 	if v.TagKeys != nil {
 		ok := object.Key("TagKeys")
 		if err := awsAwsjson10_serializeDocumentTagKeyList(v.TagKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateFHIRDatastoreInput(v *UpdateFHIRDatastoreInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalyticsConfiguration != nil {
+		ok := object.Key("AnalyticsConfiguration")
+		if err := awsAwsjson10_serializeDocumentAnalyticsConfiguration(v.AnalyticsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DatastoreId != nil {
+		ok := object.Key("DatastoreId")
+		ok.String(*v.DatastoreId)
+	}
+
+	if v.DatastoreName != nil {
+		ok := object.Key("DatastoreName")
+		ok.String(*v.DatastoreName)
+	}
+
+	if v.IdentityProviderConfiguration != nil {
+		ok := object.Key("IdentityProviderConfiguration")
+		if err := awsAwsjson10_serializeDocumentIdentityProviderConfiguration(v.IdentityProviderConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NlpConfiguration != nil {
+		ok := object.Key("NlpConfiguration")
+		if err := awsAwsjson10_serializeDocumentNlpConfiguration(v.NlpConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProfileConfiguration != nil {
+		ok := object.Key("ProfileConfiguration")
+		if err := awsAwsjson10_serializeDocumentProfileConfiguration(v.ProfileConfiguration, ok); err != nil {
 			return err
 		}
 	}

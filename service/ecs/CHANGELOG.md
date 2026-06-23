@@ -1,3 +1,15 @@
+# v1.85.0 (2026-06-18)
+
+* **Feature**: Amazon ECS services now support high resolution (20 second) CloudWatch metrics for CPUUtilization and MemoryUtilization. Use these metrics for faster service auto scaling.
+
+# v1.84.0 (2026-06-17)
+
+* **Feature**: Releasing the ability to bring-your-own task-definition for CreateExpressGatewayService and UpdateGatewayExpressService
+
+# v1.83.0 (2026-06-10)
+
+* **Feature**: Amazon ECS Managed Daemon task definitions now support pidMode and ipcMode parameters. Set shared to allow daemons to share PID or IPC namespaces with co-located tasks on Managed Instances, enabling process tracing and shared memory communication.
+
 # v1.82.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

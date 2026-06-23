@@ -35,6 +35,9 @@ func ExampleAgentTracesConfig_outputUsage() {
 	var union types.AgentTracesConfig
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AgentTracesConfigMemberBatchEvaluation:
+		_ = v.Value // Value is types.BatchEvaluationTraceConfig
+
 	case *types.AgentTracesConfigMemberCloudwatchLogs:
 		_ = v.Value // Value is types.CloudWatchLogsTraceConfig
 
@@ -51,6 +54,7 @@ func ExampleAgentTracesConfig_outputUsage() {
 }
 
 var _ *types.CloudWatchLogsTraceConfig
+var _ *types.BatchEvaluationTraceConfig
 var _ []document.Interface
 
 func ExampleBrowserAction_outputUsage() {
@@ -224,6 +228,9 @@ func ExampleDataSourceConfig_outputUsage() {
 	case *types.DataSourceConfigMemberCloudWatchLogs:
 		_ = v.Value // Value is types.CloudWatchLogsSource
 
+	case *types.DataSourceConfigMemberOnlineEvaluationConfigSource:
+		_ = v.Value // Value is types.OnlineEvaluationConfigSource
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -233,6 +240,7 @@ func ExampleDataSourceConfig_outputUsage() {
 	}
 }
 
+var _ *types.OnlineEvaluationConfigSource
 var _ *types.CloudWatchLogsSource
 
 func ExampleEvaluationContent_outputUsage() {
@@ -579,6 +587,9 @@ func ExampleHarnessSkill_outputUsage() {
 	var union types.HarnessSkill
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.HarnessSkillMemberAwsSkills:
+		_ = v.Value // Value is types.HarnessSkillAwsSkillsSource
+
 	case *types.HarnessSkillMemberGit:
 		_ = v.Value // Value is types.HarnessSkillGitSource
 
@@ -599,6 +610,7 @@ func ExampleHarnessSkill_outputUsage() {
 
 var _ *string
 var _ *types.HarnessSkillGitSource
+var _ *types.HarnessSkillAwsSkillsSource
 var _ *types.HarnessSkillS3Source
 
 func ExampleHarnessSystemContentBlock_outputUsage() {

@@ -21,6 +21,200 @@ func (Access) Values() []Access {
 	}
 }
 
+type AutonomousDatabaseBackupStatus string
+
+// Enum values for AutonomousDatabaseBackupStatus
+const (
+	AutonomousDatabaseBackupStatusActive   AutonomousDatabaseBackupStatus = "ACTIVE"
+	AutonomousDatabaseBackupStatusCreating AutonomousDatabaseBackupStatus = "CREATING"
+	AutonomousDatabaseBackupStatusUpdating AutonomousDatabaseBackupStatus = "UPDATING"
+	AutonomousDatabaseBackupStatusDeleting AutonomousDatabaseBackupStatus = "DELETING"
+	AutonomousDatabaseBackupStatusFailed   AutonomousDatabaseBackupStatus = "FAILED"
+)
+
+// Values returns all known values for AutonomousDatabaseBackupStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutonomousDatabaseBackupStatus) Values() []AutonomousDatabaseBackupStatus {
+	return []AutonomousDatabaseBackupStatus{
+		"ACTIVE",
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type AutonomousDatabaseBackupType string
+
+// Enum values for AutonomousDatabaseBackupType
+const (
+	AutonomousDatabaseBackupTypeIncremental           AutonomousDatabaseBackupType = "INCREMENTAL"
+	AutonomousDatabaseBackupTypeFull                  AutonomousDatabaseBackupType = "FULL"
+	AutonomousDatabaseBackupTypeLongterm              AutonomousDatabaseBackupType = "LONGTERM"
+	AutonomousDatabaseBackupTypeVirtualFull           AutonomousDatabaseBackupType = "VIRTUAL_FULL"
+	AutonomousDatabaseBackupTypeCumulativeIncremental AutonomousDatabaseBackupType = "CUMULATIVE_INCREMENTAL"
+	AutonomousDatabaseBackupTypeRollForwardImageCopy  AutonomousDatabaseBackupType = "ROLL_FORWARD_IMAGE_COPY"
+)
+
+// Values returns all known values for AutonomousDatabaseBackupType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutonomousDatabaseBackupType) Values() []AutonomousDatabaseBackupType {
+	return []AutonomousDatabaseBackupType{
+		"INCREMENTAL",
+		"FULL",
+		"LONGTERM",
+		"VIRTUAL_FULL",
+		"CUMULATIVE_INCREMENTAL",
+		"ROLL_FORWARD_IMAGE_COPY",
+	}
+}
+
+type AutonomousDatabaseResourceStatus string
+
+// Enum values for AutonomousDatabaseResourceStatus
+const (
+	AutonomousDatabaseResourceStatusAvailable               AutonomousDatabaseResourceStatus = "AVAILABLE"
+	AutonomousDatabaseResourceStatusFailed                  AutonomousDatabaseResourceStatus = "FAILED"
+	AutonomousDatabaseResourceStatusProvisioning            AutonomousDatabaseResourceStatus = "PROVISIONING"
+	AutonomousDatabaseResourceStatusTerminated              AutonomousDatabaseResourceStatus = "TERMINATED"
+	AutonomousDatabaseResourceStatusTerminating             AutonomousDatabaseResourceStatus = "TERMINATING"
+	AutonomousDatabaseResourceStatusUpdating                AutonomousDatabaseResourceStatus = "UPDATING"
+	AutonomousDatabaseResourceStatusMaintenanceInProgress   AutonomousDatabaseResourceStatus = "MAINTENANCE_IN_PROGRESS"
+	AutonomousDatabaseResourceStatusStopping                AutonomousDatabaseResourceStatus = "STOPPING"
+	AutonomousDatabaseResourceStatusStopped                 AutonomousDatabaseResourceStatus = "STOPPED"
+	AutonomousDatabaseResourceStatusStarting                AutonomousDatabaseResourceStatus = "STARTING"
+	AutonomousDatabaseResourceStatusUnavailable             AutonomousDatabaseResourceStatus = "UNAVAILABLE"
+	AutonomousDatabaseResourceStatusRestoreInProgress       AutonomousDatabaseResourceStatus = "RESTORE_IN_PROGRESS"
+	AutonomousDatabaseResourceStatusRestoreFailed           AutonomousDatabaseResourceStatus = "RESTORE_FAILED"
+	AutonomousDatabaseResourceStatusBackupInProgress        AutonomousDatabaseResourceStatus = "BACKUP_IN_PROGRESS"
+	AutonomousDatabaseResourceStatusScaleInProgress         AutonomousDatabaseResourceStatus = "SCALE_IN_PROGRESS"
+	AutonomousDatabaseResourceStatusAvailableNeedsAttention AutonomousDatabaseResourceStatus = "AVAILABLE_NEEDS_ATTENTION"
+	AutonomousDatabaseResourceStatusRestarting              AutonomousDatabaseResourceStatus = "RESTARTING"
+	AutonomousDatabaseResourceStatusRecreating              AutonomousDatabaseResourceStatus = "RECREATING"
+	AutonomousDatabaseResourceStatusRoleChangeInProgress    AutonomousDatabaseResourceStatus = "ROLE_CHANGE_IN_PROGRESS"
+	AutonomousDatabaseResourceStatusUpgrading               AutonomousDatabaseResourceStatus = "UPGRADING"
+	AutonomousDatabaseResourceStatusInaccessible            AutonomousDatabaseResourceStatus = "INACCESSIBLE"
+	AutonomousDatabaseResourceStatusStandby                 AutonomousDatabaseResourceStatus = "STANDBY"
+)
+
+// Values returns all known values for AutonomousDatabaseResourceStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutonomousDatabaseResourceStatus) Values() []AutonomousDatabaseResourceStatus {
+	return []AutonomousDatabaseResourceStatus{
+		"AVAILABLE",
+		"FAILED",
+		"PROVISIONING",
+		"TERMINATED",
+		"TERMINATING",
+		"UPDATING",
+		"MAINTENANCE_IN_PROGRESS",
+		"STOPPING",
+		"STOPPED",
+		"STARTING",
+		"UNAVAILABLE",
+		"RESTORE_IN_PROGRESS",
+		"RESTORE_FAILED",
+		"BACKUP_IN_PROGRESS",
+		"SCALE_IN_PROGRESS",
+		"AVAILABLE_NEEDS_ATTENTION",
+		"RESTARTING",
+		"RECREATING",
+		"ROLE_CHANGE_IN_PROGRESS",
+		"UPGRADING",
+		"INACCESSIBLE",
+		"STANDBY",
+	}
+}
+
+type AutonomousDatabaseWalletStatus string
+
+// Enum values for AutonomousDatabaseWalletStatus
+const (
+	AutonomousDatabaseWalletStatusActive   AutonomousDatabaseWalletStatus = "ACTIVE"
+	AutonomousDatabaseWalletStatusUpdating AutonomousDatabaseWalletStatus = "UPDATING"
+)
+
+// Values returns all known values for AutonomousDatabaseWalletStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutonomousDatabaseWalletStatus) Values() []AutonomousDatabaseWalletStatus {
+	return []AutonomousDatabaseWalletStatus{
+		"ACTIVE",
+		"UPDATING",
+	}
+}
+
+type AutonomousMaintenanceScheduleType string
+
+// Enum values for AutonomousMaintenanceScheduleType
+const (
+	AutonomousMaintenanceScheduleTypeEarly   AutonomousMaintenanceScheduleType = "EARLY"
+	AutonomousMaintenanceScheduleTypeRegular AutonomousMaintenanceScheduleType = "REGULAR"
+)
+
+// Values returns all known values for AutonomousMaintenanceScheduleType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutonomousMaintenanceScheduleType) Values() []AutonomousMaintenanceScheduleType {
+	return []AutonomousMaintenanceScheduleType{
+		"EARLY",
+		"REGULAR",
+	}
+}
+
+type CharacterSetType string
+
+// Enum values for CharacterSetType
+const (
+	CharacterSetTypeDatabase CharacterSetType = "DATABASE"
+	CharacterSetTypeNational CharacterSetType = "NATIONAL"
+)
+
+// Values returns all known values for CharacterSetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CharacterSetType) Values() []CharacterSetType {
+	return []CharacterSetType{
+		"DATABASE",
+		"NATIONAL",
+	}
+}
+
+type CloneType string
+
+// Enum values for CloneType
+const (
+	CloneTypeFull     CloneType = "FULL"
+	CloneTypeMetadata CloneType = "METADATA"
+	CloneTypePartial  CloneType = "PARTIAL"
+)
+
+// Values returns all known values for CloneType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloneType) Values() []CloneType {
+	return []CloneType{
+		"FULL",
+		"METADATA",
+		"PARTIAL",
+	}
+}
+
 type ComputeModel string
 
 // Enum values for ComputeModel
@@ -37,6 +231,121 @@ func (ComputeModel) Values() []ComputeModel {
 	return []ComputeModel{
 		"ECPU",
 		"OCPU",
+	}
+}
+
+type DatabaseEdition string
+
+// Enum values for DatabaseEdition
+const (
+	DatabaseEditionStandardEdition   DatabaseEdition = "STANDARD_EDITION"
+	DatabaseEditionEnterpriseEdition DatabaseEdition = "ENTERPRISE_EDITION"
+)
+
+// Values returns all known values for DatabaseEdition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseEdition) Values() []DatabaseEdition {
+	return []DatabaseEdition{
+		"STANDARD_EDITION",
+		"ENTERPRISE_EDITION",
+	}
+}
+
+type DatabaseManagementStatus string
+
+// Enum values for DatabaseManagementStatus
+const (
+	DatabaseManagementStatusEnabling        DatabaseManagementStatus = "ENABLING"
+	DatabaseManagementStatusEnabled         DatabaseManagementStatus = "ENABLED"
+	DatabaseManagementStatusDisabling       DatabaseManagementStatus = "DISABLING"
+	DatabaseManagementStatusNotEnabled      DatabaseManagementStatus = "NOT_ENABLED"
+	DatabaseManagementStatusFailedEnabling  DatabaseManagementStatus = "FAILED_ENABLING"
+	DatabaseManagementStatusFailedDisabling DatabaseManagementStatus = "FAILED_DISABLING"
+)
+
+// Values returns all known values for DatabaseManagementStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseManagementStatus) Values() []DatabaseManagementStatus {
+	return []DatabaseManagementStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"NOT_ENABLED",
+		"FAILED_ENABLING",
+		"FAILED_DISABLING",
+	}
+}
+
+type DatabaseType string
+
+// Enum values for DatabaseType
+const (
+	DatabaseTypeRegular DatabaseType = "REGULAR"
+	DatabaseTypeClone   DatabaseType = "CLONE"
+)
+
+// Values returns all known values for DatabaseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseType) Values() []DatabaseType {
+	return []DatabaseType{
+		"REGULAR",
+		"CLONE",
+	}
+}
+
+type DataGuardRole string
+
+// Enum values for DataGuardRole
+const (
+	DataGuardRolePrimary         DataGuardRole = "PRIMARY"
+	DataGuardRoleStandby         DataGuardRole = "STANDBY"
+	DataGuardRoleDisabledStandby DataGuardRole = "DISABLED_STANDBY"
+	DataGuardRoleBackupCopy      DataGuardRole = "BACKUP_COPY"
+	DataGuardRoleSnapshotStandby DataGuardRole = "SNAPSHOT_STANDBY"
+)
+
+// Values returns all known values for DataGuardRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataGuardRole) Values() []DataGuardRole {
+	return []DataGuardRole{
+		"PRIMARY",
+		"STANDBY",
+		"DISABLED_STANDBY",
+		"BACKUP_COPY",
+		"SNAPSHOT_STANDBY",
+	}
+}
+
+type DataSafeStatus string
+
+// Enum values for DataSafeStatus
+const (
+	DataSafeStatusRegistering   DataSafeStatus = "REGISTERING"
+	DataSafeStatusRegistered    DataSafeStatus = "REGISTERED"
+	DataSafeStatusDeregistering DataSafeStatus = "DEREGISTERING"
+	DataSafeStatusNotRegistered DataSafeStatus = "NOT_REGISTERED"
+	DataSafeStatusFailed        DataSafeStatus = "FAILED"
+)
+
+// Values returns all known values for DataSafeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSafeStatus) Values() []DataSafeStatus {
+	return []DataSafeStatus{
+		"REGISTERING",
+		"REGISTERED",
+		"DEREGISTERING",
+		"NOT_REGISTERED",
+		"FAILED",
 	}
 }
 
@@ -142,6 +451,48 @@ func (DbServerPatchingStatus) Values() []DbServerPatchingStatus {
 	}
 }
 
+type DbWorkload string
+
+// Enum values for DbWorkload
+const (
+	DbWorkloadOltp DbWorkload = "OLTP"
+	DbWorkloadAjd  DbWorkload = "AJD"
+	DbWorkloadApex DbWorkload = "APEX"
+	DbWorkloadLh   DbWorkload = "LH"
+)
+
+// Values returns all known values for DbWorkload. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DbWorkload) Values() []DbWorkload {
+	return []DbWorkload{
+		"OLTP",
+		"AJD",
+		"APEX",
+		"LH",
+	}
+}
+
+type DisasterRecoveryType string
+
+// Enum values for DisasterRecoveryType
+const (
+	DisasterRecoveryTypeAdg         DisasterRecoveryType = "ADG"
+	DisasterRecoveryTypeBackupBased DisasterRecoveryType = "BACKUP_BASED"
+)
+
+// Values returns all known values for DisasterRecoveryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DisasterRecoveryType) Values() []DisasterRecoveryType {
+	return []DisasterRecoveryType{
+		"ADG",
+		"BACKUP_BASED",
+	}
+}
+
 type DiskRedundancy string
 
 // Enum values for DiskRedundancy
@@ -158,6 +509,69 @@ func (DiskRedundancy) Values() []DiskRedundancy {
 	return []DiskRedundancy{
 		"HIGH",
 		"NORMAL",
+	}
+}
+
+type EncryptionKeyProvider string
+
+// Enum values for EncryptionKeyProvider
+const (
+	EncryptionKeyProviderOracleManaged EncryptionKeyProvider = "ORACLE_MANAGED"
+	EncryptionKeyProviderAwsKms        EncryptionKeyProvider = "AWS_KMS"
+	EncryptionKeyProviderOkv           EncryptionKeyProvider = "OKV"
+	EncryptionKeyProviderOci           EncryptionKeyProvider = "OCI"
+)
+
+// Values returns all known values for EncryptionKeyProvider. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyProvider) Values() []EncryptionKeyProvider {
+	return []EncryptionKeyProvider{
+		"ORACLE_MANAGED",
+		"AWS_KMS",
+		"OKV",
+		"OCI",
+	}
+}
+
+type EncryptionKeyProviderInput string
+
+// Enum values for EncryptionKeyProviderInput
+const (
+	EncryptionKeyProviderInputOracleManaged EncryptionKeyProviderInput = "ORACLE_MANAGED"
+	EncryptionKeyProviderInputAwsKms        EncryptionKeyProviderInput = "AWS_KMS"
+)
+
+// Values returns all known values for EncryptionKeyProviderInput. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyProviderInput) Values() []EncryptionKeyProviderInput {
+	return []EncryptionKeyProviderInput{
+		"ORACLE_MANAGED",
+		"AWS_KMS",
+	}
+}
+
+type ExternalIdType string
+
+// Enum values for ExternalIdType
+const (
+	ExternalIdTypeDatabaseOcid    ExternalIdType = "database_ocid"
+	ExternalIdTypeCompartmentOcid ExternalIdType = "compartment_ocid"
+	ExternalIdTypeTenantOcid      ExternalIdType = "tenant_ocid"
+)
+
+// Values returns all known values for ExternalIdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalIdType) Values() []ExternalIdType {
+	return []ExternalIdType{
+		"database_ocid",
+		"compartment_ocid",
+		"tenant_ocid",
 	}
 }
 
@@ -296,6 +710,25 @@ func (MonthName) Values() []MonthName {
 	}
 }
 
+type NetServicesArchitecture string
+
+// Enum values for NetServicesArchitecture
+const (
+	NetServicesArchitectureDedicated NetServicesArchitecture = "DEDICATED"
+	NetServicesArchitectureShared    NetServicesArchitecture = "SHARED"
+)
+
+// Values returns all known values for NetServicesArchitecture. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetServicesArchitecture) Values() []NetServicesArchitecture {
+	return []NetServicesArchitecture{
+		"DEDICATED",
+		"SHARED",
+	}
+}
+
 type Objective string
 
 // Enum values for Objective
@@ -318,6 +751,23 @@ func (Objective) Values() []Objective {
 		"BASIC",
 		"HIGH_THROUGHPUT",
 		"LOW_LATENCY",
+	}
+}
+
+type OciAwsIntegration string
+
+// Enum values for OciAwsIntegration
+const (
+	OciAwsIntegrationKmsTde OciAwsIntegration = "KmsTde"
+)
+
+// Values returns all known values for OciAwsIntegration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OciAwsIntegration) Values() []OciAwsIntegration {
+	return []OciAwsIntegration{
+		"KmsTde",
 	}
 }
 
@@ -360,6 +810,52 @@ func (OciOnboardingStatus) Values() []OciOnboardingStatus {
 	}
 }
 
+type OpenMode string
+
+// Enum values for OpenMode
+const (
+	OpenModeReadOnly  OpenMode = "READ_ONLY"
+	OpenModeReadWrite OpenMode = "READ_WRITE"
+)
+
+// Values returns all known values for OpenMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpenMode) Values() []OpenMode {
+	return []OpenMode{
+		"READ_ONLY",
+		"READ_WRITE",
+	}
+}
+
+type OperationsInsightsStatus string
+
+// Enum values for OperationsInsightsStatus
+const (
+	OperationsInsightsStatusEnabling        OperationsInsightsStatus = "ENABLING"
+	OperationsInsightsStatusEnabled         OperationsInsightsStatus = "ENABLED"
+	OperationsInsightsStatusDisabling       OperationsInsightsStatus = "DISABLING"
+	OperationsInsightsStatusNotEnabled      OperationsInsightsStatus = "NOT_ENABLED"
+	OperationsInsightsStatusFailedEnabling  OperationsInsightsStatus = "FAILED_ENABLING"
+	OperationsInsightsStatusFailedDisabling OperationsInsightsStatus = "FAILED_DISABLING"
+)
+
+// Values returns all known values for OperationsInsightsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationsInsightsStatus) Values() []OperationsInsightsStatus {
+	return []OperationsInsightsStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"NOT_ENABLED",
+		"FAILED_ENABLING",
+		"FAILED_DISABLING",
+	}
+}
+
 type PatchingModeType string
 
 // Enum values for PatchingModeType
@@ -379,6 +875,25 @@ func (PatchingModeType) Values() []PatchingModeType {
 	}
 }
 
+type PermissionLevel string
+
+// Enum values for PermissionLevel
+const (
+	PermissionLevelRestricted   PermissionLevel = "RESTRICTED"
+	PermissionLevelUnrestricted PermissionLevel = "UNRESTRICTED"
+)
+
+// Values returns all known values for PermissionLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionLevel) Values() []PermissionLevel {
+	return []PermissionLevel{
+		"RESTRICTED",
+		"UNRESTRICTED",
+	}
+}
+
 type PreferenceType string
 
 // Enum values for PreferenceType
@@ -395,6 +910,67 @@ func (PreferenceType) Values() []PreferenceType {
 	return []PreferenceType{
 		"NO_PREFERENCE",
 		"CUSTOM_PREFERENCE",
+	}
+}
+
+type RefreshableMode string
+
+// Enum values for RefreshableMode
+const (
+	RefreshableModeAutomatic RefreshableMode = "AUTOMATIC"
+	RefreshableModeManual    RefreshableMode = "MANUAL"
+)
+
+// Values returns all known values for RefreshableMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RefreshableMode) Values() []RefreshableMode {
+	return []RefreshableMode{
+		"AUTOMATIC",
+		"MANUAL",
+	}
+}
+
+type RefreshableStatus string
+
+// Enum values for RefreshableStatus
+const (
+	RefreshableStatusRefreshing    RefreshableStatus = "REFRESHING"
+	RefreshableStatusNotRefreshing RefreshableStatus = "NOT_REFRESHING"
+)
+
+// Values returns all known values for RefreshableStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RefreshableStatus) Values() []RefreshableStatus {
+	return []RefreshableStatus{
+		"REFRESHING",
+		"NOT_REFRESHING",
+	}
+}
+
+type RepeatCadence string
+
+// Enum values for RepeatCadence
+const (
+	RepeatCadenceOneTime RepeatCadence = "ONE_TIME"
+	RepeatCadenceWeekly  RepeatCadence = "WEEKLY"
+	RepeatCadenceMonthly RepeatCadence = "MONTHLY"
+	RepeatCadenceYearly  RepeatCadence = "YEARLY"
+)
+
+// Values returns all known values for RepeatCadence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RepeatCadence) Values() []RepeatCadence {
+	return []RepeatCadence{
+		"ONE_TIME",
+		"WEEKLY",
+		"MONTHLY",
+		"YEARLY",
 	}
 }
 
@@ -447,6 +1023,56 @@ func (ShapeType) Values() []ShapeType {
 		"INTEL",
 		"INTEL_FLEX_X9",
 		"AMPERE_FLEX_A1",
+	}
+}
+
+type SourceType string
+
+// Enum values for SourceType
+const (
+	SourceTypeNone                        SourceType = "NONE"
+	SourceTypeDatabase                    SourceType = "DATABASE"
+	SourceTypeBackupFromId                SourceType = "BACKUP_FROM_ID"
+	SourceTypeBackupFromTimestamp         SourceType = "BACKUP_FROM_TIMESTAMP"
+	SourceTypeCrossRegionDataguard        SourceType = "CROSS_REGION_DATAGUARD"
+	SourceTypeCrossRegionDisasterRecovery SourceType = "CROSS_REGION_DISASTER_RECOVERY"
+	SourceTypeCloneToRefreshable          SourceType = "CLONE_TO_REFRESHABLE"
+)
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"NONE",
+		"DATABASE",
+		"BACKUP_FROM_ID",
+		"BACKUP_FROM_TIMESTAMP",
+		"CROSS_REGION_DATAGUARD",
+		"CROSS_REGION_DISASTER_RECOVERY",
+		"CLONE_TO_REFRESHABLE",
+	}
+}
+
+type StandbyAllowlistedIpsSource string
+
+// Enum values for StandbyAllowlistedIpsSource
+const (
+	StandbyAllowlistedIpsSourcePrimary       StandbyAllowlistedIpsSource = "PRIMARY"
+	StandbyAllowlistedIpsSourceSeparate      StandbyAllowlistedIpsSource = "SEPARATE"
+	StandbyAllowlistedIpsSourceNotApplicable StandbyAllowlistedIpsSource = "NOT_APPLICABLE"
+)
+
+// Values returns all known values for StandbyAllowlistedIpsSource. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StandbyAllowlistedIpsSource) Values() []StandbyAllowlistedIpsSource {
+	return []StandbyAllowlistedIpsSource{
+		"PRIMARY",
+		"SEPARATE",
+		"NOT_APPLICABLE",
 	}
 }
 
@@ -504,5 +1130,24 @@ const (
 func (VpcEndpointType) Values() []VpcEndpointType {
 	return []VpcEndpointType{
 		"SERVICENETWORK",
+	}
+}
+
+type WalletType string
+
+// Enum values for WalletType
+const (
+	WalletTypeRegional WalletType = "REGIONAL"
+	WalletTypeInstance WalletType = "INSTANCE"
+)
+
+// Values returns all known values for WalletType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WalletType) Values() []WalletType {
+	return []WalletType{
+		"REGIONAL",
+		"INSTANCE",
 	}
 }

@@ -47,6 +47,11 @@ type CreateIntegrationInput struct {
 	// the integration.
 	KmsKeyId *string
 
+	// The name of an active private connection used to reach a self-hosted provider
+	// instance over private networking. Specify this when the instance is not publicly
+	// reachable.
+	PrivateConnectionName *string
+
 	// The tags to associate with the integration.
 	Tags map[string]string
 

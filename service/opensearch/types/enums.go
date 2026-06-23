@@ -297,6 +297,27 @@ func (ConnectionMode) Values() []ConnectionMode {
 	}
 }
 
+type DataSourceAttachmentStatus string
+
+// Enum values for DataSourceAttachmentStatus
+const (
+	DataSourceAttachmentStatusPending  DataSourceAttachmentStatus = "PENDING"
+	DataSourceAttachmentStatusAttached DataSourceAttachmentStatus = "ATTACHED"
+	DataSourceAttachmentStatusFailed   DataSourceAttachmentStatus = "FAILED"
+)
+
+// Values returns all known values for DataSourceAttachmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceAttachmentStatus) Values() []DataSourceAttachmentStatus {
+	return []DataSourceAttachmentStatus{
+		"PENDING",
+		"ATTACHED",
+		"FAILED",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus

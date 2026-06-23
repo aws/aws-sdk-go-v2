@@ -45,6 +45,12 @@ func ExampleAdditionalServiceDetails_outputUsage() {
 	case *types.AdditionalServiceDetailsMemberPagerduty:
 		_ = v.Value // Value is types.RegisteredPagerDutyDetails
 
+	case *types.AdditionalServiceDetailsMemberRemoteagent:
+		_ = v.Value // Value is types.RegisteredRemoteAgentDetails
+
+	case *types.AdditionalServiceDetailsMemberRemoteagentsigv4:
+		_ = v.Value // Value is types.RegisteredRemoteAgentSigV4Details
+
 	case *types.AdditionalServiceDetailsMemberServicenow:
 		_ = v.Value // Value is types.RegisteredServiceNowDetails
 
@@ -60,13 +66,15 @@ func ExampleAdditionalServiceDetails_outputUsage() {
 	}
 }
 
-var _ *types.RegisteredMCPServerDetails
-var _ *types.RegisteredAzureDevOpsServiceDetails
+var _ *types.RegisteredRemoteAgentDetails
 var _ *types.RegisteredNewRelicDetails
-var _ *types.RegisteredAzureIdentityDetails
 var _ *types.RegisteredGithubServiceDetails
-var _ *types.RegisteredSlackServiceDetails
 var _ *types.RegisteredGitLabServiceDetails
+var _ *types.RegisteredMCPServerDetails
+var _ *types.RegisteredRemoteAgentSigV4Details
+var _ *types.RegisteredAzureDevOpsServiceDetails
+var _ *types.RegisteredAzureIdentityDetails
+var _ *types.RegisteredSlackServiceDetails
 var _ *types.RegisteredPagerDutyDetails
 var _ *types.RegisteredMCPServerSigV4Details
 var _ *types.RegisteredGrafanaServerDetails
@@ -97,6 +105,9 @@ func ExampleAssetContent_outputUsage() {
 	case *types.AssetContentMemberFile:
 		_ = v.Value // Value is types.AssetFileContent
 
+	case *types.AssetContentMemberSourceUrl:
+		_ = v.Value // Value is types.AssetSourceUrlContent
+
 	case *types.AssetContentMemberZip:
 		_ = v.Value // Value is types.AssetZipContent
 
@@ -111,6 +122,7 @@ func ExampleAssetContent_outputUsage() {
 
 var _ *types.AssetFileContent
 var _ *types.AssetZipContent
+var _ *types.AssetSourceUrlContent
 
 func ExampleAssetFileBody_outputUsage() {
 	var union types.AssetFileBody
@@ -306,6 +318,32 @@ func ExamplePrivateConnectionMode_outputUsage() {
 var _ *types.SelfManagedInput
 var _ *types.ServiceManagedInput
 
+func ExampleRemoteAgentAuthorizationConfig_outputUsage() {
+	var union types.RemoteAgentAuthorizationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RemoteAgentAuthorizationConfigMemberApiKey:
+		_ = v.Value // Value is types.RemoteAgentAPIKeyConfig
+
+	case *types.RemoteAgentAuthorizationConfigMemberBearerToken:
+		_ = v.Value // Value is types.RemoteAgentBearerTokenConfig
+
+	case *types.RemoteAgentAuthorizationConfigMemberOAuthClientCredentials:
+		_ = v.Value // Value is types.RemoteAgentOAuthClientCredentialsConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RemoteAgentAPIKeyConfig
+var _ *types.RemoteAgentBearerTokenConfig
+var _ *types.RemoteAgentOAuthClientCredentialsConfig
+
 func ExampleSendMessageContentBlockDelta_outputUsage() {
 	var union types.SendMessageContentBlockDelta
 	// type switches can be used to check the union value
@@ -424,6 +462,12 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyConfiguration
 
+	case *types.ServiceConfigurationMemberRemoteagent:
+		_ = v.Value // Value is types.RemoteAgentConfiguration
+
+	case *types.ServiceConfigurationMemberRemoteagentsigv4:
+		_ = v.Value // Value is types.RemoteAgentSigV4Configuration
+
 	case *types.ServiceConfigurationMemberServicenow:
 		_ = v.Value // Value is types.ServiceNowConfiguration
 
@@ -443,6 +487,7 @@ func ExampleServiceConfiguration_outputUsage() {
 }
 
 var _ *types.AzureDevOpsConfiguration
+var _ *types.RemoteAgentSigV4Configuration
 var _ *types.MCPServerNewRelicConfiguration
 var _ *types.DynatraceConfiguration
 var _ *types.PagerDutyConfiguration
@@ -455,6 +500,7 @@ var _ *types.MCPServerConfiguration
 var _ *types.AzureConfiguration
 var _ *types.SlackConfiguration
 var _ *types.MCPServerDatadogConfiguration
+var _ *types.RemoteAgentConfiguration
 var _ *types.MCPServerGrafanaConfiguration
 var _ *types.SourceAwsConfiguration
 var _ *types.AWSConfiguration
@@ -497,6 +543,12 @@ func ExampleServiceDetails_outputUsage() {
 	case *types.ServiceDetailsMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyDetails
 
+	case *types.ServiceDetailsMemberRemoteagent:
+		_ = v.Value // Value is types.RemoteAgentServiceDetails
+
+	case *types.ServiceDetailsMemberRemoteagentsigv4:
+		_ = v.Value // Value is types.RemoteAgentSigV4ServiceDetails
+
 	case *types.ServiceDetailsMemberServicenow:
 		_ = v.Value // Value is types.ServiceNowServiceDetails
 
@@ -513,13 +565,15 @@ var _ *types.GrafanaServiceDetails
 var _ *types.MCPServerSigV4ServiceDetails
 var _ *types.DynatraceServiceDetails
 var _ *types.ServiceNowServiceDetails
-var _ *types.RegisteredAzureIdentityDetails
-var _ *types.DatadogServiceDetails
-var _ *types.NewRelicServiceDetails
+var _ *types.RemoteAgentServiceDetails
 var _ *types.PagerDutyDetails
 var _ *types.MCPServerDetails
 var _ *types.EventChannelDetails
 var _ *types.GitLabDetails
+var _ *types.RegisteredAzureIdentityDetails
+var _ *types.DatadogServiceDetails
+var _ *types.RemoteAgentSigV4ServiceDetails
+var _ *types.NewRelicServiceDetails
 
 func ExampleServiceNowServiceAuthorizationConfig_outputUsage() {
 	var union types.ServiceNowServiceAuthorizationConfig
@@ -538,6 +592,24 @@ func ExampleServiceNowServiceAuthorizationConfig_outputUsage() {
 }
 
 var _ *types.ServiceNowOAuthClientCredentialsConfig
+
+func ExampleTriggerCondition_outputUsage() {
+	var union types.TriggerCondition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TriggerConditionMemberSchedule:
+		_ = v.Value // Value is types.ScheduleCondition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ScheduleCondition
 
 func ExampleUserMessageBlock_outputUsage() {
 	var union types.UserMessageBlock

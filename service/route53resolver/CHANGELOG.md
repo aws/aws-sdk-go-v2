@@ -1,3 +1,7 @@
+# v1.46.0 (2026-06-16)
+
+* **Feature**: Adds supports for PartnerManagedRules
+
 # v1.45.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

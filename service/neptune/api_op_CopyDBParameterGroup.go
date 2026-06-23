@@ -37,6 +37,9 @@ type CopyDBParameterGroupInput struct {
 	//   - Must specify a valid DB parameter group identifier, for example
 	//   my-db-param-group , or a valid ARN.
 	//
+	//   - The source DB parameter group must be in the same Amazon Region as the
+	//   copy. Neptune does not support cross-Region copying of parameter groups.
+	//
 	// [Constructing an Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
 	//
 	// This member is required.

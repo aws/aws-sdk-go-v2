@@ -69,6 +69,115 @@ func (AgentCollaboration) Values() []AgentCollaboration {
 	}
 }
 
+type AgenticRetrieveRerankingConfigurationType string
+
+// Enum values for AgenticRetrieveRerankingConfigurationType
+const (
+	AgenticRetrieveRerankingConfigurationTypeBedrockRerankingModel AgenticRetrieveRerankingConfigurationType = "BEDROCK_RERANKING_MODEL"
+)
+
+// Values returns all known values for AgenticRetrieveRerankingConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveRerankingConfigurationType) Values() []AgenticRetrieveRerankingConfigurationType {
+	return []AgenticRetrieveRerankingConfigurationType{
+		"BEDROCK_RERANKING_MODEL",
+	}
+}
+
+type AgenticRetrieveRerankingModelType string
+
+// Enum values for AgenticRetrieveRerankingModelType
+const (
+	AgenticRetrieveRerankingModelTypeCustom  AgenticRetrieveRerankingModelType = "CUSTOM"
+	AgenticRetrieveRerankingModelTypeManaged AgenticRetrieveRerankingModelType = "MANAGED"
+	AgenticRetrieveRerankingModelTypeNone    AgenticRetrieveRerankingModelType = "NONE"
+)
+
+// Values returns all known values for AgenticRetrieveRerankingModelType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveRerankingModelType) Values() []AgenticRetrieveRerankingModelType {
+	return []AgenticRetrieveRerankingModelType{
+		"CUSTOM",
+		"MANAGED",
+		"NONE",
+	}
+}
+
+type AgenticRetrieveStatus string
+
+// Enum values for AgenticRetrieveStatus
+const (
+	// The step is currently in progress.
+	AgenticRetrieveStatusInProgress AgenticRetrieveStatus = "IN_PROGRESS"
+	// The step completed successfully.
+	AgenticRetrieveStatusSucceeded AgenticRetrieveStatus = "SUCCEEDED"
+	// The step failed.
+	AgenticRetrieveStatusFailed AgenticRetrieveStatus = "FAILED"
+)
+
+// Values returns all known values for AgenticRetrieveStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveStatus) Values() []AgenticRetrieveStatus {
+	return []AgenticRetrieveStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type AgenticRetrieveStep string
+
+// Enum values for AgenticRetrieveStep
+const (
+	// The planning phase of retrieval.
+	AgenticRetrieveStepPlanning AgenticRetrieveStep = "Planning"
+	// The retrieval phase where data is fetched.
+	AgenticRetrieveStepRetrieval AgenticRetrieveStep = "Retrieval"
+	// A speculative retrieval phase for optimization.
+	AgenticRetrieveStepSpeculativeRetrieval AgenticRetrieveStep = "SpeculativeRetrieval"
+	// The full document expansion phase.
+	AgenticRetrieveStepFullDocumentExpansion AgenticRetrieveStep = "FullDocumentExpansion"
+)
+
+// Values returns all known values for AgenticRetrieveStep. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveStep) Values() []AgenticRetrieveStep {
+	return []AgenticRetrieveStep{
+		"Planning",
+		"Retrieval",
+		"SpeculativeRetrieval",
+		"FullDocumentExpansion",
+	}
+}
+
+type AgenticRetrieveType string
+
+// Enum values for AgenticRetrieveType
+const (
+	// A Bedrock knowledge base retrieval source.
+	AgenticRetrieveTypeBedrockKnowledgeBase AgenticRetrieveType = "BedrockKnowledgeBase"
+)
+
+// Values returns all known values for AgenticRetrieveType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveType) Values() []AgenticRetrieveType {
+	return []AgenticRetrieveType{
+		"BedrockKnowledgeBase",
+	}
+}
+
 type AttributeType string
 
 // Enum values for AttributeType
@@ -163,6 +272,25 @@ const (
 func (CustomControlMethod) Values() []CustomControlMethod {
 	return []CustomControlMethod{
 		"RETURN_CONTROL",
+	}
+}
+
+type DocumentOutputFormat string
+
+// Enum values for DocumentOutputFormat
+const (
+	DocumentOutputFormatRaw       DocumentOutputFormat = "RAW"
+	DocumentOutputFormatExtracted DocumentOutputFormat = "EXTRACTED"
+)
+
+// Values returns all known values for DocumentOutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentOutputFormat) Values() []DocumentOutputFormat {
+	return []DocumentOutputFormat{
+		"RAW",
+		"EXTRACTED",
 	}
 }
 
@@ -405,6 +533,43 @@ func (FlowNodeIODataType) Values() []FlowNodeIODataType {
 		"Boolean",
 		"Object",
 		"Array",
+	}
+}
+
+type FoundationModelConfigurationType string
+
+// Enum values for FoundationModelConfigurationType
+const (
+	FoundationModelConfigurationTypeBedrockFoundationModel FoundationModelConfigurationType = "BEDROCK_FOUNDATION_MODEL"
+)
+
+// Values returns all known values for FoundationModelConfigurationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FoundationModelConfigurationType) Values() []FoundationModelConfigurationType {
+	return []FoundationModelConfigurationType{
+		"BEDROCK_FOUNDATION_MODEL",
+	}
+}
+
+type FoundationModelType string
+
+// Enum values for FoundationModelType
+const (
+	FoundationModelTypeCustom  FoundationModelType = "CUSTOM"
+	FoundationModelTypeManaged FoundationModelType = "MANAGED"
+)
+
+// Values returns all known values for FoundationModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FoundationModelType) Values() []FoundationModelType {
+	return []FoundationModelType{
+		"CUSTOM",
+		"MANAGED",
 	}
 }
 
@@ -827,6 +992,24 @@ func (KnowledgeBaseQueryType) Values() []KnowledgeBaseQueryType {
 	}
 }
 
+type ManagedSearchRerankingConfigurationType string
+
+// Enum values for ManagedSearchRerankingConfigurationType
+const (
+	ManagedSearchRerankingConfigurationTypeBedrockRerankingModel ManagedSearchRerankingConfigurationType = "BEDROCK_RERANKING_MODEL"
+)
+
+// Values returns all known values for ManagedSearchRerankingConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedSearchRerankingConfigurationType) Values() []ManagedSearchRerankingConfigurationType {
+	return []ManagedSearchRerankingConfigurationType{
+		"BEDROCK_RERANKING_MODEL",
+	}
+}
+
 type MemoryType string
 
 // Enum values for MemoryType
@@ -1150,6 +1333,27 @@ func (RerankingMetadataSelectionMode) Values() []RerankingMetadataSelectionMode 
 	}
 }
 
+type RerankingModelType string
+
+// Enum values for RerankingModelType
+const (
+	RerankingModelTypeCustom  RerankingModelType = "CUSTOM"
+	RerankingModelTypeManaged RerankingModelType = "MANAGED"
+	RerankingModelTypeNone    RerankingModelType = "NONE"
+)
+
+// Values returns all known values for RerankingModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankingModelType) Values() []RerankingModelType {
+	return []RerankingModelType{
+		"CUSTOM",
+		"MANAGED",
+		"NONE",
+	}
+}
+
 type RerankQueryContentType string
 
 // Enum values for RerankQueryContentType
@@ -1260,14 +1464,16 @@ type RetrievalResultLocationType string
 
 // Enum values for RetrievalResultLocationType
 const (
-	RetrievalResultLocationTypeS3         RetrievalResultLocationType = "S3"
-	RetrievalResultLocationTypeWeb        RetrievalResultLocationType = "WEB"
-	RetrievalResultLocationTypeConfluence RetrievalResultLocationType = "CONFLUENCE"
-	RetrievalResultLocationTypeSalesforce RetrievalResultLocationType = "SALESFORCE"
-	RetrievalResultLocationTypeSharepoint RetrievalResultLocationType = "SHAREPOINT"
-	RetrievalResultLocationTypeCustom     RetrievalResultLocationType = "CUSTOM"
-	RetrievalResultLocationTypeKendra     RetrievalResultLocationType = "KENDRA"
-	RetrievalResultLocationTypeSql        RetrievalResultLocationType = "SQL"
+	RetrievalResultLocationTypeS3          RetrievalResultLocationType = "S3"
+	RetrievalResultLocationTypeWeb         RetrievalResultLocationType = "WEB"
+	RetrievalResultLocationTypeConfluence  RetrievalResultLocationType = "CONFLUENCE"
+	RetrievalResultLocationTypeSalesforce  RetrievalResultLocationType = "SALESFORCE"
+	RetrievalResultLocationTypeSharepoint  RetrievalResultLocationType = "SHAREPOINT"
+	RetrievalResultLocationTypeCustom      RetrievalResultLocationType = "CUSTOM"
+	RetrievalResultLocationTypeKendra      RetrievalResultLocationType = "KENDRA"
+	RetrievalResultLocationTypeSql         RetrievalResultLocationType = "SQL"
+	RetrievalResultLocationTypeOnedrive    RetrievalResultLocationType = "ONEDRIVE"
+	RetrievalResultLocationTypeGoogledrive RetrievalResultLocationType = "GOOGLEDRIVE"
 )
 
 // Values returns all known values for RetrievalResultLocationType. Note that this
@@ -1284,6 +1490,8 @@ func (RetrievalResultLocationType) Values() []RetrievalResultLocationType {
 		"CUSTOM",
 		"KENDRA",
 		"SQL",
+		"ONEDRIVE",
+		"GOOGLEDRIVE",
 	}
 }
 

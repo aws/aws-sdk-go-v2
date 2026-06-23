@@ -10,7 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the available rule types that can be used in DNS Firewall rules.
+// Retrieves the rule-type variants that can be used in the FirewallRuleType field
+// of CreateFirewallRuleand UpdateFirewallRule. Each returned FirewallRuleTypeDefinition identifies one variant + value combination — for
+// example, FirewallAdvancedContentCategory + VIOLENCE_AND_HATE_SPEECH , or
+// PartnerThreatProtection + a partner-managed feed.
+//
+// The supported RuleType filter values are FirewallAdvancedContentCategory ,
+// FirewallAdvancedThreatCategory , DnsThreatProtection , and
+// PartnerThreatProtection . When a returned definition's variant requires an
+// external subscription (currently only PartnerThreatProtection ), the response
+// also includes a SubscriptionInfoidentifying the AWS Marketplace product that backs it; absence
+// of SubscriptionInfo means the variant is fully managed by AWS and requires no
+// separate subscription.
 func (c *Client) ListFirewallRuleTypes(ctx context.Context, params *ListFirewallRuleTypesInput, optFns ...func(*Options)) (*ListFirewallRuleTypesOutput, error) {
 	if params == nil {
 		params = &ListFirewallRuleTypesInput{}
@@ -41,8 +52,10 @@ type ListFirewallRuleTypesInput struct {
 	// token that was returned for the prior request in your next request.
 	NextToken *string
 
-	// The rule type to filter by. If specified, only rule types matching this value
-	// are returned.
+	// An optional filter that restricts the response to a single FirewallRuleType variant. Supported
+	// values: FirewallAdvancedContentCategory , FirewallAdvancedThreatCategory ,
+	// DnsThreatProtection , and PartnerThreatProtection . If omitted, definitions
+	// across all variants are returned.
 	RuleType *string
 
 	noSmithyDocumentSerde

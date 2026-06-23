@@ -430,7 +430,7 @@
                 "Options": {
                     "target": "com.amazonaws.acm#CertificateOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. </p>"
+                        "smithy.api#documentation": "<p>Contains the certificate options. Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log.</p>"
                     }
                 }
             },
@@ -1801,7 +1801,11 @@
                 "CertificateTransparencyLoggingPreference": {
                     "target": "com.amazonaws.acm#CertificateTransparencyLoggingPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can opt out of certificate transparency logging by specifying the <code>DISABLED</code> option. Opt in by specifying <code>ENABLED</code>. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "Certificate transparency logging opt-out is no longer available.",
+                            "since": "12th June 2026"
+                        },
+                        "smithy.api#documentation": "<p>This parameter has been deprecated. Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log.</p>"
                     }
                 },
                 "Export": {
@@ -1812,7 +1816,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Structure that contains options for your certificate. You can use this structure to specify whether to opt in to or out of certificate transparency logging and export your certificate. </p> <p>Some browsers require that public certificates issued for your domain be recorded in a log. Certificates that are not logged typically generate a browser error. Transparency makes it possible for you to detect SSL/TLS certificates that have been mistakenly or maliciously issued for your domain. For general information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency\">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside Amazon Web Services Cloud. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html\">Certificate Manager exportable public certificate</a>.</p>"
+                "smithy.api#documentation": "<p>Structure that contains options for your certificate. You can use this structure to specify whether to export your certificate.</p> <p>Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log. For general information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency\">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside Amazon Web Services Cloud. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html\">Certificate Manager exportable public certificate</a>.</p>"
             }
         },
         "com.amazonaws.acm#CertificateSearchResult": {
@@ -2051,6 +2055,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Certificate transparency logging opt-out is no longer available.",
+                    "since": "12th June 2026"
                 }
             }
         },
@@ -4019,7 +4029,7 @@
                 "Options": {
                     "target": "com.amazonaws.acm#CertificateOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can use this parameter to specify whether to add the certificate to a certificate transparency log and export your certificate.</p> <p>Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency\">Opting Out of Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside the Amazon Web Services Cloud. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html\">Certificate Manager exportable public certificate</a>.</p>"
+                        "smithy.api#documentation": "<p>You can use this parameter to specify whether to export your certificate.</p> <p>Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency\">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside the Amazon Web Services Cloud. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html\">Certificate Manager exportable public certificate</a>.</p>"
                     }
                 },
                 "CertificateAuthorityArn": {
@@ -4817,7 +4827,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a certificate. You can use this function to specify whether to opt in to or out of recording your certificate in a certificate transparency log and exporting. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency\"> Opting Out of Certificate Transparency Logging</a> and <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html\">Certificate Manager Exportable Managed Certificates</a>.</p>"
+                "smithy.api#documentation": "<p>Updates a certificate. You can use this function to specify whether to export your certificate. Certificate transparency logging opt-out is no longer available. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency\">Certificate Transparency Logging</a> and <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html\">Certificate Manager Exportable Managed Certificates</a>.</p>"
             }
         },
         "com.amazonaws.acm#UpdateCertificateOptionsRequest": {
@@ -4833,7 +4843,7 @@
                 "Options": {
                     "target": "com.amazonaws.acm#CertificateOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use to update the options for your certificate. Currently, you can specify whether to add your certificate to a transparency log or export your certificate. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. </p>",
+                        "smithy.api#documentation": "<p>Use to update the options for your certificate. Currently, you can specify whether to export your certificate. Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency\">Certificate Transparency Logging</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }

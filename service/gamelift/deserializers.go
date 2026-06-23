@@ -10681,6 +10681,17 @@ func deserializeCBOR_GameServerContainerDefinition(v smithycbor.Value) (*types.G
 			}
 			ds.ServerSdkVersion = ptr.String(dv)
 		}
+
+		if key == "LinuxCapabilities" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LinuxCapabilities(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LinuxCapabilities = dv
+		}
 	}
 	return ds, nil
 }
@@ -12418,6 +12429,53 @@ func deserializeCBOR_LimitExceededException(v smithycbor.Value) (*types.LimitExc
 		}
 	}
 	return ds, nil
+}
+
+func deserializeCBOR_LinuxCapabilities(v smithycbor.Value) (*types.LinuxCapabilities, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LinuxCapabilities{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Include" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LinuxCapabilityList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Include = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LinuxCapability(v smithycbor.Value) (types.LinuxCapability, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.LinuxCapability(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.LinuxCapability(av), nil
+}
+
+func deserializeCBOR_LinuxCapabilityList(v smithycbor.Value) ([]types.LinuxCapability, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.LinuxCapability
+	for _, si := range av {
+
+		di, err := deserializeCBOR_LinuxCapability(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
 }
 
 func deserializeCBOR_LocationalDeployment(v smithycbor.Value) (*types.LocationalDeployment, error) {
@@ -14802,6 +14860,17 @@ func deserializeCBOR_SupportContainerDefinition(v smithycbor.Value) (*types.Supp
 			}
 			ds.Vcpu = ptr.Float64(dv)
 		}
+
+		if key == "LinuxCapabilities" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LinuxCapabilities(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LinuxCapabilities = dv
+		}
 	}
 	return ds, nil
 }
@@ -15903,6 +15972,17 @@ func deserializeCBOR_DescribeContainerGroupPortMappingsOutput(v smithycbor.Value
 				return nil, err
 			}
 			ds.FleetId = ptr.String(dv)
+		}
+
+		if key == "FleetArn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FleetArn = ptr.String(dv)
 		}
 
 		if key == "Location" {

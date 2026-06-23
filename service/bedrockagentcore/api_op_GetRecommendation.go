@@ -82,6 +82,9 @@ type GetRecommendationOutput struct {
 	// The description of the recommendation.
 	Description *string
 
+	// The ARN of the KMS key used to encrypt recommendation data.
+	KmsKeyArn *string
+
 	// The result of the recommendation, containing the optimized system prompt or
 	// tool descriptions. Only present when the recommendation status is COMPLETED .
 	RecommendationResult types.RecommendationResult

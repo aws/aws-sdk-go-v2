@@ -412,6 +412,24 @@ var _ *types.GuardrailAutomatedReasoningTranslationAmbiguousFinding
 var _ *types.GuardrailAutomatedReasoningValidFinding
 var _ *types.GuardrailAutomatedReasoningNoTranslationsFinding
 
+func ExampleGuardrailChecksContentBlock_outputUsage() {
+	var union types.GuardrailChecksContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GuardrailChecksContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleGuardrailContentBlock_outputUsage() {
 	var union types.GuardrailContentBlock
 	// type switches can be used to check the union value

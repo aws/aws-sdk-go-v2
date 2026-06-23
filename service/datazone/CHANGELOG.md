@@ -1,3 +1,7 @@
+# v1.63.0 (2026-06-15)
+
+* **Feature**: Adds support for deleting lineage events in Amazon DataZone.
+
 # v1.62.7 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

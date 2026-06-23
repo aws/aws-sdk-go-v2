@@ -9507,6 +9507,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				sv.RunOutputUri = ptr.String(jtv)
 			}
 
+		case "scratchStorageMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScratchStorageMode to be of type string, got %T instead", value)
+				}
+				sv.ScratchStorageMode = types.ScratchStorageMode(jtv)
+			}
+
 		case "startedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22502,6 +22511,15 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 				return err
 			}
 
+		case "scratchStorageMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScratchStorageMode to be of type string, got %T instead", value)
+				}
+				sv.ScratchStorageMode = types.ScratchStorageMode(jtv)
+			}
+
 		case "storageCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -25884,6 +25902,15 @@ func awsRestjson1_deserializeDocumentRunListItem(v **types.RunListItem, value in
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
 				sv.WorkflowId = ptr.String(jtv)
+			}
+
+		case "workflowName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowName to be of type string, got %T instead", value)
+				}
+				sv.WorkflowName = ptr.String(jtv)
 			}
 
 		case "workflowVersionName":

@@ -551,7 +551,8 @@ type ContextDataType struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for a hosted UI custom domain.
+// The configuration for a custom domain, including the SSL certificate and TLS
+// security policy.
 type CustomDomainConfigType struct {
 
 	// The Amazon Resource Name (ARN) of an Certificate Manager SSL certificate. You
@@ -559,6 +560,20 @@ type CustomDomainConfigType struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	// The security policy for the custom domain. Defines the minimum TLS version and
+	// cipher suites that CloudFront uses when communicating with viewers (clients).
+	// Valid values are as follows:
+	//
+	//   - TLS_V1 : Supports TLS 1.0 and later. Provides the broadest client
+	//   compatibility.
+	//
+	//   - TLS_V1_2_2021 : Supports TLS 1.2 and later with 2021 cipher suites.
+	//   Recommended minimum for most use cases.
+	//
+	//   - TLS_V1_3_2025 : Supports TLS 1.3 and later with 2025 cipher suites. Provides
+	//   the strongest security posture.
+	SecurityPolicy SecurityPolicyType
 
 	noSmithyDocumentSerde
 }

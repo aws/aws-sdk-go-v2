@@ -134,6 +134,17 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//   encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string
 
+	// The network type of the DB cluster.
+	//
+	// Valid Values:
+	//
+	//   - IPV4 – ( the default ) The DB cluster uses only IPv4 addresses for
+	//   communication.
+	//
+	//   - DUAL – The DB cluster uses both IPv4 and IPv6 addresses for communication.
+	//   The DB subnet group associated with the cluster must support IPv6.
+	NetworkType *string
+
 	//  (Not supported by Neptune)
 	OptionGroupName *string
 

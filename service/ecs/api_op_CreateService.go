@@ -381,6 +381,12 @@ type CreateServiceInput struct {
 	// [Using service-linked roles for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
 	LoadBalancers []types.LoadBalancer
 
+	// The optional monitoring configuration for the service, which defines the
+	// resolution for the service-level CPUUtilization and MemoryUtilization Amazon
+	// CloudWatch metrics. When not specified, Amazon ECS uses the default resolution
+	// of 60 seconds.
+	Monitoring *types.MonitoringConfiguration
+
 	// The network configuration for the service. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it isn't supported for other network modes. For more

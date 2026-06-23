@@ -1,3 +1,7 @@
+# v1.34.0 (2026-06-09)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.33.0 (2026-06-08)
 
 * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag

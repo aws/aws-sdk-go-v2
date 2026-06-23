@@ -11069,6 +11069,19 @@ func awsRestjson1_serializeDocument__listOfAudioFeedInput(v []types.AudioFeedInp
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAudioPid(v []types.AudioPid, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAudioPid(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAudioSelector(v []types.AudioSelector, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12247,6 +12260,29 @@ func awsRestjson1_serializeDocumentAudioNormalizationSettings(v *types.AudioNorm
 		ok.String(string(v.AlgorithmControl))
 	}
 
+	if len(v.PeakCalculation) > 0 {
+		ok := object.Key("peakCalculation")
+		ok.String(string(v.PeakCalculation))
+	}
+
+	if v.PeakLimiterThreshold != nil {
+		ok := object.Key("peakLimiterThreshold")
+		switch {
+		case math.IsNaN(*v.PeakLimiterThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.PeakLimiterThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.PeakLimiterThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.PeakLimiterThreshold)
+
+		}
+	}
+
 	if v.TargetLkfs != nil {
 		ok := object.Key("targetLkfs")
 		switch {
@@ -12297,6 +12333,32 @@ func awsRestjson1_serializeDocumentAudioOnlyHlsSettings(v *types.AudioOnlyHlsSet
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioPid(v *types.AudioPid, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DolbyEDecode != nil {
+		ok := object.Key("dolbyEDecode")
+		if err := awsRestjson1_serializeDocumentAudioDolbyEDecode(v.DolbyEDecode, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Pid != nil {
+		ok := object.Key("pid")
+		ok.Integer(*v.Pid)
+	}
+
+	if v.PremixSettings != nil {
+		ok := object.Key("premixSettings")
+		if err := awsRestjson1_serializeDocumentAudioPreMixerSettings(v.PremixSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioPidSelection(v *types.AudioPidSelection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12304,6 +12366,57 @@ func awsRestjson1_serializeDocumentAudioPidSelection(v *types.AudioPidSelection,
 	if v.Pid != nil {
 		ok := object.Key("pid")
 		ok.Integer(*v.Pid)
+	}
+
+	if v.Pids != nil {
+		ok := object.Key("pids")
+		if err := awsRestjson1_serializeDocument__listOfAudioPid(v.Pids, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioPreMixerSettings(v *types.AudioPreMixerSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AudioNormalizationSettings != nil {
+		ok := object.Key("audioNormalizationSettings")
+		if err := awsRestjson1_serializeDocumentAudioNormalizationSettings(v.AudioNormalizationSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Channels != nil {
+		ok := object.Key("channels")
+		ok.Integer(*v.Channels)
+	}
+
+	if v.GainDb != nil {
+		ok := object.Key("gainDb")
+		switch {
+		case math.IsNaN(*v.GainDb):
+			ok.String("NaN")
+
+		case math.IsInf(*v.GainDb, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.GainDb, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.GainDb)
+
+		}
+	}
+
+	if v.RemixSettings != nil {
+		ok := object.Key("remixSettings")
+		if err := awsRestjson1_serializeDocumentRemixSettings(v.RemixSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -12383,6 +12496,13 @@ func awsRestjson1_serializeDocumentAudioSilenceFailoverSettings(v *types.AudioSi
 func awsRestjson1_serializeDocumentAudioTrack(v *types.AudioTrack, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.PremixSettings != nil {
+		ok := object.Key("premixSettings")
+		if err := awsRestjson1_serializeDocumentAudioPreMixerSettings(v.PremixSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Track != nil {
 		ok := object.Key("track")

@@ -3989,6 +3989,29 @@
                 "smithy.api#documentation": "<p>The full description of your connected cluster.</p>"
             }
         },
+        "com.amazonaws.eks#ControlPlaneEgressModeType": {
+            "type": "enum",
+            "members": {
+                "AWS_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MANAGED"
+                    }
+                },
+                "CUSTOMER_ROUTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_ROUTED"
+                    }
+                },
+                "CUSTOMER_ISOLATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_ISOLATED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.eks#ControlPlanePlacementRequest": {
             "type": "structure",
             "members": {
@@ -3996,6 +4019,12 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the placement group for the Kubernetes control plane instances. This setting\n            can't be changed after cluster creation. </p>"
+                    }
+                },
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional parameter to specify the placement group spread level for control plane instances. If not provided, Amazon EKS will deploy control plane instances without a placement group.</p>"
                     }
                 }
             },
@@ -4010,6 +4039,12 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the placement group for the Kubernetes control plane instances.</p>"
+                    }
+                },
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spread level used with the placement group for control plane instances on your local Amazon EKS cluster on Amazon Web Services Outposts.</p>"
                     }
                 }
             },
@@ -7745,6 +7780,34 @@
                 "target": "com.amazonaws.eks#ErrorDetail"
             }
         },
+        "com.amazonaws.eks#EtcdPlacementRequest": {
+            "type": "structure",
+            "members": {
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional parameter to specify the placement group spread level for etcd instances. If not provided, Amazon EKS will deploy etcd instances without a placement group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The placement configuration for the etcd instances of your local Amazon EKS\n            cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.eks#EtcdPlacementResponse": {
+            "type": "structure",
+            "members": {
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spread level used with the placement group for etcd instances on your local Amazon EKS cluster on Amazon Web Services Outposts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The placement configuration for the etcd instances of your local Amazon EKS\n            cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.eks#FargateProfile": {
             "type": "structure",
             "members": {
@@ -10866,7 +10929,7 @@
                 "controlPlaneInstanceType": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts.\n            Choose an instance type based on the number of nodes that your cluster will have. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>The instance type that you specify is used for all Kubernetes control plane instances. The\n            instance type can't be changed after cluster creation. The control plane is not\n            automatically scaled by Amazon EKS.</p>\n         <p> </p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10874,6 +10937,18 @@
                     "target": "com.amazonaws.eks#ControlPlanePlacementRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the placement configuration for all the control plane instances\n            of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                    }
+                },
+                "etcdInstanceType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.</p>"
+                    }
+                },
+                "etcdPlacement": {
+                    "target": "com.amazonaws.eks#EtcdPlacementRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the placement configuration for the etcd instances of your local \n            Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             },
@@ -10894,7 +10969,7 @@
                 "controlPlaneInstanceType": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type used for the control plane. The instance type is the same for\n            all control plane instances.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is the same for\n            all control plane instances.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10902,6 +10977,18 @@
                     "target": "com.amazonaws.eks#ControlPlanePlacementResponse",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the placement configuration for all the control plane instances\n            of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                    }
+                },
+                "etcdInstanceType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is the same for\n            all etcd instances.</p>"
+                    }
+                },
+                "etcdPlacement": {
+                    "target": "com.amazonaws.eks#EtcdPlacementResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the placement configuration for the etcd instances of your local \n            Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             },
@@ -11549,6 +11636,23 @@
                 "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.eks#SpreadLevel": {
+            "type": "enum",
+            "members": {
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host"
+                    }
+                },
+                "RACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rack"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#SsoIdentity": {
@@ -12416,7 +12520,10 @@
                     }
                 },
                 "resourcesVpcConfig": {
-                    "target": "com.amazonaws.eks#VpcConfigRequest"
+                    "target": "com.amazonaws.eks#VpcConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the VPC configuration to use for the cluster update. You can\n            use this parameter to update the control plane egress mode, the subnets used by the\n            cluster, the security groups, and the endpoint access settings.</p>"
+                    }
                 },
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
@@ -13158,6 +13265,30 @@
                         "smithy.api#enumValue": "NodeRepairConfig"
                     }
                 },
+                "ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleArn"
+                    }
+                },
+                "ROLE_MAPPINGS_TO_ADD_OR_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleMappingsToAddOrUpdate"
+                    }
+                },
+                "ROLE_MAPPINGS_TO_REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleMappingsToRemove"
+                    }
+                },
+                "NETWORK_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkAccess"
+                    }
+                },
                 "VENDED_LOGS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -13204,6 +13335,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WarmPoolReuseOnScaleIn"
+                    }
+                },
+                "CONTROL_PLANE_EGRESS_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ControlPlaneEgressMode"
                     }
                 }
             }
@@ -13476,6 +13613,12 @@
                         "smithy.api#enumValue": "DeletionProtectionUpdate"
                     }
                 },
+                "CAPABILITY_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CapabilityUpdate"
+                    }
+                },
                 "CONTROL_PLANE_SCALING_CONFIG_UPDATE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -13486,6 +13629,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VendedLogsUpdate"
+                    }
+                },
+                "CONTROL_PLANE_EGRESS_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ControlPlaneEgressUpdate"
                     }
                 }
             }
@@ -13573,6 +13722,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that\n            you specify is denied. The default value is <code>0.0.0.0/0</code> and additionally\n                <code>::/0</code> for dual-stack `IPv6` clusters. If you've disabled private\n            endpoint access, make sure that you specify the necessary CIDR blocks for every node and\n            Fargate <code>Pod</code> in the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster\n                API server endpoint</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>Note that the public endpoints are dual-stack for only <code>IPv6</code> clusters that\n            are made after October 2024. You can't add <code>IPv6</code> CIDR blocks to\n                <code>IPv4</code> clusters or <code>IPv6</code> clusters that were made before\n            October 2024.</p>"
                     }
+                },
+                "controlPlaneEgressMode": {
+                    "target": "com.amazonaws.eks#ControlPlaneEgressModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the control plane egress routing mode for the cluster. If the cluster is set\n            to <code>AWS_MANAGED</code>, Amazon EKS manages the egress path from the control plane\n            and you don't need to configure NAT gateways or other routing infrastructure for control\n            plane traffic. If the cluster is set to <code>CUSTOMER_ROUTED</code>, you manage the\n            egress path from the control plane in your VPC subnets. You are responsible for ensuring\n            that the control plane can reach required endpoints such as webhook servers and OIDC\n            providers. The default value is <code>AWS_MANAGED</code>. Once set to\n            <code>CUSTOMER_ROUTED</code>, this setting cannot be changed back to\n            <code>AWS_MANAGED</code> on the same cluster.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html\">Learn more about control plane\n                egress routing in the <i>Amazon EKS User Guide</i>.</a>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -13624,6 +13779,12 @@
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that\n            you specify is denied. The default value is <code>0.0.0.0/0</code> and additionally\n            <code>::/0</code> for dual-stack `IPv6` clusters. If you've disabled private\n            endpoint access, make sure that you specify the necessary CIDR blocks for every node and\n            Fargate <code>Pod</code> in the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster\n                API server endpoint</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>Note that the public endpoints are dual-stack for only <code>IPv6</code> clusters that\n            are made after October 2024. You can't add <code>IPv6</code> CIDR blocks to\n            <code>IPv4</code> clusters or <code>IPv6</code> clusters that were made before\n            October 2024.</p>"
+                    }
+                },
+                "controlPlaneEgressMode": {
+                    "target": "com.amazonaws.eks#ControlPlaneEgressModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current control plane egress routing mode for the cluster. If the cluster is set\n            to <code>AWS_MANAGED</code>, Amazon EKS manages the egress path from the control plane.\n            If the cluster is set to <code>CUSTOMER_ROUTED</code>, you manage the egress path from\n            the control plane in your VPC subnets.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html\">Learn more about control plane\n                egress routing in the <i>Amazon EKS User Guide</i>.</a>\n         </p>"
                     }
                 }
             },

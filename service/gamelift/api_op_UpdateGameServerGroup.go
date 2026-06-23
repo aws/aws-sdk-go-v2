@@ -21,11 +21,17 @@ import (
 // ensure that Amazon GameLift Servers FleetIQ can continue to perform instance
 // balancing activity. If successful, a GameServerGroup object is returned.
 //
+// Target tracking Auto Scaling policies on the Auto Scaling group cannot be
+// updated through the Amazon Web Services Management Console. Instead, use the
+// Amazon Elastic Compute Cloud Auto Scaling [PutScalingPolicy]PutScalingPolicy API action to update
+// these policies.
+//
 // # Learn more
 //
 // [Amazon GameLift Servers FleetIQ Guide]
 //
 // [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+// [PutScalingPolicy]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}

@@ -89,9 +89,6 @@ func validateOpInvokeEndpointAsyncInput(v *InvokeEndpointAsyncInput) error {
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
-	if v.InputLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputLocation"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

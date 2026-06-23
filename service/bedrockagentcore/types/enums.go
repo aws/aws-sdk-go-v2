@@ -380,6 +380,23 @@ func (ExtractionJobStatus) Values() []ExtractionJobStatus {
 	}
 }
 
+type ExtractionMode string
+
+// Enum values for ExtractionMode
+const (
+	ExtractionModeSkip ExtractionMode = "SKIP"
+)
+
+// Values returns all known values for ExtractionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtractionMode) Values() []ExtractionMode {
+	return []ExtractionMode{
+		"SKIP",
+	}
+}
+
 type HarnessBedrockApiFormat string
 
 // Enum values for HarnessBedrockApiFormat
@@ -549,6 +566,89 @@ func (HarnessToolUseType) Values() []HarnessToolUseType {
 		"tool_use",
 		"server_tool_use",
 		"mcp_tool_use",
+	}
+}
+
+type InsightsFailureCategory string
+
+// Enum values for InsightsFailureCategory
+const (
+	InsightsFailureCategoryExecutionErrorAuthentication             InsightsFailureCategory = "execution-error-category-authentication"
+	InsightsFailureCategoryExecutionErrorResourceNotFound           InsightsFailureCategory = "execution-error-category-resource-not-found"
+	InsightsFailureCategoryExecutionErrorServiceErrors              InsightsFailureCategory = "execution-error-category-service-errors"
+	InsightsFailureCategoryExecutionErrorRateLimiting               InsightsFailureCategory = "execution-error-category-rate-limiting"
+	InsightsFailureCategoryExecutionErrorFormatting                 InsightsFailureCategory = "execution-error-category-formatting"
+	InsightsFailureCategoryExecutionErrorTimeout                    InsightsFailureCategory = "execution-error-category-timeout"
+	InsightsFailureCategoryExecutionErrorResourceExhaustion         InsightsFailureCategory = "execution-error-category-resource-exhaustion"
+	InsightsFailureCategoryExecutionErrorEnvironment                InsightsFailureCategory = "execution-error-category-environment"
+	InsightsFailureCategoryExecutionErrorToolSchema                 InsightsFailureCategory = "execution-error-category-tool-schema"
+	InsightsFailureCategoryTaskInstructionNonCompliance             InsightsFailureCategory = "task-instruction-category-non-compliance"
+	InsightsFailureCategoryTaskInstructionProblemId                 InsightsFailureCategory = "task-instruction-category-problem-id"
+	InsightsFailureCategoryIncorrectActionsToolSelection            InsightsFailureCategory = "incorrect-actions-category-tool-selection"
+	InsightsFailureCategoryIncorrectActionsPoorInformationRetrieval InsightsFailureCategory = "incorrect-actions-category-poor-information-retrieval"
+	InsightsFailureCategoryIncorrectActionsClarification            InsightsFailureCategory = "incorrect-actions-category-clarification"
+	InsightsFailureCategoryIncorrectActionsInappropriateInfoRequest InsightsFailureCategory = "incorrect-actions-category-inappropriate-info-request"
+	InsightsFailureCategoryContextHandlingFailures                  InsightsFailureCategory = "context-handling-error-category-context-handling-failures"
+	InsightsFailureCategoryHallucinationCapabilities                InsightsFailureCategory = "hallucination-category-hall-capabilities"
+	InsightsFailureCategoryHallucinationMisunderstand               InsightsFailureCategory = "hallucination-category-hall-misunderstand"
+	InsightsFailureCategoryHallucinationUsage                       InsightsFailureCategory = "hallucination-category-hall-usage"
+	InsightsFailureCategoryHallucinationHistory                     InsightsFailureCategory = "hallucination-category-hall-history"
+	InsightsFailureCategoryHallucinationParams                      InsightsFailureCategory = "hallucination-category-hall-params"
+	InsightsFailureCategoryHallucinationFabricateToolOutputs        InsightsFailureCategory = "hallucination-category-fabricate-tool-outputs"
+	InsightsFailureCategoryRepetitiveBehaviorTool                   InsightsFailureCategory = "repetitive-behavior-category-repetition-tool"
+	InsightsFailureCategoryRepetitiveBehaviorInfo                   InsightsFailureCategory = "repetitive-behavior-category-repetition-info"
+	InsightsFailureCategoryRepetitiveBehaviorStep                   InsightsFailureCategory = "repetitive-behavior-category-step-repetition"
+	InsightsFailureCategoryOrchestrationReasoningMismatch           InsightsFailureCategory = "orchestration-related-errors-category-reasoning-mismatch"
+	InsightsFailureCategoryOrchestrationGoalDeviation               InsightsFailureCategory = "orchestration-related-errors-category-goal-deviation"
+	InsightsFailureCategoryOrchestrationPrematureTermination        InsightsFailureCategory = "orchestration-related-errors-category-premature-termination"
+	InsightsFailureCategoryOrchestrationUnawareTermination          InsightsFailureCategory = "orchestration-related-errors-category-unaware-termination"
+	InsightsFailureCategoryLlmOutputNonsensical                     InsightsFailureCategory = "llm-output-category-nonsensical"
+	InsightsFailureCategoryConfigurationMismatchToolDefinition      InsightsFailureCategory = "configuration-mismatch-category-tool-definition"
+	InsightsFailureCategoryCodingEdgeCaseOversights                 InsightsFailureCategory = "coding-use-case-specific-failure-types-category-edge-case-oversights"
+	InsightsFailureCategoryCodingDependencyIssues                   InsightsFailureCategory = "coding-use-case-specific-failure-types-category-dependency-issues"
+	InsightsFailureCategoryOther                                    InsightsFailureCategory = "other"
+)
+
+// Values returns all known values for InsightsFailureCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsFailureCategory) Values() []InsightsFailureCategory {
+	return []InsightsFailureCategory{
+		"execution-error-category-authentication",
+		"execution-error-category-resource-not-found",
+		"execution-error-category-service-errors",
+		"execution-error-category-rate-limiting",
+		"execution-error-category-formatting",
+		"execution-error-category-timeout",
+		"execution-error-category-resource-exhaustion",
+		"execution-error-category-environment",
+		"execution-error-category-tool-schema",
+		"task-instruction-category-non-compliance",
+		"task-instruction-category-problem-id",
+		"incorrect-actions-category-tool-selection",
+		"incorrect-actions-category-poor-information-retrieval",
+		"incorrect-actions-category-clarification",
+		"incorrect-actions-category-inappropriate-info-request",
+		"context-handling-error-category-context-handling-failures",
+		"hallucination-category-hall-capabilities",
+		"hallucination-category-hall-misunderstand",
+		"hallucination-category-hall-usage",
+		"hallucination-category-hall-history",
+		"hallucination-category-hall-params",
+		"hallucination-category-fabricate-tool-outputs",
+		"repetitive-behavior-category-repetition-tool",
+		"repetitive-behavior-category-repetition-info",
+		"repetitive-behavior-category-step-repetition",
+		"orchestration-related-errors-category-reasoning-mismatch",
+		"orchestration-related-errors-category-goal-deviation",
+		"orchestration-related-errors-category-premature-termination",
+		"orchestration-related-errors-category-unaware-termination",
+		"llm-output-category-nonsensical",
+		"configuration-mismatch-category-tool-definition",
+		"coding-use-case-specific-failure-types-category-edge-case-oversights",
+		"coding-use-case-specific-failure-types-category-dependency-issues",
+		"other",
 	}
 }
 

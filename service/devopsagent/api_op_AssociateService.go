@@ -45,6 +45,9 @@ type AssociateServiceInput struct {
 	// This member is required.
 	ServiceId *string
 
+	// Enabled capabilities for this association.
+	Capabilities map[string]types.CapabilityConfiguration
+
 	noSmithyDocumentSerde
 }
 

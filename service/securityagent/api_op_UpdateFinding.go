@@ -38,8 +38,29 @@ type UpdateFindingInput struct {
 	// This member is required.
 	FindingId *string
 
+	// The updated attack script for the finding.
+	AttackScript *string
+
+	// A customer-provided note on the finding.
+	CustomerNote *string
+
+	// The updated description for the finding.
+	Description *string
+
+	// The updated name for the finding.
+	Name *string
+
+	// The updated reasoning for the finding.
+	Reasoning *string
+
 	// The updated risk level for the finding.
 	RiskLevel types.RiskLevel
+
+	// The updated numerical risk score for the finding.
+	RiskScore *string
+
+	// The updated risk type for the finding.
+	RiskType *string
 
 	// The updated status for the finding.
 	Status types.FindingStatus

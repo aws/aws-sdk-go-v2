@@ -74,6 +74,17 @@
                 "smithy.api#pattern": "^arn:aws:signin:::devtools/(cross-device|same-device)$"
             }
         },
+        "com.amazonaws.signin#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Idempotency token",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[!-~]+$"
+            }
+        },
         "com.amazonaws.signin#CodeVerifier": {
             "type": "string",
             "traits": {
@@ -83,6 +94,79 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9\\-._~]+$"
+            }
+        },
+        "com.amazonaws.signin#Condition": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.signin#ConditionValues"
+            },
+            "traits": {
+                "smithy.api#documentation": "Condition mapping of keys to values"
+            }
+        },
+        "com.amazonaws.signin#ConditionBlock": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.signin#ConditionType"
+            },
+            "value": {
+                "target": "com.amazonaws.signin#Condition"
+            },
+            "traits": {
+                "smithy.api#documentation": "Condition block for policy statements"
+            }
+        },
+        "com.amazonaws.signin#ConditionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Condition type identifier"
+            }
+        },
+        "com.amazonaws.signin#ConditionValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of condition values"
+            }
+        },
+        "com.amazonaws.signin#ConflictException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating conflict\nWill be CONFLICT",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message explaining the conflict\nProvides specific information about what caused the conflict",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown when request conflicts with current state\n\nHTTP Status Code: 409 Conflict\n\nUsed when the request conflicts with the current state of the resource",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.signin#ConsolePermissionMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum number of results for list operations",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.signin#CreateOAuth2Token": {
@@ -113,6 +197,11 @@
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/token"
+                },
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": false
+                    }
                 },
                 "smithy.test#smokeTests": [
                     {
@@ -267,6 +356,176 @@
                 "smithy.api#documentation": "Response body payload for CreateOAuth2Token operation\n\nThe response content depends on the grant_type from the request:\n- grant_type=authorization_code: Returns all fields including refresh_token and id_token\n- grant_type=refresh_token: Returns access_token, token_type, expires_in, refresh_token (no id_token)"
             }
         },
+        "com.amazonaws.signin#DeleteConsoleAuthorizationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#DeleteConsoleAuthorizationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#DeleteConsoleAuthorizationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Delete console authorization configuration with automatic scope detection"
+                },
+                "smithy.api#documentation": "Delete console authorization configuration with automatic scope detection",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-console-authorization-configuration"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#DeleteConsoleAuthorizationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.signin#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "Target account identifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for DeleteConsoleAuthorizationConfiguration operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#DeleteConsoleAuthorizationConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.signin#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "Target account identifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Authorization scope",
+                        "smithy.api#required": {}
+                    }
+                },
+                "consoleAuthorizationEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether console authorization is enabled",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for DeleteConsoleAuthorizationConfiguration operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#DeleteResourcePermissionStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#DeleteResourcePermissionStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#DeleteResourcePermissionStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Remove a permission statement from the account's SignIn resource-based policy"
+                },
+                "smithy.api#documentation": "Remove a permission statement from the account's SignIn resource-based policy",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-resource-permission-statement"
+                },
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#DeleteResourcePermissionStatementInput": {
+            "type": "structure",
+            "members": {
+                "statementId": {
+                    "target": "com.amazonaws.signin#StatementId",
+                    "traits": {
+                        "smithy.api#documentation": "Unique identifier of the permission statement to delete",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.signin#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "Idempotency token for the request",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for DeleteResourcePermissionStatement operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#DeleteResourcePermissionStatementOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Output for DeleteResourcePermissionStatement operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#ExcludedPrincipal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Principal to exclude from permission statements",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:((iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]{1,64})|(iam::[0-9]{12}:user/[a-zA-Z0-9_+=,.@-]{1,64})|(sts::[0-9]{12}:federated-user/[a-zA-Z0-9_+=,.@-]{2,193})|(iam::[0-9]{12}:root))$"
+            }
+        },
         "com.amazonaws.signin#ExpiresIn": {
             "type": "integer",
             "traits": {
@@ -275,6 +534,156 @@
                     "min": 1,
                     "max": 900
                 }
+            }
+        },
+        "com.amazonaws.signin#GetConsoleAuthorizationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#GetConsoleAuthorizationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#GetConsoleAuthorizationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Get console authorization configuration with automatic scope detection"
+                },
+                "smithy.api#documentation": "Get console authorization configuration with automatic scope detection",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-console-authorization-configuration"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#GetConsoleAuthorizationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.signin#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "Target account identifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for GetConsoleAuthorizationConfiguration operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#GetConsoleAuthorizationConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.signin#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "Target account identifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Authorization scope",
+                        "smithy.api#required": {}
+                    }
+                },
+                "consoleAuthorizationEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether console authorization is enabled",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for GetConsoleAuthorizationConfiguration operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#GetResourcePolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#GetResourcePolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Retrieve the account's consolidated SignIn resource-based policy"
+                },
+                "smithy.api#documentation": "Retrieve the account's consolidated SignIn resource-based policy",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-resource-policy"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#GetResourcePolicyInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Input for GetResourcePolicy operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#GetResourcePolicyOutput": {
+            "type": "structure",
+            "members": {
+                "signinResourceBasedPolicy": {
+                    "target": "com.amazonaws.signin#SigninResourceBasedPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "The account's SignIn resource-based policy",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for GetResourcePolicy operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signin#GrantType": {
@@ -316,6 +725,108 @@
                 "smithy.api#documentation": "Error thrown when an internal server error occurs\n\nHTTP Status Code: 500 Internal Server Error\n\nUsed for unexpected server-side errors that prevent request processing.",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.signin#ListResourcePermissionStatements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#ListResourcePermissionStatementsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#ListResourcePermissionStatementsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Retrieve all permission statements in the account's SignIn resource-based policy"
+                },
+                "smithy.api#documentation": "Retrieve all permission statements in the account's SignIn resource-based policy",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-resource-permission-statements"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "permissionStatements"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#ListResourcePermissionStatementsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.signin#ConsolePermissionMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of results to return"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "Token for pagination"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for ListResourcePermissionStatements operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#ListResourcePermissionStatementsOutput": {
+            "type": "structure",
+            "members": {
+                "permissionStatements": {
+                    "target": "com.amazonaws.signin#PermissionStatementSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "List of permission statement summaries",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "Token for next page of results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for ListResourcePermissionStatements operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Pagination token",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9+=/_]*$"
             }
         },
         "com.amazonaws.signin#OAuth2ErrorCode": {
@@ -362,10 +873,337 @@
                         "smithy.api#documentation": "The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed",
                         "smithy.api#enumValue": "INVALID_REQUEST"
                     }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Requested resource was not found",
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
+                    }
+                },
+                "CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Request conflicts with current state of the resource",
+                        "smithy.api#enumValue": "CONFLICT"
+                    }
+                },
+                "SERVICE_QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Request would cause a service quota to be exceeded",
+                        "smithy.api#enumValue": "SERVICE_QUOTA_EXCEEDED"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "OAuth 2.0 error codes returned by the server\n\nStandard OAuth 2.0 error codes used in error responses to indicate\nthe specific type of error that occurred during token operations."
+            }
+        },
+        "com.amazonaws.signin#PermissionStatementSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signin#PermissionStatementSummary"
+            }
+        },
+        "com.amazonaws.signin#PermissionStatementSummary": {
+            "type": "structure",
+            "members": {
+                "sid": {
+                    "target": "com.amazonaws.signin#StatementId",
+                    "traits": {
+                        "smithy.api#documentation": "Unique identifier for the permission statement",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.signin#ConditionBlock",
+                    "traits": {
+                        "smithy.api#documentation": "Condition block for the permission statement"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary of a permission statement"
+            }
+        },
+        "com.amazonaws.signin#PolicyActions": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of policy actions"
+            }
+        },
+        "com.amazonaws.signin#PolicyStatement": {
+            "type": "structure",
+            "members": {
+                "effect": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Effect of the policy statement (Allow/Deny)",
+                        "smithy.api#jsonName": "Effect"
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.signin#Principal",
+                    "traits": {
+                        "smithy.api#documentation": "Principal the statement applies to",
+                        "smithy.api#jsonName": "Principal"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.signin#PolicyActions",
+                    "traits": {
+                        "smithy.api#documentation": "Actions the statement controls",
+                        "smithy.api#jsonName": "Action"
+                    }
+                },
+                "resource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Resource the statement applies to",
+                        "smithy.api#jsonName": "Resource"
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.signin#ConditionBlock",
+                    "traits": {
+                        "smithy.api#documentation": "Condition block for the statement",
+                        "smithy.api#jsonName": "Condition"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Individual policy statement within a resource-based policy"
+            }
+        },
+        "com.amazonaws.signin#PolicyStatements": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signin#PolicyStatement"
+            }
+        },
+        "com.amazonaws.signin#Principal": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "IAM principal identifier"
+            }
+        },
+        "com.amazonaws.signin#PutConsoleAuthorizationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#PutConsoleAuthorizationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#PutConsoleAuthorizationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Enable console authorization configuration with automatic scope detection"
+                },
+                "smithy.api#documentation": "Enable console authorization configuration with automatic scope detection",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/put-console-authorization-configuration"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#PutConsoleAuthorizationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.signin#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "Target account identifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for PutConsoleAuthorizationConfiguration operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#PutConsoleAuthorizationConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.signin#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "Target account identifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Authorization scope",
+                        "smithy.api#required": {}
+                    }
+                },
+                "consoleAuthorizationEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether console authorization is enabled",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for PutConsoleAuthorizationConfiguration operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#PutResourcePermissionStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#PutResourcePermissionStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#PutResourcePermissionStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Create a permission statement in the account's SignIn resource-based policy"
+                },
+                "smithy.api#documentation": "Create a permission statement in the account's SignIn resource-based policy",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/put-resource-permission-statement"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#PutResourcePermissionStatementInput": {
+            "type": "structure",
+            "members": {
+                "sourceVpc": {
+                    "target": "com.amazonaws.signin#SourceVpc",
+                    "traits": {
+                        "smithy.api#documentation": "VPC identifier to restrict console access"
+                    }
+                },
+                "signinSourceVpce": {
+                    "target": "com.amazonaws.signin#SourceVpce",
+                    "traits": {
+                        "smithy.api#documentation": "SignIn VPC endpoint identifier"
+                    }
+                },
+                "consoleSourceVpce": {
+                    "target": "com.amazonaws.signin#SourceVpce",
+                    "traits": {
+                        "smithy.api#documentation": "Console VPC endpoint identifier"
+                    }
+                },
+                "vpcSourceIp": {
+                    "target": "com.amazonaws.signin#VpcSourceIp",
+                    "traits": {
+                        "smithy.api#documentation": "Source IP address within VPC"
+                    }
+                },
+                "sourceIp": {
+                    "target": "com.amazonaws.signin#SourceIp",
+                    "traits": {
+                        "smithy.api#documentation": "Source IP address"
+                    }
+                },
+                "requestedRegion": {
+                    "target": "com.amazonaws.signin#RequestedRegion",
+                    "traits": {
+                        "smithy.api#documentation": "AWS region where the VPC and VPC endpoint reside\nRequired when sourceVpc or signinSourceVpce/consoleSourceVpce is provided"
+                    }
+                },
+                "excludedPrincipal": {
+                    "target": "com.amazonaws.signin#ExcludedPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "Principal to exclude from the permission statement"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.signin#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "Idempotency token for the request",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for PutResourcePermissionStatement operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#PutResourcePermissionStatementOutput": {
+            "type": "structure",
+            "members": {
+                "statementId": {
+                    "target": "com.amazonaws.signin#StatementId",
+                    "traits": {
+                        "smithy.api#documentation": "Unique identifier for the created permission statement",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for PutResourcePermissionStatement operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signin#RedirectUri": {
@@ -389,12 +1227,88 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.signin#RequestedRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "AWS region identifier for VPC and VPC endpoint pairing",
+                "smithy.api#pattern": "^[a-z]{2}(-[a-z]+)+-\\d+$"
+            }
+        },
+        "com.amazonaws.signin#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating resource not found\nWill be RESOURCE_NOT_FOUND",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message explaining which resource was not found\nProvides specific information about the missing resource",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown when requested resource is not found\n\nHTTP Status Code: 404 Not Found\n\nUsed when the specified resource does not exist",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.signin#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating service quota exceeded\nWill be SERVICE_QUOTA_EXCEEDED",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message explaining which quota was exceeded\nProvides specific information about the limit and current usage",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown when service quota is exceeded\n\nHTTP Status Code: 402 Payment Required (used as quota exceeded indicator)\n\nUsed when the request would cause a service quota to be exceeded",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.signin#Signin": {
             "type": "service",
             "version": "2023-01-01",
             "operations": [
                 {
                     "target": "com.amazonaws.signin#CreateOAuth2Token"
+                },
+                {
+                    "target": "com.amazonaws.signin#DeleteConsoleAuthorizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.signin#DeleteResourcePermissionStatement"
+                },
+                {
+                    "target": "com.amazonaws.signin#GetConsoleAuthorizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.signin#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.signin#ListResourcePermissionStatements"
+                },
+                {
+                    "target": "com.amazonaws.signin#PutConsoleAuthorizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.signin#PutResourcePermissionStatement"
                 }
             ],
             "traits": {
@@ -406,6 +1320,7 @@
                 "aws.auth#sigv4": {
                     "name": "signin"
                 },
+                "aws.endpoints#rulesBasedEndpoints": {},
                 "aws.endpoints#standardRegionalEndpoints": {
                     "partitionSpecialCases": {
                         "aws": [
@@ -425,6 +1340,12 @@
                         ]
                     }
                 },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
@@ -459,6 +1380,11 @@
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "string"
+                        },
+                        "IsControlPlane": {
+                            "required": false,
+                            "documentation": "Indicates if the operation targets the control plane endpoint",
+                            "type": "boolean"
                         }
                     },
                     "conditions": [
@@ -466,15 +1392,30 @@
                             "fn": "isSet",
                             "argv": [
                                 {
-                                    "ref": "Endpoint"
+                                    "ref": "Region"
                                 }
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "coalesce",
+                                    "argv": [
+                                        {
+                                            "ref": "IsControlPlane"
+                                        },
+                                        false
+                                    ]
+                                },
+                                true
                             ]
                         },
                         {
                             "fn": "isSet",
                             "argv": [
                                 {
-                                    "ref": "Region"
+                                    "ref": "Endpoint"
                                 }
                             ]
                         },
@@ -501,36 +1442,6 @@
                             "argv": [
                                 {
                                     "ref": "UseDualStack"
-                                },
-                                true
-                            ]
-                        },
-                        {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "PartitionResult"
-                                        },
-                                        "supportsDualStack"
-                                    ]
-                                },
-                                true
-                            ]
-                        },
-                        {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "PartitionResult"
-                                        },
-                                        "supportsFIPS"
-                                    ]
                                 },
                                 true
                             ]
@@ -566,6 +1477,30 @@
                             ]
                         },
                         {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                },
+                                "us-gov-west-1"
+                            ]
+                        },
+                        {
                             "fn": "stringEquals",
                             "argv": [
                                 {
@@ -579,26 +1514,146 @@
                                 },
                                 "aws-us-gov"
                             ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso-b"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso-f"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso-e"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-eusc"
+                            ]
                         }
                     ],
                     "results": [
                         {
                             "conditions": [],
-                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                            "type": "error"
-                        },
-                        {
-                            "conditions": [],
-                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                            "type": "error"
+                            "endpoint": {
+                                "url": "https://signin.{Region}.api.aws",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "signin",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
                         },
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": {
-                                    "ref": "Endpoint"
+                                "url": "https://signin.{Region}.api.amazonwebservices.com.cn",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "signin",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
                                 },
-                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "signin",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
+                                },
                                 "headers": {}
                             },
                             "type": "endpoint"
@@ -625,6 +1680,99 @@
                             "conditions": [],
                             "endpoint": {
                                 "url": "https://{Region}.signin.amazonaws-us-gov.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.c2shome.ic.gov",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.sc2shome.sgov.gov",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.csphome.hci.ic.gov",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.csphome.adc-e.uk",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.amazonaws-eusc.eu",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://signin-fips.amazonaws-us-gov.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin-fips.amazonaws-us-gov.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
                                 "properties": {},
                                 "headers": {}
                             },
@@ -688,8 +1836,8 @@
                         }
                     ],
                     "root": 2,
-                    "nodeCount": 16,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAA8AAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAAAsAAAAGAAAABAAAAAoAAAAHAAAABwX14QQAAAAIAAAACAX14QUAAAAJAAAACQX14QYF9eENAAAABQX14QsF9eEMAAAABAAAAA0AAAAMAAAABgX14QkF9eEKAAAABQAAAA4F9eEIAAAABgX14QcF9eEIAAAAAwX14QEAAAAQAAAABAX14QIF9eED"
+                    "nodeCount": 33,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAQAAAADAAAAAgAAAB4F9eEZAAAAAQAAABgAAAAFAAAAAgAAAB4AAAAGAAAAAwAAAAcAAAAaAAAABAAAABIAAAAIAAAABQAAABEAAAAJAAAABgX14QQAAAAKAAAABwX14QUAAAALAAAACgX14QYAAAAMAAAADAX14QcAAAANAAAADQX14QgAAAAOAAAADgX14QkAAAAPAAAADwX14QoAAAAQAAAAEAX14QsF9eEOAAAACAX14RYF9eEXAAAABQAAABYAAAATAAAACQX14QwAAAAUAAAACgX14Q0AAAAVAAAACwX14RQF9eEVAAAACAAAABcF9eETAAAACwX14RIF9eETAAAAAgAAAB0AAAAZAAAAAwAAACAAAAAaAAAABAAAABsF9eEZAAAABQX14RkAAAAcAAAACQX14QwF9eEZAAAAAwAAACAAAAAeAAAABAX14Q8AAAAfAAAABQX14RAF9eERAAAABgX14QEAAAAhAAAABwX14QIF9eED"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -719,9 +1867,911 @@
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "string"
+                        },
+                        "IsControlPlane": {
+                            "required": false,
+                            "documentation": "Indicates if the operation targets the control plane endpoint",
+                            "type": "boolean"
                         }
                     },
                     "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "IsControlPlane"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "IsControlPlane"
+                                        },
+                                        true
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "PartitionResult"
+                                                        },
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws"
+                                            ]
+                                        }
+                                    ],
+                                    "endpoint": {
+                                        "url": "https://signin.{Region}.api.aws",
+                                        "properties": {
+                                            "authSchemes": [
+                                                {
+                                                    "name": "sigv4",
+                                                    "signingName": "signin",
+                                                    "signingRegion": "{Region}"
+                                                }
+                                            ]
+                                        },
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "PartitionResult"
+                                                        },
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws-cn"
+                                            ]
+                                        }
+                                    ],
+                                    "endpoint": {
+                                        "url": "https://signin.{Region}.api.amazonwebservices.com.cn",
+                                        "properties": {
+                                            "authSchemes": [
+                                                {
+                                                    "name": "sigv4",
+                                                    "signingName": "signin",
+                                                    "signingRegion": "{Region}"
+                                                }
+                                            ]
+                                        },
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                        "properties": {
+                                            "authSchemes": [
+                                                {
+                                                    "name": "sigv4",
+                                                    "signingName": "signin",
+                                                    "signingRegion": "{Region}"
+                                                }
+                                            ]
+                                        },
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.aws.amazon.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-cn"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.amazonaws.cn",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-us-gov"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.amazonaws-us-gov.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-iso"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.c2shome.ic.gov",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-iso-b"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.sc2shome.sgov.gov",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-iso-f"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.csphome.hci.ic.gov",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-iso-e"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.csphome.adc-e.uk",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-eusc"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.amazonaws-eusc.eu",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        true
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        },
+                                        "us-gov-west-1"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://signin-fips.amazonaws-us-gov.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        true
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": [
+                                                {
+                                                    "ref": "PartitionResult"
+                                                },
+                                                "name"
+                                            ]
+                                        },
+                                        "aws-us-gov"
+                                    ]
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin-fips.amazonaws-us-gov.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "endpoint": {
+                                "url": "https://{Region}.signin.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
                         {
                             "conditions": [
                                 {
@@ -1167,79 +3217,67 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "documentation": "Control Plane operation in us-east-1 (aws partition)",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://example.com"
+                                    "url": "https://signin.us-east-1.api.aws",
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "signin",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    }
                                 }
                             },
                             "params": {
-                                "Endpoint": "https://example.com",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with fips enabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                            },
-                            "params": {
-                                "Endpoint": "https://example.com",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                            "expect": {
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                            },
-                            "params": {
-                                "Endpoint": "https://example.com",
+                                "IsControlPlane": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "Control Plane operation in cn-north-1 (aws-cn partition)",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://signin.us-east-1.api.aws"
+                                    "url": "https://signin.cn-north-1.api.amazonwebservices.com.cn",
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "signin",
+                                                "signingRegion": "cn-north-1"
+                                            }
+                                        ]
+                                    }
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "IsControlPlane": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "Data Plane operation in us-east-1",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://us-east-1.signin.aws.amazon.com"
+                                }
+                            },
+                            "params": {
+                                "IsControlPlane": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "Data Plane operation in us-east-1 (IsControlPlane not set)",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://us-east-1.signin.aws.amazon.com"
@@ -1252,205 +3290,38 @@
                             }
                         },
                         {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "Data Plane operation in cn-north-1",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://signin-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                    "url": "https://cn-north-1.signin.amazonaws.cn"
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.cn-northwest-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-northwest-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin.cn-northwest-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-northwest-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://cn-northwest-1.signin.amazonaws.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-northwest-1",
+                                "IsControlPlane": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "Data Plane operation in us-gov-west-1",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://signin-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://us-gov-west-1.signin.amazonaws-us-gov.com"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin.eusc-de-east-1.amazonaws.eu"
-                                }
-                            },
-                            "params": {
-                                "Region": "eusc-de-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-isoe-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin.eu-isoe-west-1.cloud.adc-e.uk"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-isoe-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.us-isof-south-1.csp.hci.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isof-south-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin.us-isof-south-1.csp.hci.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isof-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://signin-fips.us-gov-west-1.api.aws"
-                                }
-                            },
-                            "params": {
+                                "IsControlPlane": false,
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "FIPS endpoint in us-gov-west-1 (global endpoint)",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://signin-fips.us-gov-west-1.amazonaws.com"
+                                    "url": "https://signin-fips.amazonaws-us-gov.com"
                                 }
                             },
                             "params": {
@@ -1460,7 +3331,59 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "FIPS endpoint in us-gov-east-1 (regional endpoint)",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://us-gov-east-1.signin-fips.amazonaws-us-gov.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "FIPS endpoint in us-east-1",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "DualStack falls through to default SDK endpoint in us-east-1 (aws partition)",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "DualStack falls through to default SDK endpoint in cn-north-1 (aws-cn partition)",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "DualStack falls through to default SDK endpoint in us-gov-west-1 (aws-us-gov partition)",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://signin.us-gov-west-1.api.aws"
@@ -1473,27 +3396,108 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "Custom SDK endpoint override",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://us-gov-west-1.signin.amazonaws-us-gov.com"
+                                    "url": "https://custom.signin.example.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "us-east-1",
+                                "Endpoint": "https://custom.signin.example.com",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "Missing region",
+                            "documentation": "ISO partition (us-iso-east-1)",
                             "expect": {
-                                "error": "Invalid Configuration: Missing Region"
+                                "endpoint": {
+                                    "url": "https://us-iso-east-1.signin.c2shome.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "ISO-B partition (us-isob-east-1)",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://us-isob-east-1.signin.sc2shome.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         }
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.signin#SigninResourceBasedPolicy": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Policy version",
+                        "smithy.api#jsonName": "Version"
+                    }
+                },
+                "statement": {
+                    "target": "com.amazonaws.signin#PolicyStatements",
+                    "traits": {
+                        "smithy.api#documentation": "Policy statements",
+                        "smithy.api#jsonName": "Statement"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "SignIn resource-based policy document"
+            }
+        },
+        "com.amazonaws.signin#SourceIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Source IP address for access control"
+            }
+        },
+        "com.amazonaws.signin#SourceVpc": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "VPC identifier for network-based access control",
+                "smithy.api#pattern": "^vpc-([0-9a-f]{8}|[0-9a-f]{17})$"
+            }
+        },
+        "com.amazonaws.signin#SourceVpce": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "VPC endpoint identifier",
+                "smithy.api#pattern": "^vpce-[a-z0-9]{8,20}$"
+            }
+        },
+        "com.amazonaws.signin#StatementId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Unique identifier for a permission statement",
+                "smithy.api#pattern": "^[A-Za-z0-9+/]{64}=?$"
+            }
+        },
+        "com.amazonaws.signin#TargetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Target account identifier for console authorization",
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(\\d{12}|o-[a-z0-9]{10}|r-[0-9a-z]{4,32})$"
             }
         },
         "com.amazonaws.signin#TokenType": {
@@ -1549,6 +3553,12 @@
                 "smithy.api#documentation": "Error thrown when request validation fails\n\nHTTP Status Code: 400 Bad Request\n\nUsed for request validation errors such as malformed parameters,\nmissing required fields, or invalid parameter values.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.signin#VpcSourceIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Source IP address within a VPC"
             }
         }
     }

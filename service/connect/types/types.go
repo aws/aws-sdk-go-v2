@@ -1767,6 +1767,68 @@ type ContactEvaluation struct {
 	noSmithyDocumentSerde
 }
 
+// A list of conditions which would be applied together with an AND condition.
+type ContactEvaluationAttributeAndCondition struct {
+
+	// A list of attribute conditions to apply.
+	AttributeConditions []ContactEvaluationAttributeCondition
+
+	// A list of tag conditions to apply.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// An attribute condition for contact evaluation filtering.
+type ContactEvaluationAttributeCondition struct {
+
+	// The key of the attribute.
+	AttributeKey ContactEvaluationAttributeKey
+
+	// The value of the attribute.
+	AttributeValue *ContactEvaluationAttributeValue
+
+	// The comparison type for the condition.
+	ComparisonType ContactEvaluationAttributeComparisonType
+
+	noSmithyDocumentSerde
+}
+
+// An object that can be used to specify tag conditions and attribute conditions
+// inside the SearchFilter for contact evaluations. This accepts an OR or AND
+// (List of List) input where:
+//
+//   - The top level list specifies conditions that need to be applied with OR
+//     operator.
+//
+//   - The inner list specifies conditions that need to be applied with AND
+//     operator.
+type ContactEvaluationAttributeFilter struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndCondition *ContactEvaluationAttributeAndCondition
+
+	// An attribute condition to apply.
+	ContactEvaluationAttributeCondition *ContactEvaluationAttributeCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []ContactEvaluationAttributeAndCondition
+
+	// A tag condition to apply.
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// The value of a contact evaluation attribute condition.
+type ContactEvaluationAttributeValue struct {
+
+	// A string value for the attribute.
+	StringValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Filters user data based on the contact information that is associated to the
 // users. It contains a list of [contact states].
 //
@@ -3664,6 +3726,14 @@ type EvaluationForm struct {
 	// Configuration for language settings of this evaluation form.
 	LanguageConfiguration *EvaluationFormLanguageConfiguration
 
+	// The timestamp when the most recent validation was started for this evaluation
+	// form.
+	LastValidationTime *time.Time
+
+	// The status of the most recent validation run for this evaluation form. Valid
+	// values: IN_PROGRESS , COMPLETED , FAILED .
+	LatestValidationStatus EvaluationFormValidationStatus
+
 	// Configuration for evaluation review settings of this evaluation form.
 	ReviewConfiguration *EvaluationReviewConfiguration
 
@@ -3938,6 +4008,19 @@ type EvaluationFormMultiSelectQuestionOption struct {
 	// This member is required.
 	Text *string
 
+	// The flag to mark the option as automatic fail. If an automatic fail answer is
+	// provided, the overall evaluation gets a score of 0.
+	AutomaticFail bool
+
+	// Information about automatic fail configuration for an evaluation form.
+	AutomaticFailConfiguration *AutomaticFailConfiguration
+
+	// The points configuration for point-based scoring.
+	PointsConfiguration *QuestionOptionPointsConfiguration
+
+	// The score assigned to the answer option.
+	Score int32
+
 	noSmithyDocumentSerde
 }
 
@@ -4008,6 +4091,9 @@ type EvaluationFormNumericQuestionOption struct {
 	// A configuration for automatic fail.
 	AutomaticFailConfiguration *AutomaticFailConfiguration
 
+	// The points configuration for point-based scoring.
+	PointsConfiguration *QuestionOptionPointsConfiguration
+
 	// The score assigned to answer values within the range option.
 	Score int32
 
@@ -4068,6 +4154,9 @@ type EvaluationFormQuestion struct {
 	// question type properties.
 	QuestionTypeProperties EvaluationFormQuestionTypeProperties
 
+	// The scoring configuration of the question.
+	ScoringConfiguration *EvaluationFormQuestionScoringConfiguration
+
 	// The scoring weight of the section.
 	Weight float64
 
@@ -4081,6 +4170,21 @@ type EvaluationFormQuestionAutomationAnswerSource struct {
 	//
 	// This member is required.
 	SourceType EvaluationFormQuestionAutomationAnswerSourceType
+
+	noSmithyDocumentSerde
+}
+
+// Scoring configuration for a question in an evaluation form.
+type EvaluationFormQuestionScoringConfiguration struct {
+
+	// The flag to exclude the question from scoring.
+	IsExcludedFromScoring bool
+
+	// The points configuration for point-based scoring.
+	PointsConfiguration *QuestionPointsConfiguration
+
+	// The score thresholds for performance categories.
+	ScoreThresholds []EvaluationFormScoreThreshold
 
 	noSmithyDocumentSerde
 }
@@ -4137,6 +4241,23 @@ type EvaluationFormQuestionTypePropertiesMemberText struct {
 
 func (*EvaluationFormQuestionTypePropertiesMemberText) isEvaluationFormQuestionTypeProperties() {}
 
+// Information about a score threshold for a performance category.
+type EvaluationFormScoreThreshold struct {
+
+	// The performance category name.
+	//
+	// This member is required.
+	PerformanceCategory PerformanceCategoryName
+
+	// The maximum score percentage for the performance category.
+	MaxScorePercentage float64
+
+	// The minimum score percentage for the performance category.
+	MinScorePercentage float64
+
+	noSmithyDocumentSerde
+}
+
 // Information about scoring strategy for an evaluation form.
 type EvaluationFormScoringStrategy struct {
 
@@ -4149,6 +4270,9 @@ type EvaluationFormScoringStrategy struct {
 	//
 	// This member is required.
 	Status EvaluationFormScoringStatus
+
+	// The score thresholds for performance categories.
+	ScoreThresholds []EvaluationFormScoreThreshold
 
 	noSmithyDocumentSerde
 }
@@ -4295,6 +4419,12 @@ type EvaluationFormSection struct {
 	// The instructions of the section.
 	Instructions *string
 
+	// The flag to exclude the section from scoring.
+	IsExcludedFromScoring bool
+
+	// The score thresholds for performance categories.
+	ScoreThresholds []EvaluationFormScoreThreshold
+
 	// The scoring weight of the section.
 	Weight float64
 
@@ -4359,6 +4489,9 @@ type EvaluationFormSingleSelectQuestionOption struct {
 
 	// Whether automatic fail is configured on a single select question.
 	AutomaticFailConfiguration *AutomaticFailConfiguration
+
+	// The points configuration for point-based scoring.
+	PointsConfiguration *QuestionOptionPointsConfiguration
 
 	// The score assigned to the answer option.
 	Score int32
@@ -4464,6 +4597,48 @@ type EvaluationFormTextQuestionProperties struct {
 
 	// The automation properties of the text question.
 	Automation *EvaluationFormTextQuestionAutomation
+
+	noSmithyDocumentSerde
+}
+
+// Information about a finding from the evaluation form validation process. Each
+// finding identifies a structural issue or quality improvement opportunity for the
+// evaluation form.
+type EvaluationFormValidationFinding struct {
+
+	// A description of the validation issue.
+	//
+	// This member is required.
+	Description *string
+
+	// A code that identifies the type of validation issue found.
+	//
+	// This member is required.
+	IssueCode *string
+
+	// The severity of the finding. Valid values: WARNING , ERROR .
+	//
+	// This member is required.
+	Severity EvaluationFormValidationFindingSeverity
+
+	// A list of evaluation form items affected by this finding.
+	Items []EvaluationFormValidationFindingItem
+
+	// A suggested fix for the validation issue.
+	Suggestion *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an evaluation form item affected by a validation finding.
+type EvaluationFormValidationFindingItem struct {
+
+	// The specific property of the evaluation form item that the finding relates to.
+	Property *string
+
+	// The identifier of the evaluation form item (question or section) affected by
+	// the finding.
+	RefId *string
 
 	noSmithyDocumentSerde
 }
@@ -4720,11 +4895,20 @@ type EvaluationScore struct {
 	// gets an automatic fail answer, this flag will be true.
 	AutomaticFail bool
 
+	// The points earned for the item.
+	EarnedPoints int32
+
+	// The maximum base points possible for the item.
+	MaxBasePoint int32
+
 	// The flag to mark the item as not applicable for scoring.
 	NotApplicable bool
 
 	// The score percentage for an item in a contact evaluation.
 	Percentage float64
+
+	// The performance category for the score.
+	PerformanceCategory PerformanceCategoryName
 
 	noSmithyDocumentSerde
 }
@@ -4761,15 +4945,12 @@ type EvaluationSearchCriteria struct {
 // Filters to be applied to search results.
 type EvaluationSearchFilter struct {
 
-	// An object that can be used to specify Tag conditions inside the SearchFilter .
-	// This accepts an OR or AND (List of List) input where:
-	//
-	//   - The top level list specifies conditions that need to be applied with OR
-	//   operator.
-	//
-	//   - The inner list specifies conditions that need to be applied with AND
-	//   operator.
+	// An object that can be used to specify tag conditions.
 	AttributeFilter *ControlPlaneAttributeFilter
+
+	// An object that can be used to specify tag conditions and attribute conditions
+	// for contact evaluations.
+	ContactEvaluationAttributeFilter *ContactEvaluationAttributeFilter
 
 	noSmithyDocumentSerde
 }
@@ -4813,6 +4994,15 @@ type EvaluationSearchMetadata struct {
 
 	// Role of a contact participant in the evaluation.
 	ContactParticipantRole ContactParticipantRole
+
+	// The points earned for the evaluation.
+	EarnedPoints *int32
+
+	// The maximum base points possible for the evaluation.
+	MaxBasePoint *int32
+
+	// The performance category for the evaluation score.
+	PerformanceCategory PerformanceCategoryName
 
 	// Identifier for the review.
 	ReviewId *string
@@ -5184,7 +5374,9 @@ type Filters struct {
 	RoutingProfiles []string
 
 	// A list of expressions as a filter, in which an expression is an object of a
-	// step in a routing criteria.
+	// step in a routing criteria. Accepts filter values up to 3,000 characters in
+	// length. Filter values are case-sensitive. JSON object key order and whitespace
+	// may be arbitrary; array order and tree structure must be preserved.
 	RoutingStepExpressions []string
 
 	// A list of up to 10 subtypes can be provided.
@@ -7781,6 +7973,35 @@ type QualityMetrics struct {
 
 	// Information about the quality of Customer media connection.
 	Customer *CustomerQualityMetrics
+
+	noSmithyDocumentSerde
+}
+
+// Information about the points configuration for an answer option.
+type QuestionOptionPointsConfiguration struct {
+
+	// The point value assigned to the answer option.
+	//
+	// This member is required.
+	PointValue int32
+
+	// The flag to mark the option as a bonus option.
+	IsBonus bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about the points configuration for a question.
+type QuestionPointsConfiguration struct {
+
+	// The flag to mark the question as a bonus question.
+	IsBonus bool
+
+	// The maximum point value.
+	MaxPointValue int32
+
+	// The minimum point value.
+	MinPointValue int32
 
 	noSmithyDocumentSerde
 }

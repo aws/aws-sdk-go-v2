@@ -56,18 +56,30 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorStringEquals              ComparisonOperator = "StringEquals"
-	ComparisonOperatorStringNotEquals           ComparisonOperator = "StringNotEquals"
-	ComparisonOperatorStringEqualsIgnoreCase    ComparisonOperator = "StringEqualsIgnoreCase"
-	ComparisonOperatorStringNotEqualsIgnoreCase ComparisonOperator = "StringNotEqualsIgnoreCase"
-	ComparisonOperatorStringLike                ComparisonOperator = "StringLike"
-	ComparisonOperatorStringNotLike             ComparisonOperator = "StringNotLike"
-	ComparisonOperatorNumericEquals             ComparisonOperator = "NumericEquals"
-	ComparisonOperatorNumericNotEquals          ComparisonOperator = "NumericNotEquals"
-	ComparisonOperatorNumericLessThan           ComparisonOperator = "NumericLessThan"
-	ComparisonOperatorNumericLessThanEquals     ComparisonOperator = "NumericLessThanEquals"
-	ComparisonOperatorNumericGreaterThan        ComparisonOperator = "NumericGreaterThan"
-	ComparisonOperatorNumericGreaterThanEquals  ComparisonOperator = "NumericGreaterThanEquals"
+	ComparisonOperatorStringEquals                      ComparisonOperator = "StringEquals"
+	ComparisonOperatorStringNotEquals                   ComparisonOperator = "StringNotEquals"
+	ComparisonOperatorStringEqualsIgnoreCase            ComparisonOperator = "StringEqualsIgnoreCase"
+	ComparisonOperatorStringNotEqualsIgnoreCase         ComparisonOperator = "StringNotEqualsIgnoreCase"
+	ComparisonOperatorStringLike                        ComparisonOperator = "StringLike"
+	ComparisonOperatorStringNotLike                     ComparisonOperator = "StringNotLike"
+	ComparisonOperatorNumericEquals                     ComparisonOperator = "NumericEquals"
+	ComparisonOperatorNumericNotEquals                  ComparisonOperator = "NumericNotEquals"
+	ComparisonOperatorNumericLessThan                   ComparisonOperator = "NumericLessThan"
+	ComparisonOperatorNumericLessThanEquals             ComparisonOperator = "NumericLessThanEquals"
+	ComparisonOperatorNumericGreaterThan                ComparisonOperator = "NumericGreaterThan"
+	ComparisonOperatorNumericGreaterThanEquals          ComparisonOperator = "NumericGreaterThanEquals"
+	ComparisonOperatorStringEqualsIfExists              ComparisonOperator = "StringEqualsIfExists"
+	ComparisonOperatorStringNotEqualsIfExists           ComparisonOperator = "StringNotEqualsIfExists"
+	ComparisonOperatorStringEqualsIgnoreCaseIfExists    ComparisonOperator = "StringEqualsIgnoreCaseIfExists"
+	ComparisonOperatorStringNotEqualsIgnoreCaseIfExists ComparisonOperator = "StringNotEqualsIgnoreCaseIfExists"
+	ComparisonOperatorStringLikeIfExists                ComparisonOperator = "StringLikeIfExists"
+	ComparisonOperatorStringNotLikeIfExists             ComparisonOperator = "StringNotLikeIfExists"
+	ComparisonOperatorNumericEqualsIfExists             ComparisonOperator = "NumericEqualsIfExists"
+	ComparisonOperatorNumericNotEqualsIfExists          ComparisonOperator = "NumericNotEqualsIfExists"
+	ComparisonOperatorNumericLessThanIfExists           ComparisonOperator = "NumericLessThanIfExists"
+	ComparisonOperatorNumericLessThanEqualsIfExists     ComparisonOperator = "NumericLessThanEqualsIfExists"
+	ComparisonOperatorNumericGreaterThanIfExists        ComparisonOperator = "NumericGreaterThanIfExists"
+	ComparisonOperatorNumericGreaterThanEqualsIfExists  ComparisonOperator = "NumericGreaterThanEqualsIfExists"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -88,6 +100,18 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 		"NumericLessThanEquals",
 		"NumericGreaterThan",
 		"NumericGreaterThanEquals",
+		"StringEqualsIfExists",
+		"StringNotEqualsIfExists",
+		"StringEqualsIgnoreCaseIfExists",
+		"StringNotEqualsIgnoreCaseIfExists",
+		"StringLikeIfExists",
+		"StringNotLikeIfExists",
+		"NumericEqualsIfExists",
+		"NumericNotEqualsIfExists",
+		"NumericLessThanIfExists",
+		"NumericLessThanEqualsIfExists",
+		"NumericGreaterThanIfExists",
+		"NumericGreaterThanEqualsIfExists",
 	}
 }
 

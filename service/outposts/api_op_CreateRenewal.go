@@ -52,6 +52,9 @@ type CreateRenewalInput struct {
 
 type CreateRenewalOutput struct {
 
+	// The currency of the renewal price.
+	Currency types.CurrencyCode
+
 	// The monthly recurring price of the renewal.
 	MonthlyRecurringPrice *float32
 

@@ -5676,10 +5676,8 @@ const (
 	SpaceQuickSightResourceTypeTopic           SpaceQuickSightResourceType = "TOPIC"
 	SpaceQuickSightResourceTypeDashboard       SpaceQuickSightResourceType = "DASHBOARD"
 	SpaceQuickSightResourceTypeKnowledgeBase   SpaceQuickSightResourceType = "KNOWLEDGE_BASE"
-	SpaceQuickSightResourceTypeSpace           SpaceQuickSightResourceType = "SPACE"
 	SpaceQuickSightResourceTypeActionConnector SpaceQuickSightResourceType = "ACTION_CONNECTOR"
 	SpaceQuickSightResourceTypeDataSet         SpaceQuickSightResourceType = "DATA_SET"
-	SpaceQuickSightResourceTypeArtifact        SpaceQuickSightResourceType = "ARTIFACT"
 )
 
 // Values returns all known values for SpaceQuickSightResourceType. Note that this
@@ -5691,10 +5689,8 @@ func (SpaceQuickSightResourceType) Values() []SpaceQuickSightResourceType {
 		"TOPIC",
 		"DASHBOARD",
 		"KNOWLEDGE_BASE",
-		"SPACE",
 		"ACTION_CONNECTOR",
 		"DATA_SET",
-		"ARTIFACT",
 	}
 }
 

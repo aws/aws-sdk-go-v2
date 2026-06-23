@@ -21,6 +21,40 @@
                 "smithy.api#documentation": "<p>Contains details about the OpenAPI schema for the action group. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html\">Action group OpenAPI schemas</a>. You can either include the schema directly in the <code>payload</code> field or you can upload it to an S3 bucket and specify the S3 bucket location in the <code>s3</code> field.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#AccessControlAccess": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access level for an access control entry.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#AccessControlPrincipalType": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of principal in an access control entry.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -1505,6 +1539,15 @@
             "version": "2023-06-05",
             "operations": [
                 {
+                    "target": "com.amazonaws.bedrockagent#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#PutResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.bedrockagent#ValidateFlowDefinition"
                 }
             ],
@@ -2632,7 +2675,7 @@
             "member": {
                 "target": "com.amazonaws.bedrockagent#AudioConfiguration",
                 "traits": {
-                    "smithy.api#documentation": "Audio configuration for multi modal ingestion."
+                    "smithy.api#documentation": "<p>Audio configuration for multi modal ingestion.</p>"
                 }
             },
             "traits": {
@@ -2640,6 +2683,21 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#AudioExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "audioExtractionStatus": {
+                    "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
+                    "traits": {
+                        "smithy.api#documentation": "Whether audio extraction is enabled or disabled.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for audio extraction.</p>"
             }
         },
         "com.amazonaws.bedrockagent#AudioSegmentationConfiguration": {
@@ -3120,7 +3178,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration information to connect to Confluence as your data source.</p>"
+                "smithy.api#documentation": "<p>The configuration information to connect to Confluence as your data source for self-managed knowledge bases.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ConfluenceHostType": {
@@ -3782,7 +3840,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul> <note> <p>For managed knowledge bases, the only supported option is <code>DELETE</code>, which is also the default.</p> </note>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
@@ -4340,7 +4398,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a knowledge base. A knowledge base contains your data sources so that Large Language Models (LLMs) can use your data. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html\">Set up a knowledge base</a>.</p> <note> <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p> </note> <ul> <li> <p>Provide the <code>name</code> and an optional <code>description</code>.</p> </li> <li> <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p> </li> <li> <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p> </li> <li> <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p> <ul> <li> <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p> </li> <li> <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p> </li> <li> <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p> </li> <li> <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p> </li> </ul> </li> </ul>",
+                "smithy.api#documentation": "<p>Creates a knowledge base. A knowledge base contains your data sources so that Large Language Models (LLMs) can use your data. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html\">Set up a knowledge base</a>.</p> <note> <p>To create a managed knowledge base, provide a <code>managedKnowledgeBaseConfiguration</code> during creation. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html\">Build a managed knowledge base</a>.</p> </note> <ul> <li> <p>Provide the <code>name</code> and an optional <code>description</code>.</p> </li> <li> <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p> </li> <li> <p>For managed knowledge bases, set <code>embeddingModelType</code> to <code>MANAGED</code> to use the service-managed embedding model, or <code>CUSTOM</code> with an <code>embeddingModelArn</code> to use your own. To use your own KMS key for encryption, provide the ARN in <code>serverSideEncryptionConfiguration</code>. No vector store configuration is required for managed knowledge bases.</p> </li> <li> <p>For self-managed knowledge bases, provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p> </li> <li> <p>For self-managed knowledge bases, provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p> <ul> <li> <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p> </li> <li> <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p> </li> <li> <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p> </li> <li> <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p> </li> </ul> </li> </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -5070,34 +5128,40 @@
                         "smithy.api#required": {}
                     }
                 },
+                "managedKnowledgeBaseConnectorConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#ManagedKnowledgeBaseConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration for a data source that connects a managed knowledge base to a supported data source connector. Specify this object when the data source type is <code>MANAGED_KNOWLEDGE_BASE_CONNECTOR</code>.</p>"
+                    }
+                },
                 "s3Configuration": {
                     "target": "com.amazonaws.bedrockagent#S3DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to Amazon S3 as your data source.</p>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to Amazon S3 as your data source for self-managed knowledge bases. To configure this data source for managed knowledge bases, use <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html\">managedKnowledgeBaseConnectorConfiguration</a>.</p>"
                     }
                 },
                 "webConfiguration": {
                     "target": "com.amazonaws.bedrockagent#WebDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of web URLs to crawl for your data source. You should be authorized to crawl the URLs.</p> <note> <p>Crawling web URLs as your data source is in preview release and is subject to change.</p> </note>"
+                        "smithy.api#documentation": "<p>The configuration of web URLs to crawl for your data source. You should be authorized to crawl the URLs.</p> <note> <p>To configure this data source for managed knowledge bases, use <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html\">managedKnowledgeBaseConnectorConfiguration</a>. Web crawler data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>"
                     }
                 },
                 "confluenceConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ConfluenceDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to Confluence as your data source.</p> <note> <p>Confluence data source connector is in preview release and is subject to change.</p> </note>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to Confluence as your data source for self-managed knowledge bases.</p> <note> <p>To configure this data source for managed knowledge bases, use <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html\">managedKnowledgeBaseConnectorConfiguration</a>. Confluence data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>"
                     }
                 },
                 "salesforceConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SalesforceDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to Salesforce as your data source.</p> <note> <p>Salesforce data source connector is in preview release and is subject to change.</p> </note>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to Salesforce as your data source.</p> <note> <p>Salesforce data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>"
                     }
                 },
                 "sharePointConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SharePointDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to SharePoint as your data source.</p> <note> <p>SharePoint data source connector is in preview release and is subject to change.</p> </note>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to SharePoint as your data source for self-managed knowledge bases.</p> <note> <p>To configure this data source for managed knowledge bases, use <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html\">managedKnowledgeBaseConnectorConfiguration</a>. SharePoint data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>"
                     }
                 }
             },
@@ -5144,6 +5208,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETE_UNSUCCESSFUL"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
                     }
                 }
             }
@@ -5246,6 +5328,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REDSHIFT_METADATA"
+                    }
+                },
+                "MANAGED_KNOWLEDGE_BASE_CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_KNOWLEDGE_BASE_CONNECTOR"
                     }
                 }
             }
@@ -6237,6 +6325,114 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the resource policy associated with a knowledge base. After deletion, other AWS accounts can no longer access the knowledge base using cross-account permissions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/resourcepolicy/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base to remove the resource policy from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedRevisionId": {
+                    "target": "com.amazonaws.bedrockagent#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected revision identifier of the resource policy. Use this to prevent conflicts when multiple users update the same policy concurrently.</p>",
+                        "smithy.api#httpQuery": "expectedRevisionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#DeleteResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the knowledge base that the resource policy was removed from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.bedrockagent#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision identifier after the resource policy was deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#DeletionProtectionConfiguration": {
+            "type": "structure",
+            "members": {
+                "deletionProtectionStatus": {
+                    "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable or disable deletion protection for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtectionThreshold": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 15,
+                        "smithy.api#documentation": "<p>The threshold is the maximum percentage of documents that a sync job can delete from your index. If a sync would delete more than this percentage, the sync skips its delete phase, leaving your indexed documents in place. Not supported for the Custom connector.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for deletion protection.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#Description": {
             "type": "string",
             "traits": {
@@ -6424,6 +6620,52 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#DocumentAccessControlEntry": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user identifier.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#AccessControlPrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of principal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "access": {
+                    "target": "com.amazonaws.bedrockagent#AccessControlAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to allow or deny access.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An access control entry specifying a principal and their access level.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#DocumentAccessControlList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#DocumentAccessControlEntry"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of access control entries for a document.</p>",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#DocumentContent": {
             "type": "structure",
             "members": {
@@ -6514,6 +6756,12 @@
                     "target": "com.amazonaws.bedrockagent#CustomS3Location",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 location of the file containing metadata to associate with the content to ingest.</p>"
+                    }
+                },
+                "accessControlList": {
+                    "target": "com.amazonaws.bedrockagent#DocumentAccessControlList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access control list for the document. Used when metadata type is IN_LINE_ATTRIBUTE.</p>"
                     }
                 }
             },
@@ -6686,6 +6934,26 @@
                 "smithy.api#documentation": "<p>The configuration details for the embeddings model.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#EmbeddingModelType": {
+            "type": "enum",
+            "members": {
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Choose <code>CUSTOM</code> to provide your own Bedrock embedding model ARN. Choose <code>MANAGED</code> to use a service-managed embedding model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-create.html#kb-managed-embedding-models\">Embedding model options</a>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#EnabledMemoryTypes": {
             "type": "list",
             "member": {
@@ -6695,6 +6963,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#EnabledOrDisabledState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
                 }
             }
         },
@@ -6833,7 +7118,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of tokens to include in a chunk.</p>",
                         "smithy.api#range": {
-                            "min": 1
+                            "min": 1,
+                            "max": 8192
                         },
                         "smithy.api#required": {}
                     }
@@ -9268,6 +9554,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.bedrockagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>",
+                        "smithy.api#httpQuery": "includedData"
+                    }
                 }
             },
             "traits": {
@@ -9417,6 +9710,13 @@
                         "smithy.api#documentation": "<p>The version of the flow for which to get information.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.bedrockagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>",
+                        "smithy.api#httpQuery": "includedData"
                     }
                 }
             },
@@ -9794,6 +10094,13 @@
                         "smithy.api#documentation": "<p>The version of the prompt about which you want to retrieve information. Omit this field to return information about the working draft of the prompt.</p>",
                         "smithy.api#httpQuery": "promptVersion"
                     }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.bedrockagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>",
+                        "smithy.api#httpQuery": "includedData"
+                    }
                 }
             },
             "traits": {
@@ -9866,6 +10173,86 @@
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the prompt was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the resource policy associated with a knowledge base.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/resourcepolicy/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base to retrieve the resource policy for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the knowledge base that the resource policy is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.bedrockagent#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON-formatted resource policy associated with the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.bedrockagent#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision identifier of the resource policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9989,6 +10376,21 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z]{10}$"
             }
         },
+        "com.amazonaws.bedrockagent#ImageExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageExtractionStatus": {
+                    "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
+                    "traits": {
+                        "smithy.api#documentation": "Whether image extraction is enabled or disabled.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for image extraction.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#IncludeExclude": {
             "type": "enum",
             "members": {
@@ -10002,6 +10404,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#IncludedData": {
+            "type": "enum",
+            "members": {
+                "ALL_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_DATA"
+                    }
+                },
+                "METADATA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_ONLY"
                     }
                 }
             }
@@ -10458,6 +10877,13 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of source documents that failed to be ingested.</p>"
                     }
+                },
+                "numberOfDocumentsSkipped": {
+                    "target": "smithy.api#PrimitiveLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of source documents that were skipped during ingestion.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10872,7 +11298,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data that the data source is converted into for the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The type of data that the data source is converted into for the knowledge base. Choose <code>MANAGED</code> to create a managed knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10881,6 +11307,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about the model that's used to convert the data source into vector embeddings.</p>"
                     }
+                },
+                "managedKnowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#ManagedKnowledgeBaseConfiguration"
                 },
                 "kendraKnowledgeBaseConfiguration": {
                     "target": "com.amazonaws.bedrockagent#KendraKnowledgeBaseConfiguration",
@@ -11221,6 +11650,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETE_UNSUCCESSFUL"
                     }
+                },
+                "UPDATE_UNSUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_UNSUCCESSFUL"
+                    }
                 }
             }
         },
@@ -11275,6 +11710,9 @@
                         "smithy.api#enumValue": "S3_VECTORS"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The storage type of a knowledge base.</p>"
             }
         },
         "com.amazonaws.bedrockagent#KnowledgeBaseSummaries": {
@@ -11355,7 +11793,16 @@
                     "traits": {
                         "smithy.api#enumValue": "SQL"
                     }
+                },
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a knowledge base.</p>"
             }
         },
         "com.amazonaws.bedrockagent#LambdaArn": {
@@ -12941,6 +13388,55 @@
                 "smithy.api#documentation": "<p>Details about a malformed input expression in a node.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#ManagedKnowledgeBaseConfiguration": {
+            "type": "structure",
+            "members": {
+                "embeddingModelType": {
+                    "target": "com.amazonaws.bedrockagent#EmbeddingModelType"
+                },
+                "embeddingModelArn": {
+                    "target": "com.amazonaws.bedrockagent#BedrockEmbeddingModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the embeddings model.</p>"
+                    }
+                },
+                "embeddingModelConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#EmbeddingModelConfiguration"
+                },
+                "serverSideEncryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configurations for a managed knowledge base.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ManagedKnowledgeBaseConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "deletionProtectionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#DeletionProtectionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A safeguard against accidental bulk deletion of indexed content.</p>"
+                    }
+                },
+                "mediaExtractionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#MediaExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for extracting media (images, audio, video) from data source files.</p>"
+                    }
+                },
+                "connectorParameters": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connector-specific parameters. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-connect-ds.html\">Connect a data source</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for managed knowledge base connector data sources.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#MaxRecentSessions": {
             "type": "integer",
             "traits": {
@@ -12964,6 +13460,32 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#MediaExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageExtractionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#ImageExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for image extraction.</p>"
+                    }
+                },
+                "audioExtractionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#AudioExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for audio extraction.</p>"
+                    }
+                },
+                "videoExtractionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#VideoExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for video extraction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for media extraction settings.</p>"
             }
         },
         "com.amazonaws.bedrockagent#MemoryConfiguration": {
@@ -13925,7 +14447,7 @@
                 "parsingStrategy": {
                     "target": "com.amazonaws.bedrockagent#ParsingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parsing strategy for the data source.</p>",
+                        "smithy.api#documentation": "<p>The parsing strategy for the data source. Only <code>SMART_PARSING</code> can be selected for managed knowledge bases. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html\">Customize ingestion for managed knowledge bases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13994,6 +14516,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BEDROCK_DATA_AUTOMATION"
+                    }
+                },
+                "SMART_PARSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_PARSING"
                     }
                 }
             }
@@ -15020,6 +15548,95 @@
                 "smithy.api#pattern": "^((([0-9a-zA-Z][_-]?){1,63})|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:provisioned-model/[a-z0-9]{12}))$"
             }
         },
+        "com.amazonaws.bedrockagent#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a resource policy with a knowledge base. A resource policy allows other AWS accounts to access the knowledge base. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-cross-account.html\">Cross-account access for knowledge bases</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/resourcepolicy/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base to attach the resource policy to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.bedrockagent#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON-formatted resource policy to associate with the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedRevisionId": {
+                    "target": "com.amazonaws.bedrockagent#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected revision identifier of the resource policy. Use this to prevent conflicts when multiple users update the same policy concurrently. Specify the <code>revisionId</code> from the most recent <code>GetResourcePolicy</code> or <code>PutResourcePolicy</code> response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the knowledge base that the resource policy was attached to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.bedrockagent#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision identifier of the resource policy. Use this value in the <code>expectedRevisionId</code> field of a subsequent <code>PutResourcePolicy</code> or <code>DeleteResourcePolicy</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagent#QueryEngineType": {
             "type": "enum",
             "members": {
@@ -15765,6 +16382,16 @@
                 "smithy.api#documentation": "<p>Configures the metadata fields to include or exclude during the reranking process when using selective mode.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$"
+            }
+        },
         "com.amazonaws.bedrockagent#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -15776,6 +16403,17 @@
                 "smithy.api#documentation": "<p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bedrockagent#ResourcePolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20480
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.bedrockagent#RetrievalFlowNodeConfiguration": {
@@ -15822,6 +16460,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configurations for the service to use for retrieving data to return as the output from the node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.bedrockagent#S3BucketArn": {
@@ -15893,7 +16540,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration information to connect to Amazon S3 as your data source.</p>"
+                "smithy.api#documentation": "<p>The configuration information to connect to Amazon S3 as your data source for self-managed knowledge bases. To configure this data source for managed knowledge bases, use <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html\">managedKnowledgeBaseConnectorConfiguration</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagent#S3Identifier": {
@@ -16114,7 +16761,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of tokens that a chunk can contain.</p>",
                         "smithy.api#range": {
-                            "min": 1
+                            "min": 1,
+                            "max": 8192
                         },
                         "smithy.api#required": {}
                     }
@@ -16157,7 +16805,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the configuration for server-side encryption.</p>"
+                "smithy.api#documentation": "<p>Contains the configuration for server-side encryption for your managed knowledge base.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ServiceQuotaExceededException": {
@@ -16246,7 +16894,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration information to connect to SharePoint as your data source.</p>"
+                "smithy.api#documentation": "<p>The configuration information to connect to SharePoint as your data source for self-managed knowledge bases.</p>"
             }
         },
         "com.amazonaws.bedrockagent#SharePointDomain": {
@@ -16740,13 +17388,13 @@
                 "storageLocations": {
                     "target": "com.amazonaws.bedrockagent#SupplementalDataStorageLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of objects specifying storage locations for images extracted from multimodal documents in your data source.</p>",
+                        "smithy.api#documentation": "<p>A list of objects specifying storage locations for multimedia content (images, audio, and video) extracted from multimodal documents in your data source.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configurations for the storage location of the images extracted from multimodal documents in your data source. These images can be retrieved and returned to the end user.</p>"
+                "smithy.api#documentation": "<p>Specifies configurations for the storage location of multimedia content (images, audio, and video) extracted from multimodal documents in your data source. This content can be retrieved and returned to the end user with timestamp references for audio and video segments.</p>"
             }
         },
         "com.amazonaws.bedrockagent#SupplementalDataStorageLocation": {
@@ -16762,12 +17410,12 @@
                 "s3Location": {
                     "target": "com.amazonaws.bedrockagent#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the Amazon S3 location for the extracted images.</p>"
+                        "smithy.api#documentation": "<p>Contains information about the Amazon S3 location for the extracted multimedia content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a storage location for images extracted from multimodal documents in your data source.</p>"
+                "smithy.api#documentation": "<p>Contains information about a storage location for multimedia content (images, audio, and video) extracted from multimodal documents in your data source.</p>"
             }
         },
         "com.amazonaws.bedrockagent#SupplementalDataStorageLocationType": {
@@ -19230,7 +19878,7 @@
             "member": {
                 "target": "com.amazonaws.bedrockagent#VideoConfiguration",
                 "traits": {
-                    "smithy.api#documentation": "Video configuration for multi modal ingestion."
+                    "smithy.api#documentation": "<p>Video configuration for multi modal ingestion.</p>"
                 }
             },
             "traits": {
@@ -19238,6 +19886,21 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#VideoExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "videoExtractionStatus": {
+                    "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
+                    "traits": {
+                        "smithy.api#documentation": "Whether video extraction is enabled or disabled.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for video extraction.</p>"
             }
         },
         "com.amazonaws.bedrockagent#VideoSegmentationConfiguration": {

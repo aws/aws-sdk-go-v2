@@ -16,6 +16,9 @@ import (
 //
 // A single call might return only a partial list of the rules. For information,
 // see MaxResults .
+//
+// For rules that require asynchronous provisioning, the response includes Status
+// (see FirewallRuleStatus) and, on failure, StatusMessage with the reason.
 func (c *Client) ListFirewallRules(ctx context.Context, params *ListFirewallRulesInput, optFns ...func(*Options)) (*ListFirewallRulesOutput, error) {
 	if params == nil {
 		params = &ListFirewallRulesInput{}

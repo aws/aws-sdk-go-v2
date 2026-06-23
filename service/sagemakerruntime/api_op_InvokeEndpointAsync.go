@@ -51,13 +51,21 @@ type InvokeEndpointAsyncInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// The Amazon S3 URI where the inference request payload is stored.
-	//
-	// This member is required.
-	InputLocation *string
-
 	// The desired MIME type of the inference response from the model container.
 	Accept *string
+
+	// Provides inline input data for the inference request, in the format specified
+	// in the ContentType request header. Use this parameter to send the request
+	// payload directly in the API call instead of uploading it to Amazon S3 and
+	// referencing it with InputLocation . The inline payload can be up to 128,000
+	// bytes.
+	//
+	// Body and InputLocation are mutually exclusive. Provide exactly one of them.
+	//
+	// For information about the format of the request body, see [Common Data Formats-Inference].
+	//
+	// [Common Data Formats-Inference]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+	Body []byte
 
 	// The MIME type of the input data in the request body.
 	ContentType *string
@@ -89,6 +97,9 @@ type InvokeEndpointAsyncInput struct {
 	// The identifier for the inference request. Amazon SageMaker AI will generate an
 	// identifier for you if none is specified.
 	InferenceId *string
+
+	// The Amazon S3 URI where the inference request payload is stored.
+	InputLocation *string
 
 	// Maximum amount of time in seconds a request can be processed before it is
 	// marked as expired. The default is 15 minutes, or 900 seconds.

@@ -497,6 +497,21 @@ type PendingLogs struct {
 	noSmithyDocumentSerde
 }
 
+// Returns info about the resource share error after updating the broker.
+type ResourceShareError struct {
+
+	// The error code of the resource share.
+	ErrorCode *string
+
+	// The ARN of the resource share.
+	ResourceShareArn *string
+
+	// The status of the resource share.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Returns information about the configuration element or attribute that was
 // sanitized in the configuration.
 type SanitizationWarning struct {
@@ -511,6 +526,53 @@ type SanitizationWarning struct {
 
 	// The name of the configuration element that has been sanitized.
 	ElementName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a resource that is shared with the broker, including its type, ARN,
+// and current status.
+type SharedResource struct {
+
+	// The ARN of the shared resource.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The status of the shared resource.
+	//
+	// This member is required.
+	Status SharedResourceStatus
+
+	// The type of shared resource.
+	//
+	// This member is required.
+	Type SharedResourceType
+
+	// The DNS names accessible by the broker.
+	DnsNames []string
+
+	// Information on the error encountered by the resource.
+	Error *SharedResourceError
+
+	// The resource share ARNs to which the resource belongs.
+	ResourceShareArns []string
+
+	noSmithyDocumentSerde
+}
+
+// Information on the error encountered by the resource.
+type SharedResourceError struct {
+
+	// The error code associated with the error.
+	//
+	// This member is required.
+	Code SharedResourceErrorCode
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
 
 	noSmithyDocumentSerde
 }

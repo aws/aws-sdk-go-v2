@@ -8160,6 +8160,11 @@ func awsAwsjson11_serializeDocumentCustomDomainConfigType(v *types.CustomDomainC
 		ok.String(*v.CertificateArn)
 	}
 
+	if len(v.SecurityPolicy) > 0 {
+		ok := object.Key("SecurityPolicy")
+		ok.String(string(v.SecurityPolicy))
+	}
+
 	return nil
 }
 

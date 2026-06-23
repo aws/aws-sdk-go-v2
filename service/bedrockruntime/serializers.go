@@ -649,6 +649,96 @@ func awsRestjson1_serializeOpHttpBindingsGetAsyncInvokeInput(v *GetAsyncInvokeIn
 	return nil
 }
 
+type awsRestjson1_serializeOpInvokeGuardrailChecks struct {
+}
+
+func (*awsRestjson1_serializeOpInvokeGuardrailChecks) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInvokeGuardrailChecks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InvokeGuardrailChecksInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/guardrail-checks/invoke")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentInvokeGuardrailChecksInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsInvokeGuardrailChecksInput(v *InvokeGuardrailChecksInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentInvokeGuardrailChecksInput(v *InvokeGuardrailChecksInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Checks != nil {
+		ok := object.Key("checks")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksConfig(v.Checks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Messages != nil {
+		ok := object.Key("messages")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksMessageList(v.Messages, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpInvokeModel struct {
 }
 
@@ -1852,6 +1942,215 @@ func awsRestjson1_serializeDocumentErrorBlock(v *types.ErrorBlock, value smithyj
 		ok.String(*v.Message)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksConfig(v *types.GuardrailChecksConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContentFilter != nil {
+		ok := object.Key("contentFilter")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksContentFilterConfig(v.ContentFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PromptAttack != nil {
+		ok := object.Key("promptAttack")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksPromptAttackConfig(v.PromptAttack, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SensitiveInformation != nil {
+		ok := object.Key("sensitiveInformation")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksSensitiveInformationConfig(v.SensitiveInformation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksContentBlock(v types.GuardrailChecksContentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.GuardrailChecksContentBlockMemberText:
+		av := object.Key("text")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksContentBlockList(v []types.GuardrailChecksContentBlock, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentGuardrailChecksContentBlock(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksContentFilterCategoryConfig(v *types.GuardrailChecksContentFilterCategoryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Category) > 0 {
+		ok := object.Key("category")
+		ok.String(string(v.Category))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksContentFilterCategoryConfigList(v []types.GuardrailChecksContentFilterCategoryConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGuardrailChecksContentFilterCategoryConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksContentFilterConfig(v *types.GuardrailChecksContentFilterConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Categories != nil {
+		ok := object.Key("categories")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksContentFilterCategoryConfigList(v.Categories, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksMessage(v *types.GuardrailChecksMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksContentBlockList(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Role) > 0 {
+		ok := object.Key("role")
+		ok.String(string(v.Role))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksMessageList(v []types.GuardrailChecksMessage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGuardrailChecksMessage(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksPromptAttackCategoryConfig(v *types.GuardrailChecksPromptAttackCategoryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Category) > 0 {
+		ok := object.Key("category")
+		ok.String(string(v.Category))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksPromptAttackCategoryConfigList(v []types.GuardrailChecksPromptAttackCategoryConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGuardrailChecksPromptAttackCategoryConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksPromptAttackConfig(v *types.GuardrailChecksPromptAttackConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Categories != nil {
+		ok := object.Key("categories")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksPromptAttackCategoryConfigList(v.Categories, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksSensitiveInformationConfig(v *types.GuardrailChecksSensitiveInformationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entities != nil {
+		ok := object.Key("entities")
+		if err := awsRestjson1_serializeDocumentGuardrailChecksSensitiveInformationEntityConfigList(v.Entities, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksSensitiveInformationEntityConfig(v *types.GuardrailChecksSensitiveInformationEntityConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailChecksSensitiveInformationEntityConfigList(v []types.GuardrailChecksSensitiveInformationEntityConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGuardrailChecksSensitiveInformationEntityConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

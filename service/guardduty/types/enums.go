@@ -42,6 +42,23 @@ func (AutoEnableMembers) Values() []AutoEnableMembers {
 	}
 }
 
+type CloudProvider string
+
+// Enum values for CloudProvider
+const (
+	CloudProviderAws CloudProvider = "AWS"
+)
+
+// Values returns all known values for CloudProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudProvider) Values() []CloudProvider {
+	return []CloudProvider{
+		"AWS",
+	}
+}
+
 type ClusterStatus string
 
 // Enum values for ClusterStatus
@@ -66,6 +83,29 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"FAILED",
 		"UPDATING",
 		"PENDING",
+	}
+}
+
+type Confidence string
+
+// Enum values for Confidence
+const (
+	ConfidenceUnknown Confidence = "Unknown"
+	ConfidenceLow     Confidence = "Low"
+	ConfidenceMedium  Confidence = "Medium"
+	ConfidenceHigh    Confidence = "High"
+)
+
+// Values returns all known values for Confidence. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Confidence) Values() []Confidence {
+	return []Confidence{
+		"Unknown",
+		"Low",
+		"Medium",
+		"High",
 	}
 }
 
@@ -719,6 +759,52 @@ func (IndicatorType) Values() []IndicatorType {
 	}
 }
 
+type InvestigationSortField string
+
+// Enum values for InvestigationSortField
+const (
+	InvestigationSortFieldStartTime  InvestigationSortField = "START_TIME"
+	InvestigationSortFieldEndTime    InvestigationSortField = "END_TIME"
+	InvestigationSortFieldStatus     InvestigationSortField = "STATUS"
+	InvestigationSortFieldRiskLevel  InvestigationSortField = "RISK_LEVEL"
+	InvestigationSortFieldConfidence InvestigationSortField = "CONFIDENCE"
+)
+
+// Values returns all known values for InvestigationSortField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationSortField) Values() []InvestigationSortField {
+	return []InvestigationSortField{
+		"START_TIME",
+		"END_TIME",
+		"STATUS",
+		"RISK_LEVEL",
+		"CONFIDENCE",
+	}
+}
+
+type InvestigationStatus string
+
+// Enum values for InvestigationStatus
+const (
+	InvestigationStatusRunning   InvestigationStatus = "RUNNING"
+	InvestigationStatusCompleted InvestigationStatus = "COMPLETED"
+	InvestigationStatusFailed    InvestigationStatus = "FAILED"
+)
+
+// Values returns all known values for InvestigationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationStatus) Values() []InvestigationStatus {
+	return []InvestigationStatus{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type IpSetFormat string
 
 // Enum values for IpSetFormat
@@ -1248,6 +1334,31 @@ func (ResourceType) Values() []ResourceType {
 		"EKS",
 		"ECS",
 		"EC2",
+	}
+}
+
+type RiskLevel string
+
+// Enum values for RiskLevel
+const (
+	RiskLevelInfo     RiskLevel = "Info"
+	RiskLevelLow      RiskLevel = "Low"
+	RiskLevelMedium   RiskLevel = "Medium"
+	RiskLevelHigh     RiskLevel = "High"
+	RiskLevelCritical RiskLevel = "Critical"
+)
+
+// Values returns all known values for RiskLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RiskLevel) Values() []RiskLevel {
+	return []RiskLevel{
+		"Info",
+		"Low",
+		"Medium",
+		"High",
+		"Critical",
 	}
 }
 

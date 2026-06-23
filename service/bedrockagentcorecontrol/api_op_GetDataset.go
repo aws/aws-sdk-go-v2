@@ -10,25 +10,10 @@ import (
 	"time"
 )
 
-// Retrieves dataset metadata only.
+//	Retrieves dataset metadata. Use the datasetVersion query parameter to retrieve
 //
-// Use ?datasetVersion=DRAFT or ?datasetVersion=N to retrieve a specific version's
-// metadata. If absent, defaults to DRAFT (the mutable working copy). Returns
-// ResourceNotFoundException if the specified version is not found.
-//
-// Initial state after CreateDataset: When CreateDataset completes successfully
-// (status transitions to ACTIVE), only a DRAFT working copy exists. No published
-// versions exist until CreateDatasetVersion is called. At this point draftStatus
-// is MODIFIED because the DRAFT has content that has never been published.
-//
-// Default version behavior: When datasetVersion is omitted, the operation returns
-// the DRAFT working copy. To retrieve a specific published version, pass the
-// version number as a string (e.g. ?datasetVersion=1 ).
-//
-// State guard: Allowed for all statuses including DELETING. Returns the dataset
-// record with its current status so callers can observe the deletion in progress.
-//
-// For paginated example IDs use ListDatasetExamples.
+// a specific version's metadata. If absent, defaults to DRAFT. For paginated
+// example content, use ListDatasetExamples .
 func (c *Client) GetDataset(ctx context.Context, params *GetDatasetInput, optFns ...func(*Options)) (*GetDatasetOutput, error) {
 	if params == nil {
 		params = &GetDatasetInput{}
@@ -51,7 +36,7 @@ type GetDatasetInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Version to retrieve: "DRAFT" or a version number. Defaults to DRAFT if absent.
+	//  Version to retrieve: "DRAFT" or a version number. Defaults to DRAFT if absent.
 	DatasetVersion *string
 
 	noSmithyDocumentSerde
@@ -79,17 +64,17 @@ type GetDatasetOutput struct {
 	// This member is required.
 	DatasetName *string
 
-	// The resolved version: "DRAFT" (default) or the requested version number.
+	//  The resolved version: "DRAFT" (default) or the requested version number.
 	//
 	// This member is required.
 	DatasetVersion *string
 
-	// Example count for DRAFT.
+	//  The number of examples in the DRAFT.
 	//
 	// This member is required.
 	ExampleCount *int64
 
-	// The schema type declared at create time. Immutable after creation.
+	//  The schema type declared at create time. Immutable after creation.
 	//
 	// This member is required.
 	SchemaType types.DatasetSchemaType
@@ -107,23 +92,25 @@ type GetDatasetOutput struct {
 	//  The description of the dataset.
 	Description *string
 
-	// Presigned S3 URL to download the consolidated dataset.jsonl file for the
-	// resolved version (DRAFT or published). TTL: 5 minutes. Omitted if the file does
-	// not yet exist (e.g. during CREATING) or on presign failure.
+	//  Presigned Amazon S3 URL to download the consolidated dataset file for the
+	// resolved version. Expires after 5 minutes. Omitted if the file does not yet
+	// exist.
 	DownloadUrl *string
 
-	// Expiry timestamp for downloadUrl.
+	//  Expiry timestamp for the download URL.
 	DownloadUrlExpiresAt *time.Time
 
-	// Publish synchronization state. Only authoritative when status == ACTIVE.
-	// MODIFIED — DRAFT has unpublished changes (or no published versions yet).
-	// UNMODIFIED — DRAFT matches the latest published version exactly.
+	//  Publish synchronization state. Only authoritative when status is ACTIVE.
+	// MODIFIED indicates DRAFT has unpublished changes. UNMODIFIED indicates DRAFT
+	// matches the latest published version.
 	DraftStatus types.DraftStatus
 
-	// Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED.
+	//  Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED.
+	// Describes the reason for the failure.
 	FailureReason *string
 
-	// AWS KMS key ARN used for SSE-KMS on service S3 writes, if configured.
+	//  KMS key ARN used for server-side encryption on service Amazon S3 writes, if
+	// configured.
 	KmsKeyArn *string
 
 	//  The tags associated with the dataset.

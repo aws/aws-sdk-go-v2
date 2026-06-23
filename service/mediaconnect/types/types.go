@@ -413,11 +413,29 @@ type BatchGetRouterOutputError struct {
 // Configures settings for the BlackFrames metric.
 type BlackFrames struct {
 
-	//  Indicates whether the BlackFrames metric is enabled or disabled..
+	//  Indicates whether the BlackFrames metric is enabled or disabled.
 	State State
 
 	//  Specifies the number of consecutive seconds of black frames that triggers an
 	// event or alert.
+	ThresholdSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Detects black frames in the router input's source content and reports them
+// through a CloudWatch metric, an EventBridge event, and a router input message.
+type BlackFramesConfiguration struct {
+
+	// Indicates whether black frames detection is enabled or disabled.
+	//
+	// This member is required.
+	State ContentQualityAnalysisState
+
+	// The number of consecutive seconds of black frames that MediaConnect must detect
+	// before it reports an issue.
+	//
+	// This member is required.
 	ThresholdSeconds *int32
 
 	noSmithyDocumentSerde
@@ -616,6 +634,21 @@ type BridgeSource struct {
 
 	//  The network source for the bridge.
 	NetworkSource *BridgeNetworkSource
+
+	noSmithyDocumentSerde
+}
+
+// Configures the content quality analysis features for the router input.
+type ContentQualityAnalysisFeatureConfiguration struct {
+
+	// Settings for black frames detection.
+	BlackFrames *BlackFramesConfiguration
+
+	// Settings for frozen frames detection.
+	FrozenFrames *FrozenFramesConfiguration
+
+	// Settings for silent audio detection.
+	SilentAudio *SilentAudioConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1202,6 +1235,25 @@ type FrozenFrames struct {
 
 	//  Specifies the number of consecutive seconds of a static image that triggers an
 	// event or alert.
+	ThresholdSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Detects frozen video frames in the router input's source content and reports
+// them through a CloudWatch metric, an EventBridge event, and a router input
+// message.
+type FrozenFramesConfiguration struct {
+
+	// Indicates whether frozen frames detection is enabled or disabled.
+	//
+	// This member is required.
+	State ContentQualityAnalysisState
+
+	// The number of consecutive seconds of a frozen frame that MediaConnect must
+	// detect before it reports an issue.
+	//
+	// This member is required.
 	ThresholdSeconds *int32
 
 	noSmithyDocumentSerde
@@ -2823,6 +2875,28 @@ type RistRouterOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The content quality analysis configuration for the router input.
+//
+// The content quality analysis feature only monitors the first video stream and
+// the first audio stream it encounters within the router input source.
+//
+// The following types satisfy this interface:
+//
+//	RouterContentQualityAnalysisConfigurationMemberContentLevel
+type RouterContentQualityAnalysisConfiguration interface {
+	isRouterContentQualityAnalysisConfiguration()
+}
+
+// The content quality analysis configuration.
+type RouterContentQualityAnalysisConfigurationMemberContentLevel struct {
+	Value ContentQualityAnalysisFeatureConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterContentQualityAnalysisConfigurationMemberContentLevel) isRouterContentQualityAnalysisConfiguration() {
+}
+
 // A router input in AWS Elemental MediaConnect. A router input is a source of
 // media content that can be routed to one or more router outputs.
 type RouterInput struct {
@@ -2841,6 +2915,16 @@ type RouterInput struct {
 	//
 	// This member is required.
 	Configuration RouterInputConfiguration
+
+	// The content quality analysis configuration for the router input.
+	//
+	// This member is required.
+	ContentQualityAnalysisConfiguration RouterContentQualityAnalysisConfiguration
+
+	// The type of content quality analysis applied to the router input.
+	//
+	// This member is required.
+	ContentQualityAnalysisType RouterContentQualityAnalysisType
 
 	// The timestamp when the router input was created.
 	//
@@ -3964,6 +4048,24 @@ type SilentAudio struct {
 	noSmithyDocumentSerde
 }
 
+// Detects silent audio in the router input's source content and reports it
+// through a CloudWatch metric, an EventBridge event, and a router input message.
+type SilentAudioConfiguration struct {
+
+	// Indicates whether silent audio detection is enabled or disabled.
+	//
+	// This member is required.
+	State ContentQualityAnalysisState
+
+	// The number of consecutive seconds of silence that MediaConnect must detect
+	// before it reports an issue.
+	//
+	// This member is required.
+	ThresholdSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The settings for the source of the flow.
 type Source struct {
 
@@ -4030,12 +4132,12 @@ type Source struct {
 	// enabled.
 	RouterIntegrationTransitDecryption *FlowTransitEncryption
 
-	//  The IP address that the flow communicates with to initiate connection with the
-	// sender.
-	SenderControlPort *int32
-
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
+	SenderControlPort *int32
+
+	//  The IP address that the flow communicates with to initiate connection with the
+	// sender.
 	SenderIpAddress *string
 
 	//  Attributes related to the transport stream that are used in the source.
@@ -4780,6 +4882,7 @@ func (*UnknownUnionMember) isMaintenanceConfiguration()                     {}
 func (*UnknownUnionMember) isMaintenanceSchedule()                          {}
 func (*UnknownUnionMember) isMediaLiveTransitEncryptionKeyConfiguration()   {}
 func (*UnknownUnionMember) isMergeRouterInputProtocolConfiguration()        {}
+func (*UnknownUnionMember) isRouterContentQualityAnalysisConfiguration()    {}
 func (*UnknownUnionMember) isRouterInputConfiguration()                     {}
 func (*UnknownUnionMember) isRouterInputFilter()                            {}
 func (*UnknownUnionMember) isRouterInputMetadata()                          {}

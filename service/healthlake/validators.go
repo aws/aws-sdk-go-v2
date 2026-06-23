@@ -250,6 +250,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFHIRDatastore struct {
+}
+
+func (*validateOpUpdateFHIRDatastore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFHIRDatastore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFHIRDatastoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFHIRDatastoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFHIRDatastore{}, middleware.After)
 }
@@ -296,6 +316,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFHIRDatastore{}, middleware.After)
 }
 
 func validateIdentityProviderConfiguration(v *types.IdentityProviderConfiguration) error {
@@ -665,6 +689,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFHIRDatastoreInput(v *UpdateFHIRDatastoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFHIRDatastoreInput"}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if v.IdentityProviderConfiguration != nil {
+		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
+			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

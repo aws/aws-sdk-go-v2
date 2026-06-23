@@ -4323,6 +4323,47 @@ type ClarifyTextConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for automatic patching of the instance group. When
+// configured, the system automatically applies security patch AMI updates to the
+// instance group.
+type ClusterAutoPatchConfig struct {
+
+	// The strategy for applying patches to instances in the group.
+	//
+	// This member is required.
+	PatchingStrategy ClusterPatchingStrategy
+
+	// The deployment configuration for rolling patch updates, including rollback
+	// settings and batch sizes. Only applicable when using a rolling patching
+	// strategy.
+	DeploymentConfig *DeploymentConfiguration
+
+	// The schedule for automatic patching, including the next patch date.
+	PatchSchedule *ClusterPatchSchedule
+
+	noSmithyDocumentSerde
+}
+
+// The auto-patching configuration details for the instance group, including the
+// patching strategy and schedule.
+type ClusterAutoPatchConfigDetails struct {
+
+	// The currently active patch schedule that the system will execute.
+	CurrentPatchSchedule *ClusterPatchScheduleDetails
+
+	// The deployment configuration for rolling patch updates.
+	DeploymentConfig *DeploymentConfiguration
+
+	// The requested patch schedule. Differs from CurrentPatchSchedule when a
+	// reschedule request is pending.
+	DesiredPatchSchedule *ClusterPatchScheduleDetails
+
+	// The strategy used for applying patches to instances in the group.
+	PatchingStrategy ClusterPatchingStrategy
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the autoscaling configuration for a HyperPod cluster.
 type ClusterAutoScalingConfig struct {
 
@@ -4561,6 +4602,10 @@ type ClusterInstanceGroupDetails struct {
 	// The configuration to use when updating the AMI versions.
 	ActiveSoftwareUpdateConfig *DeploymentConfiguration
 
+	// The auto-patching configuration for the instance group, including the current
+	// patching strategy and next scheduled patch date.
+	AutoPatchConfig *ClusterAutoPatchConfigDetails
+
 	// The instance capacity requirements for the instance group.
 	CapacityRequirements *ClusterCapacityRequirements
 
@@ -4571,8 +4616,15 @@ type ClusterInstanceGroupDetails struct {
 	// The ID of the Amazon Machine Image (AMI) currently in use by the instance group.
 	CurrentImageId *string
 
+	// The version of the HyperPod-managed AMI currently running on the instance group.
+	CurrentImageReleaseVersion *string
+
 	// The ID of the Amazon Machine Image (AMI) desired for the instance group.
 	DesiredImageId *string
+
+	// The desired version of the HyperPod-managed AMI for the instance group. This
+	// may differ from the current version when an update is pending.
+	DesiredImageReleaseVersion *string
 
 	// The execution role for the instance group to assume.
 	ExecutionRole *string
@@ -4721,6 +4773,10 @@ type ClusterInstanceGroupSpecification struct {
 	// This member is required.
 	InstanceGroupName *string
 
+	// The configuration for automatic OS security patching. If present, the system
+	// automatically applies PATCH AMI updates to this instance group.
+	AutoPatchConfig *ClusterAutoPatchConfig
+
 	// Specifies the capacity requirements for the instance group.
 	CapacityRequirements *ClusterCapacityRequirements
 
@@ -4750,6 +4806,11 @@ type ClusterInstanceGroupSpecification struct {
 	// your UpdateClusterSoftware request, then all of the instance groups are patched
 	// with the specified image.
 	ImageId *string
+
+	// The version of the HyperPod-managed AMI to use for the instance group. Uses
+	// semantic versioning in the format MAJOR.MINOR.PATCH (for example, 1.2.3 ). If
+	// omitted, the latest available version is used.
+	ImageReleaseVersion *string
 
 	// The instance requirements for the instance group, including the instance types
 	// to use. Use this to create a flexible instance group that supports multiple
@@ -5126,8 +5187,15 @@ type ClusterNodeDetails struct {
 	// The ID of the Amazon Machine Image (AMI) currently in use by the node.
 	CurrentImageId *string
 
+	// The version of the HyperPod-managed AMI currently running on the node.
+	CurrentImageReleaseVersion *string
+
 	// The ID of the Amazon Machine Image (AMI) desired for the node.
 	DesiredImageId *string
+
+	// The desired version of the HyperPod-managed AMI for the node. This may differ
+	// from the current version when an update is pending.
+	DesiredImageReleaseVersion *string
 
 	// The status of the image version for the cluster node.
 	ImageVersionStatus ClusterImageVersionStatus
@@ -5228,6 +5296,9 @@ type ClusterNodeSummary struct {
 	// This member is required.
 	LaunchTime *time.Time
 
+	// The version of the HyperPod-managed AMI currently running on the node.
+	CurrentImageReleaseVersion *string
+
 	// The status of the image version for the cluster node.
 	ImageVersionStatus ClusterImageVersionStatus
 
@@ -5288,6 +5359,27 @@ type ClusterOrchestratorSlurmConfig struct {
 	// The strategy for managing partitions for the Slurm configuration. Valid values
 	// are Managed , Overwrite , and Merge .
 	SlurmConfigStrategy ClusterSlurmConfigStrategy
+
+	noSmithyDocumentSerde
+}
+
+// The schedule configuration for automatic patching.
+type ClusterPatchSchedule struct {
+
+	// The date and time of the next scheduled automatic patch. The system sets this
+	// automatically when a patch is detected. Use this field to reschedule the patch
+	// to a different date.
+	NextPatchDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The schedule details for automatic patching, including the next scheduled patch
+// date.
+type ClusterPatchScheduleDetails struct {
+
+	// The date and time of the next scheduled automatic patch.
+	NextPatchDate *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -5604,6 +5696,9 @@ type ClusterSummary struct {
 	//
 	// This member is required.
 	CreationTime *time.Time
+
+	// The aggregate status of the image version across the cluster's instance groups.
+	ImageVersionStatus ClusterImageVersionStatus
 
 	// A list of Amazon Resource Names (ARNs) of the training plans associated with
 	// this cluster.
@@ -6048,6 +6143,13 @@ type ContainerDefinition struct {
 	// [Use Logs and Metrics to Monitor an Inference Pipeline]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html
 	ContainerHostname *string
 
+	// The configuration for container metrics scraping. Specifies the metrics
+	// endpoint path and publishing frequency. If not specified when
+	// EnableDetailedObservability is True , the default path /metrics on port 8080 is
+	// used. For first-party and Deep Learning Containers (DLC), the endpoint path is
+	// determined automatically and this configuration is optional.
+	ContainerMetricsConfig *ContainerMetricsConfig
+
 	// The environment variables to set in the Docker container. Don't include any
 	// sensitive data in your environment variables.
 	//
@@ -6124,6 +6226,24 @@ type ContainerDefinition struct {
 
 	// Specifies additional configuration for multi-model endpoints.
 	MultiModelConfig *MultiModelConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for container-level metrics scraping. Use this configuration
+// to specify a custom metrics endpoint path and publishing frequency for container
+// metrics. When EnableDetailedObservability is set to True in MetricsConfig ,
+// metrics are scraped from the container's Prometheus endpoint. If this
+// configuration is not provided, the default path /metrics on port 8080 is used
+// with a default publishing frequency of 60 seconds. For first-party and Deep
+// Learning Containers (DLC), the endpoint path is determined automatically and
+// this configuration is optional.
+type ContainerMetricsConfig struct {
+
+	// A list of metrics endpoints to scrape from the container. Each endpoint
+	// specifies the path where the container exposes Prometheus-formatted metrics and
+	// the frequency at which to publish them. You can specify a maximum of 1 endpoint.
+	MetricsEndpoints []MetricsEndpoint
 
 	noSmithyDocumentSerde
 }
@@ -11489,6 +11609,14 @@ type InferenceComponentContainerSpecification struct {
 	// (.tar.gz suffix).
 	ArtifactUrl *string
 
+	// The configuration for container metrics scraping. Specifies the metrics
+	// endpoint path and publishing frequency for the inference component's container.
+	// If not specified when EnableDetailedObservability is True , the default path
+	// /metrics on port 8080 is used. For first-party and Deep Learning Containers
+	// (DLC), the endpoint path is determined automatically and this configuration is
+	// optional.
+	ContainerMetricsConfig *ContainerMetricsConfig
+
 	// The environment variables to set in the Docker container. Each key and value in
 	// the Environment string-to-string map can have length of up to 1024. We support
 	// up to 16 entries in the map.
@@ -11506,6 +11634,10 @@ type InferenceComponentContainerSpecificationSummary struct {
 
 	// The Amazon S3 path where the model artifacts are stored.
 	ArtifactUrl *string
+
+	// The container metrics scraping configuration for this inference component,
+	// including the metrics endpoint path and publishing frequency.
+	ContainerMetricsConfig *ContainerMetricsConfig
 
 	// Gets the Amazon EC2 Container Registry path of the docker image of the model
 	// that is hosted in this [ProductionVariant].
@@ -12593,8 +12725,9 @@ type IntegerParameterRangeSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Search shape for Job. Mirrors DescribeJobResponse fields. If you update
-// DescribeJobResponse, update this structure as well.
+// The properties of a job returned by the [Search] API.
+//
+// [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
 type Job struct {
 
 	// The date and time that the job was created.
@@ -13440,6 +13573,34 @@ type MetricDefinition struct {
 // The configuration for Utilization metrics.
 type MetricsConfig struct {
 
+	// Indicates whether detailed observability is enabled for the endpoint. When set
+	// to True , the following metrics are published at the configured frequency:
+	//
+	//   - Container-level inference metrics scraped from the container's Prometheus
+	//   endpoint (such as request latency, error counts, and throughput). Available
+	//   metrics vary by framework.
+	//
+	//   - Per-GPU metrics (utilization, memory, and temperature) attributed to
+	//   individual inference components.
+	//
+	//   - Per-instance host metrics (CPU, memory, and disk utilization).
+	//
+	//   - Inference component placement metrics (copy count per Availability Zone).
+	//
+	// For first-party and Deep Learning Containers (DLC), the Prometheus endpoint
+	// path is determined automatically. For Bring-Your-Own-Container (BYOC) cases, you
+	// can optionally set ContainerMetricsConfig to specify a custom endpoint path. If
+	// not specified, the default path /metrics on port 8080 is used.
+	//
+	// When set to False , these additional metrics are not published. Standard
+	// invocation and utilization metrics controlled by EnableEnhancedMetrics are
+	// unaffected.
+	//
+	// The default value for new endpoint configurations is True . For existing
+	// endpoint configurations created before this feature, the value is False unless
+	// explicitly set.
+	EnableDetailedObservability *bool
+
 	// Specifies whether to enable enhanced metrics for the endpoint. Enhanced metrics
 	// provide utilization and invocation data at instance and container granularity.
 	// Container granularity is supported for Inference Components. The default is
@@ -13447,11 +13608,37 @@ type MetricsConfig struct {
 	EnableEnhancedMetrics *bool
 
 	// The interval, in seconds, at which metrics are published to Amazon CloudWatch.
-	// Defaults to 60 . Valid values: 10 , 30 , 60 , 120 , 180 , 240 , 300 . When
-	// EnableEnhancedMetrics is set to False , this interval applies to utilization
-	// metrics only; invocation metrics continue to be published at the default
-	// 60-second interval. When EnableEnhancedMetrics is set to True , this interval
-	// applies to both utilization and invocation metrics.
+	// Defaults to 60 . Valid values: 10 , 30 , 60 , 120 , 180 , 240 , 300 .
+	//
+	// When EnableEnhancedMetrics is set to False , this interval applies to
+	// utilization metrics only. Invocation metrics continue to be published at the
+	// default 60-second interval. When EnableEnhancedMetrics is set to True , this
+	// interval applies to both utilization and invocation metrics.
+	//
+	// When EnableDetailedObservability is set to True , this interval applies to
+	// per-GPU metrics, per-instance host metrics, container metrics, and fleet-level
+	// inference component lifecycle and placement metrics.
+	MetricPublishFrequencyInSeconds MetricPublishFrequencyInSeconds
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a metrics endpoint for a container, including the path where the
+// container exposes Prometheus-formatted metrics and the frequency at which to
+// publish them to Amazon CloudWatch.
+type MetricsEndpoint struct {
+
+	// The path to the metrics endpoint exposed by the container. For example, /metrics
+	// or /server/metrics . The path must start with / and can contain alphanumeric
+	// characters, forward slashes, underscores, hyphens, and periods. Maximum length
+	// is 256 characters. If not specified, defaults to /metrics .
+	//
+	// This member is required.
+	MetricsEndpointPath *string
+
+	// The interval, in seconds, at which container metrics scraped from the endpoint
+	// are published to Amazon CloudWatch. Valid values: 10 , 30 , 60 , 120 , 180 , 240
+	// , 300 . Defaults to 60 .
 	MetricPublishFrequencyInSeconds MetricPublishFrequencyInSeconds
 
 	noSmithyDocumentSerde
@@ -20350,8 +20537,7 @@ type SearchRecord struct {
 	// The properties of a hyperparameter tuning job.
 	HyperParameterTuningJob *HyperParameterTuningJobSearchEntity
 
-	// Search shape for Job. Mirrors DescribeJobResponse fields. If you update
-	// DescribeJobResponse, update this structure as well.
+	// The properties of a job.
 	Job *Job
 
 	// A model displayed in the Amazon SageMaker Model Dashboard.
@@ -23825,6 +24011,10 @@ type UpdateClusterSoftwareInstanceGroupSpecification struct {
 	//
 	// This member is required.
 	InstanceGroupName *string
+
+	// The version of the HyperPod-managed AMI to update to for the instance group.
+	// Uses semantic versioning in the format MAJOR.MINOR.PATCH .
+	ImageReleaseVersion *string
 
 	noSmithyDocumentSerde
 }

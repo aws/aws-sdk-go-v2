@@ -2828,6 +2828,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request to store snapshot on local zone during Replication Settings template creation.</p>"
                     }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.mgn#StorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to configure storage during Replication Settings template creation.</p>"
+                    }
                 }
             }
         },
@@ -2977,6 +2983,14 @@
                     {
                         "name": "LAST_SNAPSHOT_JOB_FAILED",
                         "value": "LAST_SNAPSHOT_JOB_FAILED"
+                    },
+                    {
+                        "name": "FAILED_TO_SETUP_FSX_PROXY",
+                        "value": "FAILED_TO_SETUP_FSX_PROXY"
+                    },
+                    {
+                        "name": "FAILED_TO_CREATE_FSX_SNAPSHOT",
+                        "value": "FAILED_TO_CREATE_FSX_SNAPSHOT"
                     }
                 ]
             }
@@ -3184,6 +3198,10 @@
                     {
                         "value": "START_DATA_TRANSFER",
                         "name": "START_DATA_TRANSFER"
+                    },
+                    {
+                        "value": "SETUP_FSX_PROXY",
+                        "name": "SETUP_FSX_PROXY"
                     }
                 ]
             }
@@ -4980,6 +4998,38 @@
                 ]
             }
         },
+        "com.amazonaws.mgn#FqdnForActionFramework": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_](([a-zA-Z0-9_\\-]{0,61}[a-zA-Z0-9_])?\\.)+[a-zA-Z]{2,63}$|^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$|^(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}$"
+            }
+        },
+        "com.amazonaws.mgn#FsxOntapConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageVirtualMachineId": {
+                    "target": "com.amazonaws.mgn#StorageVirtualMachineId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>FSx ONTAP configuration storage virtual machine ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentialsSecretArn": {
+                    "target": "com.amazonaws.mgn#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>FSx ONTAP configuration credentials secret ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>FSx for ONTAP storage configuration.</p>"
+            }
+        },
         "com.amazonaws.mgn#GetLaunchConfiguration": {
             "type": "operation",
             "input": {
@@ -6226,6 +6276,91 @@
                 }
             }
         },
+        "com.amazonaws.mgn#LastKnownCheck": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.mgn#LastKnownCheckType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last known check type.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last known check name.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.mgn#LastKnownCheckStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last known check status.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last known check error.</p>"
+                    }
+                },
+                "checkedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last known check timestamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Last known check performed on a launched instance.</p>"
+            }
+        },
+        "com.amazonaws.mgn#LastKnownCheckStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSED",
+                        "name": "PASSED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#LastKnownCheckType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EC2",
+                        "name": "EC2"
+                    },
+                    {
+                        "value": "FSx",
+                        "name": "FSx"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#LastKnownChecksList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#LastKnownCheck"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of last known checks.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.mgn#LaunchConfiguration": {
             "type": "structure",
             "members": {
@@ -6575,6 +6710,18 @@
                     "target": "com.amazonaws.mgn#FirstBoot",
                     "traits": {
                         "smithy.api#documentation": "<p>Launched instance first boot.</p>"
+                    }
+                },
+                "lastKnownChecks": {
+                    "target": "com.amazonaws.mgn#LastKnownChecksList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launched instance last known checks.</p>"
+                    }
+                },
+                "lastKnownFsxChecksStatus": {
+                    "target": "com.amazonaws.mgn#LastKnownCheckStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launched instance last known FSx checks status.</p>"
                     }
                 }
             },
@@ -11988,6 +12135,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration store snapshot on local zone.</p>"
                     }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.mgn#StorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication Configuration storage configuration.</p>"
+                    }
                 }
             }
         },
@@ -12115,6 +12268,10 @@
                     {
                         "value": "IO2",
                         "name": "IO2"
+                    },
+                    {
+                        "value": "FSX_ONTAP",
+                        "name": "FSX_ONTAP"
                     }
                 ]
             }
@@ -12242,6 +12399,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration template store snapshot on local zone.</p>"
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.mgn#StorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication Configuration template storage configuration.</p>"
                     }
                 }
             }
@@ -12599,7 +12762,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 20,
-                    "max": 100
+                    "max": 256
                 },
                 "smithy.api#pattern": "^arn:[\\w-]+:secretsmanager:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:secret:(.+)$"
             }
@@ -14539,6 +14702,52 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.mgn#StorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageType": {
+                    "target": "com.amazonaws.mgn#StorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Storage configuration storage type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fsxOntapConfiguration": {
+                    "target": "com.amazonaws.mgn#FsxOntapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Storage configuration FSx ONTAP configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Storage configuration for replication.</p>"
+            }
+        },
+        "com.amazonaws.mgn#StorageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "EBS",
+                        "value": "EBS"
+                    },
+                    {
+                        "name": "FSX_ONTAP",
+                        "value": "FSX_ONTAP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#StorageVirtualMachineId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 21,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^(svm-[0-9a-f]{17,})$"
+            }
+        },
         "com.amazonaws.mgn#StrictlyPositiveInteger": {
             "type": "integer",
             "traits": {
@@ -15964,6 +16173,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration store snapshot on local zone.</p>"
                     }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.mgn#StorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration storage configuration.</p>"
+                    }
                 }
             }
         },
@@ -16104,6 +16319,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration template store snapshot on local zone request.</p>"
                     }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.mgn#StorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration template storage configuration request.</p>"
+                    }
                 }
             }
         },
@@ -16212,6 +16433,24 @@
                     "target": "com.amazonaws.mgn#SourceServerConnectorAction",
                     "traits": {
                         "smithy.api#documentation": "<p>Update Source Server request connector action.</p>"
+                    }
+                },
+                "userProvidedID": {
+                    "target": "com.amazonaws.mgn#UserProvidedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update Source Server request user provided ID.</p>"
+                    }
+                },
+                "fqdnForActionFramework": {
+                    "target": "com.amazonaws.mgn#FqdnForActionFramework",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update Source Server request FQDN for action framework.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.mgn#OperatingSystemString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update Source Server request platform operating system.</p>"
                     }
                 }
             },

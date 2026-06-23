@@ -784,6 +784,12 @@ func ExampleHarnessMemoryConfiguration_outputUsage() {
 	case *types.HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration:
 		_ = v.Value // Value is types.HarnessAgentCoreMemoryConfiguration
 
+	case *types.HarnessMemoryConfigurationMemberDisabled:
+		_ = v.Value // Value is types.HarnessDisabledMemoryConfiguration
+
+	case *types.HarnessMemoryConfigurationMemberManagedMemoryConfiguration:
+		_ = v.Value // Value is types.HarnessManagedMemoryConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -793,6 +799,8 @@ func ExampleHarnessMemoryConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.HarnessDisabledMemoryConfiguration
+var _ *types.HarnessManagedMemoryConfiguration
 var _ *types.HarnessAgentCoreMemoryConfiguration
 
 func ExampleHarnessModelConfiguration_outputUsage() {
@@ -829,6 +837,9 @@ func ExampleHarnessSkill_outputUsage() {
 	var union types.HarnessSkill
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.HarnessSkillMemberAwsSkills:
+		_ = v.Value // Value is types.HarnessSkillAwsSkillsSource
+
 	case *types.HarnessSkillMemberGit:
 		_ = v.Value // Value is types.HarnessSkillGitSource
 
@@ -850,6 +861,7 @@ func ExampleHarnessSkill_outputUsage() {
 var _ *types.HarnessSkillS3Source
 var _ *types.HarnessSkillGitSource
 var _ *string
+var _ *types.HarnessSkillAwsSkillsSource
 
 func ExampleHarnessSystemContentBlock_outputUsage() {
 	var union types.HarnessSystemContentBlock
@@ -932,6 +944,9 @@ func ExampleHttpTargetConfiguration_outputUsage() {
 	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
 		_ = v.Value // Value is types.RuntimeTargetConfiguration
 
+	case *types.HttpTargetConfigurationMemberPassthrough:
+		_ = v.Value // Value is types.PassthroughTargetConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -942,6 +957,29 @@ func ExampleHttpTargetConfiguration_outputUsage() {
 }
 
 var _ *types.RuntimeTargetConfiguration
+var _ *types.PassthroughTargetConfiguration
+
+func ExampleInferenceTargetConfiguration_outputUsage() {
+	var union types.InferenceTargetConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InferenceTargetConfigurationMemberConnector:
+		_ = v.Value // Value is types.InferenceConnectorTargetConfiguration
+
+	case *types.InferenceTargetConfigurationMemberProvider:
+		_ = v.Value // Value is types.InferenceProviderTargetConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InferenceConnectorTargetConfiguration
+var _ *types.InferenceProviderTargetConfiguration
 
 func ExampleInterceptorConfiguration_outputUsage() {
 	var union types.InterceptorConfiguration
@@ -960,6 +998,24 @@ func ExampleInterceptorConfiguration_outputUsage() {
 }
 
 var _ *types.LambdaInterceptorConfiguration
+
+func ExampleInterceptorPayloadExclusionSelector_outputUsage() {
+	var union types.InterceptorPayloadExclusionSelector
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InterceptorPayloadExclusionSelectorMemberField:
+		_ = v.Value // Value is types.InterceptorPayloadExclusion
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.InterceptorPayloadExclusion
 
 func ExampleMatchPrincipalEntry_outputUsage() {
 	var union types.MatchPrincipalEntry
@@ -986,6 +1042,9 @@ func ExampleMcpTargetConfiguration_outputUsage() {
 	case *types.McpTargetConfigurationMemberApiGateway:
 		_ = v.Value // Value is types.ApiGatewayTargetConfiguration
 
+	case *types.McpTargetConfigurationMemberConnector:
+		_ = v.Value // Value is types.ConnectorTargetConfiguration
+
 	case *types.McpTargetConfigurationMemberLambda:
 		_ = v.Value // Value is types.McpLambdaTargetConfiguration
 
@@ -1010,6 +1069,7 @@ func ExampleMcpTargetConfiguration_outputUsage() {
 var _ *types.McpLambdaTargetConfiguration
 var _ *types.ApiGatewayTargetConfiguration
 var _ types.ApiSchemaConfiguration
+var _ *types.ConnectorTargetConfiguration
 var _ *types.McpServerTargetConfiguration
 
 func ExampleMcpToolSchemaConfiguration_outputUsage() {
@@ -1299,6 +1359,9 @@ func ExamplePolicyDefinition_outputUsage() {
 	case *types.PolicyDefinitionMemberCedar:
 		_ = v.Value // Value is types.CedarPolicy
 
+	case *types.PolicyDefinitionMemberPolicy:
+		_ = v.Value // Value is types.PolicyStatement
+
 	case *types.PolicyDefinitionMemberPolicyGeneration:
 		_ = v.Value // Value is types.PolicyGenerationDetails
 
@@ -1311,6 +1374,7 @@ func ExamplePolicyDefinition_outputUsage() {
 	}
 }
 
+var _ *types.PolicyStatement
 var _ *types.PolicyGenerationDetails
 var _ *types.CedarPolicy
 
@@ -1521,6 +1585,9 @@ func ExampleTargetConfiguration_outputUsage() {
 	case *types.TargetConfigurationMemberHttp:
 		_ = v.Value // Value is types.HttpTargetConfiguration
 
+	case *types.TargetConfigurationMemberInference:
+		_ = v.Value // Value is types.InferenceTargetConfiguration
+
 	case *types.TargetConfigurationMemberMcp:
 		_ = v.Value // Value is types.McpTargetConfiguration
 
@@ -1535,6 +1602,7 @@ func ExampleTargetConfiguration_outputUsage() {
 
 var _ types.HttpTargetConfiguration
 var _ types.McpTargetConfiguration
+var _ types.InferenceTargetConfiguration
 
 func ExampleToolSchema_outputUsage() {
 	var union types.ToolSchema

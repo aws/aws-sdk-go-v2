@@ -53,7 +53,9 @@ type GetPlayerConnectionDetailsInput struct {
 
 	// An identifier for the game session that is unique across all regions for which
 	// to retrieve player connection details. The value is always a full ARN in the
-	// following format: arn:aws:gamelift:::gamesession// .
+	// following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -71,7 +73,9 @@ type GetPlayerConnectionDetailsOutput struct {
 
 	// An identifier for the game session that is unique across all regions for which
 	// the player connection details were retrieved. The value is always a full ARN in
-	// the following format: arn:aws:gamelift:::gamesession// .
+	// the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// .
 	GameSessionId *string
 
 	// A collection of player connection detail objects, one for each requested player.

@@ -1,3 +1,7 @@
+# v1.93.0 (2026-06-18)
+
+* **Feature**: Converging and fixing existing documentation gaps in Lambda SDK
+
 # v1.92.3 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

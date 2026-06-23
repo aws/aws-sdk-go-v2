@@ -16273,6 +16273,59 @@ func awsRestjson1_deserializeDocumentBlackFrames(v **types.BlackFrames, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBlackFramesConfiguration(v **types.BlackFramesConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BlackFramesConfiguration
+	if *v == nil {
+		sv = &types.BlackFramesConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentQualityAnalysisState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ContentQualityAnalysisState(jtv)
+			}
+
+		case "thresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RouterCqaThresholdSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThresholdSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBridge(v **types.Bridge, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16780,6 +16833,52 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContentQualityAnalysisFeatureConfiguration(v **types.ContentQualityAnalysisFeatureConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentQualityAnalysisFeatureConfiguration
+	if *v == nil {
+		sv = &types.ContentQualityAnalysisFeatureConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "blackFrames":
+			if err := awsRestjson1_deserializeDocumentBlackFramesConfiguration(&sv.BlackFrames, value); err != nil {
+				return err
+			}
+
+		case "frozenFrames":
+			if err := awsRestjson1_deserializeDocumentFrozenFramesConfiguration(&sv.FrozenFrames, value); err != nil {
+				return err
+			}
+
+		case "silentAudio":
+			if err := awsRestjson1_deserializeDocumentSilentAudioConfiguration(&sv.SilentAudio, value); err != nil {
+				return err
 			}
 
 		default:
@@ -18192,6 +18291,59 @@ func awsRestjson1_deserializeDocumentFrozenFrames(v **types.FrozenFrames, value 
 				jtv, ok := value.(json.Number)
 				if !ok {
 					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThresholdSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFrozenFramesConfiguration(v **types.FrozenFramesConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FrozenFramesConfiguration
+	if *v == nil {
+		sv = &types.FrozenFramesConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentQualityAnalysisState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ContentQualityAnalysisState(jtv)
+			}
+
+		case "thresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RouterCqaThresholdSeconds to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -22201,6 +22353,46 @@ func awsRestjson1_deserializeDocumentRistRouterOutputConfiguration(v **types.Ris
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRouterContentQualityAnalysisConfiguration(v *types.RouterContentQualityAnalysisConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.RouterContentQualityAnalysisConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "contentLevel":
+			var mv types.ContentQualityAnalysisFeatureConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentContentQualityAnalysisFeatureConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RouterContentQualityAnalysisConfigurationMemberContentLevel{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRouterInput(v **types.RouterInput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22244,6 +22436,20 @@ func awsRestjson1_deserializeDocumentRouterInput(v **types.RouterInput, value in
 		case "configuration":
 			if err := awsRestjson1_deserializeDocumentRouterInputConfiguration(&sv.Configuration, value); err != nil {
 				return err
+			}
+
+		case "contentQualityAnalysisConfiguration":
+			if err := awsRestjson1_deserializeDocumentRouterContentQualityAnalysisConfiguration(&sv.ContentQualityAnalysisConfiguration, value); err != nil {
+				return err
+			}
+
+		case "contentQualityAnalysisType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouterContentQualityAnalysisType to be of type string, got %T instead", value)
+				}
+				sv.ContentQualityAnalysisType = types.RouterContentQualityAnalysisType(jtv)
 			}
 
 		case "createdAt":
@@ -24207,6 +24413,59 @@ func awsRestjson1_deserializeDocumentSilentAudio(v **types.SilentAudio, value in
 				jtv, ok := value.(json.Number)
 				if !ok {
 					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThresholdSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSilentAudioConfiguration(v **types.SilentAudioConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SilentAudioConfiguration
+	if *v == nil {
+		sv = &types.SilentAudioConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentQualityAnalysisState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ContentQualityAnalysisState(jtv)
+			}
+
+		case "thresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RouterCqaThresholdSeconds to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

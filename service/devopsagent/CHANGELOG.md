@@ -1,3 +1,11 @@
+# v1.8.0 (2026-06-17)
+
+* **Feature**: Adds support for Remote A2A (Agent-to-Agent) agent registration and management. Adds new Release Readiness Review and Release Testing capabilities. Adds support for Git managed skills in AWS DevOps Agent.
+
+# v1.7.0 (2026-06-12)
+
+* **Feature**: Adds support for Trigger CRUD APIs (CreateTrigger, GetTrigger, UpdateTrigger, DeleteTrigger, ListTriggers) for managing schedule-based automation triggers in DevOps Agent agent spaces.
+
 # v1.6.0 (2026-06-08)
 
 * **Feature**: Add Asset APIs for managing versioned assets and asset files in AWS DevOps Agent agent spaces.

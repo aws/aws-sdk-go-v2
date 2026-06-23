@@ -1,3 +1,15 @@
+# v1.87.0 (2026-06-18)
+
+* **Feature**: Adds support for configurable control plane egress routing in Amazon EKS, allowing you to route control plane egress traffic through your VPC and control how the control plane reaches resources in your network such as webhook servers and OIDC providers.
+
+# v1.86.0 (2026-06-12)
+
+* **Feature**: Patches missing enum values for EKS updates
+
+# v1.85.0 (2026-06-11)
+
+* **Feature**: Introduce new CreateCluster parameters for Amazon EKS local clusters on AWS Outposts. Added etcdInstanceType for configuring the EC2 instance type for dedicated etcd instances, and spreadLevel for configuring the placement group spread level for Kubernetes control plane and etcd instances.
+
 # v1.84.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

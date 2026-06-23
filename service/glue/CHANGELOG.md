@@ -1,3 +1,15 @@
+# v1.146.0 (2026-06-19)
+
+* **Feature**: Adds the SearchAssets operation for discovering assets in the AWS Glue Data Catalog using full-text search and filters. Minor naming refinements across the Glossary Terms and Attachment APIs for consistency.
+
+# v1.145.0 (2026-06-17)
+
+* **Feature**: This release adds support for Search and Discovery in AWS Glue, letting you and your applications search Data Catalog assets such as table and enrich them with business context and glossary terms.
+
+# v1.144.0 (2026-06-12)
+
+* **Feature**: Adds support for retrieving Apache Iceberg table metadata via GetTable. Use the new AttributesToGet parameter with LATEST ICEBERG METADATA to receive schema, partition specs, sort orders, and table properties in the response.
+
 # v1.143.1 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

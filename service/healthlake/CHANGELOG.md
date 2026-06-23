@@ -1,3 +1,11 @@
+# v1.39.0 (2026-06-18)
+
+* **Feature**: Adding New Configurations to the FHIR Create Datastore. The new configurations include NLP Configuration, AnalyticsConfiguration, ProfileConfiguration
+
+# v1.38.0 (2026-06-11)
+
+* **Feature**: Adds the UpdateFHIRDatastore API and adds analytics, NLP, and profile configuration support to CreateFHIRDatastore and DescribeFHIRDatastore.
+
 # v1.37.7 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

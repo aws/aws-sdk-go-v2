@@ -77,6 +77,9 @@ type UpdateBrokerInput struct {
 	// The parameters that determine the WeeklyStartTime.
 	MaintenanceWindowStartTime *types.WeeklyStartTime
 
+	// The list of resource shares to update on the broker
+	ResourceShareArns []string
+
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
 	SecurityGroups []string
@@ -138,6 +141,9 @@ type UpdateBrokerOutput struct {
 	// Describes whether this broker will be a part of a data replication pair after
 	// reboot.
 	PendingDataReplicationMode types.DataReplicationMode
+
+	// The pending broker's target list of resource shares
+	ResourceShareArns []string
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.

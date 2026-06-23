@@ -506,6 +506,18 @@ func TestCheckSnapshot_AttachClassicLinkVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachImageWatermark")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AttachInternetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AttachInternetGateway(context.Background(), nil, func(o *Options) {
@@ -5534,6 +5546,18 @@ func TestCheckSnapshot_DetachClassicLinkVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DetachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachImageWatermark")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DetachInternetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DetachInternetGateway(context.Background(), nil, func(o *Options) {
@@ -9702,6 +9726,18 @@ func TestUpdateSnapshot_AttachClassicLinkVpc(t *testing.T) {
 	_, err := svc.AttachClassicLinkVpc(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AttachClassicLinkVpc")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AttachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachImageWatermark")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14730,6 +14766,18 @@ func TestUpdateSnapshot_DetachClassicLinkVpc(t *testing.T) {
 	_, err := svc.DetachClassicLinkVpc(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DetachClassicLinkVpc")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DetachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachImageWatermark")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

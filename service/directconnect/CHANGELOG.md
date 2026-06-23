@@ -1,3 +1,11 @@
+# v1.41.0 (2026-06-22)
+
+* **Feature**: Added VIF rate limiting support for AWS Direct Connect, allowing customers to set bandwidth allocations on virtual interfaces to manage traffic on dedicated connections.
+
+# v1.40.0 (2026-06-16)
+
+* **Feature**: Added VIF rate limiting support for AWS Direct Connect, allowing customers to set bandwidth allocations on virtual interfaces to manage traffic on dedicated connections.
+
 # v1.39.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

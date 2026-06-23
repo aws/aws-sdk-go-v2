@@ -75,6 +75,11 @@ type CreatePolicyInput struct {
 	// auditing, and troubleshooting.
 	Description *string
 
+	// The enforcement mode for the policy. Run this policy in LOG_ONLY mode to
+	// collect data on how it affects your application. Once you are satisfied with the
+	// data gathered, switch the policy to ACTIVE . Defaults to ACTIVE .
+	EnforcementMode types.EnforcementMode
+
 	// The validation mode for the policy creation. Determines how Cedar analyzer
 	// validation results are handled during policy creation. FAIL_ON_ANY_FINDINGS
 	// (default) runs the Cedar analyzer to validate the policy against the Cedar
@@ -150,6 +155,9 @@ type CreatePolicyOutput struct {
 	// The human-readable description of the policy's purpose and functionality. This
 	// helps administrators understand and manage the policy.
 	Description *string
+
+	// The enforcement mode of the created policy.
+	EnforcementMode types.EnforcementMode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

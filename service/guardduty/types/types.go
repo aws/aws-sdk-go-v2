@@ -457,6 +457,27 @@ type City struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the cloud environment associated with an investigation.
+type CloudDetails struct {
+
+	// The Amazon Web Services account ID of the investigated resource.
+	//
+	// This member is required.
+	Account *string
+
+	// The cloud provider. Currently, only AWS is supported.
+	//
+	// This member is required.
+	Provider CloudProvider
+
+	// The Amazon Web Services Region in which the investigated resource resides.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the CloudFormation stack involved in a GuardDuty
 // finding, including unique identifiers of the Amazon EC2 instances.
 type CloudformationStack struct {
@@ -1932,6 +1953,125 @@ type InstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details and results of a GuardDuty investigation.
+type Investigation struct {
+
+	// The unique identifier of the investigation.
+	//
+	// This member is required.
+	InvestigationId *string
+
+	// The current status of the investigation. Possible values are RUNNING , COMPLETED
+	// , and FAILED .
+	//
+	// This member is required.
+	Status InvestigationStatus
+
+	// The natural-language prompt that initiated this investigation.
+	//
+	// This member is required.
+	TriggerPrompt *string
+
+	// The account that initiated the investigation.
+	//
+	// This member is required.
+	TriggeredBy *string
+
+	// Details about the cloud environment in which the investigation was performed,
+	// including the provider, region, and account.
+	Cloud *CloudDetails
+
+	// The confidence level of the investigation's assessment. Possible values are
+	// Unknown , Low , Medium , and High .
+	Confidence Confidence
+
+	// The timestamp at which the investigation completed.
+	EndTime *time.Time
+
+	// Details about the error if the investigation status is FAILED .
+	Error *string
+
+	// Metadata about the product and version that produced the investigation.
+	Metadata *InvestigationMetadata
+
+	// A human-readable description of the assessed risk.
+	Risk *string
+
+	// The assessed risk level of the investigated threat. Possible values are Info ,
+	// Low , Medium , High , and Critical .
+	RiskLevel RiskLevel
+
+	// The timestamp at which the investigation started.
+	StartTime *time.Time
+
+	// A structured summary of the investigation findings, including affected
+	// resources, threat assessment, and recommended remediation steps.
+	Summary *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about the product and version that produced an investigation.
+type InvestigationMetadata struct {
+
+	// Information about the product that produced the investigation.
+	//
+	// This member is required.
+	Product *Product
+
+	// The version of the investigation engine that produced the results.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the criteria used for sorting investigations.
+type InvestigationSortCriteria struct {
+
+	// The attribute by which to sort investigations.
+	AttributeName InvestigationSortField
+
+	// The order in which the sorted results are to be displayed.
+	OrderBy OrderBy
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a GuardDuty investigation.
+type InvestigationSummary struct {
+
+	// The Amazon Web Services account ID associated with the investigation.
+	AccountId *string
+
+	// The confidence level of the investigation's assessment.
+	Confidence Confidence
+
+	// The timestamp at which the investigation completed.
+	EndTime *time.Time
+
+	// The unique identifier of the investigation.
+	InvestigationId *string
+
+	// The assessed risk level of the investigated threat.
+	RiskLevel RiskLevel
+
+	// The timestamp at which the investigation started.
+	StartTime *time.Time
+
+	// The current status of the investigation.
+	Status InvestigationStatus
+
+	// A short title summarizing the investigation.
+	Title *string
+
+	// The natural-language prompt that initiated this investigation.
+	TriggerPrompt *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the invitation to become a member account.
 type Invitation struct {
 
@@ -3296,6 +3436,20 @@ type ProcessDetails struct {
 
 	// The unique ID assigned to the process by GuardDuty.
 	Uuid *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the product that produced an investigation.
+type Product struct {
+
+	// The name of the product.
+	//
+	// This member is required.
+	Name *string
+
+	// The specific feature within the product that produced the investigation.
+	Feature *string
 
 	noSmithyDocumentSerde
 }

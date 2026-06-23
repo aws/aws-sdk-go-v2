@@ -3938,14 +3938,14 @@
                         }
                     }
                 },
-                "smithy.api#documentation": "<p>Continues or rolls back an Amazon ECS service deployment that is paused at a lifecycle hook.</p> <p>When a service deployment reaches a lifecycle stage that has a <code>PAUSE</code> hook configured, the deployment pauses and waits for an explicit action. Use this API to either continue the deployment to the next stage or roll back to the previous service revision.</p> <p>To find the <code>hookId</code> of the paused hook, call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a> and inspect the <code>lifecycleHookDetails</code> field.</p>",
+                "smithy.api#documentation": "<p>Continues or rolls back an Amazon ECS service deployment that is paused at a lifecycle hook.</p> <p>When a service deployment reaches a lifecycle stage that has a <code>PAUSE</code> hook configured, the deployment pauses and waits for an explicit action. Use this API to either continue the deployment to the next stage or roll back to the previous service revision.</p> <p>To find the <code>hookId</code> of the paused hook, call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a> and inspect the <code>lifecycleHookDetails</code> field.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/continue-service-deployment.html\">Continuing Amazon ECS service deployments</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To continue a paused service deployment",
                         "documentation": "This example continues a service deployment that is paused at a lifecycle hook, using the CONTINUE action to proceed to the next deployment stage.",
                         "input": {
                             "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r",
-                            "hookId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                            "hookId": "ecs-pause-Xk7rT2mP9sLwQn4vB8fYd3hJ6gA1cE5iO0uR_ZpWq",
                             "action": "CONTINUE"
                         },
                         "output": {
@@ -3957,7 +3957,7 @@
                         "documentation": "This example rolls back a service deployment that is paused at a lifecycle hook, using the ROLLBACK action to revert to the previous service revision.",
                         "input": {
                             "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r",
-                            "hookId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                            "hookId": "ecs-pause-Xk7rT2mP9sLwQn4vB8fYd3hJ6gA1cE5iO0uR_ZpWq",
                             "action": "ROLLBACK"
                         },
                         "output": {
@@ -4601,8 +4601,7 @@
                 "executionRoleArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make Amazon Web Services API calls on your behalf. This role is required for Amazon ECS to pull container images from Amazon ECR, send container logs to Amazon CloudWatch Logs, and retrieve sensitive data from Amazon Web Services Systems Manager Parameter Store or Amazon Web Services Secrets Manager.</p> <p>The execution role must include the <code>AmazonECSTaskExecutionRolePolicy</code> managed policy or equivalent permissions. For Express services, this role is used during task startup and runtime for container management operations.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make Amazon Web Services API calls on your behalf. This role is required for Amazon ECS to pull container images from Amazon ECR, send container logs to Amazon CloudWatch Logs, and retrieve sensitive data from Amazon Web Services Systems Manager Parameter Store or Amazon Web Services Secrets Manager.</p> <p>The execution role must include the <code>AmazonECSTaskExecutionRolePolicy</code> managed policy or equivalent permissions. For Express services, this role is used during task startup and runtime for container management operations.</p>"
                     }
                 },
                 "infrastructureRoleArn": {
@@ -4633,8 +4632,7 @@
                 "primaryContainer": {
                     "target": "com.amazonaws.ecs#ExpressGatewayContainer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The primary container configuration for the Express service. This defines the main application container that will receive traffic from the Application Load Balancer.</p> <p>The primary container must specify at minimum a container image. You can also configure the container port (defaults to 80), logging configuration, environment variables, secrets, and startup commands. The container image can be from Amazon ECR, Docker Hub, or any other container registry accessible to your execution role.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The primary container configuration for the Express service. This defines the main application container that will receive traffic from the Application Load Balancer.</p> <p>The primary container must specify at minimum a container image. You can also configure the container port (defaults to 80), logging configuration, environment variables, secrets, and startup commands. The container image can be from Amazon ECR, Docker Hub, or any other container registry accessible to your execution role.</p>"
                     }
                 },
                 "taskRoleArn": {
@@ -4671,6 +4669,12 @@
                     "target": "com.amazonaws.ecs#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata that you apply to the Express service to help categorize and organize it. Each tag consists of a key and an optional value. You can apply up to 50 tags to a service.</p>"
+                    }
+                },
+                "taskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a task definition to use to create the Express Gateway service. This allows you to manage your own task definition, giving you more control over the service configuration such as adding sidecar containers.</p> <p>The task definition must have a container named <code>Main</code> with a single TCP port mapping that includes a container port and port name. The task definition must also have <code>FARGATE</code> compatibility.</p> <p>If you provide a task definition ARN, you cannot also specify <code>primaryContainer</code>, <code>executionRoleArn</code>, <code>taskRoleArn</code>, <code>cpu</code>, or <code>memory</code>.</p>"
                     }
                 }
             },
@@ -4979,6 +4983,42 @@
                                 "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1"
                             }
                         }
+                    },
+                    {
+                        "title": "To create a service with a monitoring configuration",
+                        "documentation": "This example creates a service with a monitoring configuration that sets 20-second resolution for CPUUtilization and MemoryUtilization CloudWatch metrics. The monitoring configuration is not returned in the CreateService response. Use DescribeServiceRevisions to view the monitoring configuration.",
+                        "input": {
+                            "serviceName": "ecs-monitored-service",
+                            "taskDefinition": "my-app:1",
+                            "desiredCount": 2,
+                            "monitoring": {
+                                "metricConfigurations": [
+                                    {
+                                        "metricNames": [
+                                            "CPUUtilization",
+                                            "MemoryUtilization"
+                                        ],
+                                        "resolutionSeconds": 20
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "service": {
+                                "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                "serviceName": "ecs-monitored-service",
+                                "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-monitored-service",
+                                "status": "ACTIVE",
+                                "desiredCount": 2,
+                                "runningCount": 0,
+                                "pendingCount": 0,
+                                "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/my-app:1",
+                                "deploymentConfiguration": {
+                                    "maximumPercent": 200,
+                                    "minimumHealthyPercent": 100
+                                }
+                            }
+                        }
                     }
                 ]
             }
@@ -5143,6 +5183,12 @@
                     "target": "com.amazonaws.ecs#VpcLatticeConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC Lattice configuration for the service being created.</p>"
+                    }
+                },
+                "monitoring": {
+                    "target": "com.amazonaws.ecs#MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional monitoring configuration for the service, which defines the resolution for the service-level <code>CPUUtilization</code> and <code>MemoryUtilization</code> Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of <code>60</code> seconds.</p>"
                     }
                 }
             },
@@ -6191,6 +6237,25 @@
                 }
             }
         },
+        "com.amazonaws.ecs#DaemonIpcMode": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daemon gets its own isolated IPC namespace.</p>",
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daemon shares the IPC namespace with co-located tasks on the same container instance.</p>",
+                        "smithy.api#enumValue": "shared"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#DaemonLinuxParameters": {
             "type": "structure",
             "members": {
@@ -6251,6 +6316,25 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified daemon wasn't found. You can view your available daemons with <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListDaemons.html\">ListDaemons</a>. Amazon ECS daemons are cluster specific and Region specific.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecs#DaemonPidMode": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daemon gets its own isolated PID namespace.</p>",
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daemon shares the PID namespace with co-located tasks on the same container instance.</p>",
+                        "smithy.api#enumValue": "shared"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#DaemonPropagateTags": {
@@ -6621,6 +6705,18 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The principal that registered the daemon task definition.</p>"
+                    }
+                },
+                "pidMode": {
+                    "target": "com.amazonaws.ecs#DaemonPidMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PID namespace mode for the daemon. The valid values are <code>none</code> and <code>shared</code>. The default is <code>none</code>.</p> <p>If <code>none</code> is specified or no value is provided, the daemon runs with its own PID namespace, isolated from other tasks. If <code>shared</code> is specified, the daemon joins the host PID namespace, making it accessible to non-daemon tasks that use <code>pidMode: \"host\"</code> or other daemons that use <code>pidMode: \"shared\"</code>.</p>"
+                    }
+                },
+                "ipcMode": {
+                    "target": "com.amazonaws.ecs#DaemonIpcMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPC namespace mode for the daemon. The valid values are <code>none</code> and <code>shared</code>. The default is <code>none</code>.</p> <p>If <code>none</code> is specified or no value is provided, the daemon runs with its own IPC namespace, isolated from other tasks. If <code>shared</code> is specified, the daemon joins the host IPC namespace, making it accessible to non-daemon tasks that use <code>ipcMode: \"host\"</code> or other daemons that use <code>ipcMode: \"shared\"</code>.</p>"
                     }
                 }
             },
@@ -8122,7 +8218,7 @@
                 "lifecycleHooks": {
                     "target": "com.amazonaws.ecs#DeploymentLifecycleHookList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.</p>"
+                        "smithy.api#documentation": "<p>An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle.</p>"
                     }
                 },
                 "linearConfiguration": {
@@ -8206,7 +8302,7 @@
                 "hookTargetArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.</p> <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hook target. For <code>AWS_LAMBDA</code> hooks, this is the Lambda function ARN. This field is not applicable for <code>PAUSE</code> hooks.</p> <p>You must provide this parameter when configuring an <code>AWS_LAMBDA</code> lifecycle hook.</p>"
                     }
                 },
                 "roleArn": {
@@ -8218,13 +8314,13 @@
                 "lifecycleStages": {
                     "target": "com.amazonaws.ecs#DeploymentLifecycleHookStageList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle stages at which to run the hook. Choose from these valid values:</p> <ul> <li> <p>RECONCILE_SERVICE</p> <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>PRE_SCALE_UP</p> <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>POST_SCALE_UP</p> <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>TEST_TRAFFIC_SHIFT</p> <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>POST_TEST_TRAFFIC_SHIFT</p> <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>PRODUCTION_TRAFFIC_SHIFT</p> <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>POST_PRODUCTION_TRAFFIC_SHIFT</p> <p>The production traffic shift is complete.</p> <p>You can use a lifecycle hook for this stage.</p> </li> </ul> <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle stages at which to run the hook. Choose from these valid values:</p> <ul> <li> <p>RECONCILE_SERVICE</p> <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>PRE_SCALE_UP</p> <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>POST_SCALE_UP</p> <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>TEST_TRAFFIC_SHIFT</p> <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>POST_TEST_TRAFFIC_SHIFT</p> <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>PRE_PRODUCTION_TRAFFIC_SHIFT</p> <p>Occurs before production traffic shift. For linear and canary deployments, this stage is invoked before every traffic shift step.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>PRODUCTION_TRAFFIC_SHIFT</p> <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic. For linear and canary deployments, this stage is invoked at every traffic shift step.</p> <p>You can use a lifecycle hook for this stage.</p> </li> <li> <p>POST_PRODUCTION_TRAFFIC_SHIFT</p> <p>The production traffic shift is complete.</p> <p>You can use a lifecycle hook for this stage.</p> </li> </ul> <note> <p> <code>PAUSE</code> hooks cannot be configured at <code>TEST_TRAFFIC_SHIFT</code> or <code>PRODUCTION_TRAFFIC_SHIFT</code> stages. These stages are only valid for <code>AWS_LAMBDA</code> hooks.</p> </note> <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>"
                     }
                 },
                 "hookDetails": {
                     "target": "com.amazonaws.ecs#HookDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this field to specify custom parameters that Amazon ECS will pass to your hook target invocations (such as a Lambda function).</p>"
+                        "smithy.api#documentation": "<p>Use this field to specify custom parameters that Amazon ECS passes to your Lambda function on each invocation. This field is not used for <code>PAUSE</code> hooks.</p>"
                     }
                 },
                 "timeoutConfiguration": {
@@ -8235,7 +8331,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html\">Lifecycle hooks for Amazon ECS service deployments</a> in the <i> Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A deployment lifecycle hook runs custom logic or pauses the deployment at specific stages of the deployment process. You can use Lambda functions or pause hooks as hook targets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html\">Lifecycle hooks for Amazon ECS service deployments</a> in the <i> Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#DeploymentLifecycleHookAction": {
@@ -8279,7 +8375,7 @@
                 "status": {
                     "target": "com.amazonaws.ecs#DeploymentLifecycleHookStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the lifecycle hook. Valid values depend on the hook type:</p> <ul> <li> <p>For <code>AWS_LAMBDA</code> hooks: <code>IN_PROGRESS</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>TIMED_OUT</code>.</p> </li> <li> <p>For <code>PAUSE</code> hooks: <code>AWAITING_ACTION</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>TIMED_OUT</code>.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The status of the lifecycle hook. Valid values include <code>AWAITING_ACTION</code>, <code>IN_PROGRESS</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>TIMED_OUT</code>.</p>"
                     }
                 },
                 "expiresAt": {
@@ -8437,13 +8533,13 @@
                 "timeoutInMinutes": {
                     "target": "com.amazonaws.ecs#DeploymentLifecycleHookDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of minutes Amazon ECS waits for the lifecycle hook to complete before taking the timeout action.</p>"
+                        "smithy.api#documentation": "<p>The number of minutes Amazon ECS waits for the lifecycle hook to complete before taking the timeout action.</p> <p>Default: 1440 (24 hours)</p>"
                     }
                 },
                 "action": {
                     "target": "com.amazonaws.ecs#DeploymentLifecycleHookAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action Amazon ECS takes when the lifecycle hook times out. Valid values are:</p> <ul> <li> <p> <code>CONTINUE</code> - Proceeds the deployment to the next lifecycle stage.</p> </li> <li> <p> <code>ROLLBACK</code> - Rolls back the deployment to the previous service revision.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The action Amazon ECS takes when the lifecycle hook times out. Valid values are:</p> <ul> <li> <p> <code>CONTINUE</code> - Proceeds the deployment to the next lifecycle stage.</p> </li> <li> <p> <code>ROLLBACK</code> - Rolls back the deployment to the previous service revision.</p> </li> </ul> <p>Default: <code>ROLLBACK</code> </p>"
                     }
                 }
             },
@@ -10030,7 +10126,7 @@
                                     "lifecycleStage": "POST_PRODUCTION_TRAFFIC_SHIFT",
                                     "lifecycleHookDetails": [
                                         {
-                                            "hookId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                                            "hookId": "ecs-pause-Xk7rT2mP9sLwQn4vB8fYd3hJ6gA1cE5iO0uR_ZpWq",
                                             "targetType": "PAUSE",
                                             "status": "AWAITING_ACTION",
                                             "expiresAt": "2026-05-06T17:00:00.000Z",
@@ -10189,6 +10285,41 @@
                                         }
                                     },
                                     "createdAt": "2024-09-10T16:49:26.39Z"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    },
+                    {
+                        "title": "To describe a service revision with a monitoring configuration",
+                        "documentation": "This example describes a service revision that has a monitoring configuration with 20-second resolution for CPUUtilization and MemoryUtilization CloudWatch metrics.",
+                        "input": {
+                            "serviceRevisionArns": [
+                                "arn:aws:ecs:us-east-1:012345678910:service-revision/default/ecs-monitored-service/8675309012345678901"
+                            ]
+                        },
+                        "output": {
+                            "serviceRevisions": [
+                                {
+                                    "serviceRevisionArn": "arn:aws:ecs:us-east-1:012345678910:service-revision/default/ecs-monitored-service/8675309012345678901",
+                                    "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-monitored-service",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                    "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/my-app:1",
+                                    "launchType": "FARGATE",
+                                    "platformVersion": "1.4.0",
+                                    "platformFamily": "DockerLinux",
+                                    "monitoring": {
+                                        "metricConfigurations": [
+                                            {
+                                                "metricNames": [
+                                                    "CPUUtilization",
+                                                    "MemoryUtilization"
+                                                ],
+                                                "resolutionSeconds": 20
+                                            }
+                                        ]
+                                    },
+                                    "createdAt": "2026-06-10T12:00:00.00Z"
                                 }
                             ],
                             "failures": []
@@ -11953,6 +12084,12 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the task role for the service revision.</p>"
+                    }
+                },
+                "taskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the task definition used by this service revision. This is present for all Express services and reflects the task definition in use, whether managed by Amazon ECS or provided by the customer.</p>"
                     }
                 },
                 "cpu": {
@@ -14068,7 +14205,7 @@
                 "clusterArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster to filter daemons by. If not specified, daemons from all clusters are returned.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster to filter daemons by. If you do not specify a cluster, the default cluster is assumed.</p>"
                     }
                 },
                 "capacityProviderArns": {
@@ -16125,6 +16262,70 @@
                 "smithy.api#documentation": "<p>The minimum and maximum amount of memory in mebibytes (MiB) for instance type selection. This ensures that selected instance types have adequate memory for your workloads.</p>"
             }
         },
+        "com.amazonaws.ecs#MetricConfiguration": {
+            "type": "structure",
+            "members": {
+                "metricNames": {
+                    "target": "com.amazonaws.ecs#MetricNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of metric names to configure. The supported metric names are <code>CPUUtilization</code> and <code>MemoryUtilization</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resolutionSeconds": {
+                    "target": "com.amazonaws.ecs#MetricResolutionSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolution, in seconds, at which to collect the metrics. The valid values are <code>20</code> and <code>60</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a specific set of metrics to collect for a service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#MetricConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#MetricConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ecs#MetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.ecs#MetricNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#MetricName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ecs#MetricResolutionSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 20,
+                    "max": 60
+                }
+            }
+        },
         "com.amazonaws.ecs#MissingVersionException": {
             "type": "structure",
             "members": {
@@ -16138,6 +16339,20 @@
             "traits": {
                 "smithy.api#documentation": "<p>Amazon ECS can't determine the current version of the Amazon ECS container agent on the container instance and doesn't have enough information to proceed with an update. This could be because the agent running on the container instance is a previous or custom version that doesn't use our version information.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecs#MonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "metricConfigurations": {
+                    "target": "com.amazonaws.ecs#MetricConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of metric configurations for the service monitoring.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The optional monitoring configuration for a service, which defines the resolution for the service-level <code>CPUUtilization</code> and <code>MemoryUtilization</code> Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of <code>60</code> seconds.</p>"
             }
         },
         "com.amazonaws.ecs#MountPoint": {
@@ -17702,6 +17917,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata that you apply to the daemon task definition to help you categorize and organize them. Each tag consists of a key and an optional value. You define both of them.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case-sensitive.</p> </li> <li> <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "pidMode": {
+                    "target": "com.amazonaws.ecs#DaemonPidMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PID namespace mode for the daemon. The valid values are <code>none</code> and <code>shared</code>. The default is <code>none</code>.</p> <p>If <code>none</code> is specified or no value is provided, the daemon runs with its own PID namespace, isolated from other tasks. If <code>shared</code> is specified, the daemon joins the host PID namespace, making it accessible to non-daemon tasks that use <code>pidMode: \"host\"</code> or other daemons that use <code>pidMode: \"shared\"</code>.</p>"
+                    }
+                },
+                "ipcMode": {
+                    "target": "com.amazonaws.ecs#DaemonIpcMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPC namespace mode for the daemon. The valid values are <code>none</code> and <code>shared</code>. The default is <code>none</code>.</p> <p>If <code>none</code> is specified or no value is provided, the daemon runs with its own IPC namespace, isolated from other tasks. If <code>shared</code> is specified, the daemon joins the host IPC namespace, making it accessible to non-daemon tasks that use <code>ipcMode: \"host\"</code> or other daemons that use <code>ipcMode: \"shared\"</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19254,7 +19481,7 @@
                 "lifecycleStage": {
                     "target": "com.amazonaws.ecs#ServiceDeploymentLifecycleStage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current lifecycle stage of the deployment. Possible values include:</p> <ul> <li> <p>RECONCILE_SERVICE</p> <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p> </li> <li> <p>PRE_SCALE_UP</p> <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> </li> <li> <p>SCALE_UP</p> <p>The stage when the green service revision scales up to 100% and launches new tasks. The green service revision is not serving any traffic at this point.</p> </li> <li> <p>POST_SCALE_UP</p> <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> </li> <li> <p>TEST_TRAFFIC_SHIFT</p> <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p> </li> <li> <p>POST_TEST_TRAFFIC_SHIFT</p> <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p> </li> <li> <p>PRODUCTION_TRAFFIC_SHIFT</p> <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.</p> </li> <li> <p>POST_PRODUCTION_TRAFFIC_SHIFT</p> <p>The production traffic shift is complete.</p> </li> <li> <p>BAKE_TIME</p> <p>The stage when both blue and green service revisions are running simultaneously after the production traffic has shifted.</p> </li> <li> <p>CLEAN_UP</p> <p>The stage when the blue service revision has completely scaled down to 0 running tasks. The green service revision is now the production service revision after this stage.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The current lifecycle stage of the deployment. Possible values include:</p> <ul> <li> <p>RECONCILE_SERVICE</p> <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p> </li> <li> <p>PRE_SCALE_UP</p> <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> </li> <li> <p>SCALE_UP</p> <p>The stage when the green service revision scales up to 100% and launches new tasks. The green service revision is not serving any traffic at this point.</p> </li> <li> <p>POST_SCALE_UP</p> <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> </li> <li> <p>TEST_TRAFFIC_SHIFT</p> <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p> </li> <li> <p>POST_TEST_TRAFFIC_SHIFT</p> <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p> </li> <li> <p>PRE_PRODUCTION_TRAFFIC_SHIFT</p> <p>Occurs before production traffic shift. For linear and canary deployments, this stage is invoked before every traffic shift step.</p> </li> <li> <p>PRODUCTION_TRAFFIC_SHIFT</p> <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic. For linear and canary deployments, this stage is invoked at every traffic shift step.</p> </li> <li> <p>POST_PRODUCTION_TRAFFIC_SHIFT</p> <p>The production traffic shift is complete.</p> </li> <li> <p>BAKE_TIME</p> <p>The stage when both blue and green service revisions are running simultaneously after the production traffic has shifted.</p> </li> <li> <p>CLEAN_UP</p> <p>The stage when the blue service revision has completely scaled down to 0 running tasks. The green service revision is now the production service revision after this stage.</p> </li> </ul>"
                     }
                 },
                 "lifecycleHookDetails": {
@@ -19481,7 +19708,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service deploy ARN that you specified in the <code>StopServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>",
+                "smithy.api#documentation": "<p>The service deploy ARN that you specified in the <code>ContinueServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -19999,6 +20226,12 @@
                     "target": "com.amazonaws.ecs#ECSManagedResources",
                     "traits": {
                         "smithy.api#documentation": "<p>The resources created and managed by Amazon ECS when you create an Express service for Amazon ECS.</p>"
+                    }
+                },
+                "monitoring": {
+                    "target": "com.amazonaws.ecs#MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional monitoring configuration for the service, which defines the resolution for the service-level <code>CPUUtilization</code> and <code>MemoryUtilization</code> Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of <code>60</code> seconds.</p>"
                     }
                 }
             },
@@ -23996,7 +24229,8 @@
                     "ecs:propagate-tags",
                     "ecs:subnet",
                     "ecs:enable-ecs-managed-tags",
-                    "ecs:task-cpu"
+                    "ecs:task-cpu",
+                    "ecs:task-definition"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to modify the parameters of an Express Gateway service",
@@ -24071,6 +24305,12 @@
                     "target": "com.amazonaws.ecs#ExpressGatewayScalingTarget",
                     "traits": {
                         "smithy.api#documentation": "<p>The auto-scaling configuration for the Express service.</p>"
+                    }
+                },
+                "taskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a task definition to use to update the Express Gateway service. This allows you to manage your own task definition, giving you more control over the service configuration such as adding sidecar containers.</p> <p>The task definition must have a container named <code>Main</code> with a single TCP port mapping that includes a container port and port name. The task definition must also have <code>FARGATE</code> compatibility.</p> <p>If you provide a task definition ARN, you cannot also specify <code>primaryContainer</code>, <code>taskRoleArn</code>, <code>cpu</code>, or <code>memory</code>.</p>"
                     }
                 }
             },
@@ -24258,6 +24498,25 @@
                                             "timeoutInMinutes": 30,
                                             "action": "CONTINUE"
                                         }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "To update a service with a monitoring configuration",
+                        "documentation": "This example updates a service to add a monitoring configuration that sets 20-second resolution for CPUUtilization and MemoryUtilization CloudWatch metrics. The monitoring configuration is not returned in the UpdateService response. Use DescribeServiceRevisions to view the monitoring configuration.",
+                        "input": {
+                            "service": "ecs-monitored-service",
+                            "monitoring": {
+                                "metricConfigurations": [
+                                    {
+                                        "metricNames": [
+                                            "CPUUtilization",
+                                            "MemoryUtilization"
+                                        ],
+                                        "resolutionSeconds": 20
                                     }
                                 ]
                             }
@@ -24543,6 +24802,12 @@
                     "target": "com.amazonaws.ecs#VpcLatticeConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the VPC Lattice configuration for the service being updated.</p> <p>This parameter triggers a new service deployment.</p>"
+                    }
+                },
+                "monitoring": {
+                    "target": "com.amazonaws.ecs#MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional monitoring configuration for the service, which defines the resolution for the service-level <code>CPUUtilization</code> and <code>MemoryUtilization</code> Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of <code>60</code> seconds.</p>"
                     }
                 }
             },

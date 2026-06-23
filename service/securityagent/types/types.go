@@ -243,6 +243,197 @@ type AWSResources struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a successfully created security requirement.
+type BatchCreateSecurityRequirementResult struct {
+
+	// The date and time the security requirement was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The security domain the requirement belongs to.
+	//
+	// This member is required.
+	Domain *string
+
+	// The evaluation criteria used to assess compliance with this requirement.
+	//
+	// This member is required.
+	Evaluation *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the pack containing the security requirement.
+	//
+	// This member is required.
+	PackId *string
+
+	// The date and time the security requirement was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The recommended remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a successfully retrieved security requirement.
+type BatchGetSecurityRequirementResult struct {
+
+	// The date and time the security requirement was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The security domain the requirement belongs to.
+	//
+	// This member is required.
+	Domain *string
+
+	// The evaluation criteria used to assess compliance with this requirement.
+	//
+	// This member is required.
+	Evaluation *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the pack containing the security requirement.
+	//
+	// This member is required.
+	PackId *string
+
+	// The date and time the security requirement was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The recommended remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an error that occurred for a specific security
+// requirement during a batch operation.
+type BatchSecurityRequirementError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The name of the security requirement that caused the error.
+	//
+	// This member is required.
+	SecurityRequirementName *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating a Bitbucket integration.
+type BitbucketIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	// The Bitbucket workspace slug that identifies the workspace to integrate, for
+	// example acme-corp.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an integrated Bitbucket repository.
+type BitbucketRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The workspace slug that owns the repository.
+	//
+	// This member is required.
+	Workspace *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	noSmithyDocumentSerde
+}
+
+// A Bitbucket repository integrated as a resource.
+type BitbucketRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The workspace slug that owns the repository.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Bitbucket repository.
+type BitbucketResourceCapabilities struct {
+
+	// Whether to post code review comments on pull requests.
+	LeaveComments *bool
+
+	// Whether to create pull requests with automated fixes.
+	RemediateCode *bool
+
+	noSmithyDocumentSerde
+}
+
 // Represents a category assigned to a security testing task.
 type Category struct {
 
@@ -360,6 +551,10 @@ type CodeReview struct {
 
 	// The date and time the code review was last updated, in UTC format.
 	UpdatedAt *time.Time
+
+	// The validation mode for the code review. Valid values are SIMULATED and
+	// DISABLED.
+	ValidationMode ValidationMode
 
 	noSmithyDocumentSerde
 }
@@ -572,6 +767,136 @@ type CodeReviewSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata for an integrated Confluence document.
+type ConfluenceDocumentMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Confluence page identifier.
+	//
+	// This member is required.
+	PageId *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The Confluence space key containing the document.
+	//
+	// This member is required.
+	SpaceKey *string
+
+	// The display title of the Confluence space.
+	SpaceTitle *string
+
+	// The display title of the Confluence page.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// A Confluence document (page) integrated as a resource.
+type ConfluenceDocumentResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Confluence page identifier.
+	//
+	// This member is required.
+	PageId *string
+
+	// The Confluence space key containing the document.
+	//
+	// This member is required.
+	SpaceKey *string
+
+	// The display title of the Confluence space.
+	SpaceTitle *string
+
+	// The display title of the Confluence page.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating a Confluence integration.
+type ConfluenceIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The Confluence Cloud site URL, for example https://mysite.atlassian.net.
+	//
+	// This member is required.
+	SiteUrl *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Confluence space.
+type ConfluenceResourceCapabilities struct {
+
+	// Whether to create documents in this space.
+	CreateDocument *bool
+
+	// Whether to fetch documents from this space.
+	FetchDocument *bool
+
+	// Whether to update documents in this space.
+	UpdateDocument *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for a security requirement to create within a pack.
+type CreateSecurityRequirementEntry struct {
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The security domain the requirement belongs to.
+	//
+	// This member is required.
+	Domain *string
+
+	// The evaluation criteria used to assess compliance with this requirement.
+	//
+	// This member is required.
+	Evaluation *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The recommended remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
 // A custom HTTP header to include in network traffic during penetration testing.
 type CustomHeader struct {
 
@@ -607,6 +932,37 @@ type DeletePentestFailure struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about a threat model that failed to delete.
+type DeleteThreatModelFailure struct {
+
+	// The reason the threat model failed to delete.
+	Reason *string
+
+	// The unique identifier of the threat model that failed to delete.
+	ThreatModelId *string
+
+	noSmithyDocumentSerde
+}
+
+// Source of the diff for a differential code scan.
+//
+// The following types satisfy this interface:
+//
+//	DiffSourceMemberS3Uri
+type DiffSource interface {
+	isDiffSource()
+}
+
+// S3 URI pointing to a unified diff file. The file must be in standard unified
+// diff format and stored in an S3 bucket connected to your Agent Space.
+type DiffSourceMemberS3Uri struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*DiffSourceMemberS3Uri) isDiffSource() {}
 
 // Represents an endpoint discovered during a pentest job.
 type DiscoveredEndpoint struct {
@@ -665,6 +1021,9 @@ type DocumentInfo struct {
 
 	// The unique identifier of the artifact associated with the document.
 	ArtifactId *string
+
+	// A reference to a document in an integrated third-party provider.
+	IntegratedDocument *IntegratedDocument
 
 	// The Amazon S3 location of the document.
 	S3Location *string
@@ -726,6 +1085,10 @@ type Finding struct {
 	// This member is required.
 	FindingId *string
 
+	// The rationale provided by the alignment agent explaining how the finding was
+	// adjusted based on customer preferences.
+	AlignmentRationale *string
+
 	// The attack script used to reproduce the finding.
 	AttackScript *string
 
@@ -749,6 +1112,9 @@ type Finding struct {
 
 	// The date and time the finding was created, in UTC format.
 	CreatedAt *time.Time
+
+	// A customer-provided note on the finding.
+	CustomerNote *string
 
 	// A description of the finding.
 	Description *string
@@ -788,6 +1154,10 @@ type Finding struct {
 
 	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
+
+	// The simulated validation status of the finding. Valid values are NOT_VALIDATED,
+	// VALIDATING, CONFIRMED, NOT_REPRODUCED, and VALIDATION_FAILED.
+	ValidationStatus ValidationStatus
 
 	// The verification script metadata for reproducing the finding, including
 	// download URL, instructions, and required environment variables.
@@ -842,6 +1212,9 @@ type FindingSummary struct {
 	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The simulated validation status of the finding.
+	ValidationStatus ValidationStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -859,8 +1232,17 @@ type GitHubIntegrationInput struct {
 	// This member is required.
 	State *string
 
+	// The installation identifier provided by GitHub Enterprise Server on the install
+	// callback. Required for GitHub Enterprise Server integrations and ignored for
+	// GitHub.com.
+	InstallationId *string
+
 	// The name of the GitHub organization to integrate with.
 	OrganizationName *string
+
+	// The HTTPS URL of a self-hosted GitHub Enterprise Server instance. Omit this
+	// value for GitHub.com.
+	TargetUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -917,6 +1299,84 @@ type GitHubResourceCapabilities struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for creating a GitLab integration.
+type GitLabIntegrationInput struct {
+
+	// The GitLab access token used to authenticate. This can be a personal access
+	// token or a group access token.
+	//
+	// This member is required.
+	AccessToken *string
+
+	// The type of GitLab access token provided in accessToken.
+	//
+	// This member is required.
+	TokenType GitLabTokenType
+
+	// The identifier of the GitLab group. Required when tokenType is group and
+	// ignored for personal tokens.
+	GroupId *string
+
+	// The HTTPS URL of a self-managed GitLab instance. Omit this value for GitLab
+	// SaaS (gitlab.com).
+	TargetUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an integrated GitLab repository.
+type GitLabRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The namespace (group or user path) that owns the project.
+	//
+	// This member is required.
+	Namespace *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	noSmithyDocumentSerde
+}
+
+// A GitLab repository integrated as a resource.
+type GitLabRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The namespace (group or user path) that owns the project.
+	//
+	// This member is required.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated GitLab repository.
+type GitLabResourceCapabilities struct {
+
+	// Whether to post code review comments on merge request discussions.
+	LeaveComments *bool
+
+	// Whether to create merge requests with automated fixes.
+	RemediateCode *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains HTTP route verification details for a target domain, including the
 // route path and token to serve for domain ownership verification.
 type HttpVerification struct {
@@ -938,6 +1398,42 @@ type IdCConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the IAM Identity Center instance.
 	IdcInstanceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The source from which to import security requirements. Currently supports
+// document uploads.
+//
+// The following types satisfy this interface:
+//
+//	ImportSourceMemberDocuments
+type ImportSource interface {
+	isImportSource()
+}
+
+// The list of documents to extract security requirements from.
+type ImportSourceMemberDocuments struct {
+	Value []SecurityRequirementArtifact
+
+	noSmithyDocumentSerde
+}
+
+func (*ImportSourceMemberDocuments) isImportSource() {}
+
+// A reference to a document in a third-party provider, such as a Confluence page
+// linked via an integration.
+type IntegratedDocument struct {
+
+	// The identifier of the integration that provides access to the document.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The provider-specific resource identifier for the document.
+	//
+	// This member is required.
+	ResourceId *string
 
 	noSmithyDocumentSerde
 }
@@ -964,10 +1460,31 @@ type IntegratedRepository struct {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMemberBitbucketRepository
+//	IntegratedResourceMemberConfluenceDocument
 //	IntegratedResourceMemberGithubRepository
+//	IntegratedResourceMemberGitlabRepository
 type IntegratedResource interface {
 	isIntegratedResource()
 }
+
+// A Bitbucket repository integrated as a resource.
+type IntegratedResourceMemberBitbucketRepository struct {
+	Value BitbucketRepositoryResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberBitbucketRepository) isIntegratedResource() {}
+
+// A Confluence document (page) integrated as a resource.
+type IntegratedResourceMemberConfluenceDocument struct {
+	Value ConfluenceDocumentResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberConfluenceDocument) isIntegratedResource() {}
 
 // The GitHub repository resource information.
 type IntegratedResourceMemberGithubRepository struct {
@@ -977,6 +1494,15 @@ type IntegratedResourceMemberGithubRepository struct {
 }
 
 func (*IntegratedResourceMemberGithubRepository) isIntegratedResource() {}
+
+// A GitLab repository integrated as a resource.
+type IntegratedResourceMemberGitlabRepository struct {
+	Value GitLabRepositoryResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberGitlabRepository) isIntegratedResource() {}
 
 // Represents an input item for updating integrated resources, including the
 // resource and its capabilities.
@@ -998,10 +1524,31 @@ type IntegratedResourceInputItem struct {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMetadataMemberBitbucketRepository
+//	IntegratedResourceMetadataMemberConfluenceDocument
 //	IntegratedResourceMetadataMemberGithubRepository
+//	IntegratedResourceMetadataMemberGitlabRepository
 type IntegratedResourceMetadata interface {
 	isIntegratedResourceMetadata()
 }
+
+// Metadata for an integrated Bitbucket repository.
+type IntegratedResourceMetadataMemberBitbucketRepository struct {
+	Value BitbucketRepositoryMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberBitbucketRepository) isIntegratedResourceMetadata() {}
+
+// Metadata for an integrated Confluence document.
+type IntegratedResourceMetadataMemberConfluenceDocument struct {
+	Value ConfluenceDocumentMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberConfluenceDocument) isIntegratedResourceMetadata() {}
 
 // The GitHub repository metadata.
 type IntegratedResourceMetadataMemberGithubRepository struct {
@@ -1011,6 +1558,15 @@ type IntegratedResourceMetadataMemberGithubRepository struct {
 }
 
 func (*IntegratedResourceMetadataMemberGithubRepository) isIntegratedResourceMetadata() {}
+
+// Metadata for an integrated GitLab repository.
+type IntegratedResourceMetadataMemberGitlabRepository struct {
+	Value GitLabRepositoryMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberGitlabRepository) isIntegratedResourceMetadata() {}
 
 // Contains summary information about an integrated resource.
 type IntegratedResourceSummary struct {
@@ -1087,6 +1643,28 @@ type IntegrationSummary struct {
 	//
 	// This member is required.
 	ProviderType ProviderType
+
+	// The name of the private connection used to reach the integration's self-hosted
+	// instance over private networking, if one is configured.
+	PrivateConnectionName *string
+
+	// The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise
+	// Server or self-managed GitLab instance. This value is absent for SaaS
+	// integrations.
+	TargetUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter criteria for listing security requirement packs.
+type ListSecurityRequirementPackFilter struct {
+
+	// Filter packs by management type. Valid values are AWS_MANAGED and
+	// CUSTOMER_MANAGED.
+	ManagementType ManagementType
+
+	// Filter packs by status. Valid values are ENABLED and DISABLED.
+	Status SecurityRequirementPackStatus
 
 	noSmithyDocumentSerde
 }
@@ -1248,11 +1826,18 @@ type Pentest struct {
 	// This member is required.
 	Title *string
 
+	// Strategy for cleaning up resources after pentest job completion.
+	CleanUpStrategy CleanUpStrategy
+
 	// The code remediation strategy for the pentest.
 	CodeRemediationStrategy CodeRemediationStrategy
 
 	// The date and time the pentest was created, in UTC format.
 	CreatedAt *time.Time
+
+	// A list of managed skills to disable for this pentest. Valid values include
+	// FINDING_PERSONALIZATION and LOGIN_OPTIMIZATION.
+	DisableManagedSkills []SkillType
 
 	// The list of risk types excluded from the pentest.
 	ExcludeRiskTypes []RiskType
@@ -1286,11 +1871,18 @@ type PentestJob struct {
 	// The list of domains allowed during the pentest job.
 	AllowedDomains []Endpoint
 
+	// Strategy for cleaning up resources after pentest job completion.
+	CleanUpStrategy CleanUpStrategy
+
 	// The code remediation strategy for the pentest job.
 	CodeRemediationStrategy CodeRemediationStrategy
 
 	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
+
+	// A list of managed skills disabled for this pentest job. Valid values include
+	// FINDING_PERSONALIZATION and LOGIN_OPTIMIZATION.
+	DisableManagedSkills []SkillType
 
 	// The list of documents providing context for the pentest job.
 	Documents []DocumentInfo
@@ -1407,15 +1999,114 @@ type PentestSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a private connection. Specify either a service-managed or
+// a self-managed mode.
+//
+// The following types satisfy this interface:
+//
+//	PrivateConnectionModeMemberSelfManaged
+//	PrivateConnectionModeMemberServiceManaged
+type PrivateConnectionMode interface {
+	isPrivateConnectionMode()
+}
+
+// The configuration for a self-managed private connection, where you manage your
+// own resource configuration.
+type PrivateConnectionModeMemberSelfManaged struct {
+	Value SelfManagedInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivateConnectionModeMemberSelfManaged) isPrivateConnectionMode() {}
+
+// The configuration for a service-managed private connection, where the service
+// manages the resource gateway lifecycle.
+type PrivateConnectionModeMemberServiceManaged struct {
+	Value ServiceManagedInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivateConnectionModeMemberServiceManaged) isPrivateConnectionMode() {}
+
+// Summarizes a private connection.
+type PrivateConnectionSummary struct {
+
+	// The name of the private connection.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the private connection.
+	//
+	// This member is required.
+	Status PrivateConnectionStatus
+
+	// The type of the private connection, indicating whether it is service-managed or
+	// self-managed.
+	//
+	// This member is required.
+	Type PrivateConnectionType
+
+	// The date and time the connection's certificate expires, in UTC format.
+	CertificateExpiryTime *time.Time
+
+	// The DNS resolution mode for the resource gateway.
+	DnsResolution ResourceConfigDnsResolution
+
+	// A message describing why the private connection entered a failed state, if
+	// applicable.
+	FailureMessage *string
+
+	// The IP address or DNS name of the target resource.
+	HostAddress *string
+
+	// The identifier or ARN of the VPC Lattice resource configuration.
+	ResourceConfigurationId *string
+
+	// The identifier or ARN of the VPC Lattice resource gateway.
+	ResourceGatewayId *string
+
+	// The tags attached to the private connection.
+	Tags map[string]string
+
+	// The identifier of the VPC the resource gateway is created in.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // The provider-specific input for creating an integration. This is a union type
 // that contains provider-specific configuration.
 //
 // The following types satisfy this interface:
 //
+//	ProviderInputMemberBitbucket
+//	ProviderInputMemberConfluence
 //	ProviderInputMemberGithub
+//	ProviderInputMemberGitlab
 type ProviderInput interface {
 	isProviderInput()
 }
+
+// The configuration for a Bitbucket integration.
+type ProviderInputMemberBitbucket struct {
+	Value BitbucketIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberBitbucket) isProviderInput() {}
+
+// The configuration for a Confluence integration.
+type ProviderInputMemberConfluence struct {
+	Value ConfluenceIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberConfluence) isProviderInput() {}
 
 // The GitHub-specific input for creating an integration.
 type ProviderInputMemberGithub struct {
@@ -1426,15 +2117,45 @@ type ProviderInputMemberGithub struct {
 
 func (*ProviderInputMemberGithub) isProviderInput() {}
 
+// The configuration for a GitLab integration.
+type ProviderInputMemberGitlab struct {
+	Value GitLabIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberGitlab) isProviderInput() {}
+
 // The capabilities for an integrated resource from a third-party provider. This
 // is a union type that contains provider-specific capabilities.
 //
 // The following types satisfy this interface:
 //
+//	ProviderResourceCapabilitiesMemberBitbucket
+//	ProviderResourceCapabilitiesMemberConfluence
 //	ProviderResourceCapabilitiesMemberGithub
+//	ProviderResourceCapabilitiesMemberGitlab
 type ProviderResourceCapabilities interface {
 	isProviderResourceCapabilities()
 }
+
+// Capabilities for an integrated Bitbucket repository.
+type ProviderResourceCapabilitiesMemberBitbucket struct {
+	Value BitbucketResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberBitbucket) isProviderResourceCapabilities() {}
+
+// Capabilities for an integrated Confluence space.
+type ProviderResourceCapabilitiesMemberConfluence struct {
+	Value ConfluenceResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberConfluence) isProviderResourceCapabilities() {}
 
 // The GitHub-specific resource capabilities.
 type ProviderResourceCapabilitiesMemberGithub struct {
@@ -1444,6 +2165,186 @@ type ProviderResourceCapabilitiesMemberGithub struct {
 }
 
 func (*ProviderResourceCapabilitiesMemberGithub) isProviderResourceCapabilities() {}
+
+// Capabilities for an integrated GitLab repository.
+type ProviderResourceCapabilitiesMemberGitlab struct {
+	Value GitLabResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberGitlab) isProviderResourceCapabilities() {}
+
+// Destination for publishing scan reports to an integrated document provider.
+type ReportDestination struct {
+
+	// The container identifier where the report will be published.
+	//
+	// This member is required.
+	ContainerId *string
+
+	// The integration identifier for the document provider.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The existing document identifier to update instead of creating a new document.
+	DocumentId *string
+
+	// The parent document identifier under which the report will be created.
+	ParentId *string
+
+	noSmithyDocumentSerde
+}
+
+// A document used as source material for importing security requirements.
+type SecurityRequirementArtifact struct {
+
+	// The binary content of the document.
+	//
+	// This member is required.
+	Content []byte
+
+	// The format of the document. Valid values are MD, PDF, TXT, DOCX, and DOC.
+	//
+	// This member is required.
+	Format SecurityRequirementArtifactFormat
+
+	// The file name of the document.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a security requirement pack.
+type SecurityRequirementPackSummary struct {
+
+	// The date and time the security requirement pack was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The management type of the pack.
+	//
+	// This member is required.
+	ManagementType ManagementType
+
+	// The name of the security requirement pack.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the security requirement pack.
+	//
+	// This member is required.
+	PackId *string
+
+	// The status of the security requirement pack.
+	//
+	// This member is required.
+	Status SecurityRequirementPackStatus
+
+	// The date and time the security requirement pack was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the security requirement pack.
+	Description *string
+
+	// The vendor name for AWS managed packs.
+	VendorName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a security requirement.
+type SecurityRequirementSummary struct {
+
+	// The date and time the security requirement was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the pack containing the security requirement.
+	//
+	// This member is required.
+	PackId *string
+
+	// The date and time the security requirement was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a self-managed private connection.
+type SelfManagedInput struct {
+
+	// The identifier or ARN of the resource configuration.
+	//
+	// This member is required.
+	ResourceConfigurationId *string
+
+	// The certificate for the private connection.
+	Certificate *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a service-managed private connection.
+type ServiceManagedInput struct {
+
+	// The IP address or DNS name of the target resource.
+	//
+	// This member is required.
+	HostAddress *string
+
+	// The subnets that the service-managed resource gateway spans.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The VPC to create the service-managed resource gateway in.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The certificate for the private connection.
+	Certificate *string
+
+	// The DNS resolution mode for the resource gateway. Defaults to PUBLIC when not
+	// set.
+	DnsResolution ResourceConfigDnsResolution
+
+	// The IP address type of the service-managed resource gateway.
+	IpAddressType IpAddressType
+
+	// The number of IPv4 addresses in each elastic network interface for the
+	// service-managed resource gateway.
+	Ipv4AddressesPerEni *int32
+
+	// The TCP port ranges that a consumer can use to access the resource.
+	PortRanges []string
+
+	// The security groups to attach to the service-managed resource gateway.
+	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
 
 // Represents a source code repository used for security analysis during a pentest.
 type SourceCodeRepository struct {
@@ -1462,7 +2363,7 @@ type Step struct {
 	CreatedAt *time.Time
 
 	// The name of the step. Valid values include PREFLIGHT, STATIC_ANALYSIS, PENTEST,
-	// and FINALIZING.
+	// VALIDATION, and FINALIZING.
 	Name StepName
 
 	// The current status of the step.
@@ -1609,6 +2510,391 @@ type TaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a threat identified during threat modeling.
+type Threat struct {
+
+	// The DFD element this threat is anchored to.
+	Anchor *ThreatAnchorShape
+
+	// Optional customer comment on the threat.
+	Comments *string
+
+	// The date and time the threat was created, in UTC format.
+	CreatedAt *time.Time
+
+	// Who created this threat.
+	CreatedBy ThreatActor
+
+	// The source code files supporting the threat.
+	Evidence []ThreatEvidenceShape
+
+	// The specific assets affected by the threat.
+	ImpactedAssets []string
+
+	// The security goals affected by the threat.
+	ImpactedGoal []string
+
+	// The conditions required for the threat to be exploitable.
+	Prerequisites *string
+
+	// The recommended mitigation guidance for this threat.
+	Recommendation *string
+
+	// The severity level of the threat.
+	Severity ThreatSeverity
+
+	// The natural-language threat statement.
+	Statement *string
+
+	// The current status of the threat.
+	Status ThreatStatus
+
+	// The STRIDE categories applicable to this threat.
+	Stride []StrideCategory
+
+	// What the threat source can do.
+	ThreatAction *string
+
+	// The unique identifier of the threat.
+	ThreatId *string
+
+	// The direct consequence of the threat action.
+	ThreatImpact *string
+
+	// The unique identifier of the threat model job that produced the threat.
+	ThreatJobId *string
+
+	// The actor or origin of the threat.
+	ThreatSource *string
+
+	// A short title summarizing the threat.
+	Title *string
+
+	// The date and time the threat was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	// Who last updated this threat.
+	UpdatedBy ThreatActor
+
+	noSmithyDocumentSerde
+}
+
+// DFD element that a threat is anchored to.
+type ThreatAnchorShape struct {
+
+	// The identifier of the DFD element.
+	Id *string
+
+	// The kind of DFD element.
+	Kind *string
+
+	// The package identifier containing the DFD element.
+	PackageId *string
+
+	noSmithyDocumentSerde
+}
+
+// Source code file supporting a threat.
+type ThreatEvidenceShape struct {
+
+	// The package identifier containing the evidence file.
+	PackageId *string
+
+	// The file path of the evidence.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a threat model configuration that defines the parameters for
+// automated threat analysis, including target assets and logging configuration.
+type ThreatModel struct {
+
+	// The unique identifier of the agent space that contains the threat model.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The assets included in the threat model.
+	//
+	// This member is required.
+	Assets *Assets
+
+	// The unique identifier of the threat model.
+	//
+	// This member is required.
+	ThreatModelId *string
+
+	// The title of the threat model.
+	//
+	// This member is required.
+	Title *string
+
+	// The date and time the threat model was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A description of the application or system being threat modeled.
+	Description *string
+
+	// The CloudWatch Logs configuration for the threat model.
+	LogConfig *CloudWatchLog
+
+	// The scoped documents for the agent to focus on during threat modeling.
+	ScopeDocs []DocumentInfo
+
+	// The IAM service role used for the threat model.
+	ServiceRole *string
+
+	// The date and time the threat model was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a threat model job, which is an execution instance of a threat model.
+type ThreatModelJob struct {
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the threat model job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The list of documents used for threat modeling.
+	Documents []DocumentInfo
+
+	// Error information if the threat model job encountered an error.
+	ErrorInformation *ErrorInformation
+
+	// The date and time the threat model job execution ended, in UTC format.
+	ExecutionEndTime *time.Time
+
+	// The date and time the threat model job execution started, in UTC format.
+	ExecutionStartTime *time.Time
+
+	// The list of integrated repositories used for threat modeling.
+	IntegratedRepositories []IntegratedRepository
+
+	// The scoped documents for the agent to focus on during threat modeling.
+	ScopeDocs []DocumentInfo
+
+	// The list of source code repositories used for threat modeling.
+	SourceCode []SourceCodeRepository
+
+	// The current status of the threat model job.
+	Status JobStatus
+
+	// The system overview generated during threat modeling.
+	SystemOverview *string
+
+	// The unique identifier of the threat model associated with the job.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job.
+	ThreatModelJobId *string
+
+	// The title of the threat model job.
+	Title *string
+
+	// The date and time the threat model job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat model job.
+type ThreatModelJobSummary struct {
+
+	// The unique identifier of the threat model associated with the job.
+	//
+	// This member is required.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job.
+	//
+	// This member is required.
+	ThreatModelJobId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the threat model job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current status of the threat model job.
+	Status JobStatus
+
+	// The title of the threat model job.
+	Title *string
+
+	// The date and time the threat model job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an individual task within a threat model job.
+type ThreatModelJobTask struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A description of the task.
+	Description *string
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The location of the task execution logs.
+	LogsLocation *LogLocation
+
+	// The unique identifier of the threat model associated with the task.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job that contains the task.
+	ThreatModelJobId *string
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat model job task.
+type ThreatModelJobTaskSummary struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The unique identifier of the threat model associated with the task.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job that contains the task.
+	ThreatModelJobId *string
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat model.
+type ThreatModelSummary struct {
+
+	// The unique identifier of the agent space that contains the threat model.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The unique identifier of the threat model.
+	//
+	// This member is required.
+	ThreatModelId *string
+
+	// The title of the threat model.
+	//
+	// This member is required.
+	Title *string
+
+	// The date and time the threat model was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The date and time the threat model was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat.
+type ThreatSummary struct {
+
+	// The date and time the threat was created, in UTC format.
+	CreatedAt *time.Time
+
+	// Who created this threat.
+	CreatedBy ThreatActor
+
+	// The severity level of the threat.
+	Severity ThreatSeverity
+
+	// The natural-language threat statement.
+	Statement *string
+
+	// The current status of the threat.
+	Status ThreatStatus
+
+	// The STRIDE categories applicable to this threat.
+	Stride []StrideCategory
+
+	// The unique identifier of the threat.
+	ThreatId *string
+
+	// The unique identifier of the threat model job that produced the threat.
+	ThreatJobId *string
+
+	// A short title summarizing the threat.
+	Title *string
+
+	// The date and time the threat was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	// Who last updated this threat.
+	UpdatedBy ThreatActor
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for updating an existing security requirement within a
+// pack. The name is an immutable identifier used to locate the requirement and
+// cannot be modified.
+type UpdateSecurityRequirementEntry struct {
+
+	// The name of the security requirement to update. This is an immutable identifier
+	// and cannot be changed once the requirement is created.
+	//
+	// This member is required.
+	Name *string
+
+	// The updated description of the security requirement.
+	Description *string
+
+	// The updated security domain the requirement belongs to.
+	Domain *string
+
+	// The updated evaluation criteria used to assess compliance with this requirement.
+	Evaluation *string
+
+	// The updated remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a user membership, including the role assigned to the
 // user within the agent space.
 type UserConfig struct {
@@ -1728,10 +3014,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isDiffSource()                   {}
+func (*UnknownUnionMember) isImportSource()                 {}
 func (*UnknownUnionMember) isIntegratedResource()           {}
 func (*UnknownUnionMember) isIntegratedResourceMetadata()   {}
 func (*UnknownUnionMember) isIntegrationFilter()            {}
 func (*UnknownUnionMember) isMemberMetadata()               {}
 func (*UnknownUnionMember) isMembershipConfig()             {}
+func (*UnknownUnionMember) isPrivateConnectionMode()        {}
 func (*UnknownUnionMember) isProviderInput()                {}
 func (*UnknownUnionMember) isProviderResourceCapabilities() {}

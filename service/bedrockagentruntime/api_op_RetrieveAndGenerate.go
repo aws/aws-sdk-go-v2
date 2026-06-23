@@ -13,6 +13,11 @@ import (
 // and using the specified foundation model or [inference profile]. The response only cites sources
 // that are relevant to the query.
 //
+// This API cannot be used with managed knowledge bases. Use [AgenticRetrieveStream] or [Retrieve] with managed
+// knowledge bases.
+//
+// [Retrieve]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html
+// [AgenticRetrieveStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_AgenticRetrieveStream.html
 // [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGenerateInput, optFns ...func(*Options)) (*RetrieveAndGenerateOutput, error) {
 	if params == nil {
@@ -51,6 +56,11 @@ type RetrieveAndGenerateInput struct {
 	// allows Amazon Bedrock to maintain context and knowledge from previous
 	// interactions. You can't explicitly set the sessionId yourself.
 	SessionId *string
+
+	// Contains information about the user making the request. Use this to pass user
+	// identity information for access control filtering, so that retrieval results
+	// only include documents the user is authorized to access.
+	UserContext *types.UserContext
 
 	noSmithyDocumentSerde
 }

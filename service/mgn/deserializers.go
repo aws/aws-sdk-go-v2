@@ -2198,6 +2198,11 @@ func awsRestjson1_deserializeOpDocumentCreateReplicationConfigurationTemplateOut
 				return err
 			}
 
+		case "storageConfiguration":
+			if err := awsRestjson1_deserializeDocumentStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "storeSnapshotOnLocalZone":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5942,6 +5947,11 @@ func awsRestjson1_deserializeOpDocumentGetReplicationConfigurationOutput(v **Get
 
 		case "stagingAreaTags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.StagingAreaTags, value); err != nil {
+				return err
+			}
+
+		case "storageConfiguration":
+			if err := awsRestjson1_deserializeDocumentStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
 				return err
 			}
 
@@ -16643,6 +16653,11 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationOutput(v **
 				return err
 			}
 
+		case "storageConfiguration":
+			if err := awsRestjson1_deserializeDocumentStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "storeSnapshotOnLocalZone":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16945,6 +16960,11 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationTemplateOut
 
 		case "stagingAreaTags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.StagingAreaTags, value); err != nil {
+				return err
+			}
+
+		case "storageConfiguration":
+			if err := awsRestjson1_deserializeDocumentStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
 				return err
 			}
 
@@ -19844,6 +19864,55 @@ func awsRestjson1_deserializeDocumentExportTaskSummary(v **types.ExportTaskSumma
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFsxOntapConfiguration(v **types.FsxOntapConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FsxOntapConfiguration
+	if *v == nil {
+		sv = &types.FsxOntapConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "credentialsSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.CredentialsSecretArn = ptr.String(jtv)
+			}
+
+		case "storageVirtualMachineId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineId to be of type string, got %T instead", value)
+				}
+				sv.StorageVirtualMachineId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdentificationHints(v **types.IdentificationHints, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21096,6 +21165,123 @@ func awsRestjson1_deserializeDocumentJobsList(v *[]types.Job, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLastKnownCheck(v **types.LastKnownCheck, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LastKnownCheck
+	if *v == nil {
+		sv = &types.LastKnownCheck{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "checkedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CheckedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "error":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.Error = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastKnownCheckStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.LastKnownCheckStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastKnownCheckType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.LastKnownCheckType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLastKnownChecksList(v *[]types.LastKnownCheck, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LastKnownCheck
+	if *v == nil {
+		cv = []types.LastKnownCheck{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LastKnownCheck
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLastKnownCheck(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLaunchConfigurationTemplate(v **types.LaunchConfigurationTemplate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21363,6 +21549,20 @@ func awsRestjson1_deserializeDocumentLaunchedInstance(v **types.LaunchedInstance
 					return fmt.Errorf("expected JobID to be of type string, got %T instead", value)
 				}
 				sv.JobID = ptr.String(jtv)
+			}
+
+		case "lastKnownChecks":
+			if err := awsRestjson1_deserializeDocumentLastKnownChecksList(&sv.LastKnownChecks, value); err != nil {
+				return err
+			}
+
+		case "lastKnownFsxChecksStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastKnownCheckStatus to be of type string, got %T instead", value)
+				}
+				sv.LastKnownFsxChecksStatus = types.LastKnownCheckStatus(jtv)
 			}
 
 		default:
@@ -24706,6 +24906,11 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationTemplate(v **types.
 				return err
 			}
 
+		case "storageConfiguration":
+			if err := awsRestjson1_deserializeDocumentStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "storeSnapshotOnLocalZone":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -26052,6 +26257,51 @@ func awsRestjson1_deserializeDocumentSsmParameterStoreParameters(v *[]types.SsmP
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStorageConfiguration(v **types.StorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StorageConfiguration
+	if *v == nil {
+		sv = &types.StorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fsxOntapConfiguration":
+			if err := awsRestjson1_deserializeDocumentFsxOntapConfiguration(&sv.FsxOntapConfiguration, value); err != nil {
+				return err
+			}
+
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = types.StorageType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

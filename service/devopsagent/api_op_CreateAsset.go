@@ -40,7 +40,8 @@ type CreateAssetInput struct {
 	// This member is required.
 	AssetType *string
 
-	// The content for the asset. Provide a single file or a zip bundle.
+	// The content for the asset. Provide a single file, a zip bundle, or a sourceUrl
+	// to import from an external source.
 	//
 	// This member is required.
 	Content types.AssetContent

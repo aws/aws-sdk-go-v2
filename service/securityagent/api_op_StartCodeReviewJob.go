@@ -40,6 +40,10 @@ type StartCodeReviewJobInput struct {
 	// This member is required.
 	CodeReviewId *string
 
+	// Source of the diff for a differential scan. When present, the job analyzes only
+	// the changed lines instead of performing a full scan.
+	DiffSource types.DiffSource
+
 	noSmithyDocumentSerde
 }
 

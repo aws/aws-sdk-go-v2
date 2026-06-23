@@ -130,6 +130,26 @@ func (m *validateOpAssociatePackages) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachDataSource struct {
+}
+
+func (*validateOpAttachDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAuthorizeVpcEndpointAccess struct {
 }
 
@@ -510,6 +530,26 @@ func (m *validateOpDeregisterCapability) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDataSourceAttachment struct {
+}
+
+func (*validateOpDescribeDataSourceAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataSourceAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDataSourceAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDataSourceAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomainAutoTunes struct {
 }
 
@@ -730,6 +770,26 @@ func (m *validateOpDescribeVpcEndpoints) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetachDataSource struct {
+}
+
+func (*validateOpDetachDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDissociatePackage struct {
 }
 
@@ -945,6 +1005,26 @@ func (m *validateOpGetUpgradeStatus) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetUpgradeStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataSourceAttachments struct {
+}
+
+func (*validateOpListDataSourceAttachments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataSourceAttachments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataSourceAttachmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataSourceAttachmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1554,6 +1634,10 @@ func addOpAssociatePackagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociatePackages{}, middleware.After)
 }
 
+func addOpAttachDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachDataSource{}, middleware.After)
+}
+
 func addOpAuthorizeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAuthorizeVpcEndpointAccess{}, middleware.After)
 }
@@ -1630,6 +1714,10 @@ func addOpDeregisterCapabilityValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeregisterCapability{}, middleware.After)
 }
 
+func addOpDescribeDataSourceAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataSourceAttachment{}, middleware.After)
+}
+
 func addOpDescribeDomainAutoTunesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainAutoTunes{}, middleware.After)
 }
@@ -1674,6 +1762,10 @@ func addOpDescribeVpcEndpointsValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeVpcEndpoints{}, middleware.After)
 }
 
+func addOpDetachDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachDataSource{}, middleware.After)
+}
+
 func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackage{}, middleware.After)
 }
@@ -1716,6 +1808,10 @@ func addOpGetUpgradeHistoryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetUpgradeStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUpgradeStatus{}, middleware.After)
+}
+
+func addOpListDataSourceAttachmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataSourceAttachments{}, middleware.After)
 }
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -2288,6 +2384,24 @@ func validateWindowStartTime(v *types.WindowStartTime) error {
 	}
 }
 
+func validateWorkspaceConfigurationInput(v *types.WorkspaceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkspaceConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.WorkspaceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptInboundConnectionInput(v *AcceptInboundConnectionInput) error {
 	if v == nil {
 		return nil
@@ -2410,6 +2524,29 @@ func validateOpAssociatePackagesInput(v *AssociatePackagesInput) error {
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAttachDataSourceInput(v *AttachDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachDataSourceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if v.WorkspaceConfiguration != nil {
+		if err := validateWorkspaceConfigurationInput(v.WorkspaceConfiguration); err != nil {
+			invalidParams.AddNested("WorkspaceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2791,6 +2928,24 @@ func validateOpDeregisterCapabilityInput(v *DeregisterCapabilityInput) error {
 	}
 }
 
+func validateOpDescribeDataSourceAttachmentInput(v *DescribeDataSourceAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataSourceAttachmentInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput) error {
 	if v == nil {
 		return nil
@@ -2958,6 +3113,24 @@ func validateOpDescribeVpcEndpointsInput(v *DescribeVpcEndpointsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcEndpointsInput"}
 	if v.VpcEndpointIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetachDataSourceInput(v *DetachDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachDataSourceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3141,6 +3314,21 @@ func validateOpGetUpgradeStatusInput(v *GetUpgradeStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetUpgradeStatusInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataSourceAttachmentsInput(v *ListDataSourceAttachmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataSourceAttachmentsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -52,6 +52,10 @@ type UpdateGatewayInput struct {
 	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The updated custom transformation configuration for the gateway. This
+	// configuration defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The updated description for the gateway.
 	Description *string
 
@@ -82,6 +86,9 @@ type UpdateGatewayInput struct {
 
 	// The updated protocol type for the gateway.
 	ProtocolType types.GatewayProtocolType
+
+	// The updated Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -126,6 +133,10 @@ type UpdateGatewayOutput struct {
 	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The custom transformation configuration for the gateway. This configuration
+	// defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The updated description of the gateway.
 	Description *string
 
@@ -162,6 +173,13 @@ type UpdateGatewayOutput struct {
 
 	// The reasons for the current status of the updated gateway.
 	StatusReasons []string
+
+	// The Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL
+	// associated with the gateway.
+	WebAclArn *string
 
 	// The workload identity details for the updated gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails

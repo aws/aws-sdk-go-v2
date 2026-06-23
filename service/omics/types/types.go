@@ -484,6 +484,11 @@ type DefaultRunSetting struct {
 	// run-specific values take precedence when keys overlap.
 	RunTags map[string]string
 
+	// Optional configuration for enabling scratch ephemeral storage mounted at /tmp.
+	// If not specified, this will default to SHARED. This configuration is applicable
+	// only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
+	ScratchStorageMode ScratchStorageMode
+
 	// The filesystem size in gibibytes (GiB) provisioned for each workflow run and
 	// shared by all tasks in that run. Defaults to 1200 GiB if not specified.
 	StorageCapacity *int32
@@ -1601,6 +1606,9 @@ type RunListItem struct {
 
 	// The run's workflow ID.
 	WorkflowId *string
+
+	// The name of the workflow.
+	WorkflowName *string
 
 	// The name of the workflow version.
 	WorkflowVersionName *string

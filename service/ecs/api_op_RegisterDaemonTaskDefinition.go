@@ -62,9 +62,27 @@ type RegisterDaemonTaskDefinitionInput struct {
 	// container images from Amazon ECR or send container logs to CloudWatch.
 	ExecutionRoleArn *string
 
+	// The IPC namespace mode for the daemon. The valid values are none and shared .
+	// The default is none .
+	//
+	// If none is specified or no value is provided, the daemon runs with its own IPC
+	// namespace, isolated from other tasks. If shared is specified, the daemon joins
+	// the host IPC namespace, making it accessible to non-daemon tasks that use
+	// ipcMode: "host" or other daemons that use ipcMode: "shared" .
+	IpcMode types.DaemonIpcMode
+
 	// The amount of memory (in MiB) used by the daemon task. It can be expressed as
 	// an integer using MiB (for example, 1024 ).
 	Memory *string
+
+	// The PID namespace mode for the daemon. The valid values are none and shared .
+	// The default is none .
+	//
+	// If none is specified or no value is provided, the daemon runs with its own PID
+	// namespace, isolated from other tasks. If shared is specified, the daemon joins
+	// the host PID namespace, making it accessible to non-daemon tasks that use
+	// pidMode: "host" or other daemons that use pidMode: "shared" .
+	PidMode types.DaemonPidMode
 
 	// The metadata that you apply to the daemon task definition to help you
 	// categorize and organize them. Each tag consists of a key and an optional value.

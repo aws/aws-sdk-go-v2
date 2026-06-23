@@ -67,6 +67,9 @@ type CreateDataSourceInput struct {
 	//   embeddings upon deletion of a knowledge base or data source resource. Note that
 	//   the vector store itself is not deleted if you delete a knowledge base or data
 	//   source resource.
+	//
+	// For managed knowledge bases, the only supported option is DELETE , which is also
+	// the default.
 	DataDeletionPolicy types.DataDeletionPolicy
 
 	// A description of the data source.

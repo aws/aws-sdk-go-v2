@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarmMuteRule(context.Background(), nil, func(o *Options) {
@@ -230,6 +242,18 @@ func TestCheckSnapshot_DisableInsightRules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableAlarmActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAlarmActions(context.Background(), nil, func(o *Options) {
@@ -271,6 +295,18 @@ func TestCheckSnapshot_GetDashboard(t *testing.T) {
 	_, err := svc.GetDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +649,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarmMuteRule(context.Background(), nil, func(o *Options) {
@@ -781,6 +829,18 @@ func TestUpdateSnapshot_DisableInsightRules(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableAlarmActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAlarmActions(context.Background(), nil, func(o *Options) {
@@ -822,6 +882,18 @@ func TestUpdateSnapshot_GetDashboard(t *testing.T) {
 	_, err := svc.GetDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchDeleteInstrumentationConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteInstrumentationConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteInstrumentationConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetServiceLevelObjectiveBudgetReport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetServiceLevelObjectiveBudgetReport(context.Background(), nil, func(o *Options) {
@@ -79,6 +91,18 @@ func TestCheckSnapshot_BatchUpdateExclusionWindows(t *testing.T) {
 	_, err := svc.BatchUpdateExclusionWindows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchUpdateExclusionWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateInstrumentationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInstrumentationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInstrumentationConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -110,11 +134,47 @@ func TestCheckSnapshot_DeleteGroupingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteInstrumentationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInstrumentationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteInstrumentationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteServiceLevelObjective(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteServiceLevelObjective(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteServiceLevelObjective")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetInstrumentationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstrumentationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInstrumentationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetInstrumentationConfigurationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstrumentationConfigurationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInstrumentationConfigurationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -175,6 +235,18 @@ func TestCheckSnapshot_ListGroupingAttributeDefinitions(t *testing.T) {
 	_, err := svc.ListGroupingAttributeDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListGroupingAttributeDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInstrumentationConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInstrumentationConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInstrumentationConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +362,18 @@ func TestCheckSnapshot_PutGroupingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ReportInstrumentationConfigurationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReportInstrumentationConfigurationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReportInstrumentationConfigurationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartDiscovery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartDiscovery(context.Background(), nil, func(o *Options) {
@@ -337,6 +421,18 @@ func TestCheckSnapshot_UpdateServiceLevelObjective(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchDeleteInstrumentationConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteInstrumentationConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteInstrumentationConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetServiceLevelObjectiveBudgetReport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetServiceLevelObjectiveBudgetReport(context.Background(), nil, func(o *Options) {
@@ -354,6 +450,18 @@ func TestUpdateSnapshot_BatchUpdateExclusionWindows(t *testing.T) {
 	_, err := svc.BatchUpdateExclusionWindows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchUpdateExclusionWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateInstrumentationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInstrumentationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInstrumentationConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,11 +493,47 @@ func TestUpdateSnapshot_DeleteGroupingConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteInstrumentationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInstrumentationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteInstrumentationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteServiceLevelObjective(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteServiceLevelObjective(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteServiceLevelObjective")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetInstrumentationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstrumentationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInstrumentationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetInstrumentationConfigurationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstrumentationConfigurationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInstrumentationConfigurationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -450,6 +594,18 @@ func TestUpdateSnapshot_ListGroupingAttributeDefinitions(t *testing.T) {
 	_, err := svc.ListGroupingAttributeDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListGroupingAttributeDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInstrumentationConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInstrumentationConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInstrumentationConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -558,6 +714,18 @@ func TestUpdateSnapshot_PutGroupingConfiguration(t *testing.T) {
 	_, err := svc.PutGroupingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutGroupingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ReportInstrumentationConfigurationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReportInstrumentationConfigurationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReportInstrumentationConfigurationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

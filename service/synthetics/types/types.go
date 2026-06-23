@@ -7,6 +7,23 @@ import (
 	"time"
 )
 
+// A structure that specifies a replica location for a canary, including the
+// Region and optional VPC configuration.
+type AddReplicaLocationInput struct {
+
+	// The Amazon Web Services Region where the canary replica should be created, for
+	// example us-east-1 .
+	//
+	// This member is required.
+	Location *string
+
+	// The VPC configuration to use for the canary replica in this location. If not
+	// specified, the replica runs without VPC connectivity.
+	VpcConfig *VpcConfigInput
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains the configuration for canary artifacts, including the
 // encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 type ArtifactConfigInput struct {
@@ -119,6 +136,11 @@ type Canary struct {
 
 	// The unique ID of this canary.
 	Id *string
+
+	// If this canary is part of a multi-location configuration, this structure
+	// contains information about the canary's location type, primary location, and
+	// replicas.
+	MultiLocationConfig *MultiLocationConfig
 
 	// The name of the canary.
 	Name *string
@@ -341,6 +363,9 @@ type CanaryRun struct {
 
 	// A unique ID that identifies this canary run.
 	Id *string
+
+	// The Amazon Web Services Region where this canary run was executed.
+	Location *string
 
 	// The name of the canary.
 	Name *string
@@ -669,6 +694,70 @@ type GroupSummary struct {
 
 	// The name of the group.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about the multi-location configuration of
+// a canary, including whether it is a primary or replica, the primary location,
+// and the list of replicas.
+type MultiLocationConfig struct {
+
+	// Indicates whether this canary is the Primary or a Replica in the multi-location
+	// configuration.
+	LocationType LocationType
+
+	// The Amazon Web Services Region where the primary canary is located.
+	PrimaryLocation *string
+
+	// A list of replicas for this canary. This field is present only for the primary
+	// location canary.
+	Replicas []Replica
+
+	// The overall replication state of the canary across all replica locations. This
+	// field is present only for the primary location canary. Valid values are
+	// InProgress , InSync , and Inconsistent .
+	ReplicationState ReplicationState
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about a canary replica in a specific
+// location.
+type Replica struct {
+
+	// The current state of the canary in this replica location.
+	CanaryState CanaryState
+
+	// The date and time that the replica was last modified.
+	LastModified *time.Time
+
+	// The Amazon Web Services Region where this replica is located.
+	Location *string
+
+	// A structure that contains information about the replication status of this
+	// replica.
+	ReplicationStatus *ReplicationStatus
+
+	// The VPC configuration for the canary replica in this location.
+	VpcConfig *VpcConfigOutput
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about the replication status of a canary
+// replica.
+type ReplicationStatus struct {
+
+	// The replication state of the replica. Valid values are InProgress , InSync , and
+	// Inconsistent .
+	State ReplicationState
+
+	// A description that provides more detail about the current replication state.
+	StateReason *string
+
+	// A code that provides more detail about the current replication state.
+	StateReasonCode *string
 
 	noSmithyDocumentSerde
 }

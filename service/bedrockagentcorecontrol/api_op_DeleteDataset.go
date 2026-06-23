@@ -10,38 +10,10 @@ import (
 	"time"
 )
 
-// Deletes a dataset version or an entire dataset (all versions + name claim).
-// Asynchronous 202.
+//	Deletes a dataset version or an entire dataset asynchronously. If
 //
-// State transitions:
-//
-//   - If datasetVersion is absent (full delete): status transitions to DELETING
-//     immediately.
-//   - If datasetVersion is provided (version-specific delete): status transitions
-//     to UPDATING.
-//
-// State guard (full delete): Returns ConflictException (DATASET_NOT_READY) if the
-// dataset status is in {CREATING, UPDATING}. Deletion is allowed from ACTIVE,
-// CREATE_FAILED, UPDATE_FAILED, and DELETE_FAILED states.
-//
-// State guard (version-specific delete): Returns ConflictException
-// (DATASET_NOT_READY) if the dataset status is not in {ACTIVE, CREATE_FAILED,
-// UPDATE_FAILED}.
-//
-// Fails with ConflictException (REFERENCED_BY_EVAL_JOB) if referenced by an
-// active evaluation job (full delete only).
-//
-// If the delete workflow fails after retries, status is set to DELETE_FAILED
-// (full delete) or UPDATE_FAILED (version-specific delete). Calling DeleteDataset
-// on a DELETE_FAILED dataset re-triggers the delete workflow (idempotent retry
-// path).
-//
-// Version parameter:
-//
-//   - If datasetVersion is absent: deletes ALL versions and the Dataset record
-//     itself.
-//   - If datasetVersion is provided: deletes only that specific DatasetVersion.
-//     Returns ResourceNotFoundException if the specified version does not exist.
+// datasetVersion is absent, deletes all versions and the dataset record itself. If
+// provided, deletes only that specific version.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -64,8 +36,8 @@ type DeleteDatasetInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Optional version to delete. Use "DRAFT" or omit to delete the draft. Returns
-	// ResourceNotFoundException if the specified version does not exist.
+	//  Optional version to delete. If absent, deletes the entire dataset. If
+	// provided, deletes only that specific version.
 	DatasetVersion *string
 
 	noSmithyDocumentSerde
@@ -83,7 +55,7 @@ type DeleteDatasetOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// The version deleted.
+	//  The version that was deleted.
 	//
 	// This member is required.
 	DatasetVersion *string

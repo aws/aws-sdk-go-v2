@@ -11438,6 +11438,15 @@ func awsAwsjson11_deserializeDocumentAgentAccessConfig(v **types.AgentAccessConf
 				return err
 			}
 
+		case "UserControlMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserControlMode to be of type string, got %T instead", value)
+				}
+				sv.UserControlMode = types.UserControlMode(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

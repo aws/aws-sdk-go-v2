@@ -106,6 +106,9 @@ type DeletePolicyOutput struct {
 	// The human-readable description of the deleted policy.
 	Description *string
 
+	// The enforcement mode of the deleted policy.
+	EnforcementMode types.EnforcementMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

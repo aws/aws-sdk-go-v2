@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Operation to update a Harness.
+// Operation to update a harness.
 func (c *Client) UpdateHarness(ctx context.Context, params *UpdateHarnessInput, optFns ...func(*Options)) (*UpdateHarnessOutput, error) {
 	if params == nil {
 		params = &UpdateHarnessInput{}

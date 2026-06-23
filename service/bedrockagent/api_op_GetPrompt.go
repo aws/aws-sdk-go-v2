@@ -38,6 +38,11 @@ type GetPromptInput struct {
 	// This member is required.
 	PromptIdentifier *string
 
+	// Controls the scope of data returned. Set to METADATA_ONLY to return only
+	// resource metadata. Set to ALL_DATA or omit this field to return the full
+	// response.
+	IncludedData types.IncludedData
+
 	// The version of the prompt about which you want to retrieve information. Omit
 	// this field to return information about the working draft of the prompt.
 	PromptVersion *string

@@ -78,6 +78,9 @@ type UpdateReplicationConfigurationInput struct {
 	// Update replication configuration Staging Area Tags request.
 	StagingAreaTags map[string]string
 
+	// Update replication configuration storage configuration.
+	StorageConfiguration *types.StorageConfiguration
+
 	// Update replication configuration store snapshot on local zone.
 	StoreSnapshotOnLocalZone *bool
 
@@ -137,6 +140,9 @@ type UpdateReplicationConfigurationOutput struct {
 
 	// Replication Configuration Staging Area tags.
 	StagingAreaTags map[string]string
+
+	// Replication Configuration storage configuration.
+	StorageConfiguration *types.StorageConfiguration
 
 	// Replication Configuration store snapshot on local zone.
 	StoreSnapshotOnLocalZone *bool

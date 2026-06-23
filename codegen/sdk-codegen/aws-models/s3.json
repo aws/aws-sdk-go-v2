@@ -350,6 +350,9 @@
                     "target": "com.amazonaws.s3#DeleteObject"
                 },
                 {
+                    "target": "com.amazonaws.s3#DeleteObjectAnnotation"
+                },
+                {
                     "target": "com.amazonaws.s3#DeleteObjects"
                 },
                 {
@@ -434,6 +437,9 @@
                     "target": "com.amazonaws.s3#GetObjectAcl"
                 },
                 {
+                    "target": "com.amazonaws.s3#GetObjectAnnotation"
+                },
+                {
                     "target": "com.amazonaws.s3#GetObjectAttributes"
                 },
                 {
@@ -480,6 +486,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3#ListMultipartUploads"
+                },
+                {
+                    "target": "com.amazonaws.s3#ListObjectAnnotations"
                 },
                 {
                     "target": "com.amazonaws.s3#ListObjects"
@@ -557,6 +566,9 @@
                     "target": "com.amazonaws.s3#PutObjectAcl"
                 },
                 {
+                    "target": "com.amazonaws.s3#PutObjectAnnotation"
+                },
+                {
                     "target": "com.amazonaws.s3#PutObjectLegalHold"
                 },
                 {
@@ -579,6 +591,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3#SelectObjectContent"
+                },
+                {
+                    "target": "com.amazonaws.s3#UpdateBucketMetadataAnnotationTableConfiguration"
                 },
                 {
                     "target": "com.amazonaws.s3#UpdateBucketMetadataInventoryTableConfiguration"
@@ -27263,6 +27278,214 @@
                 }
             }
         },
+        "com.amazonaws.s3#AnnotationConfigurationState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#AnnotationCount": {
+            "type": "integer"
+        },
+        "com.amazonaws.s3#AnnotationDirective": {
+            "type": "enum",
+            "members": {
+                "COPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPY"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#AnnotationEntry": {
+            "type": "structure",
+            "members": {
+                "AnnotationName": {
+                    "target": "com.amazonaws.s3#AnnotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the annotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.s3#LastModified",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the annotation was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.s3#ETag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity tag of the annotation.</p>"
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.s3#ChecksumAlgorithmList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum algorithm used for the annotation.</p>",
+                        "smithy.api#xmlFlattened": {}
+                    }
+                },
+                "Size": {
+                    "target": "com.amazonaws.s3#Size",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the annotation payload, in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicationStatus": {
+                    "target": "com.amazonaws.s3#ReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication status of the annotation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a single annotation attached to an object, including its name, last modified time,\n      size, ETag, checksum algorithm, and replication status. Returned in the response from\n      <code>ListObjectAnnotations</code>.</p>"
+            }
+        },
+        "com.amazonaws.s3#AnnotationLimitExceeded": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The request would exceed the maximum number of annotations allowed per object.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.s3#AnnotationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3#AnnotationEntry",
+                "traits": {
+                    "smithy.api#xmlName": "AnnotationEntry"
+                }
+            }
+        },
+        "com.amazonaws.s3#AnnotationName": {
+            "type": "string"
+        },
+        "com.amazonaws.s3#AnnotationNameTooLong": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The annotation name exceeds 512 bytes.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.s3#AnnotationPrefix": {
+            "type": "string"
+        },
+        "com.amazonaws.s3#AnnotationTableConfiguration": {
+            "type": "structure",
+            "members": {
+                "ConfigurationState": {
+                    "target": "com.amazonaws.s3#AnnotationConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the annotation table. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.s3#MetadataTableEncryptionConfiguration"
+                },
+                "Role": {
+                    "target": "com.amazonaws.s3#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role used to manage the annotation table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for the annotation table associated with a bucket's Amazon S3 Metadata\n      configuration. The annotation table is an Iceberg table that records annotation events for objects\n      in the bucket.</p>"
+            }
+        },
+        "com.amazonaws.s3#AnnotationTableConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ConfigurationState": {
+                    "target": "com.amazonaws.s3#AnnotationConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current configuration state of the annotation table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableStatus": {
+                    "target": "com.amazonaws.s3#MetadataTableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning status of the annotation table. Possible values: <code>CREATING</code>, <code>BACKFILLING</code>, <code>ACTIVE</code>, <code>FAILED</code>.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.s3#ErrorDetails"
+                },
+                "TableName": {
+                    "target": "com.amazonaws.s3#S3TablesName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the annotation table.</p>"
+                    }
+                },
+                "TableArn": {
+                    "target": "com.amazonaws.s3#S3TablesArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the annotation table.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.s3#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role associated with the annotation table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the current state of the annotation table associated with a bucket's Amazon S3 Metadata\n      configuration, including its provisioning status and identifiers.</p>"
+            }
+        },
+        "com.amazonaws.s3#AnnotationTableConfigurationUpdates": {
+            "type": "structure",
+            "members": {
+                "ConfigurationState": {
+                    "target": "com.amazonaws.s3#AnnotationConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new configuration state to apply.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.s3#MetadataTableEncryptionConfiguration"
+                },
+                "Role": {
+                    "target": "com.amazonaws.s3#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new IAM role ARN to apply.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies updates to apply to the annotation table configuration. Used as the request body for\n      <code>UpdateBucketMetadataAnnotationTableConfiguration</code>.</p>"
+            }
+        },
         "com.amazonaws.s3#ArchiveStatus": {
             "type": "enum",
             "members": {
@@ -29044,6 +29267,13 @@
                         "smithy.api#httpHeader": "x-amz-tagging-directive"
                     }
                 },
+                "AnnotationDirective": {
+                    "target": "com.amazonaws.s3#AnnotationDirective",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you want to copy annotations from the source object or exclude them. If this\n      header isn't specified, <code>COPY</code> is the default behavior.</p>\n         <p>Valid Values: <code>COPY | EXCLUDE</code>\n         </p>\n         <p>You can specify this directive as either an HTTP header\n      (<code>x-amz-object-annotation-directive</code>) or as a query string parameter. Use the query\n      string form when generating presigned URLs that need to control annotation copy behavior.</p>\n         <p>When set to <code>COPY</code>, you must have <code>s3:GetObjectAnnotation</code> permission on\n      the source object and <code>s3:PutObjectAnnotation</code> permission on the destination. Each\n      annotation copied is billed as a separate PUT request. If annotations on the source are modified\n      during the copy, Amazon S3 returns a retryable error.</p>\n         <note>\n            <p>For directory buckets, annotations are not supported. Use <code>EXCLUDE</code> to copy\n      objects to directory buckets without errors. If you specify <code>COPY</code> for a directory\n      bucket, the request returns HTTP 501 (Not Implemented).</p>\n         </note>\n         <note>\n            <p>When you copy objects using multipart upload (for example, when the Amazon Web Services CLI or Amazon Web Services SDKs\n      use Transfer Manager for objects larger than approximately 8 MB), annotations are not copied by\n      default. To include annotations, specify <code>--copy-props default</code> in the Amazon Web Services CLI or the\n      equivalent SDK configuration. With this opt-in, the SDK reads source annotations, completes the\n      multipart upload, and then writes each annotation to the destination. Between the upload completion\n      and the last annotation write, the destination object exists without all its annotations.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-annotation-directive"
+                    }
+                },
                 "ServerSideEncryption": {
                     "target": "com.amazonaws.s3#ServerSideEncryption",
                     "traits": {
@@ -29486,7 +29716,7 @@
                     "requestAlgorithmMember": "ChecksumAlgorithm",
                     "requestChecksumRequired": true
                 },
-                "smithy.api#documentation": "<p>Creates an S3 Metadata V2 metadata configuration for a general purpose bucket. For more information, see\n      <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html\">Accelerating\n        data discovery with S3 Metadata</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>To use this operation, you must have the following permissions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">Setting up permissions for configuring metadata tables</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n               <p>If you want to encrypt your metadata tables with server-side encryption with Key Management Service\n            (KMS) keys (SSE-KMS), you need additional permissions in your KMS key policy. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">\n              Setting up permissions for configuring metadata tables</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n               <p>If you also want to integrate your table bucket with Amazon Web Services analytics services so that you can\n            query your metadata table, you need additional permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html\"> Integrating\n              Amazon S3 Tables with Amazon Web Services analytics services</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n               <p>To query your metadata tables, you need additional permissions. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-bucket-query-permissions.html\">\n              Permissions for querying metadata tables</a> in the <i>Amazon S3 User Guide</i>.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>s3:CreateBucketMetadataTableConfiguration</code>\n                     </p>\n                     <note>\n                        <p>The IAM policy action name is the same for the V1 and V2 API operations.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateTableBucket</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateNamespace</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:GetTable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateTable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:PutTablePolicy</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:PutTableEncryption</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>kms:DescribeKey</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>The following operations are related to <code>CreateBucketMetadataConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html\">DeleteBucketMetadataConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html\">GetBucketMetadataConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html\">UpdateBucketMetadataInventoryTableConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html\">UpdateBucketMetadataJournalTableConfiguration</a>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Creates an S3 Metadata V2 metadata configuration for a general purpose bucket. For more information, see\n      <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html\">Accelerating\n        data discovery with S3 Metadata</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>To use this operation, you must have the following permissions. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">Setting up permissions for configuring metadata tables</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n               <p>If you want to encrypt your metadata tables with server-side encryption with Key Management Service\n            (KMS) keys (SSE-KMS), you need additional permissions in your KMS key policy. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">\n              Setting up permissions for configuring metadata tables</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n               <p>If you also want to integrate your table bucket with Amazon Web Services analytics services so that you can\n            query your metadata table, you need additional permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html\"> Integrating\n              Amazon S3 Tables with Amazon Web Services analytics services</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n               <p>To query your metadata tables, you need additional permissions. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-bucket-query-permissions.html\">\n              Permissions for querying metadata tables</a> in the <i>Amazon S3 User Guide</i>.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>s3:CreateBucketMetadataTableConfiguration</code>\n                     </p>\n                     <note>\n                        <p>The IAM policy action name is the same for the V1 and V2 API operations.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateTableBucket</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateNamespace</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:GetTable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateTable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:PutTablePolicy</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:PutTableBucketPolicy</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:PutTableEncryption</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>kms:DescribeKey</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>iam:PassRole</code> - required if you include an\n                <code>AnnotationTableConfiguration</code> with an IAM role.</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>The following operations are related to <code>CreateBucketMetadataConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html\">DeleteBucketMetadataConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html\">GetBucketMetadataConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html\">UpdateBucketMetadataInventoryTableConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html\">UpdateBucketMetadataJournalTableConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataAnnotationTableConfiguration.html\">UpdateBucketMetadataAnnotationTableConfiguration</a>\n               </p>\n            </li>\n         </ul>\n         <p>If you include an <code>AnnotationTableConfiguration</code> with an IAM role, the role must\n      have a trust policy that allows the Amazon S3 metadata service to assume it, and a permissions policy\n      that grants the actions needed to read annotations from your bucket. The following examples show\n      a trust policy and a permissions policy that you can adapt for your bucket and account.</p>\n         <important>\n            <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/{Bucket}?metadataConfiguration",
@@ -31241,6 +31471,114 @@
                 }
             }
         },
+        "com.amazonaws.s3#DeleteObjectAnnotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#DeleteObjectAnnotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3#DeleteObjectAnnotationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3#NoSuchBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchKey"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific annotation from an Amazon S3 object. Use the <code>x-amz-object-if-match</code>\n      header to perform a conditional delete that only succeeds if the object's ETag matches the\n      provided value, preventing race conditions during concurrent updates.</p>\n         <p>Deleting an annotation is permanent. Annotations are not independently versioned, so there is no\n      delete marker or way to recover a deleted annotation.</p>\n         <p>To use this operation, you must have the <code>s3:DeleteObjectAnnotation</code> permission. If\n      the object is protected by Object Lock in governance mode, you must also include the\n      <code>x-amz-bypass-governance-retention</code> header.</p>\n         <note>\n            <p>Annotations are not supported by the following features: S3 Inventory Reports,\n      API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on Outposts, and\n      S3 Express One Zone (directory buckets).</p>\n         </note>\n         <p>The following operations are related to <code>DeleteObjectAnnotation</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAnnotation.html\">PutObjectAnnotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAnnotation.html\">GetObjectAnnotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html\">ListObjectAnnotations</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/{Bucket}/{Key+}?annotation",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.s3#DeleteObjectAnnotationOutput": {
+            "type": "structure",
+            "members": {
+                "ObjectVersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object that the annotation was deleted from.</p>",
+                        "smithy.api#httpHeader": "x-amz-object-version-id"
+                    }
+                },
+                "RequestCharged": {
+                    "target": "com.amazonaws.s3#RequestCharged",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-charged"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3#DeleteObjectAnnotationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket that contains the object.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.s3#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnnotationName": {
+                    "target": "com.amazonaws.s3#AnnotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the annotation to delete. Annotation names are UTF-8 encoded and cannot start with\n      <code>aws</code> or <code>s3</code> (case-insensitive).</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 512 bytes.</p>",
+                        "smithy.api#httpQuery": "annotationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object.</p>",
+                        "smithy.api#httpQuery": "versionId"
+                    }
+                },
+                "RequestPayer": {
+                    "target": "com.amazonaws.s3#RequestPayer",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-payer"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "ObjectIfMatch": {
+                    "target": "com.amazonaws.s3#ObjectIfMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, the operation only succeeds if the object's ETag matches the provided value.</p>",
+                        "smithy.api#httpHeader": "x-amz-object-if-match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3#DeleteObjectOutput": {
             "type": "structure",
             "members": {
@@ -32163,6 +32501,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "s3:ObjectTagging:Delete"
+                    }
+                },
+                "s3_ObjectAnnotation_": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3:ObjectAnnotation:*"
+                    }
+                },
+                "s3_ObjectAnnotation_Put": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3:ObjectAnnotation:Put"
+                    }
+                },
+                "s3_ObjectAnnotation_Delete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3:ObjectAnnotation:Delete"
                     }
                 }
             },
@@ -34297,6 +34653,255 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3#GetObjectAnnotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#GetObjectAnnotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3#GetObjectAnnotationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3#NoSuchAnnotation"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchKey"
+                }
+            ],
+            "traits": {
+                "aws.protocols#httpChecksum": {
+                    "requestValidationModeMember": "ChecksumMode",
+                    "responseAlgorithms": [
+                        "CRC64NVME",
+                        "CRC32",
+                        "CRC32C",
+                        "SHA256",
+                        "SHA1",
+                        "SHA512",
+                        "MD5",
+                        "XXHASH64",
+                        "XXHASH3",
+                        "XXHASH128"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Retrieves an annotation from an Amazon S3 object. To use this operation, you must have the\n      <code>s3:GetObjectAnnotation</code> permission.</p>\n         <p>If checksum mode is enabled via the <code>x-amz-checksum-mode</code> header, Amazon S3\n      returns the stored checksum in the response headers for client-side validation.</p>\n         <note>\n            <p>Annotations are not supported by the following features: S3 Inventory Reports,\n      API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on Outposts, and\n      S3 Express One Zone (directory buckets).</p>\n         </note>\n         <p>The following operations are related to <code>GetObjectAnnotation</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAnnotation.html\">PutObjectAnnotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html\">ListObjectAnnotations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html\">DeleteObjectAnnotation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/{Bucket}/{Key+}?annotation&x-id=GetObjectAnnotation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.s3#GetObjectAnnotationOutput": {
+            "type": "structure",
+            "members": {
+                "AnnotationPayload": {
+                    "target": "com.amazonaws.s3#StreamingBlob",
+                    "traits": {
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The annotation payload.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ObjectVersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object that the annotation is attached to.</p>",
+                        "smithy.api#httpHeader": "x-amz-object-version-id"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.s3#LastModified",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the annotation was last modified.</p>",
+                        "smithy.api#httpHeader": "Last-Modified"
+                    }
+                },
+                "ContentLength": {
+                    "target": "com.amazonaws.s3#ContentLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the annotation payload, in bytes.</p>",
+                        "smithy.api#httpHeader": "Content-Length"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.s3#ETag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity tag of the annotation.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                },
+                "ChecksumCRC32": {
+                    "target": "com.amazonaws.s3#ChecksumCRC32",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CRC32 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc32"
+                    }
+                },
+                "ChecksumCRC32C": {
+                    "target": "com.amazonaws.s3#ChecksumCRC32C",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CRC32C checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc32c"
+                    }
+                },
+                "ChecksumCRC64NVME": {
+                    "target": "com.amazonaws.s3#ChecksumCRC64NVME",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CRC64NVME checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
+                    }
+                },
+                "ChecksumSHA1": {
+                    "target": "com.amazonaws.s3#ChecksumSHA1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA1 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha1"
+                    }
+                },
+                "ChecksumSHA256": {
+                    "target": "com.amazonaws.s3#ChecksumSHA256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha256"
+                    }
+                },
+                "ChecksumSHA512": {
+                    "target": "com.amazonaws.s3#ChecksumSHA512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA512 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha512"
+                    }
+                },
+                "ChecksumMD5": {
+                    "target": "com.amazonaws.s3#ChecksumMD5",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MD5 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-md5"
+                    }
+                },
+                "ChecksumXXHASH64": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The XXHASH64 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash64"
+                    }
+                },
+                "ChecksumXXHASH3": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The XXHASH3 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash3"
+                    }
+                },
+                "ChecksumXXHASH128": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The XXHASH128 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash128"
+                    }
+                },
+                "ChecksumType": {
+                    "target": "com.amazonaws.s3#ChecksumType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of checksum used.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-type"
+                    }
+                },
+                "ServerSideEncryption": {
+                    "target": "com.amazonaws.s3#ServerSideEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-side encryption algorithm used.</p>",
+                        "smithy.api#httpHeader": "x-amz-server-side-encryption"
+                    }
+                },
+                "RequestCharged": {
+                    "target": "com.amazonaws.s3#RequestCharged",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-charged"
+                    }
+                },
+                "ReplicationStatus": {
+                    "target": "com.amazonaws.s3#ReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication status of the annotation. Possible values include <code>PENDING</code>, <code>COMPLETED</code>, <code>FAILED</code>, and <code>REPLICA</code>.</p>",
+                        "smithy.api#httpHeader": "x-amz-replication-status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3#GetObjectAnnotationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket that contains the object.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.s3#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
+                    }
+                },
+                "AnnotationName": {
+                    "target": "com.amazonaws.s3#AnnotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the annotation to retrieve.</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 512 bytes.</p>",
+                        "smithy.api#httpQuery": "annotationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object.</p>",
+                        "smithy.api#httpQuery": "versionId"
+                    }
+                },
+                "RequestPayer": {
+                    "target": "com.amazonaws.s3#RequestPayer",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-payer"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with an HTTP 403 (Access Denied) error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "ChecksumMode": {
+                    "target": "com.amazonaws.s3#ChecksumMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to validate the checksum of the annotation payload on retrieval.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-mode"
                     }
                 }
             },
@@ -36523,6 +37128,15 @@
                 }
             }
         },
+        "com.amazonaws.s3#InvalidAnnotationName": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The annotation name you provided is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.s3#InvalidObjectState": {
             "type": "structure",
             "members": {
@@ -36537,6 +37151,15 @@
                 "smithy.api#documentation": "<p>Object is archived and inaccessible until restored.</p>\n         <p>If the object you are retrieving is stored in the S3 Glacier Flexible Retrieval storage class, the\n      S3 Glacier Deep Archive storage class, the S3 Intelligent-Tiering Archive Access tier, or the\n      S3 Intelligent-Tiering Deep Archive Access tier, before you can retrieve the object you must first restore a copy\n      using <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html\">RestoreObject</a>. Otherwise, this operation returns an <code>InvalidObjectState</code> error. For\n      information about restoring archived objects, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html\">Restoring Archived Objects</a> in the\n        <i>Amazon S3 User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.s3#InvalidPrefix": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The annotation prefix you provided is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.s3#InvalidRequest": {
@@ -38172,6 +38795,177 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3#ListObjectAnnotations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#ListObjectAnnotationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3#ListObjectAnnotationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3#InvalidPrefix"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchKey"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the annotations attached to an Amazon S3 object. Results are paginated, with a maximum of\n      1,000 annotations per object. Use the <code>AnnotationPrefix</code> parameter to filter the\n      results by name prefix.</p>\n         <p>To use this operation, you must have the <code>s3:ListObjectAnnotations</code> permission.</p>\n         <note>\n            <p>Annotations are not supported by the following features: S3 Inventory Reports,\n      API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on Outposts, and\n      S3 Express One Zone (directory buckets).</p>\n         </note>\n         <p>The following operations are related to <code>ListObjectAnnotations</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAnnotation.html\">PutObjectAnnotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAnnotation.html\">GetObjectAnnotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html\">DeleteObjectAnnotation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/{Bucket}/{Key+}?annotation&x-id=ListObjectAnnotations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "ContinuationToken",
+                    "outputToken": "NextContinuationToken",
+                    "items": "Annotations",
+                    "pageSize": "MaxAnnotationResults"
+                }
+            }
+        },
+        "com.amazonaws.s3#ListObjectAnnotationsOutput": {
+            "type": "structure",
+            "members": {
+                "Annotations": {
+                    "target": "com.amazonaws.s3#AnnotationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of annotations attached to the object.</p>"
+                    }
+                },
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket name.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.s3#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key.</p>"
+                    }
+                },
+                "ObjectVersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object.</p>",
+                        "smithy.api#httpHeader": "x-amz-object-version-id"
+                    }
+                },
+                "AnnotationPrefix": {
+                    "target": "com.amazonaws.s3#AnnotationPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix used to filter the response.</p>"
+                    }
+                },
+                "MaxAnnotationResults": {
+                    "target": "com.amazonaws.s3#MaxAnnotationResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of annotations returned in the response.</p>"
+                    }
+                },
+                "AnnotationCount": {
+                    "target": "com.amazonaws.s3#AnnotationCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of annotations returned.</p>"
+                    }
+                },
+                "ContinuationToken": {
+                    "target": "com.amazonaws.s3#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The continuation token used in this request.</p>"
+                    }
+                },
+                "NextContinuationToken": {
+                    "target": "com.amazonaws.s3#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The continuation token to use to retrieve the next page of results.</p>"
+                    }
+                },
+                "RequestCharged": {
+                    "target": "com.amazonaws.s3#RequestCharged",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-charged"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3#ListObjectAnnotationsRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket that contains the object.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.s3#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object.</p>",
+                        "smithy.api#httpQuery": "versionId"
+                    }
+                },
+                "MaxAnnotationResults": {
+                    "target": "com.amazonaws.s3#MaxAnnotationResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of annotations to return in the response. Maximum is 1,000.</p>",
+                        "smithy.api#httpQuery": "max-annotation-results"
+                    }
+                },
+                "AnnotationPrefix": {
+                    "target": "com.amazonaws.s3#AnnotationPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to annotations whose name begins with the specified prefix.</p>",
+                        "smithy.api#httpQuery": "annotation-prefix"
+                    }
+                },
+                "ContinuationToken": {
+                    "target": "com.amazonaws.s3#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Continuation token returned by a previous request to retrieve the next page.</p>",
+                        "smithy.api#httpQuery": "continuation-token"
+                    }
+                },
+                "RequestPayer": {
+                    "target": "com.amazonaws.s3#RequestPayer",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-payer"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3#ListObjectVersions": {
             "type": "operation",
             "input": {
@@ -39242,6 +40036,15 @@
         "com.amazonaws.s3#MaxAgeSeconds": {
             "type": "integer"
         },
+        "com.amazonaws.s3#MaxAnnotationResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.s3#MaxBuckets": {
             "type": "integer",
             "traits": {
@@ -39296,6 +40099,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The inventory table configuration for a metadata configuration.\n    </p>"
                     }
+                },
+                "AnnotationTableConfiguration": {
+                    "target": "com.amazonaws.s3#AnnotationTableConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional annotation table configuration to include with the metadata configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39322,6 +40131,12 @@
                     "target": "com.amazonaws.s3#InventoryTableConfigurationResult",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The inventory table configuration for a metadata configuration.\n    </p>"
+                    }
+                },
+                "AnnotationTableConfigurationResult": {
+                    "target": "com.amazonaws.s3#AnnotationTableConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The annotation table configuration result, if an annotation table is configured.</p>"
                     }
                 }
             },
@@ -39645,6 +40460,15 @@
         },
         "com.amazonaws.s3#NextVersionIdMarker": {
             "type": "string"
+        },
+        "com.amazonaws.s3#NoSuchAnnotation": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The specified annotation does not exist on this object.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
         },
         "com.amazonaws.s3#NoSuchBucket": {
             "type": "structure",
@@ -40021,6 +40845,9 @@
             "member": {
                 "target": "com.amazonaws.s3#ObjectIdentifier"
             }
+        },
+        "com.amazonaws.s3#ObjectIfMatch": {
+            "type": "string"
         },
         "com.amazonaws.s3#ObjectKey": {
             "type": "string",
@@ -42874,6 +43701,330 @@
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3#PutObjectAnnotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#PutObjectAnnotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3#PutObjectAnnotationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3#AnnotationLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.s3#AnnotationNameTooLong"
+                },
+                {
+                    "target": "com.amazonaws.s3#InvalidAnnotationName"
+                },
+                {
+                    "target": "com.amazonaws.s3#InvalidRequest"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3#NoSuchKey"
+                },
+                {
+                    "target": "com.amazonaws.s3#UnsupportedMediaType"
+                }
+            ],
+            "traits": {
+                "aws.protocols#httpChecksum": {
+                    "requestAlgorithmMember": "ChecksumAlgorithm"
+                },
+                "smithy.api#documentation": "<p>Attaches an annotation to an Amazon S3 object. An annotation is a named payload of 1 byte to 1 MiB\n      that you can associate with a specific object or object version. Each object can have up to 1,000\n      annotations.</p>\n         <p>For annotation naming rules and restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/annotations-overview.html\">Annotation naming guidelines</a>\n      in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Annotations inherit the encryption of their parent object. For objects without server-side\n      encryption, annotations are encrypted with SSE-S3 (the default for new objects). Objects\n      encrypted with SSE-C cannot have annotations.</p>\n         <p>To use this operation, you must have the <code>s3:PutObjectAnnotation</code> permission. If the\n      bucket has Requester Pays enabled, you must include the <code>x-amz-request-payer</code> header.</p>\n         <note>\n            <p>Annotations are not supported by the following features: S3 Inventory Reports,\n      API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on Outposts, and\n      S3 Express One Zone (directory buckets).</p>\n         </note>\n         <p>The following operations are related to <code>PutObjectAnnotation</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAnnotation.html\">GetObjectAnnotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html\">ListObjectAnnotations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html\">DeleteObjectAnnotation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/{Bucket}/{Key+}?annotation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.s3#PutObjectAnnotationOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.s3#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key.</p>"
+                    }
+                },
+                "AnnotationName": {
+                    "target": "com.amazonaws.s3#AnnotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the annotation.</p>"
+                    }
+                },
+                "ObjectVersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object that the annotation was attached to.</p>",
+                        "smithy.api#httpHeader": "x-amz-object-version-id"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.s3#ETag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity tag of the annotation.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                },
+                "ChecksumCRC32": {
+                    "target": "com.amazonaws.s3#ChecksumCRC32",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CRC32 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc32"
+                    }
+                },
+                "ChecksumCRC32C": {
+                    "target": "com.amazonaws.s3#ChecksumCRC32C",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CRC32C checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc32c"
+                    }
+                },
+                "ChecksumCRC64NVME": {
+                    "target": "com.amazonaws.s3#ChecksumCRC64NVME",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CRC64NVME checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
+                    }
+                },
+                "ChecksumSHA1": {
+                    "target": "com.amazonaws.s3#ChecksumSHA1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA1 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha1"
+                    }
+                },
+                "ChecksumSHA256": {
+                    "target": "com.amazonaws.s3#ChecksumSHA256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha256"
+                    }
+                },
+                "ChecksumSHA512": {
+                    "target": "com.amazonaws.s3#ChecksumSHA512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA512 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha512"
+                    }
+                },
+                "ChecksumMD5": {
+                    "target": "com.amazonaws.s3#ChecksumMD5",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MD5 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-md5"
+                    }
+                },
+                "ChecksumXXHASH64": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The XXHASH64 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash64"
+                    }
+                },
+                "ChecksumXXHASH3": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The XXHASH3 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash3"
+                    }
+                },
+                "ChecksumXXHASH128": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The XXHASH128 checksum of the stored annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash128"
+                    }
+                },
+                "ChecksumType": {
+                    "target": "com.amazonaws.s3#ChecksumType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of checksum used.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-type"
+                    }
+                },
+                "ServerSideEncryption": {
+                    "target": "com.amazonaws.s3#ServerSideEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-side encryption algorithm used to encrypt the annotation.</p>",
+                        "smithy.api#httpHeader": "x-amz-server-side-encryption"
+                    }
+                },
+                "RequestCharged": {
+                    "target": "com.amazonaws.s3#RequestCharged",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-charged"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3#PutObjectAnnotationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket that contains the object.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.s3#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.s3#ObjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object to attach the annotation to.</p>",
+                        "smithy.api#httpQuery": "versionId"
+                    }
+                },
+                "AnnotationName": {
+                    "target": "com.amazonaws.s3#AnnotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the annotation.</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 512 bytes.</p>",
+                        "smithy.api#httpQuery": "annotationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnnotationPayload": {
+                    "target": "com.amazonaws.s3#StreamingBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The annotation payload. Must be between 1 byte and 1 MiB in size, and must be valid UTF-8\n      encoded text. If the payload contains invalid UTF-8 bytes, the request fails with HTTP 415\n      (Unsupported Media Type). To store binary data, encode the payload using Base64 before\n      uploading.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectIfMatch": {
+                    "target": "com.amazonaws.s3#ObjectIfMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, the operation only succeeds if the object's ETag matches the provided value.</p>",
+                        "smithy.api#httpHeader": "x-amz-object-if-match"
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.s3#ChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum algorithm to use. Supported values: <code>CRC32</code>, <code>CRC32C</code>, <code>CRC64NVME</code>, <code>SHA1</code>, <code>SHA256</code>, <code>SHA512</code>, <code>MD5</code>, <code>XXHASH64</code>, <code>XXHASH3</code>, <code>XXHASH128</code>.</p>",
+                        "smithy.api#httpHeader": "x-amz-sdk-checksum-algorithm"
+                    }
+                },
+                "ChecksumCRC32": {
+                    "target": "com.amazonaws.s3#ChecksumCRC32",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded CRC32 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc32"
+                    }
+                },
+                "ChecksumCRC32C": {
+                    "target": "com.amazonaws.s3#ChecksumCRC32C",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded CRC32C checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc32c"
+                    }
+                },
+                "ChecksumCRC64NVME": {
+                    "target": "com.amazonaws.s3#ChecksumCRC64NVME",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded CRC64NVME checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
+                    }
+                },
+                "ChecksumSHA1": {
+                    "target": "com.amazonaws.s3#ChecksumSHA1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded SHA1 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha1"
+                    }
+                },
+                "ChecksumSHA256": {
+                    "target": "com.amazonaws.s3#ChecksumSHA256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded SHA256 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha256"
+                    }
+                },
+                "ChecksumSHA512": {
+                    "target": "com.amazonaws.s3#ChecksumSHA512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded SHA512 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-sha512"
+                    }
+                },
+                "ChecksumMD5": {
+                    "target": "com.amazonaws.s3#ChecksumMD5",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded MD5 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-md5"
+                    }
+                },
+                "ChecksumXXHASH64": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded XXHASH64 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash64"
+                    }
+                },
+                "ChecksumXXHASH3": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded XXHASH3 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash3"
+                    }
+                },
+                "ChecksumXXHASH128": {
+                    "target": "com.amazonaws.s3#ChecksumXXHASH128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded XXHASH128 checksum of the annotation payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-checksum-xxhash128"
+                    }
+                },
+                "ContentMD5": {
+                    "target": "com.amazonaws.s3#ContentMD5",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded MD5 digest of the message.</p>",
+                        "smithy.api#httpHeader": "Content-MD5"
+                    }
+                },
+                "RequestPayer": {
+                    "target": "com.amazonaws.s3#RequestPayer",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amz-request-payer"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with an HTTP 403 (Access Denied) error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
@@ -46092,6 +47243,90 @@
         },
         "com.amazonaws.s3#URI": {
             "type": "string"
+        },
+        "com.amazonaws.s3#UnsupportedMediaType": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The annotation payload is not valid UTF-8 encoded text.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 415
+            }
+        },
+        "com.amazonaws.s3#UpdateBucketMetadataAnnotationTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#UpdateBucketMetadataAnnotationTableConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "aws.protocols#httpChecksum": {
+                    "requestAlgorithmMember": "ChecksumAlgorithm",
+                    "requestChecksumRequired": true
+                },
+                "smithy.api#documentation": "<p>Updates the annotation table configuration for an Amazon S3 bucket's metadata configuration. Use this\n      operation to enable or disable the annotation table, or to update its associated IAM role.</p>\n         <p>An annotation table is a queryable Iceberg table that contains records of all annotations\n      attached to objects in the bucket. To use this operation, the bucket must have an existing Amazon S3\n      Metadata configuration.</p>\n         <p>To use this operation, you must have the\n      <code>s3:UpdateBucketMetadataAnnotationTableConfiguration</code> permission. If you are specifying\n      or changing the IAM role, you must also have <code>iam:PassRole</code> permission for the role.</p>\n         <p>The IAM role must have a trust policy that allows the Amazon S3 metadata service to assume it, and a\n      permissions policy that grants the actions needed to read annotations from your bucket. The\n      following examples show a trust policy and a permissions policy that you can adapt for your bucket\n      and account.</p>\n         <p>The following operations are related to\n      <code>UpdateBucketMetadataAnnotationTableConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html\">CreateBucketMetadataConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html\">GetBucketMetadataConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/{Bucket}?metadataAnnotationTable",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#UpdateBucketMetadataAnnotationTableConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket whose annotation table configuration to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "ContentMD5": {
+                    "target": "com.amazonaws.s3#ContentMD5",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded MD5 digest of the message body.</p>",
+                        "smithy.api#httpHeader": "Content-MD5"
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.s3#ChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checksum algorithm for the request payload.</p>",
+                        "smithy.api#httpHeader": "x-amz-sdk-checksum-algorithm"
+                    }
+                },
+                "AnnotationTableConfiguration": {
+                    "target": "com.amazonaws.s3#AnnotationTableConfigurationUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The annotation table configuration updates to apply.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "AnnotationTableConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.s3#UpdateBucketMetadataInventoryTableConfiguration": {
             "type": "operation",

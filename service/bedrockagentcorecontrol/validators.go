@@ -290,6 +290,26 @@ func (m *validateOpCreateGatewayTarget) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHarnessEndpoint struct {
+}
+
+func (*validateOpCreateHarnessEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHarnessEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHarnessEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHarnessEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHarness struct {
 }
 
@@ -785,6 +805,26 @@ func (m *validateOpDeleteGatewayTarget) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGatewayTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteHarnessEndpoint struct {
+}
+
+func (*validateOpDeleteHarnessEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHarnessEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHarnessEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHarnessEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1310,6 +1350,26 @@ func (m *validateOpGetGatewayTarget) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetHarnessEndpoint struct {
+}
+
+func (*validateOpGetHarnessEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHarnessEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHarnessEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHarnessEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetHarness struct {
 }
 
@@ -1785,6 +1845,46 @@ func (m *validateOpListGatewayTargets) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListGatewayTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHarnessEndpoints struct {
+}
+
+func (*validateOpListHarnessEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHarnessEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHarnessEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHarnessEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHarnessVersions struct {
+}
+
+func (*validateOpListHarnessVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHarnessVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHarnessVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHarnessVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2290,6 +2390,26 @@ func (m *validateOpUpdateGatewayTarget) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHarnessEndpoint struct {
+}
+
+func (*validateOpUpdateHarnessEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHarnessEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHarnessEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHarnessEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateHarness struct {
 }
 
@@ -2606,6 +2726,10 @@ func addOpCreateGatewayTargetValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateGatewayTarget{}, middleware.After)
 }
 
+func addOpCreateHarnessEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHarnessEndpoint{}, middleware.After)
+}
+
 func addOpCreateHarnessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHarness{}, middleware.After)
 }
@@ -2704,6 +2828,10 @@ func addOpDeleteGatewayRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGatewayTarget{}, middleware.After)
+}
+
+func addOpDeleteHarnessEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHarnessEndpoint{}, middleware.After)
 }
 
 func addOpDeleteHarnessValidationMiddleware(stack *middleware.Stack) error {
@@ -2810,6 +2938,10 @@ func addOpGetGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGatewayTarget{}, middleware.After)
 }
 
+func addOpGetHarnessEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHarnessEndpoint{}, middleware.After)
+}
+
 func addOpGetHarnessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetHarness{}, middleware.After)
 }
@@ -2904,6 +3036,14 @@ func addOpListGatewayRulesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListGatewayTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGatewayTargets{}, middleware.After)
+}
+
+func addOpListHarnessEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHarnessEndpoints{}, middleware.After)
+}
+
+func addOpListHarnessVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHarnessVersions{}, middleware.After)
 }
 
 func addOpListPaymentConnectorsValidationMiddleware(stack *middleware.Stack) error {
@@ -3004,6 +3144,10 @@ func addOpUpdateGatewayRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGatewayTarget{}, middleware.After)
+}
+
+func addOpUpdateHarnessEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHarnessEndpoint{}, middleware.After)
 }
 
 func addOpUpdateHarnessValidationMiddleware(stack *middleware.Stack) error {
@@ -3115,6 +3259,23 @@ func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
 			invalidParams.AddNested("[containerConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedWorkloadConfiguration(v *types.AllowedWorkloadConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedWorkloadConfiguration"}
+	if v.HostingEnvironments != nil {
+		if err := validateHostingEnvironmentListType(v.HostingEnvironments); err != nil {
+			invalidParams.AddNested("HostingEnvironments", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3508,6 +3669,21 @@ func validateCloudWatchLogsInputConfig(v *types.CloudWatchLogsInputConfig) error
 	}
 }
 
+func validateClusteringConfig(v *types.ClusteringConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusteringConfig"}
+	if v.Frequencies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Frequencies"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCode(v types.Code) error {
 	if v == nil {
 		return nil
@@ -3724,6 +3900,114 @@ func validateConfigurationBundleReference(v *types.ConfigurationBundleReference)
 	}
 	if v.BundleVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorConfiguration(v *types.ConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ParameterOverrides != nil {
+		if err := validateConnectorParameterOverrides(v.ParameterOverrides); err != nil {
+			invalidParams.AddNested("ParameterOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorConfigurations(v []types.ConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorConfigurations"}
+	for i := range v {
+		if err := validateConnectorConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorParameterOverride(v *types.ConnectorParameterOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorParameterOverride"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorParameterOverrides(v []types.ConnectorParameterOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorParameterOverrides"}
+	for i := range v {
+		if err := validateConnectorParameterOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorSource(v *types.ConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorSource"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorTargetConfiguration(v *types.ConnectorTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorTargetConfiguration"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateConnectorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Configurations != nil {
+		if err := validateConnectorConfigurations(v.Configurations); err != nil {
+			invalidParams.AddNested("Configurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4051,6 +4335,11 @@ func validateCustomJWTAuthorizerConfiguration(v *types.CustomJWTAuthorizerConfig
 	if v.PrivateEndpointOverrides != nil {
 		if err := validatePrivateEndpointOverrides(v.PrivateEndpointOverrides); err != nil {
 			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowedWorkloadConfiguration != nil {
+		if err := validateAllowedWorkloadConfiguration(v.AllowedWorkloadConfiguration); err != nil {
+			invalidParams.AddNested("AllowedWorkloadConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5085,6 +5374,53 @@ func validateHarnessTruncationConfiguration(v *types.HarnessTruncationConfigurat
 	}
 }
 
+func validateHostingEnvironment(v *types.HostingEnvironment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HostingEnvironment"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHostingEnvironmentListType(v []types.HostingEnvironment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HostingEnvironmentListType"}
+	for i := range v {
+		if err := validateHostingEnvironment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpApiSchemaConfiguration(v *types.HttpApiSchemaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpApiSchemaConfiguration"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpTargetConfiguration(v types.HttpTargetConfiguration) error {
 	if v == nil {
 		return nil
@@ -5094,6 +5430,11 @@ func validateHttpTargetConfiguration(v types.HttpTargetConfiguration) error {
 	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
 		if err := validateRuntimeTargetConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[agentcoreRuntime]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HttpTargetConfigurationMemberPassthrough:
+		if err := validatePassthroughTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[passthrough]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -5189,6 +5530,121 @@ func validateIndexedKeysList(v []types.IndexedKey) error {
 	}
 }
 
+func validateInferenceConnectorSource(v *types.InferenceConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceConnectorSource"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceConnectorTargetConfiguration(v *types.InferenceConnectorTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceConnectorTargetConfiguration"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateInferenceConnectorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceOperationConfiguration(v *types.InferenceOperationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceOperationConfiguration"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.Models != nil {
+		if err := validateModelEntries(v.Models); err != nil {
+			invalidParams.AddNested("Models", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceOperationConfigurations(v []types.InferenceOperationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceOperationConfigurations"}
+	for i := range v {
+		if err := validateInferenceOperationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceProviderTargetConfiguration(v *types.InferenceProviderTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceProviderTargetConfiguration"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.Operations != nil {
+		if err := validateInferenceOperationConfigurations(v.Operations); err != nil {
+			invalidParams.AddNested("Operations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceTargetConfiguration(v types.InferenceTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceTargetConfiguration"}
+	switch uv := v.(type) {
+	case *types.InferenceTargetConfigurationMemberConnector:
+		if err := validateInferenceConnectorTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[connector]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.InferenceTargetConfigurationMemberProvider:
+		if err := validateInferenceProviderTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[provider]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInlineExamplesSource(v *types.InlineExamplesSource) error {
 	if v == nil {
 		return nil
@@ -5196,6 +5652,38 @@ func validateInlineExamplesSource(v *types.InlineExamplesSource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InlineExamplesSource"}
 	if v.Examples == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Examples"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsight(v *types.Insight) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Insight"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightList(v []types.Insight) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightList"}
+	for i := range v {
+		if err := validateInsight(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5230,6 +5718,26 @@ func validateInterceptorInputConfiguration(v *types.InterceptorInputConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "InterceptorInputConfiguration"}
 	if v.PassRequestHeaders == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PassRequestHeaders"))
+	}
+	if v.PayloadFilter != nil {
+		if err := validateInterceptorPayloadFilter(v.PayloadFilter); err != nil {
+			invalidParams.AddNested("PayloadFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInterceptorPayloadFilter(v *types.InterceptorPayloadFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InterceptorPayloadFilter"}
+	if v.Exclude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Exclude"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5531,6 +6039,11 @@ func validateMcpTargetConfiguration(v types.McpTargetConfiguration) error {
 			invalidParams.AddNested("[apiGateway]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.McpTargetConfigurationMemberConnector:
+		if err := validateConnectorTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[connector]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.McpTargetConfigurationMemberLambda:
 		if err := validateMcpLambdaTargetConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[lambda]", err.(smithy.InvalidParamsError))
@@ -5671,6 +6184,38 @@ func validateMicrosoftOauth2ProviderConfigInput(v *types.MicrosoftOauth2Provider
 		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
 			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelEntries(v []types.ModelEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelEntries"}
+	for i := range v {
+		if err := validateModelEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelEntry(v *types.ModelEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelEntry"}
+	if v.Model == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Model"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6032,6 +6577,34 @@ func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeC
 	}
 }
 
+func validatePassthroughTargetConfiguration(v *types.PassthroughTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PassthroughTargetConfiguration"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if len(v.ProtocolType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolType"))
+	}
+	if v.Schema != nil {
+		if err := validateHttpApiSchemaConfiguration(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StickinessConfiguration != nil {
+		if err := validateStickinessConfiguration(v.StickinessConfiguration); err != nil {
+			invalidParams.AddNested("StickinessConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePaymentCredentialProviderConfiguration(v *types.PaymentCredentialProviderConfiguration) error {
 	if v == nil {
 		return nil
@@ -6082,6 +6655,11 @@ func validatePolicyDefinition(v types.PolicyDefinition) error {
 			invalidParams.AddNested("[cedar]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.PolicyDefinitionMemberPolicy:
+		if err := validatePolicyStatement(&uv.Value); err != nil {
+			invalidParams.AddNested("[policy]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.PolicyDefinitionMemberPolicyGeneration:
 		if err := validatePolicyGenerationDetails(&uv.Value); err != nil {
 			invalidParams.AddNested("[policyGeneration]", err.(smithy.InvalidParamsError))
@@ -6105,6 +6683,21 @@ func validatePolicyGenerationDetails(v *types.PolicyGenerationDetails) error {
 	}
 	if v.PolicyGenerationAssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationAssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyStatement(v *types.PolicyStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyStatement"}
+	if v.Statement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6394,6 +6987,11 @@ func validateRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration) err
 	invalidParams := smithy.InvalidParamsError{Context: "RuntimeTargetConfiguration"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Schema != nil {
+		if err := validateHttpApiSchemaConfiguration(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6744,6 +7342,21 @@ func validateStaticRoute(v *types.StaticRoute) error {
 	}
 }
 
+func validateStickinessConfiguration(v *types.StickinessConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StickinessConfiguration"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStreamDeliveryResource(v types.StreamDeliveryResource) error {
 	if v == nil {
 		return nil
@@ -6923,6 +7536,11 @@ func validateTargetConfiguration(v types.TargetConfiguration) error {
 	case *types.TargetConfigurationMemberHttp:
 		if err := validateHttpTargetConfiguration(uv.Value); err != nil {
 			invalidParams.AddNested("[http]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TargetConfigurationMemberInference:
+		if err := validateInferenceTargetConfiguration(uv.Value); err != nil {
+			invalidParams.AddNested("[inference]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.TargetConfigurationMemberMcp:
@@ -7692,9 +8310,6 @@ func validateOpCreateGatewayTargetInput(v *CreateGatewayTargetInput) error {
 	if v.GatewayIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.TargetConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetConfiguration"))
 	} else if v.TargetConfiguration != nil {
@@ -7711,6 +8326,24 @@ func validateOpCreateGatewayTargetInput(v *CreateGatewayTargetInput) error {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateHarnessEndpointInput(v *CreateHarnessEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHarnessEndpointInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7857,8 +8490,15 @@ func validateOpCreateOnlineEvaluationConfigInput(v *CreateOnlineEvaluationConfig
 			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Evaluators == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Evaluators"))
+	if v.Insights != nil {
+		if err := validateInsightList(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClusteringConfig != nil {
+		if err := validateClusteringConfig(v.ClusteringConfig); err != nil {
+			invalidParams.AddNested("ClusteringConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.EvaluationExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationExecutionRoleArn"))
@@ -8252,6 +8892,24 @@ func validateOpDeleteGatewayTargetInput(v *DeleteGatewayTargetInput) error {
 	}
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteHarnessEndpointInput(v *DeleteHarnessEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHarnessEndpointInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8671,6 +9329,24 @@ func validateOpGetGatewayTargetInput(v *GetGatewayTargetInput) error {
 	}
 }
 
+func validateOpGetHarnessEndpointInput(v *GetHarnessEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHarnessEndpointInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetHarnessInput(v *GetHarnessInput) error {
 	if v == nil {
 		return nil
@@ -9041,6 +9717,36 @@ func validateOpListGatewayTargetsInput(v *ListGatewayTargetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListGatewayTargetsInput"}
 	if v.GatewayIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHarnessEndpointsInput(v *ListHarnessEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHarnessEndpointsInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHarnessVersionsInput(v *ListHarnessVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHarnessVersionsInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9551,9 +10257,6 @@ func validateOpUpdateGatewayTargetInput(v *UpdateGatewayTargetInput) error {
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.TargetConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetConfiguration"))
 	} else if v.TargetConfiguration != nil {
@@ -9570,6 +10273,24 @@ func validateOpUpdateGatewayTargetInput(v *UpdateGatewayTargetInput) error {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHarnessEndpointInput(v *UpdateHarnessEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHarnessEndpointInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9704,6 +10425,16 @@ func validateOpUpdateOnlineEvaluationConfigInput(v *UpdateOnlineEvaluationConfig
 	if v.DataSourceConfig != nil {
 		if err := validateDataSourceConfig(v.DataSourceConfig); err != nil {
 			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Insights != nil {
+		if err := validateInsightList(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClusteringConfig != nil {
+		if err := validateClusteringConfig(v.ClusteringConfig); err != nil {
+			invalidParams.AddNested("ClusteringConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

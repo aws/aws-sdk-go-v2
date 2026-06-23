@@ -16,6 +16,57 @@ import (
 	"time"
 )
 
+type smithyRpcv2cbor_serializeOpAssociateDatasetKmsKey struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpAssociateDatasetKmsKey) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpAssociateDatasetKmsKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*AssociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/AssociateDatasetKmsKey"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_AssociateDatasetKmsKeyInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpDeleteAlarmMuteRule struct {
 }
 
@@ -730,6 +781,57 @@ func (m *smithyRpcv2cbor_serializeOpDisableInsightRules) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpDisassociateDatasetKmsKey struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpDisassociateDatasetKmsKey) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpDisassociateDatasetKmsKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*DisassociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/DisassociateDatasetKmsKey"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_DisassociateDatasetKmsKeyInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpEnableAlarmActions struct {
 }
 
@@ -917,6 +1019,57 @@ func (m *smithyRpcv2cbor_serializeOpGetDashboard) HandleSerialize(ctx context.Co
 	req.Header.Set("X-Amzn-Query-Mode", "true")
 
 	cv, err := serializeCBOR_GetDashboardInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type smithyRpcv2cbor_serializeOpGetDataset struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpGetDataset) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpGetDataset) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*GetDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/GetDataset"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_GetDatasetInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3418,6 +3571,25 @@ func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
 	}, nil
 }
 
+func serializeCBOR_AssociateDatasetKmsKeyInput(v *AssociateDatasetKmsKeyInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.DatasetIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.DatasetIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["DatasetIdentifier"] = ser
+	}
+	if v.KmsKeyArn != nil {
+		ser, err := serializeCBOR_String(*v.KmsKeyArn)
+		if err != nil {
+			return nil, err
+		}
+		vm["KmsKeyArn"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_DeleteAlarmMuteRuleInput(v *DeleteAlarmMuteRuleInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.AlarmMuteRuleName != nil {
@@ -3824,6 +3996,18 @@ func serializeCBOR_DisableInsightRulesInput(v *DisableInsightRulesInput) (smithy
 	return vm, nil
 }
 
+func serializeCBOR_DisassociateDatasetKmsKeyInput(v *DisassociateDatasetKmsKeyInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.DatasetIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.DatasetIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["DatasetIdentifier"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_EnableAlarmActionsInput(v *EnableAlarmActionsInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.AlarmNames != nil {
@@ -3868,6 +4052,18 @@ func serializeCBOR_GetDashboardInput(v *GetDashboardInput) (smithycbor.Value, er
 			return nil, err
 		}
 		vm["DashboardName"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_GetDatasetInput(v *GetDatasetInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.DatasetIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.DatasetIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["DatasetIdentifier"] = ser
 	}
 	return vm, nil
 }

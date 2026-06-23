@@ -2194,6 +2194,95 @@ func (IpProtocol) Values() []IpProtocol {
 	}
 }
 
+type LinuxCapability string
+
+// Enum values for LinuxCapability
+const (
+	LinuxCapabilityAuditControl   LinuxCapability = "AUDIT_CONTROL"
+	LinuxCapabilityAuditWrite     LinuxCapability = "AUDIT_WRITE"
+	LinuxCapabilityBlockSuspend   LinuxCapability = "BLOCK_SUSPEND"
+	LinuxCapabilityChown          LinuxCapability = "CHOWN"
+	LinuxCapabilityDacOverride    LinuxCapability = "DAC_OVERRIDE"
+	LinuxCapabilityDacReadSearch  LinuxCapability = "DAC_READ_SEARCH"
+	LinuxCapabilityFowner         LinuxCapability = "FOWNER"
+	LinuxCapabilityFsetid         LinuxCapability = "FSETID"
+	LinuxCapabilityIpcLock        LinuxCapability = "IPC_LOCK"
+	LinuxCapabilityIpcOwner       LinuxCapability = "IPC_OWNER"
+	LinuxCapabilityKill           LinuxCapability = "KILL"
+	LinuxCapabilityLease          LinuxCapability = "LEASE"
+	LinuxCapabilityLinuxImmutable LinuxCapability = "LINUX_IMMUTABLE"
+	LinuxCapabilityMacAdmin       LinuxCapability = "MAC_ADMIN"
+	LinuxCapabilityMacOverride    LinuxCapability = "MAC_OVERRIDE"
+	LinuxCapabilityMknod          LinuxCapability = "MKNOD"
+	LinuxCapabilityNetAdmin       LinuxCapability = "NET_ADMIN"
+	LinuxCapabilityNetBindService LinuxCapability = "NET_BIND_SERVICE"
+	LinuxCapabilityNetBroadcast   LinuxCapability = "NET_BROADCAST"
+	LinuxCapabilityNetRaw         LinuxCapability = "NET_RAW"
+	LinuxCapabilitySetfcap        LinuxCapability = "SETFCAP"
+	LinuxCapabilitySetgid         LinuxCapability = "SETGID"
+	LinuxCapabilitySetpcap        LinuxCapability = "SETPCAP"
+	LinuxCapabilitySetuid         LinuxCapability = "SETUID"
+	LinuxCapabilitySysAdmin       LinuxCapability = "SYS_ADMIN"
+	LinuxCapabilitySysBoot        LinuxCapability = "SYS_BOOT"
+	LinuxCapabilitySysChroot      LinuxCapability = "SYS_CHROOT"
+	LinuxCapabilitySysModule      LinuxCapability = "SYS_MODULE"
+	LinuxCapabilitySysNice        LinuxCapability = "SYS_NICE"
+	LinuxCapabilitySysPacct       LinuxCapability = "SYS_PACCT"
+	LinuxCapabilitySysPtrace      LinuxCapability = "SYS_PTRACE"
+	LinuxCapabilitySysRawio       LinuxCapability = "SYS_RAWIO"
+	LinuxCapabilitySysResource    LinuxCapability = "SYS_RESOURCE"
+	LinuxCapabilitySysTime        LinuxCapability = "SYS_TIME"
+	LinuxCapabilitySysTtyConfig   LinuxCapability = "SYS_TTY_CONFIG"
+	LinuxCapabilitySyslog         LinuxCapability = "SYSLOG"
+	LinuxCapabilityWakeAlarm      LinuxCapability = "WAKE_ALARM"
+)
+
+// Values returns all known values for LinuxCapability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LinuxCapability) Values() []LinuxCapability {
+	return []LinuxCapability{
+		"AUDIT_CONTROL",
+		"AUDIT_WRITE",
+		"BLOCK_SUSPEND",
+		"CHOWN",
+		"DAC_OVERRIDE",
+		"DAC_READ_SEARCH",
+		"FOWNER",
+		"FSETID",
+		"IPC_LOCK",
+		"IPC_OWNER",
+		"KILL",
+		"LEASE",
+		"LINUX_IMMUTABLE",
+		"MAC_ADMIN",
+		"MAC_OVERRIDE",
+		"MKNOD",
+		"NET_ADMIN",
+		"NET_BIND_SERVICE",
+		"NET_BROADCAST",
+		"NET_RAW",
+		"SETFCAP",
+		"SETGID",
+		"SETPCAP",
+		"SETUID",
+		"SYS_ADMIN",
+		"SYS_BOOT",
+		"SYS_CHROOT",
+		"SYS_MODULE",
+		"SYS_NICE",
+		"SYS_PACCT",
+		"SYS_PTRACE",
+		"SYS_RAWIO",
+		"SYS_RESOURCE",
+		"SYS_TIME",
+		"SYS_TTY_CONFIG",
+		"SYSLOG",
+		"WAKE_ALARM",
+	}
+}
+
 type ListComputeInputStatus string
 
 // Enum values for ListComputeInputStatus

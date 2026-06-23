@@ -277,6 +277,27 @@ func (ClientAuthenticationMethodType) Values() []ClientAuthenticationMethodType 
 	}
 }
 
+type ClusteringFrequency string
+
+// Enum values for ClusteringFrequency
+const (
+	ClusteringFrequencyDaily   ClusteringFrequency = "DAILY"
+	ClusteringFrequencyWeekly  ClusteringFrequency = "WEEKLY"
+	ClusteringFrequencyMonthly ClusteringFrequency = "MONTHLY"
+)
+
+// Values returns all known values for ClusteringFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusteringFrequency) Values() []ClusteringFrequency {
+	return []ClusteringFrequency{
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
+	}
+}
+
 type CodeInterpreterNetworkMode string
 
 // Enum values for CodeInterpreterNetworkMode
@@ -485,14 +506,11 @@ type DatasetSchemaType string
 
 // Enum values for DatasetSchemaType
 const (
-	// AgentCore predefined evaluation schema, version 1. Dataset with pre-written
-	// inputs per conversation turn. Required: input. Optional: expectedResponse,
-	// assertions, expectedTrajectory.
+	//  AgentCore predefined evaluation schema, version 1. Dataset with pre-written
+	// inputs per conversation turn.
 	DatasetSchemaTypeAgentcoreEvaluationPredefinedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_PREDEFINED_V1"
-	// AgentCore simulated evaluation schema, version 1. Dataset for synthetic data
-	// generation. Each example is a Scenario that a simulator uses to generate full
-	// conversations. Required: input. Optional: name (→exampleId), actor_profile,
-	// max_turns, assertions.
+	//  AgentCore simulated evaluation schema, version 1. Dataset for synthetic data
+	// generation where each example is a scenario used to generate full conversations.
 	DatasetSchemaTypeAgentcoreEvaluationSimulatedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_SIMULATED_V1"
 )
 
@@ -511,29 +529,22 @@ type DatasetStatus string
 
 // Enum values for DatasetStatus
 const (
-	// CreateDataset async ingestion in progress. All writes are blocked. Poll
-	// GetDataset until status resolves to ACTIVE or CREATE_FAILED.
+	//  CreateDataset async ingestion in progress. All writes are blocked.
 	DatasetStatusCreating DatasetStatus = "CREATING"
-	// An async example mutation or CreateDatasetVersion is in progress. All writes
-	// are blocked. Poll GetDataset until status resolves.
+	//  An async example mutation or CreateDatasetVersion is in progress. All writes
+	// are blocked.
 	DatasetStatusUpdating DatasetStatus = "UPDATING"
-	// Full or version-specific delete is in progress. Read operations (GetDataset,
-	// ListDatasetExamples) are still allowed.
+	//  Full or version-specific delete is in progress. Read operations are still
+	// allowed.
 	DatasetStatusDeleting DatasetStatus = "DELETING"
-	// Dataset is stable. All operations are allowed per per-operation guards.
-	// failureReason is cleared.
+	//  Dataset is stable. All operations are allowed per operation-specific guards.
 	DatasetStatusActive DatasetStatus = "ACTIVE"
-	// Initial ingestion failed. DRAFT record exists but contains no examples.
-	// failureReason is populated. AddDatasetExamples and DeleteDatasetExamples
-	// allowed. UpdateDatasetExamples and CreateDatasetVersion blocked (no examples
-	// exist).
+	//  Initial ingestion failed. DRAFT record exists but contains no examples.
 	DatasetStatusCreateFailed DatasetStatus = "CREATE_FAILED"
-	// Last example mutation or CreateDatasetVersion failed. DRAFT may be partially
-	// modified. failureReason is populated. All example mutations and
-	// CreateDatasetVersion allowed for retry.
+	//  Last example mutation or CreateDatasetVersion failed. DRAFT may be partially
+	// modified.
 	DatasetStatusUpdateFailed DatasetStatus = "UPDATE_FAILED"
-	// Delete failed after retries. Dataset record/S3 may be in inconsistent state.
-	// failureReason is populated. Only DeleteDataset (retry) is allowed.
+	//  Delete failed after retries. Dataset record may be in an inconsistent state.
 	DatasetStatusDeleteFailed DatasetStatus = "DELETE_FAILED"
 )
 
@@ -580,11 +591,10 @@ type DraftStatus string
 
 // Enum values for DraftStatus
 const (
-	// DRAFT has changes not yet reflected in any published version, or no versions
+	//  DRAFT has changes not yet reflected in any published version, or no versions
 	// have been published yet.
 	DraftStatusModified DraftStatus = "MODIFIED"
-	// DRAFT content matches the latest published version exactly. Any example
-	// mutation transitions draftStatus back to MODIFIED.
+	//  DRAFT content matches the latest published version exactly.
 	DraftStatusUnmodified DraftStatus = "UNMODIFIED"
 )
 
@@ -615,6 +625,25 @@ func (EndpointIpAddressType) Values() []EndpointIpAddressType {
 	return []EndpointIpAddressType{
 		"IPV4",
 		"IPV6",
+	}
+}
+
+type EnforcementMode string
+
+// Enum values for EnforcementMode
+const (
+	EnforcementModeActive  EnforcementMode = "ACTIVE"
+	EnforcementModeLogOnly EnforcementMode = "LOG_ONLY"
+)
+
+// Values returns all known values for EnforcementMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnforcementMode) Values() []EnforcementMode {
+	return []EnforcementMode{
+		"ACTIVE",
+		"LOG_ONLY",
 	}
 }
 
@@ -701,6 +730,25 @@ const (
 func (ExceptionLevel) Values() []ExceptionLevel {
 	return []ExceptionLevel{
 		"DEBUG",
+	}
+}
+
+type ExtractionType string
+
+// Enum values for ExtractionType
+const (
+	ExtractionTypeLlmInferred        ExtractionType = "LLM_INFERRED"
+	ExtractionTypeStrictlyConsistent ExtractionType = "STRICTLY_CONSISTENT"
+)
+
+// Values returns all known values for ExtractionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtractionType) Values() []ExtractionType {
+	return []ExtractionType{
+		"LLM_INFERRED",
+		"STRICTLY_CONSISTENT",
 	}
 }
 
@@ -893,6 +941,59 @@ func (HarnessBedrockApiFormat) Values() []HarnessBedrockApiFormat {
 	}
 }
 
+type HarnessEndpointStatus string
+
+// Enum values for HarnessEndpointStatus
+const (
+	HarnessEndpointStatusCreating     HarnessEndpointStatus = "CREATING"
+	HarnessEndpointStatusCreateFailed HarnessEndpointStatus = "CREATE_FAILED"
+	HarnessEndpointStatusUpdating     HarnessEndpointStatus = "UPDATING"
+	HarnessEndpointStatusUpdateFailed HarnessEndpointStatus = "UPDATE_FAILED"
+	HarnessEndpointStatusReady        HarnessEndpointStatus = "READY"
+	HarnessEndpointStatusDeleting     HarnessEndpointStatus = "DELETING"
+	HarnessEndpointStatusDeleteFailed HarnessEndpointStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for HarnessEndpointStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessEndpointStatus) Values() []HarnessEndpointStatus {
+	return []HarnessEndpointStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"READY",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
+type HarnessManagedMemoryStrategyType string
+
+// Enum values for HarnessManagedMemoryStrategyType
+const (
+	HarnessManagedMemoryStrategyTypeSemantic       HarnessManagedMemoryStrategyType = "SEMANTIC"
+	HarnessManagedMemoryStrategyTypeSummarization  HarnessManagedMemoryStrategyType = "SUMMARIZATION"
+	HarnessManagedMemoryStrategyTypeUserPreference HarnessManagedMemoryStrategyType = "USER_PREFERENCE"
+	HarnessManagedMemoryStrategyTypeEpisodic       HarnessManagedMemoryStrategyType = "EPISODIC"
+)
+
+// Values returns all known values for HarnessManagedMemoryStrategyType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessManagedMemoryStrategyType) Values() []HarnessManagedMemoryStrategyType {
+	return []HarnessManagedMemoryStrategyType{
+		"SEMANTIC",
+		"SUMMARIZATION",
+		"USER_PREFERENCE",
+		"EPISODIC",
+	}
+}
+
 type HarnessOpenAiApiFormat string
 
 // Enum values for HarnessOpenAiApiFormat
@@ -1027,6 +1128,23 @@ func (IncludedData) Values() []IncludedData {
 	}
 }
 
+type InterceptorPayloadExclusion string
+
+// Enum values for InterceptorPayloadExclusion
+const (
+	InterceptorPayloadExclusionResponseBody InterceptorPayloadExclusion = "RESPONSE_BODY"
+)
+
+// Values returns all known values for InterceptorPayloadExclusion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InterceptorPayloadExclusion) Values() []InterceptorPayloadExclusion {
+	return []InterceptorPayloadExclusion{
+		"RESPONSE_BODY",
+	}
+}
+
 type KeyType string
 
 // Enum values for KeyType
@@ -1073,6 +1191,7 @@ const (
 	MemoryStatusActive   MemoryStatus = "ACTIVE"
 	MemoryStatusFailed   MemoryStatus = "FAILED"
 	MemoryStatusDeleting MemoryStatus = "DELETING"
+	MemoryStatusUpdating MemoryStatus = "UPDATING"
 )
 
 // Values returns all known values for MemoryStatus. Note that this can be
@@ -1085,6 +1204,7 @@ func (MemoryStatus) Values() []MemoryStatus {
 		"ACTIVE",
 		"FAILED",
 		"DELETING",
+		"UPDATING",
 	}
 }
 
@@ -1311,6 +1431,29 @@ func (OverrideType) Values() []OverrideType {
 		"USER_PREFERENCE_OVERRIDE",
 		"SELF_MANAGED",
 		"EPISODIC_OVERRIDE",
+	}
+}
+
+type PassthroughProtocolType string
+
+// Enum values for PassthroughProtocolType
+const (
+	PassthroughProtocolTypeMcp       PassthroughProtocolType = "MCP"
+	PassthroughProtocolTypeA2a       PassthroughProtocolType = "A2A"
+	PassthroughProtocolTypeInference PassthroughProtocolType = "INFERENCE"
+	PassthroughProtocolTypeCustom    PassthroughProtocolType = "CUSTOM"
+)
+
+// Values returns all known values for PassthroughProtocolType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PassthroughProtocolType) Values() []PassthroughProtocolType {
+	return []PassthroughProtocolType{
+		"MCP",
+		"A2A",
+		"INFERENCE",
+		"CUSTOM",
 	}
 }
 
@@ -1906,6 +2049,39 @@ func (TargetStatus) Values() []TargetStatus {
 	}
 }
 
+type TargetType string
+
+// Enum values for TargetType
+const (
+	TargetTypeOpenApiSchema    TargetType = "OPEN_API_SCHEMA"
+	TargetTypeSmithyModel      TargetType = "SMITHY_MODEL"
+	TargetTypeMcpServer        TargetType = "MCP_SERVER"
+	TargetTypeLambda           TargetType = "LAMBDA"
+	TargetTypeApiGateway       TargetType = "API_GATEWAY"
+	TargetTypeConnector        TargetType = "CONNECTOR"
+	TargetTypeAgentcoreRuntime TargetType = "AGENTCORE_RUNTIME"
+	TargetTypePassthrough      TargetType = "PASSTHROUGH"
+	TargetTypeProvider         TargetType = "PROVIDER"
+)
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"OPEN_API_SCHEMA",
+		"SMITHY_MODEL",
+		"MCP_SERVER",
+		"LAMBDA",
+		"API_GATEWAY",
+		"CONNECTOR",
+		"AGENTCORE_RUNTIME",
+		"PASSTHROUGH",
+		"PROVIDER",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
@@ -1928,5 +2104,24 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"IdempotentParameterMismatchException",
 		"EventInOtherSession",
 		"ResourceConflict",
+	}
+}
+
+type WafFailureMode string
+
+// Enum values for WafFailureMode
+const (
+	WafFailureModeFailClose WafFailureMode = "FAIL_CLOSE"
+	WafFailureModeFailOpen  WafFailureMode = "FAIL_OPEN"
+)
+
+// Values returns all known values for WafFailureMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafFailureMode) Values() []WafFailureMode {
+	return []WafFailureMode{
+		"FAIL_CLOSE",
+		"FAIL_OPEN",
 	}
 }

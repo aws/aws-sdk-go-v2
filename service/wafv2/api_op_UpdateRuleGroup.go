@@ -126,6 +126,10 @@ type UpdateRuleGroupInput struct {
 	// A description of the rule group that helps with identification.
 	Description *string
 
+	// The monetization configuration for the rule group. Provide this when any rule
+	// in the rule group uses the Monetize action.
+	MonetizationConfig *types.MonetizationConfig
+
 	// The Rule statements used to identify the web requests that you want to manage. Each
 	// rule includes one top-level statement that WAF uses to identify matching web
 	// requests, and parameters that govern how WAF handles them.

@@ -57,22 +57,34 @@ type BGPPeer struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP
 	// configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -218,6 +230,10 @@ type Connection struct {
 
 	// The name of the service provider associated with the connection.
 	ProviderName *string
+
+	// The rate limiter status for the connection, including how many rate limiters
+	// are in use and the maximum allowed.
+	RateLimiterStatus *RateLimiterStatus
 
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
@@ -588,6 +604,10 @@ type Lag struct {
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
+	// The rate limiter status for the LAG, including how many rate limiters are in
+	// use and the maximum allowed.
+	RateLimiterStatus *RateLimiterStatus
+
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
@@ -721,13 +741,16 @@ type NewPrivateVirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -735,10 +758,19 @@ type NewPrivateVirtualInterface struct {
 	// The long ASN for a new private virtual interface. The valid range is from 1 to
 	// 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -760,6 +792,11 @@ type NewPrivateVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the private virtual interface.
 	Tags []Tag
@@ -795,13 +832,16 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -809,10 +849,19 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The ASN when allocating a new private virtual interface. The valid range is
 	// from 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -828,6 +877,11 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the private virtual interface.
 	Tags []Tag
@@ -860,22 +914,34 @@ type NewPublicVirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for a new public virtual interface. The valid range is from 1 to
 	// 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -887,6 +953,11 @@ type NewPublicVirtualInterface struct {
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.
 	// Applies to public virtual interfaces.
@@ -923,13 +994,16 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -937,10 +1011,19 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// The ASN when allocating a new public virtual interface. The valid range is from
 	// 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -952,6 +1035,11 @@ type NewPublicVirtualInterfaceAllocation struct {
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.
 	// Applies to public virtual interfaces.
@@ -976,22 +1064,34 @@ type NewTransitVirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for a new transit virtual interface.The valid range is from 1 to
 	// 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -1013,6 +1113,11 @@ type NewTransitVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the transitive virtual interface.
 	Tags []Tag
@@ -1041,13 +1146,16 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -1055,10 +1163,19 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// The ASN when allocating a new transit virtual interface. The valid range is
 	// from 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -1075,6 +1192,11 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// and 8500. The default value is 1500
 	Mtu *int32
 
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
+
 	// The tags associated with the transitive virtual interface.
 	Tags []Tag
 
@@ -1085,6 +1207,26 @@ type NewTransitVirtualInterfaceAllocation struct {
 
 	// The ID of the VLAN.
 	Vlan int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the rate limiter status for a connection, including
+// the maximum number of rate limiters allowed, the number currently in use, and
+// the remaining capacity.
+type RateLimiterStatus struct {
+
+	// The number of rate limiters currently in use on the connection.
+	InUse int32
+
+	// The maximum number of rate limiters allowed on the connection.
+	MaxAllowed int32
+
+	// The number of rate limiters remaining (available) on the connection.
+	Remaining int32
+
+	// The total bandwidth allocated across all rate limiters on the connection.
+	TotalBandwidth *string
 
 	noSmithyDocumentSerde
 }
@@ -1188,22 +1330,34 @@ type VirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the virtual interface. The valid range is from 1 to 4294967294
 	// for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -1247,6 +1401,20 @@ type VirtualInterface struct {
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
+
+	// The rate limit (bandwidth allocation) applied to the virtual interface. The
+	// value must be one of the supported bandwidth values and cannot exceed the
+	// bandwidth of the parent connection or LAG. Supported values: 50Mbps , 100Mbps ,
+	// 200Mbps , 300Mbps , 400Mbps , 500Mbps , 600Mbps , 700Mbps , 800Mbps , 900Mbps ,
+	// 1Gbps , 1.2Gbps , 1.5Gbps , 1.8Gbps , 2Gbps , 2.1Gbps , 2.4Gbps , 2.7Gbps ,
+	// 3Gbps , 3.2Gbps , 3.6Gbps , 4Gbps , 5Gbps , 6Gbps , 7Gbps , 8Gbps , 9Gbps ,
+	// 10Gbps , 12Gbps , 15Gbps , 18Gbps , 20Gbps , 21Gbps , 24Gbps , 27Gbps , 30Gbps ,
+	// 32Gbps , 36Gbps , 40Gbps , 50Gbps , 60Gbps , 70Gbps , 80Gbps , 100Gbps , 120Gbps
+	// , 150Gbps , 180Gbps , 200Gbps , 210Gbps , 240Gbps , 270Gbps , 300Gbps , 320Gbps
+	// , 360Gbps , 400Gbps , 450Gbps , 480Gbps , 500Gbps , 540Gbps , 600Gbps , 700Gbps
+	// , 800Gbps , 900Gbps , 1Tbps , 1.1Tbps , 1.2Tbps , 1.3Tbps , 1.4Tbps , 1.5Tbps ,
+	// 1.6Tbps .
+	RateLimit *string
 
 	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string

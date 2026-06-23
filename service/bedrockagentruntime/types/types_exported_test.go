@@ -30,6 +30,54 @@ func ExampleActionGroupExecutor_outputUsage() {
 var _ *string
 var _ types.CustomControlMethod
 
+func ExampleAgenticRetrieveStreamResponseOutput_outputUsage() {
+	var union types.AgenticRetrieveStreamResponseOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgenticRetrieveStreamResponseOutputMemberResponseEvent:
+		_ = v.Value // Value is types.AgenticRetrieveResponseEvent
+
+	case *types.AgenticRetrieveStreamResponseOutputMemberResult:
+		_ = v.Value // Value is types.AgenticRetrieveResultEvent
+
+	case *types.AgenticRetrieveStreamResponseOutputMemberTraceEvent:
+		_ = v.Value // Value is types.AgenticRetrieveTraceEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AgenticRetrieveTraceEvent
+var _ *types.AgenticRetrieveResultEvent
+var _ *types.AgenticRetrieveResponseEvent
+
+func ExampleAgenticRetrieveWarning_outputUsage() {
+	var union types.AgenticRetrieveWarning
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgenticRetrieveWarningMemberGuardrail:
+		_ = v.Value // Value is types.AgenticRetrieveGuardrailWarning
+
+	case *types.AgenticRetrieveWarningMemberMessage:
+		_ = v.Value // Value is types.AgenticRetrieveWarningMessage
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AgenticRetrieveGuardrailWarning
+var _ *types.AgenticRetrieveWarningMessage
+
 func ExampleAPISchema_outputUsage() {
 	var union types.APISchema
 	// type switches can be used to check the union value
@@ -843,6 +891,24 @@ func ExampleRetrieveAndGenerateStreamResponseOutput_outputUsage() {
 var _ *types.GuardrailEvent
 var _ *types.CitationEvent
 var _ *types.RetrieveAndGenerateOutputEvent
+
+func ExampleRetrieverConfiguration_outputUsage() {
+	var union types.RetrieverConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetrieverConfigurationMemberKnowledgeBase:
+		_ = v.Value // Value is types.KnowledgeBaseRetrieverConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KnowledgeBaseRetrieverConfiguration
 
 func ExampleRoutingClassifierTrace_outputUsage() {
 	var union types.RoutingClassifierTrace

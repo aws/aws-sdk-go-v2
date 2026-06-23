@@ -484,6 +484,18 @@ type EBSUtilizationMetric struct {
 	//   period of time.
 	//
 	// Unit: Bytes
+	//
+	//   - VolumeIOPSExceeded - Indicates whether the volume's provisioned IOPS
+	//   performance was exceeded in a specified period of time. A value of 1 means the
+	//   provisioned IOPS were exceeded; a value of 0 means they were not.
+	//
+	// Unit: None
+	//
+	//   - VolumeThroughputExceeded - Indicates whether the volume's provisioned
+	//   throughput performance was exceeded in a specified period of time. A value of
+	//   1 means the provisioned throughput was exceeded; a value of 0 means it was not.
+	//
+	// Unit: None
 	Name EBSMetricName
 
 	// The statistic of the utilization metric.

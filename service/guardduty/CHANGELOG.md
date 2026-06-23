@@ -1,3 +1,7 @@
+# v1.80.0 (2026-06-22)
+
+* **Feature**: Added AI-powered investigations that automatically analyze security findings, correlate related activity, and produce structured summaries with risk assessment, confidence scoring, MITRE technique classification, and actionable next steps.
+
 # v1.79.3 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

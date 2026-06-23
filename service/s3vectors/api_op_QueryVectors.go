@@ -4,6 +4,8 @@ package s3vectors
 
 import (
 	"context"
+	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/document"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
 	"github.com/aws/smithy-go/middleware"
@@ -13,8 +15,7 @@ import (
 // Performs an approximate nearest neighbor search query in a vector index using a
 // query vector. By default, it returns the keys of approximate nearest neighbors.
 // You can optionally include the computed distance (between the query vector and
-// each vector in the response), the vector data, and metadata of each vector in
-// the response.
+// each vector in the response) and metadata of each vector in the response.
 //
 // To specify the vector index, you can either use both the vector bucket name and
 // the vector index name, or use the vector index Amazon Resource Name (ARN).
@@ -26,13 +27,13 @@ import (
 //   - With only s3vectors:QueryVectors permission, you can retrieve vector keys of
 //     approximate nearest neighbors and computed distances between these vectors. This
 //     permission is sufficient only when you don't set any metadata filters and don't
-//     request vector data or metadata (by keeping the returnMetadata parameter set
-//     to false or not specified).
+//     request metadata (by keeping the returnMetadata parameter set to false or not
+//     specified).
 //
 //   - If you specify a metadata filter or set returnMetadata to true, you must
 //     have both s3vectors:QueryVectors and s3vectors:GetVectors permissions. The
-//     request fails with a 403 Forbidden error if you request metadata filtering,
-//     vector data, or metadata without the s3vectors:GetVectors permission.
+//     request fails with a 403 Forbidden error if you request metadata filtering or
+//     metadata without the s3vectors:GetVectors permission.
 func (c *Client) QueryVectors(ctx context.Context, params *QueryVectorsInput, optFns ...func(*Options)) (*QueryVectorsOutput, error) {
 	if params == nil {
 		params = &QueryVectorsInput{}
@@ -75,6 +76,10 @@ type QueryVectorsInput struct {
 	// The name of the vector index that you want to query.
 	IndexName *string
 
+	// Pagination token from a previous request. The value of this field is empty for
+	// an initial request.
+	NextToken *string
+
 	// Indicates whether to include the computed distance in the response. The default
 	// value is false .
 	ReturnDistance bool
@@ -103,6 +108,10 @@ type QueryVectorsOutput struct {
 	// This member is required.
 	Vectors []types.QueryOutputVector
 
+	// Pagination token to be used in the subsequent page request. The field is empty
+	// if no further pagination is required.
+	NextToken *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -110,6 +119,9 @@ type QueryVectorsOutput struct {
 }
 
 func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryVectors{}, middleware.After)
 	if err != nil {
 		return err
@@ -118,8 +130,17 @@ func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryVectors"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
 	if err = addComputeContentLength(stack); err != nil {
@@ -131,7 +152,19 @@ func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
+	if err = addRetry(stack, options, c); err != nil {
+		return err
+	}
+	if err = addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
 	if err = addRecordResponseTiming(stack); err != nil {
+		return err
+	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
@@ -140,13 +173,22 @@ func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpQueryVectorsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "QueryVectors"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryVectors(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,8 +203,102 @@ func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
+}
+
+// QueryVectorsPaginatorOptions is the paginator options for QueryVectors
+type QueryVectorsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// QueryVectorsPaginator is a paginator for QueryVectors
+type QueryVectorsPaginator struct {
+	options   QueryVectorsPaginatorOptions
+	client    QueryVectorsAPIClient
+	params    *QueryVectorsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewQueryVectorsPaginator returns a new QueryVectorsPaginator
+func NewQueryVectorsPaginator(client QueryVectorsAPIClient, params *QueryVectorsInput, optFns ...func(*QueryVectorsPaginatorOptions)) *QueryVectorsPaginator {
+	if params == nil {
+		params = &QueryVectorsInput{}
+	}
+
+	options := QueryVectorsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &QueryVectorsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *QueryVectorsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next QueryVectors page.
+func (p *QueryVectorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*QueryVectorsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.QueryVectors(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// QueryVectorsAPIClient is a client that implements the QueryVectors operation.
+type QueryVectorsAPIClient interface {
+	QueryVectors(context.Context, *QueryVectorsInput, ...func(*Options)) (*QueryVectorsOutput, error)
+}
+
+var _ QueryVectorsAPIClient = (*Client)(nil)
+
+func newServiceMetadataMiddleware_opQueryVectors(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "QueryVectors",
+	}
 }

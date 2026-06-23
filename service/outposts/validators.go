@@ -90,6 +90,26 @@ func (m *validateOpCreateOutpost) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateQuote struct {
+}
+
+func (*validateOpCreateQuote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuoteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRenewal struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpDeleteOutpost) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteOutpostInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQuote struct {
+}
+
+func (*validateOpDeleteQuote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuoteInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +365,26 @@ func (m *validateOpGetOutpostSupportedInstanceTypes) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetOutpostSupportedInstanceTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQuote struct {
+}
+
+func (*validateOpGetQuote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQuote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQuoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQuoteInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +650,26 @@ func (m *validateOpUpdateOutpost) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQuote struct {
+}
+
+func (*validateOpUpdateQuote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuoteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSiteAddress struct {
 }
 
@@ -666,6 +746,10 @@ func addOpCreateOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOutpost{}, middleware.After)
 }
 
+func addOpCreateQuoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuote{}, middleware.After)
+}
+
 func addOpCreateRenewalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRenewal{}, middleware.After)
 }
@@ -676,6 +760,10 @@ func addOpCreateSiteValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOutpost{}, middleware.After)
+}
+
+func addOpDeleteQuoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuote{}, middleware.After)
 }
 
 func addOpDeleteSiteValidationMiddleware(stack *middleware.Stack) error {
@@ -712,6 +800,10 @@ func addOpGetOutpostInstanceTypesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetOutpostSupportedInstanceTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOutpostSupportedInstanceTypes{}, middleware.After)
+}
+
+func addOpGetQuoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQuote{}, middleware.After)
 }
 
 func addOpGetRenewalPricingValidationMiddleware(stack *middleware.Stack) error {
@@ -764,6 +856,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOutpost{}, middleware.After)
+}
+
+func addOpUpdateQuoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuote{}, middleware.After)
 }
 
 func addOpUpdateSiteAddressValidationMiddleware(stack *middleware.Stack) error {
@@ -912,6 +1008,24 @@ func validateOpCreateOutpostInput(v *CreateOutpostInput) error {
 	}
 }
 
+func validateOpCreateQuoteInput(v *CreateQuoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuoteInput"}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	}
+	if v.RequestedCapacities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestedCapacities"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRenewalInput(v *CreateRenewalInput) error {
 	if v == nil {
 		return nil
@@ -965,6 +1079,21 @@ func validateOpDeleteOutpostInput(v *DeleteOutpostInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteOutpostInput"}
 	if v.OutpostId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQuoteInput(v *DeleteQuoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuoteInput"}
+	if v.QuoteIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuoteIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1103,6 +1232,21 @@ func validateOpGetOutpostSupportedInstanceTypesInput(v *GetOutpostSupportedInsta
 	invalidParams := smithy.InvalidParamsError{Context: "GetOutpostSupportedInstanceTypesInput"}
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQuoteInput(v *GetQuoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQuoteInput"}
+	if v.QuoteIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuoteIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1320,6 +1464,21 @@ func validateOpUpdateOutpostInput(v *UpdateOutpostInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOutpostInput"}
 	if v.OutpostId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuoteInput(v *UpdateQuoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuoteInput"}
+	if v.QuoteIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuoteIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

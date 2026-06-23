@@ -254,6 +254,12 @@
                         "smithy.api#documentation": "<p>The image format for agent screen captures.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "UserControlMode": {
+                    "target": "com.amazonaws.appstream#UserControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -292,6 +298,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The image format for agent screen captures.</p>"
                     }
+                },
+                "UserControlMode": {
+                    "target": "com.amazonaws.appstream#UserControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -305,7 +317,7 @@
                     "target": "com.amazonaws.appstream#AgentAction",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The agent action to configure. Valid values are COMPUTER_VISION and COMPUTER_INPUT. If you enable COMPUTER_INPUT, you must also enable COMPUTER_VISION.</p>",
+                        "smithy.api#documentation": "<p>The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. If you enable COMPUTER_INPUT, you must also enable COMPUTER_VISION.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -348,10 +360,16 @@
                     "traits": {
                         "smithy.api#enumValue": "COMPUTER_INPUT"
                     }
+                },
+                "FORWARD_MCP_TOOLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORWARD_MCP_TOOLS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type of agent action.</p>\n         <ul>\n            <li>\n               <p>COMPUTER_VISION - Allows agents to take screenshots of the desktop.</p>\n            </li>\n            <li>\n               <p>COMPUTER_INPUT - Allows agents to click, type, and scroll on the desktop. Requires COMPUTER_VISION to also be enabled.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The type of agent action.</p>\n         <ul>\n            <li>\n               <p>COMPUTER_VISION - Allows agents to take screenshots of the desktop.</p>\n            </li>\n            <li>\n               <p>COMPUTER_INPUT - Allows agents to click, type, and scroll on the desktop. Requires COMPUTER_VISION to also be enabled.</p>\n            </li>\n            <li>\n               <p>FORWARD_MCP_TOOLS - Allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.appstream#AgentSoftwareVersion": {
@@ -12655,6 +12673,32 @@
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9_\\-\\s]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.appstream#UserControlMode": {
+            "type": "enum",
+            "members": {
+                "VIEW_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIEW_ONLY"
+                    }
+                },
+                "VIEW_STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIEW_STOP"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user control mode for agent sessions.</p>\n         <ul>\n            <li>\n               <p>VIEW_ONLY - Users can view and observe agent actions as they happen.</p>\n            </li>\n            <li>\n               <p>VIEW_STOP - Users can view agent actions and stop the agent if needed.</p>\n            </li>\n            <li>\n               <p>DISABLED - Users cannot view or stop the agent session.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.appstream#UserId": {

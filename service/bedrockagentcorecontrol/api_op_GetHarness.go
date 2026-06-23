@@ -9,7 +9,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Operation to get a single Harness.
+// Operation to get a single harness.
 func (c *Client) GetHarness(ctx context.Context, params *GetHarnessInput, optFns ...func(*Options)) (*GetHarnessOutput, error) {
 	if params == nil {
 		params = &GetHarnessInput{}
@@ -31,6 +31,10 @@ type GetHarnessInput struct {
 	//
 	// This member is required.
 	HarnessId *string
+
+	// Specific version of the harness to retrieve. If omitted, returns the current
+	// Harness configuration, including its status.
+	HarnessVersion *string
 
 	noSmithyDocumentSerde
 }

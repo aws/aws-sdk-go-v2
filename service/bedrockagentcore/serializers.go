@@ -517,6 +517,13 @@ func awsRestjson1_serializeOpDocumentCreateABTestInput(v *CreateABTestInput, val
 		ok.String(*v.RoleArn)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Variants != nil {
 		ok := object.Key("variants")
 		if err := awsRestjson1_serializeDocumentVariantList(v.Variants, ok); err != nil {
@@ -633,6 +640,11 @@ func awsRestjson1_serializeOpDocumentCreateEventInput(v *CreateEventInput, value
 	if v.EventTimestamp != nil {
 		ok := object.Key("eventTimestamp")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EventTimestamp))
+	}
+
+	if len(v.ExtractionMode) > 0 {
+		ok := object.Key("extractionMode")
+		ok.String(string(v.ExtractionMode))
 	}
 
 	if v.Metadata != nil {
@@ -3664,6 +3676,10 @@ func awsRestjson1_serializeOpHttpBindingsInvokeHarnessInput(v *InvokeHarnessInpu
 		encoder.SetQuery("harnessArn").String(*v.HarnessArn)
 	}
 
+	if v.Qualifier != nil {
+		encoder.SetQuery("qualifier").String(*v.Qualifier)
+	}
+
 	if v.RuntimeSessionId != nil {
 		locationName := "X-Amzn-Bedrock-Agentcore-Runtime-Session-Id"
 		encoder.SetHeader(locationName).String(*v.RuntimeSessionId)
@@ -5514,6 +5530,25 @@ func awsRestjson1_serializeOpDocumentStartBatchEvaluationInput(v *StartBatchEval
 		}
 	}
 
+	if v.Insights != nil {
+		ok := object.Key("insights")
+		if err := awsRestjson1_serializeDocumentInsightList(v.Insights, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5978,6 +6013,11 @@ func awsRestjson1_serializeOpDocumentStartRecommendationInput(v *StartRecommenda
 		ok.String(*v.Description)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -5986,6 +6026,13 @@ func awsRestjson1_serializeOpDocumentStartRecommendationInput(v *StartRecommenda
 	if v.RecommendationConfig != nil {
 		ok := object.Key("recommendationConfig")
 		if err := awsRestjson1_serializeDocumentRecommendationConfig(v.RecommendationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
 			return err
 		}
 	}
@@ -6655,6 +6702,12 @@ func awsRestjson1_serializeDocumentAgentTracesConfig(v types.AgentTracesConfig, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.AgentTracesConfigMemberBatchEvaluation:
+		av := object.Key("batchEvaluation")
+		if err := awsRestjson1_serializeDocumentBatchEvaluationTraceConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AgentTracesConfigMemberCloudwatchLogs:
 		av := object.Key("cloudwatchLogs")
 		if err := awsRestjson1_serializeDocumentCloudWatchLogsTraceConfig(&uv.Value, av); err != nil {
@@ -6721,6 +6774,18 @@ func awsRestjson1_serializeDocumentBasicAuth(v *types.BasicAuth, value smithyjso
 	if v.SecretArn != nil {
 		ok := object.Key("secretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchEvaluationTraceConfig(v *types.BatchEvaluationTraceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BatchEvaluationArn != nil {
+		ok := object.Key("batchEvaluationArn")
+		ok.String(*v.BatchEvaluationArn)
 	}
 
 	return nil
@@ -7244,6 +7309,12 @@ func awsRestjson1_serializeDocumentDataSourceConfig(v types.DataSourceConfig, va
 	case *types.DataSourceConfigMemberCloudWatchLogs:
 		av := object.Key("cloudWatchLogs")
 		if err := awsRestjson1_serializeDocumentCloudWatchLogsSource(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataSourceConfigMemberOnlineEvaluationConfigSource:
+		av := object.Key("onlineEvaluationConfigSource")
+		if err := awsRestjson1_serializeDocumentOnlineEvaluationConfigSource(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -7798,6 +7869,17 @@ func awsRestjson1_serializeDocumentHarnessAllowedTools(v []string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHarnessAwsSkillPaths(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHarnessBedrockModelConfig(v *types.HarnessBedrockModelConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8296,6 +8378,12 @@ func awsRestjson1_serializeDocumentHarnessSkill(v types.HarnessSkill, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.HarnessSkillMemberAwsSkills:
+		av := object.Key("awsSkills")
+		if err := awsRestjson1_serializeDocumentHarnessSkillAwsSkillsSource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.HarnessSkillMemberGit:
 		av := object.Key("git")
 		if err := awsRestjson1_serializeDocumentHarnessSkillGitSource(&uv.Value, av); err != nil {
@@ -8316,6 +8404,20 @@ func awsRestjson1_serializeDocumentHarnessSkill(v types.HarnessSkill, value smit
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessSkillAwsSkillsSource(v *types.HarnessSkillAwsSkillsSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Paths != nil {
+		ok := object.Key("paths")
+		if err := awsRestjson1_serializeDocumentHarnessAwsSkillPaths(v.Paths, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8668,6 +8770,31 @@ func awsRestjson1_serializeDocumentInputContentBlockList(v []types.InputContentB
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentInputContentBlock(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsight(v *types.Insight, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InsightId != nil {
+		ok := object.Key("insightId")
+		ok.String(*v.InsightId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsightList(v []types.Insight, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInsight(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -9453,6 +9580,25 @@ func awsRestjson1_serializeDocumentOAuthScopes(v []string, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOnlineEvaluationConfigSource(v *types.OnlineEvaluationConfigSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OnlineEvaluationConfigArn != nil {
+		ok := object.Key("onlineEvaluationConfigArn")
+		ok.String(*v.OnlineEvaluationConfigArn)
+	}
+
+	if v.TimeRange != nil {
+		ok := object.Key("timeRange")
+		if err := awsRestjson1_serializeDocumentSessionFilterConfig(v.TimeRange, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPayloadType(v types.PayloadType, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10216,6 +10362,17 @@ func awsRestjson1_serializeDocumentSystemPromptRecommendationConfig(v *types.Sys
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagsMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

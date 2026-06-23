@@ -1,3 +1,7 @@
+# v1.177.0 (2026-06-19)
+
+* **Feature**: This is the release for point based scoring system and the evaluation form validation project
+
 # v1.176.2 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

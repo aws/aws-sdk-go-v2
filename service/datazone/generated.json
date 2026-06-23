@@ -65,6 +65,7 @@
         "api_op_DeleteFormType.go",
         "api_op_DeleteGlossary.go",
         "api_op_DeleteGlossaryTerm.go",
+        "api_op_DeleteLineageEvent.go",
         "api_op_DeleteListing.go",
         "api_op_DeleteNotebook.go",
         "api_op_DeleteProject.go",

@@ -944,9 +944,6 @@ func validateComputeResource(v *types.ComputeResource) error {
 	if v.MaxvCpus == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxvCpus"))
 	}
-	if v.Subnets == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
-	}
 	if v.Ec2Configuration != nil {
 		if err := validateEc2ConfigurationList(v.Ec2Configuration); err != nil {
 			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))

@@ -62,6 +62,9 @@ type CreateConfigurationBundleInput struct {
 	// The description for the configuration bundle.
 	Description *string
 
+	// Optional KMS key ARN for encrypting component configurations.
+	KmsKeyArn *string
+
 	// A map of tag keys and values to assign to the configuration bundle. Tags enable
 	// you to categorize your resources in different ways, for example, by purpose,
 	// owner, or environment.

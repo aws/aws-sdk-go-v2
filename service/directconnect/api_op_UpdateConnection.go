@@ -148,6 +148,10 @@ type UpdateConnectionOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
+	// The rate limiter status for the connection, including how many rate limiters
+	// are in use and the maximum allowed.
+	RateLimiterStatus *types.RateLimiterStatus
+
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
 

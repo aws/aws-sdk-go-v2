@@ -108,6 +108,13 @@
                         "smithy.api#documentation": "<p>The explanation of the error.</p>",
                         "smithy.api#jsonName": "message"
                     }
+                },
+                "ResourceShareErrors": {
+                    "target": "com.amazonaws.mq#__listOfResourceShareError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource share errors.</p>",
+                        "smithy.api#jsonName": "resourceShareErrors"
+                    }
                 }
             },
             "traits": {
@@ -578,6 +585,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The explanation of the error.</p>",
                         "smithy.api#jsonName": "message"
+                    }
+                },
+                "ResourceShareErrors": {
+                    "target": "com.amazonaws.mq#__listOfResourceShareError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource share errors.</p>",
+                        "smithy.api#jsonName": "resourceShareErrors"
                     }
                 }
             },
@@ -2166,6 +2180,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mq#DescribeSharedResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mq#DescribeSharedResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mq#DescribeSharedResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mq#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mq#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mq#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mq#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the resources shared to a broker.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/brokers/{BrokerId}/shared-resources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SharedResources",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.mq#DescribeSharedResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "BrokerId": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that Amazon MQ generates for the broker.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.mq#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of resources that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mq#DescribeSharedResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "SharedResources": {
+                    "target": "com.amazonaws.mq#__listOfSharedResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resources shared to the broker.</p>",
+                        "smithy.api#jsonName": "sharedResources"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mq#DescribeUser": {
             "type": "operation",
             "input": {
@@ -2346,6 +2449,13 @@
                         "smithy.api#documentation": "<p>The explanation of the error.</p>",
                         "smithy.api#jsonName": "message"
                     }
+                },
+                "ResourceShareErrors": {
+                    "target": "com.amazonaws.mq#__listOfResourceShareError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource share errors.</p>",
+                        "smithy.api#jsonName": "resourceShareErrors"
+                    }
                 }
             },
             "traits": {
@@ -2369,6 +2479,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The explanation of the error.</p>",
                         "smithy.api#jsonName": "message"
+                    }
+                },
+                "ResourceShareErrors": {
+                    "target": "com.amazonaws.mq#__listOfResourceShareError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource share errors.</p>",
+                        "smithy.api#jsonName": "resourceShareErrors"
                     }
                 }
             },
@@ -3074,6 +3191,13 @@
                         "smithy.api#documentation": "<p>The explanation of the error.</p>",
                         "smithy.api#jsonName": "message"
                     }
+                },
+                "ResourceShareErrors": {
+                    "target": "com.amazonaws.mq#__listOfResourceShareError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource share errors.</p>",
+                        "smithy.api#jsonName": "resourceShareErrors"
+                    }
                 }
             },
             "traits": {
@@ -3250,6 +3374,35 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mq#ResourceShareError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code of the resource share.</p>",
+                        "smithy.api#jsonName": "errorCode"
+                    }
+                },
+                "ResourceShareArn": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource share.</p>",
+                        "smithy.api#jsonName": "resourceShareArn"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the resource share.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns info about the resource share error after updating the broker.</p>"
+            }
+        },
         "com.amazonaws.mq#SanitizationWarning": {
             "type": "structure",
             "members": {
@@ -3307,6 +3460,202 @@
                 "smithy.api#documentation": "<p>The reason for which the configuration elements or attributes were sanitized.</p>"
             }
         },
+        "com.amazonaws.mq#SharedResource": {
+            "type": "structure",
+            "members": {
+                "DnsNames": {
+                    "target": "com.amazonaws.mq#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS names accessible by the broker.</p>",
+                        "smithy.api#jsonName": "dnsNames"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.mq#SharedResourceError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the error encountered by the resource.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the shared resource.</p>",
+                        "smithy.api#jsonName": "resourceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceShareArns": {
+                    "target": "com.amazonaws.mq#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource share ARNs to which the resource belongs.</p>",
+                        "smithy.api#jsonName": "resourceShareArns"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mq#SharedResourceStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the shared resource.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.mq#SharedResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of shared resource.</p>",
+                        "smithy.api#jsonName": "type",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a resource that is shared with the broker, including its type, ARN, and current status.</p>"
+            }
+        },
+        "com.amazonaws.mq#SharedResourceError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.mq#SharedResourceErrorCode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The error code associated with the error.</p>",
+                        "smithy.api#jsonName": "code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the error encountered by the resource.</p>"
+            }
+        },
+        "com.amazonaws.mq#SharedResourceErrorCode": {
+            "type": "enum",
+            "members": {
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "SHARE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARE_NOT_FOUND"
+                    }
+                },
+                "INVITE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVITE_FAILED"
+                    }
+                },
+                "SETUP_INCOMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETUP_INCOMPLETE"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "AZ_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_MISMATCH"
+                    }
+                },
+                "RESOURCE_CONFIGURATION_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_CONFIGURATION_NOT_FOUND"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error code associated with the error.</p>"
+            }
+        },
+        "com.amazonaws.mq#SharedResourceStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "SETUP_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETUP_IN_PROGRESS"
+                    }
+                },
+                "DELETION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETION_IN_PROGRESS"
+                    }
+                },
+                "PENDING_CREATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CREATE"
+                    }
+                },
+                "PENDING_DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the shared resource.</p>"
+            }
+        },
+        "com.amazonaws.mq#SharedResourceType": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_SHARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_SHARE"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of shared resource.</p>"
+            }
+        },
         "com.amazonaws.mq#UnauthorizedException": {
             "type": "structure",
             "members": {
@@ -3322,6 +3671,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The explanation of the error.</p>",
                         "smithy.api#jsonName": "message"
+                    }
+                },
+                "ResourceShareErrors": {
+                    "target": "com.amazonaws.mq#__listOfResourceShareError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource share errors.</p>",
+                        "smithy.api#jsonName": "resourceShareErrors"
                     }
                 }
             },
@@ -3432,6 +3788,13 @@
                         "smithy.api#jsonName": "maintenanceWindowStartTime"
                     }
                 },
+                "ResourceShareArns": {
+                    "target": "com.amazonaws.mq#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource shares to update on the broker</p>",
+                        "smithy.api#jsonName": "resourceShareArns"
+                    }
+                },
                 "SecurityGroups": {
                     "target": "com.amazonaws.mq#__listOf__string",
                     "traits": {
@@ -3516,6 +3879,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters that determine the WeeklyStartTime.</p>",
                         "smithy.api#jsonName": "maintenanceWindowStartTime"
+                    }
+                },
+                "ResourceShareArns": {
+                    "target": "com.amazonaws.mq#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pending broker's target list of resource shares</p>",
+                        "smithy.api#jsonName": "resourceShareArns"
                     }
                 },
                 "SecurityGroups": {
@@ -3985,10 +4355,22 @@
                 "target": "com.amazonaws.mq#EngineVersion"
             }
         },
+        "com.amazonaws.mq#__listOfResourceShareError": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mq#ResourceShareError"
+            }
+        },
         "com.amazonaws.mq#__listOfSanitizationWarning": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mq#SanitizationWarning"
+            }
+        },
+        "com.amazonaws.mq#__listOfSharedResource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mq#SharedResource"
             }
         },
         "com.amazonaws.mq#__listOfUser": {
@@ -4069,6 +4451,9 @@
                 },
                 {
                     "target": "com.amazonaws.mq#DescribeConfigurationRevision"
+                },
+                {
+                    "target": "com.amazonaws.mq#DescribeSharedResources"
                 },
                 {
                     "target": "com.amazonaws.mq#DescribeUser"

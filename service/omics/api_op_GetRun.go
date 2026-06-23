@@ -134,6 +134,11 @@ type GetRunOutput struct {
 	// The destination for workflow outputs.
 	RunOutputUri *string
 
+	// Optional configuration for enabling scratch ephemeral storage mounted at /tmp.
+	// If absent, this will default to SHARED. This configuration is applicable only
+	// for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
+	ScratchStorageMode types.ScratchStorageMode
+
 	// When the run started.
 	StartTime *time.Time
 

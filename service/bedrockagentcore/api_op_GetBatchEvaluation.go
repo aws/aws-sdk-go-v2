@@ -80,11 +80,29 @@ type GetBatchEvaluationOutput struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []types.Evaluator
 
+	// The execution summary clustering results from insights, containing grouped
+	// execution patterns across evaluated sessions.
+	ExecutionSummaryResult *types.ExecutionSummaryClusteringResultContent
+
+	// The failure analysis results from insights, containing categorized failure
+	// clusters with root causes and recommendations.
+	FailureAnalysisResult *types.FailureAnalysisResultContent
+
+	// The list of insight analyses applied during the batch evaluation.
+	Insights []types.Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data.
+	KmsKeyArn *string
+
 	// The output configuration specifying where evaluation results are written.
 	OutputConfig types.OutputConfig
 
 	// The timestamp when the batch evaluation was last updated.
 	UpdatedAt *time.Time
+
+	// The user intent clustering results from insights, containing grouped user
+	// intents across evaluated sessions.
+	UserIntentResult *types.UserIntentClusteringResultContent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

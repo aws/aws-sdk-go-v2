@@ -13,10 +13,16 @@ import (
 // Queries a knowledge base and generates responses based on the retrieved
 // results, with output in streaming format.
 //
+// This API cannot be used with managed knowledge bases. Use [AgenticRetrieveStream] or [Retrieve] with managed
+// knowledge bases.
+//
 // The CLI doesn't support streaming operations in Amazon Bedrock, including
 // InvokeModelWithResponseStream .
 //
 // This operation requires permission for the  bedrock:RetrieveAndGenerate action.
+//
+// [Retrieve]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html
+// [AgenticRetrieveStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_AgenticRetrieveStream.html
 func (c *Client) RetrieveAndGenerateStream(ctx context.Context, params *RetrieveAndGenerateStreamInput, optFns ...func(*Options)) (*RetrieveAndGenerateStreamOutput, error) {
 	if params == nil {
 		params = &RetrieveAndGenerateStreamInput{}
@@ -54,6 +60,11 @@ type RetrieveAndGenerateStreamInput struct {
 	// allows Amazon Bedrock to maintain context and knowledge from previous
 	// interactions. You can't explicitly set the sessionId yourself.
 	SessionId *string
+
+	// Contains information about the user making the request. Use this to pass user
+	// identity information for access control filtering, so that retrieval results
+	// only include documents the user is authorized to access.
+	UserContext *types.UserContext
 
 	noSmithyDocumentSerde
 }

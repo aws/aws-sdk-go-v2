@@ -1412,6 +1412,33 @@ func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
 }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified NetworkType is not supported for the DB cluster, DB subnet group,
+// or orderable DB instance option.
+type NetworkTypeNotSupportedFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NetworkTypeNotSupportedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NetworkTypeNotSupportedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NetworkTypeNotSupportedFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NetworkTypeNotSupported"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NetworkTypeNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The designated option group could not be found.
 type OptionGroupNotFoundFault struct {
 	Message *string

@@ -230,6 +230,26 @@ func (m *validateOpDescribeConfigurationRevision) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSharedResources struct {
+}
+
+func (*validateOpDescribeSharedResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSharedResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSharedResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSharedResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeUser struct {
 }
 
@@ -452,6 +472,10 @@ func addOpDescribeConfigurationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeConfigurationRevisionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConfigurationRevision{}, middleware.After)
+}
+
+func addOpDescribeSharedResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSharedResources{}, middleware.After)
 }
 
 func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
@@ -818,6 +842,21 @@ func validateOpDescribeConfigurationRevisionInput(v *DescribeConfigurationRevisi
 	}
 	if v.ConfigurationRevision == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRevision"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSharedResourcesInput(v *DescribeSharedResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSharedResourcesInput"}
+	if v.BrokerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

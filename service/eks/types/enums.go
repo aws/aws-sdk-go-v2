@@ -472,6 +472,27 @@ func (ConnectorConfigProvider) Values() []ConnectorConfigProvider {
 	}
 }
 
+type ControlPlaneEgressModeType string
+
+// Enum values for ControlPlaneEgressModeType
+const (
+	ControlPlaneEgressModeTypeAwsManaged       ControlPlaneEgressModeType = "AWS_MANAGED"
+	ControlPlaneEgressModeTypeCustomerRouted   ControlPlaneEgressModeType = "CUSTOMER_ROUTED"
+	ControlPlaneEgressModeTypeCustomerIsolated ControlPlaneEgressModeType = "CUSTOMER_ISOLATED"
+)
+
+// Values returns all known values for ControlPlaneEgressModeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlPlaneEgressModeType) Values() []ControlPlaneEgressModeType {
+	return []ControlPlaneEgressModeType{
+		"AWS_MANAGED",
+		"CUSTOMER_ROUTED",
+		"CUSTOMER_ISOLATED",
+	}
+}
+
 type EksAnywhereSubscriptionLicenseType string
 
 // Enum values for EksAnywhereSubscriptionLicenseType
@@ -923,6 +944,25 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 	}
 }
 
+type SpreadLevel string
+
+// Enum values for SpreadLevel
+const (
+	SpreadLevelHost SpreadLevel = "host"
+	SpreadLevelRack SpreadLevel = "rack"
+)
+
+// Values returns all known values for SpreadLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpreadLevel) Values() []SpreadLevel {
+	return []SpreadLevel{
+		"host",
+		"rack",
+	}
+}
+
 type SsoIdentityType string
 
 // Enum values for SsoIdentityType
@@ -1024,6 +1064,10 @@ const (
 	UpdateParamTypeRemoteNetworkConfig              UpdateParamType = "RemoteNetworkConfig"
 	UpdateParamTypeDeletionProtection               UpdateParamType = "DeletionProtection"
 	UpdateParamTypeNodeRepairConfig                 UpdateParamType = "NodeRepairConfig"
+	UpdateParamTypeRoleArn                          UpdateParamType = "RoleArn"
+	UpdateParamTypeRoleMappingsToAddOrUpdate        UpdateParamType = "RoleMappingsToAddOrUpdate"
+	UpdateParamTypeRoleMappingsToRemove             UpdateParamType = "RoleMappingsToRemove"
+	UpdateParamTypeNetworkAccess                    UpdateParamType = "NetworkAccess"
 	UpdateParamTypeVendedLogs                       UpdateParamType = "VendedLogs"
 	UpdateParamTypeUpdatedTier                      UpdateParamType = "UpdatedTier"
 	UpdateParamTypePreviousTier                     UpdateParamType = "PreviousTier"
@@ -1032,6 +1076,7 @@ const (
 	UpdateParamTypeWarmPoolMinSize                  UpdateParamType = "WarmPoolMinSize"
 	UpdateParamTypeWarmPoolState                    UpdateParamType = "WarmPoolState"
 	UpdateParamTypeWarmPoolReuseOnScaleIn           UpdateParamType = "WarmPoolReuseOnScaleIn"
+	UpdateParamTypeControlPlaneEgressMode           UpdateParamType = "ControlPlaneEgressMode"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -1078,6 +1123,10 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"RemoteNetworkConfig",
 		"DeletionProtection",
 		"NodeRepairConfig",
+		"RoleArn",
+		"RoleMappingsToAddOrUpdate",
+		"RoleMappingsToRemove",
+		"NetworkAccess",
 		"VendedLogs",
 		"UpdatedTier",
 		"PreviousTier",
@@ -1086,6 +1135,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"WarmPoolMinSize",
 		"WarmPoolState",
 		"WarmPoolReuseOnScaleIn",
+		"ControlPlaneEgressMode",
 	}
 }
 
@@ -1131,8 +1181,10 @@ const (
 	UpdateTypeAutoModeUpdate                     UpdateType = "AutoModeUpdate"
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
 	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
+	UpdateTypeCapabilityUpdate                   UpdateType = "CapabilityUpdate"
 	UpdateTypeControlPlaneScalingConfigUpdate    UpdateType = "ControlPlaneScalingConfigUpdate"
 	UpdateTypeVendedLogsUpdate                   UpdateType = "VendedLogsUpdate"
+	UpdateTypeControlPlaneEgressUpdate           UpdateType = "ControlPlaneEgressUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -1156,8 +1208,10 @@ func (UpdateType) Values() []UpdateType {
 		"AutoModeUpdate",
 		"RemoteNetworkConfigUpdate",
 		"DeletionProtectionUpdate",
+		"CapabilityUpdate",
 		"ControlPlaneScalingConfigUpdate",
 		"VendedLogsUpdate",
+		"ControlPlaneEgressUpdate",
 	}
 }
 

@@ -20450,6 +20450,15 @@ func awsAwsjson11_deserializeDocumentCustomDomainConfigType(v **types.CustomDoma
 				sv.CertificateArn = ptr.String(jtv)
 			}
 
+		case "SecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecurityPolicyType to be of type string, got %T instead", value)
+				}
+				sv.SecurityPolicy = types.SecurityPolicyType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

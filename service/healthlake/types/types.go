@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+// The analytics configuration for a data store.
+type AnalyticsConfiguration struct {
+
+	// The status of the analytics configuration.
+	Status AnalyticsStatus
+
+	noSmithyDocumentSerde
+}
+
 // The filters applied to a data store query.
 type DatastoreFilter struct {
 
@@ -56,6 +65,9 @@ type DatastoreProperties struct {
 	// This member is required.
 	DatastoreTypeVersion FHIRVersion
 
+	// The analytics configuration for the data store.
+	AnalyticsConfiguration *AnalyticsConfiguration
+
 	// The time the data store was created.
 	CreatedAt *time.Time
 
@@ -68,8 +80,14 @@ type DatastoreProperties struct {
 	// The identity provider selected during data store creation.
 	IdentityProviderConfiguration *IdentityProviderConfiguration
 
+	// The natural language processing (NLP) configuration for the data store.
+	NlpConfiguration *NlpConfiguration
+
 	// The preloaded Synthea data configuration for the data store.
 	PreloadDataConfig *PreloadDataConfig
+
+	// The profile configuration for the data store.
+	ProfileConfiguration *ProfileConfiguration
 
 	//  The server-side encryption key configuration for a customer provided
 	// encryption key.
@@ -307,6 +325,15 @@ type KmsEncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The natural language processing (NLP) configuration for a data store.
+type NlpConfiguration struct {
+
+	// The status of the NLP configuration.
+	Status NlpStatus
+
+	noSmithyDocumentSerde
+}
+
 // The output data configuration supplied when the export job was created.
 //
 // The following types satisfy this interface:
@@ -332,6 +359,15 @@ type PreloadDataConfig struct {
 	//
 	// This member is required.
 	PreloadDataType PreloadDataType
+
+	noSmithyDocumentSerde
+}
+
+// The profile configuration for a data store.
+type ProfileConfiguration struct {
+
+	// The list of default profiles for the data store.
+	DefaultProfiles []string
 
 	noSmithyDocumentSerde
 }

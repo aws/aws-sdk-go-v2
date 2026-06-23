@@ -77,6 +77,9 @@ type CreateABTestInput struct {
 	// test.
 	GatewayFilter *types.GatewayFilter
 
+	// A map of tag keys and values to associate with the A/B test.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

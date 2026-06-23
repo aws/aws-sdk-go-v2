@@ -102,9 +102,10 @@ type StartMatchBackfillInput struct {
 	Players []types.Player
 
 	// An identifier for the game session that is unique across all regions. The value
-	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
-	// When using FlexMatch as a standalone matchmaking solution, this parameter is not
-	// needed.
+	// is always a full ARN in the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// . When using FlexMatch as a standalone
+	// matchmaking solution, this parameter is not needed.
 	GameSessionArn *string
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified

@@ -85,6 +85,33 @@ func (e *DuplicateTagKeysException) ErrorCode() string {
 }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The rate limiter limit has been exceeded for the connection. You cannot add
+// more rate limiters to virtual interfaces on this connection.
+type LimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You have reached the limit on the number of tags that can be assigned.
 type TooManyTagsException struct {
 	Message *string

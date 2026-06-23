@@ -2029,6 +2029,24 @@ func validateEnrichmentTargetS3Configuration(v *types.EnrichmentTargetS3Configur
 	}
 }
 
+func validateFsxOntapConfiguration(v *types.FsxOntapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FsxOntapConfiguration"}
+	if v.StorageVirtualMachineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if v.CredentialsSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePostLaunchActions(v *types.PostLaunchActions) error {
 	if v == nil {
 		return nil
@@ -2286,6 +2304,26 @@ func validateStartNetworkMigrationMappingUpdateSegments(v []types.StartNetworkMi
 	}
 }
 
+func validateStorageConfiguration(v *types.StorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageConfiguration"}
+	if len(v.StorageType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageType"))
+	}
+	if v.FsxOntapConfiguration != nil {
+		if err := validateFsxOntapConfiguration(v.FsxOntapConfiguration); err != nil {
+			invalidParams.AddNested("FsxOntapConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTargetNetwork(v *types.TargetNetwork) error {
 	if v == nil {
 		return nil
@@ -2530,6 +2568,11 @@ func validateOpCreateReplicationConfigurationTemplateInput(v *CreateReplicationC
 	}
 	if v.StagingAreaTags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StagingAreaTags"))
+	}
+	if v.StorageConfiguration != nil {
+		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3699,6 +3742,11 @@ func validateOpUpdateReplicationConfigurationInput(v *UpdateReplicationConfigura
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
 	}
+	if v.StorageConfiguration != nil {
+		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3713,6 +3761,11 @@ func validateOpUpdateReplicationConfigurationTemplateInput(v *UpdateReplicationC
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateReplicationConfigurationTemplateInput"}
 	if v.ReplicationConfigurationTemplateID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigurationTemplateID"))
+	}
+	if v.StorageConfiguration != nil {
+		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

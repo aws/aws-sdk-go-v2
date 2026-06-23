@@ -38,6 +38,15 @@ type UpdateSourceServerInput struct {
 	// Update Source Server request connector action.
 	ConnectorAction *types.SourceServerConnectorAction
 
+	// Update Source Server request FQDN for action framework.
+	FqdnForActionFramework *string
+
+	// Update Source Server request platform operating system.
+	Platform *string
+
+	// Update Source Server request user provided ID.
+	UserProvidedID *string
+
 	noSmithyDocumentSerde
 }
 

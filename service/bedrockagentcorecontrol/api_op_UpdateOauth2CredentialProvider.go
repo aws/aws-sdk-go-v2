@@ -48,7 +48,8 @@ type UpdateOauth2CredentialProviderInput struct {
 
 type UpdateOauth2CredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the client secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ClientSecretArn *types.Secret
@@ -88,12 +89,13 @@ type UpdateOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
-	// The JSON key used to extract the client secret value from the AWS Secrets
-	// Manager secret.
+	// The JSON key used to extract the client secret value from the Amazon Web
+	// Services Secrets Manager secret.
 	ClientSecretJsonKey *string
 
 	// The source type of the client secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	ClientSecretSource types.SecretSourceType
 
 	// The current status of the updated OAuth2 credential provider.

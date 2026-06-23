@@ -64,6 +64,9 @@ type CreateRouterInputInput struct {
 	// A unique identifier for the request to ensure idempotency.
 	ClientToken *string
 
+	// The content quality analysis configuration for the router input.
+	ContentQualityAnalysisConfiguration types.RouterContentQualityAnalysisConfiguration
+
 	// The maintenance configuration settings for the router input, including
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration

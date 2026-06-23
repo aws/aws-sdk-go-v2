@@ -421,6 +421,8 @@ type AudioNormalizationAlgorithm string
 const (
 	AudioNormalizationAlgorithmItu17701 AudioNormalizationAlgorithm = "ITU_1770_1"
 	AudioNormalizationAlgorithmItu17702 AudioNormalizationAlgorithm = "ITU_1770_2"
+	AudioNormalizationAlgorithmItu17703 AudioNormalizationAlgorithm = "ITU_1770_3"
+	AudioNormalizationAlgorithmItu17704 AudioNormalizationAlgorithm = "ITU_1770_4"
 )
 
 // Values returns all known values for AudioNormalizationAlgorithm. Note that this
@@ -431,6 +433,8 @@ func (AudioNormalizationAlgorithm) Values() []AudioNormalizationAlgorithm {
 	return []AudioNormalizationAlgorithm{
 		"ITU_1770_1",
 		"ITU_1770_2",
+		"ITU_1770_3",
+		"ITU_1770_4",
 	}
 }
 
@@ -449,6 +453,26 @@ const (
 func (AudioNormalizationAlgorithmControl) Values() []AudioNormalizationAlgorithmControl {
 	return []AudioNormalizationAlgorithmControl{
 		"CORRECT_AUDIO",
+	}
+}
+
+type AudioNormalizationPeakCalculation string
+
+// Enum values for AudioNormalizationPeakCalculation
+const (
+	AudioNormalizationPeakCalculationNone     AudioNormalizationPeakCalculation = "NONE"
+	AudioNormalizationPeakCalculationTruePeak AudioNormalizationPeakCalculation = "TRUE_PEAK"
+)
+
+// Values returns all known values for AudioNormalizationPeakCalculation. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioNormalizationPeakCalculation) Values() []AudioNormalizationPeakCalculation {
+	return []AudioNormalizationPeakCalculation{
+		"NONE",
+		"TRUE_PEAK",
 	}
 }
 

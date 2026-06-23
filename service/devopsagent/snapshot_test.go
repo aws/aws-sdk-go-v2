@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreatePrivateConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAgentSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAgentSpace(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_DeletePrivateConnection(t *testing.T) {
 	_, err := svc.DeletePrivateConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePrivateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -367,6 +391,18 @@ func TestCheckSnapshot_GetService(t *testing.T) {
 	_, err := svc.GetService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -566,6 +602,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTriggers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTriggers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTriggers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListWebhooks(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListWebhooks(context.Background(), nil, func(o *Options) {
@@ -734,6 +782,18 @@ func TestCheckSnapshot_UpdateRecommendation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ValidateAwsAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ValidateAwsAssociations(context.Background(), nil, func(o *Options) {
@@ -829,6 +889,18 @@ func TestUpdateSnapshot_CreatePrivateConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAgentSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAgentSpace(context.Background(), nil, func(o *Options) {
@@ -870,6 +942,18 @@ func TestUpdateSnapshot_DeletePrivateConnection(t *testing.T) {
 	_, err := svc.DeletePrivateConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePrivateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1050,6 +1134,18 @@ func TestUpdateSnapshot_GetService(t *testing.T) {
 	_, err := svc.GetService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1345,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTriggers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTriggers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTriggers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListWebhooks(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListWebhooks(context.Background(), nil, func(o *Options) {
@@ -1410,6 +1518,18 @@ func TestUpdateSnapshot_UpdateRecommendation(t *testing.T) {
 	_, err := svc.UpdateRecommendation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

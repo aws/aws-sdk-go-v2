@@ -7213,6 +7213,24 @@
                             "min": 1
                         }
                     }
+                },
+                "outOfOrderTimeWindowInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time window in seconds for accepting out of order samples. Out of order samples older than this window are rejected.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ruleQueryOffsetInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the duration in seconds to offset rule evaluation queries into the past. This allows ingested samples to be available before rule evaluation.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
                 }
             },
             "traits": {
@@ -7465,6 +7483,24 @@
                         "smithy.api#documentation": "<p>This field displays how many days that metrics are retained in the workspace.</p>",
                         "smithy.api#range": {
                             "min": 1
+                        }
+                    }
+                },
+                "outOfOrderTimeWindowInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays the out of order time window in seconds for accepting out of order samples.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ruleQueryOffsetInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays the duration in seconds that rule evaluation queries are offset into the past.</p>",
+                        "smithy.api#range": {
+                            "min": 0
                         }
                     }
                 }

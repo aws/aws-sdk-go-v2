@@ -473,6 +473,29 @@ func (CustomModelDeploymentUpdateStatus) Values() []CustomModelDeploymentUpdateS
 	}
 }
 
+type DataRetentionMode string
+
+// Enum values for DataRetentionMode
+const (
+	DataRetentionModeDefault           DataRetentionMode = "default"
+	DataRetentionModeNone              DataRetentionMode = "none"
+	DataRetentionModeProviderDataShare DataRetentionMode = "provider_data_share"
+	DataRetentionModeInherit           DataRetentionMode = "inherit"
+)
+
+// Values returns all known values for DataRetentionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRetentionMode) Values() []DataRetentionMode {
+	return []DataRetentionMode{
+		"default",
+		"none",
+		"provider_data_share",
+		"inherit",
+	}
+}
+
 type EntitlementAvailability string
 
 // Enum values for EntitlementAvailability

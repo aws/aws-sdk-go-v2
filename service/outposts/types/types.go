@@ -145,6 +145,21 @@ type BlockingInstance struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of the capacity changes for a quote option.
+type CapacitySummary struct {
+
+	// The change in capacity between the existing and final state.
+	CapacityChange []QuoteCapacity
+
+	// The existing capacities on the Outpost before the quote is fulfilled.
+	ExistingCapacities []QuoteCapacity
+
+	// The final capacities on the Outpost after the quote is fulfilled.
+	FinalCapacities []QuoteCapacity
+
+	noSmithyDocumentSerde
+}
+
 // The capacity tasks that failed.
 type CapacityTaskFailure struct {
 
@@ -279,6 +294,29 @@ type ConnectionDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an instance type that can be ordered for an Outpost,
+// including hardware specifications and supported form factors.
+type DetailedInstanceTypeItem struct {
+
+	// The supported form factor and Outpost generation configurations for the
+	// instance type.
+	FormFactorConfigs []FormFactorConfig
+
+	// The instance type.
+	InstanceType *string
+
+	// The memory size of the instance type, in MiB.
+	MemoryInMib int32
+
+	// The network performance of the instance type.
+	NetworkPerformance *string
+
+	// The number of default VCPUs in the instance type.
+	VCPUs *int32
+
+	noSmithyDocumentSerde
+}
+
 // Information about EC2 capacity.
 type EC2Capacity struct {
 
@@ -290,6 +328,22 @@ type EC2Capacity struct {
 
 	//  The quantity of the EC2 capacity.
 	Quantity *string
+
+	noSmithyDocumentSerde
+}
+
+// A supported form factor and Outpost generation configuration for an instance
+// type.
+type FormFactorConfig struct {
+
+	// The form factor. Valid values are RACK for rack-based Outposts and SERVER for
+	// server-based Outposts.
+	FormFactor FormFactor
+
+	// The Outpost generation. Valid values are GENERATION_1 for first-generation rack
+	// deployments and GENERATION_2 for second-generation rack deployments. This value
+	// is not set for server form factors.
+	OutpostGeneration OutpostGeneration
 
 	noSmithyDocumentSerde
 }
@@ -423,6 +477,12 @@ type Order struct {
 	// The payment term.
 	PaymentTerm PaymentTerm
 
+	// The ID of the quote associated with the order.
+	QuoteIdentifier *string
+
+	// The ID of the quote option associated with the order.
+	QuoteOptionIdentifier *string
+
 	// The status of the order.
 	//
 	//   - PREPARING - Order is received and being prepared.
@@ -441,6 +501,69 @@ type Order struct {
 	// The following status are deprecated: RECEIVED , PENDING , PROCESSING ,
 	// INSTALLING , and FULFILLED .
 	Status OrderStatus
+
+	noSmithyDocumentSerde
+}
+
+// A requirement that must be met before an order can be submitted for a quote.
+type OrderingRequirement struct {
+
+	// The type of ordering requirement. Indicates which check failed or passed.
+	//
+	//   - OUTPOST_ACTIVE_CHECK_ERROR - The Outpost must be in an active state.
+	//
+	//   - MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR - The maximum number of allowed orders
+	//   has been reached.
+	//
+	//   - VALID_ZIP_CODE_CHECK_ERROR - The site address must have a valid zip code.
+	//
+	//   - RACK_PHYSICAL_PROPERTIES_CHECK_ERROR - The rack physical properties do not
+	//   meet requirements.
+	//
+	//   - OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR - The site must have an operating
+	//   address.
+	//
+	//   - SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR - The site must have a shipping
+	//   address.
+	//
+	//   - COUNTRY_CODE_MISMATCH_CHECK_ERROR - The country code on the quote does not
+	//   match the Outpost site country.
+	//
+	//   - OUTPOST_GENERATION_MISMATCH_ERROR - The Outpost generation does not match
+	//   the requested configuration.
+	//
+	//   - OUTPOST_ID_MISSING_ON_QUOTE_ERROR - The quote must be associated with an
+	//   Outpost before submitting an order.
+	//
+	//   - ENTERPRISE_SUPPORT_ERROR - Enterprise Support is required.
+	//
+	//   - SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR - The shipping address must have
+	//   a contact name.
+	//
+	//   - SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR - The shipping address must
+	//   have a contact phone number.
+	//
+	//   - SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR - The shipping address must have
+	//   contact information.
+	//
+	//   - OUTPOST_STATE_CHANGED_ERROR - The Outpost state has changed since the quote
+	//   was created.
+	//
+	//   - OUTPOST_NOT_FOUND_ERROR - The Outpost associated with the quote was not
+	//   found.
+	//
+	//   - OUTPOST_RENEWAL_REQUIRED_ERROR - The Outpost requires a renewal before a new
+	//   order can be submitted.
+	//
+	//   - UNSUPPORTED - The requirement type is not recognized.
+	OrderingRequirementType OrderingRequirementType
+
+	// The status of the ordering requirement. Valid values are PASS , FAIL , and
+	// EXEMPT .
+	Status OrderingRequirementStatus
+
+	// A message about the ordering requirement.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -540,6 +663,197 @@ type PricingOption struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a quote for an Outpost. A quote provides pricing and
+// configuration options based on the requested capacity.
+type Quote struct {
+
+	// The ID of the account that owns the quote.
+	AccountId *string
+
+	// The country code for the Outpost site location.
+	CountryCode *string
+
+	// The date the quote was created.
+	CreatedDate *time.Time
+
+	// The description of the quote.
+	Description *string
+
+	// The date the quote expires.
+	ExpirationDate *time.Time
+
+	// The requirements that must be met before an order can be submitted for the
+	// quote.
+	OrderingRequirements []OrderingRequirement
+
+	// The ARN of the Outpost associated with the quote.
+	OutpostArn *string
+
+	// The ID of the quote.
+	QuoteId *string
+
+	// The configuration and pricing options for the quote. Each option includes
+	// capacity details, physical specifications, and pricing information.
+	QuoteOptions []QuoteOption
+
+	// The status of the quote.
+	//
+	//   - CREATED - The quote has been created and is available for review.
+	//
+	//   - ORDER_SUBMITTED - An order has been submitted for the quote.
+	//
+	//   - EXPIRED - The quote has expired and can no longer be used to submit an order.
+	QuoteStatus QuoteStatus
+
+	// The capacity requirements specified in the quote request.
+	RequestedCapacities []QuoteCapacity
+
+	// The physical constraints specified in the quote request.
+	RequestedConstraints []QuoteConstraint
+
+	// The payment options specified in the quote request.
+	RequestedPaymentOptions []PaymentOption
+
+	// The payment terms specified in the quote request.
+	RequestedPaymentTerms []PaymentTerm
+
+	// A message about the status of the quote.
+	StatusMessage *string
+
+	// The ID of the order submitted for the quote.
+	SubmittedOrderId *string
+
+	noSmithyDocumentSerde
+}
+
+// A capacity requirement for a quote. Specifies the type of capacity, the unit,
+// and the quantity.
+type QuoteCapacity struct {
+
+	// The quantity of the specified capacity unit. For Amazon EC2, this is the number
+	// of additional instances to add to the Outpost. For Amazon EBS and Amazon S3,
+	// this is the total desired end-state capacity of the Outpost.
+	Quantity *float32
+
+	// The type of capacity. Valid values are EC2 , EBS , and S3 .
+	QuoteCapacityType QuoteCapacityType
+
+	// The unit of measurement for the capacity. For Amazon EC2, this is the instance
+	// type (for example, c5.24xlarge ). For Amazon EBS and Amazon S3, this is the
+	// storage unit (for example, TiB for tebibytes).
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+// A physical constraint for a quote.
+type QuoteConstraint struct {
+
+	// The type of constraint. Valid values are RACK_MAXIMUM , RACK_MAX_POWER_KVA , and
+	// RACK_MAX_WEIGHT_LBS .
+	QuoteConstraintType QuoteConstraintType
+
+	// The value of the constraint.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A configuration and pricing option for a quote. Each option includes the
+// capacity breakdown, physical specifications for the racks or servers, and
+// pricing details.
+type QuoteOption struct {
+
+	// The capacities included in this quote option.
+	Capacities []QuoteCapacity
+
+	// A summary of the existing, final, and changed capacity for this quote option.
+	CapacitySummary *CapacitySummary
+
+	// The pricing options for this quote option.
+	PricingOptions []PricingOption
+
+	// The ID of the quote option.
+	QuoteOptionIdentifier *string
+
+	// The physical specifications for the racks or servers in this quote option.
+	Specifications []QuoteSpecification
+
+	noSmithyDocumentSerde
+}
+
+// A physical specification for a quote option. Describes the rack or server
+// configuration that would be deployed.
+type QuoteSpecification struct {
+
+	// The existing rack specification details, if the specification type is
+	// UPDATED_RACK or EXISTING_RACK .
+	ExistingRackSpecificationDetails *RackSpecificationDetails
+
+	// The final rack specification details after the quote is fulfilled.
+	FinalRackSpecificationDetails *RackSpecificationDetails
+
+	// The type of specification. Valid values are NEW_RACK , UPDATED_RACK ,
+	// EXISTING_RACK , and SERVER .
+	QuoteSpecificationType QuoteSpecificationType
+
+	// The server specification details, if the specification type is SERVER .
+	ServerSpecificationDetails *ServerSpecificationDetails
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a quote.
+type QuoteSummary struct {
+
+	// The ID of the account that owns the quote.
+	AccountId *string
+
+	// The country code for the Outpost site location.
+	CountryCode *string
+
+	// The date the quote was created.
+	CreatedDate *time.Time
+
+	// The description of the quote.
+	Description *string
+
+	// The date the quote expires.
+	ExpirationDate *time.Time
+
+	// The ARN of the Outpost associated with the quote.
+	OutpostArn *string
+
+	// The ID of the quote.
+	QuoteId *string
+
+	// The configuration and pricing options for the quote.
+	QuoteOptions []QuoteOption
+
+	// The status of the quote.
+	QuoteStatus QuoteStatus
+
+	// The capacity requirements specified in the quote request.
+	RequestedCapacities []QuoteCapacity
+
+	// The physical constraints specified in the quote request.
+	RequestedConstraints []QuoteConstraint
+
+	// The payment options specified in the quote request.
+	RequestedPaymentOptions []PaymentOption
+
+	// The payment terms specified in the quote request.
+	RequestedPaymentTerms []PaymentTerm
+
+	// A message about the status of the quote.
+	StatusMessage *string
+
+	// The ID of the order submitted for the quote.
+	SubmittedOrderId *string
+
+	noSmithyDocumentSerde
+}
+
 //	Information about the physical and logistical details for racks at sites. For
 //
 // more information about hardware requirements for racks, see [Network readiness checklist]in the Amazon Web
@@ -580,6 +894,76 @@ type RackPhysicalProperties struct {
 
 	// The uplink speed the rack supports for the connection to the Region.
 	UplinkGbps UplinkGbps
+
+	noSmithyDocumentSerde
+}
+
+// The physical specification details for a rack in a quote option.
+type RackSpecificationDetails struct {
+
+	// The Amazon EC2 capacities for the rack.
+	EC2Capacities []EC2Capacity
+
+	// The depth of the rack in inches.
+	RackDepthInches *float32
+
+	// The height of the rack in inches.
+	RackHeightInches *float32
+
+	// The ID of the rack.
+	RackId *string
+
+	// The maximum power draw of the rack in kVA.
+	RackPowerDrawKva *float32
+
+	// The rack unit height.
+	//
+	//   - HEIGHT_42U - 42 rack units.
+	//
+	//   - HEIGHT_2U - 2 rack units.
+	//
+	//   - HEIGHT_1U - 1 rack unit.
+	RackUnitHeight RackUnitHeight
+
+	// The use of the rack. Valid values are COMPUTE and NETWORKING .
+	RackUse QuoteRackUseType
+
+	// The weight of the rack in pounds.
+	RackWeightLbs *float32
+
+	// The width of the rack in inches.
+	RackWidthInches *float32
+
+	noSmithyDocumentSerde
+}
+
+// The physical specification details for a server in a quote option.
+type ServerSpecificationDetails struct {
+
+	// The Amazon EC2 capacities for the server.
+	EC2Capacities []EC2Capacity
+
+	// The rack unit height of the server.
+	//
+	//   - HEIGHT_2U - 2 rack units.
+	//
+	//   - HEIGHT_1U - 1 rack unit.
+	RackUnitHeight RackUnitHeight
+
+	// The depth of the server in inches.
+	ServerDepthInches *float32
+
+	// The height of the server in inches.
+	ServerHeightInches *float32
+
+	// The maximum power draw of the server in kVA.
+	ServerPowerDrawKva *float32
+
+	// The weight of the server in pounds.
+	ServerWeightLbs *float32
+
+	// The width of the server in inches.
+	ServerWidthInches *float32
 
 	noSmithyDocumentSerde
 }
@@ -642,6 +1026,9 @@ type Subscription struct {
 	// The date your subscription starts.
 	BeginDate *time.Time
 
+	// The currency of the subscription price. Currently only USD is supported.
+	Currency CurrencyCode
+
 	// The date your subscription ends.
 	EndDate *time.Time
 
@@ -685,6 +1072,9 @@ type Subscription struct {
 
 // The pricing details for a subscription.
 type SubscriptionPricingDetails struct {
+
+	// The currency of the price. Currently only USD is supported.
+	Currency CurrencyCode
 
 	// The monthly recurring price.
 	MonthlyRecurringPrice *float32

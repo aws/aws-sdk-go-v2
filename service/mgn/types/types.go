@@ -430,6 +430,22 @@ type ExportTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+// FSx for ONTAP storage configuration.
+type FsxOntapConfiguration struct {
+
+	// FSx ONTAP configuration credentials secret ARN.
+	//
+	// This member is required.
+	CredentialsSecretArn *string
+
+	// FSx ONTAP configuration storage virtual machine ID.
+	//
+	// This member is required.
+	StorageVirtualMachineId *string
+
+	noSmithyDocumentSerde
+}
+
 // Identification hints.
 type IdentificationHints struct {
 
@@ -700,6 +716,27 @@ type JobPostLaunchActionsLaunchStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Last known check performed on a launched instance.
+type LastKnownCheck struct {
+
+	// Last known check timestamp.
+	CheckedAt *time.Time
+
+	// Last known check error.
+	Error *string
+
+	// Last known check name.
+	Name *string
+
+	// Last known check status.
+	Status LastKnownCheckStatus
+
+	// Last known check type.
+	Type LastKnownCheckType
+
+	noSmithyDocumentSerde
+}
+
 type LaunchConfigurationTemplate struct {
 
 	// ID of the Launch Configuration Template.
@@ -775,6 +812,12 @@ type LaunchedInstance struct {
 
 	// Launched instance Job ID.
 	JobID *string
+
+	// Launched instance last known checks.
+	LastKnownChecks []LastKnownCheck
+
+	// Launched instance last known FSx checks status.
+	LastKnownFsxChecksStatus LastKnownCheckStatus
 
 	noSmithyDocumentSerde
 }
@@ -1752,6 +1795,9 @@ type ReplicationConfigurationTemplate struct {
 	// Replication Configuration template Staging Area Tags.
 	StagingAreaTags map[string]string
 
+	// Replication Configuration template storage configuration.
+	StorageConfiguration *StorageConfiguration
+
 	// Replication Configuration template store snapshot on local zone.
 	StoreSnapshotOnLocalZone *bool
 
@@ -2095,6 +2141,20 @@ type StartNetworkMigrationMappingUpdateSegment struct {
 
 	// The updated target AWS account for the segment.
 	TargetAccount *string
+
+	noSmithyDocumentSerde
+}
+
+// Storage configuration for replication.
+type StorageConfiguration struct {
+
+	// Storage configuration storage type.
+	//
+	// This member is required.
+	StorageType StorageType
+
+	// Storage configuration FSx ONTAP configuration.
+	FsxOntapConfiguration *FsxOntapConfiguration
 
 	noSmithyDocumentSerde
 }

@@ -128,8 +128,8 @@ type GetMetricDataV2Input struct {
 	//   contact/segmentAttributes/connect:Subtype filter key.
 	//
 	//   - ROUTING_STEP_EXPRESSION accepts a filter value up to 3,000 characters in
-	//   length. This filter is case-sensitive and order-sensitive. JSON string fields
-	//   must be sorted in ascending order, and JSON array order must be preserved.
+	//   length. Filter values are case-sensitive. JSON object key order and whitespace
+	//   may be arbitrary; array order and tree structure must be preserved.
 	//
 	//   - TRUE and FALSE are the only valid filter values for the Q_CONNECT_ENABLED
 	//   filter key.

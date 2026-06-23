@@ -39,6 +39,10 @@ type UpdateApplicationInput struct {
 	// The data sources to associate with the OpenSearch application.
 	DataSources []types.DataSource
 
+	// Configuration settings for integrating IAM Identity Center with the OpenSearch
+	// application.
+	IamIdentityCenterOptions *types.IamIdentityCenterOptionsInput
+
 	noSmithyDocumentSerde
 }
 

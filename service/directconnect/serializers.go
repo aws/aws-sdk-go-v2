@@ -3941,6 +3941,11 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.Integer(*v.Mtu)
 	}
 
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -4005,6 +4010,11 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterfaceAllocation(v *types
 		ok.Integer(*v.Mtu)
 	}
 
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -4057,6 +4067,11 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterface(v *types.NewPublicV
 	if v.CustomerAddress != nil {
 		ok := object.Key("customerAddress")
 		ok.String(*v.CustomerAddress)
+	}
+
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
 	}
 
 	if v.RouteFilterPrefixes != nil {
@@ -4118,6 +4133,11 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterfaceAllocation(v *types.
 	if v.CustomerAddress != nil {
 		ok := object.Key("customerAddress")
 		ok.String(*v.CustomerAddress)
+	}
+
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
 	}
 
 	if v.RouteFilterPrefixes != nil {
@@ -4196,6 +4216,11 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterface(v *types.NewTransi
 		ok.Integer(*v.Mtu)
 	}
 
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -4253,6 +4278,11 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterfaceAllocation(v *types
 	if v.Mtu != nil {
 		ok := object.Key("mtu")
 		ok.Integer(*v.Mtu)
+	}
+
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
 	}
 
 	if v.Tags != nil {
@@ -5705,6 +5735,11 @@ func awsAwsjson11_serializeOpDocumentUpdateVirtualInterfaceAttributesInput(v *Up
 	if v.Mtu != nil {
 		ok := object.Key("mtu")
 		ok.Integer(*v.Mtu)
+	}
+
+	if v.RateLimit != nil {
+		ok := object.Key("rateLimit")
+		ok.String(*v.RateLimit)
 	}
 
 	if v.VirtualInterfaceId != nil {

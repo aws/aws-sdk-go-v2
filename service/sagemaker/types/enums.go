@@ -588,6 +588,12 @@ const (
 	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
 	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
 	AppInstanceTypeMlP54xlarge             AppInstanceType = "ml.p5.4xlarge"
+	AppInstanceTypeMlG7e2xlarge            AppInstanceType = "ml.g7e.2xlarge"
+	AppInstanceTypeMlG7e4xlarge            AppInstanceType = "ml.g7e.4xlarge"
+	AppInstanceTypeMlG7e8xlarge            AppInstanceType = "ml.g7e.8xlarge"
+	AppInstanceTypeMlG7e12xlarge           AppInstanceType = "ml.g7e.12xlarge"
+	AppInstanceTypeMlG7e24xlarge           AppInstanceType = "ml.g7e.24xlarge"
+	AppInstanceTypeMlG7e48xlarge           AppInstanceType = "ml.g7e.48xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -760,6 +766,12 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
 		"ml.p5.4xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 	}
 }
 
@@ -2141,8 +2153,10 @@ type ClusterImageVersionStatus string
 
 // Enum values for ClusterImageVersionStatus
 const (
-	ClusterImageVersionStatusUpToDate        ClusterImageVersionStatus = "UpToDate"
-	ClusterImageVersionStatusUpdateAvailable ClusterImageVersionStatus = "UpdateAvailable"
+	ClusterImageVersionStatusUpToDate               ClusterImageVersionStatus = "UpToDate"
+	ClusterImageVersionStatusUpdateAvailable        ClusterImageVersionStatus = "UpdateAvailable"
+	ClusterImageVersionStatusSecurityUpdateRequired ClusterImageVersionStatus = "SecurityUpdateRequired"
+	ClusterImageVersionStatusEndOfLife              ClusterImageVersionStatus = "EndOfLife"
 )
 
 // Values returns all known values for ClusterImageVersionStatus. Note that this
@@ -2153,6 +2167,8 @@ func (ClusterImageVersionStatus) Values() []ClusterImageVersionStatus {
 	return []ClusterImageVersionStatus{
 		"UpToDate",
 		"UpdateAvailable",
+		"SecurityUpdateRequired",
+		"EndOfLife",
 	}
 }
 
@@ -2520,6 +2536,25 @@ func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
 	return []ClusterNodeRecovery{
 		"Automatic",
 		"None",
+	}
+}
+
+type ClusterPatchingStrategy string
+
+// Enum values for ClusterPatchingStrategy
+const (
+	ClusterPatchingStrategyWhenIdle    ClusterPatchingStrategy = "WhenIdle"
+	ClusterPatchingStrategyWhenAllIdle ClusterPatchingStrategy = "WhenAllIdle"
+)
+
+// Values returns all known values for ClusterPatchingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterPatchingStrategy) Values() []ClusterPatchingStrategy {
+	return []ClusterPatchingStrategy{
+		"WhenIdle",
+		"WhenAllIdle",
 	}
 }
 
@@ -4523,6 +4558,14 @@ const (
 	InstanceTypeMlG648xlarge     InstanceType = "ml.g6.48xlarge"
 	InstanceTypeMlP54xlarge      InstanceType = "ml.p5.4xlarge"
 	InstanceTypeMlP5en48xlarge   InstanceType = "ml.p5en.48xlarge"
+	InstanceTypeMlG6eXlarge      InstanceType = "ml.g6e.xlarge"
+	InstanceTypeMlG6e2xlarge     InstanceType = "ml.g6e.2xlarge"
+	InstanceTypeMlG6e4xlarge     InstanceType = "ml.g6e.4xlarge"
+	InstanceTypeMlG6e8xlarge     InstanceType = "ml.g6e.8xlarge"
+	InstanceTypeMlG6e12xlarge    InstanceType = "ml.g6e.12xlarge"
+	InstanceTypeMlG6e16xlarge    InstanceType = "ml.g6e.16xlarge"
+	InstanceTypeMlG6e24xlarge    InstanceType = "ml.g6e.24xlarge"
+	InstanceTypeMlG6e48xlarge    InstanceType = "ml.g6e.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4706,6 +4749,14 @@ func (InstanceType) Values() []InstanceType {
 		"ml.g6.48xlarge",
 		"ml.p5.4xlarge",
 		"ml.p5en.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 	}
 }
 

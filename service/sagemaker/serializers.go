@@ -27016,6 +27016,32 @@ func awsAwsjson11_serializeDocumentClarifyTextConfig(v *types.ClarifyTextConfig,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterAutoPatchConfig(v *types.ClusterAutoPatchConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeploymentConfig != nil {
+		ok := object.Key("DeploymentConfig")
+		if err := awsAwsjson11_serializeDocumentDeploymentConfiguration(v.DeploymentConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PatchingStrategy) > 0 {
+		ok := object.Key("PatchingStrategy")
+		ok.String(string(v.PatchingStrategy))
+	}
+
+	if v.PatchSchedule != nil {
+		ok := object.Key("PatchSchedule")
+		if err := awsAwsjson11_serializeDocumentClusterPatchSchedule(v.PatchSchedule, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterAutoScalingConfig(v *types.ClusterAutoScalingConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27130,6 +27156,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoPatchConfig != nil {
+		ok := object.Key("AutoPatchConfig")
+		if err := awsAwsjson11_serializeDocumentClusterAutoPatchConfig(v.AutoPatchConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CapacityRequirements != nil {
 		ok := object.Key("CapacityRequirements")
 		if err := awsAwsjson11_serializeDocumentClusterCapacityRequirements(v.CapacityRequirements, ok); err != nil {
@@ -27145,6 +27178,11 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 	if v.ImageId != nil {
 		ok := object.Key("ImageId")
 		ok.String(*v.ImageId)
+	}
+
+	if v.ImageReleaseVersion != nil {
+		ok := object.Key("ImageReleaseVersion")
+		ok.String(*v.ImageReleaseVersion)
 	}
 
 	if v.InstanceCount != nil {
@@ -27521,6 +27559,18 @@ func awsAwsjson11_serializeDocumentClusterPartitionNames(v []string, value smith
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterPatchSchedule(v *types.ClusterPatchSchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NextPatchDate != nil {
+		ok := object.Key("NextPatchDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.NextPatchDate))
+	}
+
 	return nil
 }
 
@@ -28058,6 +28108,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.String(*v.ContainerHostname)
 	}
 
+	if v.ContainerMetricsConfig != nil {
+		ok := object.Key("ContainerMetricsConfig")
+		if err := awsAwsjson11_serializeDocumentContainerMetricsConfig(v.ContainerMetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Environment != nil {
 		ok := object.Key("Environment")
 		if err := awsAwsjson11_serializeDocumentEnvironmentMap(v.Environment, ok); err != nil {
@@ -28135,6 +28192,20 @@ func awsAwsjson11_serializeDocumentContainerEntrypoint(v []string, value smithyj
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentContainerMetricsConfig(v *types.ContainerMetricsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricsEndpoints != nil {
+		ok := object.Key("MetricsEndpoints")
+		if err := awsAwsjson11_serializeDocumentMetricsEndpointList(v.MetricsEndpoints, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31260,6 +31331,13 @@ func awsAwsjson11_serializeDocumentInferenceComponentContainerSpecification(v *t
 		ok.String(*v.ArtifactUrl)
 	}
 
+	if v.ContainerMetricsConfig != nil {
+		ok := object.Key("ContainerMetricsConfig")
+		if err := awsAwsjson11_serializeDocumentContainerMetricsConfig(v.ContainerMetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Environment != nil {
 		ok := object.Key("Environment")
 		if err := awsAwsjson11_serializeDocumentEnvironmentMap(v.Environment, ok); err != nil {
@@ -32351,6 +32429,11 @@ func awsAwsjson11_serializeDocumentMetricsConfig(v *types.MetricsConfig, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableDetailedObservability != nil {
+		ok := object.Key("EnableDetailedObservability")
+		ok.Boolean(*v.EnableDetailedObservability)
+	}
+
 	if v.EnableEnhancedMetrics != nil {
 		ok := object.Key("EnableEnhancedMetrics")
 		ok.Boolean(*v.EnableEnhancedMetrics)
@@ -32361,6 +32444,36 @@ func awsAwsjson11_serializeDocumentMetricsConfig(v *types.MetricsConfig, value s
 		ok.Integer(v.MetricPublishFrequencyInSeconds)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricsEndpoint(v *types.MetricsEndpoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricPublishFrequencyInSeconds != 0 {
+		ok := object.Key("MetricPublishFrequencyInSeconds")
+		ok.Integer(v.MetricPublishFrequencyInSeconds)
+	}
+
+	if v.MetricsEndpointPath != nil {
+		ok := object.Key("MetricsEndpointPath")
+		ok.String(*v.MetricsEndpointPath)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricsEndpointList(v []types.MetricsEndpoint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMetricsEndpoint(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -38329,6 +38442,11 @@ func awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroups(v []types
 func awsAwsjson11_serializeDocumentUpdateClusterSoftwareInstanceGroupSpecification(v *types.UpdateClusterSoftwareInstanceGroupSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ImageReleaseVersion != nil {
+		ok := object.Key("ImageReleaseVersion")
+		ok.String(*v.ImageReleaseVersion)
+	}
 
 	if v.InstanceGroupName != nil {
 		ok := object.Key("InstanceGroupName")

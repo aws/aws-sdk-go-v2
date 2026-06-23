@@ -2623,6 +2623,15 @@ func awsRestjson1_deserializeOpDocumentQueryVectorsOutput(v **QueryVectorsOutput
 				sv.DistanceMetric = types.DistanceMetric(jtv)
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryVectorsNextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		case "vectors":
 			if err := awsRestjson1_deserializeDocumentQueryVectorsOutputList(&sv.Vectors, value); err != nil {
 				return err

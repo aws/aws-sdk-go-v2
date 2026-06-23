@@ -476,6 +476,9 @@ func awsAwsjson11_deserializeOpErrorAllocatePrivateVirtualInterface(response *sm
 	case strings.EqualFold("DuplicateTagKeysException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
@@ -595,6 +598,9 @@ func awsAwsjson11_deserializeOpErrorAllocatePublicVirtualInterface(response *smi
 
 	case strings.EqualFold("DuplicateTagKeysException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
@@ -716,6 +722,9 @@ func awsAwsjson11_deserializeOpErrorAllocateTransitVirtualInterface(response *sm
 	case strings.EqualFold("DuplicateTagKeysException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
@@ -832,6 +841,9 @@ func awsAwsjson11_deserializeOpErrorAssociateConnectionWithLag(response *smithyh
 
 	case strings.EqualFold("DirectConnectServerException", errorCode):
 		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2678,6 +2690,9 @@ func awsAwsjson11_deserializeOpErrorCreatePrivateVirtualInterface(response *smit
 	case strings.EqualFold("DuplicateTagKeysException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
@@ -2798,6 +2813,9 @@ func awsAwsjson11_deserializeOpErrorCreatePublicVirtualInterface(response *smith
 	case strings.EqualFold("DuplicateTagKeysException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
@@ -2917,6 +2935,9 @@ func awsAwsjson11_deserializeOpErrorCreateTransitVirtualInterface(response *smit
 
 	case strings.EqualFold("DuplicateTagKeysException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
@@ -7374,6 +7395,41 @@ func awsAwsjson11_deserializeErrorDuplicateTagKeysException(response *smithyhttp
 	return output
 }
 
+func awsAwsjson11_deserializeErrorLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.LimitExceededException{}
+	err := awsAwsjson11_deserializeDocumentLimitExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorTooManyTagsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -8051,6 +8107,11 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
 				sv.ProviderName = ptr.String(jtv)
+			}
+
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
 			}
 
 		case "region":
@@ -9244,6 +9305,11 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9298,6 +9364,46 @@ func awsAwsjson11_deserializeDocumentLagList(v *[]types.Lag, value interface{}) 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LimitExceededException
+	if *v == nil {
+		sv = &types.LimitExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -9595,6 +9701,85 @@ func awsAwsjson11_deserializeDocumentProviderList(v *[]string, value interface{}
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimiterStatus(v **types.RateLimiterStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimiterStatus
+	if *v == nil {
+		sv = &types.RateLimiterStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inUse":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Count to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InUse = int32(i64)
+			}
+
+		case "maxAllowed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Count to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAllowed = int32(i64)
+			}
+
+		case "remaining":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Count to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Remaining = int32(i64)
+			}
+
+		case "totalBandwidth":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
+				}
+				sv.TotalBandwidth = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -10229,6 +10414,15 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10750,6 +10944,11 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10991,6 +11190,11 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11212,6 +11416,15 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11494,6 +11707,15 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11832,6 +12054,11 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12071,6 +12298,11 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
 				sv.ProviderName = ptr.String(jtv)
+			}
+
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
 			}
 
 		case "region":
@@ -12339,6 +12571,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
 			}
 
 		case "region":
@@ -12875,6 +13116,11 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
 				sv.ProviderName = ptr.String(jtv)
+			}
+
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
 			}
 
 		case "region":
@@ -13415,6 +13661,11 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13623,6 +13874,15 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
 			}
 
 		case "region":
@@ -13905,6 +14165,15 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
 			}
 
 		case "region":
@@ -14277,6 +14546,11 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
 				sv.ProviderName = ptr.String(jtv)
+			}
+
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
 			}
 
 		case "region":
@@ -14654,6 +14928,11 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
 				sv.ProviderName = ptr.String(jtv)
+			}
+
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
 			}
 
 		case "region":
@@ -15715,6 +15994,11 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16180,6 +16464,11 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16481,6 +16770,11 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				sv.ProviderName = ptr.String(jtv)
 			}
 
+		case "rateLimiterStatus":
+			if err := awsAwsjson11_deserializeDocumentRateLimiterStatus(&sv.RateLimiterStatus, value); err != nil {
+				return err
+			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16689,6 +16983,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "rateLimit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RateLimit to be of type string, got %T instead", value)
+				}
+				sv.RateLimit = ptr.String(jtv)
 			}
 
 		case "region":

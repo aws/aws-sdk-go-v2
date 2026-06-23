@@ -34,6 +34,9 @@ type CreateFHIRDatastoreInput struct {
 	// This member is required.
 	DatastoreTypeVersion types.FHIRVersion
 
+	// The analytics configuration for the data store.
+	AnalyticsConfiguration *types.AnalyticsConfiguration
+
 	// An optional user-provided token to ensure API idempotency.
 	ClientToken *string
 
@@ -43,9 +46,15 @@ type CreateFHIRDatastoreInput struct {
 	// The identity provider configuration to use for the data store.
 	IdentityProviderConfiguration *types.IdentityProviderConfiguration
 
+	// The natural language processing (NLP) configuration for the data store.
+	NlpConfiguration *types.NlpConfiguration
+
 	// An optional parameter to preload (import) open source Synthea FHIR data upon
 	// creation of the data store.
 	PreloadDataConfig *types.PreloadDataConfig
+
+	// The profile configuration for the data store.
+	ProfileConfiguration *types.ProfileConfiguration
 
 	// The server-side encryption key configuration for a customer-provided encryption
 	// key specified for creating a data store.

@@ -296,19 +296,20 @@ type IpAddressStatus string
 
 // Enum values for IpAddressStatus
 const (
-	IpAddressStatusCreating               IpAddressStatus = "CREATING"
-	IpAddressStatusFailedCreation         IpAddressStatus = "FAILED_CREATION"
-	IpAddressStatusAttaching              IpAddressStatus = "ATTACHING"
-	IpAddressStatusAttached               IpAddressStatus = "ATTACHED"
-	IpAddressStatusRemapDetaching         IpAddressStatus = "REMAP_DETACHING"
-	IpAddressStatusRemapAttaching         IpAddressStatus = "REMAP_ATTACHING"
-	IpAddressStatusDetaching              IpAddressStatus = "DETACHING"
-	IpAddressStatusFailedResourceGone     IpAddressStatus = "FAILED_RESOURCE_GONE"
-	IpAddressStatusDeleting               IpAddressStatus = "DELETING"
-	IpAddressStatusDeleteFailedFasExpired IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
-	IpAddressStatusUpdating               IpAddressStatus = "UPDATING"
-	IpAddressStatusUpdateFailed           IpAddressStatus = "UPDATE_FAILED"
-	IpAddressStatusIsolated               IpAddressStatus = "ISOLATED"
+	IpAddressStatusCreating                                       IpAddressStatus = "CREATING"
+	IpAddressStatusFailedCreation                                 IpAddressStatus = "FAILED_CREATION"
+	IpAddressStatusFailedCreationInsufficientEC2CapacityInOutpost IpAddressStatus = "FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST"
+	IpAddressStatusAttaching                                      IpAddressStatus = "ATTACHING"
+	IpAddressStatusAttached                                       IpAddressStatus = "ATTACHED"
+	IpAddressStatusRemapDetaching                                 IpAddressStatus = "REMAP_DETACHING"
+	IpAddressStatusRemapAttaching                                 IpAddressStatus = "REMAP_ATTACHING"
+	IpAddressStatusDetaching                                      IpAddressStatus = "DETACHING"
+	IpAddressStatusFailedResourceGone                             IpAddressStatus = "FAILED_RESOURCE_GONE"
+	IpAddressStatusDeleting                                       IpAddressStatus = "DELETING"
+	IpAddressStatusDeleteFailedFasExpired                         IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
+	IpAddressStatusUpdating                                       IpAddressStatus = "UPDATING"
+	IpAddressStatusUpdateFailed                                   IpAddressStatus = "UPDATE_FAILED"
+	IpAddressStatusIsolated                                       IpAddressStatus = "ISOLATED"
 )
 
 // Values returns all known values for IpAddressStatus. Note that this can be
@@ -319,6 +320,7 @@ func (IpAddressStatus) Values() []IpAddressStatus {
 	return []IpAddressStatus{
 		"CREATING",
 		"FAILED_CREATION",
+		"FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST",
 		"ATTACHING",
 		"ATTACHED",
 		"REMAP_DETACHING",

@@ -54,6 +54,10 @@ type UpdateCodeReviewInput struct {
 	// The updated title of the code review.
 	Title *string
 
+	// The updated validation mode for the code review. Valid values are SIMULATED and
+	// DISABLED.
+	ValidationMode types.ValidationMode
+
 	noSmithyDocumentSerde
 }
 
@@ -88,6 +92,9 @@ type UpdateCodeReviewOutput struct {
 
 	// The date and time the code review was last updated, in UTC format.
 	UpdatedAt *time.Time
+
+	// The validation mode for the code review.
+	ValidationMode types.ValidationMode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

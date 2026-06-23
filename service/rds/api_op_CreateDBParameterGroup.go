@@ -65,6 +65,8 @@ type CreateDBParameterGroupInput struct {
 	//
 	//   - db2-ae
 	//
+	//   - db2-ce
+	//
 	//   - db2-se
 	//
 	//   - mysql

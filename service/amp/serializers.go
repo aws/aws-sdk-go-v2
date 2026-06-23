@@ -3885,9 +3885,19 @@ func awsRestjson1_serializeOpDocumentUpdateWorkspaceConfigurationInput(v *Update
 		}
 	}
 
+	if v.OutOfOrderTimeWindowInSeconds != nil {
+		ok := object.Key("outOfOrderTimeWindowInSeconds")
+		ok.Integer(*v.OutOfOrderTimeWindowInSeconds)
+	}
+
 	if v.RetentionPeriodInDays != nil {
 		ok := object.Key("retentionPeriodInDays")
 		ok.Integer(*v.RetentionPeriodInDays)
+	}
+
+	if v.RuleQueryOffsetInSeconds != nil {
+		ok := object.Key("ruleQueryOffsetInSeconds")
+		ok.Integer(*v.RuleQueryOffsetInSeconds)
 	}
 
 	return nil

@@ -54,8 +54,9 @@ type AgentAction string
 
 // Enum values for AgentAction
 const (
-	AgentActionComputerVision AgentAction = "COMPUTER_VISION"
-	AgentActionComputerInput  AgentAction = "COMPUTER_INPUT"
+	AgentActionComputerVision  AgentAction = "COMPUTER_VISION"
+	AgentActionComputerInput   AgentAction = "COMPUTER_INPUT"
+	AgentActionForwardMcpTools AgentAction = "FORWARD_MCP_TOOLS"
 )
 
 // Values returns all known values for AgentAction. Note that this can be expanded
@@ -66,6 +67,7 @@ func (AgentAction) Values() []AgentAction {
 	return []AgentAction{
 		"COMPUTER_VISION",
 		"COMPUTER_INPUT",
+		"FORWARD_MCP_TOOLS",
 	}
 }
 
@@ -1072,6 +1074,27 @@ const (
 func (UsageReportSchedule) Values() []UsageReportSchedule {
 	return []UsageReportSchedule{
 		"DAILY",
+	}
+}
+
+type UserControlMode string
+
+// Enum values for UserControlMode
+const (
+	UserControlModeViewOnly UserControlMode = "VIEW_ONLY"
+	UserControlModeViewStop UserControlMode = "VIEW_STOP"
+	UserControlModeDisabled UserControlMode = "DISABLED"
+)
+
+// Values returns all known values for UserControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserControlMode) Values() []UserControlMode {
+	return []UserControlMode{
+		"VIEW_ONLY",
+		"VIEW_STOP",
+		"DISABLED",
 	}
 }
 

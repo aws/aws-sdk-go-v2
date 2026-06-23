@@ -109,10 +109,12 @@ type CRAllocationStrategy string
 
 // Enum values for CRAllocationStrategy
 const (
-	CRAllocationStrategyBestFit                    CRAllocationStrategy = "BEST_FIT"
-	CRAllocationStrategyBestFitProgressive         CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRAllocationStrategySpotCapacityOptimized      CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
-	CRAllocationStrategySpotPriceCapacityOptimized CRAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRAllocationStrategyBestFit                          CRAllocationStrategy = "BEST_FIT"
+	CRAllocationStrategyBestFitProgressive               CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRAllocationStrategyBestFitProgressiveOrdered        CRAllocationStrategy = "BEST_FIT_PROGRESSIVE_ORDERED"
+	CRAllocationStrategySpotCapacityOptimized            CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRAllocationStrategySpotPriceCapacityOptimized       CRAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRAllocationStrategySpotCapacityOptimizedPrioritized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED"
 )
 
 // Values returns all known values for CRAllocationStrategy. Note that this can be
@@ -123,8 +125,10 @@ func (CRAllocationStrategy) Values() []CRAllocationStrategy {
 	return []CRAllocationStrategy{
 		"BEST_FIT",
 		"BEST_FIT_PROGRESSIVE",
+		"BEST_FIT_PROGRESSIVE_ORDERED",
 		"SPOT_CAPACITY_OPTIMIZED",
 		"SPOT_PRICE_CAPACITY_OPTIMIZED",
+		"SPOT_CAPACITY_OPTIMIZED_PRIORITIZED",
 	}
 }
 
@@ -155,9 +159,11 @@ type CRUpdateAllocationStrategy string
 
 // Enum values for CRUpdateAllocationStrategy
 const (
-	CRUpdateAllocationStrategyBestFitProgressive         CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRUpdateAllocationStrategySpotCapacityOptimized      CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
-	CRUpdateAllocationStrategySpotPriceCapacityOptimized CRUpdateAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategyBestFitProgressive               CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRUpdateAllocationStrategyBestFitProgressiveOrdered        CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE_ORDERED"
+	CRUpdateAllocationStrategySpotCapacityOptimized            CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategySpotPriceCapacityOptimized       CRUpdateAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategySpotCapacityOptimizedPrioritized CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED"
 )
 
 // Values returns all known values for CRUpdateAllocationStrategy. Note that this
@@ -167,8 +173,10 @@ const (
 func (CRUpdateAllocationStrategy) Values() []CRUpdateAllocationStrategy {
 	return []CRUpdateAllocationStrategy{
 		"BEST_FIT_PROGRESSIVE",
+		"BEST_FIT_PROGRESSIVE_ORDERED",
 		"SPOT_CAPACITY_OPTIMIZED",
 		"SPOT_PRICE_CAPACITY_OPTIMIZED",
+		"SPOT_CAPACITY_OPTIMIZED_PRIORITIZED",
 	}
 }
 

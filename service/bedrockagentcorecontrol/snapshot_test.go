@@ -242,6 +242,18 @@ func TestCheckSnapshot_CreateHarness(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHarnessEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMemory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMemory(context.Background(), nil, func(o *Options) {
@@ -535,6 +547,18 @@ func TestCheckSnapshot_DeleteHarness(t *testing.T) {
 	_, err := svc.DeleteHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -847,6 +871,18 @@ func TestCheckSnapshot_GetHarness(t *testing.T) {
 	_, err := svc.GetHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1250,11 +1286,35 @@ func TestCheckSnapshot_ListGatewayTargets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListHarnessEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHarnessEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListHarnesses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHarnesses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListHarnesses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHarnessVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHarnessVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1682,6 +1742,18 @@ func TestCheckSnapshot_UpdateHarness(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHarnessEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMemory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMemory(context.Background(), nil, func(o *Options) {
@@ -2005,6 +2077,18 @@ func TestUpdateSnapshot_CreateHarness(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHarnessEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMemory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMemory(context.Background(), nil, func(o *Options) {
@@ -2298,6 +2382,18 @@ func TestUpdateSnapshot_DeleteHarness(t *testing.T) {
 	_, err := svc.DeleteHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2610,6 +2706,18 @@ func TestUpdateSnapshot_GetHarness(t *testing.T) {
 	_, err := svc.GetHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3013,11 +3121,35 @@ func TestUpdateSnapshot_ListGatewayTargets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListHarnessEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHarnessEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListHarnesses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHarnesses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListHarnesses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHarnessVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHarnessVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3438,6 +3570,18 @@ func TestUpdateSnapshot_UpdateHarness(t *testing.T) {
 	_, err := svc.UpdateHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

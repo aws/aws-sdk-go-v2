@@ -513,6 +513,7 @@ const (
 	LastUpdateStatusReasonCodeInvalidRuntime                       LastUpdateStatusReasonCode = "InvalidRuntime"
 	LastUpdateStatusReasonCodeInvalidZipFileException              LastUpdateStatusReasonCode = "InvalidZipFileException"
 	LastUpdateStatusReasonCodeFunctionError                        LastUpdateStatusReasonCode = "FunctionError"
+	LastUpdateStatusReasonCodeServiceQuotaExceededException        LastUpdateStatusReasonCode = "ServiceQuotaExceededException"
 	LastUpdateStatusReasonCodeVcpuLimitExceeded                    LastUpdateStatusReasonCode = "VcpuLimitExceeded"
 	LastUpdateStatusReasonCodeCapacityProviderScalingLimitExceeded LastUpdateStatusReasonCode = "CapacityProviderScalingLimitExceeded"
 	LastUpdateStatusReasonCodeInsufficientCapacity                 LastUpdateStatusReasonCode = "InsufficientCapacity"
@@ -555,6 +556,7 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
+		"ServiceQuotaExceededException",
 		"VcpuLimitExceeded",
 		"CapacityProviderScalingLimitExceeded",
 		"InsufficientCapacity",
@@ -805,44 +807,44 @@ const (
 	RuntimeNodejs12x      Runtime = "nodejs12.x"
 	RuntimeNodejs14x      Runtime = "nodejs14.x"
 	RuntimeNodejs16x      Runtime = "nodejs16.x"
+	RuntimeNodejs18x      Runtime = "nodejs18.x"
+	RuntimeNodejs20x      Runtime = "nodejs20.x"
+	RuntimeNodejs22x      Runtime = "nodejs22.x"
+	RuntimeNodejs24x      Runtime = "nodejs24.x"
 	RuntimeJava8          Runtime = "java8"
 	RuntimeJava8al2       Runtime = "java8.al2"
 	RuntimeJava11         Runtime = "java11"
+	RuntimeJava17         Runtime = "java17"
+	RuntimeJava21         Runtime = "java21"
+	RuntimeJava25         Runtime = "java25"
 	RuntimePython27       Runtime = "python2.7"
 	RuntimePython36       Runtime = "python3.6"
 	RuntimePython37       Runtime = "python3.7"
 	RuntimePython38       Runtime = "python3.8"
 	RuntimePython39       Runtime = "python3.9"
+	RuntimePython310      Runtime = "python3.10"
+	RuntimePython311      Runtime = "python3.11"
+	RuntimePython312      Runtime = "python3.12"
+	RuntimePython313      Runtime = "python3.13"
+	RuntimePython314      Runtime = "python3.14"
 	RuntimeDotnetcore10   Runtime = "dotnetcore1.0"
 	RuntimeDotnetcore20   Runtime = "dotnetcore2.0"
 	RuntimeDotnetcore21   Runtime = "dotnetcore2.1"
 	RuntimeDotnetcore31   Runtime = "dotnetcore3.1"
 	RuntimeDotnet6        Runtime = "dotnet6"
 	RuntimeDotnet8        Runtime = "dotnet8"
+	RuntimeDotnet10       Runtime = "dotnet10"
 	RuntimeNodejs43edge   Runtime = "nodejs4.3-edge"
 	RuntimeGo1x           Runtime = "go1.x"
 	RuntimeRuby25         Runtime = "ruby2.5"
 	RuntimeRuby27         Runtime = "ruby2.7"
-	RuntimeProvided       Runtime = "provided"
-	RuntimeProvidedal2    Runtime = "provided.al2"
-	RuntimeNodejs18x      Runtime = "nodejs18.x"
-	RuntimePython310      Runtime = "python3.10"
-	RuntimeJava17         Runtime = "java17"
 	RuntimeRuby32         Runtime = "ruby3.2"
 	RuntimeRuby33         Runtime = "ruby3.3"
 	RuntimeRuby34         Runtime = "ruby3.4"
-	RuntimePython311      Runtime = "python3.11"
-	RuntimeNodejs20x      Runtime = "nodejs20.x"
-	RuntimeProvidedal2023 Runtime = "provided.al2023"
-	RuntimePython312      Runtime = "python3.12"
-	RuntimeJava21         Runtime = "java21"
-	RuntimePython313      Runtime = "python3.13"
-	RuntimeNodejs22x      Runtime = "nodejs22.x"
-	RuntimeNodejs24x      Runtime = "nodejs24.x"
-	RuntimePython314      Runtime = "python3.14"
-	RuntimeJava25         Runtime = "java25"
-	RuntimeDotnet10       Runtime = "dotnet10"
 	RuntimeRuby40         Runtime = "ruby4.0"
+	RuntimeProvided       Runtime = "provided"
+	RuntimeProvidedal2    Runtime = "provided.al2"
+	RuntimeProvidedal2023 Runtime = "provided.al2023"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -859,44 +861,44 @@ func (Runtime) Values() []Runtime {
 		"nodejs12.x",
 		"nodejs14.x",
 		"nodejs16.x",
+		"nodejs18.x",
+		"nodejs20.x",
+		"nodejs22.x",
+		"nodejs24.x",
 		"java8",
 		"java8.al2",
 		"java11",
+		"java17",
+		"java21",
+		"java25",
 		"python2.7",
 		"python3.6",
 		"python3.7",
 		"python3.8",
 		"python3.9",
+		"python3.10",
+		"python3.11",
+		"python3.12",
+		"python3.13",
+		"python3.14",
 		"dotnetcore1.0",
 		"dotnetcore2.0",
 		"dotnetcore2.1",
 		"dotnetcore3.1",
 		"dotnet6",
 		"dotnet8",
+		"dotnet10",
 		"nodejs4.3-edge",
 		"go1.x",
 		"ruby2.5",
 		"ruby2.7",
-		"provided",
-		"provided.al2",
-		"nodejs18.x",
-		"python3.10",
-		"java17",
 		"ruby3.2",
 		"ruby3.3",
 		"ruby3.4",
-		"python3.11",
-		"nodejs20.x",
-		"provided.al2023",
-		"python3.12",
-		"java21",
-		"python3.13",
-		"nodejs22.x",
-		"nodejs24.x",
-		"python3.14",
-		"java25",
-		"dotnet10",
 		"ruby4.0",
+		"provided",
+		"provided.al2",
+		"provided.al2023",
 	}
 }
 
@@ -1048,7 +1050,7 @@ const (
 	StateReasonCodeInvalidRuntime                       StateReasonCode = "InvalidRuntime"
 	StateReasonCodeInvalidZipFileException              StateReasonCode = "InvalidZipFileException"
 	StateReasonCodeFunctionError                        StateReasonCode = "FunctionError"
-	StateReasonCodeDrainingDurableExecutions            StateReasonCode = "DrainingDurableExecutions"
+	StateReasonCodeServiceQuotaExceededException        StateReasonCode = "ServiceQuotaExceededException"
 	StateReasonCodeVcpuLimitExceeded                    StateReasonCode = "VcpuLimitExceeded"
 	StateReasonCodeCapacityProviderScalingLimitExceeded StateReasonCode = "CapacityProviderScalingLimitExceeded"
 	StateReasonCodeInsufficientCapacity                 StateReasonCode = "InsufficientCapacity"
@@ -1062,6 +1064,7 @@ const (
 	StateReasonCodeFunctionErrorTooManyExtensions       StateReasonCode = "FunctionError.TooManyExtensions"
 	StateReasonCodeFunctionErrorInitResourceExhausted   StateReasonCode = "FunctionError.InitResourceExhausted"
 	StateReasonCodeDisallowedByVpcEncryptionControl     StateReasonCode = "DisallowedByVpcEncryptionControl"
+	StateReasonCodeDrainingDurableExecutions            StateReasonCode = "DrainingDurableExecutions"
 )
 
 // Values returns all known values for StateReasonCode. Note that this can be
@@ -1094,7 +1097,7 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
-		"DrainingDurableExecutions",
+		"ServiceQuotaExceededException",
 		"VcpuLimitExceeded",
 		"CapacityProviderScalingLimitExceeded",
 		"InsufficientCapacity",
@@ -1108,6 +1111,7 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"FunctionError.TooManyExtensions",
 		"FunctionError.InitResourceExhausted",
 		"DisallowedByVpcEncryptionControl",
+		"DrainingDurableExecutions",
 	}
 }
 

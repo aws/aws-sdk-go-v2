@@ -39,6 +39,16 @@
                 "smithy.api#pattern": "^arn:.*:kms:[a-zA-Z0-9\\-]+:\\d{12}:(key|alias)/[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.firehose#AWSKMSKeyARNForSSE": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:.*:kms:[a-zA-Z0-9\\-]+:\\d{12}:key/[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
         "com.amazonaws.firehose#AmazonOpenSearchServerlessBufferingHints": {
             "type": "structure",
             "members": {
@@ -1727,7 +1737,7 @@
             "type": "structure",
             "members": {
                 "KeyARN": {
-                    "target": "com.amazonaws.firehose#AWSKMSKeyARN",
+                    "target": "com.amazonaws.firehose#AWSKMSKeyARNForSSE",
                     "traits": {
                         "smithy.api#documentation": "<p>If <code>KeyType</code> is <code>CUSTOMER_MANAGED_CMK</code>, this field contains the\n         ARN of the customer managed CMK. If <code>KeyType</code> is <code>Amazon Web Services_OWNED_CMK</code>, <code>DeliveryStreamEncryptionConfiguration</code> doesn't contain\n         a value for <code>KeyARN</code>.</p>"
                     }
@@ -1759,7 +1769,7 @@
             "type": "structure",
             "members": {
                 "KeyARN": {
-                    "target": "com.amazonaws.firehose#AWSKMSKeyARN",
+                    "target": "com.amazonaws.firehose#AWSKMSKeyARNForSSE",
                     "traits": {
                         "smithy.api#documentation": "<p>If you set <code>KeyType</code> to <code>CUSTOMER_MANAGED_CMK</code>, you must specify\n         the Amazon Resource Name (ARN) of the CMK. If you set <code>KeyType</code> to <code>Amazon Web Services_OWNED_CMK</code>, Firehose uses a service-account CMK.</p>"
                     }

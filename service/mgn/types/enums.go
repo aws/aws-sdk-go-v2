@@ -205,6 +205,8 @@ const (
 	DataReplicationErrorStringFailedToStartDataTransfer               DataReplicationErrorString = "FAILED_TO_START_DATA_TRANSFER"
 	DataReplicationErrorStringUnsupportedVmConfiguration              DataReplicationErrorString = "UNSUPPORTED_VM_CONFIGURATION"
 	DataReplicationErrorStringLastSnapshotJobFailed                   DataReplicationErrorString = "LAST_SNAPSHOT_JOB_FAILED"
+	DataReplicationErrorStringFailedToSetupFsxProxy                   DataReplicationErrorString = "FAILED_TO_SETUP_FSX_PROXY"
+	DataReplicationErrorStringFailedToCreateFsxSnapshot               DataReplicationErrorString = "FAILED_TO_CREATE_FSX_SNAPSHOT"
 )
 
 // Values returns all known values for DataReplicationErrorString. Note that this
@@ -229,6 +231,8 @@ func (DataReplicationErrorString) Values() []DataReplicationErrorString {
 		"FAILED_TO_START_DATA_TRANSFER",
 		"UNSUPPORTED_VM_CONFIGURATION",
 		"LAST_SNAPSHOT_JOB_FAILED",
+		"FAILED_TO_SETUP_FSX_PROXY",
+		"FAILED_TO_CREATE_FSX_SNAPSHOT",
 	}
 }
 
@@ -247,6 +251,7 @@ const (
 	DataReplicationInitiationStepNamePairReplicationServerWithAgent  DataReplicationInitiationStepName = "PAIR_REPLICATION_SERVER_WITH_AGENT"
 	DataReplicationInitiationStepNameConnectAgentToReplicationServer DataReplicationInitiationStepName = "CONNECT_AGENT_TO_REPLICATION_SERVER"
 	DataReplicationInitiationStepNameStartDataTransfer               DataReplicationInitiationStepName = "START_DATA_TRANSFER"
+	DataReplicationInitiationStepNameSetupFsxProxy                   DataReplicationInitiationStepName = "SETUP_FSX_PROXY"
 )
 
 // Values returns all known values for DataReplicationInitiationStepName. Note
@@ -267,6 +272,7 @@ func (DataReplicationInitiationStepName) Values() []DataReplicationInitiationSte
 		"PAIR_REPLICATION_SERVER_WITH_AGENT",
 		"CONNECT_AGENT_TO_REPLICATION_SERVER",
 		"START_DATA_TRANSFER",
+		"SETUP_FSX_PROXY",
 	}
 }
 
@@ -688,6 +694,46 @@ func (JobType) Values() []JobType {
 	}
 }
 
+type LastKnownCheckStatus string
+
+// Enum values for LastKnownCheckStatus
+const (
+	LastKnownCheckStatusPassed  LastKnownCheckStatus = "PASSED"
+	LastKnownCheckStatusFailed  LastKnownCheckStatus = "FAILED"
+	LastKnownCheckStatusPending LastKnownCheckStatus = "PENDING"
+)
+
+// Values returns all known values for LastKnownCheckStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LastKnownCheckStatus) Values() []LastKnownCheckStatus {
+	return []LastKnownCheckStatus{
+		"PASSED",
+		"FAILED",
+		"PENDING",
+	}
+}
+
+type LastKnownCheckType string
+
+// Enum values for LastKnownCheckType
+const (
+	LastKnownCheckTypeEc2 LastKnownCheckType = "EC2"
+	LastKnownCheckTypeFSx LastKnownCheckType = "FSx"
+)
+
+// Values returns all known values for LastKnownCheckType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LastKnownCheckType) Values() []LastKnownCheckType {
+	return []LastKnownCheckType{
+		"EC2",
+		"FSx",
+	}
+}
+
 type LaunchDisposition string
 
 // Enum values for LaunchDisposition
@@ -1070,6 +1116,7 @@ const (
 	ReplicationConfigurationReplicatedDiskStagingDiskTypeStandard ReplicationConfigurationReplicatedDiskStagingDiskType = "STANDARD"
 	ReplicationConfigurationReplicatedDiskStagingDiskTypeGp3      ReplicationConfigurationReplicatedDiskStagingDiskType = "GP3"
 	ReplicationConfigurationReplicatedDiskStagingDiskTypeIo2      ReplicationConfigurationReplicatedDiskStagingDiskType = "IO2"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeFsxOntap ReplicationConfigurationReplicatedDiskStagingDiskType = "FSX_ONTAP"
 )
 
 // Values returns all known values for
@@ -1087,6 +1134,7 @@ func (ReplicationConfigurationReplicatedDiskStagingDiskType) Values() []Replicat
 		"STANDARD",
 		"GP3",
 		"IO2",
+		"FSX_ONTAP",
 	}
 }
 
@@ -1198,6 +1246,25 @@ func (SsmParameterStoreParameterType) Values() []SsmParameterStoreParameterType 
 	return []SsmParameterStoreParameterType{
 		"STRING",
 		"SECURE_STRING",
+	}
+}
+
+type StorageType string
+
+// Enum values for StorageType
+const (
+	StorageTypeEbs      StorageType = "EBS"
+	StorageTypeFsxOntap StorageType = "FSX_ONTAP"
+)
+
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"EBS",
+		"FSX_ONTAP",
 	}
 }
 
