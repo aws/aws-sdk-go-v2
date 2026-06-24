@@ -101,7 +101,7 @@ func (p *CredentialsCache) Retrieve(ctx context.Context) (Credentials, error) {
 	}
 
 	resCh := p.sf.DoChan("", func() (interface{}, error) {
-		return p.singleRetrieve(&suppressedContext{ctx})
+		return p.singleRetrieve(context.WithoutCancel(ctx))
 	})
 	select {
 	case res := <-resCh:
