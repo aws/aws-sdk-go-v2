@@ -62,6 +62,14 @@ func (a RecordResponseTiming) HandleDeserialize(ctx context.Context, in middlewa
 
 	switch resp := out.RawResponse.(type) {
 	case *smithyhttp.Response:
+		// If the response has an Age header, it was served from a cache (e.g.
+		// CloudFront). In that case the Date header reflects when the original
+		// response was generated, not the current server time, so using it for
+		// clock-skew calculation would produce incorrect results. Skip skew
+		// computation entirely for cached responses.
+		if resp.Header.Get("Age") != "" {
+			break
+		}
 		respDateHeader := resp.Header.Get("Date")
 		if len(respDateHeader) == 0 {
 			break
