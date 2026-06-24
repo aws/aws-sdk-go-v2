@@ -18,16 +18,6 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.ToShapeId;
 import software.amazon.smithy.utils.ListUtils;
 
-/**
- * Emits a single shared {@code newServiceMetadataMiddleware(region, operation)}
- * helper per service and registers a per-operation plugin that calls it with
- * the appropriate operation name literal.
- *
- * <p>The shared function eliminates N redundant per-operation function
- * definitions. The plugin registration stays per-operation because the
- * middleware uses Initialize.Add(Before) which requires correct prepend
- * ordering relative to other per-operation Initialize middlewares.
- */
 public final class RegisterServiceMetadataMiddleware implements GoIntegration {
     private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
