@@ -55,7 +55,9 @@ public class LambdaRecursionDetection implements GoIntegration {
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addRecursionDetection"))
                                         .build()
-                        ).build()
+                        )
+                        .isCommon(true)
+                        .build()
                 );
     }
 

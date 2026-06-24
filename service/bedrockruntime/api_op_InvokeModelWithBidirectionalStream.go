@@ -5,7 +5,6 @@ package bedrockruntime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
 	"github.com/aws/smithy-go/middleware"
@@ -77,9 +76,6 @@ func (o *InvokeModelWithBidirectionalStreamOutput) GetInitialReply() <-chan Invo
 }
 
 func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeModelWithBidirectionalStream{}, middleware.After)
 	if err != nil {
 		return err
@@ -87,9 +83,6 @@ func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack
 	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeModelWithBidirectionalStream{}, middleware.After)
 	if err != nil {
 		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeModelWithBidirectionalStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
@@ -101,13 +94,7 @@ func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack
 	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
 		return err
 	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opInvokeModelWithBidirectionalStreamMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -119,28 +106,10 @@ func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack
 	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
 	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -149,10 +118,7 @@ func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack
 	if err = addOpInvokeModelWithBidirectionalStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeModelWithBidirectionalStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeModelWithBidirectionalStream"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +131,6 @@ func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -217,14 +177,6 @@ func (m *eventStreamBuild_opInvokeModelWithBidirectionalStreamMiddleware) Handle
 }
 func addEventStreamBuild_opInvokeModelWithBidirectionalStreamMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Add(&eventStreamBuild_opInvokeModelWithBidirectionalStreamMiddleware{}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opInvokeModelWithBidirectionalStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeModelWithBidirectionalStream",
-	}
 }
 
 // InvokeModelWithBidirectionalStreamEventStream provides the event stream handling for the InvokeModelWithBidirectionalStream operation.
