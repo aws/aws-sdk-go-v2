@@ -5,6 +5,7 @@ package awsrestjson
 import (
 	"context"
 	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	smithy "github.com/aws/smithy-go"
@@ -83,6 +84,9 @@ func (o *OutputStreamOutput) GetInitialReply() <-chan OutputStreamInitialReply {
 }
 
 func (c *Client) addOperationOutputStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OutputStream, nil, schemas.OutputStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
@@ -92,11 +96,20 @@ func (c *Client) addOperationOutputStreamMiddlewares(stack *middleware.Stack, op
 	if err := stack.Deserialize.Insert(&deserializeOpEventStreamOutputStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "OutputStream"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEventStreamBuild_opOutputStreamMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
 	if err = addComputeContentLength(stack); err != nil {
@@ -108,13 +121,34 @@ func (c *Client) addOperationOutputStreamMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
+	if err = addRetry(stack, options, c); err != nil {
+		return err
+	}
+	if err = addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
 	if err = addRecordResponseTiming(stack); err != nil {
+		return err
+	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack, options); err != nil {
+		return err
+	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "OutputStream"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOutputStream(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -127,6 +161,12 @@ func (c *Client) addOperationOutputStreamMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -173,6 +213,14 @@ func (m *eventStreamBuild_opOutputStreamMiddleware) HandleBuild(ctx context.Cont
 }
 func addEventStreamBuild_opOutputStreamMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Add(&eventStreamBuild_opOutputStreamMiddleware{}, middleware.Before)
+}
+
+func newServiceMetadataMiddleware_opOutputStream(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "OutputStream",
+	}
 }
 
 // OutputStreamEventStream provides the event stream handling for the OutputStream operation.
