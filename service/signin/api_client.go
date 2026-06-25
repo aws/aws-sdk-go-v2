@@ -874,12 +874,9 @@ func resolveMeterProvider(options *Options) {
 	}
 }
 
-func newServiceMetadataMiddleware(region, operation string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: operation,
-	}
+// IdempotencyTokenProvider interface for providing idempotency token
+type IdempotencyTokenProvider interface {
+	GetIdempotencyToken() (string, error)
 }
 
 func newServiceMetadataMiddleware(region, operation string) *awsmiddleware.RegisterServiceMetadata {
