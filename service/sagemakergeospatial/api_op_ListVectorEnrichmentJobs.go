@@ -5,6 +5,7 @@ package sagemakergeospatial
 import (
 	"context"
 	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -66,6 +67,9 @@ type ListVectorEnrichmentJobsOutput struct {
 }
 
 func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVectorEnrichmentJobs{}, middleware.After)
 	if err != nil {
 		return err
@@ -74,8 +78,17 @@ func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middlewa
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVectorEnrichmentJobs"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
 	if err = addComputeContentLength(stack); err != nil {
@@ -87,7 +100,19 @@ func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
+	if err = addRetry(stack, options, c); err != nil {
+		return err
+	}
+	if err = addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
 	if err = addRecordResponseTiming(stack); err != nil {
+		return err
+	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
@@ -96,10 +121,19 @@ func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListVectorEnrichmentJobs"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVectorEnrichmentJobs(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -112,6 +146,12 @@ func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -202,3 +242,11 @@ type ListVectorEnrichmentJobsAPIClient interface {
 }
 
 var _ ListVectorEnrichmentJobsAPIClient = (*Client)(nil)
+
+func newServiceMetadataMiddleware_opListVectorEnrichmentJobs(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "ListVectorEnrichmentJobs",
+	}
+}

@@ -291,6 +291,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                     return memberShape.getMemberTrait(model, StreamingTrait.class).isPresent();
                                 })) {
                                     writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+                                    writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
 
                                     Symbol removeContentTypeHeader = SymbolUtils.createValueSymbolBuilder(
                                             "RemoveContentTypeHeader", AwsGoDependency.AWS_HTTP_TRANSPORT
