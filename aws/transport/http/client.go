@@ -193,9 +193,13 @@ func defaultHTTPTransport() *http.Transport {
 		ForceAttemptHTTP2:     true,
 		TLSClientConfig: &tls.Config{
 			MinVersion: DefaultHTTPTransportTLSMinVersion,
+			CurvePreferences: []tls.CurveID{
+				tls.CurveP256,
+				tls.CurveP384,
+				tls.CurveP521,
+			},
 		},
 	}
-
 	return tr
 }
 
