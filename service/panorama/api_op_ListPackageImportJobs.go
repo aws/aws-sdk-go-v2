@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of package import jobs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPackageImportJobs(ctx context.Context, params *ListPackageImportJobsInput, optFns ...func(*Options)) (*ListPackageImportJobsOutput, error) {
 	if params == nil {
 		params = &ListPackageImportJobsInput{}
@@ -29,10 +31,14 @@ func (c *Client) ListPackageImportJobs(ctx context.Context, params *ListPackageI
 type ListPackageImportJobsInput struct {
 
 	// The maximum number of package import jobs to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,9 +49,13 @@ type ListPackageImportJobsOutput struct {
 	// A list of package import jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageImportJobs []types.PackageImportJob
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

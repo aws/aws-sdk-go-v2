@@ -11,6 +11,8 @@ import (
 
 // Changes one or more alarms to the snooze mode. The alarms change to the
 // SNOOZE_DISABLED state after you set them to the snooze mode.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchSnoozeAlarm(ctx context.Context, params *BatchSnoozeAlarmInput, optFns ...func(*Options)) (*BatchSnoozeAlarmOutput, error) {
 	if params == nil {
 		params = &BatchSnoozeAlarmInput{}
@@ -32,6 +34,8 @@ type BatchSnoozeAlarmInput struct {
 	// operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnoozeActionRequests []types.SnoozeAlarmActionRequest
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type BatchSnoozeAlarmOutput struct {
 	// A list of errors associated with the request, or null if there are no errors.
 	// Each error entry contains an entry ID that helps you identify the entry that
 	// failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorEntries []types.BatchAlarmActionErrorEntry
 
 	// Metadata pertaining to the operation's result.

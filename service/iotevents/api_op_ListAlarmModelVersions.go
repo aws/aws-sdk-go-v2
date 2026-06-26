@@ -11,6 +11,8 @@ import (
 
 // Lists all the versions of an alarm model. The operation returns only the
 // metadata associated with each alarm model version.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListAlarmModelVersions(ctx context.Context, params *ListAlarmModelVersionsInput, optFns ...func(*Options)) (*ListAlarmModelVersionsOutput, error) {
 	if params == nil {
 		params = &ListAlarmModelVersionsInput{}
@@ -31,12 +33,18 @@ type ListAlarmModelVersionsInput struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +53,14 @@ type ListAlarmModelVersionsInput struct {
 type ListAlarmModelVersionsOutput struct {
 
 	// A list that summarizes each alarm model version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelVersionSummaries []types.AlarmModelVersionSummary
 
 	// The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

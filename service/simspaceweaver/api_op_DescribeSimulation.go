@@ -11,6 +11,8 @@ import (
 )
 
 // Returns the current state of the given simulation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeSimulation(ctx context.Context, params *DescribeSimulationInput, optFns ...func(*Options)) (*DescribeSimulationOutput, error) {
 	if params == nil {
 		params = &DescribeSimulationInput{}
@@ -31,6 +33,8 @@ type DescribeSimulationInput struct {
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde
@@ -42,23 +46,35 @@ type DescribeSimulationOutput struct {
 	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time when the simulation was created, expressed as the number of seconds
 	// and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The description of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A universally unique identifier (UUID) for this simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionId *string
 
 	// A collection of additional state information, such as domain and clock
 	// configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LiveSimulationState *types.LiveSimulationState
 
 	// Settings that control how SimSpace Weaver handles your simulation log data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// The maximum running time of the simulation, specified as a number of minutes (m
@@ -66,9 +82,13 @@ type DescribeSimulationOutput struct {
 	// this limit. The maximum value is 14D , or its equivalent in the other units. The
 	// default value is 14D . A value equivalent to 0 makes the simulation immediately
 	// transition to Stopping as soon as it reaches Started .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaximumDuration *string
 
 	// The name of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
@@ -78,6 +98,8 @@ type DescribeSimulationOutput struct {
 	//
 	// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// An error message that SimSpace Weaver returns only if there is a problem with
@@ -90,6 +112,8 @@ type DescribeSimulationOutput struct {
 	// S3). For more information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
 	//
 	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaS3Location *types.S3Location
 
 	// A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
@@ -97,16 +121,24 @@ type DescribeSimulationOutput struct {
 	// information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
 	//
 	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnapshotS3Location *types.S3Location
 
 	// An error message that SimSpace Weaver returns only if a problem occurs when the
 	// simulation is in the STARTING state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartError *string
 
 	// The current lifecycle state of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.SimulationStatus
 
 	// The desired lifecycle state of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetStatus types.SimulationTargetStatus
 
 	// Metadata pertaining to the operation's result.

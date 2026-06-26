@@ -11,6 +11,8 @@ import (
 // Removes tags from a SimSpace Weaver resource. For more information about tags,
 // see [Tagging Amazon Web Services resources]in the Amazon Web Services General Reference.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
@@ -36,11 +38,15 @@ type UntagResourceInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A list of tag keys to remove from the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

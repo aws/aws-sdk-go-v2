@@ -16,6 +16,8 @@ import (
 // schema, see the [schema reference]in the SimSpace Weaver User Guide. For more information about
 // snapshots, see [Snapshots]in the SimSpace Weaver User Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [schema reference]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/schema-reference.html
 // [Snapshots]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html
 func (c *Client) StartSimulation(ctx context.Context, params *StartSimulationInput, optFns ...func(*Options)) (*StartSimulationOutput, error) {
@@ -38,6 +40,8 @@ type StartSimulationInput struct {
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
@@ -49,14 +53,20 @@ type StartSimulationInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// A value that you provide to ensure that repeated calls to this API operation
 	// using the same parameters complete only once. A ClientToken is also known as an
 	// idempotency token. A ClientToken expires after 24 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The maximum running time of the simulation, specified as a number of minutes (m
@@ -64,6 +74,8 @@ type StartSimulationInput struct {
 	// this limit. The maximum value is 14D , or its equivalent in the other units. The
 	// default value is 14D . A value equivalent to 0 makes the simulation immediately
 	// transition to Stopping as soon as it reaches Started .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaximumDuration *string
 
 	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
@@ -74,6 +86,8 @@ type StartSimulationInput struct {
 	// If you provide a SchemaS3Location then you can't provide a SnapshotS3Location .
 	//
 	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaS3Location *types.S3Location
 
 	// The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon
@@ -87,12 +101,16 @@ type StartSimulationInput struct {
 	// If you provide a SnapshotS3Location then you can't provide a SchemaS3Location .
 	//
 	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnapshotS3Location *types.S3Location
 
 	// A list of tags for the simulation. For more information about tags, see [Tagging Amazon Web Services resources] in the
 	// Amazon Web Services General Reference.
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -104,13 +122,19 @@ type StartSimulationOutput struct {
 	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time when the simulation was created, expressed as the number of seconds
 	// and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// A universally unique identifier (UUID) for this simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionId *string
 
 	// Metadata pertaining to the operation's result.

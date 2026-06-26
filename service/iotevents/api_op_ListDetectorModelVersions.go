@@ -11,6 +11,8 @@ import (
 
 // Lists all the versions of a detector model. Only the metadata associated with
 // each detector model version is returned.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDetectorModelVersions(ctx context.Context, params *ListDetectorModelVersionsInput, optFns ...func(*Options)) (*ListDetectorModelVersionsOutput, error) {
 	if params == nil {
 		params = &ListDetectorModelVersionsInput{}
@@ -31,12 +33,18 @@ type ListDetectorModelVersionsInput struct {
 	// The name of the detector model whose versions are returned.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +53,14 @@ type ListDetectorModelVersionsInput struct {
 type ListDetectorModelVersionsOutput struct {
 
 	// Summary information about the detector model versions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelVersionSummaries []types.DetectorModelVersionSummary
 
 	// The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -9,6 +9,8 @@ import (
 )
 
 // Updates a device's metadata.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDeviceMetadata(ctx context.Context, params *UpdateDeviceMetadataInput, optFns ...func(*Options)) (*UpdateDeviceMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateDeviceMetadataInput{}
@@ -29,9 +31,13 @@ type UpdateDeviceMetadataInput struct {
 	// The device's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// A description for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -40,6 +46,8 @@ type UpdateDeviceMetadataInput struct {
 type UpdateDeviceMetadataOutput struct {
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// Metadata pertaining to the operation's result.

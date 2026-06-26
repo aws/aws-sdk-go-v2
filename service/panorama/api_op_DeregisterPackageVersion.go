@@ -9,6 +9,8 @@ import (
 )
 
 // Deregisters a package version.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeregisterPackageVersion(ctx context.Context, params *DeregisterPackageVersionInput, optFns ...func(*Options)) (*DeregisterPackageVersionOutput, error) {
 	if params == nil {
 		params = &DeregisterPackageVersionInput{}
@@ -29,22 +31,32 @@ type DeregisterPackageVersionInput struct {
 	// A package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// A package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// A patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	// An owner account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	// If the version was marked latest, the new version to maker as latest.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedLatestPatchVersion *string
 
 	noSmithyDocumentSerde

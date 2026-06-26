@@ -11,6 +11,8 @@ import (
 
 // Describes a detector model. If the version parameter is not specified,
 // information about the latest version is returned.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDetectorModel(ctx context.Context, params *DescribeDetectorModelInput, optFns ...func(*Options)) (*DescribeDetectorModelOutput, error) {
 	if params == nil {
 		params = &DescribeDetectorModelInput{}
@@ -31,9 +33,13 @@ type DescribeDetectorModelInput struct {
 	// The name of the detector model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The version of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelVersion *string
 
 	noSmithyDocumentSerde
@@ -42,6 +48,8 @@ type DescribeDetectorModelInput struct {
 type DescribeDetectorModelOutput struct {
 
 	// Information about the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModel *types.DetectorModel
 
 	// Metadata pertaining to the operation's result.

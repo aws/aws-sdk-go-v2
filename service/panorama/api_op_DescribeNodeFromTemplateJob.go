@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a job to create a camera stream node.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeNodeFromTemplateJob(ctx context.Context, params *DescribeNodeFromTemplateJobInput, optFns ...func(*Options)) (*DescribeNodeFromTemplateJobOutput, error) {
 	if params == nil {
 		params = &DescribeNodeFromTemplateJobInput{}
@@ -31,6 +33,8 @@ type DescribeNodeFromTemplateJobInput struct {
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	noSmithyDocumentSerde
@@ -41,57 +45,81 @@ type DescribeNodeFromTemplateJobOutput struct {
 	// When the job was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// When the job was updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// The node's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeName *string
 
 	// The job's output package name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputPackageName *string
 
 	// The job's output package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputPackageVersion *string
 
 	// The job's status.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.NodeFromTemplateJobStatus
 
 	// The job's status message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The job's template parameters.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateParameters map[string]string
 
 	// The job's template type.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateType types.TemplateType
 
 	// The job's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobTags []types.JobResourceTags
 
 	// The node's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeDescription *string
 
 	// Metadata pertaining to the operation's result.

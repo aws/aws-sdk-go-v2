@@ -11,6 +11,8 @@ import (
 
 // Adds to or modifies the tags of the given resource. Tags are metadata that can
 // be used to manage a resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -31,11 +33,15 @@ type TagResourceInput struct {
 	// The ARN of the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// The new or modified tags for the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

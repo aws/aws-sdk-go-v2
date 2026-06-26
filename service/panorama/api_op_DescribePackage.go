@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a package.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribePackage(ctx context.Context, params *DescribePackageInput, optFns ...func(*Options)) (*DescribePackageOutput, error) {
 	if params == nil {
 		params = &DescribePackageInput{}
@@ -31,6 +33,8 @@ type DescribePackageInput struct {
 	// The package's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	noSmithyDocumentSerde
@@ -41,37 +45,53 @@ type DescribePackageOutput struct {
 	// The package's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the package was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The package's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The package's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The package's storage location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StorageLocation *types.StorageLocation
 
 	// The package's tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// ARNs of accounts that have read access to the package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReadAccessPrincipalArns []string
 
 	// ARNs of accounts that have write access to the package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WriteAccessPrincipalArns []string
 
 	// Metadata pertaining to the operation's result.

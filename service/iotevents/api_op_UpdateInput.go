@@ -10,6 +10,8 @@ import (
 )
 
 // Updates an input.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateInput(ctx context.Context, params *UpdateInputInput, optFns ...func(*Options)) (*UpdateInputOutput, error) {
 	if params == nil {
 		params = &UpdateInputInput{}
@@ -30,14 +32,20 @@ type UpdateInputInput struct {
 	// The definition of the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDefinition *types.InputDefinition
 
 	// The name of the input you want to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// A brief description of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDescription *string
 
 	noSmithyDocumentSerde
@@ -46,6 +54,8 @@ type UpdateInputInput struct {
 type UpdateInputOutput struct {
 
 	// Information about the configuration of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputConfiguration *types.InputConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a package version.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribePackageVersion(ctx context.Context, params *DescribePackageVersionInput, optFns ...func(*Options)) (*DescribePackageVersionOutput, error) {
 	if params == nil {
 		params = &DescribePackageVersionInput{}
@@ -31,17 +33,25 @@ type DescribePackageVersionInput struct {
 	// The version's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The version's version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// The version's owner account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	// The version's patch version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	noSmithyDocumentSerde
@@ -52,43 +62,63 @@ type DescribePackageVersionOutput struct {
 	// Whether the version is the latest available.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IsLatestPatch bool
 
 	// The version's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The version's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The version's version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// The version's patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	// The version's status.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.PackageVersionStatus
 
 	// The account ID of the version's owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	// The ARN of the package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageArn *string
 
 	// The version's registered time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RegisteredTime *time.Time
 
 	// The version's status description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusDescription *string
 
 	// Metadata pertaining to the operation's result.

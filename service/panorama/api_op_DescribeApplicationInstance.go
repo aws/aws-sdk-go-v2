@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about an application instance on a device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeApplicationInstance(ctx context.Context, params *DescribeApplicationInstanceInput, optFns ...func(*Options)) (*DescribeApplicationInstanceOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInstanceInput{}
@@ -31,6 +33,8 @@ type DescribeApplicationInstanceInput struct {
 	// The application instance's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	noSmithyDocumentSerde
@@ -39,48 +43,78 @@ type DescribeApplicationInstanceInput struct {
 type DescribeApplicationInstanceOutput struct {
 
 	// The application instance's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// The ID of the application instance that this instance replaced.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceIdToReplace *string
 
 	// The application instance's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the application instance was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRuntimeContextDevice *string
 
 	// The device's bane.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRuntimeContextDeviceName *string
 
 	// The application instance's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The application instance's health status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HealthStatus types.ApplicationInstanceHealthStatus
 
 	// The application instance was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// The application instance's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The application instance's state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeContextStates []types.ReportedRuntimeContextState
 
 	// The application instance's runtime role ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeRoleArn *string
 
 	// The application instance's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.ApplicationInstanceStatus
 
 	// The application instance's status description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusDescription *string
 
 	// The application instance's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

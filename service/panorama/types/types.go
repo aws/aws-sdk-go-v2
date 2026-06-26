@@ -11,6 +11,8 @@ import (
 type AlternateSoftwareMetadata struct {
 
 	// The appliance software version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -20,39 +22,63 @@ type AlternateSoftwareMetadata struct {
 type ApplicationInstance struct {
 
 	// The application instance's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// The application instance's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the application instance was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRuntimeContextDevice *string
 
 	// The device's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRuntimeContextDeviceName *string
 
 	// The application instance's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The application instance's health status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HealthStatus ApplicationInstanceHealthStatus
 
 	// The application instance's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The application's state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeContextStates []ReportedRuntimeContextState
 
 	// The application instance's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ApplicationInstanceStatus
 
 	// The application instance's status description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusDescription *string
 
 	// The application instance's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -64,11 +90,15 @@ type ConflictExceptionErrorArgument struct {
 	// The error argument's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The error argument's value.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -78,44 +108,70 @@ type ConflictExceptionErrorArgument struct {
 type Device struct {
 
 	// The device's maker.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Brand DeviceBrand
 
 	// When the device was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// A device's current software.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CurrentSoftware *string
 
 	// A description for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A device's aggregated status. Including the device's connection status,
 	// provisioning status, and lease status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceAggregatedStatus DeviceAggregatedStatus
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// When the device was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// A device's latest job. Includes the target image version, and the update job
 	// status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestDeviceJob *LatestDeviceJob
 
 	// The device's lease expiration time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LeaseExpirationTime *time.Time
 
 	// The device's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The device's provisioning status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProvisioningStatus DeviceStatus
 
 	// The device's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The device's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type DeviceType
 
 	noSmithyDocumentSerde
@@ -125,18 +181,28 @@ type Device struct {
 type DeviceJob struct {
 
 	// When the job was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The ID of the target device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The name of the target device
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceName *string
 
 	// The job's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// The job's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType JobType
 
 	noSmithyDocumentSerde
@@ -146,6 +212,8 @@ type DeviceJob struct {
 type DeviceJobConfig struct {
 
 	// A configuration for an over-the-air (OTA) upgrade. Required for OTA jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OTAJobConfig *OTAJobConfig
 
 	noSmithyDocumentSerde
@@ -157,9 +225,13 @@ type EthernetPayload struct {
 	// How the device gets an IP address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectionType ConnectionType
 
 	// Network configuration for a static IP connection.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StaticIpConnectionInfo *StaticIpConnectionInfo
 
 	noSmithyDocumentSerde
@@ -169,12 +241,18 @@ type EthernetPayload struct {
 type EthernetStatus struct {
 
 	// The device's connection status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectionStatus NetworkConnectionStatus
 
 	// The device's physical address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HwAddress *string
 
 	// The device's IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IpAddress *string
 
 	noSmithyDocumentSerde
@@ -184,9 +262,13 @@ type EthernetStatus struct {
 type Job struct {
 
 	// The target device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The job's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	noSmithyDocumentSerde
@@ -198,11 +280,15 @@ type JobResourceTags struct {
 	// The job's type.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceType JobResourceType
 
 	// The job's tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -212,12 +298,18 @@ type JobResourceTags struct {
 type LatestDeviceJob struct {
 
 	// The target version of the device software.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImageVersion *string
 
 	// The job's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType JobType
 
 	// Status of the latest device job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status UpdateProgress
 
 	noSmithyDocumentSerde
@@ -235,6 +327,8 @@ type ManifestOverridesPayload interface {
 }
 
 // The overrides document.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ManifestOverridesPayloadMemberPayloadData struct {
 	Value string
 
@@ -256,6 +350,8 @@ type ManifestPayload interface {
 }
 
 // The application manifest.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ManifestPayloadMemberPayloadData struct {
 	Value string
 
@@ -268,12 +364,18 @@ func (*ManifestPayloadMemberPayloadData) isManifestPayload() {}
 type NetworkPayload struct {
 
 	// Settings for Ethernet port 0.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ethernet0 *EthernetPayload
 
 	// Settings for Ethernet port 1.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ethernet1 *EthernetPayload
 
 	// Network time protocol (NTP) server settings.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ntp *NtpPayload
 
 	noSmithyDocumentSerde
@@ -283,15 +385,23 @@ type NetworkPayload struct {
 type NetworkStatus struct {
 
 	// The status of Ethernet port 0.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ethernet0Status *EthernetStatus
 
 	// The status of Ethernet port 1.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ethernet1Status *EthernetStatus
 
 	// When the network status changed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// Details about a network time protocol (NTP) server connection.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NtpStatus *NtpStatus
 
 	noSmithyDocumentSerde
@@ -303,50 +413,72 @@ type Node struct {
 	// The node's category.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Category NodeCategory
 
 	// When the node was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The node's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The node's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeId *string
 
 	// The node's package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The node's package name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The node's package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// The node's patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	// The node's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The account ID of the node's owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	// The node's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageArn *string
 
 	noSmithyDocumentSerde
@@ -356,21 +488,33 @@ type Node struct {
 type NodeFromTemplateJob struct {
 
 	// When the job was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The job's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// The node's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeName *string
 
 	// The job's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status NodeFromTemplateJobStatus
 
 	// The job's status message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The job's template type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateType TemplateType
 
 	noSmithyDocumentSerde
@@ -380,18 +524,28 @@ type NodeFromTemplateJob struct {
 type NodeInputPort struct {
 
 	// The input port's default value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultValue *string
 
 	// The input port's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The input port's max connections.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxConnections int32
 
 	// The input port's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The input port's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type PortType
 
 	noSmithyDocumentSerde
@@ -403,26 +557,40 @@ type NodeInstance struct {
 	// The instance's current status.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CurrentStatus NodeInstanceStatus
 
 	// The instance's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeInstanceId *string
 
 	// The node's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeId *string
 
 	// The instance's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeName *string
 
 	// The instance's package name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The instance's package patch version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackagePatchVersion *string
 
 	// The instance's package version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	noSmithyDocumentSerde
@@ -434,11 +602,15 @@ type NodeInterface struct {
 	// The node interface's inputs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Inputs []NodeInputPort
 
 	// The node interface's outputs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Outputs []NodeOutputPort
 
 	noSmithyDocumentSerde
@@ -448,12 +620,18 @@ type NodeInterface struct {
 type NodeOutputPort struct {
 
 	// The output port's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The output port's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The output port's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type PortType
 
 	noSmithyDocumentSerde
@@ -465,11 +643,15 @@ type NodeSignal struct {
 	// The camera node's name, from the application manifest.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeInstanceId *string
 
 	// The signal value.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Signal NodeSignalValue
 
 	noSmithyDocumentSerde
@@ -482,6 +664,8 @@ type NtpPayload struct {
 	// NTP servers to use, in order of preference.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NtpServers []string
 
 	noSmithyDocumentSerde
@@ -491,12 +675,18 @@ type NtpPayload struct {
 type NtpStatus struct {
 
 	// The connection's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectionStatus NetworkConnectionStatus
 
 	// The IP address of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IpAddress *string
 
 	// The domain name of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NtpServerName *string
 
 	noSmithyDocumentSerde
@@ -508,9 +698,13 @@ type OTAJobConfig struct {
 	// The target version of the device software.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImageVersion *string
 
 	// Whether to apply the update if it is a major version change.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowMajorVersionUpdate bool
 
 	noSmithyDocumentSerde
@@ -522,11 +716,15 @@ type OutPutS3Location struct {
 	// The object's bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BucketName *string
 
 	// The object's key.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ObjectKey *string
 
 	noSmithyDocumentSerde
@@ -536,21 +734,33 @@ type OutPutS3Location struct {
 type PackageImportJob struct {
 
 	// When the job was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The job's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// The job's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType PackageImportJobType
 
 	// When the job was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// The job's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status PackageImportJobStatus
 
 	// The job's status message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -560,6 +770,8 @@ type PackageImportJob struct {
 type PackageImportJobInputConfig struct {
 
 	// The package version's input configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersionInputConfig *PackageVersionInputConfig
 
 	noSmithyDocumentSerde
@@ -571,21 +783,29 @@ type PackageImportJobOutput struct {
 	// The package's output location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputS3Location *OutPutS3Location
 
 	// The package's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The package's version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// The package's patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	noSmithyDocumentSerde
@@ -595,6 +815,8 @@ type PackageImportJobOutput struct {
 type PackageImportJobOutputConfig struct {
 
 	// The package version's output configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersionOutputConfig *PackageVersionOutputConfig
 
 	noSmithyDocumentSerde
@@ -604,18 +826,28 @@ type PackageImportJobOutputConfig struct {
 type PackageListItem struct {
 
 	// The package's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// When the package was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The package's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The package's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The package's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -627,16 +859,22 @@ type PackageObject struct {
 	// The object's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The object's package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// The object's patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	noSmithyDocumentSerde
@@ -648,6 +886,8 @@ type PackageVersionInputConfig struct {
 	// A location in Amazon S3.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *S3Location
 
 	noSmithyDocumentSerde
@@ -659,14 +899,20 @@ type PackageVersionOutputConfig struct {
 	// The output's package name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The output's package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// Indicates that the version is recommended for all users.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MarkLatest bool
 
 	noSmithyDocumentSerde
@@ -678,21 +924,29 @@ type ReportedRuntimeContextState struct {
 	// The application's desired state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DesiredState DesiredState
 
 	// The application's reported status.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceReportedStatus DeviceReportedStatus
 
 	// When the device reported the application's state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceReportedTime *time.Time
 
 	// The device's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeContextName *string
 
 	noSmithyDocumentSerde
@@ -704,14 +958,20 @@ type S3Location struct {
 	// A bucket name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BucketName *string
 
 	// An object key.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ObjectKey *string
 
 	// The bucket's Region.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	noSmithyDocumentSerde
@@ -723,21 +983,29 @@ type StaticIpConnectionInfo struct {
 	// The connection's default gateway.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultGateway *string
 
 	// The connection's DNS address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Dns []string
 
 	// The connection's IP address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IpAddress *string
 
 	// The connection's DNS mask.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Mask *string
 
 	noSmithyDocumentSerde
@@ -749,26 +1017,36 @@ type StorageLocation struct {
 	// The location's binary prefix.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BinaryPrefixLocation *string
 
 	// The location's bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The location's generated prefix.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GeneratedPrefixLocation *string
 
 	// The location's manifest prefix.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ManifestPrefixLocation *string
 
 	// The location's repo prefix.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RepoPrefixLocation *string
 
 	noSmithyDocumentSerde
@@ -780,11 +1058,15 @@ type ValidationExceptionErrorArgument struct {
 	// The argument's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The argument's value.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -796,11 +1078,15 @@ type ValidationExceptionField struct {
 	// The field's message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	// The field's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde

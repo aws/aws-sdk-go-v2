@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDevice(ctx context.Context, params *DescribeDeviceInput, optFns ...func(*Options)) (*DescribeDeviceOutput, error) {
 	if params == nil {
 		params = &DescribeDeviceInput{}
@@ -31,6 +33,8 @@ type DescribeDeviceInput struct {
 	// The device's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	noSmithyDocumentSerde
@@ -39,64 +43,104 @@ type DescribeDeviceInput struct {
 type DescribeDeviceOutput struct {
 
 	// Beta software releases available for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlternateSoftwares []types.AlternateSoftwareMetadata
 
 	// The device's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The device's maker.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Brand types.DeviceBrand
 
 	// When the device was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The device's networking status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CurrentNetworkingStatus *types.NetworkStatus
 
 	// The device's current software version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CurrentSoftware *string
 
 	// The device's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A device's aggregated status. Including the device's connection status,
 	// provisioning status, and lease status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceAggregatedStatus types.DeviceAggregatedStatus
 
 	// The device's connection status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceConnectionStatus types.DeviceConnectionStatus
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The most recent beta software release.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestAlternateSoftware *string
 
 	// A device's latest job. Includes the target image version, and the job status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestDeviceJob *types.LatestDeviceJob
 
 	// The latest software version available for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestSoftware *string
 
 	// The device's lease expiration time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LeaseExpirationTime *time.Time
 
 	// The device's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The device's networking configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkingConfiguration *types.NetworkPayload
 
 	// The device's provisioning status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProvisioningStatus types.DeviceStatus
 
 	// The device's serial number.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SerialNumber *string
 
 	// The device's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The device's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.DeviceType
 
 	// Metadata pertaining to the operation's result.

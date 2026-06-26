@@ -11,6 +11,8 @@ import (
 
 // Lists the detector models you have created. Only the metadata associated with
 // each detector model is returned.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDetectorModels(ctx context.Context, params *ListDetectorModelsInput, optFns ...func(*Options)) (*ListDetectorModelsOutput, error) {
 	if params == nil {
 		params = &ListDetectorModelsInput{}
@@ -29,9 +31,13 @@ func (c *Client) ListDetectorModels(ctx context.Context, params *ListDetectorMod
 type ListDetectorModelsInput struct {
 
 	// The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,10 +46,14 @@ type ListDetectorModelsInput struct {
 type ListDetectorModelsOutput struct {
 
 	// Summary information about the detector models.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelSummaries []types.DetectorModelSummary
 
 	// The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

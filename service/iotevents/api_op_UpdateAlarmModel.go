@@ -12,6 +12,8 @@ import (
 
 // Updates an alarm model. Any alarms that were created based on the previous
 // version are deleted and then created again as new data arrives.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateAlarmModel(ctx context.Context, params *UpdateAlarmModelInput, optFns ...func(*Options)) (*UpdateAlarmModelOutput, error) {
 	if params == nil {
 		params = &UpdateAlarmModelInput{}
@@ -32,11 +34,15 @@ type UpdateAlarmModelInput struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// Defines when your alarm is invoked.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmRule *types.AlarmRule
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
@@ -45,21 +51,33 @@ type UpdateAlarmModelInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// Contains the configuration information of alarm state changes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmCapabilities *types.AlarmCapabilities
 
 	// Contains information about one or more alarm actions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmEventActions *types.AlarmEventActions
 
 	// The description of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelDescription *string
 
 	// Contains information about one or more notification actions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmNotification *types.AlarmNotification
 
 	// A non-negative integer that reflects the severity level of the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Severity *int32
 
 	noSmithyDocumentSerde
@@ -71,15 +89,23 @@ type UpdateAlarmModelOutput struct {
 	// Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelArn *string
 
 	// The version of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelVersion *string
 
 	// The time the alarm model was created, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time the alarm model was last updated, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The status of the alarm model. The status can be one of the following values:
@@ -94,6 +120,8 @@ type UpdateAlarmModelOutput struct {
 	//
 	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
 	//   model information and try again.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.AlarmModelVersionStatus
 
 	// Metadata pertaining to the operation's result.

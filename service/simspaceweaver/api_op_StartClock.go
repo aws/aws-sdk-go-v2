@@ -9,6 +9,8 @@ import (
 )
 
 // Starts the simulation clock.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartClock(ctx context.Context, params *StartClockInput, optFns ...func(*Options)) (*StartClockOutput, error) {
 	if params == nil {
 		params = &StartClockInput{}
@@ -29,6 +31,8 @@ type StartClockInput struct {
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

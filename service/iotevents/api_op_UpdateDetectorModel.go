@@ -11,6 +11,8 @@ import (
 
 // Updates a detector model. Detectors (instances) spawned by the previous version
 // are deleted and then re-created as new inputs arrive.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDetectorModel(ctx context.Context, params *UpdateDetectorModelInput, optFns ...func(*Options)) (*UpdateDetectorModelOutput, error) {
 	if params == nil {
 		params = &UpdateDetectorModelInput{}
@@ -31,24 +33,34 @@ type UpdateDetectorModelInput struct {
 	// Information that defines how a detector operates.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDefinition *types.DetectorModelDefinition
 
 	// The name of the detector model that is updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// A brief description of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDescription *string
 
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationMethod types.EvaluationMethod
 
 	noSmithyDocumentSerde
@@ -57,6 +69,8 @@ type UpdateDetectorModelInput struct {
 type UpdateDetectorModelOutput struct {
 
 	// Information about how the detector model is configured.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelConfiguration *types.DetectorModelConfiguration
 
 	// Metadata pertaining to the operation's result.

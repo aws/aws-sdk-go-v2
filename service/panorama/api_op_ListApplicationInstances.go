@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of application instances.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListApplicationInstances(ctx context.Context, params *ListApplicationInstancesInput, optFns ...func(*Options)) (*ListApplicationInstancesOutput, error) {
 	if params == nil {
 		params = &ListApplicationInstancesInput{}
@@ -29,16 +31,24 @@ func (c *Client) ListApplicationInstances(ctx context.Context, params *ListAppli
 type ListApplicationInstancesInput struct {
 
 	// The application instances' device ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The maximum number of application instances to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Only include instances with a specific status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusFilter types.StatusFilter
 
 	noSmithyDocumentSerde
@@ -47,9 +57,13 @@ type ListApplicationInstancesInput struct {
 type ListApplicationInstancesOutput struct {
 
 	// A list of application instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstances []types.ApplicationInstance
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

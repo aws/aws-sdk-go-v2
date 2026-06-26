@@ -14,6 +14,8 @@ import (
 // detectors. The deleted detector will no longer appear if referenced in the [ListDetectors]API
 // call.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [ListDetectors]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_ListDetectors.html
 func (c *Client) BatchDeleteDetector(ctx context.Context, params *BatchDeleteDetectorInput, optFns ...func(*Options)) (*BatchDeleteDetectorOutput, error) {
 	if params == nil {
@@ -35,6 +37,8 @@ type BatchDeleteDetectorInput struct {
 	// The list of one or more detectors to be deleted.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Detectors []types.DeleteDetectorRequest
 
 	noSmithyDocumentSerde
@@ -45,6 +49,8 @@ type BatchDeleteDetectorOutput struct {
 	// A list of errors associated with the request, or an empty array ( [] ) if there
 	// are no errors. Each error entry contains a messageId that helps you identify
 	// the entry that failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchDeleteDetectorErrorEntries []types.BatchDeleteDetectorErrorEntry
 
 	// Metadata pertaining to the operation's result.

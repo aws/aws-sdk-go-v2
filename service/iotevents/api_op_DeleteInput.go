@@ -9,6 +9,8 @@ import (
 )
 
 // Deletes an input.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteInput(ctx context.Context, params *DeleteInputInput, optFns ...func(*Options)) (*DeleteInputOutput, error) {
 	if params == nil {
 		params = &DeleteInputInput{}
@@ -29,6 +31,8 @@ type DeleteInputInput struct {
 	// The name of the input to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	noSmithyDocumentSerde

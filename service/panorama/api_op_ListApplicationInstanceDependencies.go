@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of application instance dependencies.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListApplicationInstanceDependencies(ctx context.Context, params *ListApplicationInstanceDependenciesInput, optFns ...func(*Options)) (*ListApplicationInstanceDependenciesOutput, error) {
 	if params == nil {
 		params = &ListApplicationInstanceDependenciesInput{}
@@ -31,14 +33,20 @@ type ListApplicationInstanceDependenciesInput struct {
 	// The application instance's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// The maximum number of application instance dependencies to return in one page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,9 +55,13 @@ type ListApplicationInstanceDependenciesInput struct {
 type ListApplicationInstanceDependenciesOutput struct {
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of package objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageObjects []types.PackageObject
 
 	// Metadata pertaining to the operation's result.

@@ -10,6 +10,8 @@ import (
 )
 
 // Retrieves the current settings of the AWS IoT Events logging options.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeLoggingOptions(ctx context.Context, params *DescribeLoggingOptionsInput, optFns ...func(*Options)) (*DescribeLoggingOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeLoggingOptionsInput{}
@@ -32,6 +34,8 @@ type DescribeLoggingOptionsInput struct {
 type DescribeLoggingOptionsOutput struct {
 
 	// The current settings of the AWS IoT Events logging options.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LoggingOptions *types.LoggingOptions
 
 	// Metadata pertaining to the operation's result.

@@ -10,6 +10,8 @@ import (
 )
 
 // Creates a package and storage location in an Amazon S3 access point.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, optFns ...func(*Options)) (*CreatePackageOutput, error) {
 	if params == nil {
 		params = &CreatePackageInput{}
@@ -30,9 +32,13 @@ type CreatePackageInput struct {
 	// A name for the package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// Tags for the package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -43,12 +49,18 @@ type CreatePackageOutput struct {
 	// The package's storage location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StorageLocation *types.StorageLocation
 
 	// The package's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The package's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// Metadata pertaining to the operation's result.

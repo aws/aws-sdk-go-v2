@@ -10,6 +10,8 @@ import (
 )
 
 // Returns information about the specified detector (instance).
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDetector(ctx context.Context, params *DescribeDetectorInput, optFns ...func(*Options)) (*DescribeDetectorOutput, error) {
 	if params == nil {
 		params = &DescribeDetectorInput{}
@@ -31,10 +33,14 @@ type DescribeDetectorInput struct {
 	// about.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// A filter used to limit results to detectors (instances) created because of the
 	// given key ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	noSmithyDocumentSerde
@@ -43,6 +49,8 @@ type DescribeDetectorInput struct {
 type DescribeDetectorOutput struct {
 
 	// Information about the detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Detector *types.Detector
 
 	// Metadata pertaining to the operation's result.

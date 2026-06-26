@@ -9,6 +9,8 @@ import (
 )
 
 // Lists all tags on a SimSpace Weaver resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -32,6 +34,8 @@ type ListTagsForResourceInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// The list of tags for the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

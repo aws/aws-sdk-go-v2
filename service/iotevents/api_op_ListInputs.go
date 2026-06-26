@@ -10,6 +10,8 @@ import (
 )
 
 // Lists the inputs you have created.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListInputs(ctx context.Context, params *ListInputsInput, optFns ...func(*Options)) (*ListInputsOutput, error) {
 	if params == nil {
 		params = &ListInputsInput{}
@@ -28,9 +30,13 @@ func (c *Client) ListInputs(ctx context.Context, params *ListInputsInput, optFns
 type ListInputsInput struct {
 
 	// The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -39,10 +45,14 @@ type ListInputsInput struct {
 type ListInputsOutput struct {
 
 	// Summary information about the inputs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputSummaries []types.InputSummary
 
 	// The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

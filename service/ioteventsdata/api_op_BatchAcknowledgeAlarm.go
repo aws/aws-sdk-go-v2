@@ -11,6 +11,8 @@ import (
 
 // Acknowledges one or more alarms. The alarms change to the ACKNOWLEDGED state
 // after you acknowledge them.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchAcknowledgeAlarm(ctx context.Context, params *BatchAcknowledgeAlarmInput, optFns ...func(*Options)) (*BatchAcknowledgeAlarmOutput, error) {
 	if params == nil {
 		params = &BatchAcknowledgeAlarmInput{}
@@ -32,6 +34,8 @@ type BatchAcknowledgeAlarmInput struct {
 	// operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcknowledgeActionRequests []types.AcknowledgeAlarmActionRequest
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type BatchAcknowledgeAlarmOutput struct {
 	// A list of errors associated with the request, or null if there are no errors.
 	// Each error entry contains an entry ID that helps you identify the entry that
 	// failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorEntries []types.BatchAlarmActionErrorEntry
 
 	// Metadata pertaining to the operation's result.

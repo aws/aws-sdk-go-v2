@@ -10,6 +10,8 @@ import (
 
 // Stops the given custom app and shuts down all of its allocated compute
 // resources.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopApp(ctx context.Context, params *StopAppInput, optFns ...func(*Options)) (*StopAppOutput, error) {
 	if params == nil {
 		params = &StopAppInput{}
@@ -30,16 +32,22 @@ type StopAppInput struct {
 	// The name of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	App *string
 
 	// The name of the domain of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The name of the simulation of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

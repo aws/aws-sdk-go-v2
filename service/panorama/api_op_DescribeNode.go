@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a node.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeNode(ctx context.Context, params *DescribeNodeInput, optFns ...func(*Options)) (*DescribeNodeOutput, error) {
 	if params == nil {
 		params = &DescribeNodeInput{}
@@ -31,9 +33,13 @@ type DescribeNodeInput struct {
 	// The node's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeId *string
 
 	// The account ID of the node's owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	noSmithyDocumentSerde
@@ -44,67 +50,95 @@ type DescribeNodeOutput struct {
 	// The node's category.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Category types.NodeCategory
 
 	// When the node was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The node's description.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// When the node was updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// The node's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The node's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeId *string
 
 	// The node's interface.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeInterface *types.NodeInterface
 
 	// The account ID of the node's owner.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	// The node's package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// The node's package name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The node's package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// The node's patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	// The node's asset name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssetName *string
 
 	// The node's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageArn *string
 
 	// Metadata pertaining to the operation's result.

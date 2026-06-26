@@ -13,6 +13,8 @@ import (
 //
 // After AWS IoT Events starts analyzing your detector model, you have up to 24
 // hours to retrieve the analysis results.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDetectorModelAnalysisResults(ctx context.Context, params *GetDetectorModelAnalysisResultsInput, optFns ...func(*Options)) (*GetDetectorModelAnalysisResultsOutput, error) {
 	if params == nil {
 		params = &GetDetectorModelAnalysisResultsInput{}
@@ -33,12 +35,18 @@ type GetDetectorModelAnalysisResultsInput struct {
 	// The ID of the analysis result that you want to retrieve.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnalysisId *string
 
 	// The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +55,14 @@ type GetDetectorModelAnalysisResultsInput struct {
 type GetDetectorModelAnalysisResultsOutput struct {
 
 	// Contains information about one or more analysis results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnalysisResults []types.AnalysisResult
 
 	// The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -14,6 +14,8 @@ import (
 // minutes. Name the configuration archive certificates-omni_device-name.zip and
 // transfer it to the device within 5 minutes. Use the included USB storage device
 // and connect it to the USB 3.0 port next to the HDMI output.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ProvisionDevice(ctx context.Context, params *ProvisionDeviceInput, optFns ...func(*Options)) (*ProvisionDeviceOutput, error) {
 	if params == nil {
 		params = &ProvisionDeviceInput{}
@@ -34,15 +36,23 @@ type ProvisionDeviceInput struct {
 	// A name for the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A description for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A networking configuration for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkingConfiguration *types.NetworkPayload
 
 	// Tags for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -53,20 +63,30 @@ type ProvisionDeviceOutput struct {
 	// The device's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The device's status.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DeviceStatus
 
 	// The device's configuration bundle.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Certificates []byte
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The device's IoT thing name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotThingName *string
 
 	// Metadata pertaining to the operation's result.
