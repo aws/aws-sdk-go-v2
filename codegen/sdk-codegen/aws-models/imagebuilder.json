@@ -201,6 +201,30 @@
                 "smithy.api#pattern": "^[-_A-Za-z0-9{][-_A-Za-z0-9\\s:{}\\.]+[-_A-Za-z0-9}]$"
             }
         },
+        "com.amazonaws.imagebuilder#AmiWatermarkName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of an AMI watermark. AMI watermarks are lineage markers that\n\t\t\tImage Builder attaches to output AMIs during the build process. AMI watermarks\n\t\t\tautomatically propagate to derivative AMIs when the source AMI is\n\t\t\tcopied or distributed.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$"
+            }
+        },
+        "com.amazonaws.imagebuilder#AmiWatermarksList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#AmiWatermarkName"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of AMI watermark names to attach to the output AMI. Names are\n\t\t\tcase-sensitive. The recipe does not allow duplicate names.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#Arn": {
             "type": "string"
         },
@@ -1970,7 +1994,7 @@
                 "loggingConfiguration": {
                     "target": "com.amazonaws.imagebuilder#PipelineLoggingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Define logging configuration for the image build process.</p>"
+                        "smithy.api#documentation": "<p>Specifies the logging configuration for the image pipeline. Use this\n\t\t\tto define custom CloudWatch Logs log groups for your pipeline execution\n\t\t\tlogs and image build logs. The service manages log groups with names\n\t\t\tstarting with <code>/aws/imagebuilder/</code> using the service-linked\n\t\t\trole. For custom log group names outside of this prefix, you must also\n\t\t\tprovide an <code>executionRole</code>.</p>"
                     }
                 }
             },
@@ -2119,7 +2143,13 @@
                 "amiTags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags that are applied to the AMI that Image Builder creates during the Build phase \n\t\t\tprior to image distribution.</p>"
+                        "smithy.api#documentation": "<p>Tags that are applied to the AMI that Image Builder creates during the Build phase\n\t\t\tprior to image distribution.</p>"
+                    }
+                },
+                "amiWatermarks": {
+                    "target": "com.amazonaws.imagebuilder#AmiWatermarksList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMI watermark names to attach to the output AMI from this recipe.\n\t\t\tAMI watermarks are lineage markers. They automatically propagate to\n\t\t\tderivative AMIs when the source AMI is copied or distributed across\n\t\t\tRegions or accounts.</p>\n         <note>\n            <p>AMI watermarks are supported only for image recipes. AMIs with\n\t\t\t\twatermarks cannot be made public.</p>\n         </note>"
                     }
                 },
                 "clientToken": {
@@ -3614,7 +3644,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>DistributeImage distributes existing AMIs to additional regions and accounts without rebuilding the image.</p>",
+                "smithy.api#documentation": "<p>Distributes an existing AMI to target Regions and accounts without running\n\t\t\tthe full image build process. This operation only runs the distribution\n\t\t\tphase on an image that has already been built.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/DistributeImage",
@@ -3628,21 +3658,21 @@
                 "sourceImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source image Amazon Resource Name (ARN) to distribute.</p>",
+                        "smithy.api#documentation": "<p>The source image to distribute. Specify an AMI identifier,\n\t\t\tSSM parameter path, or Image Builder image Amazon Resource Name (ARN). When you specify an\n\t\t\tImage Builder image Amazon Resource Name (ARN), the image must be in the <code>AVAILABLE</code>\n\t\t\tstate.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "distributionConfigurationArn": {
                     "target": "com.amazonaws.imagebuilder#DistributionConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the distribution configuration to use.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the distribution configuration. The configuration\n\t\t\tdefines target Regions, accounts, and AMI settings. The distribution\n\t\t\tconfiguration must be in the same Region as this operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "executionRole": {
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role to use for the distribution.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role that Image Builder assumes to distribute\n\t\t\tthe image.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6213,7 +6243,13 @@
                 "amiTags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags that are applied to the AMI that Image Builder creates during the Build phase \n\t\t\tprior to image distribution.</p>"
+                        "smithy.api#documentation": "<p>Tags that are applied to the AMI that Image Builder creates during the Build phase\n\t\t\tprior to image distribution.</p>"
+                    }
+                },
+                "amiWatermarks": {
+                    "target": "com.amazonaws.imagebuilder#AmiWatermarksList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMI watermark names attached to the output AMI from this recipe.\n\t\t\tAMI watermarks are lineage markers that automatically propagate to\n\t\t\tderivative AMIs when the source AMI is copied or distributed.</p>"
                     }
                 }
             },
@@ -11310,13 +11346,13 @@
                 "imageLogGroupName": {
                     "target": "com.amazonaws.imagebuilder#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log group name that Image Builder uses for image creation. If not specified, the log group \n\t\t\tname defaults to <code>/aws/imagebuilder/image-name</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the CloudWatch Logs log group name for image build logs.\n\t\t\tThe log group name can contain alphanumeric characters, hyphens,\n\t\t\tunderscores, forward slashes, and periods, up to 512 characters.\n\t\t\tLog group names not starting with <code>/aws/imagebuilder/</code>\n\t\t\trequire an <code>executionRole</code> with CloudWatch Logs write\n\t\t\tpermissions. If not specified, defaults to\n\t\t\t<code>/aws/imagebuilder/image-name</code>.</p>"
                     }
                 },
                 "pipelineLogGroupName": {
                     "target": "com.amazonaws.imagebuilder#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log group name that Image Builder uses for the log output during creation of a new pipeline. \n\t\t\tIf not specified, the pipeline log group name defaults to \n\t\t\t<code>/aws/imagebuilder/pipeline/pipeline-name</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the CloudWatch Logs log group name for pipeline execution\n\t\t\tlogs. The log group name can contain alphanumeric characters, hyphens,\n\t\t\tunderscores, forward slashes, and periods, up to 512 characters.\n\t\t\tLog group names not starting with <code>/aws/imagebuilder/</code>\n\t\t\trequire an <code>executionRole</code> with CloudWatch Logs write\n\t\t\tpermissions. If not specified, defaults to\n\t\t\t<code>/aws/imagebuilder/pipeline/pipeline-name</code>.</p>"
                     }
                 }
             },
@@ -12266,21 +12302,21 @@
                 "imageBuildVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image build version to send action for.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image build version associated with the workflow\n\t\t\tstep execution. This value must match the image that owns the waiting step.\n\t\t\tIf the ARN does not correspond to the image running the workflow,\n\t\t\tthen the request fails with a validation error.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "action": {
                     "target": "com.amazonaws.imagebuilder#WorkflowStepActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action for the image creation process to take while a workflow \n\t\t\t<code>WaitForAction</code> step waits for an asynchronous action to complete.</p>",
+                        "smithy.api#documentation": "<p>The action to perform on the paused workflow step. The workflow\n\t\t\tstep must be in a waiting state to accept an action. The request\n\t\t\tfails if the step has already timed out or been actioned.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "reason": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why this action is sent.</p>"
+                        "smithy.api#documentation": "<p>The reason for the action. This value is stored with the step\n\t\t\texecution record and is accessible in subsequent workflow steps\n\t\t\tvia step output references.</p>"
                     }
                 },
                 "clientToken": {
@@ -12618,14 +12654,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Image Builder resource that is updated. The state update might also \n\t\t\timpact associated resources.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image build version to update. The\n\t\t\timage must be in one of these terminal states: <code>AVAILABLE</code>,\n\t\t\t<code>DEPRECATED</code>, <code>DISABLED</code>,\n\t\t\t<code>FAILED</code>, or <code>CANCELLED</code>. Images with\n\t\t\t<code>FAILED</code> or <code>CANCELLED</code> status can transition only\n\t\t\tto <code>DELETED</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "state": {
                     "target": "com.amazonaws.imagebuilder#ResourceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the lifecycle action to take for this request.</p>",
+                        "smithy.api#documentation": "<p>Specifies the lifecycle action to take for this request. For AMI-based\n\t\t\timages, valid values are <code>AVAILABLE</code>,\n\t\t\t<code>DEPRECATED</code>, <code>DISABLED</code>, and\n\t\t\t<code>DELETED</code>. For container-based images, only\n\t\t\t<code>DELETED</code> is supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12638,7 +12674,7 @@
                 "includeResources": {
                     "target": "com.amazonaws.imagebuilder#ResourceStateUpdateIncludeResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of image resources to update state for.</p>"
+                        "smithy.api#documentation": "<p>Specifies which image resources to include in the state update.\n\t\t\tWhen specified, the lifecycle action applies to underlying resources.\n\t\t\tThese resources include AMIs, snapshots, and containers in addition\n\t\t\tto the Image Builder image resource. Requires <code>executionRole</code> to\n\t\t\talso be specified. To delete an image and its underlying resources, you must\n\t\t\tspecify <code>includeResources</code>. To delete only the Image Builder\n\t\t\timage record without affecting underlying resources, use the\n\t\t\t<code>DeleteImage</code> API instead.</p>"
                     }
                 },
                 "exclusionRules": {
@@ -12650,7 +12686,7 @@
                 "updateAt": {
                     "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp that indicates when resources are updated by a lifecycle action.</p>"
+                        "smithy.api#documentation": "<p>Specifies the timestamp when the state transition takes\n\t\t\teffect. Use this parameter only when the target status is\n\t\t\t<code>DEPRECATED</code>. The value must be a future time.</p>"
                     }
                 },
                 "clientToken": {

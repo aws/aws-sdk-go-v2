@@ -9421,6 +9421,15 @@
                         ]
                     }
                 },
+                "S3ObjectStorageMode": {
+                    "target": "com.amazonaws.lambda#S3ObjectStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the deployment package is stored. Use <code>COPY</code> (default) to upload a copy of your deployment package to Lambda. Use <code>REFERENCE</code> to have Lambda reference the deployment package from the specified Amazon S3 bucket.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
                 "ImageUri": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
@@ -9486,6 +9495,15 @@
                         ]
                     }
                 },
+                "ResolvedS3Object": {
+                    "target": "com.amazonaws.lambda#ResolvedS3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved Amazon S3 object that contains the deployment package.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
                 "SourceKMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
@@ -9494,10 +9512,48 @@
                             "feature:public"
                         ]
                     }
+                },
+                "Error": {
+                    "target": "com.amazonaws.lambda#FunctionCodeLocationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an error related to function deployment package retrieval.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about a function's deployment package.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#FunctionCodeLocationError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the failed retrieval.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an error related to retrieving a function's deployment package.</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -15771,6 +15827,14 @@
                         ]
                     }
                 },
+                "S3ObjectStorageMode": {
+                    "target": "com.amazonaws.lambda#S3ObjectStorageMode",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
                 "ZipFile": {
                     "target": "com.amazonaws.lambda#Blob",
                     "traits": {
@@ -15832,6 +15896,14 @@
                     "target": "com.amazonaws.lambda#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a signing job.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ResolvedS3Object": {
+                    "target": "com.amazonaws.lambda#ResolvedS3Object",
+                    "traits": {
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -21463,6 +21535,44 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#ResolvedS3Object": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.lambda#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the deployment package.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "S3Key": {
+                    "target": "com.amazonaws.lambda#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 key of the deployment package.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "S3ObjectVersion": {
+                    "target": "com.amazonaws.lambda#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the deployment package object.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the resolved Amazon S3 object that contains a function's deployment package.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
         "com.amazonaws.lambda#ResourceArn": {
             "type": "string",
             "traits": {
@@ -22296,6 +22406,37 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^.*$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#S3ObjectStorageMode": {
+            "type": "enum",
+            "members": {
+                "Copy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> <code>COPY</code> (default) uploads a copy of your deployment package to Lambda.</p>",
+                        "smithy.api#enumValue": "COPY",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Reference": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lambda references the deployment package from the specified Amazon S3 bucket.</p>",
+                        "smithy.api#enumValue": "REFERENCE",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The storage mode for a function's deployment package.</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -25616,6 +25757,15 @@
                     "target": "com.amazonaws.lambda#S3ObjectVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>For versioned objects, the version of the deployment package object to use.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "S3ObjectStorageMode": {
+                    "target": "com.amazonaws.lambda#S3ObjectStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the deployment package is stored. Use <code>COPY</code> (default) to upload a copy of your deployment package to Lambda. Use <code>REFERENCE</code> to have Lambda reference the deployment package from the specified Amazon S3 bucket.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]

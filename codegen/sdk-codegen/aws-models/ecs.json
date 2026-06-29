@@ -8170,6 +8170,18 @@
                         "smithy.api#documentation": "<p>Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "resetOnHealthyTask": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to <code>true</code>, a healthy task resets the failure count to <code>0</code>; when <code>false</code>, it doesn't.</p>"
+                    }
+                },
+                "thresholdConfiguration": {
+                    "target": "com.amazonaws.ecs#ThresholdConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold configuration that controls when the deployment circuit breaker triggers. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ThresholdConfiguration.html\">ThresholdConfiguration</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10090,8 +10102,13 @@
                                     "status": "PENDING",
                                     "deploymentConfiguration": {
                                         "deploymentCircuitBreaker": {
-                                            "enable": false,
-                                            "rollback": false
+                                            "enable": true,
+                                            "rollback": true,
+                                            "resetOnHealthyTask": true,
+                                            "thresholdConfiguration": {
+                                                "type": "BOUNDED_PERCENT",
+                                                "value": 50
+                                            }
                                         },
                                         "maximumPercent": 200,
                                         "minimumHealthyPercent": 100
@@ -10135,8 +10152,13 @@
                                     ],
                                     "deploymentConfiguration": {
                                         "deploymentCircuitBreaker": {
-                                            "enable": false,
-                                            "rollback": false
+                                            "enable": true,
+                                            "rollback": true,
+                                            "resetOnHealthyTask": true,
+                                            "thresholdConfiguration": {
+                                                "type": "BOUNDED_PERCENT",
+                                                "value": 50
+                                            }
                                         },
                                         "maximumPercent": 200,
                                         "minimumHealthyPercent": 100,
@@ -22771,6 +22793,58 @@
                 "target": "com.amazonaws.ecs#Task"
             }
         },
+        "com.amazonaws.ecs#ThresholdConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.ecs#ThresholdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how <code>value</code> is used to calculate the failure threshold. For the percentage types (<code>BOUNDED_PERCENT</code> and <code>UNBOUNDED_PERCENT</code>), <code>value</code> is multiplied by the latest service desired count; for <code>COUNT</code>, <code>value</code> is used directly. The default is <code>BOUNDED_PERCENT</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The integer used to calculate the failure threshold. When <code>type</code> is <code>COUNT</code>, this is the failure threshold itself. When <code>type</code> is a percentage type, this is the percentage that Amazon ECS multiplies by the latest service desired count to calculate the failure threshold.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the failure threshold that the deployment circuit breaker uses to monitor a deployment. The <code>type</code> and <code>value</code> together determine the number of task failures that are tolerated before the circuit breaker triggers.</p> <p>By default, the threshold configuration uses a <code>type</code> of <code>BOUNDED_PERCENT</code> with a <code>value</code> of <code>50</code>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ThresholdType": {
+            "type": "enum",
+            "members": {
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon ECS uses the integer provided in <code>value</code> directly as the failure threshold.</p>",
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "BOUNDED_PERCENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon ECS calculates the failure threshold by multiplying <code>value</code> by the latest service desired count, then clamps the result to a minimum of <code>3</code> and a maximum of <code>200</code>. This is the default threshold type.</p>",
+                        "smithy.api#enumValue": "BOUNDED_PERCENT"
+                    }
+                },
+                "UNBOUNDED_PERCENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon ECS calculates the failure threshold by multiplying <code>value</code> by the latest service desired count, without applying the <code>3</code>-to-<code>200</code> bounds. Use this when the desired count is large enough that the calculated threshold should be allowed to exceed <code>200</code>.</p>",
+                        "smithy.api#enumValue": "UNBOUNDED_PERCENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines how the deployment circuit breaker calculates the task failure threshold from the threshold <code>value</code>.</p>"
+            }
+        },
         "com.amazonaws.ecs#TimeoutConfiguration": {
             "type": "structure",
             "members": {
@@ -24310,7 +24384,7 @@
                 "taskDefinitionArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a task definition to use to update the Express Gateway service. This allows you to manage your own task definition, giving you more control over the service configuration such as adding sidecar containers.</p> <p>The task definition must have a container named <code>Main</code> with a single TCP port mapping that includes a container port and port name. The task definition must also have <code>FARGATE</code> compatibility.</p> <p>If you provide a task definition ARN, you cannot also specify <code>primaryContainer</code>, <code>taskRoleArn</code>, <code>cpu</code>, or <code>memory</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a task definition to use to update the Express Gateway service. This allows you to manage your own task definition, giving you more control over the service configuration such as adding sidecar containers.</p> <p>The task definition must have a container named <code>Main</code> with a single TCP port mapping that includes a container port and port name. The task definition must also have <code>FARGATE</code> compatibility.</p> <p>If you provide a task definition ARN, you cannot also specify <code>primaryContainer</code>, <code>executionRoleArn</code>, <code>taskRoleArn</code>, <code>cpu</code>, or <code>memory</code>.</p>"
                     }
                 }
             },

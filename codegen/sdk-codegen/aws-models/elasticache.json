@@ -4633,7 +4633,7 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            When set to <code>default</code>, the service determines the effective durability based on\n            the engine version, cluster mode, and other parameters. The resolved setting is reflected\n            in the <code>EffectiveDurability</code> property of the replication group. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            When set to <code>default</code>, the service determines the effective durability based on\n            the engine version, cluster mode, and other parameters. The resolved setting is reflected\n            in the <code>EffectiveDurability</code> property of the replication group. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 }
             },
@@ -11573,7 +11573,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, this parameter causes the modifications in this request and any\n            pending modifications to be applied, asynchronously and as soon as possible, regardless\n            of the <code>PreferredMaintenanceWindow</code> setting for the cluster.</p>\n         <p>If <code>false</code>, changes to the cluster are applied on the next maintenance\n            reboot, or the next failure reboot, whichever occurs first.</p>\n         <important>\n            <p>If you perform a <code>ModifyCacheCluster</code> before a pending modification is\n                applied, the pending modification is replaced by the newer modification.</p>\n         </important>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, this parameter causes the modifications in this request and any\n            pending modifications to be applied, asynchronously and as soon as possible, regardless\n            of the <code>PreferredMaintenanceWindow</code> setting for the cluster.</p>\n         <p>If <code>false</code>, changes to the cluster are applied on the next maintenance\n            reboot, or the next failure reboot, whichever occurs first.</p>\n         <important>\n            <p>If you perform a <code>ModifyCacheCluster</code> before a pending modification is\n                applied, the pending modification is replaced by the newer modification. However, \n                a pending node-count increase on Memcached clusters cannot be superseded by a request \n                to add fewer nodes. To change a pending node addition, first cancel it by setting \n                <code>NumCacheNodes</code> equal to the current number of nodes in the cluster, then \n                submit the new request. See the <code>NumCacheNodes</code> parameter for details on \n                node scaling behavior.</p>\n         </important>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
                 "Engine": {
@@ -12270,7 +12270,7 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            Use this parameter to change the durability mode of an existing replication group,\n            for example from <code>sync</code> to <code>async</code> or vice versa. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            Use this parameter to change the durability mode of an existing replication group,\n            for example from <code>sync</code> to <code>async</code> or vice versa. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 }
             },
@@ -14196,13 +14196,13 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The durability setting of the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>The durability setting of the replication group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 },
                 "EffectiveDurability": {
                     "target": "com.amazonaws.elasticache#EffectiveDurability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective durability of the replication group. When <code>Durability</code> is set to\n            <code>default</code>, the service resolves the actual durability based on the engine version,\n            cluster mode, and other parameters. This field reflects the resolved value. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ConfiguringDurability.html\">Configuring Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>The effective durability of the replication group. When <code>Durability</code> is set to\n            <code>default</code>, the service resolves the actual durability based on the engine version,\n            cluster mode, and other parameters. This field reflects the resolved value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.Configuring.html\">Configuring Durability</a>.</p>"
                     }
                 }
             },
@@ -15664,7 +15664,7 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The durability setting of the cluster when the snapshot was taken. When restoring from this snapshot,\n            the cluster uses this durability setting unless overridden in the restore request. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>The durability setting of the cluster when the snapshot was taken. When restoring from this snapshot,\n            the cluster uses this durability setting unless overridden in the restore request. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 }
             },

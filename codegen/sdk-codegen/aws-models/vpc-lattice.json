@@ -1752,6 +1752,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>"
                     }
+                },
+                "idleTimeoutSeconds": {
+                    "target": "com.amazonaws.vpclattice#IdleTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If you don't specify a value, the default is 60 seconds. This setting does not change the maximum connection duration of 10 minutes; connections are still closed when they reach that limit.</p>"
+                    }
                 }
             }
         },
@@ -1798,6 +1804,12 @@
                     "target": "com.amazonaws.vpclattice#AuthType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IAM policy.</p>"
+                    }
+                },
+                "idleTimeoutSeconds": {
+                    "target": "com.amazonaws.vpclattice#IdleTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a connection can remain idle before VPC Lattice closes it.</p>"
                     }
                 },
                 "dnsEntry": {
@@ -3937,13 +3949,13 @@
                 "serviceManaged": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the resource gateway is managed by an AWS service.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the resource gateway is managed by an Amazon Web Services service.</p>"
                     }
                 },
                 "managedBy": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS service that manages the resource gateway.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that manages the resource gateway.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -4846,6 +4858,12 @@
                         "smithy.api#documentation": "<p>The type of IAM policy.</p>"
                     }
                 },
+                "idleTimeoutSeconds": {
+                    "target": "com.amazonaws.vpclattice#IdleTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a connection can remain idle before VPC Lattice closes it.</p>"
+                    }
+                },
                 "failureCode": {
                     "target": "com.amazonaws.vpclattice#FailureCode",
                     "traits": {
@@ -5262,6 +5280,15 @@
                 "smithy.api#range": {
                     "min": 100,
                     "max": 599
+                }
+            }
+        },
+        "com.amazonaws.vpclattice#IdleTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 600
                 }
             }
         },
@@ -11918,6 +11945,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>"
                     }
+                },
+                "idleTimeoutSeconds": {
+                    "target": "com.amazonaws.vpclattice#IdleTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If you don't specify a value, the default is 60 seconds. This setting does not change the maximum connection duration of 10 minutes; connections are still closed when they reach that limit.</p>"
+                    }
                 }
             }
         },
@@ -11958,6 +11991,12 @@
                     "target": "com.amazonaws.vpclattice#AuthType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IAM policy.</p>"
+                    }
+                },
+                "idleTimeoutSeconds": {
+                    "target": "com.amazonaws.vpclattice#IdleTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a connection can remain idle before VPC Lattice closes it.</p>"
                     }
                 }
             }

@@ -829,6 +829,9 @@
                     "target": "com.amazonaws.glue#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.glue#UpdateAsset"
+                },
+                {
                     "target": "com.amazonaws.glue#UpdateBlueprint"
                 },
                 {
@@ -37120,25 +37123,6 @@
                 }
             }
         },
-        "com.amazonaws.glue#MetadataFormContent": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 300000
-                }
-            }
-        },
-        "com.amazonaws.glue#MetadataFormTypeIdentifier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
-                },
-                "smithy.api#pattern": "^(?![\\.:])([\\w.]+(::))?[A-Z]\\w*$"
-            }
-        },
         "com.amazonaws.glue#MetadataInfo": {
             "type": "structure",
             "members": {
@@ -39986,14 +39970,14 @@
                     }
                 },
                 "Content": {
-                    "target": "com.amazonaws.glue#MetadataFormContent",
+                    "target": "com.amazonaws.glue#FormContent",
                     "traits": {
                         "smithy.api#documentation": "<p>The JSON content of the form, conforming to the schema of the specified form type.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FormTypeId": {
-                    "target": "com.amazonaws.glue#MetadataFormTypeIdentifier",
+                    "target": "com.amazonaws.glue#FormTypeId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the form type for this attachment.</p>",
                         "smithy.api#required": {}
@@ -40039,7 +40023,7 @@
                     }
                 },
                 "FormTypeId": {
-                    "target": "com.amazonaws.glue#MetadataFormTypeIdentifier",
+                    "target": "com.amazonaws.glue#FormTypeId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the form type for this attachment.</p>"
                     }
@@ -50223,6 +50207,111 @@
         "com.amazonaws.glue#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the name and description of an existing asset in Glue Data Catalog. Only the fields that you provide are updated.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/assets/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateAssetRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name of the asset.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#AssetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new description of the asset.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateAssetResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#AssetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.glue#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset was last updated.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
