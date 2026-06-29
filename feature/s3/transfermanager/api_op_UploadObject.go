@@ -1174,7 +1174,9 @@ func (u *multiUploader) seterr(e error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
-	u.err = e
+	if u.err == nil {
+		u.err = e
+	}
 }
 
 func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Options)) {
