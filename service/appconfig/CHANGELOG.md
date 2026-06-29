@@ -1,3 +1,7 @@
+# v1.45.0 (2026-06-29)
+
+* **Feature**: AWS AppConfig introduces Experimentation tools - enhanced capabilities within AWS AppConfig that enable you to run AB tests, multivariate tests, and gradual feature rollouts across your application stack.
+
 # v1.44.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

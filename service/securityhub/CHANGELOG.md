@@ -1,3 +1,7 @@
+# v1.71.8 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.71.7 (2026-06-09)
 
 * No change notes available for this release.

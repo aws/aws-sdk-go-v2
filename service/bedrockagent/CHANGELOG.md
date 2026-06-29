@@ -1,3 +1,7 @@
+# v1.56.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.56.0 (2026-06-19)
 
 * **Feature**: Add support for metadata-only retrieval on GetFlow, GetFlowVersion, and GetPrompt APIs.

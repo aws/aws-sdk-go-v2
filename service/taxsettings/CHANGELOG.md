@@ -1,3 +1,7 @@
+# v1.18.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.18.0 (2026-06-08)
 
 * **Feature**: Adds support for additional tax information fields for Philippines, Belgium, Chile, France, Poland, and Italy in the Tax Settings API.

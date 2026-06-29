@@ -1,3 +1,7 @@
+# v1.44.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.44.0 (2026-06-10)
 
 * **Feature**: Adds supports for out-of-order sample ingestion (default 1-minute window) and a configurable rule query offset to reduce data loss and improve alerting accuracy.

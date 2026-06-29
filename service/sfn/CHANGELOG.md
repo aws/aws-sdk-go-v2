@@ -1,3 +1,7 @@
+# v1.43.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.43.0 (2026-06-08)
 
 * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag

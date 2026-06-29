@@ -1,3 +1,7 @@
+# v1.40.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.40.0 (2026-06-08)
 
 * **Feature**: Adds support for DASH Audio Timeline Patternization. This enables your DASH manifests to templatize the repeating patterns that emerge in audio segment timelines. This compacts the total timeline length, utilizing the repeat notation, such that manifests don't grow indefinitely long.

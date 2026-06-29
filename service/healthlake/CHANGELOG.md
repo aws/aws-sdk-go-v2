@@ -1,3 +1,7 @@
+# v1.39.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.39.0 (2026-06-18)
 
 * **Feature**: Adding New Configurations to the FHIR Create Datastore. The new configurations include NLP Configuration, AnalyticsConfiguration, ProfileConfiguration

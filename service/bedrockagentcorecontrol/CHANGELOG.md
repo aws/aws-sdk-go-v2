@@ -1,3 +1,7 @@
+# v1.45.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.45.0 (2026-06-17)
 
 * **Feature**: AgentCore Gateway now supports inference targets to LLM providers (direct config or built-in connectors), HTTP passthrough targets with session stickiness, runtime target API schemas, AWS WAF web ACL association with configurable fail-open or fail-close modes, and interceptor payload filtering.

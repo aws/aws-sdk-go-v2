@@ -1,3 +1,7 @@
+# v1.94.0 (2026-06-29)
+
+* **Feature**: Lambda now supports self-managed S3 buckets for Lambda code storage giving you the option for Lambda to reference a copy of your source code from your own S3 buckets. This allows you to maintain a single copy of your source code and manage your own code storage limits.
+
 # v1.93.0 (2026-06-18)
 
 * **Feature**: Converging and fixing existing documentation gaps in Lambda SDK

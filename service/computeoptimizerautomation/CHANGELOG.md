@@ -1,3 +1,7 @@
+# v1.3.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.3.0 (2026-06-17)
 
 * **Feature**: This launch adds IfExists comparison operators to Compute Optimizer Automation rule criteria, so a rule can include recommended actions whose specified attribute isn't present.

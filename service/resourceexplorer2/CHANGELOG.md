@@ -1,3 +1,7 @@
+# v1.25.0 (2026-06-29)
+
+* **Feature**: Added CFN resource type fields for Search and ListSupportedResourceTypes responses. Added SLRec field for ServiceView
+
 # v1.24.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

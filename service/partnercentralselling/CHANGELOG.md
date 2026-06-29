@@ -1,3 +1,7 @@
+# v1.19.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.19.0 (2026-06-16)
 
 * **Feature**: Added Prospecting APIs to convert engagements into AI-enriched leads with scoring insights. Extended Engagement APIs with ProspectingResult and Lead contexts. Added CoSell Scoring to GetAwsOpportunitySummary- quality score, trend, agent-driven recommendations, and engagement classification.

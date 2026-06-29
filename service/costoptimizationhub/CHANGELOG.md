@@ -1,3 +1,7 @@
+# v1.24.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.24.0 (2026-06-08)
 
 * **Feature**: Adds new Idle Recommendation types in the Cost Optimization Hub API

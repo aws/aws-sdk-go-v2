@@ -1,3 +1,7 @@
+# v1.56.0 (2026-06-29)
+
+* **Feature**: Adds support for AMI watermarks in Image Builder.
+
 # v1.55.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

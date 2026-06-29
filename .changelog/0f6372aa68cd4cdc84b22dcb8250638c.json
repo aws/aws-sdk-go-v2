@@ -1,8 +1,0 @@
-{
-    "id": "0f6372aa-68cd-4cdc-84b2-2dcb8250638c",
-    "type": "feature",
-    "description": "Expand input validation to support Unicode characters and markdown table syntax.",
-    "modules": [
-        "service/connecthealth"
-    ]
-}

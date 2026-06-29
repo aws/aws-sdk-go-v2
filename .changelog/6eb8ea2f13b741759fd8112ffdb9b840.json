@@ -1,8 +1,0 @@
-{
-    "id": "6eb8ea2f-13b7-4175-9fd8-112ffdb9b840",
-    "type": "feature",
-    "description": "Added CFN resource type fields for Search and ListSupportedResourceTypes responses. Added SLRec field for ServiceView",
-    "modules": [
-        "service/resourceexplorer2"
-    ]
-}

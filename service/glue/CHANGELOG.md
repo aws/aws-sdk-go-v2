@@ -1,3 +1,7 @@
+# v1.147.0 (2026-06-29)
+
+* **Feature**: Added the UpdateAsset operation to set the business name and description for an existing AWS Glue Data Catalog asset.
+
 # v1.146.0 (2026-06-19)
 
 * **Feature**: Adds the SearchAssets operation for discovering assets in the AWS Glue Data Catalog using full-text search and filters. Minor naming refinements across the Glossary Terms and Attachment APIs for consistency.

@@ -1,3 +1,7 @@
+# v1.46.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.46.0 (2026-06-22)
 
 * **Feature**: Adds support for scratch ephemeral storage mounted at tmp

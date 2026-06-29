@@ -1,3 +1,7 @@
+# v1.32.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.32.0 (2026-06-22)
 
 * **Feature**: Adds an optional extractionMode field to CreateEvent. SKIP retains the event in short-term memory but excludes it from long-term memory extraction.

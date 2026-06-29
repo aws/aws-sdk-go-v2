@@ -1,3 +1,7 @@
+# v1.21.0 (2026-06-29)
+
+* **Feature**: Add support for in-place Slurm version upgrades on existing clusters by accepting scheduler.version in UpdateCluster.
+
 # v1.20.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

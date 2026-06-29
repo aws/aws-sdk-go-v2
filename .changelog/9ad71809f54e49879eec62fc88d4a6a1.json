@@ -1,8 +1,0 @@
-{
-    "id": "9ad71809-f54e-4987-9eec-62fc88d4a6a1",
-    "type": "feature",
-    "description": "refactor common middlewares to be shared by service operations",
-    "modules": [
-        "."
-    ]
-}

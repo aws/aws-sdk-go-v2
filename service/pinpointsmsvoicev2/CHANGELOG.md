@@ -1,3 +1,7 @@
+# v1.30.0 (2026-06-29)
+
+* **Feature**: This launch is an expansion of our Q1 RCS for business launch where we will release an API that supports rich media and interactive messaging elements.
+
 # v1.29.7 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

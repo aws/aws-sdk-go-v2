@@ -1,3 +1,7 @@
+# v1.4.0 (2026-06-29)
+
+* **Feature**: Expand input validation to support Unicode characters and markdown table syntax.
+
 # v1.3.0 (2026-06-10)
 
 * **Feature**: Add support for MedicalScribeBinaryAudioEvent in the Medical Scribe streaming input. This new event type lets you send audio as a raw binary payload instead of a base64-encoded value

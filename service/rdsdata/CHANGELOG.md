@@ -1,3 +1,7 @@
+# v1.33.5 (2026-06-29)
+
+* **Documentation**: Updated documentation to remove Aurora Serverless V1 references.
+
 # v1.33.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

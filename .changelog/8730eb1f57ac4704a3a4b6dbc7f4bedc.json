@@ -1,8 +1,0 @@
-{
-    "id": "8730eb1f-57ac-4704-a3a4-b6dbc7f4bedc",
-    "type": "feature",
-    "description": "Added the UpdateAsset operation to set the business name and description for an existing AWS Glue Data Catalog asset.",
-    "modules": [
-        "service/glue"
-    ]
-}

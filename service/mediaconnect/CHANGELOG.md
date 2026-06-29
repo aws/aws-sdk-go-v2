@@ -1,3 +1,7 @@
+# v1.51.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.51.0 (2026-06-22)
 
 * **Feature**: AWS MediaConnect now supports Content Quality Analysis for Router Inputs, enabling detection of black frames, frozen frames, and silent audio with configurable thresholds.

@@ -1,3 +1,7 @@
+# v1.54.4 (2026-06-29)
+
+* **Documentation**: Updated documentation for the ApplyImmediately parameter in ModifyCacheCluster and ModifyReplicationGroup to clarify modification behavior.
+
 # v1.54.3 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.36.0 (2026-06-29)
+
+* **Feature**: Add support for ListRecords and BatchWriteRecord APIs to Feature Store.
+
 # v1.35.7 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

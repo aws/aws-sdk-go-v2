@@ -1,3 +1,7 @@
+# v1.177.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.177.0 (2026-06-19)
 
 * **Feature**: This is the release for point based scoring system and the evaluation form validation project

@@ -1,3 +1,7 @@
+# v1.23.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.23.0 (2026-06-22)
 
 * **Feature**: Application Signals now supports dynamic instrumentation and Service Events telemetry. Add instrumentation at runtime without restarts, and use fine-grained profiling data to quickly pinpoint latency and error root causes.

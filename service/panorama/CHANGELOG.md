@@ -1,3 +1,7 @@
+# v1.29.0 (2026-06-29)
+
+* **Feature**: Marked iotevents/ioteventsdata/panorama/simspaceweaver services as deprecated. These services have reached end-of-life.
+
 # v1.28.8 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

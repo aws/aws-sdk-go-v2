@@ -1,3 +1,7 @@
+# v1.86.0 (2026-06-29)
+
+* **Feature**: Amazon ECS now supports customizable deployment circuit breaker configurations. Customers can now define the failure threshold or control the failure counting mechanism.
+
 # v1.85.0 (2026-06-18)
 
 * **Feature**: Amazon ECS services now support high resolution (20 second) CloudWatch metrics for CPUUtilization and MemoryUtilization. Use these metrics for faster service auto scaling.

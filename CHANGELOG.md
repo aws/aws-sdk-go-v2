@@ -1,3 +1,54 @@
+# Release (2026-06-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.45.0](service/appconfig/CHANGELOG.md#v1450-2026-06-29)
+  * **Feature**: AWS AppConfig introduces Experimentation tools - enhanced capabilities within AWS AppConfig that enable you to run AB tests, multivariate tests, and gradual feature rollouts across your application stack.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.60.0](service/cloudwatch/CHANGELOG.md#v1600-2026-06-29)
+  * **Feature**: This release adds the API (PutLogAlarm) to manage a new CloudWatch resource, Log Based Alarms. Log Based Alarms allows customers to alarm directly on CloudWatch Logs query results.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.15.0](service/connectcampaignsv2/CHANGELOG.md#v1150-2026-06-29)
+  * **Feature**: Adding new attributes to PutProfileOutboundRequest API that will create an outbound request call for the customer's Web Notification outbound campaign.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.4.0](service/connecthealth/CHANGELOG.md#v140-2026-06-29)
+  * **Feature**: Expand input validation to support Unicode characters and markdown table syntax.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.309.0](service/ec2/CHANGELOG.md#v13090-2026-06-29)
+  * **Feature**: Adds support for the precision time strategy and a parentGroupId parameter on CreatePlacementGroup and DescribePlacementGroups. Precision time placement groups and cluster placement groups with a parent precision time placement group ensure instances launch on precision time capable hardware.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.86.0](service/ecs/CHANGELOG.md#v1860-2026-06-29)
+  * **Feature**: Amazon ECS now supports customizable deployment circuit breaker configurations. Customers can now define the failure threshold or control the failure counting mechanism.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.54.4](service/elasticache/CHANGELOG.md#v1544-2026-06-29)
+  * **Documentation**: Updated documentation for the ApplyImmediately parameter in ModifyCacheCluster and ModifyReplicationGroup to clarify modification behavior.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.11.0](service/evs/CHANGELOG.md#v1110-2026-06-29)
+  * **Feature**: Amazon EVS introduces a VMware Cloud Foundation (VCF) self-deployed mode, along with new connectors to VCF components such as the Operations and SDDC managers to monitor coverage and usage.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.147.0](service/glue/CHANGELOG.md#v11470-2026-06-29)
+  * **Feature**: Added the UpdateAsset operation to set the business name and description for an existing AWS Glue Data Catalog asset.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.56.0](service/imagebuilder/CHANGELOG.md#v1560-2026-06-29)
+  * **Feature**: Adds support for AMI watermarks in Image Builder.
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.35.0](service/iotevents/CHANGELOG.md#v1350-2026-06-29)
+  * **Feature**: Marked iotevents/ioteventsdata/panorama/simspaceweaver services as deprecated. These services have reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.32.0](service/ioteventsdata/CHANGELOG.md#v1320-2026-06-29)
+  * **Feature**: Marked iotevents/ioteventsdata/panorama/simspaceweaver services as deprecated. These services have reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.94.0](service/lambda/CHANGELOG.md#v1940-2026-06-29)
+  * **Feature**: Lambda now supports self-managed S3 buckets for Lambda code storage giving you the option for Lambda to reference a copy of your source code from your own S3 buckets. This allows you to maintain a single copy of your source code and manage your own code storage limits.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.29.0](service/panorama/CHANGELOG.md#v1290-2026-06-29)
+  * **Feature**: Marked iotevents/ioteventsdata/panorama/simspaceweaver services as deprecated. These services have reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.21.0](service/pcs/CHANGELOG.md#v1210-2026-06-29)
+  * **Feature**: Add support for in-place Slurm version upgrades on existing clusters by accepting scheduler.version in UpdateCluster.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.30.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1300-2026-06-29)
+  * **Feature**: This launch is an expansion of our Q1 RCS for business launch where we will release an API that supports rich media and interactive messaging elements.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.33.5](service/rdsdata/CHANGELOG.md#v1335-2026-06-29)
+  * **Documentation**: Updated documentation to remove Aurora Serverless V1 references.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.25.0](service/resourceexplorer2/CHANGELOG.md#v1250-2026-06-29)
+  * **Feature**: Added CFN resource type fields for Search and ListSupportedResourceTypes responses. Added SLRec field for ServiceView
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.36.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1360-2026-06-29)
+  * **Feature**: Add support for ListRecords and BatchWriteRecord APIs to Feature Store.
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.21.0](service/simspaceweaver/CHANGELOG.md#v1210-2026-06-29)
+  * **Feature**: Marked iotevents/ioteventsdata/panorama/simspaceweaver services as deprecated. These services have reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.23.0](service/vpclattice/CHANGELOG.md#v1230-2026-06-29)
+  * **Feature**: Amazon VPC Lattice now supports mutable idle timeout configuration on VPC Lattice Services
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.74.0](service/wafv2/CHANGELOG.md#v1740-2026-06-29)
+  * **Feature**: AWS WAF added support for associating AWS WAF web ACLs with Amazon Bedrock AgentCore Gateway resources. You can now use AssociateWebACL, DisassociateWebACL, GetWebACLForResource, and ListResourcesForWebACL to protect your AgentCore Gateways with AWS WAF.
+
 # Release (2026-06-23)
 
 ## Module Highlights

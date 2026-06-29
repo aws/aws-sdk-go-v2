@@ -1,3 +1,7 @@
+# v1.23.0 (2026-06-29)
+
+* **Feature**: Amazon VPC Lattice now supports mutable idle timeout configuration on VPC Lattice Services
+
 # v1.22.2 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.40.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.40.0 (2026-06-12)
 
 * **Feature**: Certificate transparency logging opt-out is no longer available. Per compliance requirements, all public ACM certificates are automatically recorded in certificate transparency logs. The CertificateTransparencyLoggingPreference option is deprecated.

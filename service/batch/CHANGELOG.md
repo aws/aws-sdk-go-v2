@@ -1,3 +1,7 @@
+# v1.66.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.66.0 (2026-06-18)
 
 * **Feature**: Adds Support for ordered allocation strategies- BEST-FIT-PROGRESSIVE-ORDERED or SPOT-CAPACITY-OPTIMIZED-PRIORITIZED

@@ -1,3 +1,7 @@
+# v1.256.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.256.0 (2026-06-18)
 
 * **Feature**: Adds support for automatic AMI patching on HyperPod clusters. Customers can configure patching strategies to automatically apply security patch with zero job termination. Customers can also specify an AMI version at instance group level and update cluster software to a certain AMI version.

@@ -1,3 +1,7 @@
+# v1.78.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.78.0 (2026-06-22)
 
 * **Feature**: CloudWatch Logs Updates - New APIs introduced to support syslog ingestion to a log group. For more information, see CloudWatch Logs API documentation.

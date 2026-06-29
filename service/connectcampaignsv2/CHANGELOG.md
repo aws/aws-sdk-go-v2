@@ -1,3 +1,7 @@
+# v1.15.0 (2026-06-29)
+
+* **Feature**: Adding new attributes to PutProfileOutboundRequest API that will create an outbound request call for the customer's Web Notification outbound campaign.
+
 # v1.14.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

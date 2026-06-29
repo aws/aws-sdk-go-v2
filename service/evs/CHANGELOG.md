@@ -1,3 +1,7 @@
+# v1.11.0 (2026-06-29)
+
+* **Feature**: Amazon EVS introduces a VMware Cloud Foundation (VCF) self-deployed mode, along with new connectors to VCF components such as the Operations and SDDC managers to monitor coverage and usage.
+
 # v1.10.7 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

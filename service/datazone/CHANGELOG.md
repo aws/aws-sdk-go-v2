@@ -1,3 +1,7 @@
+# v1.63.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.63.0 (2026-06-15)
 
 * **Feature**: Adds support for deleting lineage events in Amazon DataZone.

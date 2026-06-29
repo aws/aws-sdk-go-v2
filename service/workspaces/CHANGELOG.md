@@ -1,3 +1,7 @@
+# v1.70.1 (2026-06-29)
+
+* No change notes available for this release.
+
 # v1.70.0 (2026-06-15)
 
 * **Feature**: Added a validation for null check for ImageIds in DescribeWorkspaceImages API request parameters.

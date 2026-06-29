@@ -1,8 +1,0 @@
-{
-    "id": "074c1863-99ae-41eb-ae33-b342472a1184",
-    "type": "feature",
-    "description": "Add support for ListRecords and BatchWriteRecord APIs to Feature Store.",
-    "modules": [
-        "service/sagemakerfeaturestoreruntime"
-    ]
-}
