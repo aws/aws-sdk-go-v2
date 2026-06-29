@@ -38,13 +38,17 @@ type StartResourceStateUpdateInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Image Builder resource that is updated.
-	// The state update might also impact associated resources.
+	// The Amazon Resource Name (ARN) of the image build version to update. The image
+	// must be in one of these terminal states: AVAILABLE , DEPRECATED , DISABLED ,
+	// FAILED , or CANCELLED . Images with FAILED or CANCELLED status can transition
+	// only to DELETED .
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Indicates the lifecycle action to take for this request.
+	// Specifies the lifecycle action to take for this request. For AMI-based images,
+	// valid values are AVAILABLE , DEPRECATED , DISABLED , and DELETED . For
+	// container-based images, only DELETED is supported.
 	//
 	// This member is required.
 	State *types.ResourceState
@@ -57,10 +61,18 @@ type StartResourceStateUpdateInput struct {
 	// image state.
 	ExecutionRole *string
 
-	// A list of image resources to update state for.
+	// Specifies which image resources to include in the state update. When specified,
+	// the lifecycle action applies to underlying resources. These resources include
+	// AMIs, snapshots, and containers in addition to the Image Builder image resource.
+	// Requires executionRole to also be specified. To delete an image and its
+	// underlying resources, you must specify includeResources . To delete only the
+	// Image Builder image record without affecting underlying resources, use the
+	// DeleteImage API instead.
 	IncludeResources *types.ResourceStateUpdateIncludeResources
 
-	// The timestamp that indicates when resources are updated by a lifecycle action.
+	// Specifies the timestamp when the state transition takes effect. Use this
+	// parameter only when the target status is DEPRECATED . The value must be a future
+	// time.
 	UpdateAt *time.Time
 
 	noSmithyDocumentSerde

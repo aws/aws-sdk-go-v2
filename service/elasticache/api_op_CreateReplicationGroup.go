@@ -280,7 +280,7 @@ type CreateReplicationGroupInput struct {
 	// EffectiveDurability property of the replication group. For more information, see [Durability]
 	// .
 	//
-	// [Durability]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+	// [Durability]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
 	Durability types.Durability
 
 	// The name of the cache engine to be used for the clusters in this replication

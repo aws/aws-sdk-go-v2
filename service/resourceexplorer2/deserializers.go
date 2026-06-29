@@ -5822,6 +5822,42 @@ func awsRestjson1_deserializeDocumentBatchGetViewErrors(v *[]types.BatchGetViewE
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCFNResourceTypeList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6621,6 +6657,15 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "CfnResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CfnResourceType = ptr.String(jtv)
+			}
+
 		case "LastReportedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6977,6 +7022,64 @@ func awsRestjson1_deserializeDocumentSearchFilter(v **types.SearchFilter, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentServiceLinkedRecorderInfo(v **types.ServiceLinkedRecorderInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceLinkedRecorderInfo
+	if *v == nil {
+		sv = &types.ServiceLinkedRecorderInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RecorderName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RecorderName = ptr.String(jtv)
+			}
+
+		case "RecorderType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecorderType to be of type string, got %T instead", value)
+				}
+				sv.RecorderType = types.RecorderType(jtv)
+			}
+
+		case "ServicePrincipal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServicePrincipal = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7074,6 +7177,11 @@ func awsRestjson1_deserializeDocumentServiceView(v **types.ServiceView, value in
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ScopeType = ptr.String(jtv)
+			}
+
+		case "ServiceLinkedRecorder":
+			if err := awsRestjson1_deserializeDocumentServiceLinkedRecorderInfo(&sv.ServiceLinkedRecorder, value); err != nil {
+				return err
 			}
 
 		case "ServiceViewArn":
@@ -7257,6 +7365,11 @@ func awsRestjson1_deserializeDocumentSupportedResourceType(v **types.SupportedRe
 
 	for key, value := range shape {
 		switch key {
+		case "CFNResourceTypes":
+			if err := awsRestjson1_deserializeDocumentCFNResourceTypeList(&sv.CFNResourceTypes, value); err != nil {
+				return err
+			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)

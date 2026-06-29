@@ -6073,9 +6073,21 @@ func awsAwsjson11_serializeDocumentDeploymentCircuitBreaker(v *types.DeploymentC
 		ok.Boolean(v.Enable)
 	}
 
+	if v.ResetOnHealthyTask != nil {
+		ok := object.Key("resetOnHealthyTask")
+		ok.Boolean(*v.ResetOnHealthyTask)
+	}
+
 	{
 		ok := object.Key("rollback")
 		ok.Boolean(v.Rollback)
+	}
+
+	if v.ThresholdConfiguration != nil {
+		ok := object.Key("thresholdConfiguration")
+		if err := awsAwsjson11_serializeDocumentThresholdConfiguration(v.ThresholdConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8937,6 +8949,23 @@ func awsAwsjson11_serializeDocumentTaskVolumeConfigurations(v []types.TaskVolume
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentThresholdConfiguration(v *types.ThresholdConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	{
+		ok := object.Key("value")
+		ok.Integer(v.Value)
+	}
+
 	return nil
 }
 

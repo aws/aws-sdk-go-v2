@@ -902,6 +902,27 @@ func (Runtime) Values() []Runtime {
 	}
 }
 
+type S3ObjectStorageMode string
+
+// Enum values for S3ObjectStorageMode
+const (
+	// COPY (default) uploads a copy of your deployment package to Lambda.
+	S3ObjectStorageModeCopy S3ObjectStorageMode = "COPY"
+	// Lambda references the deployment package from the specified Amazon S3 bucket.
+	S3ObjectStorageModeReference S3ObjectStorageMode = "REFERENCE"
+)
+
+// Values returns all known values for S3ObjectStorageMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectStorageMode) Values() []S3ObjectStorageMode {
+	return []S3ObjectStorageMode{
+		"COPY",
+		"REFERENCE",
+	}
+}
+
 type SchemaRegistryEventRecordFormat string
 
 // Enum values for SchemaRegistryEventRecordFormat

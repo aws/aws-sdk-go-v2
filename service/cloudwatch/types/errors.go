@@ -414,6 +414,33 @@ func (e *MissingRequiredParameterException) ErrorCode() string {
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation could not be completed because the request conflicts with the
+// current state of the alarm or its underlying scheduled query resource.
+type ResourceConflict struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceConflict) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceConflict) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceConflict) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceConflict"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceConflict) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The named resource does not exist.
 type ResourceNotFound struct {
 	Message *string

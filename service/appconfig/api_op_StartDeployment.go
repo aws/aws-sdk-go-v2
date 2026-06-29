@@ -11,6 +11,15 @@ import (
 )
 
 // Starts a deployment.
+//
+// AppConfig Agent supports deploying feature flag or free-form configuration data
+// to specific segments or individual users during a gradual rollout. Entity-based
+// gradual deployments ensure that once a user or segment receives a configuration
+// version, they continue to receive that same version throughout the deployment
+// period, regardless of which compute resource serves their requests. For more
+// information, see [Using AppConfig Agent for user-based or entity-based gradual deployments]
+//
+// [Using AppConfig Agent for user-based or entity-based gradual deployments]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments
 func (c *Client) StartDeployment(ctx context.Context, params *StartDeploymentInput, optFns ...func(*Options)) (*StartDeploymentOutput, error) {
 	if params == nil {
 		params = &StartDeploymentInput{}
@@ -65,6 +74,10 @@ type StartDeploymentInput struct {
 	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID
 	// to encrypt the configuration data using a customer managed key.
 	KmsKeyIdentifier *string
+
+	// The number of the latest deployment. Use this value to ensure that the
+	// deployment starts from the expected state and to prevent conflicting updates.
+	LatestDeploymentNumber *int32
 
 	// Metadata to assign to the deployment. Tags help organize and categorize your
 	// AppConfig resources. Each tag consists of a key and an optional value, both of

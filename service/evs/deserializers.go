@@ -2816,6 +2816,15 @@ func awsAwsjson10_deserializeDocumentCheck(v **types.Check, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
 		case "impairedSince":
 			if value != nil {
 				switch jtv := value.(type) {

@@ -993,6 +993,483 @@ type RcsAgentInformation struct {
 	// SMS messages.
 	TwoWayChannelRole *string
 
+	// The name of the S3 bucket where inbound RCS media files are stored.
+	TwoWayMediaS3BucketName *string
+
+	// The key prefix used for inbound RCS media objects in the S3 bucket.
+	TwoWayMediaS3KeyPrefix *string
+
+	// The ARN of the IAM role used to write inbound RCS media files to the S3 bucket.
+	TwoWayMediaS3Role *string
+
+	// The list of RCS event types enabled for two-way messaging on the agent.
+	TwoWayRcsEventsEnabled []string
+
+	noSmithyDocumentSerde
+}
+
+// The content of a rich card, including title, description, media, and card-level
+// suggested actions.
+type RcsCardContent struct {
+
+	// The description text of the card. Maximum 2000 characters.
+	Description *string
+
+	// The media content of the card, including the file URL, optional thumbnail, and
+	// display height.
+	Media *RcsCardMedia
+
+	// Card-level suggested actions. Maximum 4 suggestions per card.
+	Suggestions []RcsSuggestedAction
+
+	// The title of the card. Maximum 200 characters.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The media content of a rich card, including the file URL, optional thumbnail,
+// and display height.
+type RcsCardMedia struct {
+
+	// The S3 URI of the media file for the card, in the format s3://bucket-name/key .
+	// Maximum 2000 characters.
+	//
+	// This member is required.
+	FileUrl *string
+
+	// The display height of the media in the card. Valid values are SHORT, MEDIUM,
+	// and TALL.
+	Height *string
+
+	// The S3 URI of an optional thumbnail image for the card media. Maximum 2000
+	// characters.
+	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A carousel of 2 to 10 scrollable rich cards.
+type RcsCarousel struct {
+
+	// The list of cards in the carousel. Minimum 2, maximum 10 cards.
+	//
+	// This member is required.
+	CardContents []RcsCarouselCardContent
+
+	// The width of cards in the carousel. Valid values are SMALL and MEDIUM.
+	//
+	// This member is required.
+	CardWidth *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of a carousel card, including title, description, media, and
+// card-level suggested actions. Media height is restricted to SHORT or MEDIUM.
+type RcsCarouselCardContent struct {
+
+	// The description text of the carousel card. Maximum 2000 characters.
+	Description *string
+
+	// The media content of the carousel card. Media height is restricted to SHORT or
+	// MEDIUM (TALL is not supported in carousels).
+	Media *RcsCarouselCardMedia
+
+	// Card-level suggested actions for this carousel card. Maximum 4 suggestions per
+	// card.
+	Suggestions []RcsSuggestedAction
+
+	// The title of the carousel card. Maximum 200 characters.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The media content of a carousel card. Display height is restricted to SHORT or
+// MEDIUM (TALL is not supported in carousels).
+type RcsCarouselCardMedia struct {
+
+	// The S3 URI of the media file for the carousel card. Maximum 2000 characters.
+	//
+	// This member is required.
+	FileUrl *string
+
+	// The display height of the media in the carousel card. Valid values are SHORT
+	// and MEDIUM.
+	Height *string
+
+	// The S3 URI of an optional thumbnail image for the carousel card media. Maximum
+	// 2000 characters.
+	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The message body of an RCS message. Exactly one content type must be specified.
+//
+// The following types satisfy this interface:
+//
+//	RcsContentMemberCarousel
+//	RcsContentMemberFileMessage
+//	RcsContentMemberRichCard
+//	RcsContentMemberTextMessage
+type RcsContent interface {
+	isRcsContent()
+}
+
+// A carousel of 2 to 10 scrollable cards, each with media, title, description,
+// and suggested actions.
+type RcsContentMemberCarousel struct {
+	Value RcsCarousel
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberCarousel) isRcsContent() {}
+
+// A file message containing a media file (image, video, audio, or PDF) with an
+// optional thumbnail.
+type RcsContentMemberFileMessage struct {
+	Value RcsFileMessage
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberFileMessage) isRcsContent() {}
+
+// A standalone rich card with media, title, description, and suggested actions.
+type RcsContentMemberRichCard struct {
+	Value RcsStandaloneCard
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberRichCard) isRcsContent() {}
+
+// A plain text RCS message.
+type RcsContentMemberTextMessage struct {
+	Value RcsTextMessage
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberTextMessage) isRcsContent() {}
+
+// A suggested action that creates a calendar event on the recipient's device.
+type RcsCreateCalendarEventAction struct {
+
+	// The end time of the calendar event in ISO 8601 format.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The start time of the calendar event in ISO 8601 format.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	// The title of the calendar event. Maximum 100 characters.
+	//
+	// This member is required.
+	Title *string
+
+	// An optional description for the calendar event. Maximum 500 characters.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A suggested action that initiates a phone call to a specified number when
+// tapped by the recipient.
+type RcsDialPhoneAction struct {
+
+	// The phone number to dial in E.164 format.
+	//
+	// This member is required.
+	PhoneNumber *string
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for SMS or MMS fallback when RCS delivery fails or the TimeToLive
+// expires without delivery confirmation.
+type RcsFallbackConfiguration struct {
+
+	// The fallback channel to use when RCS delivery fails. Valid values are SMS and
+	// MMS. SMS and MMS are mutually exclusive.
+	//
+	// This member is required.
+	Channel RcsFallbackChannel
+
+	// An array of S3 URIs to media files for MMS fallback. Only valid when Channel is
+	// MMS.
+	MediaUrls []string
+
+	// The text body of the fallback message. Required for SMS fallback. For MMS
+	// fallback, at least one of MessageBody or MediaUrls must be provided.
+	MessageBody *string
+
+	// The origination identity to use for the fallback message. This can be a
+	// PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, or SenderIdArn. Pool IDs
+	// and pool ARNs are not accepted. If not specified and the original message was
+	// sent via a pool, the service selects a suitable number from the pool.
+	OriginationIdentity *string
+
+	noSmithyDocumentSerde
+}
+
+// A file message containing a media file (image, video, audio, or PDF) with an
+// optional thumbnail.
+type RcsFileMessage struct {
+
+	// The S3 URI of the media file to send, in the format s3://bucket-name/key . The
+	// service downloads the file from your S3 bucket, rehosts it, and generates a
+	// presigned URL for the aggregator. Maximum 2000 characters.
+	//
+	// This member is required.
+	FileUrl *string
+
+	// The S3 URI of an optional thumbnail image for the media file, in the format
+	// s3://bucket-name/key . Maximum 2000 characters.
+	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of an RCS message, containing the message body (text, file, rich
+// card, or carousel) and optional message-level suggested actions.
+type RcsMessageContent struct {
+
+	// The content of the RCS message. Exactly one content type must be specified:
+	// TextMessage, FileMessage, RichCard, or Carousel.
+	//
+	// This member is required.
+	Content RcsContent
+
+	// Message-level suggested actions displayed to the recipient. Maximum 11
+	// suggestions per message.
+	Suggestions []RcsSuggestedAction
+
+	noSmithyDocumentSerde
+}
+
+// A suggested action that opens a URL in the recipient's browser or an in-app
+// webview.
+type RcsOpenUrlAction struct {
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	// The URL to open. Must start with https://. Maximum 2048 characters.
+	//
+	// This member is required.
+	Url *string
+
+	// How to open the URL. BROWSER opens in the device's default browser. WEBVIEW
+	// opens in an in-app webview.
+	Application *string
+
+	// The display mode of the webview. Valid values are FULL, HALF, and TALL. Only
+	// applicable when Application is WEBVIEW.
+	WebviewViewMode *string
+
+	noSmithyDocumentSerde
+}
+
+// A suggested reply action that sends predefined text and postback data when
+// tapped by the recipient.
+type RcsReplyAction struct {
+
+	// The postback data sent to your webhook when the user taps this reply. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the suggested reply. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// A suggested action that requests the recipient's current location.
+type RcsRequestLocationAction struct {
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// A suggested action that shows a location on a map when tapped by the recipient.
+type RcsShowLocationAction struct {
+
+	// The latitude of the location. Valid values are -90 to 90.
+	//
+	// This member is required.
+	Latitude *float64
+
+	// The longitude of the location. Valid values are -180 to 180.
+	//
+	// This member is required.
+	Longitude *float64
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	// An optional label for the location pin. Maximum 100 characters.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
+// A standalone rich card with media, title, description, and suggested actions.
+type RcsStandaloneCard struct {
+
+	// The content of the rich card, including title, description, media, and
+	// card-level suggested actions.
+	//
+	// This member is required.
+	CardContent *RcsCardContent
+
+	// The orientation of the rich card. Valid values are HORIZONTAL and VERTICAL.
+	//
+	// This member is required.
+	CardOrientation *string
+
+	// The alignment of the thumbnail image in a horizontal card. Valid values are
+	// LEFT and RIGHT. Only applicable when CardOrientation is HORIZONTAL.
+	ThumbnailImageAlignment *string
+
+	noSmithyDocumentSerde
+}
+
+// A suggested action displayed to the RCS message recipient. Can be a reply, open
+// URL, dial phone, show location, request location, or create calendar event.
+//
+// The following types satisfy this interface:
+//
+//	RcsSuggestedActionMemberCreateCalendarEvent
+//	RcsSuggestedActionMemberDialPhone
+//	RcsSuggestedActionMemberOpenUrl
+//	RcsSuggestedActionMemberReply
+//	RcsSuggestedActionMemberRequestLocation
+//	RcsSuggestedActionMemberShowLocation
+type RcsSuggestedAction interface {
+	isRcsSuggestedAction()
+}
+
+// A suggested action that creates a calendar event on the user's device.
+type RcsSuggestedActionMemberCreateCalendarEvent struct {
+	Value RcsCreateCalendarEventAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberCreateCalendarEvent) isRcsSuggestedAction() {}
+
+// A suggested action that initiates a phone call to the specified number.
+type RcsSuggestedActionMemberDialPhone struct {
+	Value RcsDialPhoneAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberDialPhone) isRcsSuggestedAction() {}
+
+// A suggested action that opens a URL in the user's browser or a webview.
+type RcsSuggestedActionMemberOpenUrl struct {
+	Value RcsOpenUrlAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberOpenUrl) isRcsSuggestedAction() {}
+
+// A suggested reply that sends predefined text and postback data when tapped.
+type RcsSuggestedActionMemberReply struct {
+	Value RcsReplyAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberReply) isRcsSuggestedAction() {}
+
+// A suggested action that requests the user's current location.
+type RcsSuggestedActionMemberRequestLocation struct {
+	Value RcsRequestLocationAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberRequestLocation) isRcsSuggestedAction() {}
+
+// A suggested action that shows a location on a map.
+type RcsSuggestedActionMemberShowLocation struct {
+	Value RcsShowLocationAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberShowLocation) isRcsSuggestedAction() {}
+
+// A plain text RCS message body.
+type RcsTextMessage struct {
+
+	// The text body of the RCS message. Maximum 3072 characters.
+	//
+	// This member is required.
+	Body *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1927,3 +2404,15 @@ type VerifiedDestinationNumberInformation struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRcsContent()         {}
+func (*UnknownUnionMember) isRcsSuggestedAction() {}

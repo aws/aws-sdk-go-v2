@@ -50,7 +50,7 @@ type GetMetricWidgetImageInput struct {
 	// If any metric on the graph could not load all the requested data points, an
 	// orange triangle with an exclamation point appears next to the graph legend.
 	//
-	// [GetMetricWidgetImage: Metric Widget Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html
+	// [GetMetricWidgetImage: Metric Widget Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html
 	//
 	// This member is required.
 	MetricWidget *string

@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an ESX host and adds it to an Amazon EVS environment. Amazon EVS
-// supports 4-32 hosts per environment.
+// Creates an ESX host and adds it to an Amazon EVS environment.
 //
 // This action can only be used after the Amazon EVS environment is deployed.
 //
@@ -23,8 +22,8 @@ import (
 //
 // If you don't specify an ESX version when adding hosts using
 // CreateEnvironmentHost action, Amazon EVS automatically uses the default ESX
-// version associated with your environment's VCF version. To find the default ESX
-// version for a particular VCF version, use the GetVersions action.
+// version for your environment's VCF version. To find the available ESX versions
+// for a particular VCF version, use the GetVersions action.
 //
 // You cannot use the dedicatedHostId and placementGroupId parameters together in
 // the same CreateEnvironmentHost action. This results in a ValidationException

@@ -13,21 +13,24 @@ import (
 // Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager,
 // NSX Manager, and vCenter Server.
 //
-// During environment creation, Amazon EVS performs validations on DNS settings,
-// provisions VLAN subnets and hosts, and deploys the supplied version of VCF.
+// When you specify SELF_DEPLOYED for vcfVersion , Amazon EVS provisions only the
+// VLAN subnets; no hosts are added and no VCF installation is performed. After the
+// environment is created, you can add hosts with CreateEnvironmentHost and
+// install VCF yourself. The licenseInfo , hosts , vcfHostnames , siteId , and
+// connectivityInfo parameters are not supported in this mode.
 //
-// It can take several hours to create an environment. After the deployment
-// completes, you can configure VCF in the vSphere user interface according to your
-// needs.
+// When you specify any other VCF version, Amazon EVS installs and configures VCF
+// for you. For more information, see [Self-deployed mode]in the Amazon EVS User Guide.
 //
-// When creating a new environment, the default ESX version for the selected VCF
-// version will be used, you cannot choose a specific ESX version in
-// CreateEnvironment action. When a host has been added with a specific ESX
-// version, it can only be upgraded using vCenter Lifecycle Manager.
+// When Amazon EVS installs VCF, the default ESX version for the selected VCF
+// version will be used. After a host is added with a specific ESX version, it can
+// only be upgraded using vCenter Lifecycle Manager.
 //
 // You cannot use the dedicatedHostId and placementGroupId parameters together in
 // the same CreateEnvironment action. This results in a ValidationException
 // response.
+//
+// [Self-deployed mode]: https://docs.aws.amazon.com/evs/latest/userguide/getting-started-self-deployed.html
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -45,24 +48,6 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 
 type CreateEnvironmentInput struct {
 
-	//  The connectivity configuration for the environment. Amazon EVS requires that
-	// you specify two route server peer IDs. During environment creation, the route
-	// server endpoints peer with the NSX edges over the NSX uplink subnet, providing
-	// BGP-based dynamic routing for overlay networks.
-	//
-	// This member is required.
-	ConnectivityInfo *types.ConnectivityInfo
-
-	// The ESX hosts to add to the environment. Amazon EVS requires that you provide
-	// details for a minimum of 4 hosts during environment creation.
-	//
-	// For each host, you must provide the desired hostname, EC2 SSH keypair name, and
-	// EC2 instance type. Optionally, you can also provide a partition or cluster
-	// placement group to use, or use Amazon EC2 Dedicated Hosts.
-	//
-	// This member is required.
-	Hosts []types.HostInfoForCreate
-
 	// The initial VLAN subnets for the Amazon EVS environment.
 	//
 	// For each Amazon EVS VLAN subnet, you must specify a non-overlapping CIDR block.
@@ -72,58 +57,31 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	InitialVlans *types.InitialVlans
 
-	// The license information that Amazon EVS requires to create an environment.
-	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
-	// The VCF solution key must meet minimum core requirements, and the vSAN license
-	// key must meet minimum capacity requirements for your selected instance type.
-	//
-	// For information about minimum license requirements, see [the VCF subscriptions section] in the Amazon EVS User
-	// Guide.
-	//
-	// VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does
-	// not support reuse of VCF licenses for multiple environments.
-	//
-	// VCF license information can be retrieved from the Broadcom portal.
-	//
-	// [the VCF subscriptions section]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
-	//
-	// This member is required.
-	LicenseInfo []types.LicenseInfo
-
 	// The subnet that is used to establish connectivity between the Amazon EVS
-	// control plane and VPC. Amazon EVS uses this subnet to validate mandatory DNS
-	// records for your VCF appliances and hosts and create the environment.
+	// control plane and VPC. The Amazon EVS control plane uses this subnet to
+	// interface with your environment. This includes validating DNS records and
+	// enabling Amazon EVS Connectors.
 	//
 	// This member is required.
 	ServiceAccessSubnetId *string
 
-	// The Broadcom Site ID that is allocated to you as part of your electronic
-	// software delivery. This ID allows customer access to the Broadcom portal, and is
-	// provided to you by Broadcom at the close of your software contract or contract
-	// renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom
-	// VCF license usage reporting requirements for Amazon EVS.
-	//
-	// This member is required.
-	SiteId *string
-
-	// Customer confirmation that the customer has purchased and will continue to
-	// maintain the required number of VCF software licenses to cover all physical
-	// processor cores in the Amazon EVS environment. Information about your VCF
-	// software in Amazon EVS will be shared with Broadcom to verify license
-	// compliance. Amazon EVS does not validate license keys. To validate license keys,
-	// visit the Broadcom support portal.
+	// Confirmation that the customer has purchased and will continue to maintain the
+	// required number of VCF software licenses to cover all physical processor cores
+	// in the Amazon EVS environment. Information about your VCF software in Amazon EVS
+	// will be shared with Broadcom to verify license compliance. Amazon EVS does not
+	// validate license keys. To validate license keys, visit the Broadcom support
+	// portal.
 	//
 	// This member is required.
 	TermsAccepted *bool
 
-	// The DNS hostnames for the virtual machines that host the VCF management
-	// appliances. Amazon EVS requires that you provide DNS hostnames for the following
-	// appliances: vCenter, NSX Manager, SDDC Manager, and Cloud Builder.
+	// The VCF version to use for the environment.
 	//
-	// This member is required.
-	VcfHostnames *types.VcfHostnames
-
-	//  The VCF version to use for the environment.
+	//   - SELF_DEPLOYED : You install VCF yourself. The licenseInfo , hosts ,
+	//   vcfHostnames , siteId , and connectivityInfo parameters are not supported.
+	//
+	//   - Any other valid value: Amazon EVS installs and configures VCF for you in
+	//   the version you specify.
 	//
 	// This member is required.
 	VcfVersion types.VcfVersion
@@ -158,6 +116,14 @@ type CreateEnvironmentInput struct {
 	// randomly generated token is used for the request to ensure idempotency.
 	ClientToken *string
 
+	// The connectivity configuration for the environment. Amazon EVS requires that
+	// you specify two route server peer IDs. During environment creation, the route
+	// server endpoints peer with the NSX edges over the NSX uplink subnet, providing
+	// BGP-based dynamic routing for overlay networks.
+	//
+	// Not supported when vcfVersion is SELF_DEPLOYED .
+	ConnectivityInfo *types.ConnectivityInfo
+
 	// The name to give to your environment. The name can contain only alphanumeric
 	// characters (case-sensitive), hyphens, and underscores. It must start with an
 	// alphanumeric character, and can't be longer than 100 characters. The name must
@@ -165,10 +131,36 @@ type CreateEnvironmentInput struct {
 	// that you're creating the environment in.
 	EnvironmentName *string
 
+	// The ESX hosts to add to the environment. For each host, provide the desired
+	// hostname, EC2 SSH keypair name, and EC2 instance type. Optionally, provide a
+	// partition or cluster placement group, or use Amazon EC2 Dedicated Hosts.
+	//
+	// Not supported when vcfVersion is SELF_DEPLOYED . In that case, you can add hosts
+	// using CreateEnvironmentHost after the environment is created.
+	Hosts []types.HostInfoForCreate
+
 	// A unique ID for the customer-managed KMS key that is used to encrypt the VCF
 	// credential pairs for SDDC Manager, NSX Manager, and vCenter appliances. These
 	// credentials are stored in Amazon Web Services Secrets Manager.
 	KmsKeyId *string
+
+	// The license information that Amazon EVS requires to create an environment.
+	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
+	// The VCF solution key must meet minimum core requirements, and the vSAN license
+	// key must meet minimum capacity requirements for your selected instance type.
+	//
+	// For information about minimum license requirements, see [the VCF subscriptions section] in the Amazon EVS User
+	// Guide.
+	//
+	// VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does
+	// not support reuse of VCF licenses for multiple environments.
+	//
+	// VCF license information can be retrieved from the Broadcom portal.
+	//
+	// Not supported when vcfVersion is SELF_DEPLOYED .
+	//
+	// [the VCF subscriptions section]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
+	LicenseInfo []types.LicenseInfo
 
 	// The security group that controls communication between the Amazon EVS control
 	// plane and VPC. The default security group is used if a custom security group
@@ -188,10 +180,26 @@ type CreateEnvironmentInput struct {
 	// fail.
 	ServiceAccessSecurityGroups *types.ServiceAccessSecurityGroups
 
+	// The Broadcom Site ID that is allocated to you as part of your electronic
+	// software delivery. This ID allows customer access to the Broadcom portal, and is
+	// provided to you by Broadcom at the close of your software contract or contract
+	// renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom
+	// VCF license usage reporting requirements for Amazon EVS.
+	//
+	// Not supported when vcfVersion is SELF_DEPLOYED .
+	SiteId *string
+
 	// Metadata that assists with categorization and organization. Each tag consists
 	// of a key and an optional value. You define both. Tags don't propagate to any
 	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
+
+	// The DNS hostnames for the virtual machines that host the VCF management
+	// appliances. Provide hostnames for vCenter, NSX Manager, SDDC Manager, and Cloud
+	// Builder.
+	//
+	// Not supported when vcfVersion is SELF_DEPLOYED .
+	VcfHostnames *types.VcfHostnames
 
 	noSmithyDocumentSerde
 }

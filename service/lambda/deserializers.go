@@ -24137,6 +24137,11 @@ func awsRestjson1_deserializeDocumentFunctionCodeLocation(v **types.FunctionCode
 
 	for key, value := range shape {
 		switch key {
+		case "Error":
+			if err := awsRestjson1_deserializeDocumentFunctionCodeLocationError(&sv.Error, value); err != nil {
+				return err
+			}
+
 		case "ImageUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24173,6 +24178,11 @@ func awsRestjson1_deserializeDocumentFunctionCodeLocation(v **types.FunctionCode
 				sv.ResolvedImageUri = ptr.String(jtv)
 			}
 
+		case "ResolvedS3Object":
+			if err := awsRestjson1_deserializeDocumentResolvedS3Object(&sv.ResolvedS3Object, value); err != nil {
+				return err
+			}
+
 		case "SourceKMSKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24180,6 +24190,55 @@ func awsRestjson1_deserializeDocumentFunctionCodeLocation(v **types.FunctionCode
 					return fmt.Errorf("expected KMSKeyArn to be of type string, got %T instead", value)
 				}
 				sv.SourceKMSKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFunctionCodeLocationError(v **types.FunctionCodeLocationError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FunctionCodeLocationError
+	if *v == nil {
+		sv = &types.FunctionCodeLocationError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -26461,6 +26520,11 @@ func awsRestjson1_deserializeDocumentLayerVersionContentOutput(v **types.LayerVe
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "ResolvedS3Object":
+			if err := awsRestjson1_deserializeDocumentResolvedS3Object(&sv.ResolvedS3Object, value); err != nil {
+				return err
+			}
+
 		case "SigningJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -27608,6 +27672,64 @@ func awsRestjson1_deserializeDocumentRequestTooLargeException(v **types.RequestT
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResolvedS3Object(v **types.ResolvedS3Object, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResolvedS3Object
+	if *v == nil {
+		sv = &types.ResolvedS3Object{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Bucket to be of type string, got %T instead", value)
+				}
+				sv.S3Bucket = ptr.String(jtv)
+			}
+
+		case "S3Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Key to be of type string, got %T instead", value)
+				}
+				sv.S3Key = ptr.String(jtv)
+			}
+
+		case "S3ObjectVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectVersion to be of type string, got %T instead", value)
+				}
+				sv.S3ObjectVersion = ptr.String(jtv)
 			}
 
 		default:

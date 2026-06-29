@@ -106,6 +106,20 @@ type CreateRcsAgentOutput struct {
 	// SMS messages.
 	TwoWayChannelRole *string
 
+	// The name of the S3 bucket where inbound RCS media files are stored.
+	TwoWayMediaS3BucketName *string
+
+	// The key prefix used for inbound RCS media objects in the S3 bucket.
+	TwoWayMediaS3KeyPrefix *string
+
+	// The ARN of the IAM role used to write inbound RCS media files to the S3 bucket.
+	// The role must have s3:PutObject permission on the bucket and a trust policy
+	// allowing sms-voice.amazonaws.com to assume it.
+	TwoWayMediaS3Role *string
+
+	// The list of RCS event types enabled for two-way messaging on the agent.
+	TwoWayRcsEventsEnabled []string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

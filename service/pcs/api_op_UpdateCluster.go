@@ -10,12 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a cluster configuration. You can modify Slurm scheduler settings,
-// accounting configuration, and security groups for an existing cluster.
+// Updates a cluster configuration. You can upgrade the Slurm version, modify
+// scheduler settings, and update accounting configuration for an existing cluster.
+// For more information about upgrading the Slurm version, see [Upgrading the Slurm version on a cluster]in the PCS User
+// Guide.
 //
 // You can only update clusters that are in ACTIVE , UPDATE_FAILED , or SUSPENDED
 // state. All associated resources (queues and compute node groups) must be in
 // ACTIVE state before you can update the cluster.
+//
+// [Upgrading the Slurm version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_upgrade.html
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
 		params = &UpdateClusterInput{}
@@ -45,6 +49,12 @@ type UpdateClusterInput struct {
 	// original successful request and they have no additional effect. If you don't
 	// specify a client token, the CLI and SDK automatically generate 1 for you.
 	ClientToken *string
+
+	// The scheduler configuration to update for the cluster. Use this to upgrade the
+	// Slurm version. For more information, see [Upgrading the Slurm version on a cluster]in the PCS User Guide.
+	//
+	// [Upgrading the Slurm version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_upgrade.html
+	Scheduler *types.UpdateSchedulerRequest
 
 	// Additional options related to the Slurm scheduler.
 	SlurmConfiguration *types.UpdateClusterSlurmConfigurationRequest

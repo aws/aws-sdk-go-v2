@@ -65,6 +65,10 @@ type GetServiceOutput struct {
 	// The ID of the service.
 	Id *string
 
+	// The amount of time, in seconds, that a connection can remain idle before VPC
+	// Lattice closes it.
+	IdleTimeoutSeconds *int32
+
 	// The date and time that the service was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 

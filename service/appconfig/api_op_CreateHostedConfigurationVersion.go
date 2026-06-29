@@ -13,7 +13,7 @@ import (
 // JSON schema for feature flag data. For more information, see [Type reference for AWS.AppConfig.FeatureFlags]in the AppConfig
 // User Guide.
 //
-// [Type reference for AWS.AppConfig.FeatureFlags]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags
+// [Type reference for AWS.AppConfig.FeatureFlags]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-type-reference-feature-flags.html
 func (c *Client) CreateHostedConfigurationVersion(ctx context.Context, params *CreateHostedConfigurationVersionInput, optFns ...func(*Options)) (*CreateHostedConfigurationVersionOutput, error) {
 	if params == nil {
 		params = &CreateHostedConfigurationVersionInput{}
@@ -58,6 +58,8 @@ type CreateHostedConfigurationVersionInput struct {
 	ContentType *string
 
 	// A description of the configuration.
+	//
+	// Due to HTTP limitations, this field only supports ASCII characters.
 	Description *string
 
 	// An optional locking token used to prevent race conditions from overwriting

@@ -847,6 +847,11 @@ func awsRestjson1_serializeOpDocumentCreateServiceInput(v *CreateServiceInput, v
 		ok.String(*v.CustomDomainName)
 	}
 
+	if v.IdleTimeoutSeconds != nil {
+		ok := object.Key("idleTimeoutSeconds")
+		ok.Integer(*v.IdleTimeoutSeconds)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -6026,6 +6031,11 @@ func awsRestjson1_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.CertificateArn != nil {
 		ok := object.Key("certificateArn")
 		ok.String(*v.CertificateArn)
+	}
+
+	if v.IdleTimeoutSeconds != nil {
+		ok := object.Key("idleTimeoutSeconds")
+		ok.Integer(*v.IdleTimeoutSeconds)
 	}
 
 	return nil

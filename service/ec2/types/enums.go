@@ -9080,9 +9080,10 @@ type PlacementStrategy string
 
 // Enum values for PlacementStrategy
 const (
-	PlacementStrategyCluster   PlacementStrategy = "cluster"
-	PlacementStrategySpread    PlacementStrategy = "spread"
-	PlacementStrategyPartition PlacementStrategy = "partition"
+	PlacementStrategyCluster       PlacementStrategy = "cluster"
+	PlacementStrategySpread        PlacementStrategy = "spread"
+	PlacementStrategyPartition     PlacementStrategy = "partition"
+	PlacementStrategyPrecisionTime PlacementStrategy = "precision-time"
 )
 
 // Values returns all known values for PlacementStrategy. Note that this can be
@@ -9094,6 +9095,7 @@ func (PlacementStrategy) Values() []PlacementStrategy {
 		"cluster",
 		"spread",
 		"partition",
+		"precision-time",
 	}
 }
 

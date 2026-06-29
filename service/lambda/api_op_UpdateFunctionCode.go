@@ -100,6 +100,11 @@ type UpdateFunctionCodeInput struct {
 	// with a .zip file archive deployment package.
 	S3Key *string
 
+	// Specifies how the deployment package is stored. Use COPY (default) to upload a
+	// copy of your deployment package to Lambda. Use REFERENCE to have Lambda
+	// reference the deployment package from the specified Amazon S3 bucket.
+	S3ObjectStorageMode types.S3ObjectStorageMode
+
 	// For versioned objects, the version of the deployment package object to use.
 	S3ObjectVersion *string
 

@@ -11,30 +11,53 @@ import (
 // VCF licensing compliance.
 type Check struct {
 
+	// A unique ID for the check.
+	Id *string
+
 	// The time when environment health began to be impaired.
 	ImpairedSince *time.Time
 
 	//  The check result.
 	Result CheckResult
 
-	// The check type. Amazon EVS performs the following checks.
+	// The check type. Amazon EVS performs the following checks:
 	//
-	//   - KEY_REUSE : checks that the VCF license key is not used by another Amazon
-	//   EVS environment. This check fails if a used license is added to the environment.
+	//   - KEY_REUSE : Verifies that the VCF license key is not used by another Amazon
+	//   EVS environment.
 	//
-	//   - KEY_COVERAGE : checks that your VCF license key allocates sufficient vCPU
-	//   cores for all deployed hosts. The check fails when any assigned hosts in the EVS
-	//   environment are not covered by license keys, or when any unassigned hosts cannot
-	//   be covered by available vCPU cores in keys.
+	//   - KEY_COVERAGE : Verifies that the VCF license key allocates sufficient vCPU
+	//   cores for all deployed hosts.
 	//
-	//   - REACHABILITY : checks that the Amazon EVS control plane has a persistent
-	//   connection to SDDC Manager. If Amazon EVS cannot reach the environment, this
-	//   check fails.
+	//   - REACHABILITY : Verifies that the Amazon EVS control plane has a persistent
+	//   connection to SDDC Manager.
 	//
-	//   - HOST_COUNT : Checks that your environment has a minimum of 4 hosts.
+	//   - HOST_COUNT : Verifies that the environment meets the minimum host count.
 	//
-	// If this check fails, you will need to add hosts so that your environment meets
-	//   this minimum requirement. Amazon EVS only supports environments with 4-32 hosts.
+	//   - VCENTER_REACHABILITY : Verifies vCenter Server reachability through the
+	//   vCenter connector.
+	//
+	//   - VCENTER_VM_SYNC : Verifies that the vCenter connector can synchronize VM
+	//   inventory from vCenter Server.
+	//
+	//   - VCENTER_VM_EVENT : Verifies that the vCenter connector can receive VM
+	//   lifecycle events from vCenter Server.
+	//
+	//   - OPERATIONS_MANAGER_REACHABILITY : Verifies Operations Manager reachability
+	//   through the Operations Manager connector.
+	//
+	//   - SDDC_MANAGER_REACHABILITY : Verifies SDDC Manager reachability through the
+	//   SDDC Manager connector.
+	//
+	//   - SDDC_MANAGER_HOST_COUNT : Verifies that the host count reported by SDDC
+	//   Manager meets Amazon EVS minimum requirements.
+	//
+	//   - SDDC_MANAGER_KEY_COVERAGE : Verifies that the VCF license key configured in
+	//   SDDC Manager covers all deployed hosts.
+	//
+	//   - SDDC_MANAGER_KEY_REUSE : Verifies that the VCF license key configured in
+	//   SDDC Manager is not used by another Amazon EVS environment.
+	//
+	//   - CONNECTOR_HEALTH : Aggregate health across all connectors in the environment.
 	Type CheckType
 
 	noSmithyDocumentSerde
@@ -44,6 +67,8 @@ type Check struct {
 // you specify two route server peer IDs. During environment creation, the route
 // server endpoints peer with the NSX uplink VLAN for connectivity to the NSX
 // overlay network.
+//
+// Not supported when vcfVersion is SELF_DEPLOYED .
 type ConnectivityInfo struct {
 
 	// The unique IDs for private route server peers.
@@ -55,8 +80,8 @@ type ConnectivityInfo struct {
 }
 
 // An object that represents a connector for an Amazon EVS environment. A
-// connector establishes a vCenter connection using the credentials stored in
-// Amazon Web Services Secrets Manager.
+// connector establishes a connection to the given appliance type using the
+// credentials stored in Amazon Web Services Secrets Manager.
 type Connector struct {
 
 	// The fully qualified domain name (FQDN) of the VCF appliance that the connector
@@ -134,8 +159,7 @@ type EipAssociation struct {
 // An object that represents an Amazon EVS environment.
 type Environment struct {
 
-	// A check on the environment to identify instance health and VMware VCF licensing
-	// issues.
+	// A check on the environment to identify connector health.
 	Checks []Check
 
 	// The connectivity configuration for the environment. Amazon EVS requires that
@@ -284,10 +308,7 @@ type ErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
-// An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
-// created in an Amazon EVS environment during environment creation. You can add
-// hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
-// supports 4-32 hosts per environment.
+// An ESX host that runs on an Amazon EC2 bare metal instance.
 type Host struct {
 
 	//  The date and time that the host was created.
@@ -577,6 +598,8 @@ type ValidationExceptionField struct {
 //
 // VMware VCF requires the deployment of two NSX Edge nodes, and three NSX Manager
 // virtual machines.
+//
+// Not supported when vcfVersion is SELF_DEPLOYED .
 type VcfHostnames struct {
 
 	// The hostname for VMware Cloud Builder.
@@ -584,7 +607,7 @@ type VcfHostnames struct {
 	// This member is required.
 	CloudBuilder *string
 
-	// The VMware NSX hostname.
+	// The VMware NSX Virtual IP (VIP) hostname.
 	//
 	// This member is required.
 	Nsx *string

@@ -1,0 +1,8 @@
+{
+    "id": "ea7958f5-7de0-40c1-98ec-e0f9fc5d43f0",
+    "type": "feature",
+    "description": "Adding new attributes to PutProfileOutboundRequest API that will create an outbound request call for the customer's Web Notification outbound campaign.",
+    "modules": [
+        "service/connectcampaignsv2"
+    ]
+}

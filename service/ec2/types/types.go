@@ -17366,6 +17366,9 @@ type PlacementGroup struct {
 	// The service provider that manages the Placement Group.
 	Operator *OperatorResponse
 
+	// The ID of the parent placement group.
+	ParentGroupId *string
+
 	// The number of partitions. Valid only if strategy is set to partition .
 	PartitionCount *int32
 

@@ -50,7 +50,7 @@ type PutDashboardInput struct {
 	//
 	// For more information about the syntax, see [Dashboard Body Structure and Syntax].
 	//
-	// [Dashboard Body Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
+	// [Dashboard Body Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html
 	//
 	// This member is required.
 	DashboardBody *string

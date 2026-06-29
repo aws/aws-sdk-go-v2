@@ -757,6 +757,21 @@ func validateUpdateQueueSlurmConfigurationRequest(v *types.UpdateQueueSlurmConfi
 	}
 }
 
+func validateUpdateSchedulerRequest(v *types.UpdateSchedulerRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSchedulerRequest"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v == nil {
 		return nil
@@ -1071,6 +1086,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	if v.SlurmConfiguration != nil {
 		if err := validateUpdateClusterSlurmConfigurationRequest(v.SlurmConfiguration); err != nil {
 			invalidParams.AddNested("SlurmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scheduler != nil {
+		if err := validateUpdateSchedulerRequest(v.Scheduler); err != nil {
+			invalidParams.AddNested("Scheduler", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

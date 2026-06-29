@@ -57,7 +57,12 @@ type ModifyCacheClusterInput struct {
 	// the next failure reboot, whichever occurs first.
 	//
 	// If you perform a ModifyCacheCluster before a pending modification is applied,
-	// the pending modification is replaced by the newer modification.
+	// the pending modification is replaced by the newer modification. However, a
+	// pending node-count increase on Memcached clusters cannot be superseded by a
+	// request to add fewer nodes. To change a pending node addition, first cancel it
+	// by setting NumCacheNodes equal to the current number of nodes in the cluster,
+	// then submit the new request. See the NumCacheNodes parameter for details on
+	// node scaling behavior.
 	//
 	// Valid values: true | false
 	//

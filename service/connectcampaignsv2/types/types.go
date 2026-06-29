@@ -131,6 +131,15 @@ type CampaignSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Additional metadata related to the event trigger context
+type ChannelContext struct {
+
+	// Context metadata for the web notification type channel
+	WebNotificationContext *WebNotificationContext
+
+	noSmithyDocumentSerde
+}
+
 // Campaign Channel Subtype config
 type ChannelSubtypeConfig struct {
 
@@ -440,6 +449,18 @@ type EventTrigger struct {
 
 	// Amazon Resource Names(ARN)
 	CustomerProfilesDomainArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Event trigger context data
+type EventTriggerContext struct {
+
+	// Additional metadata related to the event trigger context
+	ChannelContext *ChannelContext
+
+	// Source event object for event triggers
+	SourceEvent *string
 
 	noSmithyDocumentSerde
 }
@@ -802,6 +823,9 @@ type ProfileOutboundRequest struct {
 	//
 	// This member is required.
 	ProfileId *string
+
+	// Event trigger context data
+	EventTriggerContext *EventTriggerContext
 
 	// Timestamp with no UTC offset or timezone
 	ExpirationTime *time.Time
@@ -1213,6 +1237,18 @@ type TimeWindow struct {
 
 	// Restricted period config
 	RestrictedPeriods RestrictedPeriods
+
+	noSmithyDocumentSerde
+}
+
+// Context metadata for the web notification type channel
+type WebNotificationContext struct {
+
+	// Browser Id for web notification event trigger
+	BrowserId *string
+
+	// Session Id for web notification event trigger
+	SessionId *string
 
 	noSmithyDocumentSerde
 }

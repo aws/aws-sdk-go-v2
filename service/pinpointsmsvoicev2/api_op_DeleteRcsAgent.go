@@ -91,6 +91,10 @@ type DeleteRcsAgentOutput struct {
 	// SMS messages.
 	TwoWayChannelRole *string
 
+	// The list of RCS event types that were enabled for two-way messaging on the
+	// deleted agent.
+	TwoWayRcsEventsEnabled []string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

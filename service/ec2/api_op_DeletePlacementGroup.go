@@ -9,8 +9,10 @@ import (
 )
 
 // Deletes the specified placement group. You must terminate all instances in the
-// placement group before you can delete the placement group. For more information,
-// see [Placement groups]in the Amazon EC2 User Guide.
+// placement group before you can delete the placement group. You cannot delete a
+// placement group that is a parent of a cluster placement group. Delete the
+// cluster placement groups first. For more information, see [Placement groups]in the Amazon EC2
+// User Guide.
 //
 // [Placement groups]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
 func (c *Client) DeletePlacementGroup(ctx context.Context, params *DeletePlacementGroupInput, optFns ...func(*Options)) (*DeletePlacementGroupOutput, error) {

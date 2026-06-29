@@ -14,6 +14,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 )
 
@@ -1830,6 +1831,67 @@ func (m *awsAwsjson10_serializeOpDeleteRcsAgent) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteRcsAgentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteRcsMessageSpendLimitOverride struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteRcsMessageSpendLimitOverride) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteRcsMessageSpendLimitOverride) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteRcsMessageSpendLimitOverrideInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DeleteRcsMessageSpendLimitOverride")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteRcsMessageSpendLimitOverrideInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5141,6 +5203,67 @@ func (m *awsAwsjson10_serializeOpSendNotifyVoiceMessage) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpSendRcsMessage struct {
+}
+
+func (*awsAwsjson10_serializeOpSendRcsMessage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpSendRcsMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendRcsMessageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.SendRcsMessage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentSendRcsMessageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpSendTextMessage struct {
 }
 
@@ -5612,6 +5735,67 @@ func (m *awsAwsjson10_serializeOpSetNotifyMessageSpendLimitOverride) HandleSeria
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentSetNotifyMessageSpendLimitOverrideInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpSetRcsMessageSpendLimitOverride struct {
+}
+
+func (*awsAwsjson10_serializeOpSetRcsMessageSpendLimitOverride) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpSetRcsMessageSpendLimitOverride) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetRcsMessageSpendLimitOverrideInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.SetRcsMessageSpendLimitOverride")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentSetRcsMessageSpendLimitOverrideInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7181,6 +7365,557 @@ func awsAwsjson10_serializeDocumentRcsAgentIdList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentRcsCardContent(v *types.RcsCardContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Media != nil {
+		ok := object.Key("Media")
+		if err := awsAwsjson10_serializeDocumentRcsCardMedia(v.Media, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Suggestions != nil {
+		ok := object.Key("Suggestions")
+		if err := awsAwsjson10_serializeDocumentRcsCardSuggestedActionList(v.Suggestions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCardMedia(v *types.RcsCardMedia, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileUrl != nil {
+		ok := object.Key("FileUrl")
+		ok.String(*v.FileUrl)
+	}
+
+	if v.Height != nil {
+		ok := object.Key("Height")
+		ok.String(*v.Height)
+	}
+
+	if v.ThumbnailUrl != nil {
+		ok := object.Key("ThumbnailUrl")
+		ok.String(*v.ThumbnailUrl)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCardSuggestedActionList(v []types.RcsSuggestedAction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentRcsSuggestedAction(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCarousel(v *types.RcsCarousel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CardContents != nil {
+		ok := object.Key("CardContents")
+		if err := awsAwsjson10_serializeDocumentRcsCarouselCardContentList(v.CardContents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CardWidth != nil {
+		ok := object.Key("CardWidth")
+		ok.String(*v.CardWidth)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCarouselCardContent(v *types.RcsCarouselCardContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Media != nil {
+		ok := object.Key("Media")
+		if err := awsAwsjson10_serializeDocumentRcsCarouselCardMedia(v.Media, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Suggestions != nil {
+		ok := object.Key("Suggestions")
+		if err := awsAwsjson10_serializeDocumentRcsCardSuggestedActionList(v.Suggestions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCarouselCardContentList(v []types.RcsCarouselCardContent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentRcsCarouselCardContent(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCarouselCardMedia(v *types.RcsCarouselCardMedia, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileUrl != nil {
+		ok := object.Key("FileUrl")
+		ok.String(*v.FileUrl)
+	}
+
+	if v.Height != nil {
+		ok := object.Key("Height")
+		ok.String(*v.Height)
+	}
+
+	if v.ThumbnailUrl != nil {
+		ok := object.Key("ThumbnailUrl")
+		ok.String(*v.ThumbnailUrl)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsContent(v types.RcsContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RcsContentMemberCarousel:
+		av := object.Key("Carousel")
+		if err := awsAwsjson10_serializeDocumentRcsCarousel(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsContentMemberFileMessage:
+		av := object.Key("FileMessage")
+		if err := awsAwsjson10_serializeDocumentRcsFileMessage(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsContentMemberRichCard:
+		av := object.Key("RichCard")
+		if err := awsAwsjson10_serializeDocumentRcsStandaloneCard(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsContentMemberTextMessage:
+		av := object.Key("TextMessage")
+		if err := awsAwsjson10_serializeDocumentRcsTextMessage(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsCreateCalendarEventAction(v *types.RcsCreateCalendarEventAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.PostbackData != nil {
+		ok := object.Key("PostbackData")
+		ok.String(*v.PostbackData)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsDialPhoneAction(v *types.RcsDialPhoneAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PhoneNumber != nil {
+		ok := object.Key("PhoneNumber")
+		ok.String(*v.PhoneNumber)
+	}
+
+	if v.PostbackData != nil {
+		ok := object.Key("PostbackData")
+		ok.String(*v.PostbackData)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsEventTypeList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsFallbackConfiguration(v *types.RcsFallbackConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("Channel")
+		ok.String(string(v.Channel))
+	}
+
+	if v.MediaUrls != nil {
+		ok := object.Key("MediaUrls")
+		if err := awsAwsjson10_serializeDocumentMediaUrlList(v.MediaUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MessageBody != nil {
+		ok := object.Key("MessageBody")
+		ok.String(*v.MessageBody)
+	}
+
+	if v.OriginationIdentity != nil {
+		ok := object.Key("OriginationIdentity")
+		ok.String(*v.OriginationIdentity)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsFileMessage(v *types.RcsFileMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileUrl != nil {
+		ok := object.Key("FileUrl")
+		ok.String(*v.FileUrl)
+	}
+
+	if v.ThumbnailUrl != nil {
+		ok := object.Key("ThumbnailUrl")
+		ok.String(*v.ThumbnailUrl)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsMessageContent(v *types.RcsMessageContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		if err := awsAwsjson10_serializeDocumentRcsContent(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Suggestions != nil {
+		ok := object.Key("Suggestions")
+		if err := awsAwsjson10_serializeDocumentRcsSuggestedActionList(v.Suggestions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsOpenUrlAction(v *types.RcsOpenUrlAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Application != nil {
+		ok := object.Key("Application")
+		ok.String(*v.Application)
+	}
+
+	if v.PostbackData != nil {
+		ok := object.Key("PostbackData")
+		ok.String(*v.PostbackData)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("Url")
+		ok.String(*v.Url)
+	}
+
+	if v.WebviewViewMode != nil {
+		ok := object.Key("WebviewViewMode")
+		ok.String(*v.WebviewViewMode)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsReplyAction(v *types.RcsReplyAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PostbackData != nil {
+		ok := object.Key("PostbackData")
+		ok.String(*v.PostbackData)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsRequestLocationAction(v *types.RcsRequestLocationAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PostbackData != nil {
+		ok := object.Key("PostbackData")
+		ok.String(*v.PostbackData)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsShowLocationAction(v *types.RcsShowLocationAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Label != nil {
+		ok := object.Key("Label")
+		ok.String(*v.Label)
+	}
+
+	if v.Latitude != nil {
+		ok := object.Key("Latitude")
+		switch {
+		case math.IsNaN(*v.Latitude):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Latitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Latitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Latitude)
+
+		}
+	}
+
+	if v.Longitude != nil {
+		ok := object.Key("Longitude")
+		switch {
+		case math.IsNaN(*v.Longitude):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Longitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Longitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Longitude)
+
+		}
+	}
+
+	if v.PostbackData != nil {
+		ok := object.Key("PostbackData")
+		ok.String(*v.PostbackData)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsStandaloneCard(v *types.RcsStandaloneCard, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CardContent != nil {
+		ok := object.Key("CardContent")
+		if err := awsAwsjson10_serializeDocumentRcsCardContent(v.CardContent, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CardOrientation != nil {
+		ok := object.Key("CardOrientation")
+		ok.String(*v.CardOrientation)
+	}
+
+	if v.ThumbnailImageAlignment != nil {
+		ok := object.Key("ThumbnailImageAlignment")
+		ok.String(*v.ThumbnailImageAlignment)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsSuggestedAction(v types.RcsSuggestedAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RcsSuggestedActionMemberCreateCalendarEvent:
+		av := object.Key("CreateCalendarEvent")
+		if err := awsAwsjson10_serializeDocumentRcsCreateCalendarEventAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsSuggestedActionMemberDialPhone:
+		av := object.Key("DialPhone")
+		if err := awsAwsjson10_serializeDocumentRcsDialPhoneAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsSuggestedActionMemberOpenUrl:
+		av := object.Key("OpenUrl")
+		if err := awsAwsjson10_serializeDocumentRcsOpenUrlAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsSuggestedActionMemberReply:
+		av := object.Key("Reply")
+		if err := awsAwsjson10_serializeDocumentRcsReplyAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsSuggestedActionMemberRequestLocation:
+		av := object.Key("RequestLocation")
+		if err := awsAwsjson10_serializeDocumentRcsRequestLocationAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RcsSuggestedActionMemberShowLocation:
+		av := object.Key("ShowLocation")
+		if err := awsAwsjson10_serializeDocumentRcsShowLocationAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsSuggestedActionList(v []types.RcsSuggestedAction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentRcsSuggestedAction(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsTextMessage(v *types.RcsTextMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRegistrationAssociationFilter(v *types.RegistrationAssociationFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8172,6 +8907,13 @@ func awsAwsjson10_serializeOpDocumentDeleteRcsAgentInput(v *DeleteRcsAgentInput,
 		ok := object.Key("RcsAgentId")
 		ok.String(*v.RcsAgentId)
 	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteRcsMessageSpendLimitOverrideInput(v *DeleteRcsMessageSpendLimitOverrideInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -9709,6 +10451,79 @@ func awsAwsjson10_serializeOpDocumentSendNotifyVoiceMessageInput(v *SendNotifyVo
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentSendRcsMessageInput(v *SendRcsMessageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationSetName != nil {
+		ok := object.Key("ConfigurationSetName")
+		ok.String(*v.ConfigurationSetName)
+	}
+
+	if v.Context != nil {
+		ok := object.Key("Context")
+		if err := awsAwsjson10_serializeDocumentContextMap(v.Context, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("DestinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.DryRun {
+		ok := object.Key("DryRun")
+		ok.Boolean(v.DryRun)
+	}
+
+	if v.FallbackConfiguration != nil {
+		ok := object.Key("FallbackConfiguration")
+		if err := awsAwsjson10_serializeDocumentRcsFallbackConfiguration(v.FallbackConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxPrice != nil {
+		ok := object.Key("MaxPrice")
+		ok.String(*v.MaxPrice)
+	}
+
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
+	}
+
+	if v.MessageTrafficType != nil {
+		ok := object.Key("MessageTrafficType")
+		ok.String(*v.MessageTrafficType)
+	}
+
+	if v.OriginationIdentity != nil {
+		ok := object.Key("OriginationIdentity")
+		ok.String(*v.OriginationIdentity)
+	}
+
+	if v.ProtectConfigurationId != nil {
+		ok := object.Key("ProtectConfigurationId")
+		ok.String(*v.ProtectConfigurationId)
+	}
+
+	if v.RcsMessageContent != nil {
+		ok := object.Key("RcsMessageContent")
+		if err := awsAwsjson10_serializeDocumentRcsMessageContent(v.RcsMessageContent, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeToLive != nil {
+		ok := object.Key("TimeToLive")
+		ok.Integer(*v.TimeToLive)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentSendTextMessageInput(v *SendTextMessageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9930,6 +10745,18 @@ func awsAwsjson10_serializeOpDocumentSetMediaMessageSpendLimitOverrideInput(v *S
 }
 
 func awsAwsjson10_serializeOpDocumentSetNotifyMessageSpendLimitOverrideInput(v *SetNotifyMessageSpendLimitOverrideInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MonthlyLimit != nil {
+		ok := object.Key("MonthlyLimit")
+		ok.Long(*v.MonthlyLimit)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentSetRcsMessageSpendLimitOverrideInput(v *SetRcsMessageSpendLimitOverrideInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10283,6 +11110,28 @@ func awsAwsjson10_serializeOpDocumentUpdateRcsAgentInput(v *UpdateRcsAgentInput,
 	if v.TwoWayEnabled != nil {
 		ok := object.Key("TwoWayEnabled")
 		ok.Boolean(*v.TwoWayEnabled)
+	}
+
+	if v.TwoWayMediaS3BucketName != nil {
+		ok := object.Key("TwoWayMediaS3BucketName")
+		ok.String(*v.TwoWayMediaS3BucketName)
+	}
+
+	if v.TwoWayMediaS3KeyPrefix != nil {
+		ok := object.Key("TwoWayMediaS3KeyPrefix")
+		ok.String(*v.TwoWayMediaS3KeyPrefix)
+	}
+
+	if v.TwoWayMediaS3Role != nil {
+		ok := object.Key("TwoWayMediaS3Role")
+		ok.String(*v.TwoWayMediaS3Role)
+	}
+
+	if v.TwoWayRcsEventsEnabled != nil {
+		ok := object.Key("TwoWayRcsEventsEnabled")
+		if err := awsAwsjson10_serializeDocumentRcsEventTypeList(v.TwoWayRcsEventsEnabled, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

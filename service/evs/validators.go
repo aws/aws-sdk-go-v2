@@ -822,13 +822,6 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v.TermsAccepted == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TermsAccepted"))
 	}
-	if v.LicenseInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LicenseInfo"))
-	} else if v.LicenseInfo != nil {
-		if err := validateLicenseInfoList(v.LicenseInfo); err != nil {
-			invalidParams.AddNested("LicenseInfo", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.InitialVlans == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialVlans"))
 	} else if v.InitialVlans != nil {
@@ -836,29 +829,25 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 			invalidParams.AddNested("InitialVlans", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Hosts == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Hosts"))
-	} else if v.Hosts != nil {
-		if err := validateHostInfoForCreateList(v.Hosts); err != nil {
-			invalidParams.AddNested("Hosts", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ConnectivityInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectivityInfo"))
-	} else if v.ConnectivityInfo != nil {
+	if v.ConnectivityInfo != nil {
 		if err := validateConnectivityInfo(v.ConnectivityInfo); err != nil {
 			invalidParams.AddNested("ConnectivityInfo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.VcfHostnames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VcfHostnames"))
-	} else if v.VcfHostnames != nil {
+	if v.LicenseInfo != nil {
+		if err := validateLicenseInfoList(v.LicenseInfo); err != nil {
+			invalidParams.AddNested("LicenseInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Hosts != nil {
+		if err := validateHostInfoForCreateList(v.Hosts); err != nil {
+			invalidParams.AddNested("Hosts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VcfHostnames != nil {
 		if err := validateVcfHostnames(v.VcfHostnames); err != nil {
 			invalidParams.AddNested("VcfHostnames", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SiteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

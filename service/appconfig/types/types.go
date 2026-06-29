@@ -111,6 +111,64 @@ type AppliedExtension struct {
 	noSmithyDocumentSerde
 }
 
+// A value for a feature flag attribute. Only one of the members can be set.
+//
+// The following types satisfy this interface:
+//
+//	AttributeValueMemberBooleanValue
+//	AttributeValueMemberNumberArray
+//	AttributeValueMemberNumberValue
+//	AttributeValueMemberStringArray
+//	AttributeValueMemberStringValue
+type AttributeValue interface {
+	isAttributeValue()
+}
+
+// A Boolean value for the attribute.
+type AttributeValueMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberBooleanValue) isAttributeValue() {}
+
+// An array of numeric values for the attribute.
+type AttributeValueMemberNumberArray struct {
+	Value []float64
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberNumberArray) isAttributeValue() {}
+
+// A numeric value for the attribute.
+type AttributeValueMemberNumberValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberNumberValue) isAttributeValue() {}
+
+// An array of string values for the attribute.
+type AttributeValueMemberStringArray struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberStringArray) isAttributeValue() {}
+
+// A string value for the attribute.
+type AttributeValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberStringValue) isAttributeValue() {}
+
 // Detailed information about the input that failed to satisfy the constraints
 // specified by a call.
 //
@@ -223,6 +281,19 @@ type DeploymentEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Optional deployment parameters for an experiment run, including extension
+// parameters and tags.
+type DeploymentParameters struct {
+
+	// A map of extension parameters for the deployment.
+	DynamicExtensionParameters map[string]string
+
+	// The tags to assign to the deployment.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 type DeploymentStrategy struct {
 
 	// Total amount of time the deployment lasted.
@@ -263,6 +334,9 @@ type DeploymentSummary struct {
 	// The name of the configuration.
 	ConfigurationName *string
 
+	// The ID of the configuration profile that was deployed.
+	ConfigurationProfileId *string
+
 	// The version of the configuration.
 	ConfigurationVersion *string
 
@@ -292,6 +366,9 @@ type DeploymentSummary struct {
 	// The state of the deployment.
 	State DeploymentState
 
+	// The type of deployment.
+	Type DeploymentType
+
 	// A user-defined label for an AppConfig hosted configuration version.
 	VersionLabel *string
 
@@ -318,6 +395,157 @@ type Environment struct {
 	// The state of the environment. An environment can be in one of the following
 	// states: READY_FOR_DEPLOYMENT , DEPLOYING , ROLLING_BACK , or ROLLED_BACK
 	State EnvironmentState
+
+	noSmithyDocumentSerde
+}
+
+// A snapshot of the experiment definition captured at the time an experiment run
+// was started. This preserves the configuration that was active during the run.
+type ExperimentDefinitionSnapshot struct {
+
+	// The application ID at the time the run was started.
+	ApplicationId *string
+
+	// The audience description at the time the run was started.
+	AudienceDescription *string
+
+	// The audience rule at the time the run was started.
+	AudienceRule *string
+
+	// The configuration profile ID at the time the run was started.
+	ConfigurationProfileId *string
+
+	// The control treatment at the time the run was started.
+	Control *Treatment
+
+	// The environment ID at the time the run was started.
+	EnvironmentId *string
+
+	// The feature flag key at the time the run was started.
+	FlagKey *string
+
+	// The hypothesis at the time the run was started.
+	Hypothesis *string
+
+	// The experiment definition ID.
+	Id *string
+
+	// The launch criteria at the time the run was started.
+	LaunchCriteria *string
+
+	// The name of the experiment definition at the time the run was started.
+	Name *string
+
+	// The treatments at the time the run was started.
+	Treatments []Treatment
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an experiment definition.
+type ExperimentDefinitionSummary struct {
+
+	// The application ID.
+	ApplicationId *string
+
+	// The configuration profile ID associated with the experiment.
+	ConfigurationProfileId *string
+
+	// The date and time the experiment definition was created, in ISO 8601 format.
+	CreatedAt *time.Time
+
+	// The environment ID where the experiment runs.
+	EnvironmentId *string
+
+	// The key of the feature flag used by the experiment.
+	FlagKey *string
+
+	// The hypothesis that the experiment is designed to validate.
+	Hypothesis *string
+
+	// The experiment definition ID.
+	Id *string
+
+	// The name of the experiment definition.
+	Name *string
+
+	// The current status of the experiment definition.
+	Status ExperimentDefinitionStatus
+
+	// The date and time the experiment definition was last updated, in ISO 8601
+	// format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes an event that occurred during an experiment run.
+type ExperimentRunEvent struct {
+
+	// The Amazon Resource Name (ARN) of the deployment associated with this event.
+	AssociatedDeployment *string
+
+	// A description of the event.
+	Description *string
+
+	// The type of event. Valid values: RUN_STARTED , EXPOSURE_UPDATED ,
+	// OVERRIDES_UPDATED , RUN_STOPPED .
+	EventType ExperimentRunEventType
+
+	// The exposure percentage at the time of the event.
+	ExposurePercentage *float32
+
+	// The date and time the event occurred, in ISO 8601 format.
+	OccurredAt *time.Time
+
+	// The treatment overrides at the time of the event.
+	TreatmentOverrides TreatmentOverrides
+
+	// The principal that triggered the event.
+	TriggeredBy TriggeredBy
+
+	noSmithyDocumentSerde
+}
+
+// The result of an experiment run, including the executive summary and launch
+// decision rationale.
+type ExperimentRunResult struct {
+
+	// A summary of the experiment outcome and key findings.
+	ExecutiveSummary *string
+
+	// Evidence against launching the treatment.
+	ReasonsNotToLaunch *string
+
+	// Evidence in favor of launching the winning treatment.
+	ReasonsToLaunch *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an experiment run.
+type ExperimentRunSummary struct {
+
+	// A description of the experiment run.
+	Description *string
+
+	// The date and time the experiment run ended, in ISO 8601 format.
+	EndedAt *time.Time
+
+	// The experiment definition ID.
+	ExperimentDefinitionId *string
+
+	// The experiment run number.
+	Run int32
+
+	// The date and time the experiment run started, in ISO 8601 format.
+	StartedAt *time.Time
+
+	// The current status of the experiment run.
+	Status ExperimentRunStatus
+
+	// The date and time the experiment run was last updated, in ISO 8601 format.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -359,6 +587,21 @@ type ExtensionSummary struct {
 
 	// The extension version number.
 	VersionNumber int32
+
+	noSmithyDocumentSerde
+}
+
+// The feature flag value configuration for a treatment, including the enabled
+// state and attribute values.
+type FlagValue struct {
+
+	// Whether the feature flag is enabled for this treatment.
+	//
+	// This member is required.
+	Enabled bool
+
+	// The attribute values associated with this flag value.
+	AttributeValues map[string]AttributeValue
 
 	noSmithyDocumentSerde
 }
@@ -457,6 +700,69 @@ type Parameter struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a treatment in an experiment, including its traffic allocation weight
+// and feature flag value.
+type Treatment struct {
+
+	// The feature flag value served to users assigned to this treatment.
+	//
+	// This member is required.
+	FlagValue *FlagValue
+
+	// The traffic allocation weight for this treatment.
+	//
+	// This member is required.
+	Weight float32
+
+	// A description of the treatment.
+	Description *string
+
+	// The unique key that identifies this treatment.
+	Key *string
+
+	noSmithyDocumentSerde
+}
+
+// Input structure for defining a treatment when creating or updating an
+// experiment definition.
+type TreatmentInput struct {
+
+	// The feature flag value to serve to users assigned to this treatment.
+	//
+	// This member is required.
+	FlagValue *FlagValue
+
+	// The traffic allocation weight for this treatment.
+	//
+	// This member is required.
+	Weight float32
+
+	// A description of the treatment.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Treatment assignment overrides that assign specific entity IDs to treatments,
+// bypassing random assignment.
+//
+// The following types satisfy this interface:
+//
+//	TreatmentOverridesMemberInline
+type TreatmentOverrides interface {
+	isTreatmentOverrides()
+}
+
+// A map of entity IDs to treatment keys. Each entry assigns the specified entity
+// to the specified treatment, bypassing random assignment.
+type TreatmentOverridesMemberInline struct {
+	Value map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (*TreatmentOverridesMemberInline) isTreatmentOverrides() {}
+
 // A validator provides a syntactic or semantic check to ensure the configuration
 // that you want to deploy functions as intended. To validate your application
 // configuration data, you provide a schema or an Amazon Web Services Lambda
@@ -481,6 +787,15 @@ type Validator struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for vended metrics.
+type VendedMetricsSettings struct {
+
+	// Whether vended metrics are enabled for the account.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -492,4 +807,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isBadRequestDetails() {}
+func (*UnknownUnionMember) isAttributeValue()     {}
+func (*UnknownUnionMember) isBadRequestDetails()  {}
+func (*UnknownUnionMember) isTreatmentOverrides() {}

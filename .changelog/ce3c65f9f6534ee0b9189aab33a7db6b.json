@@ -1,0 +1,8 @@
+{
+    "id": "ce3c65f9-f653-4ee0-b918-9aab33a7db6b",
+    "type": "feature",
+    "description": "AWS AppConfig introduces Experimentation tools - enhanced capabilities within AWS AppConfig that enable you to run AB tests, multivariate tests, and gradual feature rollouts across your application stack.",
+    "modules": [
+        "service/appconfig"
+    ]
+}

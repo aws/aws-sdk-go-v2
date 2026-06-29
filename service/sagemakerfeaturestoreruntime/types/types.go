@@ -83,6 +83,53 @@ type BatchGetRecordResultDetail struct {
 	noSmithyDocumentSerde
 }
 
+// An entry to write as part of a BatchWriteRecord request.
+type BatchWriteRecordEntry struct {
+
+	// The name or Amazon Resource Name (ARN) of the FeatureGroup to write the record
+	// to.
+	//
+	// This member is required.
+	FeatureGroupName *string
+
+	// List of FeatureValues to be inserted. This will be a full over-write.
+	//
+	// This member is required.
+	Record []FeatureValue
+
+	// A list of stores to which you're adding the record. By default, Feature Store
+	// adds the record to all of the stores that you're using for the FeatureGroup .
+	TargetStores []TargetStore
+
+	// Time to live duration for this entry, where the record is hard deleted after
+	// the expiration time is reached; ExpiresAt = EventTime + TtlDuration . This
+	// overrides the request level TtlDuration .
+	TtlDuration *TtlDuration
+
+	noSmithyDocumentSerde
+}
+
+// The error that has occurred when attempting to write a record in a batch.
+type BatchWriteRecordError struct {
+
+	// The entry that failed to be written.
+	//
+	// This member is required.
+	Entry *BatchWriteRecordEntry
+
+	// The error code for the failed record write.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message for the failed record write.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // The value associated with a feature.
 type FeatureValue struct {
 

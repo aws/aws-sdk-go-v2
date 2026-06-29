@@ -273,6 +273,7 @@
         "api_op_TagResource.go",
         "api_op_TestConnection.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateAsset.go",
         "api_op_UpdateBlueprint.go",
         "api_op_UpdateCatalog.go",
         "api_op_UpdateClassifier.go",

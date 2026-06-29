@@ -1954,6 +1954,57 @@ func (m *smithyRpcv2cbor_serializeOpPutInsightRule) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpPutLogAlarm struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpPutLogAlarm) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpPutLogAlarm) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*PutLogAlarmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/PutLogAlarm"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_PutLogAlarmInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpPutManagedInsightRules struct {
 }
 
@@ -2877,6 +2928,19 @@ func serializeCBOR_LabelOptions(v *types.LabelOptions) (smithycbor.Value, error)
 	return vm, nil
 }
 
+func serializeCBOR_LogGroupIdentifiers(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
 func serializeCBOR_ManagedRule(v *types.ManagedRule) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.TemplateName != nil {
@@ -3389,6 +3453,86 @@ func serializeCBOR_Schedule(v *types.Schedule) (smithycbor.Value, error) {
 	return vm, nil
 }
 
+func serializeCBOR_ScheduleConfiguration(v *types.ScheduleConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ScheduleExpression != nil {
+		ser, err := serializeCBOR_String(*v.ScheduleExpression)
+		if err != nil {
+			return nil, err
+		}
+		vm["ScheduleExpression"] = ser
+	}
+	if v.StartTimeOffset != nil {
+		ser, err := serializeCBOR_Int64(*v.StartTimeOffset)
+		if err != nil {
+			return nil, err
+		}
+		vm["StartTimeOffset"] = ser
+	}
+	if v.EndTimeOffset != nil {
+		ser, err := serializeCBOR_Int64(*v.EndTimeOffset)
+		if err != nil {
+			return nil, err
+		}
+		vm["EndTimeOffset"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ScheduledQueryConfiguration(v *types.ScheduledQueryConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.QueryString != nil {
+		ser, err := serializeCBOR_String(*v.QueryString)
+		if err != nil {
+			return nil, err
+		}
+		vm["QueryString"] = ser
+	}
+	if v.LogGroupIdentifiers != nil {
+		ser, err := serializeCBOR_LogGroupIdentifiers(v.LogGroupIdentifiers)
+		if err != nil {
+			return nil, err
+		}
+		vm["LogGroupIdentifiers"] = ser
+	}
+	if v.QueryARN != nil {
+		ser, err := serializeCBOR_String(*v.QueryARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["QueryARN"] = ser
+	}
+	if v.ScheduledQueryRoleARN != nil {
+		ser, err := serializeCBOR_String(*v.ScheduledQueryRoleARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ScheduledQueryRoleARN"] = ser
+	}
+	if v.ScheduleConfiguration != nil {
+		ser, err := serializeCBOR_ScheduleConfiguration(v.ScheduleConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["ScheduleConfiguration"] = ser
+	}
+	if v.AggregationExpression != nil {
+		ser, err := serializeCBOR_String(*v.AggregationExpression)
+		if err != nil {
+			return nil, err
+		}
+		vm["AggregationExpression"] = ser
+	}
+	if v.Tags != nil {
+		ser, err := serializeCBOR_TagList(v.Tags)
+		if err != nil {
+			return nil, err
+		}
+		vm["Tags"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_SingleMetricAnomalyDetector(v *types.SingleMetricAnomalyDetector) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.AccountId != nil {
@@ -3554,6 +3698,13 @@ func serializeCBOR_Float64(v float64) (smithycbor.Value, error) {
 }
 
 func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
+	}
+	return smithycbor.Uint(uint64(v)), nil
+}
+
+func serializeCBOR_Int64(v int64) (smithycbor.Value, error) {
 	if v < 0 {
 		return smithycbor.NegInt(uint64(-v)), nil
 	}
@@ -4703,6 +4854,116 @@ func serializeCBOR_PutInsightRuleInput(v *PutInsightRuleInput) (smithycbor.Value
 			return nil, err
 		}
 		vm["ApplyOnTransformedLogs"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_PutLogAlarmInput(v *PutLogAlarmInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.AlarmName != nil {
+		ser, err := serializeCBOR_String(*v.AlarmName)
+		if err != nil {
+			return nil, err
+		}
+		vm["AlarmName"] = ser
+	}
+	if v.AlarmDescription != nil {
+		ser, err := serializeCBOR_String(*v.AlarmDescription)
+		if err != nil {
+			return nil, err
+		}
+		vm["AlarmDescription"] = ser
+	}
+	if v.ScheduledQueryConfiguration != nil {
+		ser, err := serializeCBOR_ScheduledQueryConfiguration(v.ScheduledQueryConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["ScheduledQueryConfiguration"] = ser
+	}
+	if v.ActionLogLineCount != nil {
+		ser, err := serializeCBOR_Int32(*v.ActionLogLineCount)
+		if err != nil {
+			return nil, err
+		}
+		vm["ActionLogLineCount"] = ser
+	}
+	if v.ActionLogLineRoleArn != nil {
+		ser, err := serializeCBOR_String(*v.ActionLogLineRoleArn)
+		if err != nil {
+			return nil, err
+		}
+		vm["ActionLogLineRoleArn"] = ser
+	}
+	if v.ActionsEnabled != nil {
+		ser, err := serializeCBOR_Bool(*v.ActionsEnabled)
+		if err != nil {
+			return nil, err
+		}
+		vm["ActionsEnabled"] = ser
+	}
+	if v.OKActions != nil {
+		ser, err := serializeCBOR_ResourceList(v.OKActions)
+		if err != nil {
+			return nil, err
+		}
+		vm["OKActions"] = ser
+	}
+	if v.AlarmActions != nil {
+		ser, err := serializeCBOR_ResourceList(v.AlarmActions)
+		if err != nil {
+			return nil, err
+		}
+		vm["AlarmActions"] = ser
+	}
+	if v.InsufficientDataActions != nil {
+		ser, err := serializeCBOR_ResourceList(v.InsufficientDataActions)
+		if err != nil {
+			return nil, err
+		}
+		vm["InsufficientDataActions"] = ser
+	}
+	if v.QueryResultsToEvaluate != nil {
+		ser, err := serializeCBOR_Int32(*v.QueryResultsToEvaluate)
+		if err != nil {
+			return nil, err
+		}
+		vm["QueryResultsToEvaluate"] = ser
+	}
+	if v.QueryResultsToAlarm != nil {
+		ser, err := serializeCBOR_Int32(*v.QueryResultsToAlarm)
+		if err != nil {
+			return nil, err
+		}
+		vm["QueryResultsToAlarm"] = ser
+	}
+	if v.Threshold != nil {
+		ser, err := serializeCBOR_Float64(*v.Threshold)
+		if err != nil {
+			return nil, err
+		}
+		vm["Threshold"] = ser
+	}
+	if len(v.ComparisonOperator) > 0 {
+		ser, err := serializeCBOR_ComparisonOperator(v.ComparisonOperator)
+		if err != nil {
+			return nil, err
+		}
+		vm["ComparisonOperator"] = ser
+	}
+	if v.TreatMissingData != nil {
+		ser, err := serializeCBOR_String(*v.TreatMissingData)
+		if err != nil {
+			return nil, err
+		}
+		vm["TreatMissingData"] = ser
+	}
+	if v.Tags != nil {
+		ser, err := serializeCBOR_TagList(v.Tags)
+		if err != nil {
+			return nil, err
+		}
+		vm["Tags"] = ser
 	}
 	return vm, nil
 }

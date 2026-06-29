@@ -1,0 +1,8 @@
+{
+    "id": "1e43a7ed-117e-4bb7-8be9-384fa0e761f6",
+    "type": "documentation",
+    "description": "Updated documentation to remove Aurora Serverless V1 references.",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

@@ -128,7 +128,7 @@ type ModifyReplicationGroupInput struct {
 	// to change the durability mode of an existing replication group, for example from
 	// sync to async or vice versa. For more information, see [Durability].
 	//
-	// [Durability]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+	// [Durability]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
 	Durability types.Durability
 
 	// Modifies the engine listed in a replication group message. The options are

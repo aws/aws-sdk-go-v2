@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchGetRecord(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchWriteRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchWriteRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchWriteRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteRecord(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRecord(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_GetRecord(t *testing.T) {
 	_, err := svc.GetRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -121,6 +145,18 @@ func TestUpdateSnapshot_BatchGetRecord(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchWriteRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchWriteRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchWriteRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteRecord(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRecord(context.Background(), nil, func(o *Options) {
@@ -138,6 +174,18 @@ func TestUpdateSnapshot_GetRecord(t *testing.T) {
 	_, err := svc.GetRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

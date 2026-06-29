@@ -202,11 +202,12 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeCampaignEmail         EventType = "Campaign-Email"
-	EventTypeCampaignSms           EventType = "Campaign-SMS"
-	EventTypeCampaignTelephony     EventType = "Campaign-Telephony"
-	EventTypeCampaignOrchestration EventType = "Campaign-Orchestration"
-	EventTypeCampaignWhatsApp      EventType = "Campaign-WhatsApp"
+	EventTypeCampaignEmail           EventType = "Campaign-Email"
+	EventTypeCampaignSms             EventType = "Campaign-SMS"
+	EventTypeCampaignTelephony       EventType = "Campaign-Telephony"
+	EventTypeCampaignOrchestration   EventType = "Campaign-Orchestration"
+	EventTypeCampaignWhatsApp        EventType = "Campaign-WhatsApp"
+	EventTypeCampaignWebNotification EventType = "Campaign-WebNotification"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
@@ -220,6 +221,7 @@ func (EventType) Values() []EventType {
 		"Campaign-Telephony",
 		"Campaign-Orchestration",
 		"Campaign-WhatsApp",
+		"Campaign-WebNotification",
 	}
 }
 

@@ -81,7 +81,11 @@ type CreateImagePipelineInput struct {
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
-	// Define logging configuration for the image build process.
+	// Specifies the logging configuration for the image pipeline. Use this to define
+	// custom CloudWatch Logs log groups for your pipeline execution logs and image
+	// build logs. The service manages log groups with names starting with
+	// /aws/imagebuilder/ using the service-linked role. For custom log group names
+	// outside of this prefix, you must also provide an executionRole .
 	LoggingConfiguration *types.PipelineLoggingConfiguration
 
 	// The schedule of the image pipeline.

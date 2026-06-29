@@ -2279,6 +2279,55 @@ func (m *smithyRpcv2cbor_deserializeOpPutInsightRule) HandleDeserialize(ctx cont
 	return out, metadata, nil
 }
 
+type smithyRpcv2cbor_deserializeOpPutLogAlarm struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpPutLogAlarm) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpPutLogAlarm) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorPutLogAlarm(resp)
+	}
+
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
+		return out, metadata, fmt.Errorf("discard response body: %w", err)
+	}
+
+	out.Result = &PutLogAlarmOutput{}
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpPutManagedInsightRules struct {
 }
 
@@ -4670,6 +4719,287 @@ func deserializeCBOR_LimitExceededFault(v smithycbor.Value) (*types.LimitExceede
 	return ds, nil
 }
 
+func deserializeCBOR_LogAlarm(v smithycbor.Value) (*types.LogAlarm, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LogAlarm{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "AlarmName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AlarmName = ptr.String(dv)
+		}
+
+		if key == "AlarmArn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AlarmArn = ptr.String(dv)
+		}
+
+		if key == "AlarmDescription" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AlarmDescription = ptr.String(dv)
+		}
+
+		if key == "AlarmConfigurationUpdatedTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AlarmConfigurationUpdatedTimestamp = ptr.Time(dv)
+		}
+
+		if key == "ActionsEnabled" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ActionsEnabled = ptr.Bool(dv)
+		}
+
+		if key == "OKActions" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ResourceList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.OKActions = dv
+		}
+
+		if key == "AlarmActions" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ResourceList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AlarmActions = dv
+		}
+
+		if key == "InsufficientDataActions" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ResourceList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.InsufficientDataActions = dv
+		}
+
+		if key == "StateValue" {
+
+			dv, err := deserializeCBOR_StateValue(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StateValue = dv
+		}
+
+		if key == "StateReason" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StateReason = ptr.String(dv)
+		}
+
+		if key == "StateReasonData" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StateReasonData = ptr.String(dv)
+		}
+
+		if key == "StateUpdatedTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StateUpdatedTimestamp = ptr.Time(dv)
+		}
+
+		if key == "ScheduledQueryConfiguration" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ScheduledQueryConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ScheduledQueryConfiguration = dv
+		}
+
+		if key == "QueryResultsToEvaluate" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.QueryResultsToEvaluate = ptr.Int32(dv)
+		}
+
+		if key == "QueryResultsToAlarm" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.QueryResultsToAlarm = ptr.Int32(dv)
+		}
+
+		if key == "Threshold" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Float64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Threshold = ptr.Float64(dv)
+		}
+
+		if key == "ComparisonOperator" {
+
+			dv, err := deserializeCBOR_ComparisonOperator(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ComparisonOperator = dv
+		}
+
+		if key == "TreatMissingData" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TreatMissingData = ptr.String(dv)
+		}
+
+		if key == "StateTransitionedTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StateTransitionedTimestamp = ptr.Time(dv)
+		}
+
+		if key == "EvaluationState" {
+
+			dv, err := deserializeCBOR_EvaluationState(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EvaluationState = dv
+		}
+
+		if key == "ActionLogLineCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ActionLogLineCount = ptr.Int32(dv)
+		}
+
+		if key == "ActionLogLineRoleArn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ActionLogLineRoleArn = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LogAlarms(v smithycbor.Value) ([]types.LogAlarm, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.LogAlarm
+	for _, si := range av {
+
+		di, err := deserializeCBOR_LogAlarm(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_LogGroupIdentifiers(v smithycbor.Value) ([]string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []string
+	for _, si := range av {
+
+		di, err := deserializeCBOR_String(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
 func deserializeCBOR_ManagedRuleDescription(v smithycbor.Value) (*types.ManagedRuleDescription, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -5995,6 +6325,28 @@ func deserializeCBOR_Range(v smithycbor.Value) (*types.Range, error) {
 	return ds, nil
 }
 
+func deserializeCBOR_ResourceConflict(v smithycbor.Value) (*types.ResourceConflict, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ResourceConflict{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_ResourceList(v smithycbor.Value) ([]string, error) {
 	av, ok := v.(smithycbor.List)
 	if !ok {
@@ -6139,6 +6491,138 @@ func deserializeCBOR_Schedule(v smithycbor.Value) (*types.Schedule, error) {
 				return nil, err
 			}
 			ds.Timezone = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ScheduleConfiguration(v smithycbor.Value) (*types.ScheduleConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ScheduleConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ScheduleExpression" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ScheduleExpression = ptr.String(dv)
+		}
+
+		if key == "StartTimeOffset" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StartTimeOffset = ptr.Int64(dv)
+		}
+
+		if key == "EndTimeOffset" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EndTimeOffset = ptr.Int64(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ScheduledQueryConfiguration(v smithycbor.Value) (*types.ScheduledQueryConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ScheduledQueryConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "QueryString" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.QueryString = ptr.String(dv)
+		}
+
+		if key == "LogGroupIdentifiers" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LogGroupIdentifiers(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LogGroupIdentifiers = dv
+		}
+
+		if key == "QueryARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.QueryARN = ptr.String(dv)
+		}
+
+		if key == "ScheduledQueryRoleARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ScheduledQueryRoleARN = ptr.String(dv)
+		}
+
+		if key == "ScheduleConfiguration" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ScheduleConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ScheduleConfiguration = dv
+		}
+
+		if key == "AggregationExpression" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AggregationExpression = ptr.String(dv)
+		}
+
+		if key == "Tags" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_TagList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Tags = dv
 		}
 	}
 	return ds, nil
@@ -6487,6 +6971,17 @@ func deserializeCBOR_DescribeAlarmsOutput(v smithycbor.Value) (*DescribeAlarmsOu
 				return nil, err
 			}
 			ds.MetricAlarms = dv
+		}
+
+		if key == "LogAlarms" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LogAlarms(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LogAlarms = dv
 		}
 
 		if key == "NextToken" {
@@ -7564,6 +8059,18 @@ func rpc2_deserializeOpErrorDeleteAlarms(resp *smithyhttp.Response) error {
 	errorParts := strings.Split(typ, "#")
 	errorName := errorParts[len(errorParts)-1]
 	switch string(errorName) {
+	case "ResourceConflict":
+		verr, err := deserializeCBOR_ResourceConflict(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ResourceConflict: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
 	case "ResourceNotFound":
 		verr, err := deserializeCBOR_ResourceNotFound(v)
 		if err != nil {
@@ -9571,6 +10078,61 @@ func rpc2_deserializeOpErrorPutInsightRule(resp *smithyhttp.Response) error {
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#MissingRequiredParameterException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorPutLogAlarm(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "LimitExceededFault":
+		verr, err := deserializeCBOR_LimitExceededFault(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#LimitExceededFault: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	case "ResourceConflict":
+		verr, err := deserializeCBOR_ResourceConflict(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ResourceConflict: %w", err),
 				Snapshot: payload,
 			}
 		}

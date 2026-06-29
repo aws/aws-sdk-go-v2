@@ -37,7 +37,7 @@ import (
 // using Amazon Athena or Apache Spark. For information on how to hard delete a
 // record from the OfflineStore with the Iceberg table format enabled, see [Delete records from the offline store].
 //
-// [Delete records from the offline store]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store
+// [Delete records from the offline store]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records.html#feature-store-delete-records-offline-store
 func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, optFns ...func(*Options)) (*DeleteRecordOutput, error) {
 	if params == nil {
 		params = &DeleteRecordInput{}

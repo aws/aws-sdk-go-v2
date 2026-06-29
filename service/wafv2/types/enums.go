@@ -40,6 +40,7 @@ const (
 	AssociatedResourceTypeCognitoUserPool        AssociatedResourceType = "COGNITO_USER_POOL"
 	AssociatedResourceTypeAppRunnerService       AssociatedResourceType = "APP_RUNNER_SERVICE"
 	AssociatedResourceTypeVerifiedAccessInstance AssociatedResourceType = "VERIFIED_ACCESS_INSTANCE"
+	AssociatedResourceTypeAgentcoreGateway       AssociatedResourceType = "AGENTCORE_GATEWAY"
 )
 
 // Values returns all known values for AssociatedResourceType. Note that this can
@@ -53,6 +54,7 @@ func (AssociatedResourceType) Values() []AssociatedResourceType {
 		"COGNITO_USER_POOL",
 		"APP_RUNNER_SERVICE",
 		"VERIFIED_ACCESS_INSTANCE",
+		"AGENTCORE_GATEWAY",
 	}
 }
 
@@ -1370,6 +1372,7 @@ const (
 	ResourceTypeAppRunnerService        ResourceType = "APP_RUNNER_SERVICE"
 	ResourceTypeVerifiedAccessInstance  ResourceType = "VERIFIED_ACCESS_INSTANCE"
 	ResourceTypeAmplify                 ResourceType = "AMPLIFY"
+	ResourceTypeAgentcoreGateway        ResourceType = "AGENTCORE_GATEWAY"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1385,6 +1388,7 @@ func (ResourceType) Values() []ResourceType {
 		"APP_RUNNER_SERVICE",
 		"VERIFIED_ACCESS_INSTANCE",
 		"AMPLIFY",
+		"AGENTCORE_GATEWAY",
 	}
 }
 

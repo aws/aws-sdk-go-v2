@@ -630,6 +630,26 @@ func (m *validateOpPutInsightRule) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutLogAlarm struct {
+}
+
+func (*validateOpPutLogAlarm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutLogAlarm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutLogAlarmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutLogAlarmInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutManagedInsightRules struct {
 }
 
@@ -932,6 +952,10 @@ func addOpPutDashboardValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutInsightRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutInsightRule{}, middleware.After)
+}
+
+func addOpPutLogAlarmValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutLogAlarm{}, middleware.After)
 }
 
 func addOpPutManagedInsightRulesValidationMiddleware(stack *middleware.Stack) error {
@@ -1453,6 +1477,54 @@ func validateSchedule(v *types.Schedule) error {
 	}
 	if v.Duration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Duration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledQueryConfiguration(v *types.ScheduledQueryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledQueryConfiguration"}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.ScheduledQueryRoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledQueryRoleARN"))
+	}
+	if v.ScheduleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfiguration"))
+	} else if v.ScheduleConfiguration != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregationExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationExpression"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2110,6 +2182,45 @@ func validateOpPutInsightRuleInput(v *PutInsightRuleInput) error {
 	}
 	if v.RuleDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleDefinition"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutLogAlarmInput(v *PutLogAlarmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutLogAlarmInput"}
+	if v.AlarmName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
+	}
+	if v.ScheduledQueryConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledQueryConfiguration"))
+	} else if v.ScheduledQueryConfiguration != nil {
+		if err := validateScheduledQueryConfiguration(v.ScheduledQueryConfiguration); err != nil {
+			invalidParams.AddNested("ScheduledQueryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryResultsToEvaluate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryResultsToEvaluate"))
+	}
+	if v.QueryResultsToAlarm == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryResultsToAlarm"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

@@ -17,7 +17,9 @@ import (
 // throughput. A spread placement group places instances on distinct hardware. A
 // partition placement group places groups of instances in different partitions,
 // where instances in one partition do not share the same hardware with instances
-// in another partition.
+// in another partition. A precision-time placement group places instances on
+// supported hardware with direct access to high-precision time sources in AWS
+// infrastructure.
 //
 // For more information, see [Placement groups] in the Amazon EC2 User Guide.
 //
@@ -56,6 +58,9 @@ type CreatePlacementGroupInput struct {
 
 	// Reserved for internal use.
 	Operator *types.OperatorRequest
+
+	// The ID of a parent placement group. Valid only when Strategy is set to cluster .
+	ParentGroupId *string
 
 	// The number of partitions. Valid only when Strategy is set to partition .
 	PartitionCount *int32

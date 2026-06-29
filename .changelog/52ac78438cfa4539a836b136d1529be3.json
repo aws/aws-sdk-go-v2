@@ -1,0 +1,8 @@
+{
+    "id": "52ac7843-8cfa-4539-a836-b136d1529be3",
+    "type": "feature",
+    "description": "This release adds the API (PutLogAlarm) to manage a new CloudWatch resource, Log Based Alarms. Log Based Alarms allows customers to alarm directly on CloudWatch Logs query results.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

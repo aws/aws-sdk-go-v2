@@ -1,0 +1,8 @@
+{
+    "id": "664bdd95-5474-43c7-8ed1-13d71230e21d",
+    "type": "feature",
+    "description": "Amazon VPC Lattice now supports mutable idle timeout configuration on VPC Lattice Services",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

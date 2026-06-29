@@ -16640,6 +16640,15 @@ func awsAwsjson11_deserializeDocumentDeploymentCircuitBreaker(v **types.Deployme
 				sv.Enable = jtv
 			}
 
+		case "resetOnHealthyTask":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.ResetOnHealthyTask = ptr.Bool(jtv)
+			}
+
 		case "rollback":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16647,6 +16656,11 @@ func awsAwsjson11_deserializeDocumentDeploymentCircuitBreaker(v **types.Deployme
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Rollback = jtv
+			}
+
+		case "thresholdConfiguration":
+			if err := awsAwsjson11_deserializeDocumentThresholdConfiguration(&sv.ThresholdConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -28948,6 +28962,59 @@ func awsAwsjson11_deserializeDocumentTaskSets(v *[]types.TaskSet, value interfac
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentThresholdConfiguration(v **types.ThresholdConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThresholdConfiguration
+	if *v == nil {
+		sv = &types.ThresholdConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThresholdType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ThresholdType(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

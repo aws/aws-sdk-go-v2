@@ -2210,6 +2210,35 @@ func (TaskStopCode) Values() []TaskStopCode {
 	}
 }
 
+type ThresholdType string
+
+// Enum values for ThresholdType
+const (
+	// Amazon ECS uses the integer provided in value directly as the failure threshold.
+	ThresholdTypeCount ThresholdType = "COUNT"
+	// Amazon ECS calculates the failure threshold by multiplying value by the latest
+	// service desired count, then clamps the result to a minimum of 3 and a maximum
+	// of 200 . This is the default threshold type.
+	ThresholdTypeBoundedPercent ThresholdType = "BOUNDED_PERCENT"
+	// Amazon ECS calculates the failure threshold by multiplying value by the latest
+	// service desired count, without applying the 3 -to- 200 bounds. Use this when
+	// the desired count is large enough that the calculated threshold should be
+	// allowed to exceed 200 .
+	ThresholdTypeUnboundedPercent ThresholdType = "UNBOUNDED_PERCENT"
+)
+
+// Values returns all known values for ThresholdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThresholdType) Values() []ThresholdType {
+	return []ThresholdType{
+		"COUNT",
+		"BOUNDED_PERCENT",
+		"UNBOUNDED_PERCENT",
+	}
+}
+
 type TransportProtocol string
 
 // Enum values for TransportProtocol

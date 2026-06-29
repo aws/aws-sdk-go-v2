@@ -46,6 +46,7 @@
         "api_op_PutCompositeAlarm.go",
         "api_op_PutDashboard.go",
         "api_op_PutInsightRule.go",
+        "api_op_PutLogAlarm.go",
         "api_op_PutManagedInsightRules.go",
         "api_op_PutMetricAlarm.go",
         "api_op_PutMetricData.go",

@@ -1157,6 +1157,11 @@ type ImageRecipe struct {
 	// phase prior to image distribution.
 	AmiTags map[string]string
 
+	// The AMI watermark names attached to the output AMI from this recipe. AMI
+	// watermarks are lineage markers that automatically propagate to derivative AMIs
+	// when the source AMI is copied or distributed.
+	AmiWatermarks []string
+
 	// The Amazon Resource Name (ARN) of the image recipe.
 	Arn *string
 
@@ -2226,12 +2231,18 @@ type PackageVulnerabilityDetails struct {
 // The logging configuration that's defined for pipeline execution.
 type PipelineLoggingConfiguration struct {
 
-	// The log group name that Image Builder uses for image creation. If not
-	// specified, the log group name defaults to /aws/imagebuilder/image-name .
+	// Specifies the CloudWatch Logs log group name for image build logs. The log
+	// group name can contain alphanumeric characters, hyphens, underscores, forward
+	// slashes, and periods, up to 512 characters. Log group names not starting with
+	// /aws/imagebuilder/ require an executionRole with CloudWatch Logs write
+	// permissions. If not specified, defaults to /aws/imagebuilder/image-name .
 	ImageLogGroupName *string
 
-	// The log group name that Image Builder uses for the log output during creation
-	// of a new pipeline. If not specified, the pipeline log group name defaults to
+	// Specifies the CloudWatch Logs log group name for pipeline execution logs. The
+	// log group name can contain alphanumeric characters, hyphens, underscores,
+	// forward slashes, and periods, up to 512 characters. Log group names not starting
+	// with /aws/imagebuilder/ require an executionRole with CloudWatch Logs write
+	// permissions. If not specified, defaults to
 	// /aws/imagebuilder/pipeline/pipeline-name .
 	PipelineLogGroupName *string
 

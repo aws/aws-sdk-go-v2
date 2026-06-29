@@ -36,8 +36,10 @@ type UpdateNotifyConfigurationInput struct {
 	// This member is required.
 	NotifyConfigurationId *string
 
-	// The template ID to set as the default, or the special value
-	// UNSET_DEFAULT_TEMPLATE to clear the current default template.
+	// The default template identifier to associate with the notify configuration. If
+	// specified, this template is used when sending messages without an explicit
+	// template identifier. Pass the special value UNSET_DEFAULT_TEMPLATE to clear the
+	// current default template from the notify configuration.
 	DefaultTemplateId *string
 
 	// When set to true the notify configuration can't be deleted.
@@ -51,8 +53,9 @@ type UpdateNotifyConfigurationInput struct {
 	// are enabled for the notify configuration.
 	EnabledCountries []string
 
-	// The pool ID or ARN to associate, or the special value
-	// UNSET_DEFAULT_POOL_FOR_NOTIFY to clear the current default pool.
+	// The pool identifier or Amazon Resource Name (ARN) to associate with the notify
+	// configuration. Pass the special value UNSET_DEFAULT_POOL_FOR_NOTIFY to clear
+	// the current default pool from the notify configuration.
 	PoolId *string
 
 	noSmithyDocumentSerde

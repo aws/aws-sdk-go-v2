@@ -1,0 +1,8 @@
+{
+    "id": "1c18003e-36f1-4fe2-8ca1-0a8a950d8932",
+    "type": "feature",
+    "description": "Add support for in-place Slurm version upgrades on existing clusters by accepting scheduler.version in UpdateCluster.",
+    "modules": [
+        "service/pcs"
+    ]
+}

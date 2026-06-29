@@ -74,7 +74,7 @@ type UpdateExpressGatewayServiceInput struct {
 	// also have FARGATE compatibility.
 	//
 	// If you provide a task definition ARN, you cannot also specify primaryContainer ,
-	// taskRoleArn , cpu , or memory .
+	// executionRoleArn , taskRoleArn , cpu , or memory .
 	TaskDefinitionArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role for containers in this task.

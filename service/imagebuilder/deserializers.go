@@ -15585,6 +15585,42 @@ func awsRestjson1_deserializeDocumentAmiList(v *[]types.Ami, value interface{}) 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAmiWatermarksList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AmiWatermarkName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutoDisablePolicy(v **types.AutoDisablePolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18868,6 +18904,11 @@ func awsRestjson1_deserializeDocumentImageRecipe(v **types.ImageRecipe, value in
 
 		case "amiTags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.AmiTags, value); err != nil {
+				return err
+			}
+
+		case "amiWatermarks":
+			if err := awsRestjson1_deserializeDocumentAmiWatermarksList(&sv.AmiWatermarks, value); err != nil {
 				return err
 			}
 

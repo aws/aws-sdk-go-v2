@@ -829,12 +829,13 @@ type Scheduler struct {
 	Type SchedulerType
 
 	// The version of the specified scheduling software that PCS uses to manage
-	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
-	// Guide.
+	// cluster scaling and job scheduling. You can upgrade this version using the
+	// UpdateCluster API action. For more information, see [Upgrading the Slurm version on a cluster] and [Slurm versions in PCS] in the PCS User Guide.
 	//
 	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
+	// [Upgrading the Slurm version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_upgrade.html
 	//
 	// This member is required.
 	Version *string
@@ -1042,6 +1043,24 @@ type UpdateQueueSlurmConfigurationRequest struct {
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
+// The scheduler configuration for updating a cluster. Use this to specify the
+// Slurm version to upgrade to.
+type UpdateSchedulerRequest struct {
+
+	// The Slurm version to upgrade the cluster to. You can only upgrade to a newer
+	// version. For more information about supported versions and upgrade paths, see [Upgrading the Slurm version on a cluster]
+	// in the PCS User Guide.
+	//
+	// Valid Values: 24.05 | 24.11 | 25.05 | 25.11
+	//
+	// [Upgrading the Slurm version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_upgrade.html
+	//
+	// This member is required.
+	Version *string
 
 	noSmithyDocumentSerde
 }

@@ -10,10 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a connector for an Amazon EVS environment. A connector establishes a
-// connection to a VCF appliance, such as vCenter, using a fully qualified domain
-// name and an Amazon Web Services Secrets Manager secret that stores the appliance
-// credentials.
+// Creates a connector for an Amazon EVS environment. A connector allows the
+// Amazon EVS control plane to interface with VCF appliances using a fully
+// qualified domain name.
+//
+// You can create only one connector of each type per environment. For
+// environments where Amazon EVS installs VCF, the SDDC_MANAGER connector is
+// created automatically.
+//
+// Amazon EVS requires an active connector to SDDC Manager or VCF Operations
+// Manager to monitor environment health and license compliance.
 func (c *Client) CreateEnvironmentConnector(ctx context.Context, params *CreateEnvironmentConnectorInput, optFns ...func(*Options)) (*CreateEnvironmentConnectorOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentConnectorInput{}
@@ -43,15 +49,25 @@ type CreateEnvironmentConnectorInput struct {
 	EnvironmentId *string
 
 	// The ARN or name of the Amazon Web Services Secrets Manager secret that stores
-	// the credentials for the VCF appliance.
+	// the credentials for the VCF appliance. SDDC_MANAGER requires an apiKey field;
+	// OPERATIONS_MANAGER and VCENTER require username and password fields.
 	//
 	// Do not use credentials with Administrator privileges. We recommend using a
-	// service account with the minimum required permissions.
+	// service account with read-only permissions.
 	//
 	// This member is required.
 	SecretIdentifier *string
 
 	// The type of connector to create.
+	//
+	//   - OPERATIONS_MANAGER : Connector to an Operations Manager appliance. Required
+	//   for VCF 9x environments.
+	//
+	//   - SDDC_MANAGER : Connector to an SDDC Manager appliance. Required for VCF 5.x
+	//   environments.
+	//
+	//   - VCENTER : Connector to a vCenter Server appliance. Required for features
+	//   that depend on vCenter, such as Windows Server license-included.
 	//
 	// This member is required.
 	Type types.ConnectorType

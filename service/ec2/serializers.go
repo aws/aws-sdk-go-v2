@@ -70260,6 +70260,11 @@ func awsEc2query_serializeOpDocumentCreatePlacementGroupInput(v *CreatePlacement
 		}
 	}
 
+	if v.ParentGroupId != nil {
+		objectKey := object.Key("ParentGroupId")
+		objectKey.String(*v.ParentGroupId)
+	}
+
 	if v.PartitionCount != nil {
 		objectKey := object.Key("PartitionCount")
 		objectKey.Integer(*v.PartitionCount)

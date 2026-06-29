@@ -84,6 +84,14 @@ type CreateImageRecipeInput struct {
 	// phase prior to image distribution.
 	AmiTags map[string]string
 
+	// The AMI watermark names to attach to the output AMI from this recipe. AMI
+	// watermarks are lineage markers. They automatically propagate to derivative AMIs
+	// when the source AMI is copied or distributed across Regions or accounts.
+	//
+	// AMI watermarks are supported only for image recipes. AMIs with watermarks
+	// cannot be made public.
+	AmiWatermarks []string
+
 	// The block device mappings of the image recipe.
 	BlockDeviceMappings []types.InstanceBlockDeviceMapping
 

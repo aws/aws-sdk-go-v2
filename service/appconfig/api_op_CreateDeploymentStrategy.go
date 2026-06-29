@@ -33,6 +33,15 @@ type CreateDeploymentStrategyInput struct {
 
 	// Total amount of time for a deployment to last.
 	//
+	// AppConfig Agent supports deploying feature flag or free-form configuration data
+	// to specific segments or individual users during a gradual rollout. Entity-based
+	// gradual deployments ensure that once a user or segment receives a configuration
+	// version, they continue to receive that same version throughout the deployment
+	// period, regardless of which compute resource serves their requests. For more
+	// information, see [Using AppConfig Agent for user-based or entity-based gradual deployments]
+	//
+	// [Using AppConfig Agent for user-based or entity-based gradual deployments]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments
+	//
 	// This member is required.
 	DeploymentDurationInMinutes *int32
 

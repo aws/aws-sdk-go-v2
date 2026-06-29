@@ -518,6 +518,18 @@ func TestCheckSnapshot_PutInsightRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutLogAlarm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLogAlarm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutLogAlarm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutManagedInsightRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutManagedInsightRules(context.Background(), nil, func(o *Options) {
@@ -1098,6 +1110,18 @@ func TestUpdateSnapshot_PutInsightRule(t *testing.T) {
 	_, err := svc.PutInsightRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutInsightRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutLogAlarm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLogAlarm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutLogAlarm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

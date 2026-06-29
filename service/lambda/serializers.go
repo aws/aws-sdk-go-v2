@@ -7574,6 +7574,11 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionCodeInput(v *UpdateFunctionCo
 		ok.String(*v.S3Key)
 	}
 
+	if len(v.S3ObjectStorageMode) > 0 {
+		ok := object.Key("S3ObjectStorageMode")
+		ok.String(string(v.S3ObjectStorageMode))
+	}
+
 	if v.S3ObjectVersion != nil {
 		ok := object.Key("S3ObjectVersion")
 		ok.String(*v.S3ObjectVersion)
@@ -8650,6 +8655,11 @@ func awsRestjson1_serializeDocumentFunctionCode(v *types.FunctionCode, value smi
 		ok.String(*v.S3Key)
 	}
 
+	if len(v.S3ObjectStorageMode) > 0 {
+		ok := object.Key("S3ObjectStorageMode")
+		ok.String(string(v.S3ObjectStorageMode))
+	}
+
 	if v.S3ObjectVersion != nil {
 		ok := object.Key("S3ObjectVersion")
 		ok.String(*v.S3ObjectVersion)
@@ -8916,6 +8926,11 @@ func awsRestjson1_serializeDocumentLayerVersionContentInput(v *types.LayerVersio
 	if v.S3Key != nil {
 		ok := object.Key("S3Key")
 		ok.String(*v.S3Key)
+	}
+
+	if len(v.S3ObjectStorageMode) > 0 {
+		ok := object.Key("S3ObjectStorageMode")
+		ok.String(string(v.S3ObjectStorageMode))
 	}
 
 	if v.S3ObjectVersion != nil {

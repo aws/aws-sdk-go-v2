@@ -2014,6 +2014,11 @@ func validateDeploymentCircuitBreaker(v *types.DeploymentCircuitBreaker) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentCircuitBreaker"}
+	if v.ThresholdConfiguration != nil {
+		if err := validateThresholdConfiguration(v.ThresholdConfiguration); err != nil {
+			invalidParams.AddNested("ThresholdConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3088,6 +3093,21 @@ func validateTaskVolumeConfigurations(v []types.TaskVolumeConfiguration) error {
 		if err := validateTaskVolumeConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateThresholdConfiguration(v *types.ThresholdConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ThresholdConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

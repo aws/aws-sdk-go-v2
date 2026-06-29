@@ -422,6 +422,18 @@ func TestCheckSnapshot_DeleteRcsAgent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteRcsMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRcsMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRcsMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRegistration(context.Background(), nil, func(o *Options) {
@@ -1070,6 +1082,18 @@ func TestCheckSnapshot_SendNotifyVoiceMessage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendRcsMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendRcsMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendRcsMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendTextMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendTextMessage(context.Background(), nil, func(o *Options) {
@@ -1159,6 +1183,18 @@ func TestCheckSnapshot_SetNotifyMessageSpendLimitOverride(t *testing.T) {
 	_, err := svc.SetNotifyMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SetNotifyMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SetRcsMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetRcsMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetRcsMessageSpendLimitOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1686,6 +1722,18 @@ func TestUpdateSnapshot_DeleteRcsAgent(t *testing.T) {
 	_, err := svc.DeleteRcsAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRcsAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRcsMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRcsMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRcsMessageSpendLimitOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2341,6 +2389,18 @@ func TestUpdateSnapshot_SendNotifyVoiceMessage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SendRcsMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendRcsMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendRcsMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SendTextMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendTextMessage(context.Background(), nil, func(o *Options) {
@@ -2430,6 +2490,18 @@ func TestUpdateSnapshot_SetNotifyMessageSpendLimitOverride(t *testing.T) {
 	_, err := svc.SetNotifyMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SetNotifyMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SetRcsMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetRcsMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetRcsMessageSpendLimitOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

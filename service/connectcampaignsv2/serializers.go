@@ -3224,6 +3224,20 @@ func awsRestjson1_serializeDocumentCampaignIdList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChannelContext(v *types.ChannelContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.WebNotificationContext != nil {
+		ok := object.Key("webNotificationContext")
+		if err := awsRestjson1_serializeDocumentWebNotificationContext(v.WebNotificationContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChannelSubtypeConfig(v *types.ChannelSubtypeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3615,6 +3629,25 @@ func awsRestjson1_serializeDocumentEventTrigger(v *types.EventTrigger, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventTriggerContext(v *types.EventTriggerContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelContext != nil {
+		ok := object.Key("channelContext")
+		if err := awsRestjson1_serializeDocumentChannelContext(v.ChannelContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceEvent != nil {
+		ok := object.Key("sourceEvent")
+		ok.String(*v.SourceEvent)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInstanceCommunicationLimitsConfig(v *types.InstanceCommunicationLimitsConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3902,6 +3935,13 @@ func awsRestjson1_serializeDocumentProfileOutboundRequest(v *types.ProfileOutbou
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.EventTriggerContext != nil {
+		ok := object.Key("eventTriggerContext")
+		if err := awsRestjson1_serializeDocumentEventTriggerContext(v.EventTriggerContext, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExpirationTime != nil {
@@ -4393,6 +4433,23 @@ func awsRestjson1_serializeDocumentTimeWindow(v *types.TimeWindow, value smithyj
 		if err := awsRestjson1_serializeDocumentRestrictedPeriods(v.RestrictedPeriods, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebNotificationContext(v *types.WebNotificationContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BrowserId != nil {
+		ok := object.Key("browserId")
+		ok.String(*v.BrowserId)
+	}
+
+	if v.SessionId != nil {
+		ok := object.Key("sessionId")
+		ok.String(*v.SessionId)
 	}
 
 	return nil

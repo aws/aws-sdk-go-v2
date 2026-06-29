@@ -1005,6 +1005,13 @@ func awsRestjson1_serializeOpDocumentCreateImageRecipeInput(v *CreateImageRecipe
 		}
 	}
 
+	if v.AmiWatermarks != nil {
+		ok := object.Key("amiWatermarks")
+		if err := awsRestjson1_serializeDocumentAmiWatermarksList(v.AmiWatermarks, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BlockDeviceMappings != nil {
 		ok := object.Key("blockDeviceMappings")
 		if err := awsRestjson1_serializeDocumentInstanceBlockDeviceMappings(v.BlockDeviceMappings, ok); err != nil {
@@ -7333,6 +7340,17 @@ func awsRestjson1_serializeDocumentAmiDistributionConfiguration(v *types.AmiDist
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAmiWatermarksList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

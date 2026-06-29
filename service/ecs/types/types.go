@@ -2669,6 +2669,17 @@ type DeploymentCircuitBreaker struct {
 	// This member is required.
 	Rollback bool
 
+	// Determines whether the deployment circuit breaker resets its failure count when
+	// a task reaches a healthy state. When set to true , a healthy task resets the
+	// failure count to 0 ; when false , it doesn't.
+	ResetOnHealthyTask *bool
+
+	// The threshold configuration that controls when the deployment circuit breaker
+	// triggers. For more information, see [ThresholdConfiguration].
+	//
+	// [ThresholdConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ThresholdConfiguration.html
+	ThresholdConfiguration *ThresholdConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -8463,6 +8474,33 @@ type TaskVolumeConfiguration struct {
 	// one volume created for each task. The Amazon EBS volumes are visible in your
 	// account in the Amazon EC2 console once they are created.
 	ManagedEBSVolume *TaskManagedEBSVolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Defines the failure threshold that the deployment circuit breaker uses to
+// monitor a deployment. The type and value together determine the number of task
+// failures that are tolerated before the circuit breaker triggers.
+//
+// By default, the threshold configuration uses a type of BOUNDED_PERCENT with a
+// value of 50 .
+type ThresholdConfiguration struct {
+
+	// Determines how value is used to calculate the failure threshold. For the
+	// percentage types ( BOUNDED_PERCENT and UNBOUNDED_PERCENT ), value is multiplied
+	// by the latest service desired count; for COUNT , value is used directly. The
+	// default is BOUNDED_PERCENT .
+	//
+	// This member is required.
+	Type ThresholdType
+
+	// The integer used to calculate the failure threshold. When type is COUNT , this
+	// is the failure threshold itself. When type is a percentage type, this is the
+	// percentage that Amazon ECS multiplies by the latest service desired count to
+	// calculate the failure threshold.
+	//
+	// This member is required.
+	Value int32
 
 	noSmithyDocumentSerde
 }

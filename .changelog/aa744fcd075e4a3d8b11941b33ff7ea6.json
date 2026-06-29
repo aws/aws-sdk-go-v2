@@ -1,0 +1,8 @@
+{
+    "id": "aa744fcd-075e-4a3d-8b11-941b33ff7ea6",
+    "type": "feature",
+    "description": "Adds support for the precision time strategy and a parentGroupId parameter on CreatePlacementGroup and DescribePlacementGroups. Precision time placement groups and cluster placement groups with a parent precision time placement group ensure instances launch on precision time capable hardware.",
+    "modules": [
+        "service/ec2"
+    ]
+}

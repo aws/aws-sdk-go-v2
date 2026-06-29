@@ -61,6 +61,13 @@ type CreateServiceInput struct {
 	// The custom domain name of the service.
 	CustomDomainName *string
 
+	// The amount of time, in seconds, that a connection can remain idle (no data
+	// sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If you
+	// don't specify a value, the default is 60 seconds. This setting does not change
+	// the maximum connection duration of 10 minutes; connections are still closed when
+	// they reach that limit.
+	IdleTimeoutSeconds *int32
+
 	// The tags for the service.
 	Tags map[string]string
 
@@ -86,6 +93,10 @@ type CreateServiceOutput struct {
 
 	// The ID of the service.
 	Id *string
+
+	// The amount of time, in seconds, that a connection can remain idle before VPC
+	// Lattice closes it.
+	IdleTimeoutSeconds *int32
 
 	// The name of the service.
 	Name *string

@@ -46,8 +46,8 @@ type DescribeAlarmHistoryInput struct {
 	AlarmName *string
 
 	// Use this parameter to specify whether you want the operation to return metric
-	// alarms or composite alarms. If you omit this parameter, only metric alarms are
-	// returned.
+	// alarms, composite alarms, or log alarms. If you omit this parameter, only metric
+	// alarms are returned.
 	AlarmTypes []types.AlarmType
 
 	// The ending date to retrieve alarm history.

@@ -57,7 +57,7 @@ type GetResourceGatewayOutput struct {
 	// format.
 	LastUpdatedAt *time.Time
 
-	// The AWS service that manages the resource gateway.
+	// The Amazon Web Services service that manages the resource gateway.
 	ManagedBy *string
 
 	// The name of the resource gateway.
@@ -70,7 +70,8 @@ type GetResourceGatewayOutput struct {
 	// The security group IDs associated with the resource gateway.
 	SecurityGroupIds []string
 
-	// Indicates whether the resource gateway is managed by an AWS service.
+	// Indicates whether the resource gateway is managed by an Amazon Web Services
+	// service.
 	ServiceManaged *bool
 
 	// The status for the resource gateway.

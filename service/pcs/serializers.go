@@ -1664,6 +1664,18 @@ func awsAwsjson10_serializeDocumentUpdateQueueSlurmConfigurationRequest(v *types
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentUpdateSchedulerRequest(v *types.UpdateSchedulerRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Version != nil {
+		ok := object.Key("version")
+		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentUpdateSlurmRestRequest(v *types.UpdateSlurmRestRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2102,6 +2114,13 @@ func awsAwsjson10_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.ClusterIdentifier != nil {
 		ok := object.Key("clusterIdentifier")
 		ok.String(*v.ClusterIdentifier)
+	}
+
+	if v.Scheduler != nil {
+		ok := object.Key("scheduler")
+		if err := awsAwsjson10_serializeDocumentUpdateSchedulerRequest(v.Scheduler, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SlurmConfiguration != nil {

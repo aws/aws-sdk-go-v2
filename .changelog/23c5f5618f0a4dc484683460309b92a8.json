@@ -1,0 +1,8 @@
+{
+    "id": "23c5f561-8f0a-4dc4-8468-3460309b92a8",
+    "type": "feature",
+    "description": "Lambda now supports self-managed S3 buckets for Lambda code storage giving you the option for Lambda to reference a copy of your source code from your own S3 buckets. This allows you to maintain a single copy of your source code and manage your own code storage limits.",
+    "modules": [
+        "service/lambda"
+    ]
+}

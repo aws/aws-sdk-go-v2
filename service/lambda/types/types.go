@@ -1272,6 +1272,11 @@ type FunctionCode struct {
 	// The Amazon S3 key of the deployment package.
 	S3Key *string
 
+	// Specifies how the deployment package is stored. Use COPY (default) to upload a
+	// copy of your deployment package to Lambda. Use REFERENCE to have Lambda
+	// reference the deployment package from the specified Amazon S3 bucket.
+	S3ObjectStorageMode S3ObjectStorageMode
+
 	// For versioned objects, the version of the deployment package object to use.
 	S3ObjectVersion *string
 
@@ -1292,6 +1297,10 @@ type FunctionCode struct {
 // Details about a function's deployment package.
 type FunctionCodeLocation struct {
 
+	// An object that contains details about an error related to function deployment
+	// package retrieval.
+	Error *FunctionCodeLocationError
+
 	// URI of a container image in the Amazon ECR registry.
 	ImageUri *string
 
@@ -1304,12 +1313,27 @@ type FunctionCodeLocation struct {
 	// The resolved URI for the image.
 	ResolvedImageUri *string
 
+	// The resolved Amazon S3 object that contains the deployment package.
+	ResolvedS3Object *ResolvedS3Object
+
 	// The ARN of the Key Management Service (KMS) customer managed key that's used to
 	// encrypt your function's .zip deployment package. If you don't provide a customer
 	// managed key, Lambda uses an [Amazon Web Services owned key].
 	//
 	// [Amazon Web Services owned key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
 	SourceKMSKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an error related to retrieving a function's deployment package.
+type FunctionCodeLocationError struct {
+
+	// The error code for the failed retrieval.
+	ErrorCode *string
+
+	// A description of the error.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -1904,6 +1928,9 @@ type LayerVersionContentInput struct {
 	// The Amazon S3 key of the layer archive.
 	S3Key *string
 
+	// The storage mode for a function's deployment package.
+	S3ObjectStorageMode S3ObjectStorageMode
+
 	// For versioned objects, the version of the layer archive object to use.
 	S3ObjectVersion *string
 
@@ -1927,6 +1954,10 @@ type LayerVersionContentOutput struct {
 
 	// A link to the layer archive in Amazon S3 that is valid for 10 minutes.
 	Location *string
+
+	// Details about the resolved Amazon S3 object that contains a function's
+	// deployment package.
+	ResolvedS3Object *ResolvedS3Object
 
 	// The Amazon Resource Name (ARN) of a signing job.
 	SigningJobArn *string
@@ -2248,6 +2279,22 @@ type ProvisionedPollerConfig struct {
 	// group and aggregate maximum pollers across all ESMs in a group cannot exceed
 	// 2000.
 	PollerGroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the resolved Amazon S3 object that contains a function's
+// deployment package.
+type ResolvedS3Object struct {
+
+	// The Amazon S3 bucket that contains the deployment package.
+	S3Bucket *string
+
+	// The Amazon S3 key of the deployment package.
+	S3Key *string
+
+	// The version of the deployment package object.
+	S3ObjectVersion *string
 
 	noSmithyDocumentSerde
 }

@@ -65,6 +65,9 @@ type DisassociateWebACLInput struct {
 	//   - For an Amplify application:
 	//   arn:partition:amplify:region:account-id:apps/app-id
 	//
+	//   - For an Amazon Bedrock AgentCore Gateway:
+	//   arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+	//
 	// This member is required.
 	ResourceArn *string
 

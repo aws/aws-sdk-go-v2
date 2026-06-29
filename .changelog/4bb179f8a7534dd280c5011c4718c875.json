@@ -1,0 +1,8 @@
+{
+    "id": "4bb179f8-a753-4dd2-80c5-011c4718c875",
+    "type": "feature",
+    "description": "Adds support for AMI watermarks in Image Builder.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}
