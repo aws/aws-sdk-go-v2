@@ -9,6 +9,8 @@ import (
 )
 
 // Deletes the instance of the given custom app.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns ...func(*Options)) (*DeleteAppOutput, error) {
 	if params == nil {
 		params = &DeleteAppInput{}
@@ -29,16 +31,22 @@ type DeleteAppInput struct {
 	// The name of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	App *string
 
 	// The name of the domain of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The name of the simulation of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

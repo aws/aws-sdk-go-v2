@@ -10,6 +10,8 @@ import (
 
 // Deletes a detector model. Any active instances of the detector model are also
 // deleted.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteDetectorModel(ctx context.Context, params *DeleteDetectorModelInput, optFns ...func(*Options)) (*DeleteDetectorModelOutput, error) {
 	if params == nil {
 		params = &DeleteDetectorModelInput{}
@@ -30,6 +32,8 @@ type DeleteDetectorModelInput struct {
 	// The name of the detector model to be deleted.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	noSmithyDocumentSerde

@@ -11,6 +11,8 @@ import (
 
 // Resets one or more alarms. The alarms return to the NORMAL state after you
 // reset them.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchResetAlarm(ctx context.Context, params *BatchResetAlarmInput, optFns ...func(*Options)) (*BatchResetAlarmOutput, error) {
 	if params == nil {
 		params = &BatchResetAlarmInput{}
@@ -32,6 +34,8 @@ type BatchResetAlarmInput struct {
 	// operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResetActionRequests []types.ResetAlarmActionRequest
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type BatchResetAlarmOutput struct {
 	// A list of errors associated with the request, or null if there are no errors.
 	// Each error entry contains an entry ID that helps you identify the entry that
 	// failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorEntries []types.BatchAlarmActionErrorEntry
 
 	// Metadata pertaining to the operation's result.

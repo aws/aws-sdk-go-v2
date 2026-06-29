@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of camera stream node jobs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListNodeFromTemplateJobs(ctx context.Context, params *ListNodeFromTemplateJobsInput, optFns ...func(*Options)) (*ListNodeFromTemplateJobsOutput, error) {
 	if params == nil {
 		params = &ListNodeFromTemplateJobsInput{}
@@ -29,10 +31,14 @@ func (c *Client) ListNodeFromTemplateJobs(ctx context.Context, params *ListNodeF
 type ListNodeFromTemplateJobsInput struct {
 
 	// The maximum number of node from template jobs to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,9 +49,13 @@ type ListNodeFromTemplateJobsOutput struct {
 	// A list of jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeFromTemplateJobs []types.NodeFromTemplateJob
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

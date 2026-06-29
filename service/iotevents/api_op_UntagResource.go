@@ -9,6 +9,8 @@ import (
 )
 
 // Removes the given tags (metadata) from the resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,11 +31,15 @@ type UntagResourceInput struct {
 	// The ARN of the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A list of the keys of the tags to be removed from the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

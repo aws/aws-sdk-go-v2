@@ -11,6 +11,8 @@ import (
 
 // Disables one or more alarms. The alarms change to the DISABLED state after you
 // disable them.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchDisableAlarm(ctx context.Context, params *BatchDisableAlarmInput, optFns ...func(*Options)) (*BatchDisableAlarmOutput, error) {
 	if params == nil {
 		params = &BatchDisableAlarmInput{}
@@ -32,6 +34,8 @@ type BatchDisableAlarmInput struct {
 	// operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisableActionRequests []types.DisableAlarmActionRequest
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type BatchDisableAlarmOutput struct {
 	// A list of errors associated with the request, or null if there are no errors.
 	// Each error entry contains an entry ID that helps you identify the entry that
 	// failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorEntries []types.BatchAlarmActionErrorEntry
 
 	// Metadata pertaining to the operation's result.

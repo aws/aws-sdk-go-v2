@@ -11,6 +11,8 @@ import (
 )
 
 // Starts a custom app with the configuration specified in the simulation schema.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartApp(ctx context.Context, params *StartAppInput, optFns ...func(*Options)) (*StartAppOutput, error) {
 	if params == nil {
 		params = &StartAppInput{}
@@ -31,27 +33,39 @@ type StartAppInput struct {
 	// The name of the domain of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The name of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the simulation of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	// A value that you provide to ensure that repeated calls to this API operation
 	// using the same parameters complete only once. A ClientToken is also known as an
 	// idempotency token. A ClientToken expires after 24 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Options that apply when the app starts. These options override default behavior.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchOverrides *types.LaunchOverrides
 
 	noSmithyDocumentSerde
@@ -60,12 +74,18 @@ type StartAppInput struct {
 type StartAppOutput struct {
 
 	// The name of the domain of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The name of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the simulation of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	// Metadata pertaining to the operation's result.

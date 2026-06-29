@@ -14,6 +14,8 @@ import (
 // detectors that monitor that input. If multiple messages are sent, the order in
 // which the messages are processed isn't guaranteed. To guarantee ordering, you
 // must send messages one at a time and wait for a successful response.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchPutMessage(ctx context.Context, params *BatchPutMessageInput, optFns ...func(*Options)) (*BatchPutMessageOutput, error) {
 	if params == nil {
 		params = &BatchPutMessageInput{}
@@ -35,6 +37,8 @@ type BatchPutMessageInput struct {
 	// "messageId": "string", "inputName": "string", "payload": "string"}'
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Messages []types.Message
 
 	noSmithyDocumentSerde
@@ -43,6 +47,8 @@ type BatchPutMessageInput struct {
 type BatchPutMessageOutput struct {
 
 	// A list of any errors encountered when sending the messages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchPutMessageErrorEntries []types.BatchPutMessageErrorEntry
 
 	// Metadata pertaining to the operation's result.

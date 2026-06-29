@@ -10,6 +10,8 @@ import (
 )
 
 // Imports a node package.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePackageImportJob(ctx context.Context, params *CreatePackageImportJobInput, optFns ...func(*Options)) (*CreatePackageImportJobOutput, error) {
 	if params == nil {
 		params = &CreatePackageImportJobInput{}
@@ -30,24 +32,34 @@ type CreatePackageImportJobInput struct {
 	// A client token for the package import job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// An input config for the package import job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputConfig *types.PackageImportJobInputConfig
 
 	// A job type for the package import job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType types.PackageImportJobType
 
 	// An output config for the package import job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputConfig *types.PackageImportJobOutputConfig
 
 	// Tags for the package import job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobTags []types.JobResourceTags
 
 	noSmithyDocumentSerde
@@ -58,6 +70,8 @@ type CreatePackageImportJobOutput struct {
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

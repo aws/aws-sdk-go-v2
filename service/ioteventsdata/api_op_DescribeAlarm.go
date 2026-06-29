@@ -10,6 +10,8 @@ import (
 )
 
 // Retrieves information about an alarm.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAlarm(ctx context.Context, params *DescribeAlarmInput, optFns ...func(*Options)) (*DescribeAlarmOutput, error) {
 	if params == nil {
 		params = &DescribeAlarmInput{}
@@ -30,12 +32,16 @@ type DescribeAlarmInput struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	noSmithyDocumentSerde
@@ -44,6 +50,8 @@ type DescribeAlarmInput struct {
 type DescribeAlarmOutput struct {
 
 	// Contains information about an alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alarm *types.Alarm
 
 	// Metadata pertaining to the operation's result.

@@ -9,6 +9,8 @@ import (
 )
 
 // Tags a resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,11 +31,15 @@ type TagResourceInput struct {
 	// The resource's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// Tags for the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

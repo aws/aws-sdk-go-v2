@@ -11,6 +11,8 @@ import (
 )
 
 // Lists all custom apps or service apps for the given simulation and domain.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...func(*Options)) (*ListAppsOutput, error) {
 	if params == nil {
 		params = &ListAppsInput{}
@@ -31,12 +33,18 @@ type ListAppsInput struct {
 	// The name of the simulation that you want to list apps for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	// The name of the domain that you want to list apps for.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The maximum number of apps to list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If SimSpace Weaver returns nextToken , then there are more results available.
@@ -45,6 +53,8 @@ type ListAppsInput struct {
 	// arguments unchanged. If no results remain, then nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, then you receive an HTTP 400 ValidationException error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,6 +63,8 @@ type ListAppsInput struct {
 type ListAppsOutput struct {
 
 	// The list of apps for the given simulation and domain.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Apps []types.SimulationAppMetadata
 
 	// If SimSpace Weaver returns nextToken , then there are more results available.
@@ -61,6 +73,8 @@ type ListAppsOutput struct {
 	// arguments unchanged. If no results remain, then nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, then you receive an HTTP 400 ValidationException error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

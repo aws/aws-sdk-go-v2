@@ -11,6 +11,8 @@ import (
 
 // Creates a job to run on a device. A job can update a device's software or
 // reboot it.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateJobForDevices(ctx context.Context, params *CreateJobForDevicesInput, optFns ...func(*Options)) (*CreateJobForDevicesOutput, error) {
 	if params == nil {
 		params = &CreateJobForDevicesInput{}
@@ -31,14 +33,20 @@ type CreateJobForDevicesInput struct {
 	// ID of target device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceIds []string
 
 	// The type of job to run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType types.JobType
 
 	// Configuration settings for a software update job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceJobConfig *types.DeviceJobConfig
 
 	noSmithyDocumentSerde
@@ -49,6 +57,8 @@ type CreateJobForDevicesOutput struct {
 	// A list of jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Jobs []types.Job
 
 	// Metadata pertaining to the operation's result.

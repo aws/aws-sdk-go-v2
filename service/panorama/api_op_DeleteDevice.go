@@ -9,6 +9,8 @@ import (
 )
 
 // Deletes a device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteDevice(ctx context.Context, params *DeleteDeviceInput, optFns ...func(*Options)) (*DeleteDeviceOutput, error) {
 	if params == nil {
 		params = &DeleteDeviceInput{}
@@ -29,6 +31,8 @@ type DeleteDeviceInput struct {
 	// The device's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	noSmithyDocumentSerde
@@ -37,6 +41,8 @@ type DeleteDeviceInput struct {
 type DeleteDeviceOutput struct {
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// Metadata pertaining to the operation's result.

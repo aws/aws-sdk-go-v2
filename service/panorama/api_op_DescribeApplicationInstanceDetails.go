@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about an application instance's configuration manifest.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeApplicationInstanceDetails(ctx context.Context, params *DescribeApplicationInstanceDetailsInput, optFns ...func(*Options)) (*DescribeApplicationInstanceDetailsOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInstanceDetailsInput{}
@@ -31,6 +33,8 @@ type DescribeApplicationInstanceDetailsInput struct {
 	// The application instance's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	noSmithyDocumentSerde
@@ -39,27 +43,43 @@ type DescribeApplicationInstanceDetailsInput struct {
 type DescribeApplicationInstanceDetailsOutput struct {
 
 	// The application instance's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// The ID of the application instance that this instance replaced.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceIdToReplace *string
 
 	// When the application instance was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The application instance's default runtime context device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRuntimeContextDevice *string
 
 	// The application instance's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Parameter overrides for the configuration manifest.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ManifestOverridesPayload types.ManifestOverridesPayload
 
 	// The application instance's configuration manifest.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ManifestPayload types.ManifestPayload
 
 	// The application instance's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

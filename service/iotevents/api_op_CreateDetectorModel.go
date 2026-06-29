@@ -10,6 +10,8 @@ import (
 )
 
 // Creates a detector model.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDetectorModel(ctx context.Context, params *CreateDetectorModelInput, optFns ...func(*Options)) (*CreateDetectorModelOutput, error) {
 	if params == nil {
 		params = &CreateDetectorModelInput{}
@@ -30,24 +32,34 @@ type CreateDetectorModelInput struct {
 	// Information that defines how the detectors operate.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDefinition *types.DetectorModelDefinition
 
 	// The name of the detector model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// A brief description of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDescription *string
 
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationMethod types.EvaluationMethod
 
 	// The input attribute key used to identify a device or system to create a
@@ -55,9 +67,13 @@ type CreateDetectorModelInput struct {
 	// received to the appropriate detector (instance). This parameter uses a JSON-path
 	// expression in the message payload of each input to specify the attribute-value
 	// pair that is used to identify the device associated with the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// Metadata that can be used to manage the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -66,6 +82,8 @@ type CreateDetectorModelInput struct {
 type CreateDetectorModelOutput struct {
 
 	// Information about how the detector model is configured.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelConfiguration *types.DetectorModelConfiguration
 
 	// Metadata pertaining to the operation's result.

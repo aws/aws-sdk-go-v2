@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of nodes.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListNodes(ctx context.Context, params *ListNodesInput, optFns ...func(*Options)) (*ListNodesOutput, error) {
 	if params == nil {
 		params = &ListNodesInput{}
@@ -29,25 +31,39 @@ func (c *Client) ListNodes(ctx context.Context, params *ListNodesInput, optFns .
 type ListNodesInput struct {
 
 	// Search for nodes by category.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Category types.NodeCategory
 
 	// The maximum number of nodes to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Search for nodes by the account ID of the nodes' owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	// Search for nodes by name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// Search for nodes by version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// Search for nodes by patch version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	noSmithyDocumentSerde
@@ -56,9 +72,13 @@ type ListNodesInput struct {
 type ListNodesOutput struct {
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of nodes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nodes []types.Node
 
 	// Metadata pertaining to the operation's result.

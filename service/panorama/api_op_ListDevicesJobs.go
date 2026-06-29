@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of jobs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDevicesJobs(ctx context.Context, params *ListDevicesJobsInput, optFns ...func(*Options)) (*ListDevicesJobsOutput, error) {
 	if params == nil {
 		params = &ListDevicesJobsInput{}
@@ -29,13 +31,19 @@ func (c *Client) ListDevicesJobs(ctx context.Context, params *ListDevicesJobsInp
 type ListDevicesJobsInput struct {
 
 	// Filter results by the job's target device ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The maximum number of device jobs to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,9 +52,13 @@ type ListDevicesJobsInput struct {
 type ListDevicesJobsOutput struct {
 
 	// A list of jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceJobs []types.DeviceJob
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

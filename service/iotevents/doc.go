@@ -7,4 +7,6 @@
 // in operation, and triggers actions when such events occur. You can use AWS IoT
 // Events API operations to create, read, update, and delete inputs and detector
 // models, and to list their versions.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package iotevents

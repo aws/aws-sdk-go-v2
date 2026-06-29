@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of devices.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optFns ...func(*Options)) (*ListDevicesOutput, error) {
 	if params == nil {
 		params = &ListDevicesInput{}
@@ -29,23 +31,35 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 type ListDevicesInput struct {
 
 	// Filter based on a device's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceAggregatedStatusFilter types.DeviceAggregatedStatus
 
 	// The maximum number of devices to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Filter based on device's name. Prefixes supported.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NameFilter *string
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The target column to be sorted on. Default column sort is CREATED_TIME.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SortBy types.ListDevicesSortBy
 
 	// The sorting order for the returned list. SortOrder is DESCENDING by default
 	// based on CREATED_TIME. Otherwise, SortOrder is ASCENDING.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -56,9 +70,13 @@ type ListDevicesOutput struct {
 	// A list of devices.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Devices []types.Device
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

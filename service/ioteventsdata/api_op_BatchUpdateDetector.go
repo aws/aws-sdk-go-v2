@@ -11,6 +11,8 @@ import (
 
 // Updates the state, variable values, and timer settings of one or more detectors
 // (instances) of a specified detector model.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BatchUpdateDetector(ctx context.Context, params *BatchUpdateDetectorInput, optFns ...func(*Options)) (*BatchUpdateDetectorOutput, error) {
 	if params == nil {
 		params = &BatchUpdateDetectorInput{}
@@ -31,6 +33,8 @@ type BatchUpdateDetectorInput struct {
 	// The list of detectors (instances) to update, along with the values to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Detectors []types.UpdateDetectorRequest
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type BatchUpdateDetectorOutput struct {
 
 	// A list of those detector updates that resulted in errors. (If an error is
 	// listed here, the specific update did not occur.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchUpdateDetectorErrorEntries []types.BatchUpdateDetectorErrorEntry
 
 	// Metadata pertaining to the operation's result.

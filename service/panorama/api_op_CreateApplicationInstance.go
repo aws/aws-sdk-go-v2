@@ -10,6 +10,8 @@ import (
 )
 
 // Creates an application instance and deploys it to a device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateApplicationInstance(ctx context.Context, params *CreateApplicationInstanceInput, optFns ...func(*Options)) (*CreateApplicationInstanceOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInstanceInput{}
@@ -30,29 +32,45 @@ type CreateApplicationInstanceInput struct {
 	// A device's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRuntimeContextDevice *string
 
 	// The application's manifest document.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ManifestPayload types.ManifestPayload
 
 	// The ID of an application instance to replace with the new instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceIdToReplace *string
 
 	// A description for the application instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Setting overrides for the application manifest.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ManifestOverridesPayload types.ManifestOverridesPayload
 
 	// A name for the application instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The ARN of a runtime role for the application instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeRoleArn *string
 
 	// Tags for the application instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -63,6 +81,8 @@ type CreateApplicationInstanceOutput struct {
 	// The application instance's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,6 +10,8 @@ import (
 )
 
 // Signal camera nodes to stop or resume.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) SignalApplicationInstanceNodeInstances(ctx context.Context, params *SignalApplicationInstanceNodeInstancesInput, optFns ...func(*Options)) (*SignalApplicationInstanceNodeInstancesOutput, error) {
 	if params == nil {
 		params = &SignalApplicationInstanceNodeInstancesInput{}
@@ -30,11 +32,15 @@ type SignalApplicationInstanceNodeInstancesInput struct {
 	// An application instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// A list of signals.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeSignals []types.NodeSignal
 
 	noSmithyDocumentSerde
@@ -45,6 +51,8 @@ type SignalApplicationInstanceNodeInstancesOutput struct {
 	// An application instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// Metadata pertaining to the operation's result.

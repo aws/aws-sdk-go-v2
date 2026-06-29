@@ -12,6 +12,8 @@ import (
 //
 // Your simulation uses resources in other Amazon Web Services. This API operation
 // doesn't delete resources in other Amazon Web Services.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteSimulation(ctx context.Context, params *DeleteSimulationInput, optFns ...func(*Options)) (*DeleteSimulationOutput, error) {
 	if params == nil {
 		params = &DeleteSimulationInput{}
@@ -32,6 +34,8 @@ type DeleteSimulationInput struct {
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

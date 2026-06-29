@@ -10,6 +10,8 @@ import (
 )
 
 // Returns the state of the given custom app.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeApp(ctx context.Context, params *DescribeAppInput, optFns ...func(*Options)) (*DescribeAppOutput, error) {
 	if params == nil {
 		params = &DescribeAppInput{}
@@ -30,16 +32,22 @@ type DescribeAppInput struct {
 	// The name of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	App *string
 
 	// The name of the domain of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The name of the simulation of the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde
@@ -48,28 +56,44 @@ type DescribeAppInput struct {
 type DescribeAppOutput struct {
 
 	// The description of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The name of the domain of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// Information about the network endpoint for the custom app. You can use the
 	// endpoint to connect to the custom app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndpointInfo *types.SimulationAppEndpointInfo
 
 	// Options that apply when the app starts. These options override default behavior.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchOverrides *types.LaunchOverrides
 
 	// The name of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the simulation of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	// The current lifecycle state of the custom app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.SimulationAppStatus
 
 	// The desired lifecycle state of the custom app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetStatus types.SimulationAppTargetStatus
 
 	// Metadata pertaining to the operation's result.

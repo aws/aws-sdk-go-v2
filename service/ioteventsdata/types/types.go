@@ -11,6 +11,8 @@ import (
 type AcknowledgeActionConfiguration struct {
 
 	// The note that you can leave when you acknowledge the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -22,20 +24,28 @@ type AcknowledgeAlarmActionRequest struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The request ID. Each ID must be unique within each batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The note that you can leave when you acknowledge the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -45,27 +55,41 @@ type AcknowledgeAlarmActionRequest struct {
 type Alarm struct {
 
 	// The name of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The version of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelVersion *string
 
 	// Contains information about the current state of the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmState *AlarmState
 
 	// The time the alarm was created, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The time the alarm was last updated, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// A non-negative integer that reflects the severity level of the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Severity *int32
 
 	noSmithyDocumentSerde
@@ -75,9 +99,13 @@ type Alarm struct {
 type AlarmState struct {
 
 	// Contains information about the action that you can take to respond to the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomerAction *CustomerAction
 
 	// Information needed to evaluate data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuleEvaluation *RuleEvaluation
 
 	// The name of the alarm state. The state name can be one of the following values:
@@ -100,9 +128,13 @@ type AlarmState struct {
 	//   - LATCHED - When the alarm is in the LATCHED state, the alarm was invoked.
 	//   However, the data that the alarm is currently evaluating is within the specified
 	//   range. To change the alarm to the NORMAL state, you must acknowledge the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateName AlarmStateName
 
 	// Contains information about alarm state changes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SystemEvent *SystemEvent
 
 	noSmithyDocumentSerde
@@ -112,21 +144,31 @@ type AlarmState struct {
 type AlarmSummary struct {
 
 	// The name of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The version of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelVersion *string
 
 	// The time the alarm was created, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The time the alarm was last updated, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The name of the alarm state. The state name can be one of the following values:
@@ -149,6 +191,8 @@ type AlarmSummary struct {
 	//   - LATCHED - When the alarm is in the LATCHED state, the alarm was invoked.
 	//   However, the data that the alarm is currently evaluating is within the specified
 	//   range. To change the alarm to the NORMAL state, you must acknowledge the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateName AlarmStateName
 
 	noSmithyDocumentSerde
@@ -174,12 +218,18 @@ type AlarmSummary struct {
 type BatchAlarmActionErrorEntry struct {
 
 	// The error code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCode ErrorCode
 
 	// A message that describes the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The request ID. Each ID must be unique within each batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -189,15 +239,21 @@ type BatchAlarmActionErrorEntry struct {
 type BatchDeleteDetectorErrorEntry struct {
 
 	// The error code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCode ErrorCode
 
 	// A message that describes the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The ID of the message that caused the error. (See the value of the "messageId"
 	// in the [detectors]object of the DeleteDetectorRequest .)
 	//
 	// [detectors]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -207,13 +263,19 @@ type BatchDeleteDetectorErrorEntry struct {
 type BatchPutMessageErrorEntry struct {
 
 	// The error code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCode ErrorCode
 
 	// A message that describes the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The ID of the message that caused the error. (See the value corresponding to
 	// the "messageId" key in the "message" object.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -223,13 +285,19 @@ type BatchPutMessageErrorEntry struct {
 type BatchUpdateDetectorErrorEntry struct {
 
 	// The error code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCode ErrorCode
 
 	// A message that describes the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The "messageId" of the update request that caused the error. (The value of the
 	// "messageId" in the update request "Detector" object.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -239,6 +307,8 @@ type BatchUpdateDetectorErrorEntry struct {
 type CustomerAction struct {
 
 	// Contains the configuration information of an acknowledge action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcknowledgeActionConfiguration *AcknowledgeActionConfiguration
 
 	// The name of the action. The action name can be one of the following values:
@@ -258,18 +328,28 @@ type CustomerAction struct {
 	// For more information, see the [AlarmState] API.
 	//
 	// [AlarmState]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionName CustomerActionName
 
 	// Contains the configuration information of a disable action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisableActionConfiguration *DisableActionConfiguration
 
 	// Contains the configuration information of an enable action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableActionConfiguration *EnableActionConfiguration
 
 	// Contains the configuration information of a reset action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResetActionConfiguration *ResetActionConfiguration
 
 	// Contains the configuration information of a snooze action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnoozeActionConfiguration *SnoozeActionConfiguration
 
 	noSmithyDocumentSerde
@@ -281,17 +361,23 @@ type DeleteDetectorRequest struct {
 	// The name of the detector model that was used to create the detector instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The ID to assign to the DeleteDetectorRequest . Each "messageId" must be unique
 	// within each batch sent.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	// The value of the [key] used to identify the detector.
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	noSmithyDocumentSerde
@@ -301,22 +387,34 @@ type DeleteDetectorRequest struct {
 type Detector struct {
 
 	// The time the detector (instance) was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The name of the detector model that created this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The version of the detector model that created this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelVersion *string
 
 	// The value of the key (identifying the device or system) that caused the
 	// creation of this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The time the detector (instance) was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The current state of the detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State *DetectorState
 
 	noSmithyDocumentSerde
@@ -328,16 +426,22 @@ type DetectorState struct {
 	// The name of the state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateName *string
 
 	// The current state of the detector's timers.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timers []Timer
 
 	// The current values of the detector's variables.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variables []Variable
 
 	noSmithyDocumentSerde
@@ -349,18 +453,24 @@ type DetectorStateDefinition struct {
 	// The name of the new state of the detector (instance).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateName *string
 
 	// The new values of the detector's timers. Any timer whose value isn't specified
 	// is cleared, and its timeout event won't occur.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timers []TimerDefinition
 
 	// The new values of the detector's variables. Any variable whose value isn't
 	// specified is cleared.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Variables []VariableDefinition
 
 	noSmithyDocumentSerde
@@ -370,6 +480,8 @@ type DetectorStateDefinition struct {
 type DetectorStateSummary struct {
 
 	// The name of the state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateName *string
 
 	noSmithyDocumentSerde
@@ -379,22 +491,34 @@ type DetectorStateSummary struct {
 type DetectorSummary struct {
 
 	// The time the detector (instance) was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The name of the detector model that created this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The version of the detector model that created this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelVersion *string
 
 	// The value of the key (identifying the device or system) that caused the
 	// creation of this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The time the detector (instance) was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The current state of the detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State *DetectorStateSummary
 
 	noSmithyDocumentSerde
@@ -404,6 +528,8 @@ type DetectorSummary struct {
 type DisableActionConfiguration struct {
 
 	// The note that you can leave when you disable the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -415,20 +541,28 @@ type DisableAlarmActionRequest struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The request ID. Each ID must be unique within each batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The note that you can leave when you disable the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -438,6 +572,8 @@ type DisableAlarmActionRequest struct {
 type EnableActionConfiguration struct {
 
 	// The note that you can leave when you enable the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -449,20 +585,28 @@ type EnableAlarmActionRequest struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The request ID. Each ID must be unique within each batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The note that you can leave when you enable the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -474,21 +618,29 @@ type Message struct {
 	// The name of the input into which the message payload is transformed.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// The ID to assign to the message. Within each batch sent, each "messageId" must
 	// be unique.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	// The payload of the message. This can be a JSON string or a Base-64-encoded
 	// string representing binary data (in which case you must decode it).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload []byte
 
 	// The timestamp associated with the message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamp *TimestampValue
 
 	noSmithyDocumentSerde
@@ -498,6 +650,8 @@ type Message struct {
 type ResetActionConfiguration struct {
 
 	// The note that you can leave when you reset the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -509,20 +663,28 @@ type ResetAlarmActionRequest struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The request ID. Each ID must be unique within each batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RequestId *string
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The note that you can leave when you reset the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -532,6 +694,8 @@ type ResetAlarmActionRequest struct {
 type RuleEvaluation struct {
 
 	// Information needed to compare two values with a comparison operator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimpleRuleEvaluation *SimpleRuleEvaluation
 
 	noSmithyDocumentSerde
@@ -541,12 +705,18 @@ type RuleEvaluation struct {
 type SimpleRuleEvaluation struct {
 
 	// The value of the input property, on the left side of the comparison operator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputPropertyValue *string
 
 	// The comparison operator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Operator ComparisonOperator
 
 	// The threshold value, on the right side of the comparison operator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThresholdValue *string
 
 	noSmithyDocumentSerde
@@ -556,10 +726,14 @@ type SimpleRuleEvaluation struct {
 type SnoozeActionConfiguration struct {
 
 	// The note that you can leave when you snooze the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	// The snooze time in seconds. The alarm automatically changes to the NORMAL state
 	// after this duration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnoozeDuration *int32
 
 	noSmithyDocumentSerde
@@ -571,26 +745,36 @@ type SnoozeAlarmActionRequest struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The request ID. Each ID must be unique within each batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RequestId *string
 
 	// The snooze time in seconds. The alarm automatically changes to the NORMAL state
 	// after this duration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnoozeDuration *int32
 
 	// The value of the key used as a filter to select only the alarms associated with
 	// the [key].
 	//
 	// [key]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	// The note that you can leave when you snooze the alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Note *string
 
 	noSmithyDocumentSerde
@@ -601,6 +785,8 @@ type StateChangeConfiguration struct {
 
 	// The trigger type. If the value is SNOOZE_TIMEOUT , the snooze duration ends and
 	// the alarm automatically changes to the NORMAL state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TriggerType TriggerType
 
 	noSmithyDocumentSerde
@@ -611,9 +797,13 @@ type SystemEvent struct {
 
 	// The event type. If the value is STATE_CHANGE , the event contains information
 	// about alarm state changes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventType EventType
 
 	// Contains the configuration information of alarm state changes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateChangeConfiguration *StateChangeConfiguration
 
 	noSmithyDocumentSerde
@@ -625,11 +815,15 @@ type Timer struct {
 	// The name of the timer.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The expiration time for the timer.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -641,11 +835,15 @@ type TimerDefinition struct {
 	// The name of the timer.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The new setting of the timer (the number of seconds before the timer elapses).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Seconds *int32
 
 	noSmithyDocumentSerde
@@ -655,6 +853,8 @@ type TimerDefinition struct {
 type TimestampValue struct {
 
 	// The value of the timestamp, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeInMillis *int64
 
 	noSmithyDocumentSerde
@@ -666,21 +866,29 @@ type UpdateDetectorRequest struct {
 	// The name of the detector model that created the detectors (instances).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The ID to assign to the detector update "message" . Each "messageId" must be
 	// unique within each batch sent.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MessageId *string
 
 	// The new state, variable values, and timer settings of the detector (instance).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State *DetectorStateDefinition
 
 	// The value of the input key attribute (identifying the device or system) that
 	// caused the creation of this detector (instance).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	noSmithyDocumentSerde
@@ -692,11 +900,15 @@ type Variable struct {
 	// The name of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current value of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -708,11 +920,15 @@ type VariableDefinition struct {
 	// The name of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The new value of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde

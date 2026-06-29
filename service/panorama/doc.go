@@ -10,5 +10,7 @@
 // This is the AWS Panorama API Reference. For an introduction to the service, see [What is AWS Panorama?]
 // in the AWS Panorama Developer Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [What is AWS Panorama?]: https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html
 package panorama

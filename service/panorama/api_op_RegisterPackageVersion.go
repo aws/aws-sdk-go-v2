@@ -9,6 +9,8 @@ import (
 )
 
 // Registers a package version.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) RegisterPackageVersion(ctx context.Context, params *RegisterPackageVersionInput, optFns ...func(*Options)) (*RegisterPackageVersionOutput, error) {
 	if params == nil {
 		params = &RegisterPackageVersionInput{}
@@ -29,22 +31,32 @@ type RegisterPackageVersionInput struct {
 	// A package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// A package version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageVersion *string
 
 	// A patch version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PatchVersion *string
 
 	// Whether to mark the new version as the latest version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MarkLatest bool
 
 	// An owner account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerAccount *string
 
 	noSmithyDocumentSerde

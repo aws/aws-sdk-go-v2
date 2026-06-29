@@ -37,6 +37,8 @@ import (
 //
 //   - ss is the 2-digit seconds
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Snapshots]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
@@ -62,11 +64,15 @@ type CreateSnapshotInput struct {
 	// simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Destination *types.S3Destination
 
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

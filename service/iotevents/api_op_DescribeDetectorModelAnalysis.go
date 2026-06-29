@@ -13,6 +13,8 @@ import (
 //
 // After AWS IoT Events starts analyzing your detector model, you have up to 24
 // hours to retrieve the analysis results.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDetectorModelAnalysis(ctx context.Context, params *DescribeDetectorModelAnalysisInput, optFns ...func(*Options)) (*DescribeDetectorModelAnalysisOutput, error) {
 	if params == nil {
 		params = &DescribeDetectorModelAnalysisInput{}
@@ -33,6 +35,8 @@ type DescribeDetectorModelAnalysisInput struct {
 	// The ID of the analysis result that you want to retrieve.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnalysisId *string
 
 	noSmithyDocumentSerde
@@ -50,6 +54,8 @@ type DescribeDetectorModelAnalysisOutput struct {
 	//
 	//   - FAILED - AWS IoT Events couldn't analyze your detector model. Try again
 	//   later.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.AnalysisStatus
 
 	// Metadata pertaining to the operation's result.

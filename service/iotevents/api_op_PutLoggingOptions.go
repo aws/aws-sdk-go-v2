@@ -15,6 +15,8 @@ import (
 // for the change to take effect. If you change the policy attached to the role you
 // specified in the roleArn field (for example, to correct an invalid policy), it
 // takes up to five minutes for that change to take effect.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutLoggingOptions(ctx context.Context, params *PutLoggingOptionsInput, optFns ...func(*Options)) (*PutLoggingOptionsOutput, error) {
 	if params == nil {
 		params = &PutLoggingOptionsInput{}
@@ -35,6 +37,8 @@ type PutLoggingOptionsInput struct {
 	// The new values of the AWS IoT Events logging options.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LoggingOptions *types.LoggingOptions
 
 	noSmithyDocumentSerde

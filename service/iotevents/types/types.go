@@ -17,6 +17,8 @@ type AcknowledgeFlow struct {
 	// value returns to the specified range.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -26,6 +28,8 @@ type AcknowledgeFlow struct {
 type Action struct {
 
 	// Information needed to clear the timer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClearTimer *ClearTimerAction
 
 	// Writes to the DynamoDB table that you created. The default action payload
@@ -37,6 +41,8 @@ type Action struct {
 	//
 	// [payload]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html
 	// [Actions]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DynamoDB *DynamoDBAction
 
 	// Writes to the DynamoDB table that you created. The default action payload
@@ -48,41 +54,63 @@ type Action struct {
 	//
 	// [payload]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html
 	// [Actions]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DynamoDBv2 *DynamoDBv2Action
 
 	// Sends information about the detector model instance and the event that
 	// triggered the action to an Amazon Kinesis Data Firehose delivery stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Firehose *FirehoseAction
 
 	// Sends AWS IoT Events input, which passes information about the detector model
 	// instance and the event that triggered the action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotEvents *IotEventsAction
 
 	// Sends information about the detector model instance and the event that
 	// triggered the action to an asset property in AWS IoT SiteWise .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotSiteWise *IotSiteWiseAction
 
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotTopicPublish *IotTopicPublishAction
 
 	// Calls a Lambda function, passing in information about the detector model
 	// instance and the event that triggered the action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Lambda *LambdaAction
 
 	// Information needed to reset the timer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResetTimer *ResetTimerAction
 
 	// Information needed to set the timer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SetTimer *SetTimerAction
 
 	// Sets a variable to a specified value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SetVariable *SetVariableAction
 
 	// Sends an Amazon SNS message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sns *SNSTopicPublishAction
 
 	// Sends information about the detector model instance and the event that
 	// triggered the action to an Amazon SQS queue.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sqs *SqsAction
 
 	noSmithyDocumentSerde
@@ -136,6 +164,8 @@ type AlarmAction struct {
 	//
 	// [payload]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html
 	// [Expressions]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DynamoDB *DynamoDBAction
 
 	// Defines an action to write to the Amazon DynamoDB table that you created. The
@@ -182,14 +212,20 @@ type AlarmAction struct {
 	//
 	// [payload]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html
 	// [Expressions]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DynamoDBv2 *DynamoDBv2Action
 
 	// Sends information about the detector model instance and the event that
 	// triggered the action to an Amazon Kinesis Data Firehose delivery stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Firehose *FirehoseAction
 
 	// Sends an AWS IoT Events input, passing in information about the detector model
 	// instance and the event that triggered the action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotEvents *IotEventsAction
 
 	// Sends information about the detector model instance and the event that
@@ -225,21 +261,31 @@ type AlarmAction struct {
 	// For more information, see [Expressions] in the AWS IoT Events Developer Guide.
 	//
 	// [Expressions]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotSiteWise *IotSiteWiseAction
 
 	// Information required to publish the MQTT message through the AWS IoT message
 	// broker.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotTopicPublish *IotTopicPublishAction
 
 	// Calls a Lambda function, passing in information about the detector model
 	// instance and the event that triggered the action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Lambda *LambdaAction
 
 	// Information required to publish the Amazon SNS message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sns *SNSTopicPublishAction
 
 	// Sends information about the detector model instance and the event that
 	// triggered the action to an Amazon SQS queue.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sqs *SqsAction
 
 	noSmithyDocumentSerde
@@ -249,10 +295,14 @@ type AlarmAction struct {
 type AlarmCapabilities struct {
 
 	// Specifies whether to get notified for alarm state changes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcknowledgeFlow *AcknowledgeFlow
 
 	// Specifies the default alarm state. The configuration applies to all alarms that
 	// were created based on this alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationConfiguration *InitializationConfiguration
 
 	noSmithyDocumentSerde
@@ -263,6 +313,8 @@ type AlarmEventActions struct {
 
 	// Specifies one or more supported actions to receive notifications when the alarm
 	// state changes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmActions []AlarmAction
 
 	noSmithyDocumentSerde
@@ -272,12 +324,18 @@ type AlarmEventActions struct {
 type AlarmModelSummary struct {
 
 	// The description of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelDescription *string
 
 	// The name of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The time the alarm model was created, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	noSmithyDocumentSerde
@@ -290,24 +348,36 @@ type AlarmModelVersionSummary struct {
 	// Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelArn *string
 
 	// The name of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The version of the alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelVersion *string
 
 	// The time the alarm model was created, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time the alarm model was last updated, in the Unix epoch format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
 	// resources. For more information, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The status of the alarm model. The status can be one of the following values:
@@ -322,9 +392,13 @@ type AlarmModelVersionSummary struct {
 	//
 	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
 	//   model information and try again.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status AlarmModelVersionStatus
 
 	//  Contains information about the status of the alarm model version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -335,6 +409,8 @@ type AlarmNotification struct {
 
 	// Contains the notification settings of an alarm model. The settings apply to all
 	// alarms that were created based on this alarm model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NotificationActions []NotificationAction
 
 	noSmithyDocumentSerde
@@ -345,6 +421,8 @@ type AlarmRule struct {
 
 	// A rule that compares an input property value to a threshold value with a
 	// comparison operator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimpleRule *SimpleRule
 
 	noSmithyDocumentSerde
@@ -366,13 +444,19 @@ type AnalysisResult struct {
 	//
 	//   - ERROR - An error result notifies you about a problem found in your detector
 	//   model. You must fix all errors before you can publish your detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Level AnalysisResultLevel
 
 	// Contains one or more locations that you can use to locate the fields in your
 	// detector model that the analysis result references.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Locations []AnalysisResultLocation
 
 	// Contains additional information about the analysis result.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	// The type of the analysis result. Analyses fall into the following types based
@@ -400,6 +484,8 @@ type AnalysisResult struct {
 	// For more information, see [Running detector model analyses] in the AWS IoT Events Developer Guide.
 	//
 	// [Running detector model analyses]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -412,6 +498,8 @@ type AnalysisResultLocation struct {
 	// A [JsonPath] expression that identifies the error field in your detector model.
 	//
 	// [JsonPath]: https://github.com/json-path/JsonPath
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Path *string
 
 	noSmithyDocumentSerde
@@ -452,10 +540,14 @@ type AssetPropertyTimestamp struct {
 	// 1-31556889864403199.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeInSeconds *string
 
 	// The nanosecond offset converted from timeInSeconds . The valid range is between
 	// 0-999999999.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OffsetInNanos *string
 
 	noSmithyDocumentSerde
@@ -485,13 +577,19 @@ type AssetPropertyValue struct {
 
 	// The quality of the asset property value. The value must be 'GOOD' , 'BAD' , or
 	// 'UNCERTAIN' .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Quality *string
 
 	// The timestamp associated with the asset property value. The default is the
 	// current event time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamp *AssetPropertyTimestamp
 
 	// The value to send to an asset property.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *AssetPropertyVariant
 
 	noSmithyDocumentSerde
@@ -535,18 +633,26 @@ type AssetPropertyVariant struct {
 
 	// The asset property value is a Boolean value that must be 'TRUE' or 'FALSE' . You
 	// must use an expression, and the evaluated result should be a Boolean value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BooleanValue *string
 
 	// The asset property value is a double. You must use an expression, and the
 	// evaluated result should be a double.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DoubleValue *string
 
 	// The asset property value is an integer. You must use an expression, and the
 	// evaluated result should be an integer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IntegerValue *string
 
 	// The asset property value is a string. You must use an expression, and the
 	// evaluated result should be a string.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StringValue *string
 
 	noSmithyDocumentSerde
@@ -569,6 +675,8 @@ type Attribute struct {
 	// Syntax: ....
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JsonPath *string
 
 	noSmithyDocumentSerde
@@ -580,6 +688,8 @@ type ClearTimerAction struct {
 	// The name of the timer to clear.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimerName *string
 
 	noSmithyDocumentSerde
@@ -592,10 +702,14 @@ type DetectorDebugOption struct {
 	// The name of the detector model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The value of the input attribute key used to create the detector (the instance
 	// of the detector model).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyValue *string
 
 	noSmithyDocumentSerde
@@ -605,9 +719,13 @@ type DetectorDebugOption struct {
 type DetectorModel struct {
 
 	// Information about how the detector is configured.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelConfiguration *DetectorModelConfiguration
 
 	// Information that defines how a detector operates.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDefinition *DetectorModelDefinition
 
 	noSmithyDocumentSerde
@@ -617,22 +735,34 @@ type DetectorModel struct {
 type DetectorModelConfiguration struct {
 
 	// The time the detector model was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The ARN of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelArn *string
 
 	// A brief description of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDescription *string
 
 	// The name of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The version of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelVersion *string
 
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationMethod EvaluationMethod
 
 	// The value used to identify a detector instance. When a device or system sends
@@ -644,16 +774,24 @@ type DetectorModelConfiguration struct {
 	// in the message payload that is used for identification. To route the message to
 	// the correct detector instance, the device must send a message payload that
 	// contains the same attribute-value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The time the detector model was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The status of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DetectorModelVersionStatus
 
 	noSmithyDocumentSerde
@@ -665,11 +803,15 @@ type DetectorModelDefinition struct {
 	// The state that is entered at the creation of each detector (instance).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitialStateName *string
 
 	// Information about the states of the detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	States []State
 
 	noSmithyDocumentSerde
@@ -679,12 +821,18 @@ type DetectorModelDefinition struct {
 type DetectorModelSummary struct {
 
 	// The time the detector model was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// A brief description of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelDescription *string
 
 	// The name of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	noSmithyDocumentSerde
@@ -694,29 +842,45 @@ type DetectorModelSummary struct {
 type DetectorModelVersionSummary struct {
 
 	// The time the detector model version was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The ARN of the detector model version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelArn *string
 
 	// The name of the detector model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelName *string
 
 	// The ID of the detector model version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorModelVersion *string
 
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationMethod EvaluationMethod
 
 	// The last time the detector model version was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The ARN of the role that grants the detector model permission to perform its
 	// tasks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The status of the detector model version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DetectorModelVersionStatus
 
 	noSmithyDocumentSerde
@@ -774,17 +938,23 @@ type DynamoDBAction struct {
 	// value must match the partition key of the target DynamoDB table.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HashKeyField *string
 
 	// The value of the hash key (also called the partition key).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HashKeyValue *string
 
 	// The name of the DynamoDB table. The tableName value must match the table name
 	// of the target DynamoDB table.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TableName *string
 
 	// The data type for the hash key (also called the partition key). You can specify
@@ -795,6 +965,8 @@ type DynamoDBAction struct {
 	//   - 'NUMBER' - The hash key is a number.
 	//
 	// If you don't specify hashKeyType , the default value is 'STRING' .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HashKeyType *string
 
 	// The type of operation to perform. You can specify the following values:
@@ -813,6 +985,8 @@ type DynamoDBAction struct {
 	//
 	// If you don't specify this parameter, AWS IoT Events triggers the 'INSERT'
 	// operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Operation *string
 
 	// Information needed to configure the payload.
@@ -821,15 +995,21 @@ type DynamoDBAction struct {
 	// This action payload contains all attribute-value pairs that have the information
 	// about the detector model instance and the event triggered the action. To
 	// configure the action payload, you can use contentExpression .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	// The name of the DynamoDB column that receives the action payload.
 	//
 	// If you don't specify this parameter, the name of the DynamoDB column is payload .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PayloadField *string
 
 	// The name of the range key (also called the sort key). The rangeKeyField value
 	// must match the sort key of the target DynamoDB table.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RangeKeyField *string
 
 	// The data type for the range key (also called the sort key), You can specify the
@@ -840,9 +1020,13 @@ type DynamoDBAction struct {
 	//   - 'NUMBER' - The range key is number.
 	//
 	// If you don't specify rangeKeyField , the default value is 'STRING' .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RangeKeyType *string
 
 	// The value of the range key (also called the sort key).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RangeKeyValue *string
 
 	noSmithyDocumentSerde
@@ -900,6 +1084,8 @@ type DynamoDBv2Action struct {
 	// The name of the DynamoDB table.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TableName *string
 
 	// Information needed to configure the payload.
@@ -908,6 +1094,8 @@ type DynamoDBv2Action struct {
 	// This action payload contains all attribute-value pairs that have the information
 	// about the detector model instance and the event triggered the action. To
 	// configure the action payload, you can use contentExpression .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	noSmithyDocumentSerde
@@ -924,6 +1112,8 @@ type EmailConfiguration struct {
 	// [verify the email address that sends emails in Amazon SES]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	From *string
 
 	// Contains the information of one or more recipients who receive the emails.
@@ -933,9 +1123,13 @@ type EmailConfiguration struct {
 	// [add the users that receive emails to your AWS SSO store]: https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Recipients *EmailRecipients
 
 	// Contains the subject and message of an email.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Content *EmailContent
 
 	noSmithyDocumentSerde
@@ -945,9 +1139,13 @@ type EmailConfiguration struct {
 type EmailContent struct {
 
 	// The message that you want to send. The message can be up to 200 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AdditionalMessage *string
 
 	// The subject of the email.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subject *string
 
 	noSmithyDocumentSerde
@@ -961,6 +1159,8 @@ type EmailContent struct {
 type EmailRecipients struct {
 
 	// Specifies one or more recipients who receive the email.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	To []RecipientDetail
 
 	noSmithyDocumentSerde
@@ -972,14 +1172,20 @@ type Event struct {
 	// The name of the event.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventName *string
 
 	// The actions to be performed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actions []Action
 
 	// Optional. The Boolean expression that, when TRUE, causes the actions to be
 	// performed. If not present, the actions are performed (=TRUE). If the expression
 	// result is not a Boolean value, the actions are not performed (=FALSE).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Condition *string
 
 	noSmithyDocumentSerde
@@ -992,15 +1198,21 @@ type FirehoseAction struct {
 	// The name of the Kinesis Data Firehose delivery stream where the data is written.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeliveryStreamName *string
 
 	// You can configure the action payload when you send a message to an Amazon
 	// Kinesis Data Firehose delivery stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	// A character separator that is used to separate records written to the Kinesis
 	// Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab),
 	// '\r\n' (Windows newline), ',' (comma).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Separator *string
 
 	noSmithyDocumentSerde
@@ -1014,6 +1226,8 @@ type InitializationConfiguration struct {
 	// on the alarm model are activated. The default value is TRUE .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisabledOnInitialization *bool
 
 	noSmithyDocumentSerde
@@ -1023,9 +1237,13 @@ type InitializationConfiguration struct {
 type Input struct {
 
 	// Information about the configuration of an input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputConfiguration *InputConfiguration
 
 	// The definition of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDefinition *InputDefinition
 
 	noSmithyDocumentSerde
@@ -1037,29 +1255,41 @@ type InputConfiguration struct {
 	// The time the input was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The ARN of the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputArn *string
 
 	// The name of the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// The last time the input was updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The status of the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status InputStatus
 
 	// A brief description of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDescription *string
 
 	noSmithyDocumentSerde
@@ -1075,6 +1305,8 @@ type InputDefinition struct {
 	// condition expressions used by detectors that monitor this input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes []Attribute
 
 	noSmithyDocumentSerde
@@ -1084,9 +1316,13 @@ type InputDefinition struct {
 type InputIdentifier struct {
 
 	//  The identifier of the input routed to AWS IoT Events.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotEventsInputIdentifier *IotEventsInputIdentifier
 
 	//  The identifer of the input routed from AWS IoT SiteWise.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotSiteWiseInputIdentifier *IotSiteWiseInputIdentifier
 
 	noSmithyDocumentSerde
@@ -1096,21 +1332,33 @@ type InputIdentifier struct {
 type InputSummary struct {
 
 	// The time the input was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The ARN of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputArn *string
 
 	// A brief description of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDescription *string
 
 	// The name of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// The last time the input was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdateTime *time.Time
 
 	// The status of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status InputStatus
 
 	noSmithyDocumentSerde
@@ -1123,10 +1371,14 @@ type IotEventsAction struct {
 	// The name of the AWS IoT Events input where the data is sent.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// You can configure the action payload when you send a message to an AWS IoT
 	// Events input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	noSmithyDocumentSerde
@@ -1138,6 +1390,8 @@ type IotEventsInputIdentifier struct {
 	//  The name of the input routed to AWS IoT Events.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	noSmithyDocumentSerde
@@ -1181,21 +1435,31 @@ type IotEventsInputIdentifier struct {
 type IotSiteWiseAction struct {
 
 	// The ID of the asset that has the specified property.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssetId *string
 
 	// A unique identifier for this entry. You can use the entry ID to track which
 	// data entry causes an error in case of failure. The default is a new unique
 	// identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EntryId *string
 
 	// The alias of the asset property.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PropertyAlias *string
 
 	// The ID of the asset property.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PropertyId *string
 
 	// The value to send to the asset property. This value contains timestamp,
 	// quality, and value (TQV) information.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PropertyValue *AssetPropertyValue
 
 	noSmithyDocumentSerde
@@ -1207,11 +1471,15 @@ type IotSiteWiseAssetModelPropertyIdentifier struct {
 	//  The ID of the AWS IoT SiteWise asset model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssetModelId *string
 
 	//  The ID of the AWS IoT SiteWise asset property.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PropertyId *string
 
 	noSmithyDocumentSerde
@@ -1221,6 +1489,8 @@ type IotSiteWiseAssetModelPropertyIdentifier struct {
 type IotSiteWiseInputIdentifier struct {
 
 	//  The identifier of the AWS IoT SiteWise asset model property.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IotSiteWiseAssetModelPropertyIdentifier *IotSiteWiseAssetModelPropertyIdentifier
 
 	noSmithyDocumentSerde
@@ -1234,10 +1504,14 @@ type IotTopicPublishAction struct {
 	// variables ( $variable. ) and input values ( $input.. ) as the topic string.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MqttTopic *string
 
 	// You can configure the action payload when you publish a message to an AWS IoT
 	// Core topic.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	noSmithyDocumentSerde
@@ -1250,10 +1524,14 @@ type LambdaAction struct {
 	// The ARN of the Lambda function that is executed.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FunctionArn *string
 
 	// You can configure the action payload when you send a message to a Lambda
 	// function.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	noSmithyDocumentSerde
@@ -1265,20 +1543,28 @@ type LoggingOptions struct {
 	// If TRUE, logging is enabled for AWS IoT Events.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enabled bool
 
 	// The logging level.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Level LoggingLevel
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform logging.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// Information that identifies those detector models and their detectors
 	// (instances) for which the logging level is given.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectorDebugOptions []DetectorDebugOption
 
 	noSmithyDocumentSerde
@@ -1294,12 +1580,18 @@ type NotificationAction struct {
 	// [AWS Lambda function provided by AWS IoT Events]: https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Action *NotificationTargetActions
 
 	// Contains the configuration information of email notifications.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailConfigurations []EmailConfiguration
 
 	// Contains the configuration information of SMS notifications.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SmsConfigurations []SMSConfiguration
 
 	noSmithyDocumentSerde
@@ -1313,6 +1605,8 @@ type NotificationTargetActions struct {
 
 	// Calls a Lambda function, passing in information about the detector model
 	// instance and the event that triggered the action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LambdaAction *LambdaAction
 
 	noSmithyDocumentSerde
@@ -1323,6 +1617,8 @@ type OnEnterLifecycle struct {
 
 	// Specifies the actions that are performed when the state is entered and the
 	// condition is TRUE .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Events []Event
 
 	noSmithyDocumentSerde
@@ -1334,6 +1630,8 @@ type OnExitLifecycle struct {
 
 	// Specifies the actions that are performed when the state is exited and the
 	// condition is TRUE .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Events []Event
 
 	noSmithyDocumentSerde
@@ -1343,10 +1641,14 @@ type OnExitLifecycle struct {
 type OnInputLifecycle struct {
 
 	// Specifies the actions performed when the condition evaluates to TRUE.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Events []Event
 
 	// Specifies the actions performed, and the next state entered, when a condition
 	// evaluates to TRUE.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransitionEvents []TransitionEvent
 
 	noSmithyDocumentSerde
@@ -1366,11 +1668,15 @@ type Payload struct {
 	// recommended maximum size of a content expression is 1 KB.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentExpression *string
 
 	// The value of the payload type can be either STRING or JSON .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type PayloadType
 
 	noSmithyDocumentSerde
@@ -1380,6 +1686,8 @@ type Payload struct {
 type RecipientDetail struct {
 
 	// The AWS Single Sign-On (AWS SSO) authentication information.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SsoIdentity *SSOIdentity
 
 	noSmithyDocumentSerde
@@ -1393,6 +1701,8 @@ type ResetTimerAction struct {
 	// The name of the timer to reset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimerName *string
 
 	noSmithyDocumentSerde
@@ -1405,9 +1715,13 @@ type RoutedResource struct {
 	// Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	//  The name of the routed resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -1419,6 +1733,8 @@ type SetTimerAction struct {
 	// The name of the timer.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimerName *string
 
 	// The duration of the timer, in seconds. You can use a string expression that
@@ -1426,6 +1742,8 @@ type SetTimerAction struct {
 	// duration. The range of the duration is 1-31622400 seconds. To ensure accuracy,
 	// the minimum duration is 60 seconds. The evaluated result of the duration is
 	// rounded down to the nearest whole number.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DurationExpression *string
 
 	// The number of seconds until the timer expires. The minimum value is 60 seconds
@@ -1445,11 +1763,15 @@ type SetVariableAction struct {
 	// The new value of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	// The name of the variable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VariableName *string
 
 	noSmithyDocumentSerde
@@ -1462,18 +1784,24 @@ type SimpleRule struct {
 	// The comparison operator.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComparisonOperator ComparisonOperator
 
 	// The value on the left side of the comparison operator. You can specify an AWS
 	// IoT Events input attribute as an input property.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputProperty *string
 
 	// The value on the right side of the comparison operator. You can enter a number
 	// or specify an AWS IoT Events input attribute.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Threshold *string
 
 	noSmithyDocumentSerde
@@ -1489,12 +1817,18 @@ type SMSConfiguration struct {
 	// [add the users that receive SMS messages to your AWS SSO store]: https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Recipients []RecipientDetail
 
 	// The message that you want to send. The message can be up to 200 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AdditionalMessage *string
 
 	// The sender ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SenderId *string
 
 	noSmithyDocumentSerde
@@ -1506,10 +1840,14 @@ type SNSTopicPublishAction struct {
 	// The ARN of the Amazon SNS target where the message is sent.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetArn *string
 
 	// You can configure the action payload when you send a message as an Amazon SNS
 	// push notification.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	noSmithyDocumentSerde
@@ -1522,14 +1860,20 @@ type SqsAction struct {
 	// The URL of the SQS queue where the data is written.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	QueueUrl *string
 
 	// You can configure the action payload when you send a message to an Amazon SQS
 	// queue.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Payload *Payload
 
 	// Set this to TRUE if you want the data to be base-64 encoded before it is
 	// written to the queue. Otherwise, set this to FALSE.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseBase64 *bool
 
 	noSmithyDocumentSerde
@@ -1544,9 +1888,13 @@ type SSOIdentity struct {
 	// The ID of the AWS SSO identity store.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IdentityStoreId *string
 
 	// The user ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -1558,17 +1906,25 @@ type State struct {
 	// The name of the state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StateName *string
 
 	// When entering this state, perform these actions if the condition is TRUE.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnEnter *OnEnterLifecycle
 
 	// When exiting this state, perform these actions if the specified condition is
 	// TRUE .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnExit *OnExitLifecycle
 
 	// When an input is received and the condition is TRUE, perform the specified
 	// actions .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnInput *OnInputLifecycle
 
 	noSmithyDocumentSerde
@@ -1580,11 +1936,15 @@ type Tag struct {
 	// The tag's key.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The tag's value.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -1598,19 +1958,27 @@ type TransitionEvent struct {
 	// performed and the nextState to be entered.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Condition *string
 
 	// The name of the transition event.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EventName *string
 
 	// The next state to enter.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextState *string
 
 	// The actions to be performed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actions []Action
 
 	noSmithyDocumentSerde

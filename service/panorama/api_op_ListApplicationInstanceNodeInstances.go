@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of application node instances.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListApplicationInstanceNodeInstances(ctx context.Context, params *ListApplicationInstanceNodeInstancesInput, optFns ...func(*Options)) (*ListApplicationInstanceNodeInstancesOutput, error) {
 	if params == nil {
 		params = &ListApplicationInstanceNodeInstancesInput{}
@@ -31,13 +33,19 @@ type ListApplicationInstanceNodeInstancesInput struct {
 	// The node instances' application instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	// The maximum number of node instances to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,9 +54,13 @@ type ListApplicationInstanceNodeInstancesInput struct {
 type ListApplicationInstanceNodeInstancesOutput struct {
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of node instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeInstances []types.NodeInstance
 
 	// Metadata pertaining to the operation's result.

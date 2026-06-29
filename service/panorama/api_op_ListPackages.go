@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of packages.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, optFns ...func(*Options)) (*ListPackagesOutput, error) {
 	if params == nil {
 		params = &ListPackagesInput{}
@@ -29,10 +31,14 @@ func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, op
 type ListPackagesInput struct {
 
 	// The maximum number of packages to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,9 +47,13 @@ type ListPackagesInput struct {
 type ListPackagesOutput struct {
 
 	// A pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of packages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Packages []types.PackageListItem
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a package import job.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribePackageImportJob(ctx context.Context, params *DescribePackageImportJobInput, optFns ...func(*Options)) (*DescribePackageImportJobOutput, error) {
 	if params == nil {
 		params = &DescribePackageImportJobInput{}
@@ -31,6 +33,8 @@ type DescribePackageImportJobInput struct {
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	noSmithyDocumentSerde
@@ -41,52 +45,74 @@ type DescribePackageImportJobOutput struct {
 	// When the job was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The job's input config.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputConfig *types.PackageImportJobInputConfig
 
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// The job's type.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType types.PackageImportJobType
 
 	// When the job was updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTime *time.Time
 
 	// The job's output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Output *types.PackageImportJobOutput
 
 	// The job's output config.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputConfig *types.PackageImportJobOutputConfig
 
 	// The job's status.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.PackageImportJobStatus
 
 	// The job's status message.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The job's client token.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The job's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobTags []types.JobResourceTags
 
 	// Metadata pertaining to the operation's result.

@@ -10,6 +10,8 @@ import (
 )
 
 // Creates an input.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateInput(ctx context.Context, params *CreateInputInput, optFns ...func(*Options)) (*CreateInputOutput, error) {
 	if params == nil {
 		params = &CreateInputInput{}
@@ -30,17 +32,25 @@ type CreateInputInput struct {
 	// The definition of the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDefinition *types.InputDefinition
 
 	// The name you want to give to the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	// A brief description of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputDescription *string
 
 	// Metadata that can be used to manage the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -49,6 +59,8 @@ type CreateInputInput struct {
 type CreateInputOutput struct {
 
 	// Information about the configuration of the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputConfiguration *types.InputConfiguration
 
 	// Metadata pertaining to the operation's result.

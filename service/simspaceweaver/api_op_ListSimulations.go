@@ -12,6 +12,8 @@ import (
 
 // Lists the SimSpace Weaver simulations in the Amazon Web Services account used
 // to make the API call.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListSimulations(ctx context.Context, params *ListSimulationsInput, optFns ...func(*Options)) (*ListSimulationsOutput, error) {
 	if params == nil {
 		params = &ListSimulationsInput{}
@@ -30,6 +32,8 @@ func (c *Client) ListSimulations(ctx context.Context, params *ListSimulationsInp
 type ListSimulationsInput struct {
 
 	// The maximum number of simulations to list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If SimSpace Weaver returns nextToken , then there are more results available.
@@ -38,6 +42,8 @@ type ListSimulationsInput struct {
 	// arguments unchanged. If no results remain, then nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, then you receive an HTTP 400 ValidationException error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,9 +57,13 @@ type ListSimulationsOutput struct {
 	// arguments unchanged. If no results remain, then nextToken is set to null . Each
 	// pagination token expires after 24 hours. If you provide a token that isn't
 	// valid, then you receive an HTTP 400 ValidationException error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The list of simulations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulations []types.SimulationMetadata
 
 	// Metadata pertaining to the operation's result.

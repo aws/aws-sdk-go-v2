@@ -12,6 +12,8 @@ import (
 //
 // To delete a package, you need permission to call s3:DeleteObject in addition to
 // permissions for the AWS Panorama API.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
 		params = &DeletePackageInput{}
@@ -32,10 +34,14 @@ type DeletePackageInput struct {
 	// The package's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageId *string
 
 	// Delete the package even if it has artifacts stored in its access point. Deletes
 	// the package's artifacts from Amazon S3.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ForceDelete bool
 
 	noSmithyDocumentSerde

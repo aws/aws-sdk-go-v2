@@ -10,6 +10,8 @@ import (
 )
 
 // Describes an input.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeInput(ctx context.Context, params *DescribeInputInput, optFns ...func(*Options)) (*DescribeInputOutput, error) {
 	if params == nil {
 		params = &DescribeInputInput{}
@@ -30,6 +32,8 @@ type DescribeInputInput struct {
 	// The name of the input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputName *string
 
 	noSmithyDocumentSerde
@@ -38,6 +42,8 @@ type DescribeInputInput struct {
 type DescribeInputOutput struct {
 
 	// Information about the input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Input *types.Input
 
 	// Metadata pertaining to the operation's result.

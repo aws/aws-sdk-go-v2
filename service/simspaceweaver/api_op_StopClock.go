@@ -9,6 +9,8 @@ import (
 )
 
 // Stops the simulation clock.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopClock(ctx context.Context, params *StopClockInput, optFns ...func(*Options)) (*StopClockOutput, error) {
 	if params == nil {
 		params = &StopClockInput{}
@@ -29,6 +31,8 @@ type StopClockInput struct {
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

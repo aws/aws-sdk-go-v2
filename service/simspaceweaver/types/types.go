@@ -20,6 +20,8 @@ type CloudWatchLogsLogGroup struct {
 	//
 	// [Working with log groups and log streams]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
@@ -46,9 +48,13 @@ type Domain struct {
 	//
 	//   - ByRequest – Unmanaged: You use the StartApp API to start the apps and use
 	//   the StopApp API to stop the apps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Lifecycle LifecycleManagementStrategy
 
 	// The name of the domain.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -59,6 +65,8 @@ type LaunchOverrides struct {
 
 	// App launch commands and command line parameters that override the launch
 	// command configured in the simulation schema.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchCommands []string
 
 	noSmithyDocumentSerde
@@ -71,12 +79,16 @@ type LiveSimulationState struct {
 	// A list of simulation clocks.
 	//
 	// At this time, a simulation has only one clock.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Clocks []SimulationClock
 
 	// A list of domains for the simulation. For more information about domains, see [Key concepts: Domains]
 	// in the SimSpace Weaver User Guide.
 	//
 	// [Key concepts: Domains]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domains []Domain
 
 	noSmithyDocumentSerde
@@ -89,6 +101,8 @@ type LogDestination struct {
 	// information about log groups, see [Working with log groups and log streams]in the Amazon CloudWatch Logs User Guide.
 	//
 	// [Working with log groups and log streams]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
 
 	noSmithyDocumentSerde
@@ -98,6 +112,8 @@ type LogDestination struct {
 type LoggingConfiguration struct {
 
 	// A list of the locations where SimSpace Weaver sends simulation log data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Destinations []LogDestination
 
 	noSmithyDocumentSerde
@@ -113,6 +129,8 @@ type S3Destination struct {
 	// [Creating, configuring, and working with Amazon S3 buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BucketName *string
 
 	// A string prefix for an Amazon S3 object key. It's usually a folder name. For
@@ -120,6 +138,8 @@ type S3Destination struct {
 	// Service User Guide.
 	//
 	// [Organizing objects in the Amazon S3 console using folders]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ObjectKeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -138,6 +158,8 @@ type S3Location struct {
 	// [Creating, configuring, and working with Amazon S3 buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BucketName *string
 
 	// The key name of an object in Amazon S3. For more information about Amazon S3
@@ -146,6 +168,8 @@ type S3Location struct {
 	// [Uploading, downloading, and working with objects in Amazon S3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ObjectKey *string
 
 	noSmithyDocumentSerde
@@ -160,10 +184,14 @@ type SimulationAppEndpointInfo struct {
 
 	// The IP address of the app. SimSpace Weaver dynamically assigns this IP address
 	// when the app starts.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Address *string
 
 	// The inbound TCP/UDP port numbers of the app. The combination of an IP address
 	// and a port number form a network endpoint.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IngressPortMappings []SimulationAppPortMapping
 
 	noSmithyDocumentSerde
@@ -176,18 +204,28 @@ type SimulationAppMetadata struct {
 	// Weaver User Guide.
 	//
 	// [Key concepts: Domains]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The name of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the simulation of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	// The current status of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status SimulationAppStatus
 
 	// The desired status of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetStatus SimulationAppTargetStatus
 
 	noSmithyDocumentSerde
@@ -200,11 +238,15 @@ type SimulationAppPortMapping struct {
 	// this port number when the app starts. SimSpace Weaver maps the Declared port to
 	// the Actual port. Clients connect to the app using the app's IP address and the
 	// Actual port number.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Actual *int32
 
 	// The TCP/UDP port number of the app, declared in the simulation schema. SimSpace
 	// Weaver maps the Declared port to the Actual port. The source code for the app
 	// should bind to the Declared port.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Declared *int32
 
 	noSmithyDocumentSerde
@@ -214,9 +256,13 @@ type SimulationAppPortMapping struct {
 type SimulationClock struct {
 
 	// The current status of the simulation clock.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ClockStatus
 
 	// The desired status of the simulation clock.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetStatus ClockTargetStatus
 
 	noSmithyDocumentSerde
@@ -229,19 +275,29 @@ type SimulationMetadata struct {
 	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time when the simulation was created, expressed as the number of seconds
 	// and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The name of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current status of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status SimulationStatus
 
 	// The desired status of the simulation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetStatus SimulationTargetStatus
 
 	noSmithyDocumentSerde

@@ -11,6 +11,8 @@ import (
 )
 
 // Returns information about a device job.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDeviceJob(ctx context.Context, params *DescribeDeviceJobInput, optFns ...func(*Options)) (*DescribeDeviceJobOutput, error) {
 	if params == nil {
 		params = &DescribeDeviceJobInput{}
@@ -31,6 +33,8 @@ type DescribeDeviceJobInput struct {
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	noSmithyDocumentSerde
@@ -39,30 +43,48 @@ type DescribeDeviceJobInput struct {
 type DescribeDeviceJobOutput struct {
 
 	// When the job was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTime *time.Time
 
 	// The device's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceArn *string
 
 	// The device's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The device's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceName *string
 
 	// The device's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceType types.DeviceType
 
 	// For an OTA job, the target version of the device software.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImageVersion *string
 
 	// The job's ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// The job's type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobType types.JobType
 
 	// The job's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.UpdateProgress
 
 	// Metadata pertaining to the operation's result.

@@ -9,6 +9,8 @@ import (
 )
 
 // Removes an application instance.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) RemoveApplicationInstance(ctx context.Context, params *RemoveApplicationInstanceInput, optFns ...func(*Options)) (*RemoveApplicationInstanceOutput, error) {
 	if params == nil {
 		params = &RemoveApplicationInstanceInput{}
@@ -29,6 +31,8 @@ type RemoveApplicationInstanceInput struct {
 	// An application instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationInstanceId *string
 
 	noSmithyDocumentSerde

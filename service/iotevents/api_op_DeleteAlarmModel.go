@@ -10,6 +10,8 @@ import (
 
 // Deletes an alarm model. Any alarm instances that were created based on this
 // alarm model are also deleted. This action can't be undone.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteAlarmModel(ctx context.Context, params *DeleteAlarmModelInput, optFns ...func(*Options)) (*DeleteAlarmModelOutput, error) {
 	if params == nil {
 		params = &DeleteAlarmModelInput{}
@@ -30,6 +32,8 @@ type DeleteAlarmModelInput struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	noSmithyDocumentSerde

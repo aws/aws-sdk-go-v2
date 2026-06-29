@@ -10,5 +10,7 @@
 //
 // For more information, see [What is IoT Events?] in the IoT Events Developer Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [What is IoT Events?]: https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html
 package ioteventsdata

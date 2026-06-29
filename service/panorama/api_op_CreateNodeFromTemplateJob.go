@@ -10,6 +10,8 @@ import (
 )
 
 // Creates a camera stream node.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateNodeFromTemplateJob(ctx context.Context, params *CreateNodeFromTemplateJobInput, optFns ...func(*Options)) (*CreateNodeFromTemplateJobOutput, error) {
 	if params == nil {
 		params = &CreateNodeFromTemplateJobInput{}
@@ -30,32 +32,46 @@ type CreateNodeFromTemplateJobInput struct {
 	// A name for the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeName *string
 
 	// An output package name for the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputPackageName *string
 
 	// An output package version for the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputPackageVersion *string
 
 	// Template parameters for the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateParameters map[string]string
 
 	// The type of node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateType types.TemplateType
 
 	// Tags for the job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobTags []types.JobResourceTags
 
 	// A description for the node.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeDescription *string
 
 	noSmithyDocumentSerde
@@ -66,6 +82,8 @@ type CreateNodeFromTemplateJobOutput struct {
 	// The job's ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

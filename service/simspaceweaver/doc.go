@@ -17,5 +17,7 @@
 // SimSpace Weaver app SDK documentation. This documentation is part of the
 // SimSpace Weaver app SDK distributable package.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [SimSpace Weaver User Guide]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/
 package simspaceweaver

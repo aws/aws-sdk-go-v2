@@ -12,6 +12,8 @@ import (
 //
 // You can't restart a simulation after you stop it. If you want to restart a
 // simulation, then you must stop it, delete it, and start a new instance of it.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopSimulation(ctx context.Context, params *StopSimulationInput, optFns ...func(*Options)) (*StopSimulationOutput, error) {
 	if params == nil {
 		params = &StopSimulationInput{}
@@ -32,6 +34,8 @@ type StopSimulationInput struct {
 	// The name of the simulation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Simulation *string
 
 	noSmithyDocumentSerde

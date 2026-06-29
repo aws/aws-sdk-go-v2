@@ -9,7 +9,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists one or more input routings.
+//	Lists one or more input routings.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListInputRoutings(ctx context.Context, params *ListInputRoutingsInput, optFns ...func(*Options)) (*ListInputRoutingsOutput, error) {
 	if params == nil {
 		params = &ListInputRoutingsInput{}
@@ -30,12 +32,18 @@ type ListInputRoutingsInput struct {
 	//  The identifer of the routed input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputIdentifier *types.InputIdentifier
 
 	//  The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	//  The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,9 +53,13 @@ type ListInputRoutingsOutput struct {
 
 	//  The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	//  Summary information about the routed resources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoutedResources []types.RoutedResource
 
 	// Metadata pertaining to the operation's result.

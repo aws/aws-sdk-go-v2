@@ -11,6 +11,8 @@ import (
 
 // Lists one or more alarms. The operation returns only the metadata associated
 // with each alarm.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListAlarms(ctx context.Context, params *ListAlarmsInput, optFns ...func(*Options)) (*ListAlarmsOutput, error) {
 	if params == nil {
 		params = &ListAlarmsInput{}
@@ -31,12 +33,18 @@ type ListAlarmsInput struct {
 	// The name of the alarm model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmModelName *string
 
 	// The maximum number of results to be returned per request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token that you can use to return the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +53,14 @@ type ListAlarmsInput struct {
 type ListAlarmsOutput struct {
 
 	// A list that summarizes each alarm.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlarmSummaries []types.AlarmSummary
 
 	// The token that you can use to return the next set of results, or null if there
 	// are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
