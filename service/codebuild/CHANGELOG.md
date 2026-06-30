@@ -1,3 +1,7 @@
+# v1.70.0 (2026-06-30)
+
+* **Feature**: Adds support for host kernel selection for on-demand builds.
+
 # v1.69.5 (2026-06-29)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.41.0 (2026-06-30)
+
+* **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol to issue public certificates. ACME is an industry-standard protocol for automating certificate lifecycle on customer-managed infrastructure such as on-premises servers and Kubernetes clusters.
+
 # v1.40.1 (2026-06-29)
 
 * No change notes available for this release.

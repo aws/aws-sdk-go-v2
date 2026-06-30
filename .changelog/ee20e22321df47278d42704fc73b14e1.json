@@ -1,8 +1,0 @@
-{
-    "id": "ee20e223-21df-4727-8d42-704fc73b14e1",
-    "type": "feature",
-    "description": "Adds support for host kernel selection for on-demand builds.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

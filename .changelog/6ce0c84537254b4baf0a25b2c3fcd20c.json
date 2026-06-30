@@ -1,8 +1,0 @@
-{
-    "id": "6ce0c845-3725-4b4b-af0a-25b2c3fcd20c",
-    "type": "feature",
-    "description": "Adds support for intermediate tables in AWS Clean Rooms collaborations.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

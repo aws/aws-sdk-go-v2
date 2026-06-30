@@ -1,8 +1,0 @@
-{
-    "id": "aa01ace0-ca0f-4328-a630-4ada43d57231",
-    "type": "feature",
-    "description": "AWS Network Firewall now supports container associations for monitoring ECS and EKS workloads. You can create container associations to dynamically track the IP addresses of running containers in your Amazon ECS and Amazon EKS clusters.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}
