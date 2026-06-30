@@ -1384,6 +1384,9 @@
                     "target": "com.amazonaws.connect#CreateAgentStatus"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateAttachedFile"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateContact"
                 },
                 {
@@ -2132,6 +2135,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#StartChatContact"
+                },
+                {
+                    "target": "com.amazonaws.connect#StartContactConversationalAnalyticsJob"
                 },
                 {
                     "target": "com.amazonaws.connect#StartContactEvaluation"
@@ -3381,6 +3387,49 @@
                 }
             }
         },
+        "com.amazonaws.connect#AnalyticsConfiguration": {
+            "type": "structure",
+            "members": {
+                "LanguageConfiguration": {
+                    "target": "com.amazonaws.connect#LanguageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language configuration for conversational analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedactionConfiguration": {
+                    "target": "com.amazonaws.connect#RedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction configuration for conversational analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SentimentConfiguration": {
+                    "target": "com.amazonaws.connect#SentimentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sentiment configuration for conversational analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SummaryConfiguration": {
+                    "target": "com.amazonaws.connect#SummaryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary configuration for conversational analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RulesConfiguration": {
+                    "target": "com.amazonaws.connect#RulesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules configuration for conversational analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for conversational analytics.</p>"
+            }
+        },
         "com.amazonaws.connect#AnalyticsDataAssociationResult": {
             "type": "structure",
             "members": {
@@ -3449,6 +3498,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#AnalyticsDataSetsResult"
+            }
+        },
+        "com.amazonaws.connect#AnalyticsMode": {
+            "type": "enum",
+            "members": {
+                "PostContact": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostContact"
+                    }
+                },
+                "RealTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RealTime"
+                    }
+                },
+                "ContactLens": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ContactLens"
+                    }
+                },
+                "AutomatedInteraction": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomatedInteraction"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#AnalyticsModes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AnalyticsMode"
             }
         },
         "com.amazonaws.connect#AnswerMachineDetectionConfig": {
@@ -7287,6 +7371,23 @@
                 "target": "com.amazonaws.connect#BatchUpdateDataTableValueSuccessResult"
             }
         },
+        "com.amazonaws.connect#Behavior": {
+            "type": "enum",
+            "members": {
+                "Enable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enable"
+                    }
+                },
+                "Disable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disable"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#BehaviorType": {
             "type": "enum",
             "members": {
@@ -10488,6 +10589,127 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateAttachedFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateAttachedFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateAttachedFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an attached file for a completed voice contact by copying a recording from a source S3 URI into\n   Connect Customer managed storage. Use this API to attach voice recordings to contacts for downstream\n   processing such as conversational analytics.</p>\n         <important>\n            <p>The <code>AssociatedResourceArn</code> must be the ARN of a completed voice contact, <code>FileUseCaseType</code>\n    must be set to <code>VOICE_RECORDING</code>, and <code>FileSourceUri</code> must be a valid S3 URI.</p>\n         </important>\n         <note>\n            <p>For example, you can call <code>CreateContact</code>, then <code>CreateAttachedFile</code>, then\n    <code>StartContactConversationalAnalyticsJob</code> to create a contact, attach a recording, and\n    run post-call analytics.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/attached-files/{InstanceId}/files",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateAttachedFileRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileUseCaseType": {
+                    "target": "com.amazonaws.connect#FileUseCaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the file.</p>\n         <important>\n            <p>Only <code>VOICE_RECORDING</code> is supported.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSourceUri": {
+                    "target": "com.amazonaws.connect#FileSourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI of the file to be attached. Only S3 source URIs are supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the completed voice contact to attach the file to. Only voice contacts with Telephony subtype are\n   supported.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#httpQuery": "associatedResourceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{ \"Tags\":\n    {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateAttachedFileResponse": {
+            "type": "structure",
+            "members": {
+                "FileArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource (ARN).</p>"
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format:\n    <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>"
+                    }
+                },
+                "FileStatus": {
+                    "target": "com.amazonaws.connect#FileStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the attached file. Valid values: <code>PROCESSING</code> | <code>APPROVED</code> |\n    <code>REJECTED</code> | <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response from CreateAttachedFile API.",
                 "smithy.api#output": {}
             }
         },
@@ -23520,6 +23742,20 @@
                 }
             }
         },
+        "com.amazonaws.connect#Entities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Entity"
+            }
+        },
+        "com.amazonaws.connect#Entity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.connect#EntityArn": {
             "type": "string",
             "traits": {
@@ -27568,6 +27804,15 @@
                 }
             }
         },
+        "com.amazonaws.connect#FileSourceUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.connect#FileStatusType": {
             "type": "enum",
             "members": {
@@ -27634,6 +27879,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ATTACHMENT"
+                    }
+                },
+                "VOICE_RECORDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE_RECORDING"
                     }
                 }
             }
@@ -32229,6 +32480,23 @@
             "traits": {
                 "smithy.api#documentation": "<p>Configuration information of a Kinesis video stream.</p>"
             }
+        },
+        "com.amazonaws.connect#LanguageConfiguration": {
+            "type": "structure",
+            "members": {
+                "LanguageLocale": {
+                    "target": "com.amazonaws.connect#LanguageLocale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language locale setting for conversational analytics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The language configuration for conversational analytics.</p>"
+            }
+        },
+        "com.amazonaws.connect#LanguageLocale": {
+            "type": "string"
         },
         "com.amazonaws.connect#LargeNextToken": {
             "type": "string",
@@ -39323,6 +39591,23 @@
         "com.amazonaws.connect#Long": {
             "type": "long"
         },
+        "com.amazonaws.connect#MaskMode": {
+            "type": "enum",
+            "members": {
+                "PII": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PII"
+                    }
+                },
+                "EntityType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityType"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#MatchCriteria": {
             "type": "structure",
             "members": {
@@ -43747,6 +44032,29 @@
                 }
             }
         },
+        "com.amazonaws.connect#Policy": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "RedactedOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RedactedOnly"
+                    }
+                },
+                "RedactedAndOriginal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RedactedAndOriginal"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#PositiveAndNegativeDouble": {
             "type": "double",
             "traits": {
@@ -46438,6 +46746,40 @@
                 "smithy.api#documentation": "<p>Specifies the detailed pattern for event recurrence. Use this to define complex scheduling rules such as \"every 2nd Tuesday of the month\" or \"every 3 months on the 15th\".</p>"
             }
         },
+        "com.amazonaws.connect#RedactionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.connect#Behavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether redaction is applied to the analytics output. Valid values: <code>Enable</code> |\n    <code>Disable</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.connect#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction output policy that determines which versions of the transcript are stored. Valid values:\n    <code>None</code> | <code>RedactedOnly</code> | <code>RedactedAndOriginal</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Entities": {
+                    "target": "com.amazonaws.connect#Entities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of PII entity types to redact from the transcript (for example, <code>NAME</code>,\n    <code>ADDRESS</code>, <code>CREDIT_DEBIT_NUMBER</code>).</p>"
+                    }
+                },
+                "MaskMode": {
+                    "target": "com.amazonaws.connect#MaskMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The masking mode that determines how redacted content is replaced in the output. Valid values:\n    <code>PII</code> (replaces with the literal string [PII]) | <code>EntityType</code> (replaces with the\n   entity type name, for example [NAME]).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The redaction configuration for conversational analytics.</p>"
+            }
+        },
         "com.amazonaws.connect#Reference": {
             "type": "structure",
             "members": {
@@ -48230,6 +48572,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the following values:\n    <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>\n   | <code>OnContactEvaluationSubmit</code> | <code>OnMetricDataUpdate</code>.</p>"
+            }
+        },
+        "com.amazonaws.connect#RulesConfiguration": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.connect#Behavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether Contact Lens rules are evaluated for the contact. Valid values: <code>Enable</code> |\n    <code>Disable</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rules configuration for conversational analytics. Controls whether Contact Lens rules are evaluated against\n   the analytics output.</p>"
             }
         },
         "com.amazonaws.connect#S3Config": {
@@ -52215,6 +52571,21 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.connect#SentimentConfiguration": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.connect#Behavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether sentiment analysis is applied to the analytics output. Valid values: <code>Enable</code> |\n    <code>Disable</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sentiment configuration for conversational analytics.</p>"
+            }
+        },
         "com.amazonaws.connect#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -52856,6 +53227,107 @@
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
                         "smithy.api#documentation": "<p>The contactId from which a persistent chat session is started. This field is populated only for persistent\n   chats.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#StartContactConversationalAnalyticsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#StartContactConversationalAnalyticsJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#StartContactConversationalAnalyticsJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a Contact Lens post-call analytics job for the specified contact. This API runs Conversational\n   Analytics post-contact analysis on a voice recording that is already attached to the contact, generating\n   transcription, sentiment analysis, redaction, and summarization results based on the provided configuration.</p>\n         <important>\n            <p>A voice recording must already be attached to the contact before calling this API. Use\n    <code>CreateAttachedFile</code> to attach a recording from an S3 source URI.</p>\n         </important>\n         <note>\n            <p>For example, you can call <code>CreateContact</code>, then <code>CreateAttachedFile</code>, then\n    <code>StartContactConversationalAnalyticsJob</code> to create a contact, attach a recording, and\n    run post-call analytics.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/start-conversational-analytics-job/{InstanceId}/{ContactId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#StartContactConversationalAnalyticsJobRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Connect Customer. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalyticsModes": {
+                    "target": "com.amazonaws.connect#AnalyticsModes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analytics modes to run for the contact. Valid values: <code>PostContact</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalyticsConfiguration": {
+                    "target": "com.amazonaws.connect#AnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the conversational analytics job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#StartContactConversationalAnalyticsJobResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance.</p>"
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact.</p>"
                     }
                 }
             },
@@ -55080,6 +55552,56 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#SuccessfulRequest"
+            }
+        },
+        "com.amazonaws.connect#SummaryConfiguration": {
+            "type": "structure",
+            "members": {
+                "SummaryModes": {
+                    "target": "com.amazonaws.connect#SummaryModes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary modes that determine what type of summarization is generated. Valid values:\n    <code>PostContact</code> | <code>AutomatedInteraction</code> | <code>ContactChain</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary configuration for conversational analytics.</p>"
+            }
+        },
+        "com.amazonaws.connect#SummaryMode": {
+            "type": "enum",
+            "members": {
+                "PostContact": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostContact"
+                    }
+                },
+                "AutomatedInteraction": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomatedInteraction"
+                    }
+                },
+                "ContactChain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ContactChain"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#SummaryModes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SummaryMode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.connect#SupportedMessagingContentType": {

@@ -1336,6 +1336,54 @@
                 "target": "com.amazonaws.partnercentralselling#AwsMarketplaceOfferSetIdentifier"
             }
         },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceProductArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsMarketplaceProductArn"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifier"
+            }
+        },
         "com.amazonaws.partnercentralselling#AwsMaturity": {
             "type": "string",
             "traits": {
@@ -1510,6 +1558,18 @@
                     "target": "com.amazonaws.partnercentralselling#SolutionIdentifiers",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the partner solutions related to the opportunity. These solutions represent the partner's offerings that are being positioned as part of the overall AWS opportunity.</p>"
+                    }
+                },
+                "AwsMarketplaceSolutions": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Marketplace solution ARNs associated with this opportunity.</p>"
+                    }
+                },
+                "AwsMarketplaceProducts": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Marketplace product ARNs associated with this opportunity.</p>"
                     }
                 }
             },
@@ -10578,6 +10638,15 @@
                             "max": 10
                         }
                     }
+                },
+                "AwsMarketplaceSolutionArn": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results by AWS Marketplace solution ARN. You can provide up to 10 ARNs.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
                 }
             },
             "traits": {
@@ -12449,12 +12518,22 @@
             },
             "value": {
                 "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.partnercentralselling#RecommendationList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.partnercentralselling#Recommendation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.partnercentralselling#RejectEngagementInvitation": {
@@ -12560,6 +12639,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables the association of specific Amazon Web Services products with the <code>Opportunity</code>. Partners can indicate the relevant Amazon Web Services products for the <code>Opportunity</code>'s solution and align with the customer's needs. Returns multiple values separated by commas. For example, <code>\"AWSProducts\" : [\"AmazonRedshift\", \"AWSAppFabric\", \"AWSCleanRooms\"]</code>.</p> <p>Use the file with the list of Amazon Web Services products hosted on GitHub: <a href=\"https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json\"> Amazon Web Services products</a>.</p>"
                     }
+                },
+                "AwsMarketplaceSolutions": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the AWS Marketplace solutions to associate with the <code>Opportunity</code>. Each value is an Amazon Resource Name (ARN) that identifies a solution listing in AWS Marketplace.</p>"
+                    }
+                },
+                "AwsMarketplaceProducts": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the AWS Marketplace products to associate with the <code>Opportunity</code>. Each value is an Amazon Resource Name (ARN) that identifies a product listing in AWS Marketplace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12591,6 +12682,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AwsMarketplaceOfferSets"
+                    }
+                },
+                "AWS_MARKETPLACE_SOLUTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsMarketplaceSolutions"
+                    }
+                },
+                "AWS_MARKETPLACE_PRODUCTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsMarketplaceProducts"
                     }
                 }
             }
@@ -13191,6 +13294,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the solution creation date. This is useful to track and audit.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AwsMarketplaceSolutionArn": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Marketplace solution associated with this partner solution.</p>"
                     }
                 }
             },

@@ -3040,6 +3040,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Determines how CloudFormation handles configuration drift during deployment.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REVERT_DRIFT</code> – Creates a drift-aware change set that brings actual\n          resource states in line with template definitions. Provides a three-way comparison between\n          actual state, previous deployment state, and desired state.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html\">Using drift-aware\n        change sets</a> in the <i>CloudFormation User Guide</i>.</p>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
+                },
+                "DisableValidation": {
+                    "target": "com.amazonaws.cloudformation#DisableValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.\n    </p>\n         <p>\n    Default: <code>false</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -3318,6 +3330,18 @@
                     "target": "com.amazonaws.cloudformation#RetainExceptOnCreate",
                     "traits": {
                         "smithy.api#documentation": "<p>When set to <code>true</code>, newly created resources are deleted when the operation\n      rolls back. This includes newly created resources marked with a deletion policy of\n        <code>Retain</code>.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
+                },
+                "DisableValidation": {
+                    "target": "com.amazonaws.cloudformation#DisableValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.\n    </p>\n         <p>\n    Default: <code>false</code>\n         </p>"
                     }
                 }
             },
@@ -3906,6 +3930,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the deletion mode for the stack. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Use the standard behavior. Specifying this value is the same\n          as not specifying this parameter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DELETE_STACK</code> - Delete the stack if it's stuck in a\n            <code>DELETE_FAILED</code> state due to resource deletion failure.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4087,6 +4117,43 @@
         },
         "com.amazonaws.cloudformation#DeletionTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.cloudformation#DeploymentConfig": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfigMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment mode for the stack operation. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Use the standard deployment behavior, ensuring resources are\n     ready to serve traffic before completing the operation. This is the default. You do not need\n     to specify this value explicitly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPRESS</code> - Complete the stack operation when resource configuration is\n     applied, without waiting for resources to become ready to serve traffic. Resources continue\n     becoming ready in the background.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DisableRollback": {
+                    "target": "com.amazonaws.cloudformation#DisableRollback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to disable rollback of the stack if the stack operation fails.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deployment configuration for a stack operation, including the deployment mode.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#DeploymentConfigMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "EXPRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPRESS"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudformation#DeploymentMode": {
             "type": "enum",
@@ -4596,6 +4663,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment mode specified when the change set was created. Valid value is\n        <code>REVERT_DRIFT</code>. Only present for drift-aware change sets.</p>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration specified when the change set was created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4626,7 +4699,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or unique stack ID for which you want to retrieve events.</p>"
+                        "smithy.api#documentation": "<p>The name or unique stack ID for which you want to retrieve events. If you specified the\n      name of a change set, specify the stack name or ID (ARN) of the change set you want to\n      describe.</p>"
                     }
                 },
                 "ChangeSetName": {
@@ -6733,6 +6806,12 @@
         },
         "com.amazonaws.cloudformation#DisableRollback": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudformation#DisableValidation": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#documentation": "<p>Boolean to enable or disable pre-deployment validations in changeset and stack operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code>: disable pre-deployment validations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code>: enable pre-deployment validations.</p>\n            </li>\n         </ul>"
+            }
         },
         "com.amazonaws.cloudformation#DriftIgnoredReason": {
             "type": "enum",
@@ -12954,6 +13033,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When set to <code>true</code>, newly created resources are deleted when the operation\n      rolls back. This includes newly created resources marked with a deletion policy of\n        <code>Retain</code>.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13453,6 +13538,12 @@
                     "target": "com.amazonaws.cloudformation#DisableRollback",
                     "traits": {
                         "smithy.api#documentation": "<p>Boolean to enable or disable rollback on stack creation failures:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code>: disable rollback.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code>: enable rollback.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for the stack, including the deployment mode used for stack\n   operations.</p>"
                     }
                 },
                 "NotificationARNs": {
@@ -17420,6 +17511,18 @@
                     "target": "com.amazonaws.cloudformation#RetainExceptOnCreate",
                     "traits": {
                         "smithy.api#documentation": "<p>When set to <code>true</code>, newly created resources are deleted when the operation\n      rolls back. This includes newly created resources marked with a deletion policy of\n        <code>Retain</code>.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
+                },
+                "DisableValidation": {
+                    "target": "com.amazonaws.cloudformation#DisableValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.\n    </p>\n         <p>\n    Default: <code>false</code>\n         </p>"
                     }
                 }
             },
