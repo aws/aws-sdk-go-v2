@@ -1,0 +1,5 @@
+POST /blueprints/
+
+Content-Type: application/json
+
+{"blueprintArn":"__BlueprintArn__","blueprintStageFilter":"DEVELOPMENT","maxResults":1,"nextToken":"__NextToken__","projectFilter":{"projectArn":"__ProjectArn__","projectStage":"DEVELOPMENT"},"resourceOwner":"SERVICE"}

@@ -1,0 +1,5 @@
+POST /quotes
+
+Content-Type: application/json
+
+{"CountryCode":"__CountryCode__","Description":"__Description__","OutpostIdentifier":"__OutpostIdentifier__","RequestedCapacities":[{"Quantity":1,"QuoteCapacityType":"EC2","Unit":"__Unit__"},{"Quantity":1,"QuoteCapacityType":"EC2","Unit":"__Unit__"}],"RequestedConstraints":[{"QuoteConstraintType":"RACK_MAXIMUM","Value":"__Value__"},{"QuoteConstraintType":"RACK_MAXIMUM","Value":"__Value__"}],"RequestedPaymentOptions":["ALL_UPFRONT","ALL_UPFRONT"],"RequestedPaymentTerms":["THREE_YEARS","THREE_YEARS"]}

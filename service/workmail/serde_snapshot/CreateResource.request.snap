@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.CreateResource
+
+{"Description":"__Description__","HiddenFromGlobalAddressList":true,"Name":"__Name__","OrganizationId":"__OrganizationId__","Type":"ROOM"}

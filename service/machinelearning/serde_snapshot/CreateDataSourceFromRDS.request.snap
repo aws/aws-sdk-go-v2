@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.CreateDataSourceFromRDS
+
+{"ComputeStatistics":true,"DataSourceId":"__DataSourceId__","DataSourceName":"__DataSourceName__","RDSData":{"DataRearrangement":"__DataRearrangement__","DataSchema":"__DataSchema__","DataSchemaUri":"__DataSchemaUri__","DatabaseCredentials":{"Password":"__Password__","Username":"__Username__"},"DatabaseInformation":{"DatabaseName":"__DatabaseName__","InstanceIdentifier":"__InstanceIdentifier__"},"ResourceRole":"__ResourceRole__","S3StagingLocation":"__S3StagingLocation__","SecurityGroupIds":["__Member__","__Member__"],"SelectSqlQuery":"__SelectSqlQuery__","ServiceRole":"__ServiceRole__","SubnetId":"__SubnetId__"},"RoleARN":"__RoleARN__"}

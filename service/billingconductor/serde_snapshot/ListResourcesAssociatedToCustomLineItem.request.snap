@@ -1,0 +1,5 @@
+POST /list-resources-associated-to-custom-line-item
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","BillingPeriod":"__BillingPeriod__","Filters":{"Relationship":"PARENT"},"MaxResults":1,"NextToken":"__NextToken__"}

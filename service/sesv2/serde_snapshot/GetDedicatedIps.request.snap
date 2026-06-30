@@ -1,0 +1,3 @@
+GET /v2/email/dedicated-ips?NextToken=__NextToken__&PageSize=1&PoolName=__PoolName__
+
+

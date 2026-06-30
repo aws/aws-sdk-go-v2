@@ -1,0 +1,5 @@
+POST /CreateEncoderConfiguration
+
+Content-Type: application/json
+
+{"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"},"video":{"bitrate":1,"framerate":1,"height":1,"width":1}}

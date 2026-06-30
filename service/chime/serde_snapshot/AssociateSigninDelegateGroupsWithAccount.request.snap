@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__?operation=associate-signin-delegate-groups
+
+Content-Type: application/json
+
+{"SigninDelegateGroups":[{"GroupName":"__GroupName__"},{"GroupName":"__GroupName__"}]}

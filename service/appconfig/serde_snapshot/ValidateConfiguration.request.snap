@@ -1,0 +1,3 @@
+POST /applications/__ApplicationId__/configurationprofiles/__ConfigurationProfileId__/validators?configuration_version=__ConfigurationVersion__
+
+

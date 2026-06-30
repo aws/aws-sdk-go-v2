@@ -1,0 +1,5 @@
+POST /createSignalingChannel
+
+Content-Type: application/json
+
+{"ChannelName":"__ChannelName__","ChannelType":"SINGLE_MASTER","SingleMasterConfiguration":{"MessageTtlSeconds":1},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

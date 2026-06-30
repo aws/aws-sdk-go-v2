@@ -1,0 +1,5 @@
+PUT /api/datalake/instance/__InstanceId__/namespaces/__Namespace__/datasets/__Name__
+
+Content-Type: application/json
+
+{"description":"__Description__","partitionSpec":{"fields":[{"name":"__Name__","transform":{"type":"YEAR"}},{"name":"__Name__","transform":{"type":"YEAR"}}]},"schema":{"fields":[{"isRequired":true,"name":"__Name__","type":"INT"},{"isRequired":true,"name":"__Name__","type":"INT"}],"name":"__Name__","primaryKeys":[{"name":"__Name__"},{"name":"__Name__"}]},"tags":{"key0":"__Value__","key1":"__Value__"}}

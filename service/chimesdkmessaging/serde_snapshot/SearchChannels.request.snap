@@ -1,0 +1,6 @@
+POST /channels?max-results=1&next-token=__NextToken__&operation=search
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"Fields":[{"Key":"MEMBERS","Operator":"EQUALS","Values":["__Member__","__Member__"]},{"Key":"MEMBERS","Operator":"EQUALS","Values":["__Member__","__Member__"]}]}

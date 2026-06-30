@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.ListRuleExecutions
+
+{"filter":{"latestInPipelineExecution":{"pipelineExecutionId":"__PipelineExecutionId__","startTimeRange":"Latest"},"pipelineExecutionId":"__PipelineExecutionId__"},"maxResults":1,"nextToken":"__NextToken__","pipelineName":"__PipelineName__"}

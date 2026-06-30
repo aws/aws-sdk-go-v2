@@ -1,0 +1,5 @@
+PATCH /rummetrics/__AppMonitorName__/metrics
+
+Content-Type: application/json
+
+{"Destination":"CloudWatch","DestinationArn":"__DestinationArn__","MetricDefinition":{"DimensionKeys":{"key0":"__Value__","key1":"__Value__"},"EventPattern":"__EventPattern__","Name":"__Name__","Namespace":"__Namespace__","UnitLabel":"__UnitLabel__","ValueKey":"__ValueKey__"},"MetricDefinitionId":"__MetricDefinitionId__"}

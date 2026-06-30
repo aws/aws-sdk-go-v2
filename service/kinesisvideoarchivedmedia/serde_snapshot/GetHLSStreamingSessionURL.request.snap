@@ -1,0 +1,5 @@
+POST /getHLSStreamingSessionURL
+
+Content-Type: application/json
+
+{"ContainerFormat":"FRAGMENTED_MP4","DiscontinuityMode":"ALWAYS","DisplayFragmentTimestamp":"ALWAYS","Expires":1,"HLSFragmentSelector":{"FragmentSelectorType":"PRODUCER_TIMESTAMP","TimestampRange":{"EndTimestamp":946684800,"StartTimestamp":946684800}},"MaxMediaPlaylistFragmentResults":1,"PlaybackMode":"LIVE","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

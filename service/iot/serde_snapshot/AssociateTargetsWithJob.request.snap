@@ -1,0 +1,5 @@
+POST /jobs/__JobId__/targets?namespaceId=__NamespaceId__
+
+Content-Type: application/json
+
+{"comment":"__Comment__","targets":["__Member__","__Member__"]}

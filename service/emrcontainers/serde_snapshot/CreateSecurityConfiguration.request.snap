@@ -1,0 +1,5 @@
+POST /securityconfigurations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","containerProvider":{"id":"__Id__","info":{"eksInfo":{"namespace":"__Namespace__","nodeLabel":"__NodeLabel__"}},"type":"EKS"},"name":"__Name__","securityConfigurationData":{"authorizationConfiguration":{"encryptionConfiguration":{"inTransitEncryptionConfiguration":{"tlsCertificateConfiguration":{"certificateProviderType":"PEM","privateCertificateSecretArn":"__PrivateCertificateSecretArn__","publicCertificateSecretArn":"__PublicCertificateSecretArn__"}}},"lakeFormationConfiguration":{"authorizedSessionTagValue":"__AuthorizedSessionTagValue__","queryEngineRoleArn":"__QueryEngineRoleArn__","secureNamespaceInfo":{"clusterId":"__ClusterId__","namespace":"__Namespace__"}}}},"tags":{"key0":"__Value__","key1":"__Value__"}}

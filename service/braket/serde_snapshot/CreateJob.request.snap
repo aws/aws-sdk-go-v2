@@ -1,0 +1,5 @@
+POST /job
+
+Content-Type: application/json
+
+{"algorithmSpecification":{"containerImage":{"uri":"__Uri__"},"scriptModeConfig":{"compressionType":"NONE","entryPoint":"__EntryPoint__","s3Uri":"__S3Uri__"}},"associations":[{"arn":"__Arn__","type":"RESERVATION_TIME_WINDOW_ARN"},{"arn":"__Arn__","type":"RESERVATION_TIME_WINDOW_ARN"}],"checkpointConfig":{"localPath":"__LocalPath__","s3Uri":"__S3Uri__"},"clientToken":"__ClientToken__","deviceConfig":{"device":"__Device__"},"hyperParameters":{"key0":"__Value__","key1":"__Value__"},"inputDataConfig":[{"channelName":"__ChannelName__","contentType":"__ContentType__","dataSource":{"s3DataSource":{"s3Uri":"__S3Uri__"}}},{"channelName":"__ChannelName__","contentType":"__ContentType__","dataSource":{"s3DataSource":{"s3Uri":"__S3Uri__"}}}],"instanceConfig":{"instanceCount":1,"instanceType":"ml.t3.large","volumeSizeInGb":1},"jobName":"__JobName__","outputDataConfig":{"kmsKeyId":"__KmsKeyId__","s3Path":"__S3Path__"},"roleArn":"__RoleArn__","stoppingCondition":{"maxRuntimeInSeconds":1},"tags":{"key0":"__Value__","key1":"__Value__"}}

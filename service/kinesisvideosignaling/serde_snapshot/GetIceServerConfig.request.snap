@@ -1,0 +1,5 @@
+POST /v1/get-ice-server-config
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","ClientId":"__ClientId__","Service":"TURN","Username":"__Username__"}

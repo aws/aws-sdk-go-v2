@@ -1,0 +1,3 @@
+GET /certificates-by-ca/__CaCertificateId__?isAscendingOrder=true&marker=__Marker__&pageSize=1
+
+

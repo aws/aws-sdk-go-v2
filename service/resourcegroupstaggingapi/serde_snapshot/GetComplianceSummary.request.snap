@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetComplianceSummary
+
+{"GroupBy":["TARGET_ID","TARGET_ID"],"MaxResults":1,"PaginationToken":"__PaginationToken__","RegionFilters":["__Member__","__Member__"],"ResourceTypeFilters":["__Member__","__Member__"],"TagKeyFilters":["__Member__","__Member__"],"TargetIdFilters":["__Member__","__Member__"]}

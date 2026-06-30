@@ -1,0 +1,5 @@
+POST /instance/__InstanceId__/replicate
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ReplicaAlias":"__ReplicaAlias__","ReplicaRegion":"__ReplicaRegion__"}

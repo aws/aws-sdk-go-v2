@@ -1,0 +1,5 @@
+POST /workloads/__WorkloadId__/milestones
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","MilestoneName":"__MilestoneName__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.UpdateSecurityConfig
+
+{"clientToken":"__ClientToken__","configVersion":"__ConfigVersion__","description":"__Description__","iamFederationOptions":{"groupAttribute":"__GroupAttribute__","userAttribute":"__UserAttribute__"},"iamIdentityCenterOptionsUpdates":{"groupAttribute":"GroupId","userAttribute":"UserId"},"id":"__Id__","samlOptions":{"groupAttribute":"__GroupAttribute__","metadata":"__Metadata__","openSearchServerlessEntityId":"__OpenSearchServerlessEntityId__","sessionTimeout":1,"userAttribute":"__UserAttribute__"}}

@@ -1,0 +1,5 @@
+POST /listTagsForStream
+
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

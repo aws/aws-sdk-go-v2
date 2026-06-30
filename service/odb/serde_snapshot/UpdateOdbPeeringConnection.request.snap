@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateOdbPeeringConnection
+
+{"displayName":"__DisplayName__","odbPeeringConnectionId":"__OdbPeeringConnectionId__","peerNetworkCidrsToBeAdded":["__Member__","__Member__"],"peerNetworkCidrsToBeRemoved":["__Member__","__Member__"]}

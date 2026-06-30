@@ -1,0 +1,5 @@
+POST /gateway/__GatewayId__/link/__LinkId__/accept
+
+Content-Type: application/json
+
+{"attributes":{"customerProvidedId":"__CustomerProvidedId__","responderErrorMasking":[{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1},{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1}]},"logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"timeoutInMillis":1}

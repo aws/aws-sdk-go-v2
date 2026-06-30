@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.JoinDomain
+
+{"DomainControllers":["__Member__","__Member__"],"DomainName":"__DomainName__","GatewayARN":"__GatewayARN__","OrganizationalUnit":"__OrganizationalUnit__","Password":"__Password__","TimeoutInSeconds":1,"UserName":"__UserName__"}

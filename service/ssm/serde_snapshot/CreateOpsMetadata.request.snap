@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.CreateOpsMetadata
+
+{"Metadata":{"key0":{"Value":"__Value__"},"key1":{"Value":"__Value__"}},"ResourceId":"__ResourceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

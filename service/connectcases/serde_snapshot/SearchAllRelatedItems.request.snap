@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/related-items-search
+
+Content-Type: application/json
+
+{"filters":[{"contact":{"channel":["__Member__","__Member__"],"contactArn":"__ContactArn__"}},{"contact":{"channel":["__Member__","__Member__"],"contactArn":"__ContactArn__"}}],"maxResults":1,"nextToken":"__NextToken__","sorts":[{"sortOrder":"Asc","sortProperty":"AssociationTime"},{"sortOrder":"Asc","sortProperty":"AssociationTime"}]}

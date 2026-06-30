@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeIndexPolicies
+
+{"logGroupIdentifiers":["__Member__","__Member__"],"nextToken":"__NextToken__"}

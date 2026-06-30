@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/environments/__EnvironmentId__/deployments
+
+Content-Type: application/json
+
+{"ConfigurationProfileId":"__ConfigurationProfileId__","ConfigurationVersion":"__ConfigurationVersion__","DeploymentStrategyId":"__DeploymentStrategyId__","Description":"__Description__","DynamicExtensionParameters":{"key0":"__Value__","key1":"__Value__"},"KmsKeyIdentifier":"__KmsKeyIdentifier__","Tags":{"key0":"__Value__","key1":"__Value__"}}

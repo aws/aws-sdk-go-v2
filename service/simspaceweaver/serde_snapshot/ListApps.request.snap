@@ -1,0 +1,3 @@
+GET /listapps?domain=__Domain__&maxResults=1&nextToken=__NextToken__&simulation=__Simulation__
+
+

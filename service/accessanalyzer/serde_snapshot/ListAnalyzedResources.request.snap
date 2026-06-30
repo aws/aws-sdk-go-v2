@@ -1,0 +1,5 @@
+POST /analyzed-resource
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__","maxResults":1,"nextToken":"__NextToken__","resourceType":"AWS::S3::Bucket"}

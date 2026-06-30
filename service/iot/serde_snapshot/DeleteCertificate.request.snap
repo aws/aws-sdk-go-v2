@@ -1,0 +1,3 @@
+DELETE /certificates/__CertificateId__?forceDelete=true
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.SendTextMessage
+
+{"ConfigurationSetName":"__ConfigurationSetName__","Context":{"key0":"__Value__","key1":"__Value__"},"DestinationCountryParameters":{"key0":"__Value__","key1":"__Value__"},"DestinationPhoneNumber":"__DestinationPhoneNumber__","DryRun":true,"Keyword":"__Keyword__","MaxPrice":"__MaxPrice__","MessageBody":"__MessageBody__","MessageFeedbackEnabled":true,"MessageType":"TRANSACTIONAL","OriginationIdentity":"__OriginationIdentity__","ProtectConfigurationId":"__ProtectConfigurationId__","TimeToLive":1}

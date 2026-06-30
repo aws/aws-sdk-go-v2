@@ -1,0 +1,5 @@
+POST /workflowstepgroup/__Id__?workflowId=__WorkflowId__
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","next":["__Member__","__Member__"],"previous":["__Member__","__Member__"]}

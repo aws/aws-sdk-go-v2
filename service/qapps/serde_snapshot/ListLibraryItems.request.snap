@@ -1,0 +1,4 @@
+GET /catalog.list?categoryId=__CategoryId__&limit=1&nextToken=__NextToken__
+
+Instance-Id: __InstanceId__
+

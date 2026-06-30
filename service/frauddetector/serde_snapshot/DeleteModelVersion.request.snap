@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.DeleteModelVersion
+
+{"modelId":"__ModelId__","modelType":"ONLINE_FRAUD_INSIGHTS","modelVersionNumber":"__ModelVersionNumber__"}

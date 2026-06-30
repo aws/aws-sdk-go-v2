@@ -1,0 +1,5 @@
+POST /2022-01-01/osis/revokePipelineEndpointConnections
+
+Content-Type: application/json
+
+{"EndpointIds":["__Member__","__Member__"],"PipelineArn":"__PipelineArn__"}

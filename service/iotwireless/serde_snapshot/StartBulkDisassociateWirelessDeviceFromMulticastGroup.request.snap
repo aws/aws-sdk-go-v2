@@ -1,0 +1,5 @@
+POST /multicast-groups/__Id__/bulk
+
+Content-Type: application/json
+
+{"QueryString":"__QueryString__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/apns_voip
+
+Content-Type: application/json
+
+{"BundleId":"__BundleId__","Certificate":"__Certificate__","DefaultAuthenticationMethod":"__DefaultAuthenticationMethod__","Enabled":true,"PrivateKey":"__PrivateKey__","TeamId":"__TeamId__","TokenKey":"__TokenKey__","TokenKeyId":"__TokenKeyId__"}

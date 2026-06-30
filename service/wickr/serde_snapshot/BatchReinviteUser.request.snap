@@ -1,0 +1,6 @@
+PATCH /networks/__NetworkId__/users/re-invite
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"userIds":["__Member__","__Member__"]}

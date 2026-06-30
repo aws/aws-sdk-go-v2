@@ -1,0 +1,5 @@
+PATCH /2023-10-12/monitors/__MonitorId__/settings
+
+Content-Type: application/json
+
+{"settings":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,4 @@
+POST /assistants/__AssistantId__/retrieve
+
+Content-Type: application/json
+

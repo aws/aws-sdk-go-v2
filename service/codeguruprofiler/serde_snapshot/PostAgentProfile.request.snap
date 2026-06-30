@@ -1,0 +1,4 @@
+POST /profilingGroups/__ProfilingGroupName__/agentProfile?profileToken=__ProfileToken__
+
+Content-Type: __ContentType__
+

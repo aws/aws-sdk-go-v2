@@ -1,0 +1,5 @@
+POST /CreateS3TableIntegration
+
+Content-Type: application/json
+
+{"Encryption":{"KmsKeyArn":"__KmsKeyArn__","SseAlgorithm":"aws:kms"},"RoleArn":"__RoleArn__","Tags":{"key0":"__Value__","key1":"__Value__"}}

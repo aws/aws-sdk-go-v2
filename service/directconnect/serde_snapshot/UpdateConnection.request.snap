@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.UpdateConnection
+
+{"connectionId":"__ConnectionId__","connectionName":"__ConnectionName__","encryptionMode":"__EncryptionMode__"}

@@ -1,0 +1,3 @@
+GET /audience-generation-job?collaborationId=__CollaborationId__&configuredAudienceModelArn=__ConfiguredAudienceModelArn__&maxResults=1&nextToken=__NextToken__
+
+

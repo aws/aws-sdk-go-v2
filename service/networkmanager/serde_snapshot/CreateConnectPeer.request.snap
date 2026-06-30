@@ -1,0 +1,5 @@
+POST /connect-peers
+
+Content-Type: application/json
+
+{"BgpOptions":{"PeerAsn":1},"ClientToken":"__ClientToken__","ConnectAttachmentId":"__ConnectAttachmentId__","CoreNetworkAddress":"__CoreNetworkAddress__","InsideCidrBlocks":["__Member__","__Member__"],"PeerAddress":"__PeerAddress__","SubnetArn":"__SubnetArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

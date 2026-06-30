@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.CreateCluster
+
+{"clientToken":"__ClientToken__","clusterName":"__ClusterName__","networking":{"networkType":"IPV4","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]},"scheduler":{"type":"SLURM","version":"__Version__"},"size":"SMALL","slurmConfiguration":{"accounting":{"defaultPurgeTimeInDays":1,"mode":"STANDARD"},"cgroupCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}],"scaleDownIdleTimeInSeconds":1,"slurmCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}],"slurmRest":{"mode":"STANDARD"},"slurmdbdCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}]},"tags":{"key0":"__Value__","key1":"__Value__"}}

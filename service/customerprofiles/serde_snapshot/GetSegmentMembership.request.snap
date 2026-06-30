@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/segments/__SegmentDefinitionName__/membership
+
+Content-Type: application/json
+
+{"ProfileIds":["__Member__","__Member__"]}

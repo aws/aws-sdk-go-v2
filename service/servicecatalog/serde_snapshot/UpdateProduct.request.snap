@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateProduct
+
+{"AcceptLanguage":"__AcceptLanguage__","AddTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Description":"__Description__","Distributor":"__Distributor__","Id":"__Id__","Name":"__Name__","Owner":"__Owner__","RemoveTags":["__Member__","__Member__"],"SourceConnection":{"ConnectionParameters":{"CodeStar":{"ArtifactPath":"__ArtifactPath__","Branch":"__Branch__","ConnectionArn":"__ConnectionArn__","Repository":"__Repository__"}},"Type":"CODESTAR"},"SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__"}

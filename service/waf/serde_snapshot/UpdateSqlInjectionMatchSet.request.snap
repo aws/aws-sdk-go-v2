@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.UpdateSqlInjectionMatchSet
+
+{"ChangeToken":"__ChangeToken__","SqlInjectionMatchSetId":"__SqlInjectionMatchSetId__","Updates":[{"Action":"INSERT","SqlInjectionMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"TextTransformation":"NONE"}},{"Action":"INSERT","SqlInjectionMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"TextTransformation":"NONE"}}]}

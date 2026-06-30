@@ -1,0 +1,5 @@
+POST /createStream
+
+Content-Type: application/json
+
+{"DataRetentionInHours":1,"DeviceName":"__DeviceName__","KmsKeyId":"__KmsKeyId__","MediaType":"__MediaType__","StreamName":"__StreamName__","StreamStorageConfiguration":{"DefaultStorageTier":"HOT"},"Tags":{"key0":"__Value__","key1":"__Value__"}}

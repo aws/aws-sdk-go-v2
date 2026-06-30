@@ -1,0 +1,5 @@
+POST /listIncidentFindings
+
+Content-Type: application/json
+
+{"incidentRecordArn":"__IncidentRecordArn__","maxResults":1,"nextToken":"__NextToken__"}

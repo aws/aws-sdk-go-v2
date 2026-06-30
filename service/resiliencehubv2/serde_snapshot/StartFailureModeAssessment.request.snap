@@ -1,0 +1,5 @@
+POST /v2/start-failure-mode-assessment
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","serviceArn":"__ServiceArn__"}

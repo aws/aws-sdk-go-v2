@@ -1,0 +1,5 @@
+POST /BatchDescribeEntities
+
+Content-Type: application/json
+
+{"EntityRequestList":[{"Catalog":"__Catalog__","EntityId":"__EntityId__"},{"Catalog":"__Catalog__","EntityId":"__EntityId__"}]}

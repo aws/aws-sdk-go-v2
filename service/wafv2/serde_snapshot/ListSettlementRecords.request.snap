@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.ListSettlementRecords
+
+{"Currency":"USDC","Filters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Limit":1,"NextMarker":"__NextMarker__","Scope":"CLOUDFRONT","SortBy":"TIMESTAMP","SortOrder":"ASC","TimeWindow":{"EndTime":946684800,"StartTime":946684800}}

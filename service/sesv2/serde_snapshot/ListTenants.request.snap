@@ -1,0 +1,5 @@
+POST /v2/email/tenants/list
+
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PageSize":1}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.UpdateStreamProcessor
+
+{"DataSharingPreferenceForUpdate":{"OptIn":true},"Name":"__Name__","ParametersToDelete":["ConnectedHomeMinConfidence","ConnectedHomeMinConfidence"],"RegionsOfInterestForUpdate":[{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]},{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]}],"SettingsForUpdate":{"ConnectedHomeForUpdate":{"Labels":["__Member__","__Member__"],"MinConfidence":1}}}

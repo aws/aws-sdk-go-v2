@@ -1,0 +1,5 @@
+PUT /cissession/stop
+
+Content-Type: application/json
+
+{"message":{"benchmarkProfile":"__BenchmarkProfile__","benchmarkVersion":"__BenchmarkVersion__","computePlatform":{"product":"__Product__","vendor":"__Vendor__","version":"__Version__"},"progress":{"errorChecks":1,"failedChecks":1,"informationalChecks":1,"notApplicableChecks":1,"notEvaluatedChecks":1,"successfulChecks":1,"totalChecks":1,"unknownChecks":1},"reason":"__Reason__","status":"SUCCESS"},"scanJobId":"__ScanJobId__","sessionToken":"__SessionToken__"}

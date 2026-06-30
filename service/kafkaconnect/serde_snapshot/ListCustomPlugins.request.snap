@@ -1,0 +1,3 @@
+GET /v1/custom-plugins?maxResults=1&namePrefix=__NamePrefix__&nextToken=__NextToken__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutStoredQuery
+
+{"StoredQuery":{"Description":"__Description__","Expression":"__Expression__","QueryArn":"__QueryArn__","QueryId":"__QueryId__","QueryName":"__QueryName__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

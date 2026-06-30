@@ -1,0 +1,3 @@
+GET /wireless-devices?destinationName=__DestinationName__&deviceProfileId=__DeviceProfileId__&fuotaTaskId=__FuotaTaskId__&maxResults=1&multicastGroupId=__MulticastGroupId__&nextToken=__NextToken__&serviceProfileId=__ServiceProfileId__&wirelessDeviceType=Sidewalk
+
+

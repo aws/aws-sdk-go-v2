@@ -1,0 +1,5 @@
+POST /v1/brokers/__BrokerId__/users/__Username__
+
+Content-Type: application/json
+
+{"consoleAccess":true,"groups":["__Member__","__Member__"],"password":"__Password__","replicationUser":true}

@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/subscriptions/__Identifier__
+
+

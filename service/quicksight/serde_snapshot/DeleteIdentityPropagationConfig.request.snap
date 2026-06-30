@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/identity-propagation-config/REDSHIFT
+
+

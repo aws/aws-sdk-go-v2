@@ -1,0 +1,5 @@
+POST /2026-02-05/getOfferSet
+
+Content-Type: application/json
+
+{"offerSetId":"__OfferSetId__"}

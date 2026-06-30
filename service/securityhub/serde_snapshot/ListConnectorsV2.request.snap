@@ -1,0 +1,3 @@
+GET /connectorsv2?ConnectorStatus=CONNECTED&MaxResults=1&NextToken=__NextToken__&ProviderName=JIRA_CLOUD
+
+

@@ -1,0 +1,5 @@
+POST /appbundles/__AppBundleIdentifier__/appauthorizations/__AppAuthorizationIdentifier__/connect
+
+Content-Type: application/json
+
+{"authRequest":{"code":"__Code__","redirectUri":"__RedirectUri__"}}

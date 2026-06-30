@@ -1,0 +1,3 @@
+DELETE /runtimes/__AgentRuntimeId__/?clientToken=__ClientToken__
+
+

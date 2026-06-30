@@ -1,0 +1,5 @@
+POST /groups-list?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"resource-type","Values":["__Member__","__Member__"]},{"Name":"resource-type","Values":["__Member__","__Member__"]}]}

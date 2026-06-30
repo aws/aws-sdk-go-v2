@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.CreateResourceSnapshotJob
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","EngagementIdentifier":"__EngagementIdentifier__","ResourceIdentifier":"__ResourceIdentifier__","ResourceSnapshotTemplateIdentifier":"__ResourceSnapshotTemplateIdentifier__","ResourceType":"Opportunity","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

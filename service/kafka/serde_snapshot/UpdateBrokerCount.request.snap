@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/nodes/count
+
+Content-Type: application/json
+
+{"currentVersion":"__CurrentVersion__","targetNumberOfBrokerNodes":1}

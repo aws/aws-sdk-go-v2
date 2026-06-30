@@ -1,0 +1,5 @@
+POST /network-migration/ListNetworkMigrationDeployedStacks
+
+Content-Type: application/json
+
+{"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","nextToken":"__NextToken__"}

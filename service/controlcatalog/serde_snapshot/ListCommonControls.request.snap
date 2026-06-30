@@ -1,0 +1,5 @@
+POST /common-controls?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"CommonControlFilter":{"Objectives":[{"Arn":"__Arn__"},{"Arn":"__Arn__"}]}}

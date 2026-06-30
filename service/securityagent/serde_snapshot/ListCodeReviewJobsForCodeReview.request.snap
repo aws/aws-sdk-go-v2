@@ -1,0 +1,5 @@
+POST /ListCodeReviewJobsForCodeReview
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","codeReviewId":"__CodeReviewId__","maxResults":1,"nextToken":"__NextToken__"}

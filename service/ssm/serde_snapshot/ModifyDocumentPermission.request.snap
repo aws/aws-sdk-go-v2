@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.ModifyDocumentPermission
+
+{"AccountIdsToAdd":["__Member__","__Member__"],"AccountIdsToRemove":["__Member__","__Member__"],"Name":"__Name__","PermissionType":"Share","SharedDocumentVersion":"__SharedDocumentVersion__"}

@@ -1,0 +1,4 @@
+DELETE /?id=__Id__&intelligent-tiering=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

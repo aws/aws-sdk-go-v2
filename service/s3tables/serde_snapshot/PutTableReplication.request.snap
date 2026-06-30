@@ -1,0 +1,5 @@
+PUT /table-replication?tableArn=__TableArn__&versionToken=__VersionToken__
+
+Content-Type: application/json
+
+{"configuration":{"role":"__Role__","rules":[{"destinations":[{"destinationTableBucketARN":"__DestinationTableBucketARN__"},{"destinationTableBucketARN":"__DestinationTableBucketARN__"}]},{"destinations":[{"destinationTableBucketARN":"__DestinationTableBucketARN__"},{"destinationTableBucketARN":"__DestinationTableBucketARN__"}]}]}}

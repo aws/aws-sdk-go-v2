@@ -1,0 +1,5 @@
+POST /metadata/v0/list-keys
+
+Content-Type: application/json
+
+{"Filter":{"KeyStatus":"Active"},"MaxResults":1,"NextToken":"__NextToken__"}

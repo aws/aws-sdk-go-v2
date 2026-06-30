@@ -1,0 +1,5 @@
+POST /policy/check-access-not-granted
+
+Content-Type: application/json
+
+{"access":[{"actions":["__Member__","__Member__"],"resources":["__Member__","__Member__"]},{"actions":["__Member__","__Member__"],"resources":["__Member__","__Member__"]}],"policyDocument":"__PolicyDocument__","policyType":"IDENTITY_POLICY"}

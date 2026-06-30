@@ -1,0 +1,5 @@
+PATCH /api/datalake/instance/__InstanceId__/namespaces/__Namespace__/datasets/__Name__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

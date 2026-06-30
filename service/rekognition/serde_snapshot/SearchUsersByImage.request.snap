@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.SearchUsersByImage
+
+{"CollectionId":"__CollectionId__","Image":{"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"MaxUsers":1,"QualityFilter":"NONE","UserMatchThreshold":1}

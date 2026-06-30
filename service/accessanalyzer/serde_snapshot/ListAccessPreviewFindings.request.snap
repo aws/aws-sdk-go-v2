@@ -1,0 +1,5 @@
+POST /access-preview/__AccessPreviewId__
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__","filter":{"key0":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]},"key1":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]}},"maxResults":1,"nextToken":"__NextToken__"}

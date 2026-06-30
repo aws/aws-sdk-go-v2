@@ -1,0 +1,3 @@
+GET /organization/admin?Feature=SecurityHub&MaxResults=1&NextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /configuration/account/encryption
+
+Content-Type: application/json
+
+{"encryptionType":"SITEWISE_DEFAULT_ENCRYPTION","kmsKeyId":"__KmsKeyId__"}

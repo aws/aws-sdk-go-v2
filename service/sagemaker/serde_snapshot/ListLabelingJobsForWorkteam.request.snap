@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListLabelingJobsForWorkteam
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"JobReferenceCodeContains":"__JobReferenceCodeContains__","MaxResults":1,"NextToken":"__NextToken__","SortBy":"CreationTime","SortOrder":"Ascending","WorkteamArn":"__WorkteamArn__"}

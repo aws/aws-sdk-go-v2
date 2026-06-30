@@ -1,0 +1,6 @@
+POST /__AccountId__/vaults/__VaultName__/tags?operation=remove
+
+Content-Type: application/json
+X-Amz-Glacier-Version: 2012-06-01
+
+{"TagKeys":["__Member__","__Member__"]}

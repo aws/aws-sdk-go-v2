@@ -1,0 +1,5 @@
+POST /cluster-registrations
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","connectorConfig":{"provider":"EKS_ANYWHERE","roleArn":"__RoleArn__"},"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

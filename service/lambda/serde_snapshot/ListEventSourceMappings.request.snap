@@ -1,0 +1,3 @@
+GET /2015-03-31/event-source-mappings?EventSourceArn=__EventSourceArn__&FunctionName=__FunctionName__&Marker=__Marker__&MaxItems=1
+
+

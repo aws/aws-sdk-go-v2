@@ -1,0 +1,5 @@
+POST /organization/insights
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","OrganizationalUnitIds":["__Member__","__Member__"],"StatusFilter":{"Any":{"StartTimeRange":{"FromTime":946684800,"ToTime":946684800},"Type":"REACTIVE"},"Closed":{"EndTimeRange":{"FromTime":946684800,"ToTime":946684800},"Type":"REACTIVE"},"Ongoing":{"Type":"REACTIVE"}}}

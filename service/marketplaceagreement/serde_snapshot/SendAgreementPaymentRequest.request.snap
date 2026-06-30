@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.SendAgreementPaymentRequest
+
+{"agreementId":"__AgreementId__","chargeAmount":"__ChargeAmount__","clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","termId":"__TermId__"}

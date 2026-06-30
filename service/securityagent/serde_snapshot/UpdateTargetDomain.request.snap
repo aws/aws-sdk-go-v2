@@ -1,0 +1,5 @@
+POST /UpdateTargetDomain
+
+Content-Type: application/json
+
+{"targetDomainId":"__TargetDomainId__","verificationMethod":"DNS_TXT"}

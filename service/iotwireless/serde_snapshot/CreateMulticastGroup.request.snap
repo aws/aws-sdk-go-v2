@@ -1,0 +1,5 @@
+POST /multicast-groups
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","LoRaWAN":{"DlClass":"ClassB","ParticipatingGateways":{"GatewayList":["__Member__","__Member__"],"TransmissionInterval":1},"RfRegion":"EU868"},"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

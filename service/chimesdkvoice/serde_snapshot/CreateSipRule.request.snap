@@ -1,0 +1,5 @@
+POST /sip-rules
+
+Content-Type: application/json
+
+{"Disabled":true,"Name":"__Name__","TargetApplications":[{"AwsRegion":"__AwsRegion__","Priority":1,"SipMediaApplicationId":"__SipMediaApplicationId__"},{"AwsRegion":"__AwsRegion__","Priority":1,"SipMediaApplicationId":"__SipMediaApplicationId__"}],"TriggerType":"ToPhoneNumber","TriggerValue":"__TriggerValue__"}

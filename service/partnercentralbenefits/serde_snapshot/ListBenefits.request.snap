@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.ListBenefits
+
+{"Catalog":"__Catalog__","FulfillmentTypes":["CREDITS","CREDITS"],"MaxResults":1,"NextToken":"__NextToken__","Programs":["__Member__","__Member__"],"Status":["ACTIVE","ACTIVE"]}

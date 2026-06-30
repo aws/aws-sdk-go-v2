@@ -1,0 +1,5 @@
+POST /variantStores?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"status":"CREATING"},"ids":["__Member__","__Member__"]}

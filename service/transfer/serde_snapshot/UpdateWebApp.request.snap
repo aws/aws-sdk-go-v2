@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.UpdateWebApp
+
+{"AccessEndpoint":"__AccessEndpoint__","EndpointDetails":{"Vpc":{"IpAddressType":"IPV4","SubnetIds":["__Member__","__Member__"]}},"IdentityProviderDetails":{"IdentityCenterConfig":{"Role":"__Role__"}},"WebAppId":"__WebAppId__","WebAppUnits":{"Provisioned":1}}

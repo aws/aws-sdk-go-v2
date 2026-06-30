@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.ListUsageForLicenseConfiguration
+
+{"Filters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"LicenseConfigurationArn":"__LicenseConfigurationArn__","MaxResults":1,"NextToken":"__NextToken__"}

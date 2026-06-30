@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: BackupOnPremises_v20210101.UpdateHypervisor
+
+{"Host":"__Host__","HypervisorArn":"__HypervisorArn__","LogGroupArn":"__LogGroupArn__","Name":"__Name__","Password":"__Password__","Username":"__Username__"}

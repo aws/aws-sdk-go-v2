@@ -1,0 +1,5 @@
+PUT /UpdateInfrastructureConfiguration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","infrastructureConfigurationArn":"__InfrastructureConfigurationArn__","instanceMetadataOptions":{"httpPutResponseHopLimit":1,"httpTokens":"__HttpTokens__"},"instanceProfileName":"__InstanceProfileName__","instanceTypes":["__Member__","__Member__"],"keyPair":"__KeyPair__","logging":{"s3Logs":{"s3BucketName":"__S3BucketName__","s3KeyPrefix":"__S3KeyPrefix__"}},"placement":{"availabilityZone":"__AvailabilityZone__","hostId":"__HostId__","hostResourceGroupArn":"__HostResourceGroupArn__","tenancy":"default"},"resourceTags":{"key0":"__Value__","key1":"__Value__"},"securityGroupIds":["__Member__","__Member__"],"snsTopicArn":"__SnsTopicArn__","subnetId":"__SubnetId__","terminateInstanceOnFailure":true}

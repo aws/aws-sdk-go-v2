@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/object/facets
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"ObjectAttributeList":[{"Key":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}},{"Key":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}],"ObjectReference":{"Selector":"__Selector__"},"SchemaFacet":{"FacetName":"__FacetName__","SchemaArn":"__SchemaArn__"}}

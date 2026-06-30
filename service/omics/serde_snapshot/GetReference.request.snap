@@ -1,0 +1,4 @@
+GET /referencestore/__ReferenceStoreId__/reference/__Id__?file=SOURCE&partNumber=1
+
+Range: __Range__
+

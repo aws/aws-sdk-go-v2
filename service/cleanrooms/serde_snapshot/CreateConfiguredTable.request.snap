@@ -1,0 +1,5 @@
+POST /configuredTables
+
+Content-Type: application/json
+
+{"allowedColumns":["__Member__","__Member__"],"analysisMethod":"DIRECT_QUERY","description":"__Description__","name":"__Name__","selectedAnalysisMethods":["DIRECT_QUERY","DIRECT_QUERY"],"tableReference":{"glue":{"databaseName":"__DatabaseName__","region":"us-west-1","tableName":"__TableName__"}},"tags":{"key0":"__Value__","key1":"__Value__"}}

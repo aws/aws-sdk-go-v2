@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.StartOpportunityFromEngagementTask
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","ContextIdentifier":"__ContextIdentifier__","Identifier":"__Identifier__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

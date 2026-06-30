@@ -1,0 +1,5 @@
+PUT /restore-testing/plans/__RestoreTestingPlanName__/selections/__RestoreTestingSelectionName__
+
+Content-Type: application/json
+
+{"RestoreTestingSelection":{"IamRoleArn":"__IamRoleArn__","ProtectedResourceArns":["__Member__","__Member__"],"ProtectedResourceConditions":{"StringEquals":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"StringNotEquals":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"RestoreMetadataOverrides":{"key0":"__Value__","key1":"__Value__"},"ValidationWindowHours":1}}

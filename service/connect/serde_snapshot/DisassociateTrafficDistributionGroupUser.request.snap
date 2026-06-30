@@ -1,0 +1,3 @@
+DELETE /traffic-distribution-group/__TrafficDistributionGroupId__/user?InstanceId=__InstanceId__&UserId=__UserId__
+
+

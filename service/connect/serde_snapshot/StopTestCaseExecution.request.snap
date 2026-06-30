@@ -1,0 +1,5 @@
+POST /test-cases/__InstanceId__/__TestCaseId__/__TestCaseExecutionId__/stop-execution
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__"}

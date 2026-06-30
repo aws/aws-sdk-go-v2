@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleFrontendService.DescribeScalingPolicies
+
+{"MaxResults":1,"NextToken":"__NextToken__","PolicyNames":["__Member__","__Member__"],"ResourceId":"__ResourceId__","ScalableDimension":"ecs:service:DesiredCount","ServiceNamespace":"ecs"}

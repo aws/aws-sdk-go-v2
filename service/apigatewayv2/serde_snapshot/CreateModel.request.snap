@@ -1,0 +1,5 @@
+POST /v2/apis/__ApiId__/models
+
+Content-Type: application/json
+
+{"contentType":"__ContentType__","description":"__Description__","name":"__Name__","schema":"__Schema__"}

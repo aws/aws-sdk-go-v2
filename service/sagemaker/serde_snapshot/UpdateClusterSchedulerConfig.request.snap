@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateClusterSchedulerConfig
+
+{"ClusterSchedulerConfigId":"__ClusterSchedulerConfigId__","Description":"__Description__","SchedulerConfig":{"FairShare":"Enabled","IdleResourceSharing":"Enabled","PriorityClasses":[{"Name":"__Name__","Weight":1},{"Name":"__Name__","Weight":1}]},"TargetVersion":1}

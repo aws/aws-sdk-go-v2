@@ -1,0 +1,5 @@
+POST /assets
+
+Content-Type: application/json
+
+{"id":"__Id__","packagingGroupId":"__PackagingGroupId__","resourceId":"__ResourceId__","sourceArn":"__SourceArn__","sourceRoleArn":"__SourceRoleArn__","tags":{"key0":"__Value__","key1":"__Value__"}}

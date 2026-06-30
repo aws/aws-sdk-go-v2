@@ -1,0 +1,5 @@
+POST /ListStreamSessions
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__","maxResults":1,"nextToken":"__NextToken__"}

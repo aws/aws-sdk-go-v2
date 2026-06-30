@@ -1,0 +1,5 @@
+POST /invitations/accept
+
+Content-Type: application/json
+
+{"administratorAccountId":"__AdministratorAccountId__","invitationId":"__InvitationId__","masterAccount":"__MasterAccount__"}

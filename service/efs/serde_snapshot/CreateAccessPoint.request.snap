@@ -1,0 +1,5 @@
+POST /2015-02-01/access-points
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","FileSystemId":"__FileSystemId__","PosixUser":{"Gid":1,"SecondaryGids":[1,1],"Uid":1},"RootDirectory":{"CreationInfo":{"OwnerGid":1,"OwnerUid":1,"Permissions":"__Permissions__"},"Path":"__Path__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

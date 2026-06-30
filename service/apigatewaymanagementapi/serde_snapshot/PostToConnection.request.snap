@@ -1,0 +1,4 @@
+POST /@connections/__ConnectionId__
+
+Content-Type: application/octet-stream
+

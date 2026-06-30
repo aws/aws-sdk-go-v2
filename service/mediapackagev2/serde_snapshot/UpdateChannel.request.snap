@@ -1,0 +1,6 @@
+PUT /channelGroup/__ChannelGroupName__/channel/__ChannelName__/
+
+Content-Type: application/json
+X-Amzn-Update-If-Match: __ETag__
+
+{"Description":"__Description__","InputSwitchConfiguration":{"MQCSInputSwitching":true,"PreferredInput":1},"OutputHeaderConfiguration":{"PublishMQCS":true}}

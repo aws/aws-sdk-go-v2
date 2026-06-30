@@ -1,0 +1,5 @@
+PUT /restore-jobs/__RestoreJobId__/validations
+
+Content-Type: application/json
+
+{"ValidationStatus":"FAILED","ValidationStatusMessage":"__ValidationStatusMessage__"}

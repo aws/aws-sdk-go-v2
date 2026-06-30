@@ -1,0 +1,5 @@
+PATCH /workloads/__WorkloadId__/associateLenses
+
+Content-Type: application/json
+
+{"LensAliases":["__Member__","__Member__"]}

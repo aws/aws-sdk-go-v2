@@ -1,0 +1,5 @@
+POST /scans
+
+Content-Type: application/json
+
+{"analysisType":"Security","clientToken":"__ClientToken__","resourceId":{"codeArtifactId":"__ResourceIdMemberCodeArtifactId__"},"scanName":"__ScanName__","scanType":"Standard","tags":{"key0":"__Value__","key1":"__Value__"}}

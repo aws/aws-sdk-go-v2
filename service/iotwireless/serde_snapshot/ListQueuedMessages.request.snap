@@ -1,0 +1,3 @@
+GET /wireless-devices/__Id__/data?WirelessDeviceType=Sidewalk&maxResults=1&nextToken=__NextToken__
+
+

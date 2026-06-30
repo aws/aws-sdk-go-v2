@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/filter/__FilterName__
+
+Content-Type: application/json
+
+{"action":"NOOP","description":"__Description__","findingCriteria":{"criterion":{"key0":{"eq":["__Member__","__Member__"],"equals":["__Member__","__Member__"],"greaterThan":1,"greaterThanOrEqual":1,"gt":1,"gte":1,"lessThan":1,"lessThanOrEqual":1,"lt":1,"lte":1,"matches":["__Member__","__Member__"],"neq":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"],"notMatches":["__Member__","__Member__"]},"key1":{"eq":["__Member__","__Member__"],"equals":["__Member__","__Member__"],"greaterThan":1,"greaterThanOrEqual":1,"gt":1,"gte":1,"lessThan":1,"lessThanOrEqual":1,"lt":1,"lte":1,"matches":["__Member__","__Member__"],"neq":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"],"notMatches":["__Member__","__Member__"]}}},"rank":1}

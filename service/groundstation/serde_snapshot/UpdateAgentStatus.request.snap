@@ -1,0 +1,5 @@
+PUT /agent/__AgentId__
+
+Content-Type: application/json
+
+{"aggregateStatus":{"signatureMap":{"key0":true,"key1":true},"status":"SUCCESS"},"componentStatuses":[{"bytesReceived":1,"bytesSent":1,"capabilityArn":"__CapabilityArn__","componentType":"__ComponentType__","dataflowId":"__DataflowId__","packetsDropped":1,"status":"SUCCESS"},{"bytesReceived":1,"bytesSent":1,"capabilityArn":"__CapabilityArn__","componentType":"__ComponentType__","dataflowId":"__DataflowId__","packetsDropped":1,"status":"SUCCESS"}],"taskId":"__TaskId__"}

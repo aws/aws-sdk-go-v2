@@ -1,0 +1,3 @@
+GET /v20210603/InternetEvents?EndTime=2000-01-01T00%3A00%3A00Z&EventStatus=__EventStatus__&EventType=__EventType__&InternetEventMaxResults=1&NextToken=__NextToken__&StartTime=2000-01-01T00%3A00%3A00Z
+
+

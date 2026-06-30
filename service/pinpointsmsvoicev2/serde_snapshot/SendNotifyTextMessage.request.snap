@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.SendNotifyTextMessage
+
+{"ConfigurationSetName":"__ConfigurationSetName__","Context":{"key0":"__Value__","key1":"__Value__"},"DestinationPhoneNumber":"__DestinationPhoneNumber__","DryRun":true,"MessageFeedbackEnabled":true,"NotifyConfigurationId":"__NotifyConfigurationId__","TemplateId":"__TemplateId__","TemplateVariables":{"key0":"__Value__","key1":"__Value__"},"TimeToLive":1}

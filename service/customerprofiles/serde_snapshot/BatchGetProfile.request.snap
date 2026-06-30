@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/batch-get-profiles
+
+Content-Type: application/json
+
+{"ProfileIds":["__Member__","__Member__"]}

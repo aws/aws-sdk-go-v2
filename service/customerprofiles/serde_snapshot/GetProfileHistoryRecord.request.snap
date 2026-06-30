@@ -1,0 +1,3 @@
+GET /domains/__DomainName__/profiles/__ProfileId__/history-records/__Id__
+
+

@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/data-sets/__DataSetId__/permissions
+
+

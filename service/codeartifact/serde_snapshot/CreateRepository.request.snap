@@ -1,0 +1,5 @@
+POST /v1/repository?domain=__Domain__&domain-owner=__DomainOwner__&repository=__Repository__
+
+Content-Type: application/json
+
+{"description":"__Description__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"upstreams":[{"repositoryName":"__RepositoryName__"},{"repositoryName":"__RepositoryName__"}]}

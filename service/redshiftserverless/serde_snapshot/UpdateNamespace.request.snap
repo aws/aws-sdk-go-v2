@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.UpdateNamespace
+
+{"adminPasswordSecretKmsKeyId":"__AdminPasswordSecretKmsKeyId__","adminUserPassword":"__AdminUserPassword__","adminUsername":"__AdminUsername__","defaultIamRoleArn":"__DefaultIamRoleArn__","iamRoles":["__Member__","__Member__"],"kmsKeyId":"__KmsKeyId__","logExports":["useractivitylog","useractivitylog"],"manageAdminPassword":true,"namespaceName":"__NamespaceName__"}

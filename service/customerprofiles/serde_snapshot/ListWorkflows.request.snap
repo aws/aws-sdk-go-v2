@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/workflows?max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"QueryEndDate":946684800,"QueryStartDate":946684800,"Status":"NOT_STARTED","WorkflowType":"APPFLOW_INTEGRATION"}

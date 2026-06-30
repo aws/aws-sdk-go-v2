@@ -1,0 +1,5 @@
+POST /users
+
+Content-Type: application/json
+
+{"datasetArn":"__DatasetArn__","users":[{"properties":"__Properties__","userId":"__UserId__"},{"properties":"__Properties__","userId":"__UserId__"}]}

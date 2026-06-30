@@ -1,0 +1,5 @@
+PUT /v1/subscribers/__SubscriberId__/notification
+
+Content-Type: application/json
+
+{"configuration":{"sqsNotificationConfiguration":{}}}

@@ -1,0 +1,5 @@
+POST /v1/cases/__CaseId__/list-case-edits
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

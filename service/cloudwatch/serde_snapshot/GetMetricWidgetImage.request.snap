@@ -1,0 +1,7 @@
+POST /service/GraniteServiceVersion20100801/operation/GetMetricWidgetImage
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.CreateDelivery
+
+{"deliveryDestinationArn":"__DeliveryDestinationArn__","deliverySourceName":"__DeliverySourceName__","fieldDelimiter":"__FieldDelimiter__","recordFields":["__Member__","__Member__"],"s3DeliveryConfiguration":{"enableHiveCompatiblePath":true,"suffixPath":"__SuffixPath__"},"tags":{"key0":"__Value__","key1":"__Value__"}}

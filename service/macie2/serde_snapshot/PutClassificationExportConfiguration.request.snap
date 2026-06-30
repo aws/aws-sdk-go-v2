@@ -1,0 +1,5 @@
+PUT /classification-export-configuration
+
+Content-Type: application/json
+
+{"configuration":{"s3Destination":{"bucketName":"__BucketName__","expectedBucketOwner":"__ExpectedBucketOwner__","keyPrefix":"__KeyPrefix__","kmsKeyArn":"__KmsKeyArn__"}}}

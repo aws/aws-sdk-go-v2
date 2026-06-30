@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/notebook-runs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","computeConfiguration":{"environmentVersion":"__EnvironmentVersion__","instanceType":"__InstanceType__"},"metadata":{"key0":"__Value__","key1":"__Value__"},"networkConfiguration":{"networkAccessType":"PUBLIC_INTERNET_ONLY","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"},"notebookIdentifier":"__NotebookIdentifier__","owningProjectIdentifier":"__OwningProjectIdentifier__","parameters":{"key0":"__Value__","key1":"__Value__"},"scheduleIdentifier":"__ScheduleIdentifier__","timeoutConfiguration":{"runTimeoutInMinutes":1},"triggerSource":{"name":"__Name__","type":"MANUAL"}}

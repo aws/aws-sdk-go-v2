@@ -1,0 +1,5 @@
+PATCH /automated-reasoning-policies/__PolicyArn__/test-cases/__TestCaseId__
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","confidenceThreshold":1,"expectedAggregatedFindingsResult":"VALID","guardContent":"__GuardContent__","lastUpdatedAt":"2000-01-01T00:00:00Z","queryContent":"__QueryContent__"}

@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/subscription-grants/__Identifier__/status/__AssetIdentifier__
+
+Content-Type: application/json
+
+{"failureCause":{"message":"__Message__"},"status":"GRANT_PENDING","targetName":"__TargetName__"}

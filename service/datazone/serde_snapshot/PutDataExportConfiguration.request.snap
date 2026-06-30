@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/data-export-configuration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","enableExport":true,"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseAlgorithm":"__SseAlgorithm__"}}

@@ -1,0 +1,5 @@
+PUT /traffic-distribution-group/__TrafficDistributionGroupId__/user
+
+Content-Type: application/json
+
+{"InstanceId":"__InstanceId__","UserId":"__UserId__"}

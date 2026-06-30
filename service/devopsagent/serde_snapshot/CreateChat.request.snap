@@ -1,0 +1,3 @@
+POST /agents/agent-space/__AgentSpaceId__/chat/create?userId=__UserId__&userType=IAM
+
+

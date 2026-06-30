@@ -1,0 +1,5 @@
+POST /responder-gateway/__GatewayId__/update
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","domainName":"__DomainName__","listenerConfig":{"protocols":["HTTP","HTTP"]},"managedEndpointConfiguration":{"autoScalingGroups":{"autoScalingGroupNames":["__Member__","__Member__"],"healthCheckConfig":{"healthyThresholdCount":1,"intervalSeconds":1,"path":"__Path__","port":1,"protocol":"HTTP","statusCodeMatcher":"__StatusCodeMatcher__","timeoutMs":1,"unhealthyThresholdCount":1},"roleArn":"__RoleArn__"}},"port":1,"protocol":"HTTP","trustStoreConfiguration":{"certificateAuthorityCertificates":["__Member__","__Member__"]}}

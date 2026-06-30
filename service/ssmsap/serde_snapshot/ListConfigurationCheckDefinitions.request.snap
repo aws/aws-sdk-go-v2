@@ -1,0 +1,5 @@
+POST /list-configuration-check-definitions
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

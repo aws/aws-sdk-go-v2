@@ -1,0 +1,5 @@
+PUT /scrapers/__ScraperId__/logging-configuration
+
+Content-Type: application/json
+
+{"loggingDestination":{"cloudWatchLogs":{"logGroupArn":"__LogGroupArn__"}},"scraperComponents":[{"config":{"options":{"key0":"__Value__","key1":"__Value__"}},"type":"SERVICE_DISCOVERY"},{"config":{"options":{"key0":"__Value__","key1":"__Value__"}},"type":"SERVICE_DISCOVERY"}]}

@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/vpcEndpoints/describe
+
+Content-Type: application/json
+
+{"VpcEndpointIds":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+POST /userAccessLoggingSettings
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","kinesisStreamArn":"__KinesisStreamArn__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

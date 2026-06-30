@@ -1,0 +1,3 @@
+GET /endpoint?authenticationMethod=X509ClientCertificate&certificateArn=__CertificateArn__&deviceRoleArn=__DeviceRoleArn__&thingArn=__ThingArn__
+
+

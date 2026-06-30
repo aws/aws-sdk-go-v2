@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.CreateImpersonationRole
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","OrganizationId":"__OrganizationId__","Rules":[{"Description":"__Description__","Effect":"ALLOW","ImpersonationRuleId":"__ImpersonationRuleId__","Name":"__Name__","NotTargetUsers":["__Member__","__Member__"],"TargetUsers":["__Member__","__Member__"]},{"Description":"__Description__","Effect":"ALLOW","ImpersonationRuleId":"__ImpersonationRuleId__","Name":"__Name__","NotTargetUsers":["__Member__","__Member__"],"TargetUsers":["__Member__","__Member__"]}],"Type":"FULL_ACCESS"}

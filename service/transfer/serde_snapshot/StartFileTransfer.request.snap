@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.StartFileTransfer
+
+{"ConnectorId":"__ConnectorId__","CustomHttpHeaders":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"LocalDirectoryPath":"__LocalDirectoryPath__","RemoteDirectoryPath":"__RemoteDirectoryPath__","RetrieveFilePaths":["__Member__","__Member__"],"SendFilePaths":["__Member__","__Member__"]}

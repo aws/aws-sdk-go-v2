@@ -1,0 +1,3 @@
+GET /2013-04-01/hostedzonesbyvpc?maxitems=1&nexttoken=__NextToken__&vpcid=__VPCId__&vpcregion=us-east-1
+
+

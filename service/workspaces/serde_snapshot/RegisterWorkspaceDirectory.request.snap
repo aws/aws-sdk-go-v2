@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.RegisterWorkspaceDirectory
+
+{"ActiveDirectoryConfig":{"DomainName":"__DomainName__","ServiceAccountSecretArn":"__ServiceAccountSecretArn__"},"DirectoryId":"__DirectoryId__","EnableSelfService":true,"IdcInstanceArn":"__IdcInstanceArn__","MicrosoftEntraConfig":{"ApplicationConfigSecretArn":"__ApplicationConfigSecretArn__","TenantId":"__TenantId__"},"SubnetIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Tenancy":"DEDICATED","UserIdentityType":"CUSTOMER_MANAGED","WorkspaceDirectoryDescription":"__WorkspaceDirectoryDescription__","WorkspaceDirectoryName":"__WorkspaceDirectoryName__","WorkspaceType":"PERSONAL"}

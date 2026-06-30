@@ -1,0 +1,5 @@
+POST /v1/email/dedicated-ip-pools
+
+Content-Type: application/json
+
+{"PoolName":"__PoolName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

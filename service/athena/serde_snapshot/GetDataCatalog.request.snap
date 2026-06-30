@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.GetDataCatalog
+
+{"Name":"__Name__","WorkGroup":"__WorkGroup__"}

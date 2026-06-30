@@ -1,0 +1,5 @@
+POST /ephemerides?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"endTime":946684800,"ephemerisType":"TLE","satelliteId":"__SatelliteId__","startTime":946684800,"statusList":["VALIDATING","VALIDATING"]}

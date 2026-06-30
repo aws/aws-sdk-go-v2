@@ -1,0 +1,7 @@
+POST /__Key__?restore=&versionId=__VersionId__
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+

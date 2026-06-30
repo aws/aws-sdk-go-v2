@@ -1,0 +1,4 @@
+GET /apps.describeQAppPermissions?appId=__AppId__
+
+Instance-Id: __InstanceId__
+

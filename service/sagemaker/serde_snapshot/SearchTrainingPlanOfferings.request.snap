@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.SearchTrainingPlanOfferings
+
+{"DurationHours":1,"EndTimeBefore":946684800,"InstanceCount":1,"InstanceType":"ml.p4d.24xlarge","StartTimeAfter":946684800,"TargetResources":["training-job","training-job"],"TrainingPlanArn":"__TrainingPlanArn__","UltraServerCount":1,"UltraServerType":"__UltraServerType__"}

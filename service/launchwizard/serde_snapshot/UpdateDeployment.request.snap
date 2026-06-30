@@ -1,0 +1,5 @@
+POST /updateDeployment
+
+Content-Type: application/json
+
+{"deploymentId":"__DeploymentId__","deploymentPatternVersionName":"__DeploymentPatternVersionName__","dryRun":true,"force":true,"specifications":{"key0":"__Value__","key1":"__Value__"},"workloadVersionName":"__WorkloadVersionName__"}

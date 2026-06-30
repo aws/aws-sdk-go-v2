@@ -1,0 +1,3 @@
+GET /delegations?maxResults=1&nextToken=__NextToken__
+
+

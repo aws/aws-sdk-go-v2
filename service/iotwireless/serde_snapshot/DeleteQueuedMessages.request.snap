@@ -1,0 +1,3 @@
+DELETE /wireless-devices/__Id__/data?WirelessDeviceType=Sidewalk&messageId=__MessageId__
+
+

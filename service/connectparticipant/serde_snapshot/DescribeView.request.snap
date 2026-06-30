@@ -1,0 +1,4 @@
+GET /participant/views/__ViewToken__
+
+X-Amz-Bearer: __ConnectionToken__
+

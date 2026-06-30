@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifyWorkspaceProperties
+
+{"DataReplication":"NO_REPLICATION","WorkspaceId":"__WorkspaceId__","WorkspaceProperties":{"ComputeTypeName":"VALUE","GlobalAccelerator":{"Mode":"ENABLED_AUTO","PreferredProtocol":"TCP"},"OperatingSystemName":"AMAZON_LINUX_2","Protocols":["PCOIP","PCOIP"],"RootVolumeSizeGib":1,"RunningMode":"AUTO_STOP","RunningModeAutoStopTimeoutInMinutes":1,"UserVolumeSizeGib":1}}

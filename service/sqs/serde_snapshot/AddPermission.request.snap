@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.AddPermission
+X-Amzn-Query-Mode: true
+
+{"AWSAccountIds":["__Member__","__Member__"],"Actions":["__Member__","__Member__"],"Label":"__Label__","QueueUrl":"__QueueUrl__"}

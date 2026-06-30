@@ -1,0 +1,3 @@
+GET /v2/email/deliverability-dashboard/blacklist-report?BlacklistItemNames=__Member__&BlacklistItemNames=__Member__
+
+

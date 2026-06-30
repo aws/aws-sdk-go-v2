@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListEnvironmentTemplateVersions
+
+{"majorVersion":"__MajorVersion__","maxResults":1,"nextToken":"__NextToken__","templateName":"__TemplateName__"}

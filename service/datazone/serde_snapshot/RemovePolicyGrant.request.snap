@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/policies/managed/DOMAIN_UNIT/__EntityIdentifier__/removeGrant
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","grantIdentifier":"__GrantIdentifier__","policyType":"CREATE_DOMAIN_UNIT","principal":{"user":{"userIdentifier":"__UserPolicyGrantPrincipalMemberUserIdentifier__"}}}

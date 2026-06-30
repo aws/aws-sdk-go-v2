@@ -1,0 +1,5 @@
+PATCH /v2/apis/__ApiId__/integrations/__IntegrationId__
+
+Content-Type: application/json
+
+{"connectionId":"__ConnectionId__","connectionType":"INTERNET","contentHandlingStrategy":"CONVERT_TO_BINARY","credentialsArn":"__CredentialsArn__","description":"__Description__","integrationMethod":"__IntegrationMethod__","integrationSubtype":"__IntegrationSubtype__","integrationType":"AWS","integrationUri":"__IntegrationUri__","passthroughBehavior":"WHEN_NO_MATCH","payloadFormatVersion":"__PayloadFormatVersion__","requestParameters":{"key0":"__Value__","key1":"__Value__"},"requestTemplates":{"key0":"__Value__","key1":"__Value__"},"responseParameters":{"key0":{"key0":"__Value__","key1":"__Value__"},"key1":{"key0":"__Value__","key1":"__Value__"}},"templateSelectionExpression":"__TemplateSelectionExpression__","timeoutInMillis":1,"tlsConfig":{"serverNameToVerify":"__ServerNameToVerify__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetPartitions
+
+{"AuditContext":{"AdditionalAuditContext":"__AdditionalAuditContext__","AllColumnsRequested":true,"RequestedColumns":["__Member__","__Member__"]},"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","ExcludeColumnSchema":true,"Expression":"__Expression__","MaxResults":1,"NextToken":"__NextToken__","QueryAsOfTime":946684800,"Segment":{"SegmentNumber":1,"TotalSegments":1},"TableName":"__TableName__","TransactionId":"__TransactionId__"}

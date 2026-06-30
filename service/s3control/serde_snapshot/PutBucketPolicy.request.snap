@@ -1,0 +1,7 @@
+PUT /v20180820/bucket/__Bucket__/policy
+
+Content-Md5: 2aUcDBcN8tsRfn4BJmci+Q==
+Content-Type: application/xml
+X-Amz-Account-Id: AccountId-value
+X-Amz-Confirm-Remove-Self-Bucket-Access: true
+

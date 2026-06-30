@@ -1,0 +1,7 @@
+PUT /code-interpreters/__CodeInterpreterIdentifier__/sessions/start
+
+Content-Type: application/json
+Traceparent: __TraceParent__
+X-Amzn-Trace-Id: __TraceId__
+
+{"certificates":[{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}},{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}}],"clientToken":"__ClientToken__","name":"__Name__","sessionTimeoutSeconds":1}

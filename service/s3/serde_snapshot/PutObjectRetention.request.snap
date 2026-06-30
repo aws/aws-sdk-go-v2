@@ -1,0 +1,9 @@
+PUT /__Key__?retention=&versionId=__VersionId__
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Bypass-Governance-Retention: true
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+

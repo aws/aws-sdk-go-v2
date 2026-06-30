@@ -1,0 +1,4 @@
+PUT /things/__ThingName__/principals?thingPrincipalType=EXCLUSIVE_THING
+
+X-Amzn-Principal: __Principal__
+

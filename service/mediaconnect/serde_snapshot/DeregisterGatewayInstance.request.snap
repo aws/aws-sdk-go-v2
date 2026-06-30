@@ -1,0 +1,3 @@
+DELETE /v1/gateway-instances/__GatewayInstanceArn__?force=true
+
+

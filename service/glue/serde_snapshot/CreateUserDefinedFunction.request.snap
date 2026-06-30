@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateUserDefinedFunction
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","FunctionInput":{"ClassName":"__ClassName__","FunctionName":"__FunctionName__","FunctionType":"REGULAR_FUNCTION","OwnerName":"__OwnerName__","OwnerType":"USER","ResourceUris":[{"ResourceType":"JAR","Uri":"__Uri__"},{"ResourceType":"JAR","Uri":"__Uri__"}]}}

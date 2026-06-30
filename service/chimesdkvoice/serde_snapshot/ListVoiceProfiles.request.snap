@@ -1,0 +1,3 @@
+GET /voice-profiles?max-results=1&next-token=__NextToken__&voice-profile-domain-id=__VoiceProfileDomainId__
+
+

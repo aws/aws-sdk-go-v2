@@ -1,0 +1,5 @@
+POST /v1/agentspaces
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","kmsKeyArn":"__KmsKeyArn__","locale":"__Locale__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

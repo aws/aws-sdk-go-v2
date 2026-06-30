@@ -1,0 +1,3 @@
+POST /v1/agentspaces/__AgentSpaceId__/associations/list?filterServiceTypes=__FilterServiceTypes__&maxResults=1&nextToken=__NextToken__
+
+

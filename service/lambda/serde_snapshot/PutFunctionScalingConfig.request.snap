@@ -1,0 +1,5 @@
+PUT /2025-11-30/functions/__FunctionName__/function-scaling-config?Qualifier=__Qualifier__
+
+Content-Type: application/json
+
+{"FunctionScalingConfig":{"MaxExecutionEnvironments":1,"MinExecutionEnvironments":1}}

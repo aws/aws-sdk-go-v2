@@ -1,0 +1,3 @@
+GET /resourceconfigurations?domainVerificationIdentifier=__DomainVerificationIdentifier__&maxResults=1&nextToken=__NextToken__&resourceConfigurationGroupIdentifier=__ResourceConfigurationGroupIdentifier__&resourceGatewayIdentifier=__ResourceGatewayIdentifier__
+
+

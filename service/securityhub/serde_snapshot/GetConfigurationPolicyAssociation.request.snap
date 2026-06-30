@@ -1,0 +1,5 @@
+POST /configurationPolicyAssociation/get
+
+Content-Type: application/json
+
+{"Target":{"AccountId":"__TargetMemberAccountId__"}}

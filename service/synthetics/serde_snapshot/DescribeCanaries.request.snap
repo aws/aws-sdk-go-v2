@@ -1,0 +1,5 @@
+POST /canaries
+
+Content-Type: application/json
+
+{"MaxResults":1,"Names":["__Member__","__Member__"],"NextToken":"__NextToken__"}

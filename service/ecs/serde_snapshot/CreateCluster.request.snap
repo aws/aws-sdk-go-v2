@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.CreateCluster
+
+{"capacityProviders":["__Member__","__Member__"],"clusterName":"__ClusterName__","configuration":{"executeCommandConfiguration":{"kmsKeyId":"__KmsKeyId__","logConfiguration":{"cloudWatchEncryptionEnabled":true,"cloudWatchLogGroupName":"__CloudWatchLogGroupName__","s3BucketName":"__S3BucketName__","s3EncryptionEnabled":true,"s3KeyPrefix":"__S3KeyPrefix__"},"logging":"NONE"},"managedStorageConfiguration":{"fargateEphemeralStorageKmsKeyId":"__FargateEphemeralStorageKmsKeyId__","kmsKeyId":"__KmsKeyId__"}},"defaultCapacityProviderStrategy":[{"base":1,"capacityProvider":"__CapacityProvider__","weight":1},{"base":1,"capacityProvider":"__CapacityProvider__","weight":1}],"serviceConnectDefaults":{"namespace":"__Namespace__"},"settings":[{"name":"containerInsights","value":"__Value__"},{"name":"containerInsights","value":"__Value__"}],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

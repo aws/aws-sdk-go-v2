@@ -1,0 +1,5 @@
+PATCH /prod/eventbridge-rule-template-groups/__Identifier__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

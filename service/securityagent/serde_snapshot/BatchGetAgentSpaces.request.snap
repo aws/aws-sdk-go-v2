@@ -1,0 +1,5 @@
+POST /BatchGetAgentSpaces
+
+Content-Type: application/json
+
+{"agentSpaceIds":["__Member__","__Member__"]}

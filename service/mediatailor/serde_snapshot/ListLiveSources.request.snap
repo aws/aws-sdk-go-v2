@@ -1,0 +1,3 @@
+GET /sourceLocation/__SourceLocationName__/liveSources?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /run
+
+Content-Type: application/json
+
+{"cacheBehavior":"CACHE_ON_FAILURE","cacheId":"__CacheId__","configurationName":"__ConfigurationName__","logLevel":"OFF","name":"__Name__","networkingMode":"RESTRICTED","outputUri":"__OutputUri__","priority":1,"requestId":"__RequestId__","retentionMode":"RETAIN","roleArn":"__RoleArn__","runGroupId":"__RunGroupId__","runId":"__RunId__","scratchStorageMode":"LOCAL","storageCapacity":1,"storageType":"STATIC","tags":{"key0":"__Value__","key1":"__Value__"},"workflowId":"__WorkflowId__","workflowOwnerId":"__WorkflowOwnerId__","workflowType":"PRIVATE","workflowVersionName":"__WorkflowVersionName__"}

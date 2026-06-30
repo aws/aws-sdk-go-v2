@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.CreateAddonInstance
+
+{"AddonSubscriptionId":"__AddonSubscriptionId__","ClientToken":"__ClientToken__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

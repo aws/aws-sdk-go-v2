@@ -1,0 +1,14 @@
+PUT /__Key__?acl=&versionId=__VersionId__
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Acl: private
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Grant-Full-Control: __GrantFullControl__
+X-Amz-Grant-Read: __GrantRead__
+X-Amz-Grant-Read-Acp: __GrantReadACP__
+X-Amz-Grant-Write: __GrantWrite__
+X-Amz-Grant-Write-Acp: __GrantWriteACP__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+

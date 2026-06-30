@@ -1,0 +1,5 @@
+PATCH /v1/agentspaces/__AgentSpaceId__/associations/__AssociationId__
+
+Content-Type: application/json
+
+{"capabilities":{"key0":{"enabled":true},"key1":{"enabled":true}},"configuration":{"sourceAws":{"accountId":"__AccountId__","accountType":"source","assumableRoleArn":"__AssumableRoleArn__","externalId":"__ExternalId__"}}}

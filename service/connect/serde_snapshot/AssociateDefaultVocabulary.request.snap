@@ -1,0 +1,5 @@
+PUT /default-vocabulary/__InstanceId__/ar-AE
+
+Content-Type: application/json
+
+{"VocabularyId":"__VocabularyId__"}

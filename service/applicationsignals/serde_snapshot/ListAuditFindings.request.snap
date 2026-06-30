@@ -1,0 +1,5 @@
+POST /auditFindings?EndTime=2000-01-01T00%3A00%3A00Z&StartTime=2000-01-01T00%3A00%3A00Z
+
+Content-Type: application/json
+
+{"AuditTargets":[{"Data":{"Service":{"AwsAccountId":"__AwsAccountId__","Environment":"__Environment__","Name":"__Name__","Type":"__Type__"}},"Type":"__Type__"},{"Data":{"Service":{"AwsAccountId":"__AwsAccountId__","Environment":"__Environment__","Name":"__Name__","Type":"__Type__"}},"Type":"__Type__"}],"Auditors":["__Member__","__Member__"],"DetailLevel":"BRIEF","MaxResults":1,"NextToken":"__NextToken__"}

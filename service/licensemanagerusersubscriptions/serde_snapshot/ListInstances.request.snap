@@ -1,0 +1,5 @@
+POST /instance/ListInstances
+
+Content-Type: application/json
+
+{"Filters":[{"Attribute":"__Attribute__","Operation":"__Operation__","Value":"__Value__"},{"Attribute":"__Attribute__","Operation":"__Operation__","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

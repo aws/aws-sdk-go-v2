@@ -1,0 +1,6 @@
+POST /networks/__NetworkId__/users/batch-delete
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"userIds":["__Member__","__Member__"]}

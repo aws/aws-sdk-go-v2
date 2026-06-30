@@ -1,0 +1,4 @@
+PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs/__WorkflowRunId__/sessions/__SessionId__/acts
+
+Content-Type: application/json
+

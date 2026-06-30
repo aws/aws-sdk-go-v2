@@ -1,0 +1,5 @@
+POST /GetRetrievedTracesGraph
+
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RetrievalToken":"__RetrievalToken__"}

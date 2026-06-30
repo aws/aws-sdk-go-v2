@@ -1,0 +1,3 @@
+DELETE /v2/domains/__DomainIdentifier__/glossary-terms/__Identifier__
+
+

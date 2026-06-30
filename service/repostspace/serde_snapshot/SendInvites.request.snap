@@ -1,0 +1,5 @@
+POST /spaces/__SpaceId__/invite
+
+Content-Type: application/json
+
+{"accessorIds":["__Member__","__Member__"],"body":"__Body__","title":"__Title__"}

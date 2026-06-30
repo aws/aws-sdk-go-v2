@@ -1,0 +1,5 @@
+POST /list-components
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","MaxResults":1,"NextToken":"__NextToken__"}

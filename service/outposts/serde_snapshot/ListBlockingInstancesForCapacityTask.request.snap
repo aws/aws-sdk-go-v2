@@ -1,0 +1,3 @@
+GET /outposts/__OutpostIdentifier__/capacity/__CapacityTaskId__/blockingInstances?MaxResults=1&NextToken=__NextToken__
+
+

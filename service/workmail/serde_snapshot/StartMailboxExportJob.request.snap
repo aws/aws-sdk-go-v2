@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.StartMailboxExportJob
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","EntityId":"__EntityId__","KmsKeyArn":"__KmsKeyArn__","OrganizationId":"__OrganizationId__","RoleArn":"__RoleArn__","S3BucketName":"__S3BucketName__","S3Prefix":"__S3Prefix__"}

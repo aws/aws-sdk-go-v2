@@ -1,0 +1,5 @@
+POST /2021-01-01/packages/dissociateMultiple
+
+Content-Type: application/json
+
+{"DomainName":"__DomainName__","PackageList":["__Member__","__Member__"]}

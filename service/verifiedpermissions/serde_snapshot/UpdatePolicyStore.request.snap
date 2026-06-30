@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.UpdatePolicyStore
+
+{"deletionProtection":"ENABLED","description":"__Description__","policyStoreId":"__PolicyStoreId__","validationSettings":{"mode":"OFF"}}

@@ -1,0 +1,3 @@
+GET /applications?maxResults=1&nextToken=__NextToken__&states=CREATING&states=CREATING
+
+

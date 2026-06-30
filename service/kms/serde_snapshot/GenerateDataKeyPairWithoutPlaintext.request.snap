@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.GenerateDataKeyPairWithoutPlaintext
+
+{"DryRun":true,"EncryptionContext":{"key0":"__Value__","key1":"__Value__"},"GrantTokens":["__Member__","__Member__"],"KeyId":"__KeyId__","KeyPairSpec":"RSA_2048"}

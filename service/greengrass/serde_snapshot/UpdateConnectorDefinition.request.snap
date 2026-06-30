@@ -1,0 +1,5 @@
+PUT /greengrass/definition/connectors/__ConnectorDefinitionId__
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

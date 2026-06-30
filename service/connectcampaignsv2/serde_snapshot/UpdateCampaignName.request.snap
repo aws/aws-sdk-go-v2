@@ -1,0 +1,5 @@
+POST /v2/campaigns/__Id__/name
+
+Content-Type: application/json
+
+{"name":"__Name__"}

@@ -1,0 +1,5 @@
+PUT /flow-associations/__InstanceId__
+
+Content-Type: application/json
+
+{"FlowId":"__FlowId__","ResourceId":"__ResourceId__","ResourceType":"SMS_PHONE_NUMBER"}

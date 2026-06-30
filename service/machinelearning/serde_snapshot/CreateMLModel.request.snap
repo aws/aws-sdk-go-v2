@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.CreateMLModel
+
+{"MLModelId":"__MLModelId__","MLModelName":"__MLModelName__","MLModelType":"REGRESSION","Parameters":{"key0":"__Value__","key1":"__Value__"},"Recipe":"__Recipe__","RecipeUri":"__RecipeUri__","TrainingDataSourceId":"__TrainingDataSourceId__"}

@@ -1,0 +1,3 @@
+GET /greengrass/v2/components/__Arn__/versions?maxResults=1&nextToken=__NextToken__
+
+

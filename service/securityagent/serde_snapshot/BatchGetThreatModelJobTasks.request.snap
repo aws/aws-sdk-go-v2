@@ -1,0 +1,5 @@
+POST /BatchGetThreatModelJobTasks
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","threatModelJobTaskIds":["__Member__","__Member__"]}

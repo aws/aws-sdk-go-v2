@@ -1,0 +1,4 @@
+GET /api/v1/documents/__DocumentId__?includeCustomMetadata=true
+
+Authentication: __AuthenticationToken__
+

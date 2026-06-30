@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateDisk
+
+{"addOns":[{"addOnType":"AutoSnapshot","autoSnapshotAddOnRequest":{"snapshotTimeOfDay":"__SnapshotTimeOfDay__"},"stopInstanceOnIdleRequest":{"duration":"__Duration__","threshold":"__Threshold__"}},{"addOnType":"AutoSnapshot","autoSnapshotAddOnRequest":{"snapshotTimeOfDay":"__SnapshotTimeOfDay__"},"stopInstanceOnIdleRequest":{"duration":"__Duration__","threshold":"__Threshold__"}}],"availabilityZone":"__AvailabilityZone__","diskName":"__DiskName__","sizeInGb":1,"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

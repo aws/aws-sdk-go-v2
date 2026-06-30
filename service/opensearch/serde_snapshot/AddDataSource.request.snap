@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/domain/__DomainName__/dataSource
+
+Content-Type: application/json
+
+{"DataSourceType":{"S3GlueDataCatalog":{"RoleArn":"__RoleArn__"}},"Description":"__Description__","Name":"__Name__"}

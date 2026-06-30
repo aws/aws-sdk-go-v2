@@ -1,0 +1,5 @@
+POST /ListTelemetryRules
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","RuleNamePrefix":"__RuleNamePrefix__"}

@@ -1,0 +1,5 @@
+PUT /domains/__DomainName__/profiles/objects/batch-put-profile-object
+
+Content-Type: application/json
+
+{"Items":[{"Id":"__Id__","Object":"__Object__"},{"Id":"__Id__","Object":"__Object__"}],"ObjectTypeName":"__ObjectTypeName__"}

@@ -1,0 +1,6 @@
+PUT /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__
+
+Accept: application/json
+Content-Type: application/json
+
+{"apiKeyRequired":true,"authorizationScopes":["__Member__","__Member__"],"authorizationType":"__AuthorizationType__","authorizerId":"__AuthorizerId__","operationName":"__OperationName__","requestModels":{"key0":"__Value__","key1":"__Value__"},"requestParameters":{"key0":true,"key1":true},"requestValidatorId":"__RequestValidatorId__"}

@@ -1,0 +1,4 @@
+GET /api/v1/folders/__FolderId__/contents?include=__Include__&limit=1&marker=__Marker__&order=ASCENDING&sort=DATE&type=ALL
+
+Authentication: __AuthenticationToken__
+

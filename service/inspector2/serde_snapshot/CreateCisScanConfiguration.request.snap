@@ -1,0 +1,5 @@
+POST /cis/scan-configuration/create
+
+Content-Type: application/json
+
+{"scanName":"__ScanName__","schedule":{"oneTime":{}},"securityLevel":"LEVEL_1","tags":{"key0":"__Value__","key1":"__Value__"},"targets":{"accountIds":["__Member__","__Member__"],"targetResourceTags":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]}}}

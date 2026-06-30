@@ -1,0 +1,5 @@
+POST /kx/environments/__EnvironmentId__/databases/__DatabaseName__/changesets
+
+Content-Type: application/x-amz-json-1.1
+
+{"changeRequests":[{"changeType":"PUT","dbPath":"__DbPath__","s3Path":"__S3Path__"},{"changeType":"PUT","dbPath":"__DbPath__","s3Path":"__S3Path__"}],"clientToken":"__ClientToken__"}

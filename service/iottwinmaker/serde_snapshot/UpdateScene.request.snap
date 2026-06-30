@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceId__/scenes/__SceneId__
+
+Content-Type: application/json
+
+{"capabilities":["__Member__","__Member__"],"contentLocation":"__ContentLocation__","description":"__Description__","sceneMetadata":{"key0":"__Value__","key1":"__Value__"}}

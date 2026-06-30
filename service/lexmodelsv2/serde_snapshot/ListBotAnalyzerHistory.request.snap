@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botanalyzer/history
+
+Content-Type: application/json
+
+{"botVersion":"__BotVersion__","localeId":"__LocaleId__","maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+PUT /channels/__Id__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

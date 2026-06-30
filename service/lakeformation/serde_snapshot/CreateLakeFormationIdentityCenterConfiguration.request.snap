@@ -1,0 +1,5 @@
+POST /CreateLakeFormationIdentityCenterConfiguration
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","ExternalFiltering":{"AuthorizedTargets":["__Member__","__Member__"],"Status":"ENABLED"},"InstanceArn":"__InstanceArn__","ServiceIntegrations":[{"Redshift":[{"RedshiftConnect":{"Authorization":"ENABLED"}},{"RedshiftConnect":{"Authorization":"ENABLED"}}]},{"Redshift":[{"RedshiftConnect":{"Authorization":"ENABLED"}},{"RedshiftConnect":{"Authorization":"ENABLED"}}]}],"ShareRecipients":[{"DataLakePrincipalIdentifier":"__DataLakePrincipalIdentifier__"},{"DataLakePrincipalIdentifier":"__DataLakePrincipalIdentifier__"}]}

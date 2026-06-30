@@ -1,0 +1,5 @@
+PUT /v2/email/suppression/addresses
+
+Content-Type: application/json
+
+{"EmailAddress":"__EmailAddress__","Reason":"BOUNCE","TenantName":"__TenantName__"}

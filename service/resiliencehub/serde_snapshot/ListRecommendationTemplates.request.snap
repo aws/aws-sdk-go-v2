@@ -1,0 +1,3 @@
+GET /list-recommendation-templates?assessmentArn=__AssessmentArn__&maxResults=1&name=__Name__&nextToken=__NextToken__&recommendationTemplateArn=__RecommendationTemplateArn__&reverseOrder=true&status=Pending&status=Pending
+
+

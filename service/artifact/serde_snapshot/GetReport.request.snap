@@ -1,0 +1,3 @@
+GET /v1/report/get?reportId=__ReportId__&reportVersion=1&termToken=__TermToken__
+
+

@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationId__/dataaccessors/__DataAccessorId__
+
+

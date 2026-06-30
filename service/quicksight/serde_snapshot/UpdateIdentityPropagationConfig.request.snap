@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/identity-propagation-config/REDSHIFT
+
+Content-Type: application/json
+
+{"AuthorizedTargets":["__Member__","__Member__"]}

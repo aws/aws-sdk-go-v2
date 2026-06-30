@@ -1,0 +1,5 @@
+PUT /settings
+
+Content-Type: application/json
+
+{"VoiceConnector":{"CdrBucket":"__CdrBucket__"}}

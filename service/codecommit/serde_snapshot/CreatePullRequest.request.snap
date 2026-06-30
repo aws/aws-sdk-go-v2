@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.CreatePullRequest
+
+{"clientRequestToken":"__ClientRequestToken__","description":"__Description__","targets":[{"destinationReference":"__DestinationReference__","repositoryName":"__RepositoryName__","sourceReference":"__SourceReference__"},{"destinationReference":"__DestinationReference__","repositoryName":"__RepositoryName__","sourceReference":"__SourceReference__"}],"title":"__Title__"}

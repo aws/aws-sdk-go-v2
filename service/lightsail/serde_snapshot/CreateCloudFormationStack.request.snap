@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateCloudFormationStack
+
+{"instances":[{"availabilityZone":"__AvailabilityZone__","instanceType":"__InstanceType__","portInfoSource":"DEFAULT","sourceName":"__SourceName__","userData":"__UserData__"},{"availabilityZone":"__AvailabilityZone__","instanceType":"__InstanceType__","portInfoSource":"DEFAULT","sourceName":"__SourceName__","userData":"__UserData__"}]}

@@ -1,0 +1,5 @@
+POST /v1/whatsapp/template/media
+
+Content-Type: application/json
+
+{"id":"__Id__","sourceS3File":{"bucketName":"__BucketName__","key":"__Key__"}}

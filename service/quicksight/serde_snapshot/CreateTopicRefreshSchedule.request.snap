@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/topics/__TopicId__/schedules
+
+Content-Type: application/json
+
+{"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","RefreshSchedule":{"BasedOnSpiceSchedule":true,"IsEnabled":true,"RepeatAt":"__RepeatAt__","StartingAt":946684800,"Timezone":"__Timezone__","TopicScheduleType":"HOURLY"}}

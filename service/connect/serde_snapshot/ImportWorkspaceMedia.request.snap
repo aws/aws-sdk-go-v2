@@ -1,0 +1,5 @@
+POST /workspaces/__InstanceId__/__WorkspaceId__/media
+
+Content-Type: application/json
+
+{"MediaSource":"__MediaSource__","MediaType":"IMAGE_LOGO_LIGHT_FAVICON"}

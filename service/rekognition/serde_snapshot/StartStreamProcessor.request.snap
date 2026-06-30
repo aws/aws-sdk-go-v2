@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.StartStreamProcessor
+
+{"Name":"__Name__","StartSelector":{"KVSStreamStartSelector":{"FragmentNumber":"__FragmentNumber__","ProducerTimestamp":1}},"StopSelector":{"MaxDurationInSeconds":1}}

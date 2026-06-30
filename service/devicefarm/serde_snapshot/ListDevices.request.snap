@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListDevices
+
+{"arn":"__Arn__","filters":[{"attribute":"ARN","operator":"EQUALS","values":["__Member__","__Member__"]},{"attribute":"ARN","operator":"EQUALS","values":["__Member__","__Member__"]}],"nextToken":"__NextToken__"}

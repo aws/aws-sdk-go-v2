@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.AcceptAgreementRequest
+
+{"agreementRequestId":"__AgreementRequestId__","purchaseOrders":[{"agreementId":"__AgreementId__","chargeId":"__ChargeId__","chargeRevision":1,"purchaseOrderReference":"__PurchaseOrderReference__"},{"agreementId":"__AgreementId__","chargeId":"__ChargeId__","chargeRevision":1,"purchaseOrderReference":"__PurchaseOrderReference__"}]}

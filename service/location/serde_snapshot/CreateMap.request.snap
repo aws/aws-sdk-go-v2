@@ -1,0 +1,5 @@
+POST /maps/v0/maps
+
+Content-Type: application/json
+
+{"Configuration":{"CustomLayers":["__Member__","__Member__"],"PoliticalView":"__PoliticalView__","Style":"__Style__"},"Description":"__Description__","MapName":"__MapName__","PricingPlan":"RequestBasedUsage","Tags":{"key0":"__Value__","key1":"__Value__"}}

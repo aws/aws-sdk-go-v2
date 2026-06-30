@@ -1,0 +1,5 @@
+POST /joinStorageSessionAsViewer
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__","clientId":"__ClientId__"}

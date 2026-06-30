@@ -1,0 +1,3 @@
+DELETE /v1/templates/__TemplateName__/voice?version=__Version__
+
+

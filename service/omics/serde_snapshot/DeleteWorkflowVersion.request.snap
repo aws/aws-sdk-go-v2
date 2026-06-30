@@ -1,0 +1,3 @@
+DELETE /workflow/__WorkflowId__/version/__VersionName__
+
+

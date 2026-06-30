@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/lex-bots?maxResults=1&nextToken=__NextToken__
+
+

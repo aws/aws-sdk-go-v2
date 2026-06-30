@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.ListThirdPartyFirewallFirewallPolicies
+
+{"MaxResults":1,"NextToken":"__NextToken__","ThirdPartyFirewall":"PALO_ALTO_NETWORKS_CLOUD_NGFW"}

@@ -1,0 +1,4 @@
+PUT /sequencestore/__SequenceStoreId__/upload/__UploadId__/part?partNumber=1&partSource=SOURCE1
+
+Content-Type: application/octet-stream
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutRemediationConfigurations
+
+{"RemediationConfigurations":[{"Arn":"__Arn__","Automatic":true,"ConfigRuleName":"__ConfigRuleName__","CreatedByService":"__CreatedByService__","ExecutionControls":{"SsmControls":{"ConcurrentExecutionRatePercentage":1,"ErrorPercentage":1}},"MaximumAutomaticAttempts":1,"Parameters":{"key0":{"ResourceValue":{"Value":"RESOURCE_ID"},"StaticValue":{"Values":["__Member__","__Member__"]}},"key1":{"ResourceValue":{"Value":"RESOURCE_ID"},"StaticValue":{"Values":["__Member__","__Member__"]}}},"ResourceType":"__ResourceType__","RetryAttemptSeconds":1,"TargetId":"__TargetId__","TargetType":"SSM_DOCUMENT","TargetVersion":"__TargetVersion__"},{"Arn":"__Arn__","Automatic":true,"ConfigRuleName":"__ConfigRuleName__","CreatedByService":"__CreatedByService__","ExecutionControls":{"SsmControls":{"ConcurrentExecutionRatePercentage":1,"ErrorPercentage":1}},"MaximumAutomaticAttempts":1,"Parameters":{"key0":{"ResourceValue":{"Value":"RESOURCE_ID"},"StaticValue":{"Values":["__Member__","__Member__"]}},"key1":{"ResourceValue":{"Value":"RESOURCE_ID"},"StaticValue":{"Values":["__Member__","__Member__"]}}},"ResourceType":"__ResourceType__","RetryAttemptSeconds":1,"TargetId":"__TargetId__","TargetType":"SSM_DOCUMENT","TargetVersion":"__TargetVersion__"}]}

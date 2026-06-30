@@ -1,0 +1,3 @@
+DELETE /computation-models/__ComputationModelId__?clientToken=__ClientToken__
+
+

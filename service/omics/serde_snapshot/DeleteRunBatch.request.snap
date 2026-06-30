@@ -1,0 +1,5 @@
+POST /runBatch/delete
+
+Content-Type: application/json
+
+{"batchId":"__BatchId__"}

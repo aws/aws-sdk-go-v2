@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetResources
+
+{"ExcludeCompliantResources":true,"IncludeComplianceDetails":true,"PaginationToken":"__PaginationToken__","ResourceARNList":["__Member__","__Member__"],"ResourceTypeFilters":["__Member__","__Member__"],"ResourcesPerPage":1,"TagFilters":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"TagsPerPage":1}

@@ -1,0 +1,3 @@
+GET /v1/configurations/__Arn__/revisions?maxResults=1&nextToken=__NextToken__
+
+

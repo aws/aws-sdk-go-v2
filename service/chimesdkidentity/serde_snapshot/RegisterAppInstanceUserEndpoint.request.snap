@@ -1,0 +1,5 @@
+POST /app-instance-users/__AppInstanceUserArn__/endpoints
+
+Content-Type: application/json
+
+{"AllowMessages":"ALL","ClientRequestToken":"__ClientRequestToken__","EndpointAttributes":{"DeviceToken":"__DeviceToken__","VoipDeviceToken":"__VoipDeviceToken__"},"Name":"__Name__","ResourceArn":"__ResourceArn__","Type":"APNS"}

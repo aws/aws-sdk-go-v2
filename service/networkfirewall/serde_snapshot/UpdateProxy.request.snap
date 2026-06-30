@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.UpdateProxy
+
+{"ListenerPropertiesToAdd":[{"Port":1,"Type":"HTTP"},{"Port":1,"Type":"HTTP"}],"ListenerPropertiesToRemove":[{"Port":1,"Type":"HTTP"},{"Port":1,"Type":"HTTP"}],"NatGatewayId":"__NatGatewayId__","ProxyArn":"__ProxyArn__","ProxyName":"__ProxyName__","TlsInterceptProperties":{"PcaArn":"__PcaArn__","TlsInterceptMode":"ENABLED"},"UpdateToken":"__UpdateToken__"}

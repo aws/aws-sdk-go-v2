@@ -1,0 +1,5 @@
+POST /DeleteMembership
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","applicationId":"__ApplicationId__","memberType":"USER","membershipId":"__MembershipId__"}

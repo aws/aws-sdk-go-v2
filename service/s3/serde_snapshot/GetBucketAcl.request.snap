@@ -1,0 +1,4 @@
+GET /?acl=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

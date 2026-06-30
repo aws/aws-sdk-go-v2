@@ -1,0 +1,5 @@
+PUT /contact-flow-modules/__InstanceId__/__ContactFlowModuleId__/alias
+
+Content-Type: application/json
+
+{"AliasName":"__AliasName__","ContactFlowModuleVersion":1,"Description":"__Description__"}

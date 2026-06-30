@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListPipelines
+
+{"CreatedAfter":946684800,"CreatedBefore":946684800,"MaxResults":1,"NextToken":"__NextToken__","PipelineNamePrefix":"__PipelineNamePrefix__","SortBy":"Name","SortOrder":"Ascending"}

@@ -1,0 +1,5 @@
+POST /disable
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"],"resourceTypes":["EC2","EC2"]}

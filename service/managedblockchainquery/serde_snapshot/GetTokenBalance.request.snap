@@ -1,0 +1,5 @@
+POST /get-token-balance
+
+Content-Type: application/json
+
+{"atBlockchainInstant":{"time":946684800},"ownerIdentifier":{"address":"__Address__"},"tokenIdentifier":{"contractAddress":"__ContractAddress__","network":"ETHEREUM_MAINNET","tokenId":"__TokenId__"}}

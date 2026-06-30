@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.AssociateResolverRule
+
+{"Name":"__Name__","ResolverRuleId":"__ResolverRuleId__","VPCId":"__VPCId__"}

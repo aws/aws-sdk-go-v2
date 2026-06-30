@@ -1,0 +1,6 @@
+POST /channels
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"AppInstanceArn":"__AppInstanceArn__","ChannelId":"__ChannelId__","ClientRequestToken":"__ClientRequestToken__","ElasticChannelConfiguration":{"MaximumSubChannels":1,"MinimumMembershipPercentage":1,"TargetMembershipsPerSubChannel":1},"ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1},"MemberArns":["__Member__","__Member__"],"Metadata":"__Metadata__","Mode":"UNRESTRICTED","ModeratorArns":["__Member__","__Member__"],"Name":"__Name__","Privacy":"PUBLIC","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /2023-10-12/batch-get-session
+
+Content-Type: application/json
+
+{"identifiers":[{"farmId":"__FarmId__","jobId":"__JobId__","queueId":"__QueueId__","sessionId":"__SessionId__"},{"farmId":"__FarmId__","jobId":"__JobId__","queueId":"__QueueId__","sessionId":"__SessionId__"}]}

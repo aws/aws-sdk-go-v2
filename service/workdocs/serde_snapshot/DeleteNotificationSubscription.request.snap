@@ -1,0 +1,3 @@
+DELETE /api/v1/organizations/__OrganizationId__/subscriptions/__SubscriptionId__
+
+

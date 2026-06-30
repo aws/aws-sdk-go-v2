@@ -1,0 +1,5 @@
+POST /propertygraph/statistics
+
+Content-Type: application/json
+
+{"mode":"disableAutoCompute"}

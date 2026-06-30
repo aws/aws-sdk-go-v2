@@ -1,0 +1,5 @@
+POST /describe-app
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__"}

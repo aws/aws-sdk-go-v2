@@ -1,0 +1,5 @@
+PUT /?id=__Id__&inventory=
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

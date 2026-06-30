@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.DeleteMessageBatch
+X-Amzn-Query-Mode: true
+
+{"Entries":[{"Id":"__Id__","ReceiptHandle":"__ReceiptHandle__"},{"Id":"__Id__","ReceiptHandle":"__ReceiptHandle__"}],"QueueUrl":"__QueueUrl__"}

@@ -1,0 +1,46 @@
+PUT /__Key__?x-id=PutObject
+
+Cache-Control: __CacheControl__
+Content-Disposition: __ContentDisposition__
+Content-Encoding: __ContentEncoding__
+Content-Language: __ContentLanguage__
+Content-Md5: __ContentMD5__
+Content-Type: __ContentType__
+Expires: Sat, 01 Jan 2000 00:00:00 GMT
+If-Match: __IfMatch__
+If-None-Match: __IfNoneMatch__
+X-Amz-Acl: private
+X-Amz-Checksum-Crc32: __ChecksumCRC32__
+X-Amz-Checksum-Crc32c: __ChecksumCRC32C__
+X-Amz-Checksum-Crc64nvme: __ChecksumCRC64NVME__
+X-Amz-Checksum-Md5: __ChecksumMD5__
+X-Amz-Checksum-Sha1: __ChecksumSHA1__
+X-Amz-Checksum-Sha256: __ChecksumSHA256__
+X-Amz-Checksum-Sha512: __ChecksumSHA512__
+X-Amz-Checksum-Xxhash128: __ChecksumXXHASH128__
+X-Amz-Checksum-Xxhash3: __ChecksumXXHASH3__
+X-Amz-Checksum-Xxhash64: __ChecksumXXHASH64__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Grant-Full-Control: __GrantFullControl__
+X-Amz-Grant-Read: __GrantRead__
+X-Amz-Grant-Read-Acp: __GrantReadACP__
+X-Amz-Grant-Write-Acp: __GrantWriteACP__
+X-Amz-Meta-Key0: __Value__
+X-Amz-Meta-Key1: __Value__
+X-Amz-Object-Lock-Legal-Hold: ON
+X-Amz-Object-Lock-Mode: GOVERNANCE
+X-Amz-Object-Lock-Retain-Until-Date: 2000-01-01T00:00:00Z
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+X-Amz-Server-Side-Encryption: AES256
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Context: __SSEKMSEncryptionContext__
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Storage-Class: STANDARD
+X-Amz-Tagging: __Tagging__
+X-Amz-Website-Redirect-Location: __WebsiteRedirectLocation__
+X-Amz-Write-Offset-Bytes: 1
+

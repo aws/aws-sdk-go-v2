@@ -1,0 +1,5 @@
+POST /import-resources-to-draft-app-version
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","eksSources":[{"eksClusterArn":"__EksClusterArn__","namespaces":["__Member__","__Member__"]},{"eksClusterArn":"__EksClusterArn__","namespaces":["__Member__","__Member__"]}],"importStrategy":"AddOnly","sourceArns":["__Member__","__Member__"],"terraformSources":[{"s3StateFileUrl":"__S3StateFileUrl__"},{"s3StateFileUrl":"__S3StateFileUrl__"}]}

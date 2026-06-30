@@ -1,0 +1,5 @@
+PUT /buckets/__TableBucketARN__/storage-class
+
+Content-Type: application/json
+
+{"storageClassConfiguration":{"storageClass":"STANDARD"}}

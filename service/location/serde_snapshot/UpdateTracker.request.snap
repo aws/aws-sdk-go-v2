@@ -1,0 +1,5 @@
+PATCH /tracking/v0/trackers/__TrackerName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","EventBridgeEnabled":true,"KmsKeyEnableGeospatialQueries":true,"PositionFiltering":"TimeBased","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__"}

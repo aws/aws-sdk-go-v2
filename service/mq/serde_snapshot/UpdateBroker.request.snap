@@ -1,0 +1,5 @@
+PUT /v1/brokers/__BrokerId__
+
+Content-Type: application/json
+
+{"authenticationStrategy":"SIMPLE","autoMinorVersionUpgrade":true,"configuration":{"id":"__Id__","revision":1},"dataReplicationMode":"NONE","engineVersion":"__EngineVersion__","hostInstanceType":"__HostInstanceType__","ldapServerMetadata":{"hosts":["__Member__","__Member__"],"roleBase":"__RoleBase__","roleName":"__RoleName__","roleSearchMatching":"__RoleSearchMatching__","roleSearchSubtree":true,"serviceAccountPassword":"__ServiceAccountPassword__","serviceAccountUsername":"__ServiceAccountUsername__","userBase":"__UserBase__","userRoleName":"__UserRoleName__","userSearchMatching":"__UserSearchMatching__","userSearchSubtree":true},"logs":{"audit":true,"general":true},"maintenanceWindowStartTime":{"dayOfWeek":"MONDAY","timeOfDay":"__TimeOfDay__","timeZone":"__TimeZone__"},"resourceShareArns":["__Member__","__Member__"],"securityGroups":["__Member__","__Member__"]}

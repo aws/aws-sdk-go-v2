@@ -1,0 +1,5 @@
+POST /2015-01-01/es/domain/__DomainName__/authorizeVpcEndpointAccess
+
+Content-Type: application/json
+
+{"Account":"__Account__"}

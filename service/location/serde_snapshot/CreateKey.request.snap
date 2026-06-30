@@ -1,0 +1,5 @@
+POST /metadata/v0/keys
+
+Content-Type: application/json
+
+{"Description":"__Description__","ExpireTime":"2000-01-01T00:00:00Z","KeyName":"__KeyName__","NoExpiry":true,"Restrictions":{"AllowActions":["__Member__","__Member__"],"AllowAndroidApps":[{"CertificateFingerprint":"__CertificateFingerprint__","Package":"__Package__"},{"CertificateFingerprint":"__CertificateFingerprint__","Package":"__Package__"}],"AllowAppleApps":[{"BundleId":"__BundleId__"},{"BundleId":"__BundleId__"}],"AllowReferers":["__Member__","__Member__"],"AllowResources":["__Member__","__Member__"]},"Tags":{"key0":"__Value__","key1":"__Value__"}}

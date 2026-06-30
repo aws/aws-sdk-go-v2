@@ -1,0 +1,5 @@
+POST /DeleteArtifact
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","artifactId":"__ArtifactId__"}

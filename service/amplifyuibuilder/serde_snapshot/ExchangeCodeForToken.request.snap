@@ -1,0 +1,5 @@
+POST /tokens/figma
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","code":"__Code__","redirectUri":"__RedirectUri__"}

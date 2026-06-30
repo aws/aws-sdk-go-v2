@@ -1,0 +1,5 @@
+POST /v2/domains
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","domainExecutionRole":"__DomainExecutionRole__","domainVersion":"V1","kmsKeyIdentifier":"__KmsKeyIdentifier__","name":"__Name__","serviceRole":"__ServiceRole__","singleSignOn":{"idcInstanceArn":"__IdcInstanceArn__","type":"IAM_IDC","userAssignment":"AUTOMATIC"},"tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.CreateLogGroup
+
+{"deletionProtectionEnabled":true,"kmsKeyId":"__KmsKeyId__","logGroupClass":"STANDARD","logGroupName":"__LogGroupName__","tags":{"key0":"__Value__","key1":"__Value__"}}

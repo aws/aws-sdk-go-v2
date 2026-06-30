@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.ListBillingAdjustmentRequests
+
+{"agreementId":"__AgreementId__","agreementType":"__AgreementType__","catalog":"__Catalog__","createdAfter":946684800,"createdBefore":946684800,"maxResults":1,"nextToken":"__NextToken__","status":"PENDING"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: BackupOnPremises_v20210101.CreateGateway
+
+{"ActivationKey":"__ActivationKey__","GatewayDisplayName":"__GatewayDisplayName__","GatewayType":"BACKUP_VM","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

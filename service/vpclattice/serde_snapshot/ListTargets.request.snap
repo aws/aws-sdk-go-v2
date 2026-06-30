@@ -1,0 +1,5 @@
+POST /targetgroups/__TargetGroupIdentifier__/listtargets?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"targets":[{"id":"__Id__","port":1},{"id":"__Id__","port":1}]}

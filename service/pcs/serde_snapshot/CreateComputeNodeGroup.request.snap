@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.CreateComputeNodeGroup
+
+{"amiId":"__AmiId__","clientToken":"__ClientToken__","clusterIdentifier":"__ClusterIdentifier__","computeNodeGroupName":"__ComputeNodeGroupName__","customLaunchTemplate":{"id":"__Id__","version":"__Version__"},"iamInstanceProfileArn":"__IamInstanceProfileArn__","instanceConfigs":[{"instanceType":"__InstanceType__"},{"instanceType":"__InstanceType__"}],"purchaseOption":"ONDEMAND","scalingConfiguration":{"maxInstanceCount":1,"minInstanceCount":1},"slurmConfiguration":{"scaleDownIdleTimeInSeconds":1,"slurmCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}]},"spotOptions":{"allocationStrategy":"lowest-price"},"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"}}

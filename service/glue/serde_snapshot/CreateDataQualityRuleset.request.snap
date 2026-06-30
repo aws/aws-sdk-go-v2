@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateDataQualityRuleset
+
+{"ClientToken":"__ClientToken__","DataQualitySecurityConfiguration":"__DataQualitySecurityConfiguration__","Description":"__Description__","Name":"__Name__","Ruleset":"__Ruleset__","Tags":{"key0":"__Value__","key1":"__Value__"},"TargetTable":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}}

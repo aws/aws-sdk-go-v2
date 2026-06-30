@@ -1,0 +1,5 @@
+POST /controls
+
+Content-Type: application/json
+
+{"actionPlanInstructions":"__ActionPlanInstructions__","actionPlanTitle":"__ActionPlanTitle__","controlMappingSources":[{"sourceDescription":"__SourceDescription__","sourceFrequency":"DAILY","sourceKeyword":{"keywordInputType":"SELECT_FROM_LIST","keywordValue":"__KeywordValue__"},"sourceName":"__SourceName__","sourceSetUpOption":"System_Controls_Mapping","sourceType":"AWS_Cloudtrail","troubleshootingText":"__TroubleshootingText__"},{"sourceDescription":"__SourceDescription__","sourceFrequency":"DAILY","sourceKeyword":{"keywordInputType":"SELECT_FROM_LIST","keywordValue":"__KeywordValue__"},"sourceName":"__SourceName__","sourceSetUpOption":"System_Controls_Mapping","sourceType":"AWS_Cloudtrail","troubleshootingText":"__TroubleshootingText__"}],"description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"},"testingInformation":"__TestingInformation__"}

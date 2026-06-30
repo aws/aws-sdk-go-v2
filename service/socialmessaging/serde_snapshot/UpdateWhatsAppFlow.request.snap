@@ -1,0 +1,5 @@
+POST /v1/whatsapp/flow/update
+
+Content-Type: application/json
+
+{"categories":["SIGN_UP","SIGN_UP"],"flowId":"__FlowId__","flowName":"__FlowName__","id":"__Id__"}

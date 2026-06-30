@@ -1,0 +1,3 @@
+POST /suiteDefinitions/__SuiteDefinitionId__/suiteRuns/__SuiteRunId__/stop
+
+

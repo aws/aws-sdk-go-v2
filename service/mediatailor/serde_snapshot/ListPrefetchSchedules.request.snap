@@ -1,0 +1,5 @@
+POST /prefetchSchedule/__PlaybackConfigurationName__
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","ScheduleType":"SINGLE","StreamId":"__StreamId__"}

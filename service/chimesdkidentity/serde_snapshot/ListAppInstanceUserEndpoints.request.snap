@@ -1,0 +1,3 @@
+GET /app-instance-users/__AppInstanceUserArn__/endpoints?max-results=1&next-token=__NextToken__
+
+

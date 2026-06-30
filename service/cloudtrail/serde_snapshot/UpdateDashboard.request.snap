@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.UpdateDashboard
+
+{"DashboardId":"__DashboardId__","RefreshSchedule":{"Frequency":{"Unit":"HOURS","Value":1},"Status":"ENABLED","TimeOfDay":"__TimeOfDay__"},"TerminationProtectionEnabled":true,"Widgets":[{"QueryParameters":["__Member__","__Member__"],"QueryStatement":"__QueryStatement__","ViewProperties":{"key0":"__Value__","key1":"__Value__"}},{"QueryParameters":["__Member__","__Member__"],"QueryStatement":"__QueryStatement__","ViewProperties":{"key0":"__Value__","key1":"__Value__"}}]}

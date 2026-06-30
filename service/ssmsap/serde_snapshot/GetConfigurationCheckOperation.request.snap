@@ -1,0 +1,5 @@
+POST /get-configuration-check-operation
+
+Content-Type: application/json
+
+{"OperationId":"__OperationId__"}

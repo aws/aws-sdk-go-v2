@@ -1,0 +1,5 @@
+POST /collaborations/__CollaborationIdentifier__/changeRequests
+
+Content-Type: application/json
+
+{"changes":[{"specification":{"member":{"accountId":"__AccountId__","displayName":"__DisplayName__","memberAbilities":["CAN_QUERY","CAN_QUERY"],"mlMemberAbilities":{"customMLMemberAbilities":["CAN_RECEIVE_MODEL_OUTPUT","CAN_RECEIVE_MODEL_OUTPUT"]},"paymentConfiguration":{"jobCompute":{"isResponsible":true},"machineLearning":{"modelInference":{"isResponsible":true},"modelTraining":{"isResponsible":true},"syntheticDataGeneration":{"isResponsible":true}},"queryCompute":{"isResponsible":true}}}},"specificationType":"MEMBER"},{"specification":{"member":{"accountId":"__AccountId__","displayName":"__DisplayName__","memberAbilities":["CAN_QUERY","CAN_QUERY"],"mlMemberAbilities":{"customMLMemberAbilities":["CAN_RECEIVE_MODEL_OUTPUT","CAN_RECEIVE_MODEL_OUTPUT"]},"paymentConfiguration":{"jobCompute":{"isResponsible":true},"machineLearning":{"modelInference":{"isResponsible":true},"modelTraining":{"isResponsible":true},"syntheticDataGeneration":{"isResponsible":true}},"queryCompute":{"isResponsible":true}}}},"specificationType":"MEMBER"}]}

@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/policy
+
+Content-Type: application/json
+
+{"actions":["__Member__","__Member__"],"conditions":[{"conditionKey":"__ConditionKey__","conditionOperator":"StringEquals","conditionValues":["__Member__","__Member__"]},{"conditionKey":"__ConditionKey__","conditionOperator":"StringEquals","conditionValues":["__Member__","__Member__"]}],"principal":"__Principal__","statementId":"__StatementId__"}

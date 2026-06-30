@@ -1,0 +1,3 @@
+GET /outposts/__OutpostIdentifier__/assetInstances?AccountIdFilter=__Member__&AccountIdFilter=__Member__&AssetIdFilter=__Member__&AssetIdFilter=__Member__&AwsServiceFilter=AWS&AwsServiceFilter=AWS&InstanceTypeFilter=__Member__&InstanceTypeFilter=__Member__&MaxResults=1&NextToken=__NextToken__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.CreateRelay
+
+{"Authentication":{"SecretArn":"__RelayAuthenticationMemberSecretArn__"},"ClientToken":"__ClientToken__","RelayName":"__RelayName__","ServerName":"__ServerName__","ServerPort":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

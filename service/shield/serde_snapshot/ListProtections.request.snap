@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShield_20160616.ListProtections
+
+{"InclusionFilters":{"ProtectionNames":["__Member__","__Member__"],"ResourceArns":["__Member__","__Member__"],"ResourceTypes":["CLOUDFRONT_DISTRIBUTION","CLOUDFRONT_DISTRIBUTION"]},"MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,3 @@
+GET /templatestep/__Id__?stepGroupId=__StepGroupId__&templateId=__TemplateId__
+
+

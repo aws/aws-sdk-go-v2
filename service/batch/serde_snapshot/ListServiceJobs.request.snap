@@ -1,0 +1,5 @@
+POST /v1/listservicejobs
+
+Content-Type: application/json
+
+{"filters":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"jobQueue":"__JobQueue__","jobStatus":"SUBMITTED","maxResults":1,"nextToken":"__NextToken__"}

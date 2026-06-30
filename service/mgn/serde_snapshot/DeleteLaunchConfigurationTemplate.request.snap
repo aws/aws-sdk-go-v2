@@ -1,0 +1,5 @@
+POST /DeleteLaunchConfigurationTemplate
+
+Content-Type: application/json
+
+{"launchConfigurationTemplateID":"__LaunchConfigurationTemplateID__"}

@@ -1,0 +1,5 @@
+POST /user-hierarchy-groups/__InstanceId__/__HierarchyGroupId__/name
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

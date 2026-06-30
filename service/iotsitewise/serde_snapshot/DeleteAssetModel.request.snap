@@ -1,0 +1,6 @@
+DELETE /asset-models/__AssetModelId__?clientToken=__ClientToken__
+
+If-Match: __IfMatch__
+If-None-Match: __IfNoneMatch__
+Match-For-Version-Type: LATEST
+

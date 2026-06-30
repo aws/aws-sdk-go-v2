@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSBudgetServiceGateway.UpdateNotification
+
+{"AccountId":"__AccountId__","BudgetName":"__BudgetName__","NewNotification":{"ComparisonOperator":"GREATER_THAN","NotificationState":"OK","NotificationType":"ACTUAL","Threshold":1,"ThresholdType":"PERCENTAGE"},"OldNotification":{"ComparisonOperator":"GREATER_THAN","NotificationState":"OK","NotificationType":"ACTUAL","Threshold":1,"ThresholdType":"PERCENTAGE"}}

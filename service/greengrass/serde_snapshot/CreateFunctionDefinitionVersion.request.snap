@@ -1,0 +1,6 @@
+POST /greengrass/definition/functions/__FunctionDefinitionId__/versions
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"DefaultConfig":{"Execution":{"IsolationMode":"GreengrassContainer","RunAs":{"Gid":1,"Uid":1}}},"Functions":[{"FunctionArn":"__FunctionArn__","FunctionConfiguration":{"EncodingType":"binary","Environment":{"AccessSysfs":true,"Execution":{"IsolationMode":"GreengrassContainer","RunAs":{"Gid":1,"Uid":1}},"ResourceAccessPolicies":[{"Permission":"ro","ResourceId":"__ResourceId__"},{"Permission":"ro","ResourceId":"__ResourceId__"}],"Variables":{"key0":"__Value__","key1":"__Value__"}},"ExecArgs":"__ExecArgs__","Executable":"__Executable__","FunctionRuntimeOverride":"__FunctionRuntimeOverride__","MemorySize":1,"Pinned":true,"Timeout":1},"Id":"__Id__"},{"FunctionArn":"__FunctionArn__","FunctionConfiguration":{"EncodingType":"binary","Environment":{"AccessSysfs":true,"Execution":{"IsolationMode":"GreengrassContainer","RunAs":{"Gid":1,"Uid":1}},"ResourceAccessPolicies":[{"Permission":"ro","ResourceId":"__ResourceId__"},{"Permission":"ro","ResourceId":"__ResourceId__"}],"Variables":{"key0":"__Value__","key1":"__Value__"}},"ExecArgs":"__ExecArgs__","Executable":"__Executable__","FunctionRuntimeOverride":"__FunctionRuntimeOverride__","MemorySize":1,"Pinned":true,"Timeout":1},"Id":"__Id__"}]}

@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/phone-config
+
+Content-Type: application/json
+
+{"PhoneConfig":{"AfterContactWorkTimeLimit":1,"AutoAccept":true,"DeskPhoneNumber":"__DeskPhoneNumber__","PersistentConnection":true,"PhoneType":"SOFT_PHONE"}}

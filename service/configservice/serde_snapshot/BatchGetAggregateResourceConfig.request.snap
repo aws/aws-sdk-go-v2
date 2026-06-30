@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.BatchGetAggregateResourceConfig
+
+{"ConfigurationAggregatorName":"__ConfigurationAggregatorName__","ResourceIdentifiers":[{"ResourceId":"__ResourceId__","ResourceName":"__ResourceName__","ResourceType":"AWS::EC2::CustomerGateway","SourceAccountId":"__SourceAccountId__","SourceRegion":"__SourceRegion__"},{"ResourceId":"__ResourceId__","ResourceName":"__ResourceName__","ResourceType":"AWS::EC2::CustomerGateway","SourceAccountId":"__SourceAccountId__","SourceRegion":"__SourceRegion__"}]}

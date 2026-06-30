@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonBedrockKeystoneRuntimeService.InvokeDataAutomationAsync
+
+{"blueprints":[{"blueprintArn":"__BlueprintArn__","stage":"DEVELOPMENT","version":"__Version__"},{"blueprintArn":"__BlueprintArn__","stage":"DEVELOPMENT","version":"__Version__"}],"clientToken":"__ClientToken__","dataAutomationConfiguration":{"dataAutomationProjectArn":"__DataAutomationProjectArn__","stage":"LIVE"},"dataAutomationProfileArn":"__DataAutomationProfileArn__","encryptionConfiguration":{"kmsEncryptionContext":{"key0":"__Value__","key1":"__Value__"},"kmsKeyId":"__KmsKeyId__"},"inputConfiguration":{"assetProcessingConfiguration":{"video":{"segmentConfiguration":{"timestampSegment":{"endTimeMillis":1,"startTimeMillis":1}}}},"s3Uri":"__S3Uri__"},"notificationConfiguration":{"eventBridgeConfiguration":{"eventBridgeEnabled":true}},"outputConfiguration":{"s3Uri":"__S3Uri__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

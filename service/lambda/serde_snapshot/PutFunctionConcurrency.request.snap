@@ -1,0 +1,5 @@
+PUT /2017-10-31/functions/__FunctionName__/concurrency
+
+Content-Type: application/json
+
+{"ReservedConcurrentExecutions":1}

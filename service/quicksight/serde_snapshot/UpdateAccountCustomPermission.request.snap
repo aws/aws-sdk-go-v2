@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/custom-permission
+
+Content-Type: application/json
+
+{"CustomPermissionsName":"__CustomPermissionsName__"}

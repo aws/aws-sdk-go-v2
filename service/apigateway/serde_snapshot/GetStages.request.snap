@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/stages?deploymentId=__DeploymentId__
+
+Accept: application/json
+

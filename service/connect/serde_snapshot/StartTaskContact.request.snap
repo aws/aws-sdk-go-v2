@@ -1,0 +1,5 @@
+PUT /contact/task
+
+Content-Type: application/json
+
+{"Attachments":[{"FileName":"__FileName__","S3Url":"__S3Url__"},{"FileName":"__FileName__","S3Url":"__S3Url__"}],"Attributes":{"key0":"__Value__","key1":"__Value__"},"ClientToken":"__ClientToken__","ContactFlowId":"__ContactFlowId__","Description":"__Description__","InstanceId":"__InstanceId__","Name":"__Name__","PreviousContactId":"__PreviousContactId__","QuickConnectId":"__QuickConnectId__","References":{"key0":{"Arn":"__Arn__","Status":"AVAILABLE","StatusReason":"__StatusReason__","Type":"URL","Value":"__Value__"},"key1":{"Arn":"__Arn__","Status":"AVAILABLE","StatusReason":"__StatusReason__","Type":"URL","Value":"__Value__"}},"RelatedContactId":"__RelatedContactId__","ScheduledTime":946684800,"SegmentAttributes":{"key0":{"ValueArn":"__ValueArn__","ValueInteger":1,"ValueList":[{},{}],"ValueMap":{"key0":{},"key1":{}},"ValueString":"__ValueString__"},"key1":{"ValueArn":"__ValueArn__","ValueInteger":1,"ValueList":[{},{}],"ValueMap":{"key0":{},"key1":{}},"ValueString":"__ValueString__"}},"TaskTemplateId":"__TaskTemplateId__"}

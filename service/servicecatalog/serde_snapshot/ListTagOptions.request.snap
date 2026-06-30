@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListTagOptions
+
+{"Filters":{"Active":true,"Key":"__Key__","Value":"__Value__"},"PageSize":1,"PageToken":"__PageToken__"}

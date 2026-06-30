@@ -1,0 +1,3 @@
+GET /cluster-snapshots?clusterArn=__ClusterArn__&maxResults=1&nextToken=__NextToken__&snapshotType=__SnapshotType__
+
+

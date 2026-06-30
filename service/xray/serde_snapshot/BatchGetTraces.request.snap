@@ -1,0 +1,5 @@
+POST /Traces
+
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TraceIds":["__Member__","__Member__"]}

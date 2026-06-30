@@ -1,0 +1,3 @@
+GET /rules?maxResults=1&nextToken=__NextToken__&ruleDisabled=true&topic=__Topic__
+
+

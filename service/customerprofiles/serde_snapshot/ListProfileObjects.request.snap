@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/profiles/objects?max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"ObjectFilter":{"KeyName":"__KeyName__","Values":["__Member__","__Member__"]},"ObjectTypeName":"__ObjectTypeName__","ProfileId":"__ProfileId__"}

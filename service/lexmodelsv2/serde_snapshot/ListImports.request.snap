@@ -1,0 +1,5 @@
+POST /imports
+
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersion":"__BotVersion__","filters":[{"name":"ImportResourceType","operator":"CO","values":["__Member__","__Member__"]},{"name":"ImportResourceType","operator":"CO","values":["__Member__","__Member__"]}],"localeId":"__LocaleId__","maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"LastUpdatedDateTime","order":"Ascending"}}

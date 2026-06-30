@@ -1,0 +1,5 @@
+POST /loader
+
+Content-Type: application/json
+
+{"dependencies":["__Member__","__Member__"],"edgeOnlyLoad":true,"failOnError":true,"format":"csv","iamRoleArn":"__IamRoleArn__","mode":"RESUME","parallelism":"LOW","parserConfiguration":{"key0":"__Value__","key1":"__Value__"},"queueRequest":true,"region":"us-east-1","source":"__Source__","updateSingleCardinalityProperties":true,"userProvidedEdgeIds":true}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutDeliveryChannel
+
+{"DeliveryChannel":{"configSnapshotDeliveryProperties":{"deliveryFrequency":"One_Hour"},"name":"__Name__","s3BucketName":"__S3BucketName__","s3KeyPrefix":"__S3KeyPrefix__","s3KmsKeyArn":"__S3KmsKeyArn__","snsTopicARN":"__SnsTopicARN__"}}

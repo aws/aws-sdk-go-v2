@@ -1,0 +1,5 @@
+PUT /encryptionkey/reset
+
+Content-Type: application/json
+
+{"resourceType":"AWS_EC2_INSTANCE","scanType":"NETWORK"}

@@ -1,0 +1,3 @@
+GET /v2/apis/__ApiId__/exports/__Specification__?exportVersion=__ExportVersion__&includeExtensions=true&outputType=__OutputType__&stageName=__StageName__
+
+

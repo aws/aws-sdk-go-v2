@@ -1,0 +1,5 @@
+POST /deleteDeployment
+
+Content-Type: application/json
+
+{"deploymentId":"__DeploymentId__"}

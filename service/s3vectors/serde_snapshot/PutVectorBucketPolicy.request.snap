@@ -1,0 +1,5 @@
+POST /PutVectorBucketPolicy
+
+Content-Type: application/json
+
+{"policy":"__Policy__","vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}

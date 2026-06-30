@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/object/attach
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"ChildReference":{"Selector":"__Selector__"},"LinkName":"__LinkName__","ParentReference":{"Selector":"__Selector__"}}

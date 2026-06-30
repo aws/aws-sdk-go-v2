@@ -1,0 +1,5 @@
+POST /CreateStorageConfiguration
+
+Content-Type: application/json
+
+{"name":"__Name__","s3":{"bucketName":"__BucketName__"},"tags":{"key0":"__Value__","key1":"__Value__"}}

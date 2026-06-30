@@ -1,0 +1,5 @@
+POST /cardvalidationdata/generate
+
+Content-Type: application/json
+
+{"GenerationAttributes":{"AmexCardSecurityCodeVersion1":{"CardExpiryDate":"__CardExpiryDate__"}},"KeyIdentifier":"__KeyIdentifier__","PrimaryAccountNumber":"__PrimaryAccountNumber__","ValidationDataLength":1}

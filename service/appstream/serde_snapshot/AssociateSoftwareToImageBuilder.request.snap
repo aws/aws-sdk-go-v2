@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.AssociateSoftwareToImageBuilder
+
+{"ImageBuilderName":"__ImageBuilderName__","SoftwareNames":["__Member__","__Member__"]}

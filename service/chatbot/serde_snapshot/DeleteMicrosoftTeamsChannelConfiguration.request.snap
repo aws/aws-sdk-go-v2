@@ -1,0 +1,5 @@
+POST /delete-ms-teams-channel-configuration
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__"}

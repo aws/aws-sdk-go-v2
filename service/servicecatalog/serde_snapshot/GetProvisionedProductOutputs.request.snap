@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.GetProvisionedProductOutputs
+
+{"AcceptLanguage":"__AcceptLanguage__","OutputKeys":["__Member__","__Member__"],"PageSize":1,"PageToken":"__PageToken__","ProvisionedProductId":"__ProvisionedProductId__","ProvisionedProductName":"__ProvisionedProductName__"}

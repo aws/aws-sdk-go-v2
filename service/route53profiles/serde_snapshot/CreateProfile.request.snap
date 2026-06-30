@@ -1,0 +1,5 @@
+POST /profile
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

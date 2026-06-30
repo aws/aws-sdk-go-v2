@@ -1,0 +1,3 @@
+GET /managed-job-templates/__TemplateName__?templateVersion=__TemplateVersion__
+
+

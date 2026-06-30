@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/aiprompts/__AiPromptId__/versions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","modifiedTime":946684800}

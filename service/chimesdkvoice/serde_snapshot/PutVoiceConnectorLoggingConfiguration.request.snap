@@ -1,0 +1,5 @@
+PUT /voice-connectors/__VoiceConnectorId__/logging-configuration
+
+Content-Type: application/json
+
+{"LoggingConfiguration":{"EnableMediaMetricLogs":true,"EnableSIPLogs":true}}

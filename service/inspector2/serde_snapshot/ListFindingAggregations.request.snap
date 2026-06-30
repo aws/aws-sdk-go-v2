@@ -1,0 +1,5 @@
+POST /findings/aggregation/list
+
+Content-Type: application/json
+
+{"accountIds":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"aggregationRequest":{"accountAggregation":{"findingType":"NETWORK_REACHABILITY","resourceType":"AWS_EC2_INSTANCE","sortBy":"CRITICAL","sortOrder":"ASC"}},"aggregationType":"FINDING_TYPE","maxResults":1,"nextToken":"__NextToken__"}

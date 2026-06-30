@@ -1,0 +1,3 @@
+GET /ml/modeltraining/__Id__?neptuneIamRoleArn=__NeptuneIamRoleArn__
+
+

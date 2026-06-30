@@ -1,0 +1,9 @@
+PUT /?object-lock=
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Bucket-Object-Lock-Token: __Token__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+

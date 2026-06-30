@@ -1,0 +1,5 @@
+PUT /v1/email/identities/__EmailIdentity__/mail-from
+
+Content-Type: application/json
+
+{"BehaviorOnMxFailure":"USE_DEFAULT_VALUE","MailFromDomain":"__MailFromDomain__"}

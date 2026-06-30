@@ -1,0 +1,5 @@
+POST /StartQueryPlanning
+
+Content-Type: application/json
+
+{"QueryPlanningContext":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","QueryAsOfTime":946684800,"QueryParameters":{"key0":"__Value__","key1":"__Value__"},"TransactionId":"__TransactionId__"},"QueryString":"__QueryString__"}

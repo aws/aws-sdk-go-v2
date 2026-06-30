@@ -1,0 +1,5 @@
+PUT /app-instances/__AppInstanceArn__/streaming-configurations
+
+Content-Type: application/json
+
+{"StreamingConfigurations":[{"DataType":"Channel","ResourceArn":"__ResourceArn__"},{"DataType":"Channel","ResourceArn":"__ResourceArn__"}]}

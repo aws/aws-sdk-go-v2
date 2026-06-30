@@ -1,0 +1,5 @@
+PATCH /securityControl/update
+
+Content-Type: application/json
+
+{"LastUpdateReason":"__LastUpdateReason__","Parameters":{"key0":{"Value":{"Integer":1},"ValueType":"DEFAULT"},"key1":{"Value":{"Integer":1},"ValueType":"DEFAULT"}},"SecurityControlId":"__SecurityControlId__"}

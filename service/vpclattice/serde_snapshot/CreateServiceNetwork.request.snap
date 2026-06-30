@@ -1,0 +1,5 @@
+POST /servicenetworks
+
+Content-Type: application/json
+
+{"authType":"NONE","clientToken":"__ClientToken__","name":"__Name__","sharingConfig":{"enabled":true},"tags":{"key0":"__Value__","key1":"__Value__"}}

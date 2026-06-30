@@ -1,0 +1,5 @@
+PATCH /memberships/__MembershipIdentifier__/idnamespaceassociations/__IdNamespaceAssociationIdentifier__
+
+Content-Type: application/json
+
+{"description":"__Description__","idMappingConfig":{"allowUseAsDimensionColumn":true},"name":"__Name__"}

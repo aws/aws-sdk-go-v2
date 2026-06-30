@@ -1,0 +1,3 @@
+DELETE /access-policies/__AccessPolicyId__?clientToken=__ClientToken__
+
+

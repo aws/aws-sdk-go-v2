@@ -1,0 +1,5 @@
+POST /destinations
+
+Content-Type: application/json
+
+{"destinationConfiguration":{"httpUrlConfiguration":{"confirmationUrl":"__ConfirmationUrl__"},"vpcConfiguration":{"roleArn":"__RoleArn__","securityGroups":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}}}

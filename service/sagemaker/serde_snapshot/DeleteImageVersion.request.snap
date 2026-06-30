@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DeleteImageVersion
+
+{"Alias":"__Alias__","ImageName":"__ImageName__","Version":1}

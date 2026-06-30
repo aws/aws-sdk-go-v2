@@ -1,0 +1,3 @@
+DELETE /appmonitor/__Name__/policy?policyRevisionId=__PolicyRevisionId__
+
+

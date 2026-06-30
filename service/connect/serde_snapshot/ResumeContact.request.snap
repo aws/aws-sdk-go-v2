@@ -1,0 +1,5 @@
+POST /contact/resume
+
+Content-Type: application/json
+
+{"ContactFlowId":"__ContactFlowId__","ContactId":"__ContactId__","InstanceId":"__InstanceId__"}

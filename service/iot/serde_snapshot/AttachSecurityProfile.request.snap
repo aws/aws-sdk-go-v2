@@ -1,0 +1,3 @@
+PUT /security-profiles/__SecurityProfileName__/targets?securityProfileTargetArn=__SecurityProfileTargetArn__
+
+

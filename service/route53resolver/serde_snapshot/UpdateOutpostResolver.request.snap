@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.UpdateOutpostResolver
+
+{"Id":"__Id__","InstanceCount":1,"Name":"__Name__","PreferredInstanceType":"__PreferredInstanceType__"}

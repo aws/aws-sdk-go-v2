@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListAppImageConfigs
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"MaxResults":1,"ModifiedTimeAfter":946684800,"ModifiedTimeBefore":946684800,"NameContains":"__NameContains__","NextToken":"__NextToken__","SortBy":"CreationTime","SortOrder":"Ascending"}

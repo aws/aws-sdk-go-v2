@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/application
+
+Content-Type: application/json
+
+{"appConfigs":[{"key":"opensearchDashboards.dashboardAdmin.users","value":"__Value__"},{"key":"opensearchDashboards.dashboardAdmin.users","value":"__Value__"}],"clientToken":"__ClientToken__","dataSources":[{"dataSourceArn":"__DataSourceArn__","dataSourceDescription":"__DataSourceDescription__","iamRoleForDataSourceArn":"__IamRoleForDataSourceArn__"},{"dataSourceArn":"__DataSourceArn__","dataSourceDescription":"__DataSourceDescription__","iamRoleForDataSourceArn":"__IamRoleForDataSourceArn__"}],"iamIdentityCenterOptions":{"enabled":true,"iamIdentityCenterInstanceArn":"__IamIdentityCenterInstanceArn__","iamRoleForIdentityCenterApplicationArn":"__IamRoleForIdentityCenterApplicationArn__"},"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","tagList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

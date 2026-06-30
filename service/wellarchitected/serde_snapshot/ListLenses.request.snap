@@ -1,0 +1,3 @@
+GET /lenses?LensName=__LensName__&LensStatus=ALL&LensType=AWS_OFFICIAL&MaxResults=1&NextToken=__NextToken__
+
+

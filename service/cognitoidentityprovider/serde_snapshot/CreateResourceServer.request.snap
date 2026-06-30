@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.CreateResourceServer
+
+{"Identifier":"__Identifier__","Name":"__Name__","Scopes":[{"ScopeDescription":"__ScopeDescription__","ScopeName":"__ScopeName__"},{"ScopeDescription":"__ScopeDescription__","ScopeName":"__ScopeName__"}],"UserPoolId":"__UserPoolId__"}

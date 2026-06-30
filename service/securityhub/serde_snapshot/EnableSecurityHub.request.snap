@@ -1,0 +1,5 @@
+POST /accounts
+
+Content-Type: application/json
+
+{"ControlFindingGenerator":"STANDARD_CONTROL","EnableDefaultStandards":true,"Tags":{"key0":"__Value__","key1":"__Value__"}}

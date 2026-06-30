@@ -1,0 +1,3 @@
+GET /restore-testing/inferred-metadata?BackupVaultAccountId=__BackupVaultAccountId__&BackupVaultName=__BackupVaultName__&RecoveryPointArn=__RecoveryPointArn__
+
+

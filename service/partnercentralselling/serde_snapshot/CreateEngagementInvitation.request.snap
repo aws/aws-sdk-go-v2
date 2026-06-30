@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.CreateEngagementInvitation
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","EngagementIdentifier":"__EngagementIdentifier__","Invitation":{"Message":"__Message__","Payload":{"OpportunityInvitation":{"Customer":{"CompanyName":"__CompanyName__","CountryCode":"US","Industry":"Aerospace","WebsiteUrl":"__WebsiteUrl__"},"Project":{"BusinessProblem":"__BusinessProblem__","ExpectedCustomerSpend":[{"Amount":"__Amount__","CurrencyCode":"USD","EstimationUrl":"__EstimationUrl__","Frequency":"Monthly","TargetCompany":"__TargetCompany__"},{"Amount":"__Amount__","CurrencyCode":"USD","EstimationUrl":"__EstimationUrl__","Frequency":"Monthly","TargetCompany":"__TargetCompany__"}],"TargetCompletionDate":"__TargetCompletionDate__","Title":"__Title__"},"ReceiverResponsibilities":["Distributor","Distributor"],"SenderContacts":[{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Phone":"__Phone__"},{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Phone":"__Phone__"}]}},"Receiver":{"Account":{"Alias":"__Alias__","AwsAccountId":"__AwsAccountId__"}}}}

@@ -1,0 +1,5 @@
+POST /standards/get
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","StandardsSubscriptionArns":["__Member__","__Member__"]}

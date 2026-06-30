@@ -1,0 +1,5 @@
+PUT /2025-11-30/capacity-providers/__CapacityProviderName__
+
+Content-Type: application/json
+
+{"CapacityProviderScalingConfig":{"MaxVCpuCount":1,"ScalingMode":"Auto","ScalingPolicies":[{"PredefinedMetricType":"LambdaCapacityProviderAverageCPUUtilization","TargetValue":1},{"PredefinedMetricType":"LambdaCapacityProviderAverageCPUUtilization","TargetValue":1}]},"PropagateTags":{"ExplicitTags":{"key0":"__Value__","key1":"__Value__"},"Mode":"None"}}

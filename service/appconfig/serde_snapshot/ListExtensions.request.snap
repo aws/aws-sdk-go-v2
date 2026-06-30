@@ -1,0 +1,3 @@
+GET /extensions?max_results=1&name=__Name__&next_token=__NextToken__
+
+

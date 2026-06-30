@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/aiprompts
+
+Content-Type: application/json
+
+{"apiFormat":"ANTHROPIC_CLAUDE_MESSAGES","clientToken":"__ClientToken__","description":"__Description__","inferenceConfiguration":{"maxTokensToSample":1,"temperature":1,"topK":1,"topP":1},"modelId":"__ModelId__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"},"templateConfiguration":{"textFullAIPromptEditTemplateConfiguration":{"text":"__Text__"}},"templateType":"TEXT","type":"ANSWER_GENERATION","visibilityStatus":"SAVED"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.CopyProjectVersion
+
+{"DestinationProjectArn":"__DestinationProjectArn__","KmsKeyId":"__KmsKeyId__","OutputConfig":{"S3Bucket":"__S3Bucket__","S3KeyPrefix":"__S3KeyPrefix__"},"SourceProjectArn":"__SourceProjectArn__","SourceProjectVersionArn":"__SourceProjectVersionArn__","Tags":{"key0":"__Value__","key1":"__Value__"},"VersionName":"__VersionName__"}

@@ -1,0 +1,3 @@
+GET /collaborations/__CollaborationIdentifier__/trained-models?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,3 @@
+GET /2025-12-01/durable-executions/__DurableExecutionArn__/state?CheckpointToken=__CheckpointToken__&Marker=__Marker__&MaxItems=1
+
+

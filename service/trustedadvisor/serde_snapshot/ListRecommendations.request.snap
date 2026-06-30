@@ -1,0 +1,3 @@
+GET /v1/recommendations?afterLastUpdatedAt=2000-01-01T00%3A00%3A00Z&awsService=__AwsService__&beforeLastUpdatedAt=2000-01-01T00%3A00%3A00Z&checkIdentifier=__CheckIdentifier__&language=en&maxResults=1&nextToken=__NextToken__&pillar=cost_optimizing&source=aws_config&status=ok&type=standard
+
+

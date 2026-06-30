@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.CreateRemoteAccessSession
+
+{"appArn":"__AppArn__","configuration":{"auxiliaryApps":["__Member__","__Member__"],"billingMethod":"METERED","deviceProxy":{"host":"__Host__","port":1},"vpceConfigurationArns":["__Member__","__Member__"]},"deviceArn":"__DeviceArn__","instanceArn":"__InstanceArn__","interactionMode":"INTERACTIVE","name":"__Name__","projectArn":"__ProjectArn__","skipAppResign":true}

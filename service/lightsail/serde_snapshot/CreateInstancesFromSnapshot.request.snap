@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateInstancesFromSnapshot
+
+{"addOns":[{"addOnType":"AutoSnapshot","autoSnapshotAddOnRequest":{"snapshotTimeOfDay":"__SnapshotTimeOfDay__"},"stopInstanceOnIdleRequest":{"duration":"__Duration__","threshold":"__Threshold__"}},{"addOnType":"AutoSnapshot","autoSnapshotAddOnRequest":{"snapshotTimeOfDay":"__SnapshotTimeOfDay__"},"stopInstanceOnIdleRequest":{"duration":"__Duration__","threshold":"__Threshold__"}}],"attachedDiskMapping":{"key0":[{"newDiskName":"__NewDiskName__","originalDiskPath":"__OriginalDiskPath__"},{"newDiskName":"__NewDiskName__","originalDiskPath":"__OriginalDiskPath__"}],"key1":[{"newDiskName":"__NewDiskName__","originalDiskPath":"__OriginalDiskPath__"},{"newDiskName":"__NewDiskName__","originalDiskPath":"__OriginalDiskPath__"}]},"availabilityZone":"__AvailabilityZone__","bundleId":"__BundleId__","instanceNames":["__Member__","__Member__"],"instanceSnapshotName":"__InstanceSnapshotName__","ipAddressType":"dualstack","keyPairName":"__KeyPairName__","restoreDate":"__RestoreDate__","sourceInstanceName":"__SourceInstanceName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"useLatestRestorableAutoSnapshot":true,"userData":"__UserData__"}

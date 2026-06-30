@@ -1,0 +1,5 @@
+POST /human-loops/stop
+
+Content-Type: application/json
+
+{"HumanLoopName":"__HumanLoopName__"}

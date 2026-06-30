@@ -1,0 +1,5 @@
+PATCH /gateway/__GatewayId__/link/__LinkId__
+
+Content-Type: application/json
+
+{"logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"timeoutInMillis":1}

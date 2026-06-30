@@ -1,0 +1,4 @@
+GET /?id=__Id__&intelligent-tiering=&x-id=GetBucketIntelligentTieringConfiguration
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

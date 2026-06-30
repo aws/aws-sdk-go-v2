@@ -1,0 +1,3 @@
+GET /zonalshifts?maxResults=1&nextToken=__NextToken__&resourceIdentifier=__ResourceIdentifier__&status=ACTIVE
+
+

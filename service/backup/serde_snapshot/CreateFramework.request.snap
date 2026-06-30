@@ -1,0 +1,5 @@
+POST /audit/frameworks
+
+Content-Type: application/json
+
+{"FrameworkControls":[{"ControlInputParameters":[{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"},{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"}],"ControlName":"__ControlName__","ControlScope":{"ComplianceResourceIds":["__Member__","__Member__"],"ComplianceResourceTypes":["__Member__","__Member__"],"Tags":{"key0":"__Value__","key1":"__Value__"}}},{"ControlInputParameters":[{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"},{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"}],"ControlName":"__ControlName__","ControlScope":{"ComplianceResourceIds":["__Member__","__Member__"],"ComplianceResourceTypes":["__Member__","__Member__"],"Tags":{"key0":"__Value__","key1":"__Value__"}}}],"FrameworkDescription":"__FrameworkDescription__","FrameworkName":"__FrameworkName__","FrameworkTags":{"key0":"__Value__","key1":"__Value__"},"IdempotencyToken":"__IdempotencyToken__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.UpdateUpload
+
+{"arn":"__Arn__","contentType":"__ContentType__","editContent":true,"name":"__Name__"}

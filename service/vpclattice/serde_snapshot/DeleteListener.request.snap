@@ -1,0 +1,3 @@
+DELETE /services/__ServiceIdentifier__/listeners/__ListenerIdentifier__
+
+

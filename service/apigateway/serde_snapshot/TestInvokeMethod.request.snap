@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__
+
+Accept: application/json
+Content-Type: application/json
+
+{"body":"__Body__","clientCertificateId":"__ClientCertificateId__","headers":{"key0":"__Value__","key1":"__Value__"},"multiValueHeaders":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"pathWithQueryString":"__PathWithQueryString__","stageVariables":{"key0":"__Value__","key1":"__Value__"}}

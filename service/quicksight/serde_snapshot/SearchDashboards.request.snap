@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/search/dashboards
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"QUICKSIGHT_USER","Operator":"StringEquals","Value":"__Value__"},{"Name":"QUICKSIGHT_USER","Operator":"StringEquals","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

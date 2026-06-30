@@ -1,0 +1,5 @@
+POST /publish-app-version
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","versionName":"__VersionName__"}

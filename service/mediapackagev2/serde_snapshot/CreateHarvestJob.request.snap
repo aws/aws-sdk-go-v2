@@ -1,0 +1,6 @@
+POST /channelGroup/__ChannelGroupName__/channel/__ChannelName__/originEndpoint/__OriginEndpointName__/harvestJob
+
+Content-Type: application/json
+X-Amzn-Client-Token: __ClientToken__
+
+{"Description":"__Description__","Destination":{"S3Destination":{"BucketName":"__BucketName__","DestinationPath":"__DestinationPath__"}},"HarvestJobName":"__HarvestJobName__","HarvestedManifests":{"DashManifests":[{"ManifestName":"__ManifestName__"},{"ManifestName":"__ManifestName__"}],"HlsManifests":[{"ManifestName":"__ManifestName__"},{"ManifestName":"__ManifestName__"}],"LowLatencyHlsManifests":[{"ManifestName":"__ManifestName__"},{"ManifestName":"__ManifestName__"}]},"ScheduleConfiguration":{"EndTime":946684800,"StartTime":946684800},"Tags":{"key0":"__Value__","key1":"__Value__"}}

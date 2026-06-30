@@ -1,0 +1,3 @@
+GET /audience-export-job?audienceGenerationJobArn=__AudienceGenerationJobArn__&maxResults=1&nextToken=__NextToken__
+
+

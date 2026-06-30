@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.StartArchiveSearch
+
+{"ArchiveId":"__ArchiveId__","Filters":{"Include":[{"StringExpression":{"Evaluate":{"Attribute":"TO"},"Operator":"CONTAINS","Values":["__Member__","__Member__"]}},{"StringExpression":{"Evaluate":{"Attribute":"TO"},"Operator":"CONTAINS","Values":["__Member__","__Member__"]}}],"Unless":[{"StringExpression":{"Evaluate":{"Attribute":"TO"},"Operator":"CONTAINS","Values":["__Member__","__Member__"]}},{"StringExpression":{"Evaluate":{"Attribute":"TO"},"Operator":"CONTAINS","Values":["__Member__","__Member__"]}}]},"FromTimestamp":946684800,"MaxResults":1,"ToTimestamp":946684800}

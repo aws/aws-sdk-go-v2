@@ -1,0 +1,5 @@
+POST /DescribeJobs
+
+Content-Type: application/json
+
+{"filters":{"fromDate":"__FromDate__","jobIDs":["__Member__","__Member__"],"toDate":"__ToDate__"},"maxResults":1,"nextToken":"__NextToken__"}

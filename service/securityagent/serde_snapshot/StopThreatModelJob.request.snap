@@ -1,0 +1,5 @@
+POST /StopThreatModelJob
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","threatModelJobId":"__ThreatModelJobId__"}

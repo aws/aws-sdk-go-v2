@@ -1,0 +1,5 @@
+POST /delegatedadminaccounts/disable
+
+Content-Type: application/json
+
+{"delegatedAdminAccountId":"__DelegatedAdminAccountId__"}

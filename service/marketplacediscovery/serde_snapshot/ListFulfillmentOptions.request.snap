@@ -1,0 +1,5 @@
+POST /2026-02-05/listFulfillmentOptions
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","productId":"__ProductId__"}

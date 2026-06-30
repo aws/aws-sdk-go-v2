@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateProject
+
+{"ProjectDescription":"__ProjectDescription__","ProjectName":"__ProjectName__","ServiceCatalogProvisioningUpdateDetails":{"ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningParameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateProvidersToUpdate":[{"CfnTemplateProvider":{"Parameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateName":"__TemplateName__","TemplateURL":"__TemplateURL__"}},{"CfnTemplateProvider":{"Parameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateName":"__TemplateName__","TemplateURL":"__TemplateURL__"}}]}

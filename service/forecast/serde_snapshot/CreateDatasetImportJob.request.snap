@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.CreateDatasetImportJob
+
+{"DataSource":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"DatasetArn":"__DatasetArn__","DatasetImportJobName":"__DatasetImportJobName__","Format":"__Format__","GeolocationFormat":"__GeolocationFormat__","ImportMode":"FULL","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TimeZone":"__TimeZone__","TimestampFormat":"__TimestampFormat__","UseGeolocationForTimeZone":true}

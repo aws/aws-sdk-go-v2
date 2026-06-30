@@ -1,0 +1,5 @@
+POST /CreateLink
+
+Content-Type: application/json
+
+{"LabelTemplate":"__LabelTemplate__","LinkConfiguration":{"LogGroupConfiguration":{"Filter":"__Filter__"},"MetricConfiguration":{"Filter":"__Filter__"}},"ResourceTypes":["AWS::CloudWatch::Metric","AWS::CloudWatch::Metric"],"SinkIdentifier":"__SinkIdentifier__","Tags":{"key0":"__Value__","key1":"__Value__"}}

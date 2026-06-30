@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.PutJobSuccessResult
+
+{"continuationToken":"__ContinuationToken__","currentRevision":{"changeIdentifier":"__ChangeIdentifier__","created":946684800,"revision":"__Revision__","revisionSummary":"__RevisionSummary__"},"executionDetails":{"externalExecutionId":"__ExternalExecutionId__","percentComplete":1,"summary":"__Summary__"},"jobId":"__JobId__","outputVariables":{"key0":"__Value__","key1":"__Value__"}}

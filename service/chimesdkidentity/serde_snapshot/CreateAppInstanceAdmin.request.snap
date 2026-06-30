@@ -1,0 +1,5 @@
+POST /app-instances/__AppInstanceArn__/admins
+
+Content-Type: application/json
+
+{"AppInstanceAdminArn":"__AppInstanceAdminArn__"}

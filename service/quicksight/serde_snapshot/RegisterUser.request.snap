@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/namespaces/__Namespace__/users
+
+Content-Type: application/json
+
+{"CustomFederationProviderUrl":"__CustomFederationProviderUrl__","CustomPermissionsName":"__CustomPermissionsName__","Email":"__Email__","ExternalLoginFederationProviderType":"__ExternalLoginFederationProviderType__","ExternalLoginId":"__ExternalLoginId__","IamArn":"__IamArn__","IdentityType":"IAM","SessionName":"__SessionName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserName":"__UserName__","UserRole":"ADMIN"}

@@ -1,0 +1,4 @@
+DELETE /domainnameaccessassociations/__DomainNameAccessAssociationArn__
+
+Accept: application/json
+

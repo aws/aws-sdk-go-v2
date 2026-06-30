@@ -1,0 +1,5 @@
+POST /StartParticipantReplication
+
+Content-Type: application/json
+
+{"attributes":{"key0":"__Value__","key1":"__Value__"},"destinationStageArn":"__DestinationStageArn__","participantId":"__ParticipantId__","reconnectWindowSeconds":1,"sourceStageArn":"__SourceStageArn__"}

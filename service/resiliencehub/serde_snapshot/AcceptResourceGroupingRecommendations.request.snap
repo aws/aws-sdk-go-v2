@@ -1,0 +1,5 @@
+POST /accept-resource-grouping-recommendations
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","entries":[{"groupingRecommendationId":"__GroupingRecommendationId__"},{"groupingRecommendationId":"__GroupingRecommendationId__"}]}

@@ -1,0 +1,5 @@
+POST /configuration/update
+
+Content-Type: application/json
+
+{"ec2Configuration":{"activateVMScanner":true,"scanMode":"EC2_SSM_AGENT_BASED"},"ecrConfiguration":{"pullDateRescanDuration":"DAYS_14","pullDateRescanMode":"LAST_PULL_DATE","rescanDuration":"LIFETIME"}}

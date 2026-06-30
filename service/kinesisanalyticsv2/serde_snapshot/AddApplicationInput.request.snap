@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.AddApplicationInput
+
+{"ApplicationName":"__ApplicationName__","CurrentApplicationVersionId":1,"Input":{"InputParallelism":{"Count":1},"InputProcessingConfiguration":{"InputLambdaProcessor":{"ResourceARN":"__ResourceARN__"}},"InputSchema":{"RecordColumns":[{"Mapping":"__Mapping__","Name":"__Name__","SqlType":"__SqlType__"},{"Mapping":"__Mapping__","Name":"__Name__","SqlType":"__SqlType__"}],"RecordEncoding":"__RecordEncoding__","RecordFormat":{"MappingParameters":{"CSVMappingParameters":{"RecordColumnDelimiter":"__RecordColumnDelimiter__","RecordRowDelimiter":"__RecordRowDelimiter__"},"JSONMappingParameters":{"RecordRowPath":"__RecordRowPath__"}},"RecordFormatType":"JSON"}},"KinesisFirehoseInput":{"ResourceARN":"__ResourceARN__"},"KinesisStreamsInput":{"ResourceARN":"__ResourceARN__"},"NamePrefix":"__NamePrefix__"}}

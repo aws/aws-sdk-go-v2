@@ -1,0 +1,3 @@
+GET /tables/__TableBucketARN__/__Namespace__/__Name__/storage-class
+
+

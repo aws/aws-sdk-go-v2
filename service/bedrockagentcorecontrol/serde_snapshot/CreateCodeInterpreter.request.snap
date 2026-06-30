@@ -1,0 +1,5 @@
+PUT /code-interpreters
+
+Content-Type: application/json
+
+{"certificates":[{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}},{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}}],"clientToken":"__ClientToken__","description":"__Description__","executionRoleArn":"__ExecutionRoleArn__","name":"__Name__","networkConfiguration":{"networkMode":"PUBLIC","vpcConfig":{"requireServiceS3Endpoint":true,"securityGroups":["__Member__","__Member__"],"subnets":["__Member__","__Member__"]}},"tags":{"key0":"__Value__","key1":"__Value__"}}

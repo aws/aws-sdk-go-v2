@@ -1,0 +1,5 @@
+POST /v1/domainnames/__DomainName__/apiassociation
+
+Content-Type: application/json
+
+{"apiId":"__ApiId__"}

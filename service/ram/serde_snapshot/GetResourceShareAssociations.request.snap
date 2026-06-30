@@ -1,0 +1,5 @@
+POST /getresourceshareassociations
+
+Content-Type: application/json
+
+{"associationStatus":"ASSOCIATING","associationType":"PRINCIPAL","maxResults":1,"nextToken":"__NextToken__","principal":"__Principal__","resourceArn":"__ResourceArn__","resourceShareArns":["__Member__","__Member__"]}

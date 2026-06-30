@@ -1,0 +1,3 @@
+POST /codesecurity/scan-configuration/list?maxResults=1&nextToken=__NextToken__
+
+

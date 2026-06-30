@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.DeleteFile
+
+{"branchName":"__BranchName__","commitMessage":"__CommitMessage__","email":"__Email__","filePath":"__FilePath__","keepEmptyFolders":true,"name":"__Name__","parentCommitId":"__ParentCommitId__","repositoryName":"__RepositoryName__"}

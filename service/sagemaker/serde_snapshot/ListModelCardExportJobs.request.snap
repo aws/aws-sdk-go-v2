@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelCardExportJobs
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"MaxResults":1,"ModelCardExportJobNameContains":"__ModelCardExportJobNameContains__","ModelCardName":"__ModelCardName__","ModelCardVersion":1,"NextToken":"__NextToken__","SortBy":"Name","SortOrder":"Ascending","StatusEquals":"InProgress"}

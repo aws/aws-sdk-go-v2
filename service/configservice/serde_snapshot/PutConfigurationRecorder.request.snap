@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutConfigurationRecorder
+
+{"ConfigurationRecorder":{"arn":"__Arn__","name":"__Name__","recordingGroup":{"allSupported":true,"exclusionByResourceTypes":{"resourceTypes":["AWS::EC2::CustomerGateway","AWS::EC2::CustomerGateway"]},"includeGlobalResourceTypes":true,"recordingStrategy":{"useOnly":"ALL_SUPPORTED_RESOURCE_TYPES"},"resourceTypes":["AWS::EC2::CustomerGateway","AWS::EC2::CustomerGateway"]},"recordingMode":{"recordingFrequency":"CONTINUOUS","recordingModeOverrides":[{"description":"__Description__","recordingFrequency":"CONTINUOUS","resourceTypes":["AWS::EC2::CustomerGateway","AWS::EC2::CustomerGateway"]},{"description":"__Description__","recordingFrequency":"CONTINUOUS","resourceTypes":["AWS::EC2::CustomerGateway","AWS::EC2::CustomerGateway"]}]},"recordingScope":"INTERNAL","roleARN":"__RoleARN__","servicePrincipal":"__ServicePrincipal__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

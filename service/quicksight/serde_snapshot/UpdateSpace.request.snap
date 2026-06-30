@@ -1,0 +1,5 @@
+PUT /v1/accounts/__AwsAccountId__/spaces/__SpaceId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

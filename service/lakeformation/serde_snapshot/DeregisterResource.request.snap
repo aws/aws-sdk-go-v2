@@ -1,0 +1,5 @@
+POST /DeregisterResource
+
+Content-Type: application/json
+
+{"ResourceArn":"__ResourceArn__"}

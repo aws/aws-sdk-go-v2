@@ -1,0 +1,5 @@
+POST /contact/list-real-time-analysis-segments-v2/__InstanceId__/__ContactId__
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","OutputType":"Raw","SegmentTypes":["Transcript","Transcript"]}

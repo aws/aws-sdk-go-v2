@@ -1,0 +1,5 @@
+POST /invitation/decline
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"]}

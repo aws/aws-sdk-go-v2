@@ -1,0 +1,5 @@
+POST /invitations
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"],"disableEmailNotification":true,"message":"__Message__"}

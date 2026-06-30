@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelQualityJobDefinitions
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"EndpointName":"__EndpointName__","MaxResults":1,"NameContains":"__NameContains__","NextToken":"__NextToken__","SortBy":"Name","SortOrder":"Ascending"}

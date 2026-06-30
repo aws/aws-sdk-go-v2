@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateColumnStatisticsTaskSettings
+
+{"CatalogID":"__CatalogID__","ColumnNameList":["__Member__","__Member__"],"DatabaseName":"__DatabaseName__","Role":"__Role__","SampleSize":1,"Schedule":"__Schedule__","SecurityConfiguration":"__SecurityConfiguration__","TableName":"__TableName__","Tags":{"key0":"__Value__","key1":"__Value__"}}

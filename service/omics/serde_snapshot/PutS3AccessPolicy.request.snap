@@ -1,0 +1,5 @@
+PUT /s3accesspolicy/__S3AccessPointArn__
+
+Content-Type: application/json
+
+{"s3AccessPolicy":"__S3AccessPolicy__"}

@@ -1,0 +1,5 @@
+POST /v1/routerInput
+
+Content-Type: application/json
+
+{"availabilityZone":"__AvailabilityZone__","clientToken":"__ClientToken__","configuration":{"standard":{"networkInterfaceArn":"__NetworkInterfaceArn__","protocol":"RTP","protocolConfiguration":{"rist":{"port":1,"recoveryLatencyMilliseconds":1}}}},"contentQualityAnalysisConfiguration":{"contentLevel":{"blackFrames":{"state":"ENABLED","thresholdSeconds":1},"frozenFrames":{"state":"ENABLED","thresholdSeconds":1},"silentAudio":{"state":"ENABLED","thresholdSeconds":1}}},"maintenanceConfiguration":{"preferredDayTime":{"day":"MONDAY","time":"__Time__"}},"maximumBitrate":1,"name":"__Name__","regionName":"__RegionName__","routingScope":"REGIONAL","tags":{"key0":"__Value__","key1":"__Value__"},"tier":"INPUT_100","transitEncryption":{"encryptionKeyConfiguration":{"secretsManager":{"roleArn":"__RoleArn__","secretArn":"__SecretArn__"}},"encryptionKeyType":"SECRETS_MANAGER"}}

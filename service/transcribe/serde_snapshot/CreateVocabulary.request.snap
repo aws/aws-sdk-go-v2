@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.CreateVocabulary
+
+{"DataAccessRoleArn":"__DataAccessRoleArn__","LanguageCode":"af-ZA","Phrases":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VocabularyFileUri":"__VocabularyFileUri__","VocabularyName":"__VocabularyName__"}

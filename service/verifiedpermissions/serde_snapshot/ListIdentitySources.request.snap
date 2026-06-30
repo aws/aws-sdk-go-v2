@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.ListIdentitySources
+
+{"filters":[{"principalEntityType":"__PrincipalEntityType__"},{"principalEntityType":"__PrincipalEntityType__"}],"maxResults":1,"nextToken":"__NextToken__","policyStoreId":"__PolicyStoreId__"}

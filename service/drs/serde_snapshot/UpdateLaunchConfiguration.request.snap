@@ -1,0 +1,5 @@
+POST /UpdateLaunchConfiguration
+
+Content-Type: application/json
+
+{"copyPrivateIp":true,"copyTags":true,"launchDisposition":"STOPPED","launchIntoInstanceProperties":{"launchIntoEC2InstanceID":"__LaunchIntoEC2InstanceID__"},"licensing":{"osByol":true},"name":"__Name__","postLaunchEnabled":true,"sourceServerID":"__SourceServerID__","targetInstanceTypeRightSizingMethod":"NONE"}

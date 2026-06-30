@@ -1,0 +1,5 @@
+POST /appbundles/__AppBundleIdentifier__/ingestions/__IngestionIdentifier__/ingestiondestinations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","destinationConfiguration":{"auditLog":{"destination":{"s3Bucket":{"bucketName":"__BucketName__","prefix":"__Prefix__"}}}},"processingConfiguration":{"auditLog":{"format":"json","schema":"ocsf"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

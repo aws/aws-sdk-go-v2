@@ -1,0 +1,5 @@
+POST /TestTelemetryPipeline
+
+Content-Type: application/json
+
+{"Configuration":{"Body":"__Body__"},"Records":[{"Data":"__Data__","Type":"STRING"},{"Data":"__Data__","Type":"STRING"}]}

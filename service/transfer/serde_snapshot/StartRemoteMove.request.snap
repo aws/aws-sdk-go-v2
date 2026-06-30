@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.StartRemoteMove
+
+{"ConnectorId":"__ConnectorId__","SourcePath":"__SourcePath__","TargetPath":"__TargetPath__"}

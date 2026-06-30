@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.ValidatePipelineDefinition
+
+{"parameterObjects":[{"attributes":[{"key":"__Key__","stringValue":"__StringValue__"},{"key":"__Key__","stringValue":"__StringValue__"}],"id":"__Id__"},{"attributes":[{"key":"__Key__","stringValue":"__StringValue__"},{"key":"__Key__","stringValue":"__StringValue__"}],"id":"__Id__"}],"parameterValues":[{"id":"__Id__","stringValue":"__StringValue__"},{"id":"__Id__","stringValue":"__StringValue__"}],"pipelineId":"__PipelineId__","pipelineObjects":[{"fields":[{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"},{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"}],"id":"__Id__","name":"__Name__"},{"fields":[{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"},{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"}],"id":"__Id__","name":"__Name__"}]}

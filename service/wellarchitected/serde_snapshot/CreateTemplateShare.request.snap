@@ -1,0 +1,5 @@
+POST /templates/shares/__TemplateArn__
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","SharedWith":"__SharedWith__"}

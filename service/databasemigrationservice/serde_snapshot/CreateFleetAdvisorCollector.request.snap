@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateFleetAdvisorCollector
+
+{"CollectorName":"__CollectorName__","Description":"__Description__","S3BucketName":"__S3BucketName__","ServiceAccessRoleArn":"__ServiceAccessRoleArn__"}

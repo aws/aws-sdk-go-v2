@@ -1,0 +1,5 @@
+POST /s3Buckets
+
+Content-Type: application/json
+
+{"nextToken":"__NextToken__"}

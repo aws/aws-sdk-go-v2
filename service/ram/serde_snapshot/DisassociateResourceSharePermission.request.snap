@@ -1,0 +1,5 @@
+POST /disassociateresourcesharepermission
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","permissionArn":"__PermissionArn__","resourceShareArn":"__ResourceShareArn__"}

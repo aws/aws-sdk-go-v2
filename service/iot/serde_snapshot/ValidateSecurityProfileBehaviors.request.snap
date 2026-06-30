@@ -1,0 +1,5 @@
+POST /security-profile-behaviors/validate
+
+Content-Type: application/json
+
+{"behaviors":[{"criteria":{"comparisonOperator":"less-than","consecutiveDatapointsToAlarm":1,"consecutiveDatapointsToClear":1,"durationSeconds":1,"mlDetectionConfig":{"confidenceLevel":"LOW"},"statisticalThreshold":{"statistic":"__Statistic__"},"value":{"cidrs":["__Member__","__Member__"],"count":1,"number":1,"numbers":[1,1],"ports":[1,1],"strings":["__Member__","__Member__"]}},"exportMetric":true,"metric":"__Metric__","metricDimension":{"dimensionName":"__DimensionName__","operator":"IN"},"name":"__Name__","suppressAlerts":true},{"criteria":{"comparisonOperator":"less-than","consecutiveDatapointsToAlarm":1,"consecutiveDatapointsToClear":1,"durationSeconds":1,"mlDetectionConfig":{"confidenceLevel":"LOW"},"statisticalThreshold":{"statistic":"__Statistic__"},"value":{"cidrs":["__Member__","__Member__"],"count":1,"number":1,"numbers":[1,1],"ports":[1,1],"strings":["__Member__","__Member__"]}},"exportMetric":true,"metric":"__Metric__","metricDimension":{"dimensionName":"__DimensionName__","operator":"IN"},"name":"__Name__","suppressAlerts":true}]}

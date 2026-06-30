@@ -1,0 +1,6 @@
+PUT /api/v1/resources/__ResourceId__/customMetadata?versionid=__VersionId__
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"CustomMetadata":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/session-embed-url?entry-point=__EntryPoint__&session-lifetime=1&user-arn=__UserArn__
+
+

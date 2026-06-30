@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.StartCalculationExecution
+
+{"CalculationConfiguration":{"CodeBlock":"__CodeBlock__"},"ClientRequestToken":"__ClientRequestToken__","CodeBlock":"__CodeBlock__","Description":"__Description__","SessionId":"__SessionId__"}

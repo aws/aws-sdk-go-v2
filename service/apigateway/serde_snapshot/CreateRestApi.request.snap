@@ -1,0 +1,6 @@
+POST /restapis
+
+Accept: application/json
+Content-Type: application/json
+
+{"apiKeySource":"HEADER","binaryMediaTypes":["__Member__","__Member__"],"cloneFrom":"__CloneFrom__","description":"__Description__","disableExecuteApiEndpoint":true,"endpointAccessMode":"BASIC","endpointConfiguration":{"ipAddressType":"ipv4","types":["REGIONAL","REGIONAL"],"vpcEndpointIds":["__Member__","__Member__"]},"minimumCompressionSize":1,"name":"__Name__","policy":"__Policy__","securityPolicy":"TLS_1_0","tags":{"key0":"__Value__","key1":"__Value__"},"version":"__Version__"}

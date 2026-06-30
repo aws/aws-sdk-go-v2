@@ -1,0 +1,5 @@
+POST /2017-08-29/jobsQueries
+
+Content-Type: application/json
+
+{"filterList":[{"key":"queue","values":["__Member__","__Member__"]},{"key":"queue","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","order":"ASCENDING"}

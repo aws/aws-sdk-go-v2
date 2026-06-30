@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.DisassociateEntitiesFromExperience
+
+{"EntityList":[{"EntityId":"__EntityId__","EntityType":"USER"},{"EntityId":"__EntityId__","EntityType":"USER"}],"Id":"__Id__","IndexId":"__IndexId__"}

@@ -1,0 +1,3 @@
+GET /portals/__PortalArn__/identityProviders?maxResults=1&nextToken=__NextToken__
+
+

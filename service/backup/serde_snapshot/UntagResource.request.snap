@@ -1,0 +1,5 @@
+POST /untag/__ResourceArn__
+
+Content-Type: application/json
+
+{"TagKeyList":["__Member__","__Member__"]}

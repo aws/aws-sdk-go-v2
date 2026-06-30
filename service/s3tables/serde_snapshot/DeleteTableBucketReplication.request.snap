@@ -1,0 +1,3 @@
+DELETE /table-bucket-replication?tableBucketARN=__TableBucketARN__&versionToken=__VersionToken__
+
+

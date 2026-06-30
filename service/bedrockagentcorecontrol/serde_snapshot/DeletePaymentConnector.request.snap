@@ -1,0 +1,3 @@
+DELETE /payments/managers/__PaymentManagerId__/connectors/__PaymentConnectorId__?clientToken=__ClientToken__
+
+

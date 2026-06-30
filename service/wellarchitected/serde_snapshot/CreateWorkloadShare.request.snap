@@ -1,0 +1,5 @@
+POST /workloads/__WorkloadId__/shares
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","PermissionType":"READONLY","SharedWith":"__SharedWith__"}

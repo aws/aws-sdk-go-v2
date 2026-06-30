@@ -1,0 +1,5 @@
+POST /PutSourceServerAction
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","actionID":"__ActionID__","actionName":"__ActionName__","active":true,"category":"DISASTER_RECOVERY","description":"__Description__","documentIdentifier":"__DocumentIdentifier__","documentVersion":"__DocumentVersion__","externalParameters":{"key0":{"dynamicPath":"__SsmExternalParameterMemberDynamicPath__"},"key1":{"dynamicPath":"__SsmExternalParameterMemberDynamicPath__"}},"mustSucceedForCutover":true,"order":1,"parameters":{"key0":[{"parameterName":"__ParameterName__","parameterType":"STRING"},{"parameterName":"__ParameterName__","parameterType":"STRING"}],"key1":[{"parameterName":"__ParameterName__","parameterType":"STRING"},{"parameterName":"__ParameterName__","parameterType":"STRING"}]},"sourceServerID":"__SourceServerID__","timeoutSeconds":1}

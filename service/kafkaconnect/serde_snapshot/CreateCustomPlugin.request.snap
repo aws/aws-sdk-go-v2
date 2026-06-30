@@ -1,0 +1,5 @@
+POST /v1/custom-plugins
+
+Content-Type: application/json
+
+{"contentType":"JAR","description":"__Description__","location":{"s3Location":{"bucketArn":"__BucketArn__","fileKey":"__FileKey__","objectVersion":"__ObjectVersion__"}},"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

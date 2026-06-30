@@ -1,0 +1,5 @@
+POST /network-migration/ListNetworkMigrationMapperSegments
+
+Content-Type: application/json
+
+{"filters":{"segmentIDs":["__Member__","__Member__"]},"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","nextToken":"__NextToken__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHealth_20160804.DescribeAffectedEntitiesForOrganization
+
+{"locale":"__Locale__","maxResults":1,"nextToken":"__NextToken__","organizationEntityAccountFilters":[{"awsAccountId":"__AwsAccountId__","eventArn":"__EventArn__","statusCodes":["IMPAIRED","IMPAIRED"]},{"awsAccountId":"__AwsAccountId__","eventArn":"__EventArn__","statusCodes":["IMPAIRED","IMPAIRED"]}],"organizationEntityFilters":[{"awsAccountId":"__AwsAccountId__","eventArn":"__EventArn__"},{"awsAccountId":"__AwsAccountId__","eventArn":"__EventArn__"}]}

@@ -1,0 +1,5 @@
+POST /contact
+
+Content-Type: application/json
+
+{"endTime":946684800,"groundStation":"__GroundStation__","missionProfileArn":"__MissionProfileArn__","satelliteArn":"__SatelliteArn__","startTime":946684800,"tags":{"key0":"__Value__","key1":"__Value__"},"trackingOverrides":{"programTrackSettings":{"azEl":{"ephemerisId":"__EphemerisId__"}}}}

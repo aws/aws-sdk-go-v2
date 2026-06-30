@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.CreateDirectConnectGatewayAssociationProposal
+
+{"addAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayOwnerAccount":"__DirectConnectGatewayOwnerAccount__","gatewayId":"__GatewayId__","removeAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}

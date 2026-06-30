@@ -1,0 +1,6 @@
+PUT /channels/__ChannelArn__/expiration-settings
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1}}

@@ -1,0 +1,5 @@
+PUT /sourceLocation/__SourceLocationName__
+
+Content-Type: application/json
+
+{"AccessConfiguration":{"AccessType":"S3_SIGV4","SecretsManagerAccessTokenConfiguration":{"HeaderName":"__HeaderName__","SecretArn":"__SecretArn__","SecretStringKey":"__SecretStringKey__"}},"DefaultSegmentDeliveryConfiguration":{"BaseUrl":"__BaseUrl__"},"HttpConfiguration":{"BaseUrl":"__BaseUrl__"},"SegmentDeliveryConfigurations":[{"BaseUrl":"__BaseUrl__","Name":"__Name__"},{"BaseUrl":"__BaseUrl__","Name":"__Name__"}]}

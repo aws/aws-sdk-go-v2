@@ -1,0 +1,5 @@
+POST /v2/email/email-address-insights
+
+Content-Type: application/json
+
+{"EmailAddress":"__EmailAddress__"}

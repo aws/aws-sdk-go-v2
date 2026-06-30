@@ -1,0 +1,5 @@
+POST /networks/__NetworkId__/oidc/test
+
+Content-Type: application/json
+
+{"certificate":"__Certificate__","extraAuthParams":"__ExtraAuthParams__","issuer":"__Issuer__","scopes":"__Scopes__"}

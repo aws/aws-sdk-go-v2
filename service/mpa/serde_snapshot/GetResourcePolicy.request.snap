@@ -1,0 +1,5 @@
+POST /GetResourcePolicy
+
+Content-Type: application/json
+
+{"PolicyName":"__PolicyName__","PolicyType":"AWS_MANAGED","ResourceArn":"__ResourceArn__"}

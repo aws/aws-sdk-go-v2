@@ -1,0 +1,5 @@
+POST /DescribeSavingsPlans
+
+Content-Type: application/json
+
+{"filters":[{"name":"region","values":["__Member__","__Member__"]},{"name":"region","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","savingsPlanArns":["__Member__","__Member__"],"savingsPlanIds":["__Member__","__Member__"],"states":["payment-pending","payment-pending"]}

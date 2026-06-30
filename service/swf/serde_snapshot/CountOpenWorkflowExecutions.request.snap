@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.CountOpenWorkflowExecutions
+
+{"domain":"__Domain__","executionFilter":{"workflowId":"__WorkflowId__"},"startTimeFilter":{"latestDate":946684800,"oldestDate":946684800},"tagFilter":{"tag":"__Tag__"},"typeFilter":{"name":"__Name__","version":"__Version__"}}

@@ -1,0 +1,5 @@
+POST /agent
+
+Content-Type: application/json
+
+{"agentDetails":{"agentCpuCores":[1,1],"agentVersion":"__AgentVersion__","componentVersions":[{"componentType":"__ComponentType__","versions":["__Member__","__Member__"]},{"componentType":"__ComponentType__","versions":["__Member__","__Member__"]}],"instanceId":"__InstanceId__","instanceType":"__InstanceType__","reservedCpuCores":[1,1]},"discoveryData":{"capabilityArns":["__Member__","__Member__"],"privateIpAddresses":["__Member__","__Member__"],"publicIpAddresses":["__Member__","__Member__"]},"tags":{"key0":"__Value__","key1":"__Value__"}}

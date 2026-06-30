@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/resources?embed=__Member__&embed=__Member__&limit=1&position=__Position__
+
+Accept: application/json
+

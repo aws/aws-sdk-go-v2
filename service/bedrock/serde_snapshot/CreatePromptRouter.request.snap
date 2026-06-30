@@ -1,0 +1,5 @@
+POST /prompt-routers
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","description":"__Description__","fallbackModel":{"modelArn":"__ModelArn__"},"models":[{"modelArn":"__ModelArn__"},{"modelArn":"__ModelArn__"}],"promptRouterName":"__PromptRouterName__","routingCriteria":{"responseQualityDifference":1},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

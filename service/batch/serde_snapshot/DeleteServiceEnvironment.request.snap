@@ -1,0 +1,5 @@
+POST /v1/deleteserviceenvironment
+
+Content-Type: application/json
+
+{"serviceEnvironment":"__ServiceEnvironment__"}

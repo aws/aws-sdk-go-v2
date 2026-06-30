@@ -1,0 +1,5 @@
+POST /GetQueryStatistics
+
+Content-Type: application/json
+
+{"QueryId":"__QueryId__"}

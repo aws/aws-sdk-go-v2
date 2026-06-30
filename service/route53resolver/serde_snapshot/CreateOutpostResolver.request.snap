@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.CreateOutpostResolver
+
+{"CreatorRequestId":"__CreatorRequestId__","InstanceCount":1,"Name":"__Name__","OutpostArn":"__OutpostArn__","PreferredInstanceType":"__PreferredInstanceType__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

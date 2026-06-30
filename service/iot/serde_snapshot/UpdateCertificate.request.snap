@@ -1,0 +1,3 @@
+PUT /certificates/__CertificateId__?newStatus=ACTIVE
+
+

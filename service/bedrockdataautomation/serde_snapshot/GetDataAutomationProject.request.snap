@@ -1,0 +1,5 @@
+POST /data-automation-projects/__ProjectArn__/
+
+Content-Type: application/json
+
+{"projectStage":"DEVELOPMENT"}

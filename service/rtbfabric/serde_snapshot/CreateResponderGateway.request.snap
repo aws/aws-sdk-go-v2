@@ -1,0 +1,5 @@
+POST /responder-gateway
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","domainName":"__DomainName__","gatewayType":"EXTERNAL","listenerConfig":{"protocols":["HTTP","HTTP"]},"managedEndpointConfiguration":{"autoScalingGroups":{"autoScalingGroupNames":["__Member__","__Member__"],"healthCheckConfig":{"healthyThresholdCount":1,"intervalSeconds":1,"path":"__Path__","port":1,"protocol":"HTTP","statusCodeMatcher":"__StatusCodeMatcher__","timeoutMs":1,"unhealthyThresholdCount":1},"roleArn":"__RoleArn__"}},"port":1,"protocol":"HTTP","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"},"trustStoreConfiguration":{"certificateAuthorityCertificates":["__Member__","__Member__"]},"vpcId":"__VpcId__"}

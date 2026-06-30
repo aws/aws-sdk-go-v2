@@ -1,0 +1,5 @@
+POST /streamgroups/__Identifier__/streamsessions
+
+Content-Type: application/json
+
+{"AdditionalEnvironmentVariables":{"key0":"__Value__","key1":"__Value__"},"AdditionalLaunchArgs":["__Member__","__Member__"],"ApplicationIdentifier":"__ApplicationIdentifier__","ClientToken":"__ClientToken__","ConnectionTimeoutSeconds":1,"Description":"__Description__","Locations":["__Member__","__Member__"],"PerformanceStatsConfiguration":{"SharedWithClient":true},"Protocol":"WebRTC","SessionLengthSeconds":1,"SignalRequest":"__SignalRequest__","UserId":"__UserId__"}

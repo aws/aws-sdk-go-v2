@@ -1,0 +1,3 @@
+DELETE /workspaces/__WorkspaceId__/alertmanager/definition?clientToken=__ClientToken__
+
+

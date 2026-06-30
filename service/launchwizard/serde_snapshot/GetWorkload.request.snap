@@ -1,0 +1,5 @@
+POST /getWorkload
+
+Content-Type: application/json
+
+{"workloadName":"__WorkloadName__"}

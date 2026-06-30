@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchDeleteWorkloadEstimateUsage
+
+{"ids":["__Member__","__Member__"],"workloadEstimateId":"__WorkloadEstimateId__"}

@@ -1,0 +1,5 @@
+POST /audit/tasks
+
+Content-Type: application/json
+
+{"targetCheckNames":["__Member__","__Member__"]}

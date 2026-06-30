@@ -1,0 +1,7 @@
+PUT /?lifecycle=
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+X-Amz-Transition-Default-Minimum-Object-Size: varies_by_storage_class
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateUser
+
+{"AuthenticationType":"API","FirstName":"__FirstName__","LastName":"__LastName__","MessageAction":"SUPPRESS","UserName":"__UserName__"}

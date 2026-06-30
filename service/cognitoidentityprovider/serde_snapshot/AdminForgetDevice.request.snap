@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AdminForgetDevice
+
+{"DeviceKey":"__DeviceKey__","UserPoolId":"__UserPoolId__","Username":"__Username__"}

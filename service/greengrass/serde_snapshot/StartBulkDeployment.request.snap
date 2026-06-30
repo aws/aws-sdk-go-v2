@@ -1,0 +1,6 @@
+POST /greengrass/bulk/deployments
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"ExecutionRoleArn":"__ExecutionRoleArn__","InputFileUri":"__InputFileUri__","tags":{"key0":"__Value__","key1":"__Value__"}}

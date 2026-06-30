@@ -1,0 +1,3 @@
+GET /api/things/shadow/ListNamedShadowsForThing/__ThingName__?nextToken=__NextToken__&pageSize=1
+
+

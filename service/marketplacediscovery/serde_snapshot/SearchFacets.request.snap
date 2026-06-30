@@ -1,0 +1,5 @@
+POST /2026-02-05/searchFacets
+
+Content-Type: application/json
+
+{"facetTypes":["AVERAGE_CUSTOMER_RATING","AVERAGE_CUSTOMER_RATING"],"filters":[{"filterType":"MIN_AVERAGE_CUSTOMER_RATING","filterValues":["__Member__","__Member__"]},{"filterType":"MIN_AVERAGE_CUSTOMER_RATING","filterValues":["__Member__","__Member__"]}],"nextToken":"__NextToken__","searchText":"__SearchText__"}

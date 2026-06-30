@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudHsmFrontendService.ModifyHsm
+
+{"EniIp":"__EniIp__","ExternalId":"__ExternalId__","HsmArn":"__HsmArn__","IamRoleArn":"__IamRoleArn__","SubnetId":"__SubnetId__","SyslogIp":"__SyslogIp__"}

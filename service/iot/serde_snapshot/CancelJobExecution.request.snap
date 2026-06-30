@@ -1,0 +1,5 @@
+PUT /things/__ThingName__/jobs/__JobId__/cancel?force=true
+
+Content-Type: application/json
+
+{"expectedVersion":1,"statusDetails":{"key0":"__Value__","key1":"__Value__"}}

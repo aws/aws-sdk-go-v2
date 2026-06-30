@@ -1,0 +1,5 @@
+POST /core-networks/__CoreNetworkId__/core-network-routing-information?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"CommunityMatches":["__Member__","__Member__"],"EdgeLocation":"__EdgeLocation__","ExactAsPathMatches":["__Member__","__Member__"],"LocalPreferenceMatches":["__Member__","__Member__"],"MedMatches":["__Member__","__Member__"],"NextHopFilters":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"SegmentName":"__SegmentName__"}

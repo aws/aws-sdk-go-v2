@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.ListFraudsterRegistrationJobs
+
+{"DomainId":"__DomainId__","JobStatus":"SUBMITTED","MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /acceptPrimaryEmailUpdate
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","Otp":"__Otp__","PrimaryEmail":"__PrimaryEmail__"}

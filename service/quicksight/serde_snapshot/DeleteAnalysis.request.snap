@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/analyses/__AnalysisId__?force-delete-without-recovery=true&recovery-window-in-days=1
+
+

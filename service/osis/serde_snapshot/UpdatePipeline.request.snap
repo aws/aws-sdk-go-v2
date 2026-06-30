@@ -1,0 +1,5 @@
+PUT /2022-01-01/osis/updatePipeline/__PipelineName__
+
+Content-Type: application/json
+
+{"BufferOptions":{"PersistentBufferEnabled":true},"EncryptionAtRestOptions":{"KmsKeyArn":"__KmsKeyArn__"},"LogPublishingOptions":{"CloudWatchLogDestination":{"LogGroup":"__LogGroup__"},"IsLoggingEnabled":true},"MaxUnits":1,"MinUnits":1,"PipelineConfigurationBody":"__PipelineConfigurationBody__","PipelineRoleArn":"__PipelineRoleArn__"}

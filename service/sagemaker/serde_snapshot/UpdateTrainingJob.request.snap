@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateTrainingJob
+
+{"ProfilerConfig":{"DisableProfiler":true,"ProfilingIntervalInMilliseconds":1,"ProfilingParameters":{"key0":"__Value__","key1":"__Value__"},"S3OutputPath":"__S3OutputPath__"},"ProfilerRuleConfigurations":[{"InstanceType":"ml.t3.medium","LocalPath":"__LocalPath__","RuleConfigurationName":"__RuleConfigurationName__","RuleEvaluatorImage":"__RuleEvaluatorImage__","RuleParameters":{"key0":"__Value__","key1":"__Value__"},"S3OutputPath":"__S3OutputPath__","VolumeSizeInGB":1},{"InstanceType":"ml.t3.medium","LocalPath":"__LocalPath__","RuleConfigurationName":"__RuleConfigurationName__","RuleEvaluatorImage":"__RuleEvaluatorImage__","RuleParameters":{"key0":"__Value__","key1":"__Value__"},"S3OutputPath":"__S3OutputPath__","VolumeSizeInGB":1}],"RemoteDebugConfig":{"EnableRemoteDebug":true},"ResourceConfig":{"KeepAlivePeriodInSeconds":1},"TrainingJobName":"__TrainingJobName__"}

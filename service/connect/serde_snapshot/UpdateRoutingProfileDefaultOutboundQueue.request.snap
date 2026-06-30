@@ -1,0 +1,5 @@
+POST /routing-profiles/__InstanceId__/__RoutingProfileId__/default-outbound-queue
+
+Content-Type: application/json
+
+{"DefaultOutboundQueueId":"__DefaultOutboundQueueId__"}

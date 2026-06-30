@@ -1,0 +1,5 @@
+POST /v1/apis/__ApiId__/functions
+
+Content-Type: application/json
+
+{"code":"__Code__","dataSourceName":"__DataSourceName__","description":"__Description__","functionVersion":"__FunctionVersion__","maxBatchSize":1,"name":"__Name__","requestMappingTemplate":"__RequestMappingTemplate__","responseMappingTemplate":"__ResponseMappingTemplate__","runtime":{"name":"APPSYNC_JS","runtimeVersion":"__RuntimeVersion__"},"syncConfig":{"conflictDetection":"VERSION","conflictHandler":"OPTIMISTIC_CONCURRENCY","lambdaConflictHandlerConfig":{"lambdaConflictHandlerArn":"__LambdaConflictHandlerArn__"}}}

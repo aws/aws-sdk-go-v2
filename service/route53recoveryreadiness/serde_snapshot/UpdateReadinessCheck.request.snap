@@ -1,0 +1,5 @@
+PUT /readinesschecks/__ReadinessCheckName__
+
+Content-Type: application/json
+
+{"resourceSetName":"__ResourceSetName__"}

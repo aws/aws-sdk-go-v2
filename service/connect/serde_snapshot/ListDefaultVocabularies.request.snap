@@ -1,0 +1,5 @@
+POST /default-vocabulary-summary/__InstanceId__
+
+Content-Type: application/json
+
+{"LanguageCode":"ar-AE","MaxResults":1,"NextToken":"__NextToken__"}

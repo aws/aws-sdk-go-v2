@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListHubContentVersions
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"HubContentName":"__HubContentName__","HubContentType":"Model","HubName":"__HubName__","MaxResults":1,"MaxSchemaVersion":"__MaxSchemaVersion__","MinVersion":"__MinVersion__","NextToken":"__NextToken__","SortBy":"HubContentName","SortOrder":"Ascending"}

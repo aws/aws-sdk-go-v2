@@ -1,0 +1,5 @@
+POST /greengrass/v2/coreDevices/__CoreDeviceThingName__/disassociateClientDevices
+
+Content-Type: application/json
+
+{"entries":[{"thingName":"__ThingName__"},{"thingName":"__ThingName__"}]}

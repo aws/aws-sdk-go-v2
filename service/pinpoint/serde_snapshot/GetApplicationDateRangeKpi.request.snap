@@ -1,0 +1,3 @@
+GET /v1/apps/__ApplicationId__/kpis/daterange/__KpiName__?end-time=2000-01-01T00%3A00%3A00Z&next-token=__NextToken__&page-size=__PageSize__&start-time=2000-01-01T00%3A00%3A00Z
+
+

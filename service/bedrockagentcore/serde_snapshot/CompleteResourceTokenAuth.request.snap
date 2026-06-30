@@ -1,0 +1,5 @@
+POST /identities/CompleteResourceTokenAuth
+
+Content-Type: application/json
+
+{"sessionUri":"__SessionUri__","userIdentifier":{"userToken":"__UserIdentifierMemberUserToken__"}}

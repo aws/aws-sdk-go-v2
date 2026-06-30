@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.StartNotebookExecution
+
+{"EditorId":"__EditorId__","EnvironmentVariables":{"key0":"__Value__","key1":"__Value__"},"ExecutionEngine":{"ExecutionRoleArn":"__ExecutionRoleArn__","Id":"__Id__","MasterInstanceSecurityGroupId":"__MasterInstanceSecurityGroupId__","Type":"EMR"},"NotebookExecutionName":"__NotebookExecutionName__","NotebookInstanceSecurityGroupId":"__NotebookInstanceSecurityGroupId__","NotebookParams":"__NotebookParams__","NotebookS3Location":{"Bucket":"__Bucket__","Key":"__Key__"},"OutputNotebookFormat":"HTML","OutputNotebookS3Location":{"Bucket":"__Bucket__","Key":"__Key__"},"RelativePath":"__RelativePath__","ServiceRole":"__ServiceRole__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

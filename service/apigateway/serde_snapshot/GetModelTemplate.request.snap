@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/models/__ModelName__/default_template
+
+Accept: application/json
+

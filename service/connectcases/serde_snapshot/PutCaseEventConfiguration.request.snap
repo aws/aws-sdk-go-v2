@@ -1,0 +1,5 @@
+PUT /domains/__DomainId__/case-event-configuration
+
+Content-Type: application/json
+
+{"eventBridge":{"enabled":true,"includedData":{"caseData":{"fields":[{"id":"__Id__"},{"id":"__Id__"}]},"relatedItemData":{"includeContent":true}}}}

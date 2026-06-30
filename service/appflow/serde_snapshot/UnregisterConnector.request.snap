@@ -1,0 +1,5 @@
+POST /unregister-connector
+
+Content-Type: application/json
+
+{"connectorLabel":"__ConnectorLabel__","forceDelete":true}

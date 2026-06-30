@@ -1,0 +1,5 @@
+POST /integrations?include-hidden=true&max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"Uri":"__Uri__"}

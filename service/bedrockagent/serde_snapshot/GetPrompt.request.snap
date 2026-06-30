@@ -1,0 +1,3 @@
+GET /prompts/__PromptIdentifier__/?includedData=ALL_DATA&promptVersion=__PromptVersion__
+
+

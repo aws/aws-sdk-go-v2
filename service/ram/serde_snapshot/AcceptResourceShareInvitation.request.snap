@@ -1,0 +1,5 @@
+POST /acceptresourceshareinvitation
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","resourceShareInvitationArn":"__ResourceShareInvitationArn__"}

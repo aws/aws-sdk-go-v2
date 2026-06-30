@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ListCrawls
+
+{"CrawlerName":"__CrawlerName__","Filters":[{"FieldName":"CRAWL_ID","FieldValue":"__FieldValue__","FilterOperator":"GT"},{"FieldName":"CRAWL_ID","FieldValue":"__FieldValue__","FilterOperator":"GT"}],"MaxResults":1,"NextToken":"__NextToken__"}

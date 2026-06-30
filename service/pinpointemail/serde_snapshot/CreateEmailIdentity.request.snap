@@ -1,0 +1,5 @@
+POST /v1/email/identities
+
+Content-Type: application/json
+
+{"EmailIdentity":"__EmailIdentity__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

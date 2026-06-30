@@ -1,0 +1,3 @@
+GET /legal-holds/__LegalHoldId__/recovery-points?maxResults=1&nextToken=__NextToken__
+
+

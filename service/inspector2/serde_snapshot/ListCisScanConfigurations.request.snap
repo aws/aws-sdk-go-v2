@@ -1,0 +1,5 @@
+POST /cis/scan-configuration/list
+
+Content-Type: application/json
+
+{"filterCriteria":{"scanConfigurationArnFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"scanNameFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"targetResourceTagFilters":[{"comparison":"EQUALS","key":"__Key__","value":"__Value__"},{"comparison":"EQUALS","key":"__Key__","value":"__Value__"}]},"maxResults":1,"nextToken":"__NextToken__","sortBy":"SCAN_NAME","sortOrder":"ASC"}

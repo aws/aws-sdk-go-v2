@@ -1,0 +1,5 @@
+POST /2015-01-01/es/vpcEndpoints/describe
+
+Content-Type: application/json
+
+{"VpcEndpointIds":["__Member__","__Member__"]}

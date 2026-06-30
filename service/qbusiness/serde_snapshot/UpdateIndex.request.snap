@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/indices/__IndexId__
+
+Content-Type: application/json
+
+{"capacityConfiguration":{"units":1},"description":"__Description__","displayName":"__DisplayName__","documentAttributeConfigurations":[{"name":"__Name__","search":"ENABLED","type":"STRING"},{"name":"__Name__","search":"ENABLED","type":"STRING"}]}

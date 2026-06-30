@@ -1,0 +1,3 @@
+DELETE /harnesses/__HarnessId__?clientToken=__ClientToken__&deleteManagedMemory=true
+
+

@@ -1,0 +1,6 @@
+POST /catalog.createCategories
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"categories":[{"color":"__Color__","id":"__Id__","title":"__Title__"},{"color":"__Color__","id":"__Id__","title":"__Title__"}]}

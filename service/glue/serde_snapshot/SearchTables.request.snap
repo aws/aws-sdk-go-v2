@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.SearchTables
+
+{"CatalogId":"__CatalogId__","Filters":[{"Comparator":"EQUALS","Key":"__Key__","Value":"__Value__"},{"Comparator":"EQUALS","Key":"__Key__","Value":"__Value__"}],"IncludeStatusDetails":true,"MaxResults":1,"NextToken":"__NextToken__","ResourceShareType":"FOREIGN","SearchText":"__SearchText__","SortCriteria":[{"FieldName":"__FieldName__","Sort":"ASC"},{"FieldName":"__FieldName__","Sort":"ASC"}]}

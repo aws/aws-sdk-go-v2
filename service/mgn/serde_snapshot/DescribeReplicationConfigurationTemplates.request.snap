@@ -1,0 +1,5 @@
+POST /DescribeReplicationConfigurationTemplates
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","replicationConfigurationTemplateIDs":["__Member__","__Member__"]}

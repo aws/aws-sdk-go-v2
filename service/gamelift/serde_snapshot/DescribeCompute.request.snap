@@ -1,0 +1,6 @@
+POST /service/GameLift/operation/DescribeCompute
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

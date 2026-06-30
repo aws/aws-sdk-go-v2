@@ -1,0 +1,3 @@
+GET /greengrass/definition/loggers/__LoggerDefinitionId__/versions/__LoggerDefinitionVersionId__?NextToken=__NextToken__
+
+

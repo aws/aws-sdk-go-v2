@@ -1,0 +1,5 @@
+POST /cluster
+
+Content-Type: application/json
+
+{"bypassPolicyLockoutSafetyCheck":true,"clientToken":"__ClientToken__","deletionProtectionEnabled":true,"kmsEncryptionKey":"__KmsEncryptionKey__","multiRegionProperties":{"clusters":["__Member__","__Member__"],"witnessRegion":"__WitnessRegion__"},"policy":"__Policy__","tags":{"key0":"__Value__","key1":"__Value__"}}

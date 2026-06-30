@@ -1,0 +1,5 @@
+PUT /v1/whatsapp/waba/eventdestinations
+
+Content-Type: application/json
+
+{"eventDestinations":[{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"},{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"}],"id":"__Id__"}

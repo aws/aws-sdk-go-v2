@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AdminInitiateAuth
+
+{"AnalyticsMetadata":{"AnalyticsEndpointId":"__AnalyticsEndpointId__"},"AuthFlow":"USER_SRP_AUTH","AuthParameters":{"key0":"__Value__","key1":"__Value__"},"ClientId":"__ClientId__","ClientMetadata":{"key0":"__Value__","key1":"__Value__"},"ContextData":{"EncodedData":"__EncodedData__","HttpHeaders":[{"headerName":"__HeaderName__","headerValue":"__HeaderValue__"},{"headerName":"__HeaderName__","headerValue":"__HeaderValue__"}],"IpAddress":"__IpAddress__","ServerName":"__ServerName__","ServerPath":"__ServerPath__"},"Session":"__Session__","UserPoolId":"__UserPoolId__"}

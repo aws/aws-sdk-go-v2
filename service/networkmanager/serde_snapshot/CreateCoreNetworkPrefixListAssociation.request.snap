@@ -1,0 +1,5 @@
+POST /prefix-list
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","PrefixListAlias":"__PrefixListAlias__","PrefixListArn":"__PrefixListArn__"}

@@ -1,0 +1,6 @@
+POST /catalog.updateItemMetadata
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"isVerified":true,"libraryItemId":"__LibraryItemId__"}

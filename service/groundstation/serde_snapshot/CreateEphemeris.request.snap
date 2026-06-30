@@ -1,0 +1,5 @@
+POST /ephemeris
+
+Content-Type: application/json
+
+{"enabled":true,"ephemeris":{"tle":{"s3Object":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"},"tleData":[{"tleLine1":"__TleLine1__","tleLine2":"__TleLine2__","validTimeRange":{"endTime":946684800,"startTime":946684800}},{"tleLine1":"__TleLine1__","tleLine2":"__TleLine2__","validTimeRange":{"endTime":946684800,"startTime":946684800}}]}},"expirationTime":946684800,"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","priority":1,"satelliteId":"__SatelliteId__","tags":{"key0":"__Value__","key1":"__Value__"}}

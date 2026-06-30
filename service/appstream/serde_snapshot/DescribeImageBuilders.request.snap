@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.DescribeImageBuilders
+
+{"MaxResults":1,"Names":["__Member__","__Member__"],"NextToken":"__NextToken__"}

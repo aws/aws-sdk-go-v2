@@ -1,0 +1,5 @@
+POST /async-invoke
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","modelId":"__ModelId__","outputDataConfig":{"s3OutputDataConfig":{"bucketOwner":"__BucketOwner__","kmsKeyId":"__KmsKeyId__","s3Uri":"__S3Uri__"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

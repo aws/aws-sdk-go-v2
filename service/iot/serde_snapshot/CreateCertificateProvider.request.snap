@@ -1,0 +1,5 @@
+POST /certificate-providers/__CertificateProviderName__
+
+Content-Type: application/json
+
+{"accountDefaultForOperations":["CreateCertificateFromCsr","CreateCertificateFromCsr"],"clientToken":"__ClientToken__","lambdaFunctionArn":"__LambdaFunctionArn__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

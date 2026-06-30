@@ -1,0 +1,5 @@
+POST /deploymentstrategies
+
+Content-Type: application/json
+
+{"DeploymentDurationInMinutes":1,"Description":"__Description__","FinalBakeTimeInMinutes":1,"GrowthFactor":1,"GrowthType":"LINEAR","Name":"__Name__","ReplicateTo":"NONE","Tags":{"key0":"__Value__","key1":"__Value__"}}

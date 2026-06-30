@@ -1,0 +1,3 @@
+GET /memories/__MemoryId__/actor/__ActorId__/sessions/__SessionId__/events/__EventId__
+
+

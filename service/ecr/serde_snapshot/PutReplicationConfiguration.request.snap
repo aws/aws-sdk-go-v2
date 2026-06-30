@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.PutReplicationConfiguration
+
+{"replicationConfiguration":{"rules":[{"destinations":[{"region":"__Region__","registryId":"__RegistryId__"},{"region":"__Region__","registryId":"__RegistryId__"}],"repositoryFilters":[{"filter":"__Filter__","filterType":"PREFIX_MATCH"},{"filter":"__Filter__","filterType":"PREFIX_MATCH"}]},{"destinations":[{"region":"__Region__","registryId":"__RegistryId__"},{"region":"__Region__","registryId":"__RegistryId__"}],"repositoryFilters":[{"filter":"__Filter__","filterType":"PREFIX_MATCH"},{"filter":"__Filter__","filterType":"PREFIX_MATCH"}]}]}}

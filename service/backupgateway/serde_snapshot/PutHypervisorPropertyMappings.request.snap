@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: BackupOnPremises_v20210101.PutHypervisorPropertyMappings
+
+{"HypervisorArn":"__HypervisorArn__","IamRoleArn":"__IamRoleArn__","VmwareToAwsTagMappings":[{"AwsTagKey":"__AwsTagKey__","AwsTagValue":"__AwsTagValue__","VmwareCategory":"__VmwareCategory__","VmwareTagName":"__VmwareTagName__"},{"AwsTagKey":"__AwsTagKey__","AwsTagValue":"__AwsTagValue__","VmwareCategory":"__VmwareCategory__","VmwareTagName":"__VmwareTagName__"}]}

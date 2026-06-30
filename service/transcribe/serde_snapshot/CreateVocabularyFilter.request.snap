@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.CreateVocabularyFilter
+
+{"DataAccessRoleArn":"__DataAccessRoleArn__","LanguageCode":"af-ZA","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VocabularyFilterFileUri":"__VocabularyFilterFileUri__","VocabularyFilterName":"__VocabularyFilterName__","Words":["__Member__","__Member__"]}

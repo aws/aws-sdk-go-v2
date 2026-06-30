@@ -1,0 +1,5 @@
+POST /workflow/__WorkflowId__/version/__VersionName__
+
+Content-Type: application/json
+
+{"description":"__Description__","readmeMarkdown":"__ReadmeMarkdown__","storageCapacity":1,"storageType":"STATIC"}

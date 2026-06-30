@@ -1,0 +1,5 @@
+POST /v1/whatsapp/template
+
+Content-Type: application/json
+
+{"ctaUrlLinkTrackingOptedOut":true,"id":"__Id__","metaTemplateId":"__MetaTemplateId__","parameterFormat":"__ParameterFormat__","templateCategory":"__TemplateCategory__","templateComponents":"YmxvYg==","templateLanguageCode":"__TemplateLanguageCode__","templateName":"__TemplateName__"}

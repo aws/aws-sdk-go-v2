@@ -1,0 +1,5 @@
+POST /getImages
+
+Content-Type: application/json
+
+{"EndTimestamp":946684800,"Format":"JPEG","FormatConfig":{"key0":"__Value__","key1":"__Value__"},"HeightPixels":1,"ImageSelectorType":"PRODUCER_TIMESTAMP","MaxResults":1,"NextToken":"__NextToken__","SamplingInterval":1,"StartTimestamp":946684800,"StreamARN":"__StreamARN__","StreamName":"__StreamName__","WidthPixels":1}

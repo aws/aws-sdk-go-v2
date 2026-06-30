@@ -1,0 +1,3 @@
+GET /groundstation?maxResults=1&nextToken=__NextToken__&satelliteId=__SatelliteId__
+
+

@@ -1,0 +1,5 @@
+POST /v1/templates/__TemplateName__/email
+
+Content-Type: application/json
+
+{"DefaultSubstitutions":"__DefaultSubstitutions__","Headers":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"HtmlPart":"__HtmlPart__","RecommenderId":"__RecommenderId__","Subject":"__Subject__","TemplateDescription":"__TemplateDescription__","TextPart":"__TextPart__","tags":{"key0":"__Value__","key1":"__Value__"}}

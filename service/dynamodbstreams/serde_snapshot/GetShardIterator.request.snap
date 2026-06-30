@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDBStreams_20120810.GetShardIterator
+
+{"SequenceNumber":"__SequenceNumber__","ShardId":"__ShardId__","ShardIteratorType":"TRIM_HORIZON","StreamArn":"__StreamArn__"}

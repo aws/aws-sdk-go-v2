@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.PutResourceAttributes
+
+{"DryRun":true,"MigrationTaskName":"__MigrationTaskName__","ProgressUpdateStream":"__ProgressUpdateStream__","ResourceAttributeList":[{"Type":"IPV4_ADDRESS","Value":"__Value__"},{"Type":"IPV4_ADDRESS","Value":"__Value__"}]}

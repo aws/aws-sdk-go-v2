@@ -1,0 +1,3 @@
+GET /list-foundation-model-agreement-offers/__ModelId__?offerType=ALL
+
+

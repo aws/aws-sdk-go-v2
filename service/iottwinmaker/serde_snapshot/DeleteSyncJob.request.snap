@@ -1,0 +1,3 @@
+DELETE /workspaces/__WorkspaceId__/sync-jobs/__SyncSource__
+
+

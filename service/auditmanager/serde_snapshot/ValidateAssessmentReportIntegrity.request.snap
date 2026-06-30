@@ -1,0 +1,5 @@
+POST /assessmentReports/integrity
+
+Content-Type: application/json
+
+{"s3RelativePath":"__S3RelativePath__"}

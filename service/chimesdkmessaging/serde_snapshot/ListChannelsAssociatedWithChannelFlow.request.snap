@@ -1,0 +1,3 @@
+GET /channels?channel-flow-arn=__ChannelFlowArn__&max-results=1&next-token=__NextToken__&scope=channel-flow-associations
+
+

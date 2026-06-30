@@ -1,0 +1,5 @@
+PATCH /applications/__ApplicationId__/configurationprofiles/__ConfigurationProfileId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","KmsKeyIdentifier":"__KmsKeyIdentifier__","Name":"__Name__","RetrievalRoleArn":"__RetrievalRoleArn__","Validators":[{"Content":"__Content__","Type":"JSON_SCHEMA"},{"Content":"__Content__","Type":"JSON_SCHEMA"}]}

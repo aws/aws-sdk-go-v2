@@ -1,0 +1,3 @@
+DELETE /v1/spaces/__SpaceName__/projects/__ProjectName__/devEnvironments/__Id__/session/__SessionId__
+
+

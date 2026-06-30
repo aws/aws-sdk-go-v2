@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.PutRegistryScanningConfiguration
+
+{"rules":[{"repositoryFilters":[{"filter":"__Filter__","filterType":"WILDCARD"},{"filter":"__Filter__","filterType":"WILDCARD"}],"scanFrequency":"SCAN_ON_PUSH"},{"repositoryFilters":[{"filter":"__Filter__","filterType":"WILDCARD"},{"filter":"__Filter__","filterType":"WILDCARD"}],"scanFrequency":"SCAN_ON_PUSH"}],"scanType":"BASIC"}

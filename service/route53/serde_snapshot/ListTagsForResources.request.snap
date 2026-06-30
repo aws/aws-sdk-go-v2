@@ -1,0 +1,4 @@
+POST /2013-04-01/tags/healthcheck
+
+Content-Type: application/xml
+

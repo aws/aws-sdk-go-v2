@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/member
+
+Content-Type: application/json
+
+{"accountDetails":[{"accountId":"__AccountId__","email":"__Email__"},{"accountId":"__AccountId__","email":"__Email__"}]}

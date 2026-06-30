@@ -1,0 +1,5 @@
+POST /UpdateAdConfiguration
+
+Content-Type: application/json
+
+{"arn":"__Arn__","mediaTailorPlaybackConfigurations":[{"playbackConfigurationArn":"__PlaybackConfigurationArn__"},{"playbackConfigurationArn":"__PlaybackConfigurationArn__"}],"name":"__Name__"}

@@ -1,0 +1,5 @@
+POST /apps/__AppId__/branches/__BranchName__/deployments
+
+Content-Type: application/json
+
+{"fileMap":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.UpdateProject
+
+{"arn":"__Arn__","defaultJobTimeoutMinutes":1,"environmentVariables":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"executionRoleArn":"__ExecutionRoleArn__","name":"__Name__","vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}}

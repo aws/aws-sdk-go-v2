@@ -1,0 +1,3 @@
+GET /responder-gateway/__GatewayId__/link/__LinkId__/routing-rules?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+PUT /agents/__AgentId__/agentversions/__AgentVersion__/actiongroups/__ActionGroupId__/
+
+Content-Type: application/json
+
+{"actionGroupExecutor":{"lambda":"__ActionGroupExecutorMemberLambda__"},"actionGroupName":"__ActionGroupName__","actionGroupState":"ENABLED","apiSchema":{"s3":{"s3BucketName":"__S3BucketName__","s3ObjectKey":"__S3ObjectKey__"}},"description":"__Description__","functionSchema":{"functions":[{"description":"__Description__","name":"__Name__","parameters":{"key0":{"description":"__Description__","required":true,"type":"string"},"key1":{"description":"__Description__","required":true,"type":"string"}},"requireConfirmation":"ENABLED"},{"description":"__Description__","name":"__Name__","parameters":{"key0":{"description":"__Description__","required":true,"type":"string"},"key1":{"description":"__Description__","required":true,"type":"string"}},"requireConfirmation":"ENABLED"}]},"parentActionGroupSignature":"AMAZON.UserInput","parentActionGroupSignatureParams":{"key0":"__Value__","key1":"__Value__"}}

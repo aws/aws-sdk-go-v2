@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/encryption-config/associate
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","encryptionConfig":[{"provider":{"keyArn":"__KeyArn__"},"resources":["__Member__","__Member__"]},{"provider":{"keyArn":"__KeyArn__"},"resources":["__Member__","__Member__"]}]}

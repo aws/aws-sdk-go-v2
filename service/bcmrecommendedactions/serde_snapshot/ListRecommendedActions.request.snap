@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBillingAndCostManagementRecommendedActions.ListRecommendedActions
+
+{"filter":{"actions":[{"key":"FEATURE","matchOption":"EQUALS","values":["__Member__","__Member__"]},{"key":"FEATURE","matchOption":"EQUALS","values":["__Member__","__Member__"]}]},"maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,11 @@
+POST /model/__ModelId__/invoke
+
+Accept: __Accept__
+Content-Type: __ContentType__
+X-Amzn-Bedrock-Guardrailidentifier: __GuardrailIdentifier__
+X-Amzn-Bedrock-Guardrailversion: __GuardrailVersion__
+X-Amzn-Bedrock-Performanceconfig-Latency: standard
+X-Amzn-Bedrock-Request-Metadata: __RequestMetadata__
+X-Amzn-Bedrock-Service-Tier: priority
+X-Amzn-Bedrock-Trace: ENABLED
+

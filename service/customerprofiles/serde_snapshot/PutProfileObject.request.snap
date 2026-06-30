@@ -1,0 +1,5 @@
+PUT /domains/__DomainName__/profiles/objects
+
+Content-Type: application/json
+
+{"Object":"__Object__","ObjectTypeName":"__ObjectTypeName__"}

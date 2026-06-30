@@ -1,0 +1,5 @@
+POST /v2/email/import-jobs
+
+Content-Type: application/json
+
+{"ImportDataSource":{"DataFormat":"CSV","S3Url":"__S3Url__"},"ImportDestination":{"ContactListDestination":{"ContactListImportAction":"DELETE","ContactListName":"__ContactListName__"},"SuppressionListDestination":{"SuppressionListImportAction":"DELETE"}}}

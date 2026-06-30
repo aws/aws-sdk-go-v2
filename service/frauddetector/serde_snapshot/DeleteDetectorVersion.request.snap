@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.DeleteDetectorVersion
+
+{"detectorId":"__DetectorId__","detectorVersionId":"__DetectorVersionId__"}

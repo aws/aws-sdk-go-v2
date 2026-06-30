@@ -1,0 +1,5 @@
+PATCH /network-analyzer-configurations/__ConfigurationName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","MulticastGroupsToAdd":["__Member__","__Member__"],"MulticastGroupsToRemove":["__Member__","__Member__"],"TraceContent":{"LogLevel":"INFO","MulticastFrameInfo":"ENABLED","WirelessDeviceFrameInfo":"ENABLED"},"WirelessDevicesToAdd":["__Member__","__Member__"],"WirelessDevicesToRemove":["__Member__","__Member__"],"WirelessGatewaysToAdd":["__Member__","__Member__"],"WirelessGatewaysToRemove":["__Member__","__Member__"]}

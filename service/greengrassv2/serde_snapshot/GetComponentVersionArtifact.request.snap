@@ -1,0 +1,4 @@
+GET /greengrass/v2/components/__Arn__/artifacts/__ArtifactName__?s3EndpointType=REGIONAL
+
+X-Amz-Iot-Endpoint-Type: fips
+

@@ -1,0 +1,5 @@
+POST /apikeys?failonwarnings=true&format=csv&mode=import
+
+Accept: application/json
+Content-Type: application/octet-stream
+

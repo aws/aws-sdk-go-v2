@@ -1,0 +1,3 @@
+GET /analytics-data/instance/__InstanceId__/datasets?maxResults=1&nextToken=__NextToken__
+
+

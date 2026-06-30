@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDAXV3.ListTags
+
+{"NextToken":"__NextToken__","ResourceName":"__ResourceName__"}

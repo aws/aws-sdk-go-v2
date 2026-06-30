@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.AssociateOpportunity
+
+{"Catalog":"__Catalog__","OpportunityIdentifier":"__OpportunityIdentifier__","RelatedEntityIdentifier":"__RelatedEntityIdentifier__","RelatedEntityType":"Solutions"}

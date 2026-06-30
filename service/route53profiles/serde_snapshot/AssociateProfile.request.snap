@@ -1,0 +1,5 @@
+POST /profileassociation
+
+Content-Type: application/json
+
+{"Name":"__Name__","ProfileId":"__ProfileId__","ResourceId":"__ResourceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

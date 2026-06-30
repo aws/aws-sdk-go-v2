@@ -1,0 +1,5 @@
+POST /2023-10-12/farms/__FarmId__/queues/__QueueId__/jobs/__JobId__/template
+
+Content-Type: application/json
+
+{"targetS3Location":{"bucketName":"__BucketName__","key":"__Key__"}}

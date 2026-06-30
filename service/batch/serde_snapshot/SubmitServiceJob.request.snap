@@ -1,0 +1,5 @@
+POST /v1/submitservicejob
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","jobName":"__JobName__","jobQueue":"__JobQueue__","preemptionConfiguration":{"preemptionRetriesBeforeTermination":1},"quotaShareName":"__QuotaShareName__","retryStrategy":{"attempts":1,"evaluateOnExit":[{"action":"RETRY","onStatusReason":"__OnStatusReason__"},{"action":"RETRY","onStatusReason":"__OnStatusReason__"}]},"schedulingPriority":1,"serviceJobType":"SAGEMAKER_TRAINING","serviceRequestPayload":"__ServiceRequestPayload__","shareIdentifier":"__ShareIdentifier__","tags":{"key0":"__Value__","key1":"__Value__"},"timeoutConfig":{"attemptDurationSeconds":1}}

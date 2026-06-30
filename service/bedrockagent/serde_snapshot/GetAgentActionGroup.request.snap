@@ -1,0 +1,3 @@
+GET /agents/__AgentId__/agentversions/__AgentVersion__/actiongroups/__ActionGroupId__/
+
+

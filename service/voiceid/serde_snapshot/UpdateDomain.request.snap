@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.UpdateDomain
+
+{"Description":"__Description__","DomainId":"__DomainId__","Name":"__Name__","ServerSideEncryptionConfiguration":{"KmsKeyId":"__KmsKeyId__"}}

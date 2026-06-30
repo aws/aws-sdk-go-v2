@@ -1,0 +1,3 @@
+GET /greengrass/definition/devices/__DeviceDefinitionId__/versions/__DeviceDefinitionVersionId__?NextToken=__NextToken__
+
+

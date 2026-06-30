@@ -1,0 +1,5 @@
+PUT /v2/campaigns/__Id__/profile-outbound-requests
+
+Content-Type: application/json
+
+{"profileOutboundRequests":[{"clientToken":"__ClientToken__","expirationTime":"2000-01-01T00:00:00Z","profileId":"__ProfileId__"},{"clientToken":"__ClientToken__","expirationTime":"2000-01-01T00:00:00Z","profileId":"__ProfileId__"}]}

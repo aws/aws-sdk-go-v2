@@ -1,0 +1,3 @@
+GET /v1/apps/__ApplicationId__/channels/apns_voip_sandbox
+
+

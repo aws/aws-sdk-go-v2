@@ -1,0 +1,5 @@
+POST /v1/speech
+
+Content-Type: application/json
+
+{"Engine":"standard","LanguageCode":"arb","LexiconNames":["__Member__","__Member__"],"OutputFormat":"json","SampleRate":"__SampleRate__","SpeechMarkTypes":["sentence","sentence"],"Text":"__Text__","TextType":"ssml","VoiceId":"Aditi"}

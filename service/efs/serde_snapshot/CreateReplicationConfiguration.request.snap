@@ -1,0 +1,5 @@
+POST /2015-02-01/file-systems/__SourceFileSystemId__/replication-configuration
+
+Content-Type: application/json
+
+{"Destinations":[{"AvailabilityZoneName":"__AvailabilityZoneName__","FileSystemId":"__FileSystemId__","KmsKeyId":"__KmsKeyId__","Region":"__Region__","RoleArn":"__RoleArn__"},{"AvailabilityZoneName":"__AvailabilityZoneName__","FileSystemId":"__FileSystemId__","KmsKeyId":"__KmsKeyId__","Region":"__Region__","RoleArn":"__RoleArn__"}]}

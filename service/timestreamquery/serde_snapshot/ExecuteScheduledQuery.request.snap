@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Timestream_20181101.ExecuteScheduledQuery
+
+{"ClientToken":"__ClientToken__","InvocationTime":946684800,"QueryInsights":{"Mode":"ENABLED_WITH_RATE_CONTROL"},"ScheduledQueryArn":"__ScheduledQueryArn__"}

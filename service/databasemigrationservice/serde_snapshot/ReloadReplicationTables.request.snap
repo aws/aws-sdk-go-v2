@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ReloadReplicationTables
+
+{"ReloadOption":"data-reload","ReplicationConfigArn":"__ReplicationConfigArn__","TablesToReload":[{"SchemaName":"__SchemaName__","TableName":"__TableName__"},{"SchemaName":"__SchemaName__","TableName":"__TableName__"}]}

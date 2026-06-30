@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.DisassociatePrincipalFromPortfolio
+
+{"AcceptLanguage":"__AcceptLanguage__","PortfolioId":"__PortfolioId__","PrincipalARN":"__PrincipalARN__","PrincipalType":"IAM"}

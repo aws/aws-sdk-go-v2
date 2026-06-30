@@ -1,0 +1,5 @@
+POST /meetings?operation=create-attendees
+
+Content-Type: application/json
+
+{"Attendees":[{"Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"},"ExternalUserId":"__ExternalUserId__"},{"Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"},"ExternalUserId":"__ExternalUserId__"}],"ClientRequestToken":"__ClientRequestToken__","ExternalMeetingId":"__ExternalMeetingId__","MediaPlacementNetworkType":"Ipv4Only","MediaRegion":"__MediaRegion__","MeetingFeatures":{"Attendee":{"MaxCount":1},"Audio":{"EchoReduction":"AVAILABLE"},"Content":{"MaxResolution":"None"},"Video":{"MaxResolution":"None"}},"MeetingHostId":"__MeetingHostId__","NotificationsConfiguration":{"LambdaFunctionArn":"__LambdaFunctionArn__","SnsTopicArn":"__SnsTopicArn__","SqsQueueArn":"__SqsQueueArn__"},"PrimaryMeetingId":"__PrimaryMeetingId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TenantIds":["__Member__","__Member__"]}

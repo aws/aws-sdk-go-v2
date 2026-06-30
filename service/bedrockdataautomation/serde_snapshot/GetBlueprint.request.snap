@@ -1,0 +1,5 @@
+POST /blueprints/__BlueprintArn__/
+
+Content-Type: application/json
+
+{"blueprintStage":"DEVELOPMENT","blueprintVersion":"__BlueprintVersion__"}

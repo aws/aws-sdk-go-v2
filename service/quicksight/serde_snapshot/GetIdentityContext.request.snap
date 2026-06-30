@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/identity-context
+
+Content-Type: application/json
+
+{"ContextRegion":"__ContextRegion__","Namespace":"__Namespace__","SessionExpiresAt":946684800,"UserIdentifier":{"UserName":"__UserIdentifierMemberUserName__"}}

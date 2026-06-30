@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeConfigurationTemplates
+
+{"deliveryDestinationTypes":["S3","S3"],"limit":1,"logTypes":["__Member__","__Member__"],"nextToken":"__NextToken__","resourceTypes":["__Member__","__Member__"],"service":"__Service__"}

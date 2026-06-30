@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/idmappingtables/__IdMappingTableIdentifier__/populate
+
+Content-Type: application/json
+
+{"jobType":"BATCH"}

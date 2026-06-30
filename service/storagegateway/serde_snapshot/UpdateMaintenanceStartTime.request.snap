@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.UpdateMaintenanceStartTime
+
+{"DayOfMonth":1,"DayOfWeek":1,"GatewayARN":"__GatewayARN__","HourOfDay":1,"MinuteOfHour":1,"SoftwareUpdatePreferences":{"AutomaticUpdatePolicy":"ALL_VERSIONS"}}

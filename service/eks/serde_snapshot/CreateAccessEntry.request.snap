@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/access-entries
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","kubernetesGroups":["__Member__","__Member__"],"principalArn":"__PrincipalArn__","tags":{"key0":"__Value__","key1":"__Value__"},"type":"__Type__","username":"__Username__"}

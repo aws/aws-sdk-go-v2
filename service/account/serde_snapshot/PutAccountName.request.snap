@@ -1,0 +1,5 @@
+POST /putAccountName
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","AccountName":"__AccountName__"}

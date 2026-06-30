@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeDeploy_20141006.ListOnPremisesInstances
+
+{"nextToken":"__NextToken__","registrationStatus":"Registered","tagFilters":[{"Key":"__Key__","Type":"KEY_ONLY","Value":"__Value__"},{"Key":"__Key__","Type":"KEY_ONLY","Value":"__Value__"}]}

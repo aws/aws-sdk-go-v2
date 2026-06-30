@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDBStreams_20120810.DescribeStream
+
+{"ExclusiveStartShardId":"__ExclusiveStartShardId__","Limit":1,"ShardFilter":{"ShardId":"__ShardId__","Type":"CHILD_SHARDS"},"StreamArn":"__StreamArn__"}

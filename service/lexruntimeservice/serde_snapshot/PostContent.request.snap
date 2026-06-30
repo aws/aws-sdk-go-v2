@@ -1,0 +1,8 @@
+POST /bot/__BotName__/alias/__BotAlias__/user/__UserId__/content
+
+Accept: __Accept__
+Content-Type: __ContentType__
+X-Amz-Lex-Active-Contexts: X19BY3RpdmVDb250ZXh0c19f
+X-Amz-Lex-Request-Attributes: X19SZXF1ZXN0QXR0cmlidXRlc19f
+X-Amz-Lex-Session-Attributes: X19TZXNzaW9uQXR0cmlidXRlc19f
+

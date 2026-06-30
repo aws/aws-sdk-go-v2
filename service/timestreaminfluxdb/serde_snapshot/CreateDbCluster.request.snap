@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.CreateDbCluster
+
+{"allocatedStorage":1,"bucket":"__Bucket__","dbInstanceType":"db.influx.medium","dbParameterGroupIdentifier":"__DbParameterGroupIdentifier__","dbStorageType":"InfluxIOIncludedT1","deploymentType":"MULTI_NODE_READ_REPLICAS","failoverMode":"AUTOMATIC","logDeliveryConfiguration":{"s3Configuration":{"bucketName":"__BucketName__","enabled":true}},"maintenanceSchedule":{"preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","timezone":"__Timezone__"},"name":"__Name__","networkType":"IPV4","organization":"__Organization__","password":"__Password__","port":1,"publiclyAccessible":true,"tags":{"key0":"__Value__","key1":"__Value__"},"username":"__Username__","vpcSecurityGroupIds":["__Member__","__Member__"],"vpcSubnetIds":["__Member__","__Member__"]}

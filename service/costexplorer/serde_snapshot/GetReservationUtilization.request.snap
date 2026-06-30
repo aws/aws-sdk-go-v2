@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetReservationUtilization
+
+{"Filter":{"And":[{},{}],"CostCategories":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Dimensions":{"Key":"AZ","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}],"Tags":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]}},"Granularity":"DAILY","GroupBy":[{"Key":"__Key__","Type":"DIMENSION"},{"Key":"__Key__","Type":"DIMENSION"}],"MaxResults":1,"NextPageToken":"__NextPageToken__","SortBy":{"Key":"__Key__","SortOrder":"ASCENDING"},"TimePeriod":{"End":"__End__","Start":"__Start__"}}

@@ -1,0 +1,5 @@
+POST /contact/stop-streaming
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","InstanceId":"__InstanceId__","StreamingId":"__StreamingId__"}

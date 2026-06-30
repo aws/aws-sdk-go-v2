@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.StartQuery
+
+{"endTime":1,"limit":1,"logGroupIdentifiers":["__Member__","__Member__"],"logGroupName":"__LogGroupName__","logGroupNames":["__Member__","__Member__"],"queryLanguage":"CWLI","queryString":"__QueryString__","startTime":1}

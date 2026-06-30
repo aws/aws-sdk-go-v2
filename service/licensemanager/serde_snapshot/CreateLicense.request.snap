@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.CreateLicense
+
+{"Beneficiary":"__Beneficiary__","ClientToken":"__ClientToken__","ConsumptionConfiguration":{"BorrowConfiguration":{"AllowEarlyCheckIn":true,"MaxTimeToLiveInMinutes":1},"ProvisionalConfiguration":{"MaxTimeToLiveInMinutes":1},"RenewType":"None"},"Entitlements":[{"AllowCheckIn":true,"MaxCount":1,"Name":"__Name__","Overage":true,"Unit":"Count","Value":"__Value__"},{"AllowCheckIn":true,"MaxCount":1,"Name":"__Name__","Overage":true,"Unit":"Count","Value":"__Value__"}],"HomeRegion":"__HomeRegion__","Issuer":{"Name":"__Name__","SignKey":"__SignKey__"},"LicenseMetadata":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"LicenseName":"__LicenseName__","ProductName":"__ProductName__","ProductSKU":"__ProductSKU__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Validity":{"Begin":"__Begin__","End":"__End__"}}

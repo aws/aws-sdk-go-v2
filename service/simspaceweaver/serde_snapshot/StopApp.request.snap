@@ -1,0 +1,5 @@
+POST /stopapp
+
+Content-Type: application/json
+
+{"App":"__App__","Domain":"__Domain__","Simulation":"__Simulation__"}

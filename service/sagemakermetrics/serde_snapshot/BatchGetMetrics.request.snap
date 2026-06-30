@@ -1,0 +1,5 @@
+POST /BatchGetMetrics
+
+Content-Type: application/json
+
+{"MetricQueries":[{"End":1,"MetricName":"__MetricName__","MetricStat":"Min","Period":"OneMinute","ResourceArn":"__ResourceArn__","Start":1,"XAxisType":"IterationNumber"},{"End":1,"MetricName":"__MetricName__","MetricStat":"Min","Period":"OneMinute","ResourceArn":"__ResourceArn__","Start":1,"XAxisType":"IterationNumber"}]}

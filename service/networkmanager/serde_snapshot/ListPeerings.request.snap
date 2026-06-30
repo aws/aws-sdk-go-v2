@@ -1,0 +1,3 @@
+GET /peerings?coreNetworkId=__CoreNetworkId__&edgeLocation=__EdgeLocation__&maxResults=1&nextToken=__NextToken__&peeringType=TRANSIT_GATEWAY&state=CREATING
+
+

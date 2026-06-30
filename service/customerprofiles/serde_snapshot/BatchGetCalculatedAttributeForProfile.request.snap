@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/calculated-attributes/__CalculatedAttributeName__/batch-get-for-profiles
+
+Content-Type: application/json
+
+{"ConditionOverrides":{"Range":{"End":1,"Start":1,"Unit":"DAYS"}},"ProfileIds":["__Member__","__Member__"]}

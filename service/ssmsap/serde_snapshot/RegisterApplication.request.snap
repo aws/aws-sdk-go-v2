@@ -1,0 +1,5 @@
+POST /register-application
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","ApplicationType":"HANA","ComponentsInfo":[{"ComponentType":"HANA","Ec2InstanceId":"__Ec2InstanceId__","Sid":"__Sid__"},{"ComponentType":"HANA","Ec2InstanceId":"__Ec2InstanceId__","Sid":"__Sid__"}],"Credentials":[{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"},{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"}],"DatabaseArn":"__DatabaseArn__","Instances":["__Member__","__Member__"],"SapInstanceNumber":"__SapInstanceNumber__","Sid":"__Sid__","Tags":{"key0":"__Value__","key1":"__Value__"}}

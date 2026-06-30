@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateFeatureGroup
+
+{"Description":"__Description__","EventTimeFeatureName":"__EventTimeFeatureName__","FeatureDefinitions":[{"CollectionConfig":{"VectorConfig":{"Dimension":1}},"CollectionType":"List","FeatureName":"__FeatureName__","FeatureType":"Integral"},{"CollectionConfig":{"VectorConfig":{"Dimension":1}},"CollectionType":"List","FeatureName":"__FeatureName__","FeatureType":"Integral"}],"FeatureGroupName":"__FeatureGroupName__","OfflineStoreConfig":{"DataCatalogConfig":{"Catalog":"__Catalog__","Database":"__Database__","TableName":"__TableName__"},"DisableGlueTableCreation":true,"S3StorageConfig":{"KmsKeyId":"__KmsKeyId__","ResolvedOutputS3Uri":"__ResolvedOutputS3Uri__","S3Uri":"__S3Uri__"},"TableFormat":"Default"},"OnlineStoreConfig":{"EnableOnlineStore":true,"SecurityConfig":{"KmsKeyId":"__KmsKeyId__"},"StorageType":"Standard","TtlDuration":{"Unit":"Seconds","Value":1}},"RecordIdentifierFeatureName":"__RecordIdentifierFeatureName__","RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ThroughputConfig":{"ProvisionedReadCapacityUnits":1,"ProvisionedWriteCapacityUnits":1,"ThroughputMode":"OnDemand"}}

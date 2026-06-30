@@ -1,0 +1,5 @@
+POST /template
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","tags":{"key0":"__Value__","key1":"__Value__"},"templateDescription":"__TemplateDescription__","templateName":"__TemplateName__","templateSource":{"workflowId":"__TemplateSourceMemberWorkflowId__"}}

@@ -1,0 +1,5 @@
+POST /UpdateApplication
+
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","defaultKmsKeyId":"__DefaultKmsKeyId__","roleArn":"__RoleArn__"}

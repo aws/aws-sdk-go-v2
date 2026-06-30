@@ -1,0 +1,5 @@
+POST /BatchGetChannel
+
+Content-Type: application/json
+
+{"arns":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+POST /prod/inputSecurityGroups
+
+Content-Type: application/json
+
+{"tags":{"key0":"__Value__","key1":"__Value__"},"whitelistRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}

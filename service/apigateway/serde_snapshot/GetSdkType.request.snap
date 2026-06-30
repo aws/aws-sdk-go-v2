@@ -1,0 +1,4 @@
+GET /sdktypes/__Id__
+
+Accept: application/json
+

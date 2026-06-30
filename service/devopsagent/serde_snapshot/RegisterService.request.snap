@@ -1,0 +1,5 @@
+POST /v1/register/dynatrace
+
+Content-Type: application/json
+
+{"exchangeUrlPrivateConnectionName":"__ExchangeUrlPrivateConnectionName__","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","privateConnectionName":"__PrivateConnectionName__","serviceDetails":{"dynatrace":{"accountUrn":"__AccountUrn__","authorizationConfig":{"oAuthClientCredentials":{"clientId":"__ClientId__","clientName":"__ClientName__","clientSecret":"__ClientSecret__","exchangeParameters":{"key0":"__Value__","key1":"__Value__"}}}}},"tags":{"key0":"__Value__","key1":"__Value__"},"targetUrlPrivateConnectionName":"__TargetUrlPrivateConnectionName__"}

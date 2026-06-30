@@ -1,0 +1,5 @@
+PATCH /monitors/__MonitorName__
+
+Content-Type: application/json
+
+{"aggregationPeriod":1}

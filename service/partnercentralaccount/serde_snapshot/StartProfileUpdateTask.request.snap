@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.StartProfileUpdateTask
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","Identifier":"__Identifier__","TaskDetails":{"Description":"__Description__","DisplayName":"__DisplayName__","IndustrySegments":["AGRICULTURE_MINING","AGRICULTURE_MINING"],"LocalizedContents":[{"Description":"__Description__","DisplayName":"__DisplayName__","Locale":"__Locale__","LogoUrl":"__LogoUrl__","WebsiteUrl":"__WebsiteUrl__"},{"Description":"__Description__","DisplayName":"__DisplayName__","Locale":"__Locale__","LogoUrl":"__LogoUrl__","WebsiteUrl":"__WebsiteUrl__"}],"LogoUrl":"__LogoUrl__","PrimarySolutionType":"SOFTWARE_PRODUCTS","TranslationSourceLocale":"__TranslationSourceLocale__","WebsiteUrl":"__WebsiteUrl__"}}

@@ -1,0 +1,5 @@
+POST /list-databases
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","ComponentId":"__ComponentId__","MaxResults":1,"NextToken":"__NextToken__"}

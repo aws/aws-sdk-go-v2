@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.UpdateStudio
+
+{"DefaultS3Location":"__DefaultS3Location__","Description":"__Description__","EncryptionKeyArn":"__EncryptionKeyArn__","Name":"__Name__","StudioId":"__StudioId__","SubnetIds":["__Member__","__Member__"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2
+
+{"automaticStopTimeMinutes":1,"clientRequestToken":"__ClientRequestToken__","connectionType":"CONNECT_SSH","description":"__Description__","dryRun":true,"imageId":"__ImageId__","instanceType":"__InstanceType__","name":"__Name__","ownerArn":"__OwnerArn__","subnetId":"__SubnetId__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

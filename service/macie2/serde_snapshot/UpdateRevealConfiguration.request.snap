@@ -1,0 +1,5 @@
+PUT /reveal-configuration
+
+Content-Type: application/json
+
+{"configuration":{"kmsKeyId":"__KmsKeyId__","status":"ENABLED"},"retrievalConfiguration":{"retrievalMode":"CALLER_CREDENTIALS","roleName":"__RoleName__"}}

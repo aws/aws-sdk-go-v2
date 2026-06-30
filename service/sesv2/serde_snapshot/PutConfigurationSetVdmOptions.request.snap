@@ -1,0 +1,5 @@
+PUT /v2/email/configuration-sets/__ConfigurationSetName__/vdm-options
+
+Content-Type: application/json
+
+{"VdmOptions":{"DashboardOptions":{"EngagementMetrics":"ENABLED"},"GuardianOptions":{"OptimizedSharedDelivery":"ENABLED"}}}

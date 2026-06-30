@@ -1,0 +1,5 @@
+POST /command-executions?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"commandArn":"__CommandArn__","completedTimeFilter":{"after":"__After__","before":"__Before__"},"namespace":"AWS-IoT","sortOrder":"ASCENDING","startedTimeFilter":{"after":"__After__","before":"__Before__"},"status":"CREATED","targetArn":"__TargetArn__"}

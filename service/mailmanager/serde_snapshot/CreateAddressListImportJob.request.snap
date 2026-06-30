@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.CreateAddressListImportJob
+
+{"AddressListId":"__AddressListId__","ClientToken":"__ClientToken__","ImportDataFormat":{"ImportDataType":"CSV"},"Name":"__Name__"}

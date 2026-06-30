@@ -1,0 +1,5 @@
+POST /v1/apps/__ApplicationId__/verify-otp
+
+Content-Type: application/json
+
+{"DestinationIdentity":"__DestinationIdentity__","Otp":"__Otp__","ReferenceId":"__ReferenceId__"}

@@ -1,0 +1,5 @@
+POST /keymaterial/translate
+
+Content-Type: application/json
+
+{"IncomingKeyMaterial":{"DiffieHellmanTr31KeyBlock":{"CertificateAuthorityPublicKeyIdentifier":"__CertificateAuthorityPublicKeyIdentifier__","DerivationData":{"SharedInformation":"__DiffieHellmanDerivationDataMemberSharedInformation__"},"DeriveKeyAlgorithm":"TDES_2KEY","KeyDerivationFunction":"NIST_SP800","KeyDerivationHashAlgorithm":"SHA_256","PrivateKeyIdentifier":"__PrivateKeyIdentifier__","PublicKeyCertificate":"__PublicKeyCertificate__","WrappedKeyBlock":"__WrappedKeyBlock__"}},"KeyCheckValueAlgorithm":"CMAC","OutgoingKeyMaterial":{"Tr31KeyBlock":{"WrappingKeyIdentifier":"__WrappingKeyIdentifier__"}}}

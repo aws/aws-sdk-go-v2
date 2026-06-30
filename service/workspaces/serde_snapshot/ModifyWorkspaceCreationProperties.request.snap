@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifyWorkspaceCreationProperties
+
+{"ResourceId":"__ResourceId__","WorkspaceCreationProperties":{"CustomSecurityGroupId":"__CustomSecurityGroupId__","DefaultOu":"__DefaultOu__","EnableInternetAccess":true,"EnableMaintenanceMode":true,"InstanceIamRoleArn":"__InstanceIamRoleArn__","UserEnabledAsLocalAdministrator":true}}

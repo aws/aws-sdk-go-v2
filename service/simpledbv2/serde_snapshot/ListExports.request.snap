@@ -1,0 +1,5 @@
+POST /v2/ListExports
+
+Content-Type: application/json
+
+{"domainName":"__DomainName__","maxResults":1,"nextToken":"__NextToken__"}

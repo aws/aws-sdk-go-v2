@@ -1,0 +1,5 @@
+POST /harnesses/__HarnessId__/endpoints
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","endpointName":"__EndpointName__","tags":{"key0":"__Value__","key1":"__Value__"},"targetVersion":"__TargetVersion__"}

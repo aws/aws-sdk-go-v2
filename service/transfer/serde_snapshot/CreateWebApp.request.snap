@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.CreateWebApp
+
+{"AccessEndpoint":"__AccessEndpoint__","EndpointDetails":{"Vpc":{"IpAddressType":"IPV4","SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"VpcId":"__VpcId__"}},"IdentityProviderDetails":{"IdentityCenterConfig":{"InstanceArn":"__InstanceArn__","Role":"__Role__"}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"WebAppEndpointPolicy":"FIPS","WebAppUnits":{"Provisioned":1}}

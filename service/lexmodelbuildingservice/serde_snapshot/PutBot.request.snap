@@ -1,0 +1,5 @@
+PUT /bots/__Name__/versions/$LATEST
+
+Content-Type: application/json
+
+{"abortStatement":{"messages":[{"content":"__Content__","contentType":"PlainText","groupNumber":1},{"content":"__Content__","contentType":"PlainText","groupNumber":1}],"responseCard":"__ResponseCard__"},"checksum":"__Checksum__","childDirected":true,"clarificationPrompt":{"maxAttempts":1,"messages":[{"content":"__Content__","contentType":"PlainText","groupNumber":1},{"content":"__Content__","contentType":"PlainText","groupNumber":1}],"responseCard":"__ResponseCard__"},"createVersion":true,"description":"__Description__","detectSentiment":true,"enableModelImprovements":true,"idleSessionTTLInSeconds":1,"intents":[{"intentName":"__IntentName__","intentVersion":"__IntentVersion__"},{"intentName":"__IntentName__","intentVersion":"__IntentVersion__"}],"locale":"de-DE","nluIntentConfidenceThreshold":1,"processBehavior":"SAVE","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"voiceId":"__VoiceId__"}

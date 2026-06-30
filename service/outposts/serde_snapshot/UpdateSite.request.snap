@@ -1,0 +1,5 @@
+PATCH /sites/__SiteId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","Notes":"__Notes__"}

@@ -1,0 +1,5 @@
+POST /GetRoom
+
+Content-Type: application/json
+
+{"identifier":"__Identifier__"}

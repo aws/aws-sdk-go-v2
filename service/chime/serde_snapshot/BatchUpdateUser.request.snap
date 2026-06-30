@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/users
+
+Content-Type: application/json
+
+{"UpdateUserRequestItems":[{"AlexaForBusinessMetadata":{"AlexaForBusinessRoomArn":"__AlexaForBusinessRoomArn__","IsAlexaForBusinessEnabled":true},"LicenseType":"Basic","UserId":"__UserId__","UserType":"PrivateUser"},{"AlexaForBusinessMetadata":{"AlexaForBusinessRoomArn":"__AlexaForBusinessRoomArn__","IsAlexaForBusinessEnabled":true},"LicenseType":"Basic","UserId":"__UserId__","UserType":"PrivateUser"}]}

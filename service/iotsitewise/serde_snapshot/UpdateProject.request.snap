@@ -1,0 +1,5 @@
+PUT /projects/__ProjectId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","projectDescription":"__ProjectDescription__","projectName":"__ProjectName__"}

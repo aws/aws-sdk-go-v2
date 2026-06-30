@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.CreateRotation
+
+{"ContactIds":["__Member__","__Member__"],"IdempotencyToken":"__IdempotencyToken__","Name":"__Name__","Recurrence":{"DailySettings":[{"HourOfDay":1,"MinuteOfHour":1},{"HourOfDay":1,"MinuteOfHour":1}],"MonthlySettings":[{"DayOfMonth":1,"HandOffTime":{"HourOfDay":1,"MinuteOfHour":1}},{"DayOfMonth":1,"HandOffTime":{"HourOfDay":1,"MinuteOfHour":1}}],"NumberOfOnCalls":1,"RecurrenceMultiplier":1,"ShiftCoverages":{"key0":[{"End":{"HourOfDay":1,"MinuteOfHour":1},"Start":{"HourOfDay":1,"MinuteOfHour":1}},{"End":{"HourOfDay":1,"MinuteOfHour":1},"Start":{"HourOfDay":1,"MinuteOfHour":1}}],"key1":[{"End":{"HourOfDay":1,"MinuteOfHour":1},"Start":{"HourOfDay":1,"MinuteOfHour":1}},{"End":{"HourOfDay":1,"MinuteOfHour":1},"Start":{"HourOfDay":1,"MinuteOfHour":1}}]},"WeeklySettings":[{"DayOfWeek":"MON","HandOffTime":{"HourOfDay":1,"MinuteOfHour":1}},{"DayOfWeek":"MON","HandOffTime":{"HourOfDay":1,"MinuteOfHour":1}}]},"StartTime":946684800,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TimeZoneId":"__TimeZoneId__"}

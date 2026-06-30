@@ -1,0 +1,5 @@
+POST /channelGroup/__ChannelGroupName__/channel/__ChannelName__/originEndpoint/__OriginEndpointName__/policy
+
+Content-Type: application/json
+
+{"CdnAuthConfiguration":{"CdnIdentifierSecretArns":["__Member__","__Member__"],"SecretsRoleArn":"__SecretsRoleArn__"},"Policy":"__Policy__"}

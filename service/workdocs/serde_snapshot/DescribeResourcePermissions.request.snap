@@ -1,0 +1,4 @@
+GET /api/v1/resources/__ResourceId__/permissions?limit=1&marker=__Marker__&principalId=__PrincipalId__
+
+Authentication: __AuthenticationToken__
+

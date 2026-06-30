@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/dashboards-qa-configuration
+
+Content-Type: application/json
+
+{"DashboardsQAStatus":"ENABLED"}

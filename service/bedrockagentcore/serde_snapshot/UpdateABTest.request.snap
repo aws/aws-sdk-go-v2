@@ -1,0 +1,5 @@
+PUT /ab-tests/__AbTestId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","evaluationConfig":{"onlineEvaluationConfigArn":"__ABTestEvaluationConfigMemberOnlineEvaluationConfigArn__"},"executionStatus":"PAUSED","gatewayFilter":{"targetPaths":["__Member__","__Member__"]},"name":"__Name__","roleArn":"__RoleArn__","variants":[{"name":"__Name__","variantConfiguration":{"configurationBundle":{"bundleArn":"__BundleArn__","bundleVersion":"__BundleVersion__"},"target":{"name":"__Name__"}},"weight":1},{"name":"__Name__","variantConfiguration":{"configurationBundle":{"bundleArn":"__BundleArn__","bundleVersion":"__BundleVersion__"},"target":{"name":"__Name__"}},"weight":1}]}

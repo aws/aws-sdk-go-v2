@@ -1,0 +1,5 @@
+POST /v2/delete-service
+
+Content-Type: application/json
+
+{"serviceArn":"__ServiceArn__"}

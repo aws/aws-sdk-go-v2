@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botanalyzer
+
+Content-Type: application/json
+
+{"analysisScope":"BotLocale","botVersion":"__BotVersion__","localeId":"__LocaleId__"}

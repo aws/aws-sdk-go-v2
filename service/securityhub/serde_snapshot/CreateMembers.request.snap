@@ -1,0 +1,5 @@
+POST /members
+
+Content-Type: application/json
+
+{"AccountDetails":[{"AccountId":"__AccountId__","Email":"__Email__"},{"AccountId":"__AccountId__","Email":"__Email__"}]}

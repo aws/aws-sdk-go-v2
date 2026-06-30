@@ -1,0 +1,5 @@
+PUT /StartResourceStateUpdate
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","exclusionRules":{"amis":{"isPublic":true,"lastLaunched":{"unit":"DAYS","value":1},"regions":["__Member__","__Member__"],"sharedAccounts":["__Member__","__Member__"],"tagMap":{"key0":"__Value__","key1":"__Value__"}}},"executionRole":"__ExecutionRole__","includeResources":{"amis":true,"containers":true,"snapshots":true},"resourceArn":"__ResourceArn__","state":{"status":"AVAILABLE"},"updateAt":946684800}

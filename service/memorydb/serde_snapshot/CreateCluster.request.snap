@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.CreateCluster
+
+{"ACLName":"__ACLName__","AutoMinorVersionUpgrade":true,"ClusterName":"__ClusterName__","DataTiering":true,"Description":"__Description__","Engine":"__Engine__","EngineVersion":"__EngineVersion__","IpDiscovery":"ipv4","KmsKeyId":"__KmsKeyId__","MaintenanceWindow":"__MaintenanceWindow__","MultiRegionClusterName":"__MultiRegionClusterName__","NetworkType":"ipv4","NodeType":"__NodeType__","NumReplicasPerShard":1,"NumShards":1,"ParameterGroupName":"__ParameterGroupName__","Port":1,"SecurityGroupIds":["__Member__","__Member__"],"SnapshotArns":["__Member__","__Member__"],"SnapshotName":"__SnapshotName__","SnapshotRetentionLimit":1,"SnapshotWindow":"__SnapshotWindow__","SnsTopicArn":"__SnsTopicArn__","SubnetGroupName":"__SubnetGroupName__","TLSEnabled":true,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

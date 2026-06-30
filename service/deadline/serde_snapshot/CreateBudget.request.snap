@@ -1,0 +1,6 @@
+POST /2023-10-12/farms/__FarmId__/budgets
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"actions":[{"description":"__Description__","thresholdPercentage":1,"type":"STOP_SCHEDULING_AND_COMPLETE_TASKS"},{"description":"__Description__","thresholdPercentage":1,"type":"STOP_SCHEDULING_AND_COMPLETE_TASKS"}],"approximateDollarLimit":1,"description":"__Description__","displayName":"__DisplayName__","schedule":{"fixed":{"endTime":"2000-01-01T00:00:00Z","startTime":"2000-01-01T00:00:00Z"}},"tags":{"key0":"__Value__","key1":"__Value__"},"usageTrackingResource":{"queueId":"__UsageTrackingResourceMemberQueueId__"}}

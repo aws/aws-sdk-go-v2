@@ -1,0 +1,6 @@
+POST /runtimes/__AgentRuntimeArn__/stopruntimesession?qualifier=__Qualifier__
+
+Content-Type: application/json
+X-Amzn-Bedrock-Agentcore-Runtime-Session-Id: __RuntimeSessionId__
+
+{"clientToken":"__ClientToken__"}

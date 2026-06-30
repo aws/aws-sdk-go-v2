@@ -1,0 +1,5 @@
+PATCH /2023-10-12/farms/__FarmId__/fleets/__FleetId__/workers/__WorkerId__/schedule
+
+Content-Type: application/json
+
+{"updatedSessionActions":{"key0":{"completedStatus":"SUCCEEDED","endedAt":"2000-01-01T00:00:00Z","manifests":[{"outputManifestHash":"__OutputManifestHash__","outputManifestPath":"__OutputManifestPath__"},{"outputManifestHash":"__OutputManifestHash__","outputManifestPath":"__OutputManifestPath__"}],"processExitCode":1,"progressMessage":"__ProgressMessage__","progressPercent":1,"startedAt":"2000-01-01T00:00:00Z","updatedAt":"2000-01-01T00:00:00Z"},"key1":{"completedStatus":"SUCCEEDED","endedAt":"2000-01-01T00:00:00Z","manifests":[{"outputManifestHash":"__OutputManifestHash__","outputManifestPath":"__OutputManifestPath__"},{"outputManifestHash":"__OutputManifestHash__","outputManifestPath":"__OutputManifestPath__"}],"processExitCode":1,"progressMessage":"__ProgressMessage__","progressPercent":1,"startedAt":"2000-01-01T00:00:00Z","updatedAt":"2000-01-01T00:00:00Z"}}}

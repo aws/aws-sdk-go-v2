@@ -1,0 +1,5 @@
+PUT /datasets/__DatasetId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__"}

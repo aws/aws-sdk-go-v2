@@ -1,0 +1,5 @@
+POST /ec2deepinspectionconfiguration/update
+
+Content-Type: application/json
+
+{"activateDeepInspection":true,"packagePaths":["__Member__","__Member__"]}

@@ -1,0 +1,3 @@
+GET /routing-profiles/__InstanceId__/__RoutingProfileId__/queues?maxResults=1&nextToken=__NextToken__
+
+

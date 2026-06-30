@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.RequestCancelWorkflowExecution
+
+{"domain":"__Domain__","runId":"__RunId__","workflowId":"__WorkflowId__"}

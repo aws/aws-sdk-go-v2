@@ -1,0 +1,5 @@
+POST /workspaces/__InstanceId__/__WorkspaceId__/disassociate
+
+Content-Type: application/json
+
+{"ResourceArns":["__Member__","__Member__"]}

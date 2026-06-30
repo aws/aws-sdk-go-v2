@@ -1,0 +1,3 @@
+GET /prod/inputSecurityGroups?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+PUT /buckets/__TableBucketARN__/encryption
+
+Content-Type: application/json
+
+{"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseAlgorithm":"AES256"}}

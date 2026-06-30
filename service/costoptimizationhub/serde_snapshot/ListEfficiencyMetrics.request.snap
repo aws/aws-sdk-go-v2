@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CostOptimizationHubService.ListEfficiencyMetrics
+
+{"granularity":"Daily","groupBy":"__GroupBy__","maxResults":1,"nextToken":"__NextToken__","orderBy":{"dimension":"__Dimension__","order":"Asc"},"timePeriod":{"end":"__End__","start":"__Start__"}}

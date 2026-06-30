@@ -1,0 +1,5 @@
+PUT /detect/mitigationactions/tasks/__TaskId__
+
+Content-Type: application/json
+
+{"actions":["__Member__","__Member__"],"clientRequestToken":"__ClientRequestToken__","includeOnlyActiveViolations":true,"includeSuppressedAlerts":true,"target":{"behaviorName":"__BehaviorName__","securityProfileName":"__SecurityProfileName__","violationIds":["__Member__","__Member__"]},"violationEventOccurrenceRange":{"endTime":946684800,"startTime":946684800}}

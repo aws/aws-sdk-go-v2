@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.GetVehicleStatus
+
+{"maxResults":1,"nextToken":"__NextToken__","vehicleName":"__VehicleName__"}

@@ -1,0 +1,5 @@
+POST /GetStreamSession
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__","streamId":"__StreamId__"}

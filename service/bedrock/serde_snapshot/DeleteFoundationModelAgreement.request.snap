@@ -1,0 +1,5 @@
+POST /delete-foundation-model-agreement
+
+Content-Type: application/json
+
+{"modelId":"__ModelId__"}

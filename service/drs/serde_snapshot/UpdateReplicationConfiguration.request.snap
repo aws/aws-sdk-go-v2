@@ -1,0 +1,5 @@
+POST /UpdateReplicationConfiguration
+
+Content-Type: application/json
+
+{"associateDefaultSecurityGroup":true,"autoReplicateNewDisks":true,"bandwidthThrottling":1,"createPublicIP":true,"dataPlaneRouting":"PRIVATE_IP","defaultLargeStagingDiskType":"GP2","ebsEncryption":"DEFAULT","ebsEncryptionKeyArn":"__EbsEncryptionKeyArn__","internetProtocol":"IPV4","name":"__Name__","pitPolicy":[{"enabled":true,"interval":1,"retentionDuration":1,"ruleID":1,"units":"MINUTE"},{"enabled":true,"interval":1,"retentionDuration":1,"ruleID":1,"units":"MINUTE"}],"replicatedDisks":[{"deviceName":"__DeviceName__","iops":1,"isBootDisk":true,"optimizedStagingDiskType":"AUTO","stagingDiskType":"AUTO","throughput":1},{"deviceName":"__DeviceName__","iops":1,"isBootDisk":true,"optimizedStagingDiskType":"AUTO","stagingDiskType":"AUTO","throughput":1}],"replicationServerInstanceType":"__ReplicationServerInstanceType__","replicationServersSecurityGroupsIDs":["__Member__","__Member__"],"sourceServerID":"__SourceServerID__","stagingAreaSubnetId":"__StagingAreaSubnetId__","stagingAreaTags":{"key0":"__Value__","key1":"__Value__"},"useDedicatedReplicationServer":true}

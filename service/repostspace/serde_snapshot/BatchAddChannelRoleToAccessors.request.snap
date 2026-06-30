@@ -1,0 +1,5 @@
+POST /spaces/__SpaceId__/channels/__ChannelId__/roles
+
+Content-Type: application/json
+
+{"accessorIds":["__Member__","__Member__"],"channelRole":"ASKER"}

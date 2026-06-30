@@ -1,0 +1,5 @@
+POST /cacertificate?allowAutoRegistration=true&setAsActive=true
+
+Content-Type: application/json
+
+{"caCertificate":"__CaCertificate__","certificateMode":"DEFAULT","registrationConfig":{"roleArn":"__RoleArn__","templateBody":"__TemplateBody__","templateName":"__TemplateName__"},"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"verificationCertificate":"__VerificationCertificate__"}

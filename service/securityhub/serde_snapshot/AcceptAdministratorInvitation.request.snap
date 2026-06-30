@@ -1,0 +1,5 @@
+POST /administrator
+
+Content-Type: application/json
+
+{"AdministratorId":"__AdministratorId__","InvitationId":"__InvitationId__"}

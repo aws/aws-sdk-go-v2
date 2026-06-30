@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.CreateIPSet
+
+{"Addresses":["__Member__","__Member__"],"Description":"__Description__","IPAddressVersion":"IPV4","Name":"__Name__","Scope":"CLOUDFRONT","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

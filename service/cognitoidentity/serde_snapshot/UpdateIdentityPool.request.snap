@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityService.UpdateIdentityPool
+
+{"AllowClassicFlow":true,"AllowUnauthenticatedIdentities":true,"CognitoIdentityProviders":[{"ClientId":"__ClientId__","ProviderName":"__ProviderName__","ServerSideTokenCheck":true},{"ClientId":"__ClientId__","ProviderName":"__ProviderName__","ServerSideTokenCheck":true}],"DeveloperProviderName":"__DeveloperProviderName__","IdentityPoolId":"__IdentityPoolId__","IdentityPoolName":"__IdentityPoolName__","IdentityPoolTags":{"key0":"__Value__","key1":"__Value__"},"OpenIdConnectProviderARNs":["__Member__","__Member__"],"SamlProviderARNs":["__Member__","__Member__"],"SupportedLoginProviders":{"key0":"__Value__","key1":"__Value__"}}

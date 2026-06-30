@@ -1,0 +1,3 @@
+GET /replication/v1/replicators?maxResults=1&nextToken=__NextToken__&replicatorNameFilter=__ReplicatorNameFilter__
+
+

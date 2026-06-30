@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.CreateLag
+
+{"childConnectionTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"connectionId":"__ConnectionId__","connectionsBandwidth":"__ConnectionsBandwidth__","lagName":"__LagName__","location":"__Location__","numberOfConnections":1,"providerName":"__ProviderName__","requestMACSec":true,"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

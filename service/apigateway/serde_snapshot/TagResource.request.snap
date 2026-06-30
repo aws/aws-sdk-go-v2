@@ -1,0 +1,6 @@
+PUT /tags/__ResourceArn__
+
+Accept: application/json
+Content-Type: application/json
+
+{"tags":{"key0":"__Value__","key1":"__Value__"}}

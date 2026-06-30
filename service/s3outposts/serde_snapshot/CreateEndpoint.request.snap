@@ -1,0 +1,5 @@
+POST /S3Outposts/CreateEndpoint
+
+Content-Type: application/json
+
+{"AccessType":"Private","CustomerOwnedIpv4Pool":"__CustomerOwnedIpv4Pool__","OutpostId":"__OutpostId__","SecurityGroupId":"__SecurityGroupId__","SubnetId":"__SubnetId__"}

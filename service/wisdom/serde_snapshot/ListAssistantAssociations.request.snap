@@ -1,0 +1,3 @@
+GET /assistants/__AssistantId__/associations?maxResults=1&nextToken=__NextToken__
+
+

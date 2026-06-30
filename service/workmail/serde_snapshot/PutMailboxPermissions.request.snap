@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.PutMailboxPermissions
+
+{"EntityId":"__EntityId__","GranteeId":"__GranteeId__","OrganizationId":"__OrganizationId__","PermissionValues":["FULL_ACCESS","FULL_ACCESS"]}

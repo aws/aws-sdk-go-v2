@@ -1,0 +1,5 @@
+PATCH /packages/__PackageName__?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"defaultVersionName":"__DefaultVersionName__","description":"__Description__","unsetDefaultVersion":true}

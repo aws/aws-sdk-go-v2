@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.UndeprecateActivityType
+
+{"activityType":{"name":"__Name__","version":"__Version__"},"domain":"__Domain__"}

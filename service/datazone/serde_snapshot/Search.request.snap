@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/search
+
+Content-Type: application/json
+
+{"additionalAttributes":["FORMS","FORMS"],"filters":{"filter":{"attribute":"__Attribute__","intValue":1,"operator":"EQ","value":"__Value__"}},"maxResults":1,"nextToken":"__NextToken__","owningProjectIdentifier":"__OwningProjectIdentifier__","searchIn":[{"attribute":"__Attribute__"},{"attribute":"__Attribute__"}],"searchScope":"ASSET","searchText":"__SearchText__","sort":{"attribute":"__Attribute__","order":"ASCENDING"}}

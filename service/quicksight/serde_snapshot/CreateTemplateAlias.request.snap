@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/templates/__TemplateId__/aliases/__AliasName__
+
+Content-Type: application/json
+
+{"TemplateVersionNumber":1}

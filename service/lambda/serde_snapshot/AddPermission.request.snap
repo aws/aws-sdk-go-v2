@@ -1,0 +1,5 @@
+POST /2015-03-31/functions/__FunctionName__/policy?Qualifier=__Qualifier__
+
+Content-Type: application/json
+
+{"Action":"__Action__","EventSourceToken":"__EventSourceToken__","FunctionUrlAuthType":"NONE","InvokedViaFunctionUrl":true,"Principal":"__Principal__","PrincipalOrgID":"__PrincipalOrgID__","RevisionId":"__RevisionId__","SourceAccount":"__SourceAccount__","SourceArn":"__SourceArn__","StatementId":"__StatementId__"}

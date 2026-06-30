@@ -1,0 +1,6 @@
+POST /greengrass/groups
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"InitialVersion":{"ConnectorDefinitionVersionArn":"__ConnectorDefinitionVersionArn__","CoreDefinitionVersionArn":"__CoreDefinitionVersionArn__","DeviceDefinitionVersionArn":"__DeviceDefinitionVersionArn__","FunctionDefinitionVersionArn":"__FunctionDefinitionVersionArn__","LoggerDefinitionVersionArn":"__LoggerDefinitionVersionArn__","ResourceDefinitionVersionArn":"__ResourceDefinitionVersionArn__","SubscriptionDefinitionVersionArn":"__SubscriptionDefinitionVersionArn__"},"Name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

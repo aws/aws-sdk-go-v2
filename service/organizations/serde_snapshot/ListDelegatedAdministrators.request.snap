@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.ListDelegatedAdministrators
+
+{"MaxResults":1,"NextToken":"__NextToken__","ServicePrincipal":"__ServicePrincipal__"}
