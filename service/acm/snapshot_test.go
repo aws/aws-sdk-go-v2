@@ -74,11 +74,131 @@ func TestCheckSnapshot_AddTagsToCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAcmeEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAcmeExternalAccountBinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAcmeEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAcmeExternalAccountBinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAcmeAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAcmeAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAcmeEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAcmeExternalAccountBinding")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,6 +242,18 @@ func TestCheckSnapshot_GetAccountConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAcmeExternalAccountBindingCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAcmeExternalAccountBindingCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAcmeExternalAccountBindingCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCertificate(context.Background(), nil, func(o *Options) {
@@ -146,6 +278,54 @@ func TestCheckSnapshot_ImportCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAcmeAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAcmeAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAcmeDomainValidations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeDomainValidations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAcmeDomainValidations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAcmeEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAcmeEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeExternalAccountBindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAcmeExternalAccountBindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCertificates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificates(context.Background(), nil, func(o *Options) {
@@ -163,6 +343,18 @@ func TestCheckSnapshot_ListTagsForCertificate(t *testing.T) {
 	_, err := svc.ListTagsForCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTagsForResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +422,30 @@ func TestCheckSnapshot_ResendValidationEmail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RevokeAcmeAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeAcmeAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeAcmeAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RevokeAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeAcmeExternalAccountBinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RevokeCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RevokeCertificate(context.Background(), nil, func(o *Options) {
@@ -247,6 +463,54 @@ func TestCheckSnapshot_SearchCertificates(t *testing.T) {
 	_, err := svc.SearchCertificates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAcmeEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -277,11 +541,131 @@ func TestUpdateSnapshot_AddTagsToCertificate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAcmeEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAcmeExternalAccountBinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAcmeEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAcmeExternalAccountBinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAcmeAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAcmeAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAcmeEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAcmeExternalAccountBinding")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -325,6 +709,18 @@ func TestUpdateSnapshot_GetAccountConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAcmeExternalAccountBindingCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAcmeExternalAccountBindingCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAcmeExternalAccountBindingCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCertificate(context.Background(), nil, func(o *Options) {
@@ -349,6 +745,54 @@ func TestUpdateSnapshot_ImportCertificate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAcmeAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAcmeAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAcmeDomainValidations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeDomainValidations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAcmeDomainValidations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAcmeEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAcmeEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAcmeExternalAccountBindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAcmeExternalAccountBindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCertificates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificates(context.Background(), nil, func(o *Options) {
@@ -366,6 +810,18 @@ func TestUpdateSnapshot_ListTagsForCertificate(t *testing.T) {
 	_, err := svc.ListTagsForCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTagsForResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +889,30 @@ func TestUpdateSnapshot_ResendValidationEmail(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RevokeAcmeAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeAcmeAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeAcmeAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeAcmeExternalAccountBinding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeAcmeExternalAccountBinding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeAcmeExternalAccountBinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RevokeCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RevokeCertificate(context.Background(), nil, func(o *Options) {
@@ -450,6 +930,54 @@ func TestUpdateSnapshot_SearchCertificates(t *testing.T) {
 	_, err := svc.SearchCertificates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAcmeDomainValidation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAcmeDomainValidation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAcmeDomainValidation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAcmeEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAcmeEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAcmeEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

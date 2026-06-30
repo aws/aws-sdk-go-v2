@@ -167,6 +167,10 @@ type CreateChangeSetInput struct {
 	// requests to ensure that CloudFormation successfully received them.
 	ClientToken *string
 
+	// The deployment configuration for this stack operation, including the deployment
+	// mode.
+	DeploymentConfig *types.DeploymentConfig
+
 	// Determines how CloudFormation handles configuration drift during deployment.
 	//
 	//   - REVERT_DRIFT – Creates a drift-aware change set that brings actual resource
@@ -180,6 +184,12 @@ type CreateChangeSetInput struct {
 
 	// A description to help you identify this change set.
 	Description *string
+
+	//  Set to true to disable pre-deployment validations in changeset or stack
+	// operations.
+	//
+	// Default: false
+	DisableValidation *bool
 
 	// Indicates if the change set auto-imports resources that already exist. For more
 	// information, see [Import Amazon Web Services resources into a CloudFormation stack automatically]in the CloudFormation User Guide.

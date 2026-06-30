@@ -11731,6 +11731,15 @@ func awsAwsjson11_deserializeDocumentProjectEnvironment(v **types.ProjectEnviron
 				return err
 			}
 
+		case "hostKernel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostKernel to be of type string, got %T instead", value)
+				}
+				sv.HostKernel = types.HostKernel(jtv)
+			}
+
 		case "image":
 			if value != nil {
 				jtv, ok := value.(string)

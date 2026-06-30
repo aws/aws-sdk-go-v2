@@ -307,6 +307,46 @@ func (AutoRefreshMode) Values() []AutoRefreshMode {
 	}
 }
 
+type BaseTableDependencyType string
+
+// Enum values for BaseTableDependencyType
+const (
+	BaseTableDependencyTypeTable             BaseTableDependencyType = "TABLE"
+	BaseTableDependencyTypeIntermediateTable BaseTableDependencyType = "INTERMEDIATE_TABLE"
+	BaseTableDependencyTypeIdMappingTable    BaseTableDependencyType = "ID_MAPPING_TABLE"
+)
+
+// Values returns all known values for BaseTableDependencyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BaseTableDependencyType) Values() []BaseTableDependencyType {
+	return []BaseTableDependencyType{
+		"TABLE",
+		"INTERMEDIATE_TABLE",
+		"ID_MAPPING_TABLE",
+	}
+}
+
+type BaseTableParentType string
+
+// Enum values for BaseTableParentType
+const (
+	BaseTableParentTypeDirect   BaseTableParentType = "DIRECT"
+	BaseTableParentTypeIndirect BaseTableParentType = "INDIRECT"
+)
+
+// Values returns all known values for BaseTableParentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BaseTableParentType) Values() []BaseTableParentType {
+	return []BaseTableParentType{
+		"DIRECT",
+		"INDIRECT",
+	}
+}
+
 type ChangeRequestAction string
 
 // Enum values for ChangeRequestAction
@@ -406,6 +446,23 @@ func (ChangeType) Values() []ChangeType {
 		"GRANT_CAN_RECEIVE_INFERENCE_OUTPUT",
 		"REVOKE_CAN_RECEIVE_MODEL_OUTPUT",
 		"REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT",
+	}
+}
+
+type ChildResourceType string
+
+// Enum values for ChildResourceType
+const (
+	ChildResourceTypeIntermediateTable ChildResourceType = "INTERMEDIATE_TABLE"
+)
+
+// Values returns all known values for ChildResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChildResourceType) Values() []ChildResourceType {
+	return []ChildResourceType{
+		"INTERMEDIATE_TABLE",
 	}
 }
 
@@ -693,6 +750,77 @@ func (IdNamespaceType) Values() []IdNamespaceType {
 	}
 }
 
+type IntermediateTableAnalysisRuleType string
+
+// Enum values for IntermediateTableAnalysisRuleType
+const (
+	IntermediateTableAnalysisRuleTypeCustom IntermediateTableAnalysisRuleType = "CUSTOM"
+)
+
+// Values returns all known values for IntermediateTableAnalysisRuleType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntermediateTableAnalysisRuleType) Values() []IntermediateTableAnalysisRuleType {
+	return []IntermediateTableAnalysisRuleType{
+		"CUSTOM",
+	}
+}
+
+type IntermediateTableStatus string
+
+// Enum values for IntermediateTableStatus
+const (
+	IntermediateTableStatusCreated                  IntermediateTableStatus = "CREATED"
+	IntermediateTableStatusPopulateStarted          IntermediateTableStatus = "POPULATE_STARTED"
+	IntermediateTableStatusPopulateSuccess          IntermediateTableStatus = "POPULATE_SUCCESS"
+	IntermediateTableStatusPopulateFailed           IntermediateTableStatus = "POPULATE_FAILED"
+	IntermediateTableStatusDisallowedByDataProvider IntermediateTableStatus = "DISALLOWED_BY_DATA_PROVIDER"
+	IntermediateTableStatusBaseTableRemoved         IntermediateTableStatus = "BASE_TABLE_REMOVED"
+	IntermediateTableStatusRetentionPeriodExpired   IntermediateTableStatus = "RETENTION_PERIOD_EXPIRED"
+)
+
+// Values returns all known values for IntermediateTableStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntermediateTableStatus) Values() []IntermediateTableStatus {
+	return []IntermediateTableStatus{
+		"CREATED",
+		"POPULATE_STARTED",
+		"POPULATE_SUCCESS",
+		"POPULATE_FAILED",
+		"DISALLOWED_BY_DATA_PROVIDER",
+		"BASE_TABLE_REMOVED",
+		"RETENTION_PERIOD_EXPIRED",
+	}
+}
+
+type IntermediateTableVersionStatus string
+
+// Enum values for IntermediateTableVersionStatus
+const (
+	IntermediateTableVersionStatusPopulateStarted        IntermediateTableVersionStatus = "POPULATE_STARTED"
+	IntermediateTableVersionStatusPopulateSuccess        IntermediateTableVersionStatus = "POPULATE_SUCCESS"
+	IntermediateTableVersionStatusPopulateFailed         IntermediateTableVersionStatus = "POPULATE_FAILED"
+	IntermediateTableVersionStatusRetentionPeriodExpired IntermediateTableVersionStatus = "RETENTION_PERIOD_EXPIRED"
+)
+
+// Values returns all known values for IntermediateTableVersionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntermediateTableVersionStatus) Values() []IntermediateTableVersionStatus {
+	return []IntermediateTableVersionStatus{
+		"POPULATE_STARTED",
+		"POPULATE_SUCCESS",
+		"POPULATE_FAILED",
+		"RETENTION_PERIOD_EXPIRED",
+	}
+}
+
 type JobType string
 
 // Enum values for JobType
@@ -924,6 +1052,24 @@ func (ParameterType) Values() []ParameterType {
 	}
 }
 
+type PopulateIntermediateTableAnalysisType string
+
+// Enum values for PopulateIntermediateTableAnalysisType
+const (
+	PopulateIntermediateTableAnalysisTypeQuery PopulateIntermediateTableAnalysisType = "QUERY"
+)
+
+// Values returns all known values for PopulateIntermediateTableAnalysisType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PopulateIntermediateTableAnalysisType) Values() []PopulateIntermediateTableAnalysisType {
+	return []PopulateIntermediateTableAnalysisType{
+		"QUERY",
+	}
+}
+
 type PrivacyBudgetTemplateAutoRefresh string
 
 // Enum values for PrivacyBudgetTemplateAutoRefresh
@@ -1090,6 +1236,35 @@ func (ProtectedQueryType) Values() []ProtectedQueryType {
 	}
 }
 
+type ResourceStatus string
+
+// Enum values for ResourceStatus
+const (
+	ResourceStatusCreated                  ResourceStatus = "CREATED"
+	ResourceStatusPopulateStarted          ResourceStatus = "POPULATE_STARTED"
+	ResourceStatusPopulateSuccess          ResourceStatus = "POPULATE_SUCCESS"
+	ResourceStatusPopulateFailed           ResourceStatus = "POPULATE_FAILED"
+	ResourceStatusDisallowedByDataProvider ResourceStatus = "DISALLOWED_BY_DATA_PROVIDER"
+	ResourceStatusBaseTableRemoved         ResourceStatus = "BASE_TABLE_REMOVED"
+	ResourceStatusRetentionPeriodExpired   ResourceStatus = "RETENTION_PERIOD_EXPIRED"
+)
+
+// Values returns all known values for ResourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStatus) Values() []ResourceStatus {
+	return []ResourceStatus{
+		"CREATED",
+		"POPULATE_STARTED",
+		"POPULATE_SUCCESS",
+		"POPULATE_FAILED",
+		"DISALLOWED_BY_DATA_PROVIDER",
+		"BASE_TABLE_REMOVED",
+		"RETENTION_PERIOD_EXPIRED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -1235,17 +1410,23 @@ type SchemaStatusReasonCode string
 
 // Enum values for SchemaStatusReasonCode
 const (
-	SchemaStatusReasonCodeAnalysisRuleMissing                    SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"
-	SchemaStatusReasonCodeAnalysisTemplatesNotConfigured         SchemaStatusReasonCode = "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
-	SchemaStatusReasonCodeAnalysisProvidersNotConfigured         SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
-	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
-	SchemaStatusReasonCodeIdMappingTableNotPopulated             SchemaStatusReasonCode = "ID_MAPPING_TABLE_NOT_POPULATED"
-	SchemaStatusReasonCodeCollaborationAnalysisRuleNotConfigured SchemaStatusReasonCode = "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED"
-	SchemaStatusReasonCodeAdditionalAnalysesNotConfigured        SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_CONFIGURED"
-	SchemaStatusReasonCodeResultReceiversNotConfigured           SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_CONFIGURED"
-	SchemaStatusReasonCodeAdditionalAnalysesNotAllowed           SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_ALLOWED"
-	SchemaStatusReasonCodeResultReceiversNotAllowed              SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_ALLOWED"
-	SchemaStatusReasonCodeAnalysisRuleTypesNotCompatible         SchemaStatusReasonCode = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
+	SchemaStatusReasonCodeAnalysisRuleMissing                           SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"
+	SchemaStatusReasonCodeAnalysisTemplatesNotConfigured                SchemaStatusReasonCode = "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAnalysisProvidersNotConfigured                SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
+	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured        SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+	SchemaStatusReasonCodeIdMappingTableNotPopulated                    SchemaStatusReasonCode = "ID_MAPPING_TABLE_NOT_POPULATED"
+	SchemaStatusReasonCodeCollaborationAnalysisRuleNotConfigured        SchemaStatusReasonCode = "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAdditionalAnalysesNotConfigured               SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_CONFIGURED"
+	SchemaStatusReasonCodeResultReceiversNotConfigured                  SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAdditionalAnalysesNotAllowed                  SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_ALLOWED"
+	SchemaStatusReasonCodeResultReceiversNotAllowed                     SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_ALLOWED"
+	SchemaStatusReasonCodeAnalysisRuleTypesNotCompatible                SchemaStatusReasonCode = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
+	SchemaStatusReasonCodeIntermediateTableNotPopulated                 SchemaStatusReasonCode = "INTERMEDIATE_TABLE_NOT_POPULATED"
+	SchemaStatusReasonCodeIntermediateTableAnalysisRuleMissing          SchemaStatusReasonCode = "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING"
+	SchemaStatusReasonCodeIntermediateTableBaseTableRemoved             SchemaStatusReasonCode = "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED"
+	SchemaStatusReasonCodeIntermediateTableInheritedConstraintsViolated SchemaStatusReasonCode = "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED"
+	SchemaStatusReasonCodeIntermediateTableDisallowedByDataProvider     SchemaStatusReasonCode = "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER"
+	SchemaStatusReasonCodeIntermediateTableRetentionPeriodExpired       SchemaStatusReasonCode = "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED"
 )
 
 // Values returns all known values for SchemaStatusReasonCode. Note that this can
@@ -1265,6 +1446,12 @@ func (SchemaStatusReasonCode) Values() []SchemaStatusReasonCode {
 		"ADDITIONAL_ANALYSES_NOT_ALLOWED",
 		"RESULT_RECEIVERS_NOT_ALLOWED",
 		"ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
+		"INTERMEDIATE_TABLE_NOT_POPULATED",
+		"INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING",
+		"INTERMEDIATE_TABLE_BASE_TABLE_REMOVED",
+		"INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED",
+		"INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER",
+		"INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED",
 	}
 }
 
@@ -1272,8 +1459,9 @@ type SchemaType string
 
 // Enum values for SchemaType
 const (
-	SchemaTypeTable          SchemaType = "TABLE"
-	SchemaTypeIdMappingTable SchemaType = "ID_MAPPING_TABLE"
+	SchemaTypeTable             SchemaType = "TABLE"
+	SchemaTypeIdMappingTable    SchemaType = "ID_MAPPING_TABLE"
+	SchemaTypeIntermediateTable SchemaType = "INTERMEDIATE_TABLE"
 )
 
 // Values returns all known values for SchemaType. Note that this can be expanded
@@ -1284,6 +1472,7 @@ func (SchemaType) Values() []SchemaType {
 	return []SchemaType{
 		"TABLE",
 		"ID_MAPPING_TABLE",
+		"INTERMEDIATE_TABLE",
 	}
 }
 

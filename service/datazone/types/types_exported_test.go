@@ -122,6 +122,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberS3Properties:
 		_ = v.Value // Value is types.S3PropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberSnowflakeProperties:
+		_ = v.Value // Value is types.SnowflakePropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesInput
 
@@ -155,6 +158,7 @@ var _ *types.HyperPodPropertiesInput
 var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.WorkflowsMwaaPropertiesInput
 var _ *types.AmazonQPropertiesInput
+var _ *types.SnowflakePropertiesInput
 var _ *types.GluePropertiesInput
 var _ *types.S3PropertiesInput
 var _ *types.IamPropertiesInput
@@ -192,6 +196,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	case *types.ConnectionPropertiesOutputMemberS3Properties:
 		_ = v.Value // Value is types.S3PropertiesOutput
 
+	case *types.ConnectionPropertiesOutputMemberSnowflakeProperties:
+		_ = v.Value // Value is types.SnowflakePropertiesOutput
+
 	case *types.ConnectionPropertiesOutputMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesOutput
 
@@ -227,6 +234,7 @@ var _ *types.SparkEmrPropertiesOutput
 var _ *types.LakehousePropertiesOutput
 var _ *types.VpcPropertiesOutput
 var _ *types.IamPropertiesOutput
+var _ *types.SnowflakePropertiesOutput
 var _ *types.WorkflowsServerlessPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
 var _ *types.GluePropertiesOutput
@@ -259,6 +267,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	case *types.ConnectionPropertiesPatchMemberS3Properties:
 		_ = v.Value // Value is types.S3PropertiesPatch
 
+	case *types.ConnectionPropertiesPatchMemberSnowflakeProperties:
+		_ = v.Value // Value is types.SnowflakePropertiesPatch
+
 	case *types.ConnectionPropertiesPatchMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesPatch
 
@@ -282,6 +293,7 @@ var _ *types.RedshiftPropertiesPatch
 var _ *types.AthenaPropertiesPatch
 var _ *types.GluePropertiesPatch
 var _ *types.LakehousePropertiesPatch
+var _ *types.SnowflakePropertiesPatch
 var _ *types.S3PropertiesPatch
 var _ *types.VpcPropertiesPatch
 

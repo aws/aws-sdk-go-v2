@@ -2873,6 +2873,27 @@ func serializeCBOR_EvaluationCriteria(v types.EvaluationCriteria) (smithycbor.Va
 	return vm, nil
 }
 
+func serializeCBOR_EvaluationWindow(v types.EvaluationWindow) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	switch uv := v.(type) {
+	case *types.EvaluationWindowMemberWallClockWindow:
+		ser, err := serializeCBOR_WallClockWindow(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["WallClockWindow"] = ser
+	case *types.EvaluationWindowMemberSlidingWindow:
+		ser, err := serializeCBOR_SlidingWindow(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["SlidingWindow"] = ser
+	default:
+		return nil, fmt.Errorf("unknown variant type %T", v)
+	}
+	return vm, nil
+}
+
 func serializeCBOR_ExtendedStatistics(v []string) (smithycbor.Value, error) {
 	vl := smithycbor.List{}
 	for i := range v {
@@ -3573,6 +3594,12 @@ func serializeCBOR_SingleMetricAnomalyDetector(v *types.SingleMetricAnomalyDetec
 	return vm, nil
 }
 
+func serializeCBOR_SlidingWindow(v *types.SlidingWindow) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
 func serializeCBOR_StandardUnit(v types.StandardUnit) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
@@ -3687,6 +3714,18 @@ func serializeCBOR_Values(v []float64) (smithycbor.Value, error) {
 		vl = append(vl, ser)
 	}
 	return vl, nil
+}
+
+func serializeCBOR_WallClockWindow(v *types.WallClockWindow) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Timezone != nil {
+		ser, err := serializeCBOR_String(*v.Timezone)
+		if err != nil {
+			return nil, err
+		}
+		vm["Timezone"] = ser
+	}
+	return vm, nil
 }
 
 func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
@@ -5135,6 +5174,13 @@ func serializeCBOR_PutMetricAlarmInput(v *PutMetricAlarmInput) (smithycbor.Value
 			return nil, err
 		}
 		vm["ThresholdMetricId"] = ser
+	}
+	if v.EvaluationWindow != nil {
+		ser, err := serializeCBOR_EvaluationWindow(v.EvaluationWindow)
+		if err != nil {
+			return nil, err
+		}
+		vm["EvaluationWindow"] = ser
 	}
 	if v.EvaluationCriteria != nil {
 		ser, err := serializeCBOR_EvaluationCriteria(v.EvaluationCriteria)

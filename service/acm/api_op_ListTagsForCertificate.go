@@ -6,12 +6,16 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the tags that have been applied to the ACM certificate. Use the
 // certificate's Amazon Resource Name (ARN) to specify the certificate. To add a
 // tag to an ACM certificate, use the AddTagsToCertificateaction. To delete a tag, use the RemoveTagsFromCertificate action.
+//
+// This action applies only to the certificate resource type. For all other ACM
+// resource types, use ListTagsForResourceinstead.
 func (c *Client) ListTagsForCertificate(ctx context.Context, params *ListTagsForCertificateInput, optFns ...func(*Options)) (*ListTagsForCertificateOutput, error) {
 	if params == nil {
 		params = &ListTagsForCertificateInput{}
@@ -42,6 +46,11 @@ type ListTagsForCertificateInput struct {
 	CertificateArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (in *ListTagsForCertificateInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type ListTagsForCertificateOutput struct {

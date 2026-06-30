@@ -1,3 +1,7 @@
+# v1.86.1 (2026-06-30)
+
+* **Documentation**: Updated threshold configuration documentation.
+
 # v1.86.0 (2026-06-29)
 
 * **Feature**: Amazon ECS now supports customizable deployment circuit breaker configurations. Customers can now define the failure threshold or control the failure counting mechanism.

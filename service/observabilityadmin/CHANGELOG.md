@@ -1,3 +1,7 @@
+# v1.18.0 (2026-06-30)
+
+* **Feature**: Organization and account level telemetry rule via Observability Admin and CloudWatch pipelines for metrics
+
 # v1.17.1 (2026-06-29)
 
 * No change notes available for this release.

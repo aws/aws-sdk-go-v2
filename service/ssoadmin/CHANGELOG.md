@@ -1,3 +1,7 @@
+# v1.40.0 (2026-06-30)
+
+* **Feature**: AWS IAM Identity Center now returns PrimaryRegion and Regions in the ListInstances response, providing information about replicated instances.
+
 # v1.39.8 (2026-06-29)
 
 * No change notes available for this release.

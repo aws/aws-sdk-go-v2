@@ -4136,6 +4136,37 @@ func deserializeCBOR_EvaluationState(v smithycbor.Value) (types.EvaluationState,
 	return types.EvaluationState(av), nil
 }
 
+func deserializeCBOR_EvaluationWindow(v smithycbor.Value) (types.EvaluationWindow, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	for key, sv := range av {
+		if key == "WallClockWindow" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_WallClockWindow(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.EvaluationWindowMemberWallClockWindow{Value: *dv}, nil
+		}
+
+		if key == "SlidingWindow" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_SlidingWindow(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.EvaluationWindowMemberSlidingWindow{Value: *dv}, nil
+		}
+	}
+	return nil, fmt.Errorf("unrecognized variant")
+}
+
 func deserializeCBOR_HistoryItemType(v smithycbor.Value) (types.HistoryItemType, error) {
 	av, ok := v.(smithycbor.String)
 	if !ok {
@@ -5488,6 +5519,15 @@ func deserializeCBOR_MetricAlarm(v smithycbor.Value) (*types.MetricAlarm, error)
 			ds.StateTransitionedTimestamp = ptr.Time(dv)
 		}
 
+		if key == "EvaluationWindow" {
+
+			dv, err := deserializeCBOR_EvaluationWindow(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EvaluationWindow = dv
+		}
+
 		if key == "EvaluationCriteria" {
 
 			dv, err := deserializeCBOR_EvaluationCriteria(sv)
@@ -6694,6 +6734,19 @@ func deserializeCBOR_SingleMetricAnomalyDetector(v smithycbor.Value) (*types.Sin
 	return ds, nil
 }
 
+func deserializeCBOR_SlidingWindow(v smithycbor.Value) (*types.SlidingWindow, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.SlidingWindow{}
+	for key, sv := range av {
+		_, _ = key, sv
+
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_StandardUnit(v smithycbor.Value) (types.StandardUnit, error) {
 	av, ok := v.(smithycbor.String)
 	if !ok {
@@ -6791,6 +6844,28 @@ func deserializeCBOR_Timestamps(v smithycbor.Value) ([]time.Time, error) {
 		dl = append(dl, di)
 	}
 	return dl, nil
+}
+
+func deserializeCBOR_WallClockWindow(v smithycbor.Value) (*types.WallClockWindow, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.WallClockWindow{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Timezone" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Timezone = ptr.String(dv)
+		}
+	}
+	return ds, nil
 }
 
 func deserializeCBOR_Blob(v smithycbor.Value) ([]byte, error) {

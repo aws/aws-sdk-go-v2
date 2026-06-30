@@ -8180,7 +8180,7 @@
                 "thresholdConfiguration": {
                     "target": "com.amazonaws.ecs#ThresholdConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The threshold configuration that controls when the deployment circuit breaker triggers. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ThresholdConfiguration.html\">ThresholdConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>The threshold configuration that controls when the deployment circuit breaker triggers.</p>"
                     }
                 }
             },

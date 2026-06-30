@@ -1,3 +1,7 @@
+# v1.62.0 (2026-06-30)
+
+* **Feature**: AWS Network Firewall now supports container associations for monitoring ECS and EKS workloads. You can create container associations to dynamically track the IP addresses of running containers in your Amazon ECS and Amazon EKS clusters.
+
 # v1.61.9 (2026-06-29)
 
 * No change notes available for this release.

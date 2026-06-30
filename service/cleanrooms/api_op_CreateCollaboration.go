@@ -37,11 +37,6 @@ type CreateCollaborationInput struct {
 	// This member is required.
 	CreatorMemberAbilities []types.MemberAbility
 
-	// A description of the collaboration provided by the collaboration owner.
-	//
-	// This member is required.
-	Description *string
-
 	// A list of initial members, not including the creator. This list is immutable.
 	//
 	// This member is required.
@@ -90,6 +85,9 @@ type CreateCollaborationInput struct {
 	// The settings for client-side encryption with Cryptographic Computing for Clean
 	// Rooms.
 	DataEncryptionMetadata *types.DataEncryptionMetadata
+
+	// A description of the collaboration provided by the collaboration owner.
+	Description *string
 
 	// An indicator as to whether metrics have been enabled or disabled for the
 	// collaboration.

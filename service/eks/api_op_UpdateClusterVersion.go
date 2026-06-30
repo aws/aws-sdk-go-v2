@@ -56,9 +56,12 @@ type UpdateClusterVersionInput struct {
 	// of the request.
 	ClientRequestToken *string
 
-	// Set this value to true to override upgrade-blocking readiness checks when
-	// updating a cluster.
+	// Set this value to true to override upgrade-blocking or rollback-blocking
+	// readiness checks when updating a cluster.
 	Force bool
+
+	// The rollback configuration for the cluster version rollback.
+	RollbackConfig *types.RollbackConfig
 
 	noSmithyDocumentSerde
 }

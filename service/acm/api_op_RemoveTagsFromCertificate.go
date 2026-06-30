@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -13,6 +14,9 @@ import (
 // pair. If you do not specify the value portion of the tag when calling this
 // function, the tag will be removed regardless of value. If you specify a value,
 // the tag is removed only if it is associated with the specified value.
+//
+// This action applies only to the certificate resource type. For all other ACM
+// resource types, use UntagResourceinstead.
 //
 // To add tags to a certificate, use the AddTagsToCertificate action. To view all of the tags that
 // have been applied to a specific ACM certificate, use the ListTagsForCertificateaction.
@@ -51,6 +55,11 @@ type RemoveTagsFromCertificateInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (in *RemoveTagsFromCertificateInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type RemoveTagsFromCertificateOutput struct {

@@ -1,3 +1,40 @@
+# Release (2026-06-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.41.0](service/acm/CHANGELOG.md#v1410-2026-06-30)
+  * **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol to issue public certificates. ACME is an industry-standard protocol for automating certificate lifecycle on customer-managed infrastructure such as on-premises servers and Kubernetes clusters.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.68.0](service/autoscaling/CHANGELOG.md#v1680-2026-06-30)
+  * **Feature**: This release adds support for a new reservations-then-balanced capacity distribution strategy, which first attempts to launch instances into your Capacity Reservations and then balances remaining capacity across healthy Availability Zones.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.46.0](service/cleanrooms/CHANGELOG.md#v1460-2026-06-30)
+  * **Feature**: Adds support for intermediate tables in AWS Clean Rooms collaborations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.73.0](service/cloudformation/CHANGELOG.md#v1730-2026-06-30)
+  * **Feature**: AWS CloudFormation adds a DeploymentConfig parameter to enable Express mode, which completes stack operations as soon as resource configuration is applied. Also adds a DisableValidation parameter to skip pre-deployment validation, which now runs automatically on CreateStack and UpdateStak.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.61.0](service/cloudwatch/CHANGELOG.md#v1610-2026-06-30)
+  * **Feature**: Customers can configure alarms with wall-clock-aligned evaluation windows instead of sliding windows, with optional timezone support for daily or weekly periods
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.70.0](service/codebuild/CHANGELOG.md#v1700-2026-06-30)
+  * **Feature**: Adds support for host kernel selection for on-demand builds.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.178.0](service/connect/CHANGELOG.md#v11780-2026-06-30)
+  * **Feature**: Amazon Connect - Added CreateAttachedFile and StartContactConversationalAnalyticsJob APIs to import call recordings and run conversational analytics.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.64.0](service/datazone/CHANGELOG.md#v1640-2026-06-30)
+  * **Feature**: Amazon DataZone now supports SNOWFLAKE as a connection type in the CreateConnection API, enabling metadata and lineage retrieval from Snowflake databases. Specify snowflakeProperties with connection details, a Secrets Manager secret, an Athena spill bucket, and an identity mapping for Snowflake.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.310.0](service/ec2/CHANGELOG.md#v13100-2026-06-30)
+  * **Feature**: Adds ModifyVpcEndpointPayerResponsibility API, which enables VPC endpoint service owners to modify the billing account for VPC endpoint usage charges at the individual endpoint level
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.86.1](service/ecs/CHANGELOG.md#v1861-2026-06-30)
+  * **Documentation**: Updated threshold configuration documentation.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.88.0](service/eks/CHANGELOG.md#v1880-2026-06-30)
+  * **Feature**: Adds Kubernetes version rollback support, including the CancelUpdate operation to cancel an in-progress VersionRollback update, the RollbackConfig structure with a timeoutMinutes field, and the Cancellation structure surfaced via the new cancellation field on the Update object.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.62.0](service/networkfirewall/CHANGELOG.md#v1620-2026-06-30)
+  * **Feature**: AWS Network Firewall now supports container associations for monitoring ECS and EKS workloads. You can create container associations to dynamically track the IP addresses of running containers in your Amazon ECS and Amazon EKS clusters.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.18.0](service/observabilityadmin/CHANGELOG.md#v1180-2026-06-30)
+  * **Feature**: Organization and account level telemetry rule via Observability Admin and CloudWatch pipelines for metrics
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.20.0](service/partnercentralselling/CHANGELOG.md#v1200-2026-06-30)
+  * **Feature**: This release adds AwsMarketplaceSolutions and AwsMarketplaceProducts entity types to the Associate and Disassociate APIs, returns them in GetOpportunity, and adds AwsMarketplaceSolutionArn to ListSolutions ,letting partners link Marketplace listings directly to opportunities.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.40.0](service/ssoadmin/CHANGELOG.md#v1400-2026-06-30)
+  * **Feature**: AWS IAM Identity Center now returns PrimaryRegion and Regions in the ListInstances response, providing information about replicated instances.
+* `github.com/aws/aws-sdk-go-v2/service/supportauthz`: [v1.0.0](service/supportauthz/CHANGELOG.md#v100-2026-06-30)
+  * **Release**: New AWS service client module
+  * **Feature**: New SDK release for SupportAuthZ.
+
 # Release (2026-06-29)
 
 ## General Highlights

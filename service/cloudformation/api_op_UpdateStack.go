@@ -143,10 +143,20 @@ type UpdateStackInput struct {
 	// Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002 .
 	ClientRequestToken *string
 
+	// The deployment configuration for this stack operation, including the deployment
+	// mode.
+	DeploymentConfig *types.DeploymentConfig
+
 	// Preserve the state of previously provisioned resources when an operation fails.
 	//
 	// Default: False
 	DisableRollback *bool
+
+	//  Set to true to disable pre-deployment validations in changeset or stack
+	// operations.
+	//
+	// Default: false
+	DisableValidation *bool
 
 	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that
 	// CloudFormation associates with the stack. Specify an empty list to remove all

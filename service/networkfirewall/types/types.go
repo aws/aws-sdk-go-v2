@@ -322,6 +322,53 @@ type CIDRSummary struct {
 	noSmithyDocumentSerde
 }
 
+// High-level information about a container association, returned by the ListContainerAssociations
+// operation. You can use this information to retrieve the full details of a
+// container association using DescribeContainerAssociation.
+type ContainerAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the container association.
+	Arn *string
+
+	// The descriptive name of the container association.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair that defines a container attribute filter for a container
+// monitoring configuration.
+type ContainerAttribute struct {
+
+	// The key of the container attribute to filter on.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the container attribute to filter on.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a container cluster to monitor, along with optional attribute filters
+// that narrow the scope of monitored containers within the cluster.
+type ContainerMonitoringConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the container cluster to monitor.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// A list of key-value pairs that filter which containers within the cluster are
+	// monitored. Only containers that match the specified attributes are included.
+	AttributeFilters []ContainerAttribute
+
+	noSmithyDocumentSerde
+}
+
 // Individual rules that define match conditions and actions for application-layer
 // traffic. Rules specify what to inspect (domains, headers, methods) and what
 // action to take (allow, deny, alert).
@@ -989,9 +1036,9 @@ type FlowOperationMetadata struct {
 
 // Describes the amount of time that can pass without any traffic sent through the
 // firewall before the firewall determines that the connection is idle and Network
-// Firewall removes the flow entry from its flow table. Existing connections and
-// flows are not impacted when you update this value. Only new connections after
-// you update this value are impacted.
+// Firewall removes the flow entry from its flow table. When you update this value,
+// existing connections will be treated according to your stream exception policy
+// configuration.
 type FlowTimeouts struct {
 
 	// The number of seconds that can pass without any TCP traffic sent through the

@@ -67,6 +67,10 @@ type DeleteStackInput struct {
 	//   due to resource deletion failure.
 	DeletionMode types.DeletionMode
 
+	// The deployment configuration for this stack operation, including the deployment
+	// mode.
+	DeploymentConfig *types.DeploymentConfig
+
 	// For stacks in the DELETE_FAILED state, a list of resource logical IDs that are
 	// associated with the resources you want to retain. During deletion,
 	// CloudFormation deletes the stack but doesn't delete the retained resources.

@@ -955,10 +955,280 @@
                 }
             }
         },
+        "com.amazonaws.networkfirewall#ContainerAssociationLastUpdatedTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.networkfirewall#ContainerAssociationStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>High-level information about a container association, returned by the <a>ListContainerAssociations</a> operation. You can use this information to retrieve the full details of a container association using <a>DescribeContainerAssociation</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#ContainerAssociationSummary"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerAttribute": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the container attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the container attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key-value pair that defines a container attribute filter for a container monitoring configuration.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#ContainerAttribute"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerMonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container cluster to monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeFilters": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that filter which containers within the cluster are monitored. Only containers that match the specified attributes are included.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a container cluster to monitor, along with optional attribute filters that narrow the scope of monitored containers within the cluster.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerMonitoringConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#ContainerMonitoringConfiguration"
+            }
+        },
+        "com.amazonaws.networkfirewall#ContainerMonitoringType": {
+            "type": "enum",
+            "members": {
+                "ECS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS"
+                    }
+                },
+                "EKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkfirewall#Count": {
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.networkfirewall#CreateContainerAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#CreateContainerAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#CreateContainerAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InsufficientCapacityException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a container association for Network Firewall. A container association links container clusters (ECS or EKS) to Network Firewall, enabling dynamic IP resolution for firewall rules based on container attributes.</p>\n         <p>To manage a container association's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about container associations, use <a>ListContainerAssociations</a> and <a>DescribeContainerAssociation</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#CreateContainerAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association. You can't change the name of a container association after you create it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the container association.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of container orchestration platform for the clusters in this association. Valid values are <code>ECS</code> and <code>EKS</code>. You can't change the type after creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContainerMonitoringConfigurations": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of container monitoring configurations that define which clusters and container attributes to monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key:value pairs to associate with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#CreateContainerAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the container association.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of container orchestration platform. Either <code>ECS</code> or <code>EKS</code>.</p>"
+                    }
+                },
+                "ContainerMonitoringConfigurations": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container monitoring configurations for this container association.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the container association.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key:value pairs associated with the resource.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association. The token marks the state of the container association resource at the time of the request. To make an update to the container association, provide the token in your request. Network Firewall uses the token to ensure that the container association hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the container association again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.networkfirewall#CreateFirewall": {
@@ -1987,6 +2257,81 @@
         "com.amazonaws.networkfirewall#DeepThreatInspection": {
             "type": "boolean"
         },
+        "com.amazonaws.networkfirewall#DeleteContainerAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DeleteContainerAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DeleteContainerAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified container association. When you delete a container association, Network Firewall stops monitoring the associated container clusters and removes the resolved IP addresses from firewall rules.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DeleteContainerAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association. You must specify the ARN or the name, and you can specify both.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association. You must specify the ARN or the name, and you can specify both.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DeleteContainerAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the container association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkfirewall#DeleteFirewall": {
             "type": "operation",
             "input": {
@@ -2712,6 +3057,120 @@
                     "target": "com.amazonaws.networkfirewall#VpcEndpointAssociationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this \nby calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeContainerAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DescribeContainerAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DescribeContainerAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the properties of a container association.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeContainerAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association. You must specify the ARN or the name, and you can specify both.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association. You must specify the ARN or the name, and you can specify both.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeContainerAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the container association.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of container orchestration platform. Either <code>ECS</code> or <code>EKS</code>.</p>"
+                    }
+                },
+                "ContainerMonitoringConfigurations": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container monitoring configurations for this container association.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the container association.</p>"
+                    }
+                },
+                "ResolvedCidrCount": {
+                    "target": "com.amazonaws.networkfirewall#CIDRCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CIDR blocks that have been resolved from the monitored containers for this container association.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAssociationLastUpdatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the container association was updated or resolved new container IP addresses.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key:value pairs associated with the resource.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association. The token marks the state of the container association resource at the time of the request.</p>"
                     }
                 }
             },
@@ -5053,7 +5512,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table. \n          Existing connections and flows are not impacted when you update this value. Only new connections after you update this value are impacted.\n     </p>"
+                "smithy.api#documentation": "<p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table. \n          When you update this value, existing connections will be treated according to your stream exception policy configuration.\n     </p>"
             }
         },
         "com.amazonaws.networkfirewall#Flows": {
@@ -5610,6 +6069,75 @@
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#ListContainerAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#ListContainerAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#ListContainerAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the metadata for the container associations that you have defined. You can optionally page through results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContainerAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#ListContainerAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.networkfirewall#PaginationMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more objects are available, in the response, Network Firewall provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkfirewall#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#ListContainerAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociations": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container association metadata objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkfirewall#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 }
             },
@@ -6824,6 +7352,9 @@
                     "target": "com.amazonaws.networkfirewall#AttachRuleGroupsToProxyConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.networkfirewall#CreateContainerAssociation"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#CreateFirewall"
                 },
                 {
@@ -6849,6 +7380,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#CreateVpcEndpointAssociation"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#DeleteContainerAssociation"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DeleteFirewall"
@@ -6882,6 +7416,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DeleteVpcEndpointAssociation"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#DescribeContainerAssociation"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DescribeFirewall"
@@ -6944,6 +7481,9 @@
                     "target": "com.amazonaws.networkfirewall#ListAnalysisReports"
                 },
                 {
+                    "target": "com.amazonaws.networkfirewall#ListContainerAssociations"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#ListFirewallPolicies"
                 },
                 {
@@ -6999,6 +7539,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateAvailabilityZoneChangeProtection"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#UpdateContainerAssociation"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateFirewallAnalysisSettings"
@@ -11529,6 +12072,144 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateContainerAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#UpdateContainerAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#UpdateContainerAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of an existing container association. Use this to modify the container monitoring configurations or description.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateContainerAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association. You must specify the ARN or the name, and you can specify both.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association. You must specify the ARN or the name, and you can specify both.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the container association.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of container orchestration platform. This must match the type specified when the container association was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContainerMonitoringConfigurations": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated list of container monitoring configurations that define which clusters and container attributes to monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key:value pairs associated with the resource.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association. The token marks the state of the container association resource at the time of the request. To make an update to the container association, provide the token in your request. Network Firewall uses the token to ensure that the container association hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the container association again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateContainerAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ContainerAssociationName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the container association.</p>"
+                    }
+                },
+                "ContainerAssociationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container association.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the container association.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of container orchestration platform. Either <code>ECS</code> or <code>EKS</code>.</p>"
+                    }
+                },
+                "ContainerMonitoringConfigurations": {
+                    "target": "com.amazonaws.networkfirewall#ContainerMonitoringConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container monitoring configurations for this container association.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkfirewall#ContainerAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the container association.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key:value pairs associated with the resource.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association. The token marks the state of the container association resource at the time of the request.</p>"
                     }
                 }
             },

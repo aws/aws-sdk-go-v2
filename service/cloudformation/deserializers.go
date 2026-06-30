@@ -13087,6 +13087,71 @@ func awsAwsquery_deserializeDocumentCreatedButModifiedException(v **types.Create
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentDeploymentConfig(v **types.DeploymentConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DeploymentConfig
+	if *v == nil {
+		sv = &types.DeploymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DisableRollback", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected DisableRollback to be of type *bool, got %T instead", val)
+				}
+				sv.DisableRollback = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Mode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Mode = types.DeploymentConfigMode(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentDeploymentTargets(v **types.DeploymentTargets, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19069,6 +19134,12 @@ func awsAwsquery_deserializeDocumentStack(v **types.Stack, decoder smithyxml.Nod
 					return err
 				}
 				sv.DeletionTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("DeploymentConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDeploymentConfig(&sv.DeploymentConfig, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("Description", t.Name.Local):
@@ -27475,6 +27546,12 @@ func awsAwsquery_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChange
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("DeploymentConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDeploymentConfig(&sv.DeploymentConfig, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("DeploymentMode", t.Name.Local):

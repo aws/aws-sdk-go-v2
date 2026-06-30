@@ -2549,7 +2549,7 @@
                 "CapacityDistributionStrategy": {
                     "target": "com.amazonaws.autoscaling#CapacityDistributionStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            If launches fail in an Availability Zone, the following strategies are available. The default is <code>balanced-best-effort</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>balanced-only</code> - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>balanced-best-effort</code> - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            If launches fail in an Availability Zone, the following strategies are available. The default is <code>balanced-best-effort</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>balanced-only</code> - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>balanced-best-effort</code> - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>reservations-then-balanced</code> - Auto Scaling will first attempt to launch into your Capacity Reservations, and then balance any remaining capacity across the healthy Availability Zones.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2969,6 +2969,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "balanced-best-effort"
+                    }
+                },
+                "RESERVATIONS_THEN_BALANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reservations-then-balanced"
                     }
                 }
             }

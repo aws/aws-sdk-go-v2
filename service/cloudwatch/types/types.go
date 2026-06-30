@@ -444,6 +444,44 @@ type EvaluationCriteriaMemberPromQLCriteria struct {
 
 func (*EvaluationCriteriaMemberPromQLCriteria) isEvaluationCriteria() {}
 
+// The evaluation window that an alarm uses to select the range of metric data
+// that it evaluates each time it runs. This is a union type. Set exactly one of
+// its members, SlidingWindow or WallClockWindow . If you don't set
+// EvaluationWindow , the alarm uses a SlidingWindow by default.
+//
+// For more information, see [Alarm evaluation windows] in the CloudWatch User Guide.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationWindowMemberSlidingWindow
+//	EvaluationWindowMemberWallClockWindow
+//
+// [Alarm evaluation windows]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+type EvaluationWindow interface {
+	isEvaluationWindow()
+}
+
+// A sliding window, which advances each time the alarm is evaluated, forming a
+// rolling time window. This is the default evaluation window.
+type EvaluationWindowMemberSlidingWindow struct {
+	Value SlidingWindow
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationWindowMemberSlidingWindow) isEvaluationWindow() {}
+
+// A wall clock window, which aligns the evaluated range to fixed clock boundaries
+// that match the alarm's period, such as the top of the hour, midnight, or the
+// start of the calendar week.
+type EvaluationWindowMemberWallClockWindow struct {
+	Value WallClockWindow
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationWindowMemberWallClockWindow) isEvaluationWindow() {}
+
 // This structure contains the definition for a Contributor Insights rule. For
 // more information about this rule, see[Using Constributor Insights to analyze high-cardinality data] in the Amazon CloudWatch User Guide.
 //
@@ -888,6 +926,13 @@ type MetricAlarm struct {
 	//
 	// [Create alarms on Metrics Insights queries]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html
 	EvaluationState EvaluationState
+
+	// The evaluation window that the alarm uses to select the range of metric data
+	// that it evaluates. This is either a sliding window or a wall clock window. For
+	// more information, see [Alarm evaluation windows]in the CloudWatch User Guide.
+	//
+	// [Alarm evaluation windows]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+	EvaluationWindow EvaluationWindow
 
 	// The percentile statistic for the metric associated with the alarm. Specify a
 	// value between p0.0 and p100.
@@ -1630,6 +1675,17 @@ type SingleMetricAnomalyDetector struct {
 	noSmithyDocumentSerde
 }
 
+// An evaluation window that advances each time the alarm is evaluated, forming a
+// rolling time window. This is the default evaluation window. A sliding window has
+// no additional configuration options.
+//
+// Choose a sliding window when you need the fastest detection and the calendar
+// boundaries of the data don't matter, such as for continuous performance,
+// latency, or resource-exhaustion monitoring.
+type SlidingWindow struct {
+	noSmithyDocumentSerde
+}
+
 // Represents a set of statistics that describes a specific metric.
 type StatisticSet struct {
 
@@ -1673,6 +1729,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// An evaluation window that aligns the evaluated range to fixed clock boundaries
+// that match the alarm's period, such as the top of the hour, midnight, or the
+// start of the calendar week, optionally in a specific time zone.
+//
+// When you use a wall clock window, the alarm's period must be 1 minute (60
+// seconds), 5 minutes (300 seconds), 1 hour (3,600 seconds), 1 day (86,400
+// seconds), or 1 week (604,800 seconds). Other period values aren't supported with
+// a wall clock window.
+//
+// Choose a wall clock window when your monitoring is tied to a business or
+// calendar period, such as daily reports, batch jobs, or backups, or when you want
+// alarm evaluations to match the periods shown on a metric dashboard.
+type WallClockWindow struct {
+
+	// The time zone to use when the alarm aligns the evaluation window to clock
+	// boundaries. You can specify an IANA time zone name (for example,
+	// America/New_York ), a fixed UTC offset (for example, +05:30 ), or an
+	// offset-prefixed identifier (for example, UTC+05:30 ). The offset must be aligned
+	// to a multiple of 5 minutes. If you don't specify a time zone, CloudWatch uses
+	// UTC .
+	//
+	// The time zone affects window alignment for all periods, including periods of
+	// one hour or shorter.
+	Timezone *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1685,3 +1769,4 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isEvaluationCriteria() {}
+func (*UnknownUnionMember) isEvaluationWindow()   {}

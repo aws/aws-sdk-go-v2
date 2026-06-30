@@ -50,6 +50,46 @@ func (ConfigurationSyncState) Values() []ConfigurationSyncState {
 	}
 }
 
+type ContainerAssociationStatus string
+
+// Enum values for ContainerAssociationStatus
+const (
+	ContainerAssociationStatusActive   ContainerAssociationStatus = "ACTIVE"
+	ContainerAssociationStatusCreating ContainerAssociationStatus = "CREATING"
+	ContainerAssociationStatusDeleting ContainerAssociationStatus = "DELETING"
+)
+
+// Values returns all known values for ContainerAssociationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerAssociationStatus) Values() []ContainerAssociationStatus {
+	return []ContainerAssociationStatus{
+		"ACTIVE",
+		"CREATING",
+		"DELETING",
+	}
+}
+
+type ContainerMonitoringType string
+
+// Enum values for ContainerMonitoringType
+const (
+	ContainerMonitoringTypeEcs ContainerMonitoringType = "ECS"
+	ContainerMonitoringTypeEks ContainerMonitoringType = "EKS"
+)
+
+// Values returns all known values for ContainerMonitoringType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerMonitoringType) Values() []ContainerMonitoringType {
+	return []ContainerMonitoringType{
+		"ECS",
+		"EKS",
+	}
+}
+
 type EnabledAnalysisType string
 
 // Enum values for EnabledAnalysisType

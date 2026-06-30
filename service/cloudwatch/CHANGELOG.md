@@ -1,3 +1,7 @@
+# v1.61.0 (2026-06-30)
+
+* **Feature**: Customers can configure alarms with wall-clock-aligned evaluation windows instead of sliding windows, with optional timezone support for daily or weekly periods
+
 # v1.60.0 (2026-06-29)
 
 * **Feature**: This release adds the API (PutLogAlarm) to manage a new CloudWatch resource, Log Based Alarms. Log Based Alarms allows customers to alarm directly on CloudWatch Logs query results.

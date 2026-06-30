@@ -8948,6 +8948,42 @@ func (PayerResponsibility) Values() []PayerResponsibility {
 	}
 }
 
+type PayerResponsibilityScope string
+
+// Enum values for PayerResponsibilityScope
+const (
+	PayerResponsibilityScopeVpcEndpointCharges PayerResponsibilityScope = "vpc-endpoint-charges"
+)
+
+// Values returns all known values for PayerResponsibilityScope. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PayerResponsibilityScope) Values() []PayerResponsibilityScope {
+	return []PayerResponsibilityScope{
+		"vpc-endpoint-charges",
+	}
+}
+
+type PayerResponsibilityType string
+
+// Enum values for PayerResponsibilityType
+const (
+	PayerResponsibilityTypeVpcEndpointAccount        PayerResponsibilityType = "vpc-endpoint-account"
+	PayerResponsibilityTypeVpcEndpointServiceAccount PayerResponsibilityType = "vpc-endpoint-service-account"
+)
+
+// Values returns all known values for PayerResponsibilityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PayerResponsibilityType) Values() []PayerResponsibilityType {
+	return []PayerResponsibilityType{
+		"vpc-endpoint-account",
+		"vpc-endpoint-service-account",
+	}
+}
+
 type PaymentOption string
 
 // Enum values for PaymentOption

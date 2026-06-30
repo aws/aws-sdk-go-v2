@@ -1,3 +1,7 @@
+# v1.88.0 (2026-06-30)
+
+* **Feature**: Adds Kubernetes version rollback support, including the CancelUpdate operation to cancel an in-progress VersionRollback update, the RollbackConfig structure with a timeoutMinutes field, and the Cancellation structure surfaced via the new cancellation field on the Update object.
+
 # v1.87.1 (2026-06-29)
 
 * No change notes available for this release.

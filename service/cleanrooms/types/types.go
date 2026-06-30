@@ -307,9 +307,16 @@ type AnalysisRuleCustom struct {
 	// applied to the output of the direct query.
 	AdditionalAnalyses AdditionalAnalyses
 
+	// The list of allowed additional analyses for the custom analysis rule.
+	AllowedAdditionalAnalyses []string
+
 	// The IDs of the Amazon Web Services accounts that are allowed to query by the
 	// custom analysis rule. Required when allowedAnalyses is ANY_QUERY .
 	AllowedAnalysisProviders []string
+
+	// The list of Amazon Web Services account IDs that are allowed to receive results
+	// from queries run on the configured table.
+	AllowedResultReceivers []string
 
 	// The differential privacy configuration.
 	DifferentialPrivacy *DifferentialPrivacyConfiguration
@@ -944,6 +951,34 @@ type ChangeSpecificationMemberMember struct {
 }
 
 func (*ChangeSpecificationMemberMember) isChangeSpecification() {}
+
+// Contains information about a child resource of a given resource in a
+// collaboration.
+type ChildResource struct {
+
+	// The Amazon Web Services account ID of the member who owns the child resource.
+	//
+	// This member is required.
+	OwnerAccountId *string
+
+	// The name of the child resource.
+	//
+	// This member is required.
+	ResourceName *string
+
+	// The type of the child resource.
+	//
+	// This member is required.
+	ResourceType ChildResourceType
+
+	// The unique identifier of the child resource.
+	ResourceId *string
+
+	// The current status of the child resource.
+	ResourceStatus ResourceStatus
+
+	noSmithyDocumentSerde
+}
 
 // The multi-party data share environment. The collaboration contains metadata
 // about its purpose and participants.
@@ -1800,6 +1835,43 @@ type ColumnClassificationDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains column lineage information that traces a disallowed output column back
+// to its source in a base table.
+type ColumnLineageEntry struct {
+
+	// The name of the column in the intermediate table.
+	//
+	// This member is required.
+	Column *string
+
+	// The Amazon Web Services account ID of the owner of the source table.
+	//
+	// This member is required.
+	SourceAccountId *string
+
+	// The name of the column in the source table.
+	//
+	// This member is required.
+	SourceColumn *string
+
+	// The unique identifier of the source table.
+	//
+	// This member is required.
+	SourceId *string
+
+	// The name of the source table.
+	//
+	// This member is required.
+	SourceName *string
+
+	// The type of the source table.
+	//
+	// This member is required.
+	SourceType BaseTableDependencyType
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration of the compute resources for an analysis with the Spark
 //
 // analytics engine.
@@ -2197,6 +2269,9 @@ type ConfiguredTableAssociation struct {
 	//  The analysis rule types for the configured table association.
 	AnalysisRuleTypes []ConfiguredTableAssociationAnalysisRuleType
 
+	// The child resources that depend on this configured table association.
+	ChildResources []ChildResource
+
 	// A description of the configured table association.
 	Description *string
 
@@ -2363,6 +2438,17 @@ type ConfiguredTableAssociationAnalysisRulePolicyV1MemberList struct {
 }
 
 func (*ConfiguredTableAssociationAnalysisRulePolicyV1MemberList) isConfiguredTableAssociationAnalysisRulePolicyV1() {
+}
+
+// Contains the schema type properties for a configured table association.
+type ConfiguredTableAssociationSchemaTypeProperties struct {
+
+	// The unique identifier of the configured table association.
+	//
+	// This member is required.
+	ConfiguredTableAssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 // The configured table association summary for the objects listed by the request.
@@ -3001,6 +3087,9 @@ type IdMappingTable struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// The child resources that depend on this ID mapping table.
+	ChildResources []ChildResource
+
 	// The description of the ID mapping table.
 	Description *string
 
@@ -3064,6 +3153,9 @@ type IdMappingTableSchemaTypeProperties struct {
 	//
 	// This member is required.
 	IdMappingTableInputSource []IdMappingTableInputSource
+
+	// The unique identifier of the ID mapping table.
+	IdMappingTableId *string
 
 	noSmithyDocumentSerde
 }
@@ -3321,6 +3413,651 @@ type IdNamespaceAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the inherited additional analyses constraint and its sources from
+// parent tables.
+type InheritedAdditionalAnalyses struct {
+
+	// The list of parent tables that contribute to this inherited constraint.
+	//
+	// This member is required.
+	Sources []InheritedAdditionalAnalysesSource
+
+	// The effective additional analyses setting inherited from parent tables.
+	//
+	// This member is required.
+	Value AdditionalAnalyses
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a parent table that contributes an additional
+// analyses constraint.
+type InheritedAdditionalAnalysesSource struct {
+
+	// The unique identifier of the parent table.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the parent table.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Web Services account ID of the member who owns the parent table.
+	//
+	// This member is required.
+	SourceAccountId *string
+
+	// The type of the parent table.
+	//
+	// This member is required.
+	Type BaseTableDependencyType
+
+	// The additional analyses setting defined on the parent table.
+	//
+	// This member is required.
+	Value AdditionalAnalyses
+
+	noSmithyDocumentSerde
+}
+
+// Contains the inherited allowed additional analyses constraint and its sources
+// from parent tables.
+type InheritedAllowedAdditionalAnalyses struct {
+
+	// The list of parent tables that contribute to this inherited constraint.
+	//
+	// This member is required.
+	Sources []InheritedAllowedAdditionalAnalysesSource
+
+	// The effective list of allowed additional analyses inherited from parent tables.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a parent table that contributes an allowed
+// additional analyses constraint.
+type InheritedAllowedAdditionalAnalysesSource struct {
+
+	// The unique identifier of the parent table.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the parent table.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Web Services account ID of the member who owns the parent table.
+	//
+	// This member is required.
+	SourceAccountId *string
+
+	// The type of the parent table.
+	//
+	// This member is required.
+	Type BaseTableDependencyType
+
+	// The allowed additional analyses defined on the parent table.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the inherited allowed result receivers constraint and its sources from
+// parent tables.
+type InheritedAllowedResultReceivers struct {
+
+	// The list of parent tables that contribute to this inherited constraint.
+	//
+	// This member is required.
+	Sources []InheritedAllowedResultReceiversSource
+
+	// The effective list of Amazon Web Services account IDs allowed to receive
+	// results, inherited from parent tables.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a parent table that contributes an allowed result
+// receivers constraint.
+type InheritedAllowedResultReceiversSource struct {
+
+	// The unique identifier of the parent table.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the parent table.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Web Services account ID of the member who owns the parent table.
+	//
+	// This member is required.
+	SourceAccountId *string
+
+	// The type of the parent table.
+	//
+	// This member is required.
+	Type BaseTableDependencyType
+
+	// The allowed result receiver account IDs defined on the parent table.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the inherited disallowed output columns constraint and the column
+// lineage tracing each column to its source.
+type InheritedDisallowedOutputColumns struct {
+
+	// The lineage information that traces each disallowed output column back to its
+	// source in a parent table.
+	//
+	// This member is required.
+	ColumnLineage []ColumnLineageEntry
+
+	// The list of column names that are disallowed from appearing in query output,
+	// inherited from parent tables.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of an intermediate table in Clean Rooms. An intermediate
+// table stores a query definition and its materialized results within a
+// collaboration.
+type IntermediateTable struct {
+
+	// The Amazon Resource Name (ARN) of the intermediate table.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains the
+	// intermediate table.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains the intermediate table.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time the intermediate table was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the intermediate table.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the membership that contains the intermediate
+	// table.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The unique identifier of the membership that contains the intermediate table.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the intermediate table.
+	//
+	// This member is required.
+	Name *string
+
+	// The analysis configuration that defines the query used to populate the
+	// intermediate table.
+	//
+	// This member is required.
+	PopulationAnalysisConfiguration PopulationAnalysisConfiguration
+
+	// The current status of the intermediate table.
+	//
+	// This member is required.
+	Status IntermediateTableStatus
+
+	// The time the intermediate table was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The types of analysis rules associated with the intermediate table.
+	AnalysisRuleTypes []IntermediateTableAnalysisRuleType
+
+	// The child resources that depend on this intermediate table.
+	ChildResources []ChildResource
+
+	// The description of the intermediate table.
+	Description *string
+
+	// The details of the currently active version of the intermediate table.
+	IntermediateTableVersion *IntermediateTableActiveVersion
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the intermediate
+	// table data.
+	KmsKeyArn *string
+
+	// The number of days that populated data is retained before expiring.
+	RetentionInDays *int32
+
+	// The schema of the intermediate table, containing column definitions. Available
+	// after the table has been successfully populated.
+	Schema *IntermediateTableSchema
+
+	// The reason for the current status of the intermediate table.
+	StatusReason *string
+
+	// The list of base tables that this intermediate table depends on.
+	TableDependencies []IntermediateTableDependency
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of the currently active version of an intermediate table.
+type IntermediateTableActiveVersion struct {
+
+	// The identifier of the protected query that created this version.
+	//
+	// This member is required.
+	AnalysisId *string
+
+	// The type of analysis that created this version.
+	//
+	// This member is required.
+	AnalysisType PopulateIntermediateTableAnalysisType
+
+	// The privacy constraints inherited from parent tables at the time this version
+	// was populated.
+	//
+	// This member is required.
+	InheritedConstraints *IntermediateTableInheritedConstraints
+
+	// The unique identifier of the active version.
+	//
+	// This member is required.
+	VersionId *string
+
+	// The time when this version expires based on the retention period.
+	ExpirationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt this version's
+	// data.
+	KmsKeyArn *string
+
+	// The runtime parameters that were used when populating this version.
+	Parameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of an analysis rule for an intermediate table.
+type IntermediateTableAnalysisRule struct {
+
+	// The policy of the analysis rule.
+	//
+	// This member is required.
+	AnalysisRulePolicy IntermediateTableAnalysisRulePolicy
+
+	// The type of the analysis rule.
+	//
+	// This member is required.
+	AnalysisRuleType IntermediateTableAnalysisRuleType
+
+	// The time the analysis rule was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the intermediate table associated with this
+	// analysis rule.
+	//
+	// This member is required.
+	IntermediateTableArn *string
+
+	// The unique identifier of the intermediate table associated with this analysis
+	// rule.
+	//
+	// This member is required.
+	IntermediateTableIdentifier *string
+
+	// The time the analysis rule was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains the custom analysis rule configuration for an intermediate table.
+type IntermediateTableAnalysisRuleCustom struct {
+
+	// The setting that controls whether additional analyses are allowed on the
+	// intermediate table.
+	AdditionalAnalyses AdditionalAnalyses
+
+	// The list of allowed additional analyses for the intermediate table.
+	AllowedAdditionalAnalyses []string
+
+	// The list of allowed analyses that can be performed on the intermediate table.
+	AllowedAnalyses []string
+
+	// The list of Amazon Web Services account IDs for the allowed analysis providers.
+	AllowedAnalysisProviders []string
+
+	// The list of Amazon Web Services account IDs that are allowed to receive results
+	// from queries run on the intermediate table.
+	AllowedResultReceivers []string
+
+	// Specifies the unique identifier for your users.
+	DifferentialPrivacy *DifferentialPrivacyConfiguration
+
+	// The list of columns that are not allowed in the query output.
+	DisallowedOutputColumns []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the policy for an intermediate table analysis rule.
+//
+// The following types satisfy this interface:
+//
+//	IntermediateTableAnalysisRulePolicyMemberV1
+type IntermediateTableAnalysisRulePolicy interface {
+	isIntermediateTableAnalysisRulePolicy()
+}
+
+// The version 1 policy for the analysis rule.
+type IntermediateTableAnalysisRulePolicyMemberV1 struct {
+	Value IntermediateTableAnalysisRulePolicyV1
+
+	noSmithyDocumentSerde
+}
+
+func (*IntermediateTableAnalysisRulePolicyMemberV1) isIntermediateTableAnalysisRulePolicy() {}
+
+// Contains the version 1 policy for an intermediate table analysis rule.
+//
+// The following types satisfy this interface:
+//
+//	IntermediateTableAnalysisRulePolicyV1MemberCustom
+type IntermediateTableAnalysisRulePolicyV1 interface {
+	isIntermediateTableAnalysisRulePolicyV1()
+}
+
+// The custom analysis rule policy.
+type IntermediateTableAnalysisRulePolicyV1MemberCustom struct {
+	Value IntermediateTableAnalysisRuleCustom
+
+	noSmithyDocumentSerde
+}
+
+func (*IntermediateTableAnalysisRulePolicyV1MemberCustom) isIntermediateTableAnalysisRulePolicyV1() {}
+
+// Contains the name and type of a column in an intermediate table.
+type IntermediateTableColumn struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the column.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// The compute configuration for an intermediate table population operation.
+//
+// The following types satisfy this interface:
+//
+//	IntermediateTableComputeConfigurationMemberQueryComputeConfiguration
+type IntermediateTableComputeConfiguration interface {
+	isIntermediateTableComputeConfiguration()
+}
+
+//	The configuration of the compute resources for workers running an analysis
+//
+// with the Clean Rooms SQL analytics engine.
+type IntermediateTableComputeConfigurationMemberQueryComputeConfiguration struct {
+	Value WorkerComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*IntermediateTableComputeConfigurationMemberQueryComputeConfiguration) isIntermediateTableComputeConfiguration() {
+}
+
+// Contains information about a base table that an intermediate table depends on.
+type IntermediateTableDependency struct {
+
+	// The Amazon Web Services account ID of the member who owns the dependency table.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The unique identifier of the dependency table.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the dependency table.
+	//
+	// This member is required.
+	Name *string
+
+	// Whether the dependency is direct or indirect. A direct dependency is a table
+	// explicitly referenced in the stored query, while an indirect dependency is
+	// referenced through another intermediate table.
+	//
+	// This member is required.
+	ParentType BaseTableParentType
+
+	// The type of the dependency table.
+	//
+	// This member is required.
+	Type BaseTableDependencyType
+
+	noSmithyDocumentSerde
+}
+
+// Contains the privacy constraints inherited from parent tables for an
+// intermediate table version.
+type IntermediateTableInheritedConstraints struct {
+
+	// The inherited additional analyses constraint.
+	AdditionalAnalyses *InheritedAdditionalAnalyses
+
+	// The inherited allowed additional analyses constraint.
+	AllowedAdditionalAnalyses *InheritedAllowedAdditionalAnalyses
+
+	// The inherited allowed result receivers constraint.
+	AllowedResultReceivers *InheritedAllowedResultReceivers
+
+	// The inherited disallowed output columns constraint.
+	DisallowedOutputColumns *InheritedDisallowedOutputColumns
+
+	noSmithyDocumentSerde
+}
+
+// Contains the output configuration of an intermediate table when a protected
+// query populates it.
+type IntermediateTableOutputConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the intermediate table.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier of the intermediate table.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the intermediate table.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the schema definition of an intermediate table.
+type IntermediateTableSchema struct {
+
+	// The list of columns in the intermediate table schema.
+	//
+	// This member is required.
+	Columns []Column
+
+	noSmithyDocumentSerde
+}
+
+// Contains the schema type properties for an intermediate table.
+type IntermediateTableSchemaTypeProperties struct {
+
+	// The unique identifier of the intermediate table.
+	//
+	// This member is required.
+	IntermediateTableId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an intermediate table.
+type IntermediateTableSummary struct {
+
+	// The Amazon Resource Name (ARN) of the intermediate table.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains the
+	// intermediate table.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains the intermediate table.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time the intermediate table was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the intermediate table.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the membership that contains the intermediate
+	// table.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The unique identifier of the membership that contains the intermediate table.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the intermediate table.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the intermediate table.
+	//
+	// This member is required.
+	Status IntermediateTableStatus
+
+	// The time the intermediate table was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The types of analysis rules associated with the intermediate table.
+	AnalysisRuleTypes []IntermediateTableAnalysisRuleType
+
+	// The description of the intermediate table.
+	Description *string
+
+	// The number of days that populated data is retained before expiring.
+	RetentionInDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a version of an intermediate table.
+type IntermediateTableVersionSummary struct {
+
+	// The identifier of the protected query that created this version.
+	//
+	// This member is required.
+	AnalysisId *string
+
+	// The type of analysis that created this version.
+	//
+	// This member is required.
+	AnalysisType PopulateIntermediateTableAnalysisType
+
+	// The time the version was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The status of the version.
+	//
+	// This member is required.
+	Status IntermediateTableVersionStatus
+
+	// The unique identifier of the intermediate table that this version belongs to.
+	//
+	// This member is required.
+	TableId *string
+
+	// The unique identifier of the version.
+	//
+	// This member is required.
+	VersionId *string
+
+	// The time when this version expires based on the retention period.
+	ExpirationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt this version's
+	// data.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // An object representing the collaboration member's payment responsibilities set
 // by the collaboration creator for query and job compute costs.
 type JobComputePaymentConfig struct {
@@ -3329,9 +4066,8 @@ type JobComputePaymentConfig struct {
 	// member to pay for query and job compute costs ( TRUE ) or has not configured the
 	// collaboration member to pay for query and job compute costs ( FALSE ).
 	//
-	// Exactly one member can be configured to pay for query and job compute costs. An
-	// error is returned if the collaboration creator sets a TRUE value for more than
-	// one member in the collaboration.
+	// One or more members can be configured as payer candidates for query and job
+	// compute costs.
 	//
 	// An error is returned if the collaboration creator sets a FALSE value for the
 	// member who can run queries and jobs.
@@ -3488,7 +4224,8 @@ type MembershipJobComputePaymentConfig struct {
 	// costs ( TRUE ) or has not accepted to pay for query and job compute costs ( FALSE
 	// ).
 	//
-	// There is only one member who pays for queries and jobs.
+	// There can be one or more members who are designated as payer candidates for
+	// queries and jobs.
 	//
 	// An error message is returned for the following reasons:
 	//
@@ -3915,14 +4652,11 @@ type ModelInferencePaymentConfig struct {
 	// member to pay for model inference costs ( TRUE ) or has not configured the
 	// collaboration member to pay for model inference costs ( FALSE ).
 	//
-	// Exactly one member can be configured to pay for model inference costs. An error
-	// is returned if the collaboration creator sets a TRUE value for more than one
-	// member in the collaboration.
+	// One or more members can be configured as payer candidates for model inference
+	// costs.
 	//
 	// If the collaboration creator hasn't specified anyone as the member paying for
-	// model inference costs, then the member who can query is the default payer. An
-	// error is returned if the collaboration creator sets a FALSE value for the
-	// member who can query.
+	// model inference costs, then the member who can query is the default payer.
 	//
 	// This member is required.
 	IsResponsible *bool
@@ -3938,14 +4672,11 @@ type ModelTrainingPaymentConfig struct {
 	// member to pay for model training costs ( TRUE ) or has not configured the
 	// collaboration member to pay for model training costs ( FALSE ).
 	//
-	// Exactly one member can be configured to pay for model training costs. An error
-	// is returned if the collaboration creator sets a TRUE value for more than one
-	// member in the collaboration.
+	// One or more members can be configured as payer candidates for model training
+	// costs.
 	//
 	// If the collaboration creator hasn't specified anyone as the member paying for
-	// model training costs, then the member who can query is the default payer. An
-	// error is returned if the collaboration creator sets a FALSE value for the
-	// member who can query.
+	// model training costs, then the member who can query is the default payer.
 	//
 	// This member is required.
 	IsResponsible *bool
@@ -3969,6 +4700,40 @@ type PaymentConfiguration struct {
 	// An object representing the collaboration member's machine learning payment
 	// responsibilities set by the collaboration creator.
 	MachineLearning *MLPaymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration that defines the analysis used to populate an
+// intermediate table.
+//
+// The following types satisfy this interface:
+//
+//	PopulationAnalysisConfigurationMemberSqlParameters
+type PopulationAnalysisConfiguration interface {
+	isPopulationAnalysisConfiguration()
+}
+
+// The SQL parameters for the population analysis, including the query string or
+// analysis template ARN.
+type PopulationAnalysisConfigurationMemberSqlParameters struct {
+	Value PopulationAnalysisSqlParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*PopulationAnalysisConfigurationMemberSqlParameters) isPopulationAnalysisConfiguration() {}
+
+// Contains the SQL parameters used to populate an intermediate table.
+type PopulationAnalysisSqlParameters struct {
+
+	// The Amazon Resource Name (ARN) of the analysis template to use for populating
+	// the intermediate table.
+	AnalysisTemplateArn *string
+
+	// The SQL query string used to populate the intermediate table. Maximum length of
+	// 500,000 characters.
+	QueryString *string
 
 	noSmithyDocumentSerde
 }
@@ -4928,6 +5693,7 @@ func (*ProtectedQueryOutputMemberS3) isProtectedQueryOutput() {}
 // The following types satisfy this interface:
 //
 //	ProtectedQueryOutputConfigurationMemberDistribute
+//	ProtectedQueryOutputConfigurationMemberIntermediateTable
 //	ProtectedQueryOutputConfigurationMemberMember
 //	ProtectedQueryOutputConfigurationMemberS3
 type ProtectedQueryOutputConfiguration interface {
@@ -4942,6 +5708,17 @@ type ProtectedQueryOutputConfigurationMemberDistribute struct {
 }
 
 func (*ProtectedQueryOutputConfigurationMemberDistribute) isProtectedQueryOutputConfiguration() {}
+
+// The intermediate table output configuration, present when the protected query
+// was triggered by a populate operation.
+type ProtectedQueryOutputConfigurationMemberIntermediateTable struct {
+	Value IntermediateTableOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryOutputConfigurationMemberIntermediateTable) isProtectedQueryOutputConfiguration() {
+}
 
 // Required configuration for a protected query with a member output type.
 type ProtectedQueryOutputConfigurationMemberMember struct {
@@ -5092,6 +5869,10 @@ type ProtectedQuerySummary struct {
 	// This member is required.
 	Status ProtectedQueryStatus
 
+	// The intermediate table configuration, present when the protected query was
+	// triggered by a populate operation.
+	IntermediateTableConfiguration *IntermediateTableOutputConfiguration
+
 	// The account ID of the member that pays for the query compute costs.
 	QueryComputePayerAccountId *string
 
@@ -5106,14 +5887,11 @@ type QueryComputePaymentConfig struct {
 	// member to pay for query compute costs ( TRUE ) or has not configured the
 	// collaboration member to pay for query compute costs ( FALSE ).
 	//
-	// Exactly one member can be configured to pay for query compute costs. An error
-	// is returned if the collaboration creator sets a TRUE value for more than one
-	// member in the collaboration.
+	// One or more members can be configured as payer candidates for query compute
+	// costs.
 	//
 	// If the collaboration creator hasn't specified anyone as the member paying for
-	// query compute costs, then the member who can query is the default payer. An
-	// error is returned if the collaboration creator sets a FALSE value for the
-	// member who can query.
+	// query compute costs, then the member who can query is the default payer.
 	//
 	// This member is required.
 	IsResponsible *bool
@@ -5400,10 +6178,21 @@ type SchemaSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	SchemaTypePropertiesMemberConfiguredTableAssociation
 //	SchemaTypePropertiesMemberIdMappingTable
+//	SchemaTypePropertiesMemberIntermediateTable
 type SchemaTypeProperties interface {
 	isSchemaTypeProperties()
 }
+
+// The schema type properties for a configured table association.
+type SchemaTypePropertiesMemberConfiguredTableAssociation struct {
+	Value ConfiguredTableAssociationSchemaTypeProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*SchemaTypePropertiesMemberConfiguredTableAssociation) isSchemaTypeProperties() {}
 
 // The ID mapping table for the schema type properties.
 type SchemaTypePropertiesMemberIdMappingTable struct {
@@ -5413,6 +6202,15 @@ type SchemaTypePropertiesMemberIdMappingTable struct {
 }
 
 func (*SchemaTypePropertiesMemberIdMappingTable) isSchemaTypeProperties() {}
+
+// The schema type properties for an intermediate table.
+type SchemaTypePropertiesMemberIntermediateTable struct {
+	Value IntermediateTableSchemaTypeProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*SchemaTypePropertiesMemberIntermediateTable) isSchemaTypeProperties() {}
 
 // A reference to a table within Snowflake.
 type SnowflakeTableReference struct {
@@ -5693,8 +6491,12 @@ func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicy()     
 func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicyV1()      {}
 func (*UnknownUnionMember) isConsolidatedPolicy()                                  {}
 func (*UnknownUnionMember) isConsolidatedPolicyV1()                                {}
+func (*UnknownUnionMember) isIntermediateTableAnalysisRulePolicy()                 {}
+func (*UnknownUnionMember) isIntermediateTableAnalysisRulePolicyV1()               {}
+func (*UnknownUnionMember) isIntermediateTableComputeConfiguration()               {}
 func (*UnknownUnionMember) isMembershipProtectedJobOutputConfiguration()           {}
 func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration()         {}
+func (*UnknownUnionMember) isPopulationAnalysisConfiguration()                     {}
 func (*UnknownUnionMember) isPreviewPrivacyImpactParametersInput()                 {}
 func (*UnknownUnionMember) isPrivacyBudget()                                       {}
 func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()                {}

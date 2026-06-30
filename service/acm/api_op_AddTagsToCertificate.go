@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -13,6 +14,9 @@ import (
 // to identify and organize your Amazon Web Services resources. Each tag consists
 // of a key and an optional value . You specify the certificate on input by its
 // Amazon Resource Name (ARN). You specify the tag by using a key-value pair.
+//
+// This action applies only to the certificate resource type. For all other ACM
+// resource types, use TagResourceinstead.
 //
 // You can apply a tag to just one certificate if you want to identify a specific
 // characteristic of that certificate, or you can apply the same tag to multiple
@@ -62,6 +66,11 @@ type AddTagsToCertificateInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (in *AddTagsToCertificateInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type AddTagsToCertificateOutput struct {
