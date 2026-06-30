@@ -1131,6 +1131,89 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 	}
 }
 
+// TestUploadFirstErrorWins verifies that when an UploadPart error races with a
+// context-cancellation read error, the final reported error is always the
+// UploadPart error (the root cause), not the secondary read error.
+//
+// The contextAwareBody forces the producer goroutine to block in readFillBuf
+// until the context is canceled, then return the context error. This guarantees
+// the producer calls seterr with "read multipart upload data failed" while the
+// worker concurrently calls seterr with the UploadPart error — exercising the
+// first-error-wins invariant in seterr.
+func TestUploadFirstErrorWins(t *testing.T) {
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = fmt.Errorf("secondary context error")
+	c, _, _ := s3testing.NewUploadLoggingClient(nil)
+	var index atomic.Int64
+	var once sync.Once
+
+	// contextAwareBody returns data for the first two parts, then blocks
+	// until the context is canceled — at which point it returns ctx.Error.
+	// This forces the producer goroutine through the shouldContinue →
+	// "read multipart upload data failed" → seterr path while the worker
+	// is concurrently calling seterr with the UploadPart error.
+	body := &contextAwareBody{
+		ctx:       ctx,
+		data:      make([]byte, 24*1024*1024),
+		threshold: 16*1024*1024 + 1, // enough for 2 full parts
+	}
+
+	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (out *s3.UploadPartOutput, err error) {
+		if idx := index.Load(); idx > 0 {
+			once.Do(func() {
+				close(ctx.DoneCh)
+				err = fmt.Errorf("primary upload part error")
+			})
+		}
+		out = &s3.UploadPartOutput{}
+		index.Add(1)
+		return
+	}
+	u := New(c, func(o *Options) {
+		o.FailTimeout = 5 * time.Second
+	})
+
+	_, err := u.UploadObject(ctx, &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   body,
+	})
+	if err == nil {
+		t.Fatal("expect error, got nil")
+	}
+	if strings.Contains(err.Error(), "secondary context error") {
+		t.Fatalf("secondary error leaked into output: %v", err)
+	}
+	if !strings.Contains(err.Error(), "primary upload part error") {
+		t.Fatalf("expected primary error in output, got: %v", err)
+	}
+}
+
+// contextAwareBody serves data normally until threshold bytes have been read,
+// then blocks until the context is canceled and returns the context error.
+// This simulates a network body that fails when the request context is canceled.
+type contextAwareBody struct {
+	ctx       *awstesting.FakeContext
+	data      []byte
+	offset    int
+	threshold int
+}
+
+func (r *contextAwareBody) Read(p []byte) (int, error) {
+	if r.offset >= r.threshold {
+		<-r.ctx.DoneCh
+		return 0, r.ctx.Error
+	}
+	remaining := r.threshold - r.offset
+	n := len(p)
+	if n > remaining {
+		n = remaining
+	}
+	copy(p[:n], r.data[r.offset:r.offset+n])
+	r.offset += n
+	return n, nil
+}
+
 func TestUploadWithContextCanceledWhenComplete(t *testing.T) {
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
