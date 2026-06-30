@@ -1,7 +1,6 @@
 ListAppImageConfigs
 	Initialize stack step
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		SetLogger
 	Serialize stack step
 		setOperationInput

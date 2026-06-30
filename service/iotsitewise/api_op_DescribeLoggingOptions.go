@@ -53,9 +53,6 @@ func (c *Client) addOperationDescribeLoggingOptionsMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -80,7 +77,7 @@ func (c *Client) addOperationDescribeLoggingOptionsMiddlewares(stack *middleware
 	if err = addEndpointPrefix_opDescribeLoggingOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeLoggingOptions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeLoggingOptions", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

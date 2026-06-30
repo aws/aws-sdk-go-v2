@@ -354,9 +354,6 @@ func (c *Client) addOperationRestoreFromClusterSnapshotMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -381,7 +378,7 @@ func (c *Client) addOperationRestoreFromClusterSnapshotMiddlewares(stack *middle
 	if err = addOpRestoreFromClusterSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RestoreFromClusterSnapshot"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RestoreFromClusterSnapshot", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

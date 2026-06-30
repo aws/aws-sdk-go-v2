@@ -52,9 +52,6 @@ func (c *Client) addOperationPutModelInvocationLoggingConfigurationMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -79,7 +76,7 @@ func (c *Client) addOperationPutModelInvocationLoggingConfigurationMiddlewares(s
 	if err = addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutModelInvocationLoggingConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutModelInvocationLoggingConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

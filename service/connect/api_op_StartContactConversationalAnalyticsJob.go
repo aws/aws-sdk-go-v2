@@ -95,9 +95,6 @@ func (c *Client) addOperationStartContactConversationalAnalyticsJobMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -122,7 +119,7 @@ func (c *Client) addOperationStartContactConversationalAnalyticsJobMiddlewares(s
 	if err = addOpStartContactConversationalAnalyticsJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartContactConversationalAnalyticsJob"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartContactConversationalAnalyticsJob", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

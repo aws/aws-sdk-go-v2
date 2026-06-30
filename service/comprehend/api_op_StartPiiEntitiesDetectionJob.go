@@ -115,9 +115,6 @@ func (c *Client) addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -145,7 +142,7 @@ func (c *Client) addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *midd
 	if err = addOpStartPiiEntitiesDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartPiiEntitiesDetectionJob"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartPiiEntitiesDetectionJob", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

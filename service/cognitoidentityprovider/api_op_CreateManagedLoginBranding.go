@@ -121,9 +121,6 @@ func (c *Client) addOperationCreateManagedLoginBrandingMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -148,7 +145,7 @@ func (c *Client) addOperationCreateManagedLoginBrandingMiddlewares(stack *middle
 	if err = addOpCreateManagedLoginBrandingValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateManagedLoginBranding"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateManagedLoginBranding", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

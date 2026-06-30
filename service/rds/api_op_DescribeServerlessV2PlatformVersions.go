@@ -97,9 +97,6 @@ func (c *Client) addOperationDescribeServerlessV2PlatformVersionsMiddlewares(sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -124,7 +121,7 @@ func (c *Client) addOperationDescribeServerlessV2PlatformVersionsMiddlewares(sta
 	if err = addOpDescribeServerlessV2PlatformVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeServerlessV2PlatformVersions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeServerlessV2PlatformVersions", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

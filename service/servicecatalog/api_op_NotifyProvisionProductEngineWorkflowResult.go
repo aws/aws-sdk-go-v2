@@ -79,9 +79,6 @@ func (c *Client) addOperationNotifyProvisionProductEngineWorkflowResultMiddlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -109,7 +106,7 @@ func (c *Client) addOperationNotifyProvisionProductEngineWorkflowResultMiddlewar
 	if err = addOpNotifyProvisionProductEngineWorkflowResultValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "NotifyProvisionProductEngineWorkflowResult"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "NotifyProvisionProductEngineWorkflowResult", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

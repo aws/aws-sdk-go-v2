@@ -98,9 +98,6 @@ func (c *Client) addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -125,7 +122,7 @@ func (c *Client) addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *mi
 	if err = addOpConfirmPrivateVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ConfirmPrivateVirtualInterface"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ConfirmPrivateVirtualInterface", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

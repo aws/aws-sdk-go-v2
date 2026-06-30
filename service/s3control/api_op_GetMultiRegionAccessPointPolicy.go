@@ -95,9 +95,6 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -131,7 +128,7 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = addOpGetMultiRegionAccessPointPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetMultiRegionAccessPointPolicy"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetMultiRegionAccessPointPolicy", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

@@ -53,9 +53,6 @@ func (c *Client) addOperationDisableOrganizationAdminAccountMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -80,7 +77,7 @@ func (c *Client) addOperationDisableOrganizationAdminAccountMiddlewares(stack *m
 	if err = addOpDisableOrganizationAdminAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisableOrganizationAdminAccount"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisableOrganizationAdminAccount", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

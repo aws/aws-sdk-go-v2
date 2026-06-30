@@ -52,9 +52,6 @@ func (c *Client) addOperationDeleteLakeFormationIdentityCenterConfigurationMiddl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -76,7 +73,7 @@ func (c *Client) addOperationDeleteLakeFormationIdentityCenterConfigurationMiddl
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteLakeFormationIdentityCenterConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteLakeFormationIdentityCenterConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

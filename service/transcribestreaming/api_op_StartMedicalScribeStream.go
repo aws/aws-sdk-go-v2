@@ -149,9 +149,6 @@ func (c *Client) addOperationStartMedicalScribeStreamMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamStartMedicalScribeStreamMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -179,7 +176,7 @@ func (c *Client) addOperationStartMedicalScribeStreamMiddlewares(stack *middlewa
 	if err = addOpStartMedicalScribeStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMedicalScribeStream"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMedicalScribeStream", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

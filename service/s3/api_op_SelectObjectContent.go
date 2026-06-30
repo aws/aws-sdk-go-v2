@@ -240,9 +240,6 @@ func (c *Client) addOperationSelectObjectContentMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamSelectObjectContentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -270,7 +267,7 @@ func (c *Client) addOperationSelectObjectContentMiddlewares(stack *middleware.St
 	if err = addOpSelectObjectContentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SelectObjectContent"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SelectObjectContent", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

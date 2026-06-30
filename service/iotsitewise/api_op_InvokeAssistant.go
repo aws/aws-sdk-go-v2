@@ -79,9 +79,6 @@ func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeAssistantMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -106,7 +103,7 @@ func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack,
 	if err = addOpInvokeAssistantValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeAssistant"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeAssistant", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

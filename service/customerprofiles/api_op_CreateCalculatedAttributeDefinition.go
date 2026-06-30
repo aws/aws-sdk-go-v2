@@ -143,9 +143,6 @@ func (c *Client) addOperationCreateCalculatedAttributeDefinitionMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -170,7 +167,7 @@ func (c *Client) addOperationCreateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addOpCreateCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateCalculatedAttributeDefinition"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateCalculatedAttributeDefinition", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -2,7 +2,6 @@ DeleteStream
 	Initialize stack step
 		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

@@ -2,7 +2,6 @@ PutBucketWebsite
 	Initialize stack step
 		AWSChecksum:SetupInputContext
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
 		OperationInputValidation

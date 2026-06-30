@@ -81,9 +81,6 @@ func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -111,7 +108,7 @@ func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewa
 	if err = addOpGetECSServiceRecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetECSServiceRecommendationProjectedMetrics"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetECSServiceRecommendationProjectedMetrics", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

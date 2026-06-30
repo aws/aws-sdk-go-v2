@@ -136,9 +136,6 @@ func (c *Client) addOperationCreateMatchingWorkflowMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -163,7 +160,7 @@ func (c *Client) addOperationCreateMatchingWorkflowMiddlewares(stack *middleware
 	if err = addOpCreateMatchingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateMatchingWorkflow"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateMatchingWorkflow", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

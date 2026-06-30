@@ -107,9 +107,6 @@ func (c *Client) addOperationGetOpenIdTokenForDeveloperIdentityMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -134,7 +131,7 @@ func (c *Client) addOperationGetOpenIdTokenForDeveloperIdentityMiddlewares(stack
 	if err = addOpGetOpenIdTokenForDeveloperIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetOpenIdTokenForDeveloperIdentity"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetOpenIdTokenForDeveloperIdentity", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

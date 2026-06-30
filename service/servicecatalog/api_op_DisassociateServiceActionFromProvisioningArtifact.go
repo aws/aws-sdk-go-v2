@@ -75,9 +75,6 @@ func (c *Client) addOperationDisassociateServiceActionFromProvisioningArtifactMi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -105,7 +102,7 @@ func (c *Client) addOperationDisassociateServiceActionFromProvisioningArtifactMi
 	if err = addOpDisassociateServiceActionFromProvisioningArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateServiceActionFromProvisioningArtifact"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateServiceActionFromProvisioningArtifact", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

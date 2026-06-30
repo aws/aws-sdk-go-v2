@@ -71,9 +71,6 @@ func (c *Client) addOperationEnableAvailabilityZonesForLoadBalancerMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -98,7 +95,7 @@ func (c *Client) addOperationEnableAvailabilityZonesForLoadBalancerMiddlewares(s
 	if err = addOpEnableAvailabilityZonesForLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EnableAvailabilityZonesForLoadBalancer"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EnableAvailabilityZonesForLoadBalancer", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -2,7 +2,6 @@ CreateOtaTaskConfiguration
 	Initialize stack step
 		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
 		SetLogger
 	Serialize stack step
 		setOperationInput

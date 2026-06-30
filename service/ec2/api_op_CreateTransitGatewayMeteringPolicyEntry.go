@@ -106,9 +106,6 @@ func (c *Client) addOperationCreateTransitGatewayMeteringPolicyEntryMiddlewares(
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -133,7 +130,7 @@ func (c *Client) addOperationCreateTransitGatewayMeteringPolicyEntryMiddlewares(
 	if err = addOpCreateTransitGatewayMeteringPolicyEntryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateTransitGatewayMeteringPolicyEntry"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateTransitGatewayMeteringPolicyEntry", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

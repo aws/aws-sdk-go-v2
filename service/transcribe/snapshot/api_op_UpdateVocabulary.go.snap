@@ -1,7 +1,6 @@
 UpdateVocabulary
 	Initialize stack step
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

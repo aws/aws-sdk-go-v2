@@ -116,9 +116,6 @@ func (c *Client) addOperationDisassociateAvailabilityZonesMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -143,7 +140,7 @@ func (c *Client) addOperationDisassociateAvailabilityZonesMiddlewares(stack *mid
 	if err = addOpDisassociateAvailabilityZonesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateAvailabilityZones"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateAvailabilityZones", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

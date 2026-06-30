@@ -114,9 +114,6 @@ func (c *Client) addOperationCreateCallAnalyticsCategoryMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -141,7 +138,7 @@ func (c *Client) addOperationCreateCallAnalyticsCategoryMiddlewares(stack *middl
 	if err = addOpCreateCallAnalyticsCategoryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateCallAnalyticsCategory"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateCallAnalyticsCategory", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

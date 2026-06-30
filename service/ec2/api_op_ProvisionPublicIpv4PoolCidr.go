@@ -88,9 +88,6 @@ func (c *Client) addOperationProvisionPublicIpv4PoolCidrMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -115,7 +112,7 @@ func (c *Client) addOperationProvisionPublicIpv4PoolCidrMiddlewares(stack *middl
 	if err = addOpProvisionPublicIpv4PoolCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ProvisionPublicIpv4PoolCidr"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ProvisionPublicIpv4PoolCidr", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

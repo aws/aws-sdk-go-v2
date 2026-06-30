@@ -85,9 +85,6 @@ func (c *Client) addOperationListAssessmentControlInsightsByControlDomainMiddlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -112,7 +109,7 @@ func (c *Client) addOperationListAssessmentControlInsightsByControlDomainMiddlew
 	if err = addOpListAssessmentControlInsightsByControlDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAssessmentControlInsightsByControlDomain"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAssessmentControlInsightsByControlDomain", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

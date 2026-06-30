@@ -87,9 +87,6 @@ func (c *Client) addOperationAcceptDomainTransferFromAnotherAwsAccountMiddleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -114,7 +111,7 @@ func (c *Client) addOperationAcceptDomainTransferFromAnotherAwsAccountMiddleware
 	if err = addOpAcceptDomainTransferFromAnotherAwsAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AcceptDomainTransferFromAnotherAwsAccount"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AcceptDomainTransferFromAnotherAwsAccount", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

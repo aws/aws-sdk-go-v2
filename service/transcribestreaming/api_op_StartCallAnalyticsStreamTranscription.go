@@ -360,9 +360,6 @@ func (c *Client) addOperationStartCallAnalyticsStreamTranscriptionMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamStartCallAnalyticsStreamTranscriptionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -390,7 +387,7 @@ func (c *Client) addOperationStartCallAnalyticsStreamTranscriptionMiddlewares(st
 	if err = addOpStartCallAnalyticsStreamTranscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartCallAnalyticsStreamTranscription"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartCallAnalyticsStreamTranscription", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

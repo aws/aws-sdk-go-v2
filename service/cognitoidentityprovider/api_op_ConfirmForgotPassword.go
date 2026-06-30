@@ -139,9 +139,6 @@ func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -163,7 +160,7 @@ func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.
 	if err = addOpConfirmForgotPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ConfirmForgotPassword"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ConfirmForgotPassword", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

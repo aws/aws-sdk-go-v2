@@ -53,9 +53,6 @@ func (c *Client) addOperationDeleteTelemetryRuleForOrganizationMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -80,7 +77,7 @@ func (c *Client) addOperationDeleteTelemetryRuleForOrganizationMiddlewares(stack
 	if err = addOpDeleteTelemetryRuleForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteTelemetryRuleForOrganization"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteTelemetryRuleForOrganization", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

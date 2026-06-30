@@ -2,7 +2,6 @@ GetObject
 	Initialize stack step
 		AWSChecksum:SetupOutputContext
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
 		OperationInputValidation

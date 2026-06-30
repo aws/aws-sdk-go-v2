@@ -65,9 +65,6 @@ func (c *Client) addOperationGetSipMediaApplicationAlexaSkillConfigurationMiddle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,7 +89,7 @@ func (c *Client) addOperationGetSipMediaApplicationAlexaSkillConfigurationMiddle
 	if err = addOpGetSipMediaApplicationAlexaSkillConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetSipMediaApplicationAlexaSkillConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetSipMediaApplicationAlexaSkillConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

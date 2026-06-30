@@ -221,9 +221,6 @@ func (c *Client) addOperationEncryptMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -248,7 +245,7 @@ func (c *Client) addOperationEncryptMiddlewares(stack *middleware.Stack, options
 	if err = addOpEncryptValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "Encrypt"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "Encrypt", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

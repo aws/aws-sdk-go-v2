@@ -125,9 +125,6 @@ func (c *Client) addOperationGenerateEmbedUrlForRegisteredUserMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -152,7 +149,7 @@ func (c *Client) addOperationGenerateEmbedUrlForRegisteredUserMiddlewares(stack 
 	if err = addOpGenerateEmbedUrlForRegisteredUserValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GenerateEmbedUrlForRegisteredUser"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GenerateEmbedUrlForRegisteredUser", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

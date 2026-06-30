@@ -66,9 +66,6 @@ func (c *Client) addOperationGetAcmeExternalAccountBindingCredentialsMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -93,7 +90,7 @@ func (c *Client) addOperationGetAcmeExternalAccountBindingCredentialsMiddlewares
 	if err = addOpGetAcmeExternalAccountBindingCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAcmeExternalAccountBindingCredentials"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAcmeExternalAccountBindingCredentials", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

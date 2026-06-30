@@ -3,7 +3,6 @@ CreateAccessPoint
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

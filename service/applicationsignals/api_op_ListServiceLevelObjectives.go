@@ -122,9 +122,6 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -149,7 +146,7 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 	if err = addOpListServiceLevelObjectivesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListServiceLevelObjectives"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListServiceLevelObjectives", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

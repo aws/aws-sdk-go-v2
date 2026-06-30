@@ -109,9 +109,6 @@ func (c *Client) addOperationPutProtectConfigurationRuleSetNumberOverrideMiddlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -139,7 +136,7 @@ func (c *Client) addOperationPutProtectConfigurationRuleSetNumberOverrideMiddlew
 	if err = addOpPutProtectConfigurationRuleSetNumberOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutProtectConfigurationRuleSetNumberOverride"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutProtectConfigurationRuleSetNumberOverride", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

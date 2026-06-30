@@ -205,9 +205,6 @@ func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamStartMedicalStreamTranscriptionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -235,7 +232,7 @@ func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *m
 	if err = addOpStartMedicalStreamTranscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMedicalStreamTranscription"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMedicalStreamTranscription", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
