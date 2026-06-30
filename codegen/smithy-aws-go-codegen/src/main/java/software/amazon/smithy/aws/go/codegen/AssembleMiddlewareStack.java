@@ -179,6 +179,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                         .registerMiddleware(
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addRecordResponseTiming"))
+                                        .useClientOptions()
                                         .build()
                         )
                         .build(),
@@ -286,8 +287,10 @@ public class AssembleMiddlewareStack implements GoIntegration {
                     return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
                 }
 
-                func addRecordResponseTiming(stack *middleware.Stack) error {
-                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+                func addRecordResponseTiming(stack *middleware.Stack, options Options) error {
+                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{
+                        DisableClockSkewCorrection: options.DisableClockSkewCorrection,
+                    }, middleware.After)
                 }
 
                 func addSpanRetryLoop(stack *middleware.Stack, options Options) error {

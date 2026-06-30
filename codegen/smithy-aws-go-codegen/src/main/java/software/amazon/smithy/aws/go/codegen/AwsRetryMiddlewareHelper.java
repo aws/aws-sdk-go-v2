@@ -50,6 +50,7 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
                             m.LogAttempts = o.ClientLogMode.IsRetries()
                             m.OperationMeter = o.MeterProvider.Meter($S)
                             m.ClientSkew = c.timeOffset
+                            m.DisableClockSkewCorrection = o.DisableClockSkewCorrection
                         })
                         if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
                             return err

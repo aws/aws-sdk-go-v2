@@ -90,6 +90,8 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private static final String RESPONSE_CHECKSUM_VALIDATION = "ResponseChecksumValidation";
 
+    private static final String DISABLE_CLOCK_SKEW_CORRECTION = "DisableClockSkewCorrection";
+
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -244,6 +246,13 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("The inclusive min request body size to be compressed.")
                     .servicePredicate(RequestCompression::isRequestCompressionService)
                     .generatedOnClient(false)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(DISABLE_CLOCK_SKEW_CORRECTION)
+                    .type(getUniversalSymbol("bool"))
+                    .documentation("Disables SDK clock skew correction. When set, the SDK will not "
+                            + "adjust request signing timestamps to compensate for clock drift "
+                            + "between the client and the service.")
                     .build(),
             AwsConfigField.builder()
                     .name(SDK_ACCOUNTID_ENDPOINT_MODE)

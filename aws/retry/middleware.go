@@ -48,6 +48,12 @@ type Attempt struct {
 	// call.
 	ClientSkew *atomic.Int64
 
+	// DisableClockSkewCorrection disables clock skew correction per the Clock
+	// Skew Correction SEP: observed skew is not applied to the signing
+	// timestamp, not recorded into ClientSkew, and clock skew error codes are
+	// not treated as retry candidates.
+	DisableClockSkewCorrection bool
+
 	retryer       aws.RetryerV2
 	requestCloner RequestCloner
 }
@@ -88,7 +94,7 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
 	var attemptClockSkew time.Duration
-	if r.ClientSkew != nil {
+	if !r.DisableClockSkewCorrection && r.ClientSkew != nil {
 		attemptClockSkew = time.Duration(r.ClientSkew.Load())
 	}
 
@@ -159,7 +165,7 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 
 	// this guarantees we are staying on top of the persistent skew value
 	// (either to apply it or to heal it back if the clocks realign)
-	if r.ClientSkew != nil {
+	if !r.DisableClockSkewCorrection && r.ClientSkew != nil {
 		if resultSkew, ok := awsmiddle.GetAttemptSkew(metadata); ok {
 			r.ClientSkew.Store(resultSkew.Nanoseconds())
 		}
@@ -245,7 +251,10 @@ func (r *Attempt) handleAttempt(
 		return out, attemptResult, nopRelease, err
 	}
 
-	err = wrapAsClockSkew(ctx, err)
+	if !r.DisableClockSkewCorrection {
+		observedSkew, hasObservedSkew := awsmiddle.GetAttemptSkew(metadata)
+		err = wrapAsClockSkew(err, observedSkew, hasObservedSkew)
+	}
 
 	//------------------------------
 	// Is Retryable and Should Retry
@@ -316,35 +325,49 @@ func (r *Attempt) handleAttempt(
 	return out, attemptResult, releaseRetryToken, err
 }
 
-// errors that, if detected when we know there's a clock skew,
-// can be retried and have a high chance of success
-var possibleSkewCodes = map[string]struct{}{
+// clockSkewCodes are the error codes that may indicate a clock skew problem.
+// Per the Clock Skew Correction SEP these are retryable only when the absolute
+// skew observed from the response Date header exceeds the detection threshold.
+// The SEP does not distinguish "definite" from "possible" skew errors: modern
+// services overload a single code (e.g. InvalidSignatureException) for both
+// skewed and genuinely malformed signatures, so every code is gated on the
+// observed skew.
+var clockSkewCodes = map[string]struct{}{
 	"InvalidSignatureException": {},
 	"SignatureDoesNotMatch":     {},
 	"AuthFailure":               {},
+	"RequestTimeTooSkewed":      {},
+	"AccessDeniedException":     {},
 }
 
-var definiteSkewCodes = map[string]struct{}{
-	"RequestExpired":       {},
-	"RequestInTheFuture":   {},
-	"RequestTimeTooSkewed": {},
-}
-
-// wrapAsClockSkew checks if this error could be related to a clock skew
-// error and if so, wrap the error.
-func wrapAsClockSkew(ctx context.Context, err error) error {
+// wrapAsClockSkew classifies err as a retryable clock skew error when its code
+// is a known clock skew code and the absolute skew observed from the response
+// Date header exceeds the detection threshold. If no skew was observed (the
+// Date header was absent, unparseable, or discarded as untrusted), the error is
+// not treated as clock skew.
+func wrapAsClockSkew(err error, observedSkew time.Duration, hasObservedSkew bool) error {
 	var v interface{ ErrorCode() string }
 	if !errors.As(err, &v) {
 		return err
 	}
-	if _, ok := definiteSkewCodes[v.ErrorCode()]; ok {
-		return &retryableClockSkewError{Err: err}
+
+	if _, ok := clockSkewCodes[v.ErrorCode()]; !ok {
+		return err
 	}
-	_, isPossibleSkewCode := possibleSkewCodes[v.ErrorCode()]
-	if skew := internalcontext.GetAttemptSkewContext(ctx); skew > skewThreshold && isPossibleSkewCode {
-		return &retryableClockSkewError{Err: err}
+
+	if !hasObservedSkew || absDuration(observedSkew) <= skewThreshold {
+		return err
 	}
-	return err
+
+	return &retryableClockSkewError{Err: err}
+}
+
+func absDuration(d time.Duration) time.Duration {
+	if d < 0 {
+		return -d
+	}
+
+	return d
 }
 
 // MetricsHeader attaches SDK request metric header for retries to the transport
