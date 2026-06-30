@@ -1,0 +1,5 @@
+PUT /account-settings
+
+Content-Type: application/json
+
+{"ResourceTypeManagementPreference":{"key0":true,"key1":true},"ResourceTypeOptInPreference":{"key0":true,"key1":true}}

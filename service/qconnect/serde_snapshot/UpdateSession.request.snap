@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/sessions/__SessionId__
+
+Content-Type: application/json
+
+{"aiAgentConfiguration":{"key0":{"aiAgentId":"__AiAgentId__"},"key1":{"aiAgentId":"__AiAgentId__"}},"description":"__Description__","orchestratorConfigurationList":[{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"},{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"}],"removeOrchestratorConfigurationList":true,"tagFilter":{"tagCondition":{"key":"__Key__","value":"__Value__"}}}

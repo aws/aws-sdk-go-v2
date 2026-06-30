@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.BatchGetItem
+
+{"RequestItems":{"key0":{"AttributesToGet":["__Member__","__Member__"],"ConsistentRead":true,"ExpressionAttributeNames":{"key0":"__Value__","key1":"__Value__"},"Keys":[{"key0":{"S":"__AttributeValueMemberS__"},"key1":{"S":"__AttributeValueMemberS__"}},{"key0":{"S":"__AttributeValueMemberS__"},"key1":{"S":"__AttributeValueMemberS__"}}],"ProjectionExpression":"__ProjectionExpression__"},"key1":{"AttributesToGet":["__Member__","__Member__"],"ConsistentRead":true,"ExpressionAttributeNames":{"key0":"__Value__","key1":"__Value__"},"Keys":[{"key0":{"S":"__AttributeValueMemberS__"},"key1":{"S":"__AttributeValueMemberS__"}},{"key0":{"S":"__AttributeValueMemberS__"},"key1":{"S":"__AttributeValueMemberS__"}}],"ProjectionExpression":"__ProjectionExpression__"}},"ReturnConsumedCapacity":"INDEXES"}

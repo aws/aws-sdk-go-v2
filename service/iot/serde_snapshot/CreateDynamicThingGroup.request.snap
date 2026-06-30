@@ -1,0 +1,5 @@
+POST /dynamic-thing-groups/__ThingGroupName__
+
+Content-Type: application/json
+
+{"indexName":"__IndexName__","queryString":"__QueryString__","queryVersion":"__QueryVersion__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"thingGroupProperties":{"attributePayload":{"attributes":{"key0":"__Value__","key1":"__Value__"},"merge":true},"thingGroupDescription":"__ThingGroupDescription__"}}

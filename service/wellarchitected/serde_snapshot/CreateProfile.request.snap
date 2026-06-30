@@ -1,0 +1,5 @@
+POST /profiles
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","ProfileDescription":"__ProfileDescription__","ProfileName":"__ProfileName__","ProfileQuestions":[{"QuestionId":"__QuestionId__","SelectedChoiceIds":["__Member__","__Member__"]},{"QuestionId":"__QuestionId__","SelectedChoiceIds":["__Member__","__Member__"]}],"Tags":{"key0":"__Value__","key1":"__Value__"}}

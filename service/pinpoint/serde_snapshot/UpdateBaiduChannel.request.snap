@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/baidu
+
+Content-Type: application/json
+
+{"ApiKey":"__ApiKey__","Enabled":true,"SecretKey":"__SecretKey__"}

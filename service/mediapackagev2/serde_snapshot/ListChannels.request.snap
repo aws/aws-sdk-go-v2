@@ -1,0 +1,3 @@
+GET /channelGroup/__ChannelGroupName__/channel?maxResults=1&nextToken=__NextToken__
+
+

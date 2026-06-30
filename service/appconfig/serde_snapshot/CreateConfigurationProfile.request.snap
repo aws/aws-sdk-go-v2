@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/configurationprofiles
+
+Content-Type: application/json
+
+{"Description":"__Description__","KmsKeyIdentifier":"__KmsKeyIdentifier__","LocationUri":"__LocationUri__","Name":"__Name__","RetrievalRoleArn":"__RetrievalRoleArn__","Tags":{"key0":"__Value__","key1":"__Value__"},"Type":"__Type__","Validators":[{"Content":"__Content__","Type":"JSON_SCHEMA"},{"Content":"__Content__","Type":"JSON_SCHEMA"}]}

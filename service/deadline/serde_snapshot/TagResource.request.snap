@@ -1,0 +1,5 @@
+POST /2023-10-12/tags/__ResourceArn__
+
+Content-Type: application/json
+
+{"tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,5 @@
+PATCH /core-networks/__CoreNetworkId__
+
+Content-Type: application/json
+
+{"Description":"__Description__"}

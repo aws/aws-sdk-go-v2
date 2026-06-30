@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.DeleteColumnStatisticsForTable
+
+{"CatalogId":"__CatalogId__","ColumnName":"__ColumnName__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}

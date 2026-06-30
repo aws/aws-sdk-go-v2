@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.CreateAgent
+
+{"ActivationKey":"__ActivationKey__","AgentName":"__AgentName__","SecurityGroupArns":["__Member__","__Member__"],"SubnetArns":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcEndpointId":"__VpcEndpointId__"}

@@ -1,0 +1,5 @@
+POST /ListRooms
+
+Content-Type: application/json
+
+{"loggingConfigurationIdentifier":"__LoggingConfigurationIdentifier__","maxResults":1,"messageReviewHandlerUri":"__MessageReviewHandlerUri__","name":"__Name__","nextToken":"__NextToken__"}

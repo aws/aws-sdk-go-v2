@@ -1,0 +1,5 @@
+POST /eks-anywhere-subscriptions
+
+Content-Type: application/json
+
+{"autoRenew":true,"clientRequestToken":"__ClientRequestToken__","licenseQuantity":1,"licenseType":"Cluster","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"},"term":{"duration":1,"unit":"MONTHS"}}

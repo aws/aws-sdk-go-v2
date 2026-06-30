@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.ListMembersOfAddressList
+
+{"AddressListId":"__AddressListId__","Filter":{"AddressPrefix":"__AddressPrefix__"},"NextToken":"__NextToken__","PageSize":1}

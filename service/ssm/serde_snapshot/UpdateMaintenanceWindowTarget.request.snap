@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateMaintenanceWindowTarget
+
+{"Description":"__Description__","Name":"__Name__","OwnerInformation":"__OwnerInformation__","Replace":true,"Targets":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"WindowId":"__WindowId__","WindowTargetId":"__WindowTargetId__"}

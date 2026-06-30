@@ -1,0 +1,6 @@
+POST /greengrass/definition/devices
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"InitialVersion":{"Devices":[{"CertificateArn":"__CertificateArn__","Id":"__Id__","SyncShadow":true,"ThingArn":"__ThingArn__"},{"CertificateArn":"__CertificateArn__","Id":"__Id__","SyncShadow":true,"ThingArn":"__ThingArn__"}]},"Name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

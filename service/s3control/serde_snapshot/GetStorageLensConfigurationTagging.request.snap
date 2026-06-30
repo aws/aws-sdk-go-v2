@@ -1,0 +1,4 @@
+GET /v20180820/storagelens/__ConfigId__/tagging
+
+X-Amz-Account-Id: AccountId-value
+

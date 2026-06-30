@@ -1,0 +1,5 @@
+POST /enable
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"],"clientToken":"__ClientToken__","resourceTypes":["EC2","EC2"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.UpdateAppBlockBuilder
+
+{"AccessEndpoints":[{"EndpointType":"STREAMING","VpceId":"__VpceId__"},{"EndpointType":"STREAMING","VpceId":"__VpceId__"}],"AttributesToDelete":["IAM_ROLE_ARN","IAM_ROLE_ARN"],"Description":"__Description__","DisableIMDSV1":true,"DisplayName":"__DisplayName__","EnableDefaultInternetAccess":true,"IamRoleArn":"__IamRoleArn__","InstanceType":"__InstanceType__","Name":"__Name__","Platform":"WINDOWS","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}

@@ -1,0 +1,5 @@
+PUT /update-pricing-rule
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","Description":"__Description__","ModifierPercentage":1,"Name":"__Name__","Tiering":{"FreeTier":{"Activated":true}},"Type":"MARKUP"}

@@ -1,0 +1,5 @@
+POST /sdk-media-stream-pipelines
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Sinks":[{"MediaStreamType":"MixedAudio","ReservedStreamCapacity":1,"SinkArn":"__SinkArn__","SinkType":"KinesisVideoStreamPool"},{"MediaStreamType":"MixedAudio","ReservedStreamCapacity":1,"SinkArn":"__SinkArn__","SinkType":"KinesisVideoStreamPool"}],"Sources":[{"SourceArn":"__SourceArn__","SourceType":"ChimeSdkMeeting"},{"SourceArn":"__SourceArn__","SourceType":"ChimeSdkMeeting"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

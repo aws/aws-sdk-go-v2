@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.CreateAdapterVersion
+
+{"AdapterId":"__AdapterId__","ClientRequestToken":"__ClientRequestToken__","DatasetConfig":{"ManifestS3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"KMSKeyId":"__KMSKeyId__","OutputConfig":{"S3Bucket":"__S3Bucket__","S3Prefix":"__S3Prefix__"},"Tags":{"key0":"__Value__","key1":"__Value__"}}

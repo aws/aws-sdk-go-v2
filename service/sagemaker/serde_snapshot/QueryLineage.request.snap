@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.QueryLineage
+
+{"Direction":"Both","Filters":{"CreatedAfter":946684800,"CreatedBefore":946684800,"LineageTypes":["TrialComponent","TrialComponent"],"ModifiedAfter":946684800,"ModifiedBefore":946684800,"Properties":{"key0":"__Value__","key1":"__Value__"},"Types":["__Member__","__Member__"]},"IncludeEdges":true,"MaxDepth":1,"MaxResults":1,"NextToken":"__NextToken__","StartArns":["__Member__","__Member__"]}

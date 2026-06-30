@@ -1,0 +1,6 @@
+POST /service/ComprehendMedical_20181030/operation/StopEntitiesDetectionV2Job
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

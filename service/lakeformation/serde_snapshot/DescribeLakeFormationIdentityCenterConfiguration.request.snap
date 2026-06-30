@@ -1,0 +1,5 @@
+POST /DescribeLakeFormationIdentityCenterConfiguration
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__"}

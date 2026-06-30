@@ -1,0 +1,3 @@
+GET /exports?exportType=ALEXA_SKILLS_KIT&name=__Name__&resourceType=BOT&version=__Version__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.NotifyMigrationTaskState
+
+{"DryRun":true,"MigrationTaskName":"__MigrationTaskName__","NextUpdateSeconds":1,"ProgressUpdateStream":"__ProgressUpdateStream__","Task":{"ProgressPercent":1,"Status":"NOT_STARTED","StatusDetail":"__StatusDetail__"},"UpdateDateTime":946684800}

@@ -1,0 +1,3 @@
+GET /active-violations?behaviorCriteriaType=STATIC&listSuppressedAlerts=true&maxResults=1&nextToken=__NextToken__&securityProfileName=__SecurityProfileName__&thingName=__ThingName__&verificationState=FALSE_POSITIVE
+
+

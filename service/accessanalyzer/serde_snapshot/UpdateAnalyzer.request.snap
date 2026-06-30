@@ -1,0 +1,5 @@
+PUT /analyzer/__AnalyzerName__
+
+Content-Type: application/json
+
+{"configuration":{"unusedAccess":{"analysisRule":{"exclusions":[{"accountIds":["__Member__","__Member__"],"resourceTags":[{"key0":"__Value__","key1":"__Value__"},{"key0":"__Value__","key1":"__Value__"}]},{"accountIds":["__Member__","__Member__"],"resourceTags":[{"key0":"__Value__","key1":"__Value__"},{"key0":"__Value__","key1":"__Value__"}]}]},"unusedAccessAge":1}}}

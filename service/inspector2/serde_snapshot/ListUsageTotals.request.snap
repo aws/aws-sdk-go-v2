@@ -1,0 +1,5 @@
+POST /usage/list
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"],"maxResults":1,"nextToken":"__NextToken__"}

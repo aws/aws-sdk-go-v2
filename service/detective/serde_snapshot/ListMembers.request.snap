@@ -1,0 +1,5 @@
+POST /graph/members/list
+
+Content-Type: application/json
+
+{"GraphArn":"__GraphArn__","MaxResults":1,"NextToken":"__NextToken__"}

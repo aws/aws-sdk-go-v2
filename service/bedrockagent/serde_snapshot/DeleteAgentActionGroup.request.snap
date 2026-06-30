@@ -1,0 +1,3 @@
+DELETE /agents/__AgentId__/agentversions/__AgentVersion__/actiongroups/__ActionGroupId__/?skipResourceInUseCheck=true
+
+

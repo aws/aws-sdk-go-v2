@@ -1,0 +1,5 @@
+POST /DisconnectSourceServer
+
+Content-Type: application/json
+
+{"sourceServerID":"__SourceServerID__"}

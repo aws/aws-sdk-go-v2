@@ -1,0 +1,5 @@
+PATCH /multicast-groups/__Id__
+
+Content-Type: application/json
+
+{"Description":"__Description__","LoRaWAN":{"DlClass":"ClassB","ParticipatingGateways":{"GatewayList":["__Member__","__Member__"],"TransmissionInterval":1},"RfRegion":"EU868"},"Name":"__Name__"}

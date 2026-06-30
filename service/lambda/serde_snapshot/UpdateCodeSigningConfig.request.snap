@@ -1,0 +1,5 @@
+PUT /2020-04-22/code-signing-configs/__CodeSigningConfigArn__
+
+Content-Type: application/json
+
+{"AllowedPublishers":{"SigningProfileVersionArns":["__Member__","__Member__"]},"CodeSigningPolicies":{"UntrustedArtifactOnDeployment":"Warn"},"Description":"__Description__"}

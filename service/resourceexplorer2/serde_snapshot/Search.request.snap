@@ -1,0 +1,5 @@
+POST /Search
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","QueryString":"__QueryString__","ViewArn":"__ViewArn__"}

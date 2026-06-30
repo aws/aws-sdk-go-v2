@@ -1,0 +1,5 @@
+PUT /policies/__Arn__
+
+Content-Type: application/json
+
+{"policy":"__Policy__","token":"__Token__"}

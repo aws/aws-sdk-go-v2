@@ -1,0 +1,5 @@
+POST /v2/create-policy
+
+Content-Type: application/json
+
+{"availabilitySlo":{"target":1},"clientToken":"__ClientToken__","dataRecovery":{"timeBetweenBackupsInMinutes":1},"description":"__Description__","kmsKeyId":"__KmsKeyId__","multiAz":{"disasterRecoveryApproach":"ACTIVE_ACTIVE","rpoInMinutes":1,"rtoInMinutes":1},"multiRegion":{"disasterRecoveryApproach":"ACTIVE_ACTIVE","rpoInMinutes":1,"rtoInMinutes":1},"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

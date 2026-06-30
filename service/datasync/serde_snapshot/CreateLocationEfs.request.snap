@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.CreateLocationEfs
+
+{"AccessPointArn":"__AccessPointArn__","Ec2Config":{"SecurityGroupArns":["__Member__","__Member__"],"SubnetArn":"__SubnetArn__"},"EfsFilesystemArn":"__EfsFilesystemArn__","FileSystemAccessRoleArn":"__FileSystemAccessRoleArn__","InTransitEncryption":"NONE","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

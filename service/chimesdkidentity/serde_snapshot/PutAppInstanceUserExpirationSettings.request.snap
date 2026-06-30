@@ -1,0 +1,5 @@
+PUT /app-instance-users/__AppInstanceUserArn__/expiration-settings
+
+Content-Type: application/json
+
+{"ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1}}

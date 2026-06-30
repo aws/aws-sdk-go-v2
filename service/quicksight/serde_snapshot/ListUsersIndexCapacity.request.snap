@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/quick-index/user-capacity
+
+Content-Type: application/json
+
+{"filters":[{"userNameOrEmail":{"prefix":"__Prefix__"}},{"userNameOrEmail":{"prefix":"__Prefix__"}}],"maxResults":1,"namespace":"__Namespace__","nextToken":"__NextToken__","sortBy":"TOTAL_CAPACITY_BYTES","sortOrder":"ASC"}

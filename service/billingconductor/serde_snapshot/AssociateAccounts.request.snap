@@ -1,0 +1,5 @@
+POST /associate-accounts
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"Arn":"__Arn__"}

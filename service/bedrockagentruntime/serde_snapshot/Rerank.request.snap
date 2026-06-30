@@ -1,0 +1,4 @@
+POST /rerank
+
+Content-Type: application/json
+

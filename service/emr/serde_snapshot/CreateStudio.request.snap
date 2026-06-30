@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.CreateStudio
+
+{"AuthMode":"SSO","DefaultS3Location":"__DefaultS3Location__","Description":"__Description__","EncryptionKeyArn":"__EncryptionKeyArn__","EngineSecurityGroupId":"__EngineSecurityGroupId__","IdcInstanceArn":"__IdcInstanceArn__","IdcUserAssignment":"REQUIRED","IdpAuthUrl":"__IdpAuthUrl__","IdpRelayStateParameterName":"__IdpRelayStateParameterName__","Name":"__Name__","ServiceRole":"__ServiceRole__","SubnetIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrustedIdentityPropagationEnabled":true,"UserRole":"__UserRole__","VpcId":"__VpcId__","WorkspaceSecurityGroupId":"__WorkspaceSecurityGroupId__"}

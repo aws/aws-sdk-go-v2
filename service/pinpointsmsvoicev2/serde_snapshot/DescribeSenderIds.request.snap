@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeSenderIds
+
+{"Filters":[{"Name":"sender-id","Values":["__Member__","__Member__"]},{"Name":"sender-id","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","Owner":"SELF","SenderIds":[{"IsoCountryCode":"__IsoCountryCode__","SenderId":"__SenderId__"},{"IsoCountryCode":"__IsoCountryCode__","SenderId":"__SenderId__"}]}

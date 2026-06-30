@@ -1,0 +1,3 @@
+GET /v2/email/deliverability-dashboard/domains/__SubscribedDomain__/campaigns?EndDate=2000-01-01T00%3A00%3A00Z&NextToken=__NextToken__&PageSize=1&StartDate=2000-01-01T00%3A00%3A00Z
+
+

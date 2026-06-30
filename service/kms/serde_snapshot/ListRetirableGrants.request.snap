@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.ListRetirableGrants
+
+{"Limit":1,"Marker":"__Marker__","RetiringPrincipal":"__RetiringPrincipal__","RetiringServicePrincipal":"__RetiringServicePrincipal__"}

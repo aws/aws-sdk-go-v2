@@ -1,0 +1,5 @@
+PATCH /global-networks/__GlobalNetworkId__/links/__LinkId__
+
+Content-Type: application/json
+
+{"Bandwidth":{"DownloadSpeed":1,"UploadSpeed":1},"Description":"__Description__","Provider":"__Provider__","Type":"__Type__"}

@@ -1,0 +1,5 @@
+PATCH /v1/data-sets/__DataSetId__/revisions/__RevisionId__
+
+Content-Type: application/json
+
+{"Comment":"__Comment__","Finalized":true}

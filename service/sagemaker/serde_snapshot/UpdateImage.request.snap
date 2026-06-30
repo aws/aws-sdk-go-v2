@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateImage
+
+{"DeleteProperties":["__Member__","__Member__"],"Description":"__Description__","DisplayName":"__DisplayName__","ImageName":"__ImageName__","RoleArn":"__RoleArn__"}

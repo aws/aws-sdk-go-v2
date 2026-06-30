@@ -1,0 +1,5 @@
+POST /sol/nslcm/v1/ns_instances/__NsInstanceId__/instantiate?dry_run=true
+
+Content-Type: application/json
+
+{"tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,5 @@
+PUT /?analytics=&id=__Id__
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.StartImport
+
+{"Destinations":["__Member__","__Member__"],"EndEventTime":946684800,"ImportId":"__ImportId__","ImportSource":{"S3":{"S3BucketAccessRoleArn":"__S3BucketAccessRoleArn__","S3BucketRegion":"__S3BucketRegion__","S3LocationUri":"__S3LocationUri__"}},"StartEventTime":946684800}

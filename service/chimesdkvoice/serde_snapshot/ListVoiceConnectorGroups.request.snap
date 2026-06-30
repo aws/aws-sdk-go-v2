@@ -1,0 +1,3 @@
+GET /voice-connector-groups?max-results=1&next-token=__NextToken__
+
+

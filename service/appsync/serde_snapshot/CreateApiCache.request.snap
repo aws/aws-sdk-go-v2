@@ -1,0 +1,5 @@
+POST /v1/apis/__ApiId__/ApiCaches
+
+Content-Type: application/json
+
+{"apiCachingBehavior":"FULL_REQUEST_CACHING","atRestEncryptionEnabled":true,"healthMetricsConfig":"ENABLED","transitEncryptionEnabled":true,"ttl":1,"type":"T2_SMALL"}

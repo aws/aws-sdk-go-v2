@@ -1,0 +1,5 @@
+POST /v1/gateways
+
+Content-Type: application/json
+
+{"egressCidrBlocks":["__Member__","__Member__"],"name":"__Name__","networks":[{"cidrBlock":"__CidrBlock__","name":"__Name__"},{"cidrBlock":"__CidrBlock__","name":"__Name__"}]}

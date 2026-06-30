@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.DescribeEntitlements
+
+{"MaxResults":1,"Name":"__Name__","NextToken":"__NextToken__","StackName":"__StackName__"}

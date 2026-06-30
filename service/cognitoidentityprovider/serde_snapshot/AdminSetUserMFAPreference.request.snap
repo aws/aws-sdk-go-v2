@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AdminSetUserMFAPreference
+
+{"EmailMfaSettings":{"Enabled":true,"PreferredMfa":true},"SMSMfaSettings":{"Enabled":true,"PreferredMfa":true},"SoftwareTokenMfaSettings":{"Enabled":true,"PreferredMfa":true},"UserPoolId":"__UserPoolId__","Username":"__Username__","WebAuthnMfaSettings":{"Enabled":true}}

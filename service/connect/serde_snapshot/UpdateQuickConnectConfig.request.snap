@@ -1,0 +1,5 @@
+POST /quick-connects/__InstanceId__/__QuickConnectId__/config
+
+Content-Type: application/json
+
+{"QuickConnectConfig":{"FlowConfig":{"ContactFlowId":"__ContactFlowId__"},"PhoneConfig":{"PhoneNumber":"__PhoneNumber__"},"QueueConfig":{"ContactFlowId":"__ContactFlowId__","QueueId":"__QueueId__"},"QuickConnectType":"USER","UserConfig":{"ContactFlowId":"__ContactFlowId__","UserId":"__UserId__"}}}

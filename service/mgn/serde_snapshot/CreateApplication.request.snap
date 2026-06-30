@@ -1,0 +1,5 @@
+POST /CreateApplication
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,5 @@
+POST /start-configuration-checks
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","ConfigurationCheckIds":["SAP_CHECK_01","SAP_CHECK_01"]}

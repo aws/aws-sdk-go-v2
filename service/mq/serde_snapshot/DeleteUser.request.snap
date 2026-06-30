@@ -1,0 +1,3 @@
+DELETE /v1/brokers/__BrokerId__/users/__Username__
+
+

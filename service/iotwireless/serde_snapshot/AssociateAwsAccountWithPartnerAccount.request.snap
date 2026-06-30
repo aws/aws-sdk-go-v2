@@ -1,0 +1,5 @@
+POST /partner-accounts
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Sidewalk":{"AmazonId":"__AmazonId__","AppServerPrivateKey":"__AppServerPrivateKey__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

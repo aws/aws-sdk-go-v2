@@ -1,0 +1,3 @@
+GET /analyzer/__AnalyzerName__/archive-rule?maxResults=1&nextToken=__NextToken__
+
+

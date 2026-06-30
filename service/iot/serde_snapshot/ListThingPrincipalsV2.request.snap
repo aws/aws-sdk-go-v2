@@ -1,0 +1,3 @@
+GET /things/__ThingName__/principals-v2?maxResults=1&nextToken=__NextToken__&thingPrincipalType=EXCLUSIVE_THING
+
+

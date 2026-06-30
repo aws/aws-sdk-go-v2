@@ -1,0 +1,6 @@
+POST /complete-rollout
+
+Content-Type: application/json
+X-Amzn-Sagemaker-Job-Arn: __JobArn__
+
+{"ClientToken":"__ClientToken__","Status":"ready","TrajectoryId":"__TrajectoryId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.CreateExpressGatewayService
+
+{"cluster":"__Cluster__","cpu":"__Cpu__","executionRoleArn":"__ExecutionRoleArn__","healthCheckPath":"__HealthCheckPath__","infrastructureRoleArn":"__InfrastructureRoleArn__","memory":"__Memory__","networkConfiguration":{"securityGroups":["__Member__","__Member__"],"subnets":["__Member__","__Member__"]},"primaryContainer":{"awsLogsConfiguration":{"logGroup":"__LogGroup__","logStreamPrefix":"__LogStreamPrefix__"},"command":["__Member__","__Member__"],"containerPort":1,"environment":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"image":"__Image__","repositoryCredentials":{"credentialsParameter":"__CredentialsParameter__"},"secrets":[{"name":"__Name__","valueFrom":"__ValueFrom__"},{"name":"__Name__","valueFrom":"__ValueFrom__"}]},"scalingTarget":{"autoScalingMetric":"AVERAGE_CPU","autoScalingTargetValue":1,"maxTaskCount":1,"minTaskCount":1},"serviceName":"__ServiceName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"taskDefinitionArn":"__TaskDefinitionArn__","taskRoleArn":"__TaskRoleArn__"}

@@ -1,0 +1,5 @@
+POST /ListDataCellsFilter
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","Table":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","Name":"__Name__","TableWildcard":{}}}

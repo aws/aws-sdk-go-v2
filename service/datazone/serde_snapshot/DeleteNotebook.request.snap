@@ -1,0 +1,3 @@
+DELETE /v2/domains/__DomainIdentifier__/notebooks/__Identifier__
+
+

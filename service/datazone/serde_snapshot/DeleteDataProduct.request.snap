@@ -1,0 +1,3 @@
+DELETE /v2/domains/__DomainIdentifier__/data-products/__Identifier__
+
+

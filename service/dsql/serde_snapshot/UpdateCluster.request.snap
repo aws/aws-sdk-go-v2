@@ -1,0 +1,5 @@
+POST /cluster/__Identifier__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","deletionProtectionEnabled":true,"kmsEncryptionKey":"__KmsEncryptionKey__","multiRegionProperties":{"clusters":["__Member__","__Member__"],"witnessRegion":"__WitnessRegion__"}}

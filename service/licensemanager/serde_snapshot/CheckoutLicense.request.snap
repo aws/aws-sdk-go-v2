@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.CheckoutLicense
+
+{"Beneficiary":"__Beneficiary__","CheckoutType":"PROVISIONAL","ClientToken":"__ClientToken__","Entitlements":[{"Name":"__Name__","Unit":"Count","Value":"__Value__"},{"Name":"__Name__","Unit":"Count","Value":"__Value__"}],"KeyFingerprint":"__KeyFingerprint__","NodeId":"__NodeId__","ProductSKU":"__ProductSKU__"}

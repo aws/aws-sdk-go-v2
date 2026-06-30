@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.PutManagedRuleSetVersions
+
+{"Id":"__Id__","LockToken":"__LockToken__","Name":"__Name__","RecommendedVersion":"__RecommendedVersion__","Scope":"CLOUDFRONT","VersionsToPublish":{"key0":{"AssociatedRuleGroupArn":"__AssociatedRuleGroupArn__","ForecastedLifetime":1},"key1":{"AssociatedRuleGroupArn":"__AssociatedRuleGroupArn__","ForecastedLifetime":1}}}

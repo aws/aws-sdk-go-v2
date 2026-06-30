@@ -1,0 +1,5 @@
+POST /prod/claimDevice
+
+Content-Type: application/json
+
+{"id":"__Id__"}

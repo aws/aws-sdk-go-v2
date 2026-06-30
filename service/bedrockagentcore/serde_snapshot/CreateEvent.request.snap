@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/events
+
+Content-Type: application/json
+
+{"actorId":"__ActorId__","branch":{"name":"__Name__","rootEventId":"__RootEventId__"},"clientToken":"__ClientToken__","eventTimestamp":946684800,"extractionMode":"SKIP","metadata":{"key0":{"stringValue":"__MetadataValueMemberStringValue__"},"key1":{"stringValue":"__MetadataValueMemberStringValue__"}},"payload":[{"conversational":{"content":{"text":"__ContentMemberText__"},"role":"ASSISTANT"}},{"conversational":{"content":{"text":"__ContentMemberText__"},"role":"ASSISTANT"}}],"sessionId":"__SessionId__"}

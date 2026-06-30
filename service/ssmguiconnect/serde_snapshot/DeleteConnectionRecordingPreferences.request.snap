@@ -1,0 +1,5 @@
+POST /DeleteConnectionRecordingPreferences
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__"}

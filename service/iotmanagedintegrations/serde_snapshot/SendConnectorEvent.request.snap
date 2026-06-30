@@ -1,0 +1,4 @@
+POST /connector-event/__ConnectorId__
+
+Content-Type: application/json
+

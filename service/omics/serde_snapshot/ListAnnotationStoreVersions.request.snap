@@ -1,0 +1,5 @@
+POST /annotationStore/__Name__/versions?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"status":"CREATING"}}

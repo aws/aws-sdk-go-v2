@@ -1,0 +1,5 @@
+POST /voice-connectors/__VoiceConnectorId__/proxy-sessions
+
+Content-Type: application/json
+
+{"Capabilities":["Voice","Voice"],"ExpiryMinutes":1,"GeoMatchLevel":"Country","GeoMatchParams":{"AreaCode":"__AreaCode__","Country":"__Country__"},"Name":"__Name__","NumberSelectionBehavior":"PreferSticky","ParticipantPhoneNumbers":["__Member__","__Member__"]}

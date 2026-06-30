@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateFlowDefinition
+
+{"FlowDefinitionName":"__FlowDefinitionName__","HumanLoopActivationConfig":{"HumanLoopActivationConditionsConfig":{"HumanLoopActivationConditions":"__HumanLoopActivationConditions__"}},"HumanLoopConfig":{"HumanTaskUiArn":"__HumanTaskUiArn__","PublicWorkforceTaskPrice":{"AmountInUsd":{"Cents":1,"Dollars":1,"TenthFractionsOfACent":1}},"TaskAvailabilityLifetimeInSeconds":1,"TaskCount":1,"TaskDescription":"__TaskDescription__","TaskKeywords":["__Member__","__Member__"],"TaskTimeLimitInSeconds":1,"TaskTitle":"__TaskTitle__","WorkteamArn":"__WorkteamArn__"},"HumanLoopRequestSource":{"AwsManagedHumanLoopRequestSource":"AWS/Rekognition/DetectModerationLabels/Image/V3"},"OutputConfig":{"KmsKeyId":"__KmsKeyId__","S3OutputPath":"__S3OutputPath__"},"RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

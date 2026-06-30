@@ -1,0 +1,3 @@
+GET /audit/report-jobs?CreationAfter=2000-01-01T00%3A00%3A00Z&CreationBefore=2000-01-01T00%3A00%3A00Z&MaxResults=1&NextToken=__NextToken__&ReportPlanName=__ByReportPlanName__&Status=__ByStatus__
+
+

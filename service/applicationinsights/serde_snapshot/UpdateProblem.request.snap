@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.UpdateProblem
+
+{"ProblemId":"__ProblemId__","UpdateStatus":"RESOLVED","Visibility":"IGNORED"}

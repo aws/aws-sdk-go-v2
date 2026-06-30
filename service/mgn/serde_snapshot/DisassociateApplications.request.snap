@@ -1,0 +1,5 @@
+POST /DisassociateApplications
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","applicationIDs":["__Member__","__Member__"],"waveID":"__WaveID__"}

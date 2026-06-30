@@ -1,0 +1,5 @@
+PUT /v2/email/dedicated-ip-pools/__PoolName__/scaling
+
+Content-Type: application/json
+
+{"ScalingMode":"STANDARD"}

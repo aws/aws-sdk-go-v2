@@ -1,0 +1,5 @@
+POST /quantum-task
+
+Content-Type: application/json
+
+{"action":"__Action__","associations":[{"arn":"__Arn__","type":"RESERVATION_TIME_WINDOW_ARN"},{"arn":"__Arn__","type":"RESERVATION_TIME_WINDOW_ARN"}],"clientToken":"__ClientToken__","deviceArn":"__DeviceArn__","deviceParameters":"__DeviceParameters__","experimentalCapabilities":{"enabled":"ALL"},"jobToken":"__JobToken__","outputS3Bucket":"__OutputS3Bucket__","outputS3KeyPrefix":"__OutputS3KeyPrefix__","shots":1,"tags":{"key0":"__Value__","key1":"__Value__"}}

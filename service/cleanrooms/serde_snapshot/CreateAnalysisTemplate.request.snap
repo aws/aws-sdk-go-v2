@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/analysistemplates
+
+Content-Type: application/json
+
+{"analysisParameters":[{"defaultValue":"__DefaultValue__","name":"__Name__","type":"SMALLINT"},{"defaultValue":"__DefaultValue__","name":"__Name__","type":"SMALLINT"}],"description":"__Description__","errorMessageConfiguration":{"type":"DETAILED"},"format":"SQL","name":"__Name__","schema":{"referencedTables":["__Member__","__Member__"]},"source":{"text":"__AnalysisSourceMemberText__"},"syntheticDataParameters":{"mlSyntheticDataParameters":{"columnClassification":{"columnMapping":[{"columnName":"__ColumnName__","columnType":"CATEGORICAL","isPredictiveValue":true},{"columnName":"__ColumnName__","columnType":"CATEGORICAL","isPredictiveValue":true}]},"epsilon":1,"maxMembershipInferenceAttackScore":1}},"tags":{"key0":"__Value__","key1":"__Value__"}}

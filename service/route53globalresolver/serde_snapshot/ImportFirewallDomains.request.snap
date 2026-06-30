@@ -1,0 +1,5 @@
+PATCH /firewall-domain-lists/__FirewallDomainListId__/domains/s3_file_url
+
+Content-Type: application/json
+
+{"domainFileUrl":"__DomainFileUrl__","operation":"__Operation__"}

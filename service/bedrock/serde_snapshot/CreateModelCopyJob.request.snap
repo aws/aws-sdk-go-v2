@@ -1,0 +1,5 @@
+POST /model-copy-jobs
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","modelKmsKeyId":"__ModelKmsKeyId__","sourceModelArn":"__SourceModelArn__","targetModelName":"__TargetModelName__","targetModelTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

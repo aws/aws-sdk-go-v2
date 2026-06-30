@@ -1,0 +1,5 @@
+POST /applications
+
+Content-Type: application/json
+
+{"attachmentsConfiguration":{"attachmentsControlMode":"ENABLED"},"clientIdsForOIDC":["__Member__","__Member__"],"clientToken":"__ClientToken__","description":"__Description__","displayName":"__DisplayName__","encryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"iamIdentityProviderArn":"__IamIdentityProviderArn__","identityCenterInstanceArn":"__IdentityCenterInstanceArn__","identityType":"AWS_IAM_IDP_SAML","personalizationConfiguration":{"personalizationControlMode":"ENABLED"},"qAppsConfiguration":{"qAppsControlMode":"ENABLED"},"quickSightConfiguration":{"clientNamespace":"__ClientNamespace__"},"roleArn":"__RoleArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

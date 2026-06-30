@@ -1,0 +1,5 @@
+PUT /export-search-jobs
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ExportSpecification":{"s3ExportSpecification":{"DestinationBucket":"__DestinationBucket__","DestinationPrefix":"__DestinationPrefix__"}},"RoleArn":"__RoleArn__","SearchJobIdentifier":"__SearchJobIdentifier__","Tags":{"key0":"__Value__","key1":"__Value__"}}

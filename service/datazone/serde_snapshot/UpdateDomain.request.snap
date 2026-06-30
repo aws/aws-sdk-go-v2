@@ -1,0 +1,5 @@
+PUT /v2/domains/__Identifier__?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"description":"__Description__","domainExecutionRole":"__DomainExecutionRole__","name":"__Name__","serviceRole":"__ServiceRole__","singleSignOn":{"idcInstanceArn":"__IdcInstanceArn__","type":"IAM_IDC","userAssignment":"AUTOMATIC"}}

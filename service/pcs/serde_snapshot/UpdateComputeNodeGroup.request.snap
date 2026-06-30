@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.UpdateComputeNodeGroup
+
+{"amiId":"__AmiId__","clientToken":"__ClientToken__","clusterIdentifier":"__ClusterIdentifier__","computeNodeGroupIdentifier":"__ComputeNodeGroupIdentifier__","customLaunchTemplate":{"id":"__Id__","version":"__Version__"},"iamInstanceProfileArn":"__IamInstanceProfileArn__","purchaseOption":"ONDEMAND","scalingConfiguration":{"maxInstanceCount":1,"minInstanceCount":1},"slurmConfiguration":{"scaleDownIdleTimeInSeconds":1,"slurmCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}]},"spotOptions":{"allocationStrategy":"lowest-price"},"subnetIds":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+POST /get-component
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","ComponentId":"__ComponentId__"}

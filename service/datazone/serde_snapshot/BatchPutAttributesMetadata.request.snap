@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/entities/ASSET/__EntityIdentifier__/attributes-metadata
+
+Content-Type: application/json
+
+{"attributes":[{"attributeIdentifier":"__AttributeIdentifier__","forms":[{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}]},{"attributeIdentifier":"__AttributeIdentifier__","forms":[{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}]}],"clientToken":"__ClientToken__"}

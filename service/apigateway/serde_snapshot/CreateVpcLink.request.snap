@@ -1,0 +1,6 @@
+POST /vpclinks
+
+Accept: application/json
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"},"targetArns":["__Member__","__Member__"]}

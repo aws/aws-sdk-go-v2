@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.ListSnapshotCopyConfigurations
+
+{"maxResults":1,"namespaceName":"__NamespaceName__","nextToken":"__NextToken__"}

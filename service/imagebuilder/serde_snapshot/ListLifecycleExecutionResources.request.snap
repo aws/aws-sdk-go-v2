@@ -1,0 +1,5 @@
+POST /ListLifecycleExecutionResources
+
+Content-Type: application/json
+
+{"lifecycleExecutionId":"__LifecycleExecutionId__","maxResults":1,"nextToken":"__NextToken__","parentResourceId":"__ParentResourceId__"}

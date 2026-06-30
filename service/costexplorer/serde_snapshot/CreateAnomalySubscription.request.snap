@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.CreateAnomalySubscription
+
+{"AnomalySubscription":{"AccountId":"__AccountId__","Frequency":"DAILY","MonitorArnList":["__Member__","__Member__"],"Subscribers":[{"Address":"__Address__","Status":"CONFIRMED","Type":"EMAIL"},{"Address":"__Address__","Status":"CONFIRMED","Type":"EMAIL"}],"SubscriptionArn":"__SubscriptionArn__","SubscriptionName":"__SubscriptionName__","Threshold":1,"ThresholdExpression":{"And":[{},{}],"CostCategories":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Dimensions":{"Key":"AZ","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}],"Tags":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]}}},"ResourceTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

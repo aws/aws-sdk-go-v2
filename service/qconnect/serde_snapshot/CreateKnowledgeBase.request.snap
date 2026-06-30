@@ -1,0 +1,5 @@
+POST /knowledgeBases
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","knowledgeBaseType":"EXTERNAL","name":"__Name__","renderingConfiguration":{"templateUri":"__TemplateUri__"},"serverSideEncryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"sourceConfiguration":{"appIntegrations":{"appIntegrationArn":"__AppIntegrationArn__","objectFields":["__Member__","__Member__"]}},"tags":{"key0":"__Value__","key1":"__Value__"},"vectorIngestionConfiguration":{"chunkingConfiguration":{"chunkingStrategy":"FIXED_SIZE","fixedSizeChunkingConfiguration":{"maxTokens":1,"overlapPercentage":1},"hierarchicalChunkingConfiguration":{"levelConfigurations":[{"maxTokens":1},{"maxTokens":1}],"overlapTokens":1},"semanticChunkingConfiguration":{"breakpointPercentileThreshold":1,"bufferSize":1,"maxTokens":1}},"parsingConfiguration":{"bedrockFoundationModelConfiguration":{"modelArn":"__ModelArn__","parsingPrompt":{"parsingPromptText":"__ParsingPromptText__"}},"parsingStrategy":"BEDROCK_FOUNDATION_MODEL"}}}

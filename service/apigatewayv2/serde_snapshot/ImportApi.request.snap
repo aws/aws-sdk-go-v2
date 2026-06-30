@@ -1,0 +1,5 @@
+PUT /v2/apis?basepath=__Basepath__&failOnWarnings=true
+
+Content-Type: application/json
+
+{"body":"__Body__"}

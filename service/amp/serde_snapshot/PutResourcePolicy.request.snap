@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceId__/policy
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","policyDocument":"__PolicyDocument__","revisionId":"__RevisionId__"}

@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/stages/__StageName__/sdks/__SdkType__?key0=__Value__&key1=__Value__
+
+Accept: application/json
+

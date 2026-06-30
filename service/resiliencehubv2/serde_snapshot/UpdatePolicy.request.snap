@@ -1,0 +1,5 @@
+POST /v2/update-policy
+
+Content-Type: application/json
+
+{"availabilitySlo":{"target":1},"dataRecovery":{"timeBetweenBackupsInMinutes":1},"description":"__Description__","multiAz":{"disasterRecoveryApproach":"ACTIVE_ACTIVE","rpoInMinutes":1,"rtoInMinutes":1},"multiRegion":{"disasterRecoveryApproach":"ACTIVE_ACTIVE","rpoInMinutes":1,"rtoInMinutes":1},"policyArn":"__PolicyArn__"}

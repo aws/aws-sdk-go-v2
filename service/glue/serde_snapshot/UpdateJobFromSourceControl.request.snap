@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.UpdateJobFromSourceControl
+
+{"AuthStrategy":"PERSONAL_ACCESS_TOKEN","AuthToken":"__AuthToken__","BranchName":"__BranchName__","CommitId":"__CommitId__","Folder":"__Folder__","JobName":"__JobName__","Provider":"GITHUB","RepositoryName":"__RepositoryName__","RepositoryOwner":"__RepositoryOwner__"}

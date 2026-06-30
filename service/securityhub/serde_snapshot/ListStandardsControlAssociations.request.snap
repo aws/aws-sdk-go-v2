@@ -1,0 +1,3 @@
+GET /associations?MaxResults=1&NextToken=__NextToken__&SecurityControlId=__SecurityControlId__
+
+

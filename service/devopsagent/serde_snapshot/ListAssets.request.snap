@@ -1,0 +1,3 @@
+GET /asset/agent-space/__AgentSpaceId__/assets?assetType=__AssetType__&maxResults=1&nextToken=__NextToken__&updatedAfter=2000-01-01T00%3A00%3A00Z&updatedBefore=2000-01-01T00%3A00%3A00Z
+
+

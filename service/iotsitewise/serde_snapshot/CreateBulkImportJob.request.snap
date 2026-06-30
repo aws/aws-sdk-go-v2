@@ -1,0 +1,5 @@
+POST /jobs
+
+Content-Type: application/json
+
+{"adaptiveIngestion":true,"deleteFilesAfterImport":true,"errorReportLocation":{"bucket":"__Bucket__","prefix":"__Prefix__"},"files":[{"bucket":"__Bucket__","key":"__Key__","versionId":"__VersionId__"},{"bucket":"__Bucket__","key":"__Key__","versionId":"__VersionId__"}],"jobConfiguration":{"fileFormat":{"csv":{"columnNames":["ALIAS","ALIAS"]},"parquet":{}}},"jobName":"__JobName__","jobRoleArn":"__JobRoleArn__"}

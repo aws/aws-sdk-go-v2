@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.ImportModel
+
+{"DataAccessRoleArn":"__DataAccessRoleArn__","ModelKmsKeyId":"__ModelKmsKeyId__","ModelName":"__ModelName__","SourceModelArn":"__SourceModelArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VersionName":"__VersionName__"}

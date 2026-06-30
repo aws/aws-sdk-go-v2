@@ -1,0 +1,5 @@
+POST /media-pipeline-kinesis-video-stream-pools
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","PoolName":"__PoolName__","StreamConfiguration":{"DataRetentionInHours":1,"Region":"__Region__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

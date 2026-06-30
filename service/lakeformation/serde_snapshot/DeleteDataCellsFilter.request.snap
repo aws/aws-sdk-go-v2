@@ -1,0 +1,5 @@
+POST /DeleteDataCellsFilter
+
+Content-Type: application/json
+
+{"DatabaseName":"__DatabaseName__","Name":"__Name__","TableCatalogId":"__TableCatalogId__","TableName":"__TableName__"}

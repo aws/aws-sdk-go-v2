@@ -1,0 +1,5 @@
+POST /custom-metric/__MetricName__
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","displayName":"__DisplayName__","metricType":"string-list","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

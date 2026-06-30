@@ -1,0 +1,5 @@
+POST /v20210603/Monitors/__MonitorName__/Queries
+
+Content-Type: application/json
+
+{"EndTime":"2000-01-01T00:00:00Z","FilterParameters":[{"Field":"__Field__","Operator":"EQUALS","Values":["__Member__","__Member__"]},{"Field":"__Field__","Operator":"EQUALS","Values":["__Member__","__Member__"]}],"LinkedAccountId":"__LinkedAccountId__","QueryType":"MEASUREMENTS","StartTime":"2000-01-01T00:00:00Z"}

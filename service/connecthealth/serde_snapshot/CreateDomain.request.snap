@@ -1,0 +1,5 @@
+POST /domain
+
+Content-Type: application/json
+
+{"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"},"webAppSetupConfiguration":{"ehrRole":"__EhrRole__","idcInstanceId":"__IdcInstanceId__","idcRegion":"__IdcRegion__"}}

@@ -1,0 +1,5 @@
+PUT /cluster/__ClusterArn__
+
+Content-Type: application/json
+
+{"adminUserPassword":"__AdminUserPassword__","authType":"PLAIN_TEXT","backupRetentionPeriod":1,"clientToken":"__ClientToken__","preferredBackupWindow":"__PreferredBackupWindow__","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","shardCapacity":1,"shardCount":1,"shardInstanceCount":1,"subnetIds":["__Member__","__Member__"],"vpcSecurityGroupIds":["__Member__","__Member__"]}

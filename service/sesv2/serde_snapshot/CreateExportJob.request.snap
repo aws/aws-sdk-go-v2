@@ -1,0 +1,5 @@
+POST /v2/email/export-jobs
+
+Content-Type: application/json
+
+{"ExportDataSource":{"MessageInsightsDataSource":{"EndDate":946684800,"Exclude":{"Destination":["__Member__","__Member__"],"FromEmailAddress":["__Member__","__Member__"],"Isp":["__Member__","__Member__"],"LastDeliveryEvent":["SEND","SEND"],"LastEngagementEvent":["OPEN","OPEN"],"Subject":["__Member__","__Member__"]},"Include":{"Destination":["__Member__","__Member__"],"FromEmailAddress":["__Member__","__Member__"],"Isp":["__Member__","__Member__"],"LastDeliveryEvent":["SEND","SEND"],"LastEngagementEvent":["OPEN","OPEN"],"Subject":["__Member__","__Member__"]},"MaxResults":1,"StartDate":946684800},"MetricsDataSource":{"Dimensions":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"EndDate":946684800,"Metrics":[{"Aggregation":"RATE","Name":"SEND"},{"Aggregation":"RATE","Name":"SEND"}],"Namespace":"VDM","StartDate":946684800}},"ExportDestination":{"DataFormat":"CSV","S3Url":"__S3Url__"}}

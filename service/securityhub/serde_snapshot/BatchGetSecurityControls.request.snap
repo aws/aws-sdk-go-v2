@@ -1,0 +1,5 @@
+POST /securityControls/batchGet
+
+Content-Type: application/json
+
+{"SecurityControlIds":["__Member__","__Member__"]}

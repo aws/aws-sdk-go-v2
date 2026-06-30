@@ -1,0 +1,5 @@
+POST /GetTableObjects
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","MaxResults":1,"NextToken":"__NextToken__","PartitionPredicate":"__PartitionPredicate__","QueryAsOfTime":946684800,"TableName":"__TableName__","TransactionId":"__TransactionId__"}

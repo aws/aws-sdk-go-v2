@@ -1,0 +1,4 @@
+POST /recommendations
+
+Content-Type: application/json
+

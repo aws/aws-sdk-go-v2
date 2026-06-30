@@ -1,0 +1,3 @@
+GET /assistants/__AssistantId__/aiprompts/__AiPromptId__/versions?maxResults=1&nextToken=__NextToken__&origin=SYSTEM
+
+

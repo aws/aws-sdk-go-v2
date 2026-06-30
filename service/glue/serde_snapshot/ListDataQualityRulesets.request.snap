@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ListDataQualityRulesets
+
+{"Filter":{"CreatedAfter":946684800,"CreatedBefore":946684800,"Description":"__Description__","LastModifiedAfter":946684800,"LastModifiedBefore":946684800,"Name":"__Name__","TargetTable":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}},"MaxResults":1,"NextToken":"__NextToken__","Tags":{"key0":"__Value__","key1":"__Value__"}}

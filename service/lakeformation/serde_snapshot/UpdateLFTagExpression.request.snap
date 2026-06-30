@@ -1,0 +1,5 @@
+POST /UpdateLFTagExpression
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","Description":"__Description__","Expression":[{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"Name":"__Name__"}

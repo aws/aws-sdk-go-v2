@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.CreateDataSourceFromRedshift
+
+{"ComputeStatistics":true,"DataSourceId":"__DataSourceId__","DataSourceName":"__DataSourceName__","DataSpec":{"DataRearrangement":"__DataRearrangement__","DataSchema":"__DataSchema__","DataSchemaUri":"__DataSchemaUri__","DatabaseCredentials":{"Password":"__Password__","Username":"__Username__"},"DatabaseInformation":{"ClusterIdentifier":"__ClusterIdentifier__","DatabaseName":"__DatabaseName__"},"S3StagingLocation":"__S3StagingLocation__","SelectSqlQuery":"__SelectSqlQuery__"},"RoleARN":"__RoleARN__"}

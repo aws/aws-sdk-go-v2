@@ -1,0 +1,5 @@
+POST /registry-records/search
+
+Content-Type: application/json
+
+{"maxResults":1,"registryIds":["__Member__","__Member__"],"searchQuery":"__SearchQuery__"}

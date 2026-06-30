@@ -1,0 +1,5 @@
+PUT /media-pipeline-kinesis-video-stream-pools/__Identifier__
+
+Content-Type: application/json
+
+{"StreamConfiguration":{"DataRetentionInHours":1}}

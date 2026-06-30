@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateWorkteam
+
+{"Description":"__Description__","MemberDefinitions":[{"CognitoMemberDefinition":{"ClientId":"__ClientId__","UserGroup":"__UserGroup__","UserPool":"__UserPool__"},"OidcMemberDefinition":{"Groups":["__Member__","__Member__"]}},{"CognitoMemberDefinition":{"ClientId":"__ClientId__","UserGroup":"__UserGroup__","UserPool":"__UserPool__"},"OidcMemberDefinition":{"Groups":["__Member__","__Member__"]}}],"NotificationConfiguration":{"NotificationTopicArn":"__NotificationTopicArn__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"WorkerAccessConfiguration":{"S3Presign":{"IamPolicyConstraints":{"SourceIp":"Enabled","VpcSourceIp":"Enabled"}}},"WorkforceName":"__WorkforceName__","WorkteamName":"__WorkteamName__"}

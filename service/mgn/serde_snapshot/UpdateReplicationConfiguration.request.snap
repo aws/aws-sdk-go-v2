@@ -1,0 +1,5 @@
+POST /UpdateReplicationConfiguration
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","associateDefaultSecurityGroup":true,"bandwidthThrottling":1,"createPublicIP":true,"dataPlaneRouting":"PRIVATE_IP","defaultLargeStagingDiskType":"GP2","ebsEncryption":"DEFAULT","ebsEncryptionKeyArn":"__EbsEncryptionKeyArn__","internetProtocol":"IPV4","name":"__Name__","replicatedDisks":[{"deviceName":"__DeviceName__","iops":1,"isBootDisk":true,"stagingDiskType":"AUTO","throughput":1},{"deviceName":"__DeviceName__","iops":1,"isBootDisk":true,"stagingDiskType":"AUTO","throughput":1}],"replicationServerInstanceType":"__ReplicationServerInstanceType__","replicationServersSecurityGroupsIDs":["__Member__","__Member__"],"sourceServerID":"__SourceServerID__","stagingAreaSubnetId":"__StagingAreaSubnetId__","stagingAreaTags":{"key0":"__Value__","key1":"__Value__"},"storageConfiguration":{"fsxOntapConfiguration":{"credentialsSecretArn":"__CredentialsSecretArn__","storageVirtualMachineId":"__StorageVirtualMachineId__"},"storageType":"EBS"},"storeSnapshotOnLocalZone":true,"useDedicatedReplicationServer":true,"useFipsEndpoint":true}

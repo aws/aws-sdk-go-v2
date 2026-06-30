@@ -1,0 +1,11 @@
+POST /v1?key0=__Value__&key1=__Value__
+
+Content-Type: text/plain
+X-Amzn-Dataexchange-Asset-Id: __AssetId__
+X-Amzn-Dataexchange-Data-Set-Id: __DataSetId__
+X-Amzn-Dataexchange-Header-Key0: __Value__
+X-Amzn-Dataexchange-Header-Key1: __Value__
+X-Amzn-Dataexchange-Http-Method: __Method__
+X-Amzn-Dataexchange-Path: __Path__
+X-Amzn-Dataexchange-Revision-Id: __RevisionId__
+

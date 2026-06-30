@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSBudgetServiceGateway.DescribeBudgetPerformanceHistory
+
+{"AccountId":"__AccountId__","BudgetName":"__BudgetName__","MaxResults":1,"NextToken":"__NextToken__","TimePeriod":{"End":946684800,"Start":946684800}}

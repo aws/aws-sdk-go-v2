@@ -1,0 +1,3 @@
+DELETE /logically-air-gapped-backup-vaults/__BackupVaultName__/restore-access-backup-vaults/__RestoreAccessBackupVaultArn__?requesterComment=__RequesterComment__
+
+

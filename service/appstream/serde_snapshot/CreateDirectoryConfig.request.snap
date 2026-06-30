@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateDirectoryConfig
+
+{"CertificateBasedAuthProperties":{"CertificateAuthorityArn":"__CertificateAuthorityArn__","Status":"DISABLED"},"DirectoryName":"__DirectoryName__","OrganizationalUnitDistinguishedNames":["__Member__","__Member__"],"ServiceAccountCredentials":{"AccountName":"__AccountName__","AccountPassword":"__AccountPassword__"}}

@@ -1,0 +1,5 @@
+POST /DeleteJob
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","jobID":"__JobID__"}

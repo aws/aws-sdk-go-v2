@@ -1,0 +1,6 @@
+POST /update-reward
+
+Content-Type: application/json
+X-Amzn-Sagemaker-Job-Arn: __JobArn__
+
+{"ClientToken":"__ClientToken__","Rewards":[1,1],"TrajectoryId":"__TrajectoryId__"}

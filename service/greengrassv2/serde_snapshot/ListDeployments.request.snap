@@ -1,0 +1,3 @@
+GET /greengrass/v2/deployments?historyFilter=ALL&maxResults=1&nextToken=__NextToken__&parentTargetArn=__ParentTargetArn__&targetArn=__TargetArn__
+
+

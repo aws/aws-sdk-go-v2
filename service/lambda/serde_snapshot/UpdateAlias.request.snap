@@ -1,0 +1,5 @@
+PUT /2015-03-31/functions/__FunctionName__/aliases/__Name__
+
+Content-Type: application/json
+
+{"Description":"__Description__","FunctionVersion":"__FunctionVersion__","RevisionId":"__RevisionId__","RoutingConfig":{"AdditionalVersionWeights":{"key0":1,"key1":1}}}

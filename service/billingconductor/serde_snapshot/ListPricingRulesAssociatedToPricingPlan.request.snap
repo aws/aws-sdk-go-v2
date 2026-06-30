@@ -1,0 +1,5 @@
+POST /list-pricing-rules-associated-to-pricing-plan
+
+Content-Type: application/json
+
+{"BillingPeriod":"__BillingPeriod__","MaxResults":1,"NextToken":"__NextToken__","PricingPlanArn":"__PricingPlanArn__"}

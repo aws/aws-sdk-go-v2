@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/actor/__ActorId__/sessions
+
+Content-Type: application/json
+
+{"filter":{"eventFilter":"HAS_EVENTS"},"maxResults":1,"nextToken":"__NextToken__"}

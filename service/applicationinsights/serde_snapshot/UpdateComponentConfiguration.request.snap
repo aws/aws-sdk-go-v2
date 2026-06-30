@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.UpdateComponentConfiguration
+
+{"AutoConfigEnabled":true,"ComponentConfiguration":"__ComponentConfiguration__","ComponentName":"__ComponentName__","Monitor":true,"ResourceGroupName":"__ResourceGroupName__","Tier":"CUSTOM"}

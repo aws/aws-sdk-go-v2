@@ -1,0 +1,7 @@
+PUT /?requestPayment=
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+

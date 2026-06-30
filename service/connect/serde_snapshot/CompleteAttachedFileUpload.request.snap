@@ -1,0 +1,3 @@
+POST /attached-files/__InstanceId__/__FileId__?associatedResourceArn=__AssociatedResourceArn__
+
+

@@ -1,0 +1,6 @@
+POST /2023-10-12/farms/__FarmId__/queues
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"allowedStorageProfileIds":["__Member__","__Member__"],"defaultBudgetAction":"NONE","description":"__Description__","displayName":"__DisplayName__","jobAttachmentSettings":{"rootPrefix":"__RootPrefix__","s3BucketName":"__S3BucketName__"},"jobRunAsUser":{"posix":{"group":"__Group__","user":"__User__"},"runAs":"QUEUE_CONFIGURED_USER","windows":{"passwordArn":"__PasswordArn__","user":"__User__"}},"requiredFileSystemLocationNames":["__Member__","__Member__"],"roleArn":"__RoleArn__","schedulingConfiguration":{"priorityFifo":{}},"tags":{"key0":"__Value__","key1":"__Value__"}}

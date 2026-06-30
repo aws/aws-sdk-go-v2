@@ -1,0 +1,5 @@
+PUT /kx/environments/__EnvironmentId__/users/__UserName__
+
+Content-Type: application/x-amz-json-1.1
+
+{"clientToken":"__ClientToken__","iamRole":"__IamRole__"}

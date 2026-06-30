@@ -1,0 +1,5 @@
+POST /resourcegateways
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","ipAddressType":"IPV4","ipv4AddressesPerEni":1,"name":"__Name__","resourceConfigDnsResolution":"IN_VPC","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"},"vpcIdentifier":"__VpcIdentifier__"}

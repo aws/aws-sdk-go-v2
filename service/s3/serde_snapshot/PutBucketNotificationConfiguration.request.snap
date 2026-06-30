@@ -1,0 +1,6 @@
+PUT /?notification=
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Skip-Destination-Validation: true
+

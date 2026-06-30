@@ -1,0 +1,5 @@
+POST /prod/cloudwatch-alarm-templates
+
+Content-Type: application/json
+
+{"comparisonOperator":"GreaterThanOrEqualToThreshold","datapointsToAlarm":1,"description":"__Description__","evaluationPeriods":1,"groupIdentifier":"__GroupIdentifier__","metricName":"__MetricName__","name":"__Name__","period":1,"requestId":"__RequestId__","statistic":"SampleCount","tags":{"key0":"__Value__","key1":"__Value__"},"targetResourceType":"CLOUDFRONT_DISTRIBUTION","threshold":1,"treatMissingData":"notBreaching"}

@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/chatresponseconfigurations/__ChatResponseConfigurationId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","displayName":"__DisplayName__","responseConfigurations":{"key0":{"instructionCollection":{"customInstructions":"__CustomInstructions__","examples":"__Examples__","identity":"__Identity__","outputStyle":"__OutputStyle__","perspective":"__Perspective__","responseLength":"__ResponseLength__","targetAudience":"__TargetAudience__","tone":"__Tone__"}},"key1":{"instructionCollection":{"customInstructions":"__CustomInstructions__","examples":"__Examples__","identity":"__Identity__","outputStyle":"__OutputStyle__","perspective":"__Perspective__","responseLength":"__ResponseLength__","targetAudience":"__TargetAudience__","tone":"__Tone__"}}}}

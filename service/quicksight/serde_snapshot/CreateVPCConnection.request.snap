@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/vpc-connections
+
+Content-Type: application/json
+
+{"DnsResolvers":["__Member__","__Member__"],"Name":"__Name__","RoleArn":"__RoleArn__","SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VPCConnectionId":"__VPCConnectionId__"}

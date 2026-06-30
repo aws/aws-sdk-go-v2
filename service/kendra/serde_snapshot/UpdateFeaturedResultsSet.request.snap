@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.UpdateFeaturedResultsSet
+
+{"Description":"__Description__","FeaturedDocuments":[{"Id":"__Id__"},{"Id":"__Id__"}],"FeaturedResultsSetId":"__FeaturedResultsSetId__","FeaturedResultsSetName":"__FeaturedResultsSetName__","IndexId":"__IndexId__","QueryTexts":["__Member__","__Member__"],"Status":"ACTIVE"}

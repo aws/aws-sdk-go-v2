@@ -1,0 +1,5 @@
+POST /instance/__InstanceId__/task/template/__TaskTemplateId__
+
+Content-Type: application/json
+
+{"Constraints":{"InvisibleFields":[{"Id":{"Name":"__Name__"}},{"Id":{"Name":"__Name__"}}],"ReadOnlyFields":[{"Id":{"Name":"__Name__"}},{"Id":{"Name":"__Name__"}}],"RequiredFields":[{"Id":{"Name":"__Name__"}},{"Id":{"Name":"__Name__"}}]},"ContactFlowId":"__ContactFlowId__","Defaults":{"DefaultFieldValues":[{"DefaultValue":"__DefaultValue__","Id":{"Name":"__Name__"}},{"DefaultValue":"__DefaultValue__","Id":{"Name":"__Name__"}}]},"Description":"__Description__","Fields":[{"Description":"__Description__","Id":{"Name":"__Name__"},"SingleSelectOptions":["__Member__","__Member__"],"Type":"NAME"},{"Description":"__Description__","Id":{"Name":"__Name__"},"SingleSelectOptions":["__Member__","__Member__"],"Type":"NAME"}],"Name":"__Name__","SelfAssignFlowId":"__SelfAssignFlowId__","Status":"ACTIVE"}

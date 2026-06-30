@@ -1,0 +1,5 @@
+PUT /domains/__DomainId__/cases/__CaseId__/related-items/__RelatedItemId__
+
+Content-Type: application/json
+
+{"content":{"comment":{"body":"__Body__","contentType":"Text/Plain"}},"performedBy":{"userArn":"__UserUnionMemberUserArn__"}}

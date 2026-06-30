@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/experiences/__WebExperienceId__
+
+Content-Type: application/json
+
+{"authenticationConfiguration":{"samlConfiguration":{"metadataXML":"__MetadataXML__","roleArn":"__RoleArn__","userGroupAttribute":"__UserGroupAttribute__","userIdAttribute":"__UserIdAttribute__"}},"browserExtensionConfiguration":{"enabledBrowserExtensions":["FIREFOX","FIREFOX"]},"customizationConfiguration":{"customCSSUrl":"__CustomCSSUrl__","faviconUrl":"__FaviconUrl__","fontUrl":"__FontUrl__","logoUrl":"__LogoUrl__"},"identityProviderConfiguration":{"samlConfiguration":{"authenticationUrl":"__AuthenticationUrl__"}},"origins":["__Member__","__Member__"],"roleArn":"__RoleArn__","samplePromptsControlMode":"ENABLED","subtitle":"__Subtitle__","title":"__Title__","welcomeMessage":"__WelcomeMessage__"}

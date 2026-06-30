@@ -1,0 +1,5 @@
+PATCH /fuota-tasks/__Id__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Descriptor":"__Descriptor__","FirmwareUpdateImage":"__FirmwareUpdateImage__","FirmwareUpdateRole":"__FirmwareUpdateRole__","FragmentIntervalMS":1,"FragmentSizeBytes":1,"LoRaWAN":{"RfRegion":"EU868"},"Name":"__Name__","RedundancyPercent":1}

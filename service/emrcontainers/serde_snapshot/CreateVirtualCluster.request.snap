@@ -1,0 +1,5 @@
+POST /virtualclusters
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","containerProvider":{"id":"__Id__","info":{"eksInfo":{"namespace":"__Namespace__","nodeLabel":"__NodeLabel__"}},"type":"EKS"},"name":"__Name__","securityConfigurationId":"__SecurityConfigurationId__","tags":{"key0":"__Value__","key1":"__Value__"}}

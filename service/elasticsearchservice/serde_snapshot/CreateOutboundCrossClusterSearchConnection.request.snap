@@ -1,0 +1,5 @@
+POST /2015-01-01/es/ccs/outboundConnection
+
+Content-Type: application/json
+
+{"ConnectionAlias":"__ConnectionAlias__","DestinationDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"},"SourceDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}}

@@ -1,0 +1,5 @@
+POST /configurationPolicyAssociation/disassociate
+
+Content-Type: application/json
+
+{"ConfigurationPolicyIdentifier":"__ConfigurationPolicyIdentifier__","Target":{"AccountId":"__TargetMemberAccountId__"}}

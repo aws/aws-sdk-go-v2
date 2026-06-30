@@ -1,0 +1,3 @@
+GET /members?MaxResults=1&NextToken=__NextToken__&OnlyAssociated=true
+
+

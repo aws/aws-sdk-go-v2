@@ -1,0 +1,3 @@
+DELETE /domains/__DomainName__/event-triggers/__EventTriggerName__
+
+

@@ -1,0 +1,5 @@
+POST /stream/__ClusterIdentifier__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","format":"JSON","ordering":"UNORDERED","tags":{"key0":"__Value__","key1":"__Value__"},"targetDefinition":{"kinesis":{"roleArn":"__RoleArn__","streamArn":"__StreamArn__"}}}

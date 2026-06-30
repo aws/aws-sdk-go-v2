@@ -1,0 +1,5 @@
+POST /dashboards
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","dashboardDefinition":"__DashboardDefinition__","dashboardDescription":"__DashboardDescription__","dashboardName":"__DashboardName__","projectId":"__ProjectId__","tags":{"key0":"__Value__","key1":"__Value__"}}

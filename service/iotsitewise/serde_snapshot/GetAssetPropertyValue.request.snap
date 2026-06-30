@@ -1,0 +1,3 @@
+GET /properties/latest?assetId=__AssetId__&propertyAlias=__PropertyAlias__&propertyId=__PropertyId__
+
+

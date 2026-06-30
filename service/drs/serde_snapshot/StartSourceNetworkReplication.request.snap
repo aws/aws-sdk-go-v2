@@ -1,0 +1,5 @@
+POST /StartSourceNetworkReplication
+
+Content-Type: application/json
+
+{"sourceNetworkID":"__SourceNetworkID__"}

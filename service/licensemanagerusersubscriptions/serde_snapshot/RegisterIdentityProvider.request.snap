@@ -1,0 +1,5 @@
+POST /identity-provider/RegisterIdentityProvider
+
+Content-Type: application/json
+
+{"IdentityProvider":{"ActiveDirectoryIdentityProvider":{"ActiveDirectorySettings":{"DomainCredentialsProvider":{"SecretsManagerCredentialsProvider":{"SecretId":"__SecretId__"}},"DomainIpv4List":["__Member__","__Member__"],"DomainIpv6List":["__Member__","__Member__"],"DomainName":"__DomainName__","DomainNetworkSettings":{"Subnets":["__Member__","__Member__"]}},"ActiveDirectoryType":"SELF_MANAGED","DirectoryId":"__DirectoryId__","IsSharedActiveDirectory":true}},"Product":"__Product__","Settings":{"SecurityGroupId":"__SecurityGroupId__","Subnets":["__Member__","__Member__"]},"Tags":{"key0":"__Value__","key1":"__Value__"}}

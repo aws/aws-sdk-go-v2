@@ -1,0 +1,5 @@
+POST /reset-enabled-baseline
+
+Content-Type: application/json
+
+{"enabledBaselineIdentifier":"__EnabledBaselineIdentifier__"}

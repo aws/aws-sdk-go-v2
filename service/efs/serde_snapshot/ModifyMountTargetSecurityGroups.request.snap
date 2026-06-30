@@ -1,0 +1,5 @@
+PUT /2015-02-01/mount-targets/__MountTargetId__/security-groups
+
+Content-Type: application/json
+
+{"SecurityGroups":["__Member__","__Member__"]}

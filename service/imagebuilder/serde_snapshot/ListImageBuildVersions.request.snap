@@ -1,0 +1,5 @@
+POST /ListImageBuildVersions
+
+Content-Type: application/json
+
+{"filters":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"imageVersionArn":"__ImageVersionArn__","maxResults":1,"nextToken":"__NextToken__"}

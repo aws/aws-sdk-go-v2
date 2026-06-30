@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ModifyReplicationInstance
+
+{"AllocatedStorage":1,"AllowMajorVersionUpgrade":true,"ApplyImmediately":true,"AutoMinorVersionUpgrade":true,"EngineVersion":"__EngineVersion__","KerberosAuthenticationSettings":{"KeyCacheSecretIamArn":"__KeyCacheSecretIamArn__","KeyCacheSecretId":"__KeyCacheSecretId__","Krb5FileContents":"__Krb5FileContents__"},"MultiAZ":true,"NetworkType":"__NetworkType__","PreferredMaintenanceWindow":"__PreferredMaintenanceWindow__","ReplicationInstanceArn":"__ReplicationInstanceArn__","ReplicationInstanceClass":"__ReplicationInstanceClass__","ReplicationInstanceIdentifier":"__ReplicationInstanceIdentifier__","VpcSecurityGroupIds":["__Member__","__Member__"]}

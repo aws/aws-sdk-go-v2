@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateAppImageConfig
+
+{"AppImageConfigName":"__AppImageConfigName__","CodeEditorAppImageConfig":{"ContainerConfig":{"ContainerArguments":["__Member__","__Member__"],"ContainerEntrypoint":["__Member__","__Member__"],"ContainerEnvironmentVariables":{"key0":"__Value__","key1":"__Value__"}},"FileSystemConfig":{"DefaultGid":1,"DefaultUid":1,"MountPath":"__MountPath__"}},"JupyterLabAppImageConfig":{"ContainerConfig":{"ContainerArguments":["__Member__","__Member__"],"ContainerEntrypoint":["__Member__","__Member__"],"ContainerEnvironmentVariables":{"key0":"__Value__","key1":"__Value__"}},"FileSystemConfig":{"DefaultGid":1,"DefaultUid":1,"MountPath":"__MountPath__"}},"KernelGatewayImageConfig":{"FileSystemConfig":{"DefaultGid":1,"DefaultUid":1,"MountPath":"__MountPath__"},"KernelSpecs":[{"DisplayName":"__DisplayName__","Name":"__Name__"},{"DisplayName":"__DisplayName__","Name":"__Name__"}]}}

@@ -1,0 +1,5 @@
+POST /greengrass/v2/resolveComponentCandidates
+
+Content-Type: application/json
+
+{"componentCandidates":[{"componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","versionRequirements":{"key0":"__Value__","key1":"__Value__"}},{"componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","versionRequirements":{"key0":"__Value__","key1":"__Value__"}}],"platform":{"attributes":{"key0":"__Value__","key1":"__Value__"},"name":"__Name__"}}

@@ -1,0 +1,5 @@
+POST /approval-teams/__Arn__/baseline
+
+Content-Type: application/json
+
+{"ApproverIds":["__Member__","__Member__"]}

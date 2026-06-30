@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.UpdateWorkflow
+
+{"DefinitionS3Location":{"Bucket":"__Bucket__","ObjectKey":"__ObjectKey__","VersionId":"__VersionId__"},"Description":"__Description__","EngineVersion":1,"LoggingConfiguration":{"LogGroupName":"__LogGroupName__"},"NetworkConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]},"RoleArn":"__RoleArn__","TriggerMode":"__TriggerMode__","WorkflowArn":"__WorkflowArn__"}

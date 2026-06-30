@@ -1,0 +1,5 @@
+POST /StartChangeSet
+
+Content-Type: application/json
+
+{"Catalog":"__Catalog__","ChangeSet":[{"ChangeName":"__ChangeName__","ChangeType":"__ChangeType__","Details":"__Details__","Entity":{"Identifier":"__Identifier__","Type":"__Type__"},"EntityTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"ChangeName":"__ChangeName__","ChangeType":"__ChangeType__","Details":"__Details__","Entity":{"Identifier":"__Identifier__","Type":"__Type__"},"EntityTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"ChangeSetName":"__ChangeSetName__","ChangeSetTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ClientRequestToken":"__ClientRequestToken__","Intent":"VALIDATE"}

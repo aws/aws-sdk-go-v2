@@ -1,0 +1,3 @@
+DELETE /prod/clusters/__ClusterId__/channelplacementgroups/__ChannelPlacementGroupId__
+
+

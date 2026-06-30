@@ -1,0 +1,3 @@
+DELETE /app/__AppId__/environment/__EnvironmentName__/components/__Id__
+
+

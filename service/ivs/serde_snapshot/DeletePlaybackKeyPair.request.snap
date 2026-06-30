@@ -1,0 +1,5 @@
+POST /DeletePlaybackKeyPair
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

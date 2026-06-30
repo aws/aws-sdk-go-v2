@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateImportedImage
+
+{"AgentSoftwareVersion":"CURRENT_LATEST","AppCatalogConfig":[{"AbsoluteAppPath":"__AbsoluteAppPath__","AbsoluteIconPath":"__AbsoluteIconPath__","AbsoluteManifestPath":"__AbsoluteManifestPath__","DisplayName":"__DisplayName__","LaunchParameters":"__LaunchParameters__","Name":"__Name__","WorkingDirectory":"__WorkingDirectory__"},{"AbsoluteAppPath":"__AbsoluteAppPath__","AbsoluteIconPath":"__AbsoluteIconPath__","AbsoluteManifestPath":"__AbsoluteManifestPath__","DisplayName":"__DisplayName__","LaunchParameters":"__LaunchParameters__","Name":"__Name__","WorkingDirectory":"__WorkingDirectory__"}],"Description":"__Description__","DisplayName":"__DisplayName__","DryRun":true,"IamRoleArn":"__IamRoleArn__","Name":"__Name__","RuntimeValidationConfig":{"IntendedInstanceType":"__IntendedInstanceType__"},"SourceAmiId":"__SourceAmiId__","Tags":{"key0":"__Value__","key1":"__Value__"},"WorkspaceImageId":"__WorkspaceImageId__"}

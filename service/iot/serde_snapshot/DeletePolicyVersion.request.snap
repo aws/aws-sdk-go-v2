@@ -1,0 +1,3 @@
+DELETE /policies/__PolicyName__/version/__PolicyVersionId__
+
+

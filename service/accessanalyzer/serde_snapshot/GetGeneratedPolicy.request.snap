@@ -1,0 +1,3 @@
+GET /policy/generation/__JobId__?includeResourcePlaceholders=true&includeServiceLevelTemplate=true
+
+

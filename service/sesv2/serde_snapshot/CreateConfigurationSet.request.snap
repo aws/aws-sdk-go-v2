@@ -1,0 +1,5 @@
+POST /v2/email/configuration-sets
+
+Content-Type: application/json
+
+{"ArchivingOptions":{"ArchiveArn":"__ArchiveArn__"},"ConfigurationSetName":"__ConfigurationSetName__","DeliveryOptions":{"MaxDeliverySeconds":1,"SendingPoolName":"__SendingPoolName__","TlsPolicy":"REQUIRE"},"ReputationOptions":{"LastFreshStart":946684800,"ReputationMetricsEnabled":true},"SendingOptions":{"SendingEnabled":true},"SuppressionOptions":{"SuppressedReasons":["BOUNCE","BOUNCE"],"SuppressionScope":"ACCOUNT","ValidationOptions":{"ConditionThreshold":{"ConditionThresholdEnabled":"ENABLED","OverallConfidenceThreshold":{"ConfidenceVerdictThreshold":"MEDIUM"}}}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrackingOptions":{"CustomRedirectDomain":"__CustomRedirectDomain__","HttpsPolicy":"REQUIRE"},"VdmOptions":{"DashboardOptions":{"EngagementMetrics":"ENABLED"},"GuardianOptions":{"OptimizedSharedDelivery":"ENABLED"}}}

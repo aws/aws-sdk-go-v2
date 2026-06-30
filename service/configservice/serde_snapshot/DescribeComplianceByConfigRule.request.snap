@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DescribeComplianceByConfigRule
+
+{"ComplianceTypes":["COMPLIANT","COMPLIANT"],"ConfigRuleNames":["__Member__","__Member__"],"NextToken":"__NextToken__"}

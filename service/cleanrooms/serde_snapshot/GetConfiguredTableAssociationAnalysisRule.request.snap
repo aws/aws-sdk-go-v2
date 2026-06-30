@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/configuredTableAssociations/__ConfiguredTableAssociationIdentifier__/analysisRule/AGGREGATION
+
+

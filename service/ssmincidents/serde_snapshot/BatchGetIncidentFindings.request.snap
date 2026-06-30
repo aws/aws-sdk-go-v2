@@ -1,0 +1,5 @@
+POST /batchGetIncidentFindings
+
+Content-Type: application/json
+
+{"findingIds":["__Member__","__Member__"],"incidentRecordArn":"__IncidentRecordArn__"}

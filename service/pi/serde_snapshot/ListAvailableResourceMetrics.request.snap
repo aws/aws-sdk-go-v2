@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceMetrics
+
+{"Identifier":"__Identifier__","MaxResults":1,"MetricTypes":["__Member__","__Member__"],"NextToken":"__NextToken__","ServiceType":"RDS"}

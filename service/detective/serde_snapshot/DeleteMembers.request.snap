@@ -1,0 +1,5 @@
+POST /graph/members/removal
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"GraphArn":"__GraphArn__"}

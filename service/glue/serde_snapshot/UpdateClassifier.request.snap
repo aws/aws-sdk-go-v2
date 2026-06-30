@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.UpdateClassifier
+
+{"CsvClassifier":{"AllowSingleColumn":true,"ContainsHeader":"UNKNOWN","CustomDatatypeConfigured":true,"CustomDatatypes":["__Member__","__Member__"],"Delimiter":"__Delimiter__","DisableValueTrimming":true,"Header":["__Member__","__Member__"],"Name":"__Name__","QuoteSymbol":"__QuoteSymbol__","Serde":"OpenCSVSerDe"},"GrokClassifier":{"Classification":"__Classification__","CustomPatterns":"__CustomPatterns__","GrokPattern":"__GrokPattern__","Name":"__Name__"},"JsonClassifier":{"JsonPath":"__JsonPath__","Name":"__Name__"},"XMLClassifier":{"Classification":"__Classification__","Name":"__Name__","RowTag":"__RowTag__"}}

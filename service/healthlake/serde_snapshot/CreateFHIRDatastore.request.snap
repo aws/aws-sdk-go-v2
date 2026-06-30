@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.CreateFHIRDatastore
+
+{"AnalyticsConfiguration":{"Status":"ENABLED"},"ClientToken":"__ClientToken__","DatastoreName":"__DatastoreName__","DatastoreTypeVersion":"R4","IdentityProviderConfiguration":{"AuthorizationStrategy":"SMART_ON_FHIR_V1","FineGrainedAuthorizationEnabled":true,"IdpLambdaArn":"__IdpLambdaArn__","Metadata":"__Metadata__"},"NlpConfiguration":{"Status":"ENABLED"},"PreloadDataConfig":{"PreloadDataType":"SYNTHEA"},"ProfileConfiguration":{"DefaultProfiles":["__Member__","__Member__"]},"SseConfiguration":{"KmsEncryptionConfig":{"CmkType":"CUSTOMER_MANAGED_KMS_KEY","KmsKeyId":"__KmsKeyId__"}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

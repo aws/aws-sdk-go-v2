@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/domain/__DomainName__/revokeVpcEndpointAccess
+
+Content-Type: application/json
+
+{"Account":"__Account__","Service":"application.opensearchservice.amazonaws.com","ServiceOptions":{"SupportedRegions":["__Member__","__Member__"]}}

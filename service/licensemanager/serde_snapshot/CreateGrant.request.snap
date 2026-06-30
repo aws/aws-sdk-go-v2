@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.CreateGrant
+
+{"AllowedOperations":["CreateGrant","CreateGrant"],"ClientToken":"__ClientToken__","GrantName":"__GrantName__","HomeRegion":"__HomeRegion__","LicenseArn":"__LicenseArn__","Principals":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

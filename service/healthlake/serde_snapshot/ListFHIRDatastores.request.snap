@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.ListFHIRDatastores
+
+{"Filter":{"CreatedAfter":946684800,"CreatedBefore":946684800,"DatastoreName":"__DatastoreName__","DatastoreStatus":"CREATING"},"MaxResults":1,"NextToken":"__NextToken__"}

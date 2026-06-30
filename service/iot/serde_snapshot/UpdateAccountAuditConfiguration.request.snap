@@ -1,0 +1,5 @@
+PATCH /audit/configuration
+
+Content-Type: application/json
+
+{"auditCheckConfigurations":{"key0":{"configuration":{"key0":"__Value__","key1":"__Value__"},"enabled":true},"key1":{"configuration":{"key0":"__Value__","key1":"__Value__"},"enabled":true}},"auditNotificationTargetConfigurations":{"key0":{"enabled":true,"roleArn":"__RoleArn__","targetArn":"__TargetArn__"},"key1":{"enabled":true,"roleArn":"__RoleArn__","targetArn":"__TargetArn__"}},"roleArn":"__RoleArn__"}

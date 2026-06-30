@@ -1,0 +1,5 @@
+POST /identitypools/__IdentityPoolId__/identity/__IdentityId__/device
+
+Content-Type: application/json
+
+{"Platform":"APNS","Token":"__Token__"}

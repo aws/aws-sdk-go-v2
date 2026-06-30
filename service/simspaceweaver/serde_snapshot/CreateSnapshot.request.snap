@@ -1,0 +1,5 @@
+POST /createsnapshot
+
+Content-Type: application/json
+
+{"Destination":{"BucketName":"__BucketName__","ObjectKeyPrefix":"__ObjectKeyPrefix__"},"Simulation":"__Simulation__"}

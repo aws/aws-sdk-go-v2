@@ -1,0 +1,5 @@
+POST /marketplace-model/endpoints
+
+Content-Type: application/json
+
+{"acceptEula":true,"clientRequestToken":"__ClientRequestToken__","endpointConfig":{"sageMaker":{"executionRole":"__ExecutionRole__","initialInstanceCount":1,"instanceType":"__InstanceType__","kmsEncryptionKey":"__KmsEncryptionKey__","vpc":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}},"endpointName":"__EndpointName__","modelSourceIdentifier":"__ModelSourceIdentifier__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

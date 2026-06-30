@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelCardVersions
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"MaxResults":1,"ModelCardName":"__ModelCardName__","ModelCardStatus":"Draft","NextToken":"__NextToken__","SortBy":"Version","SortOrder":"Ascending"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.GetPolicyTemplate
+
+{"policyStoreId":"__PolicyStoreId__","policyTemplateId":"__PolicyTemplateId__"}

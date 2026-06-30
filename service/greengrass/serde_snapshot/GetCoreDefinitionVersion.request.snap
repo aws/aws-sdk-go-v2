@@ -1,0 +1,3 @@
+GET /greengrass/definition/cores/__CoreDefinitionId__/versions/__CoreDefinitionVersionId__
+
+

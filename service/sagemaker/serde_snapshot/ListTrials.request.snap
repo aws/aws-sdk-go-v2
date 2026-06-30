@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListTrials
+
+{"CreatedAfter":946684800,"CreatedBefore":946684800,"ExperimentName":"__ExperimentName__","MaxResults":1,"NextToken":"__NextToken__","SortBy":"Name","SortOrder":"Ascending","TrialComponentName":"__TrialComponentName__"}

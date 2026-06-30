@@ -1,0 +1,5 @@
+PUT /v1/account-settings/put
+
+Content-Type: application/json
+
+{"notificationSubscriptionStatus":"SUBSCRIBED"}

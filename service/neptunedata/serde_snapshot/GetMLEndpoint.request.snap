@@ -1,0 +1,3 @@
+GET /ml/endpoints/__Id__?neptuneIamRoleArn=__NeptuneIamRoleArn__
+
+

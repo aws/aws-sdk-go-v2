@@ -1,0 +1,3 @@
+POST /cluster/__ClusterArn__/stop
+
+

@@ -1,0 +1,7 @@
+POST /bots/__BotId__/botAliases/__BotAliasId__/botLocales/__LocaleId__/sessions/__SessionId__/utterance
+
+Content-Type: __RequestContentType__
+Response-Content-Type: __ResponseContentType__
+X-Amz-Lex-Request-Attributes: __RequestAttributes__
+X-Amz-Lex-Session-State: __SessionState__
+

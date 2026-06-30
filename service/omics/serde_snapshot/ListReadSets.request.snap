@@ -1,0 +1,5 @@
+POST /sequencestore/__SequenceStoreId__/readsets?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"createdAfter":"2000-01-01T00:00:00Z","createdBefore":"2000-01-01T00:00:00Z","creationType":"IMPORT","generatedFrom":"__GeneratedFrom__","name":"__Name__","referenceArn":"__ReferenceArn__","sampleId":"__SampleId__","status":"ARCHIVED","subjectId":"__SubjectId__"}}

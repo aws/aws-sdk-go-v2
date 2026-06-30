@@ -1,0 +1,5 @@
+POST /invokeBlueprintOptimizationAsync
+
+Content-Type: application/json
+
+{"blueprint":{"blueprintArn":"__BlueprintArn__","stage":"DEVELOPMENT"},"dataAutomationProfileArn":"__DataAutomationProfileArn__","encryptionConfiguration":{"kmsEncryptionContext":{"key0":"__Value__","key1":"__Value__"},"kmsKeyId":"__KmsKeyId__"},"outputConfiguration":{"s3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}},"samples":[{"assetS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"},"groundTruthS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}},{"assetS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"},"groundTruthS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}}],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

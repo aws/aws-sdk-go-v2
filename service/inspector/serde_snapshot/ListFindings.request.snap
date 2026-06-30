@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.ListFindings
+
+{"assessmentRunArns":["__Member__","__Member__"],"filter":{"agentIds":["__Member__","__Member__"],"attributes":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"autoScalingGroups":["__Member__","__Member__"],"creationTimeRange":{"beginDate":946684800,"endDate":946684800},"ruleNames":["__Member__","__Member__"],"rulesPackageArns":["__Member__","__Member__"],"severities":["Low","Low"],"userAttributes":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]},"maxResults":1,"nextToken":"__NextToken__"}

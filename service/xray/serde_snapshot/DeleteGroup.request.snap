@@ -1,0 +1,5 @@
+POST /DeleteGroup
+
+Content-Type: application/json
+
+{"GroupARN":"__GroupARN__","GroupName":"__GroupName__"}

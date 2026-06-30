@@ -1,0 +1,3 @@
+GET /list-resource-grouping-recommendations?appArn=__AppArn__&maxResults=1&nextToken=__NextToken__
+
+

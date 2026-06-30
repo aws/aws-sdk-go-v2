@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.AssociatePersonasToEntities
+
+{"Id":"__Id__","IndexId":"__IndexId__","Personas":[{"EntityId":"__EntityId__","Persona":"OWNER"},{"EntityId":"__EntityId__","Persona":"OWNER"}]}

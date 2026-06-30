@@ -1,0 +1,3 @@
+DELETE /schedule-groups/__Name__?clientToken=__ClientToken__
+
+

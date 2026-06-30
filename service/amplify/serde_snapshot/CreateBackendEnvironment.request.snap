@@ -1,0 +1,5 @@
+POST /apps/__AppId__/backendenvironments
+
+Content-Type: application/json
+
+{"deploymentArtifacts":"__DeploymentArtifacts__","environmentName":"__EnvironmentName__","stackName":"__StackName__"}

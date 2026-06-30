@@ -1,0 +1,5 @@
+POST /list-applications
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"__Name__","Operator":"Equals","Value":"__Value__"},{"Name":"__Name__","Operator":"Equals","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

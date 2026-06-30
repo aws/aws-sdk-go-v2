@@ -1,0 +1,3 @@
+DELETE /allow-lists/__Id__?ignoreJobChecks=__IgnoreJobChecks__
+
+

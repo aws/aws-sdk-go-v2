@@ -1,0 +1,5 @@
+POST /v1/updateconsumableresource
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","consumableResource":"__ConsumableResource__","operation":"__Operation__","quantity":1}

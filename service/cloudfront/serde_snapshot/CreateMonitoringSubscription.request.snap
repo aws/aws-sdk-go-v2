@@ -1,0 +1,4 @@
+POST /2020-05-31/distributions/__DistributionId__/monitoring-subscription
+
+Content-Type: application/xml
+

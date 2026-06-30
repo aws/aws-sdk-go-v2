@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSKendraRerankingFrontendService.Rescore
+
+{"Documents":[{"Body":"__Body__","GroupId":"__GroupId__","Id":"__Id__","OriginalScore":1,"Title":"__Title__","TokenizedBody":["__Member__","__Member__"],"TokenizedTitle":["__Member__","__Member__"]},{"Body":"__Body__","GroupId":"__GroupId__","Id":"__Id__","OriginalScore":1,"Title":"__Title__","TokenizedBody":["__Member__","__Member__"],"TokenizedTitle":["__Member__","__Member__"]}],"RescoreExecutionPlanId":"__RescoreExecutionPlanId__","SearchQuery":"__SearchQuery__"}

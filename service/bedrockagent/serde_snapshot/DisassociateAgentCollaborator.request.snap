@@ -1,0 +1,3 @@
+DELETE /agents/__AgentId__/agentversions/__AgentVersion__/agentcollaborators/__CollaboratorId__/
+
+

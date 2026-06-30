@@ -1,0 +1,3 @@
+GET /responder-gateway/__GatewayId__/link/__LinkId__/routing-rule/__RuleId__
+
+

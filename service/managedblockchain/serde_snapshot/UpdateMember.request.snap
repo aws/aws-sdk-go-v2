@@ -1,0 +1,5 @@
+PATCH /networks/__NetworkId__/members/__MemberId__
+
+Content-Type: application/json
+
+{"LogPublishingConfiguration":{"Fabric":{"CaLogs":{"Cloudwatch":{"Enabled":true}}}}}

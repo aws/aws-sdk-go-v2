@@ -1,0 +1,5 @@
+PUT /v1/routerOutput/__Arn__
+
+Content-Type: application/json
+
+{"configuration":{"standard":{"networkInterfaceArn":"__NetworkInterfaceArn__","protocol":"RTP","protocolConfiguration":{"rist":{"destinationAddress":"__DestinationAddress__","destinationPort":1}}}},"maintenanceConfiguration":{"preferredDayTime":{"day":"MONDAY","time":"__Time__"}},"maximumBitrate":1,"name":"__Name__","routingScope":"REGIONAL","tier":"OUTPUT_100"}

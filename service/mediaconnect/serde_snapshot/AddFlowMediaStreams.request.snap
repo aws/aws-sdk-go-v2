@@ -1,0 +1,5 @@
+POST /v1/flows/__FlowArn__/mediaStreams
+
+Content-Type: application/json
+
+{"mediaStreams":[{"attributes":{"fmtp":{"channelOrder":"__ChannelOrder__","colorimetry":"BT601","exactFramerate":"__ExactFramerate__","par":"__Par__","range":"NARROW","scanMode":"progressive","tcs":"SDR"},"lang":"__Lang__"},"clockRate":1,"description":"__Description__","mediaStreamId":1,"mediaStreamName":"__MediaStreamName__","mediaStreamTags":{"key0":"__Value__","key1":"__Value__"},"mediaStreamType":"video","videoFormat":"__VideoFormat__"},{"attributes":{"fmtp":{"channelOrder":"__ChannelOrder__","colorimetry":"BT601","exactFramerate":"__ExactFramerate__","par":"__Par__","range":"NARROW","scanMode":"progressive","tcs":"SDR"},"lang":"__Lang__"},"clockRate":1,"description":"__Description__","mediaStreamId":1,"mediaStreamName":"__MediaStreamName__","mediaStreamTags":{"key0":"__Value__","key1":"__Value__"},"mediaStreamType":"video","videoFormat":"__VideoFormat__"}]}

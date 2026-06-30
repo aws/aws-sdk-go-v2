@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.RollbackStage
+
+{"pipelineName":"__PipelineName__","stageName":"__StageName__","targetPipelineExecutionId":"__TargetPipelineExecutionId__"}

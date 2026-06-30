@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.DisassociateFraudster
+
+{"DomainId":"__DomainId__","FraudsterId":"__FraudsterId__","WatchlistId":"__WatchlistId__"}

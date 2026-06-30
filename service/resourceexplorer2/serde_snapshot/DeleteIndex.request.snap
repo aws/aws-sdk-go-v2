@@ -1,0 +1,5 @@
+POST /DeleteIndex
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

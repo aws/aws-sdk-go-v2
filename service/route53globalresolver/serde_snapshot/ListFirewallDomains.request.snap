@@ -1,0 +1,3 @@
+GET /firewall-domain-lists/__FirewallDomainListId__/domains?max_results=1&next_token=__NextToken__
+
+

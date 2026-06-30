@@ -1,0 +1,5 @@
+POST /legal-holds
+
+Content-Type: application/json
+
+{"Description":"__Description__","IdempotencyToken":"__IdempotencyToken__","RecoveryPointSelection":{"DateRange":{"FromDate":946684800,"ToDate":946684800},"ResourceIdentifiers":["__Member__","__Member__"],"VaultNames":["__Member__","__Member__"]},"Tags":{"key0":"__Value__","key1":"__Value__"},"Title":"__Title__"}

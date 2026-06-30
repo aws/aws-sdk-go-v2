@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.GetResourceSnapshot
+
+{"Catalog":"__Catalog__","EngagementIdentifier":"__EngagementIdentifier__","ResourceIdentifier":"__ResourceIdentifier__","ResourceSnapshotTemplateIdentifier":"__ResourceSnapshotTemplateIdentifier__","ResourceType":"Opportunity","Revision":1}

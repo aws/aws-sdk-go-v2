@@ -1,0 +1,5 @@
+POST /delete-flow
+
+Content-Type: application/json
+
+{"flowName":"__FlowName__","forceDelete":true}

@@ -1,0 +1,5 @@
+POST /asset/agent-space/__AgentSpaceId__/assets/__AssetId__/files/__Path__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","content":{"bytes":"YmxvYg=="}}

@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/object/update
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"AttributeUpdates":[{"ObjectAttributeAction":{"ObjectAttributeActionType":"CREATE_OR_UPDATE","ObjectAttributeUpdateValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"}},"ObjectAttributeKey":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"}},{"ObjectAttributeAction":{"ObjectAttributeActionType":"CREATE_OR_UPDATE","ObjectAttributeUpdateValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"}},"ObjectAttributeKey":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"}}],"ObjectReference":{"Selector":"__Selector__"}}

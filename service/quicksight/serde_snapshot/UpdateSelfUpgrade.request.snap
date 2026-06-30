@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/namespaces/__Namespace__/update-self-upgrade-request
+
+Content-Type: application/json
+
+{"Action":"APPROVE","UpgradeRequestId":"__UpgradeRequestId__"}

@@ -1,0 +1,5 @@
+PUT /2020-05-31/streaming-distribution/__Id__/config
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+

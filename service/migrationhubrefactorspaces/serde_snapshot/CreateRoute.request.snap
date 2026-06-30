@@ -1,0 +1,5 @@
+POST /environments/__EnvironmentIdentifier__/applications/__ApplicationIdentifier__/routes
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","DefaultRoute":{"ActivationState":"ACTIVE"},"RouteType":"DEFAULT","ServiceIdentifier":"__ServiceIdentifier__","Tags":{"key0":"__Value__","key1":"__Value__"},"UriPathRoute":{"ActivationState":"ACTIVE","AppendSourcePath":true,"IncludeChildPaths":true,"Methods":["DELETE","DELETE"],"SourcePath":"__SourcePath__"}}

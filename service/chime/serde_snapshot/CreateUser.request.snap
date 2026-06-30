@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/users?operation=create
+
+Content-Type: application/json
+
+{"Email":"__Email__","UserType":"PrivateUser","Username":"__Username__"}

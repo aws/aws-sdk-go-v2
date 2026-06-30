@@ -1,0 +1,3 @@
+DELETE /routing-policy-label/core-network/__CoreNetworkId__/attachment/__AttachmentId__
+
+

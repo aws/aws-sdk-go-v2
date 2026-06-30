@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.UpdateScheduledAction
+
+{"enabled":true,"endTime":946684800,"roleArn":"__RoleArn__","schedule":{"at":946684800},"scheduledActionDescription":"__ScheduledActionDescription__","scheduledActionName":"__ScheduledActionName__","startTime":946684800,"targetAction":{"createSnapshot":{"namespaceName":"__NamespaceName__","retentionPeriod":1,"snapshotNamePrefix":"__SnapshotNamePrefix__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}}

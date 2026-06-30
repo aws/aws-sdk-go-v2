@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.UpdateGlobalTable
+
+{"GlobalTableName":"__GlobalTableName__","ReplicaUpdates":[{"Create":{"RegionName":"__RegionName__"},"Delete":{"RegionName":"__RegionName__"}},{"Create":{"RegionName":"__RegionName__"},"Delete":{"RegionName":"__RegionName__"}}]}

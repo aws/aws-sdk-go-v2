@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/asset-types
+
+Content-Type: application/json
+
+{"description":"__Description__","formsInput":{"key0":{"required":true,"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},"key1":{"required":true,"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}},"name":"__Name__","owningProjectIdentifier":"__OwningProjectIdentifier__"}

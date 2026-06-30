@@ -1,0 +1,5 @@
+PUT /prod/clusters/__ClusterId__/channelplacementgroups/__ChannelPlacementGroupId__
+
+Content-Type: application/json
+
+{"name":"__Name__","nodes":["__Member__","__Member__"]}

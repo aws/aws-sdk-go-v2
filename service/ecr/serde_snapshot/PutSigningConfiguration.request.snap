@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.PutSigningConfiguration
+
+{"signingConfiguration":{"rules":[{"repositoryFilters":[{"filter":"__Filter__","filterType":"WILDCARD_MATCH"},{"filter":"__Filter__","filterType":"WILDCARD_MATCH"}],"signingProfileArn":"__SigningProfileArn__"},{"repositoryFilters":[{"filter":"__Filter__","filterType":"WILDCARD_MATCH"},{"filter":"__Filter__","filterType":"WILDCARD_MATCH"}],"signingProfileArn":"__SigningProfileArn__"}]}}

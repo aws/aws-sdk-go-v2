@@ -1,0 +1,5 @@
+POST /resource-policy
+
+Content-Type: application/json
+
+{"resourceArn":"__ResourceArn__","resourcePolicy":"__ResourcePolicy__"}

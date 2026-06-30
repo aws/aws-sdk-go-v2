@@ -1,0 +1,5 @@
+POST /describe-slack-user-identities
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__","MaxResults":1,"NextToken":"__NextToken__"}

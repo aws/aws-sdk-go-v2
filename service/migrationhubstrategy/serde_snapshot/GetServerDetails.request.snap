@@ -1,0 +1,3 @@
+GET /get-server-details/__ServerId__?maxResults=1&nextToken=__NextToken__
+
+

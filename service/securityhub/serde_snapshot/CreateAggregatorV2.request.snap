@@ -1,0 +1,5 @@
+POST /aggregatorv2/create
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","LinkedRegions":["__Member__","__Member__"],"RegionLinkingMode":"__RegionLinkingMode__","Tags":{"key0":"__Value__","key1":"__Value__"}}

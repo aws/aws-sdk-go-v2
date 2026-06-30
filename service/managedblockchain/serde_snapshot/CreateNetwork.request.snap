@@ -1,0 +1,5 @@
+POST /networks
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","Framework":"HYPERLEDGER_FABRIC","FrameworkConfiguration":{"Fabric":{"Edition":"STARTER"}},"FrameworkVersion":"__FrameworkVersion__","MemberConfiguration":{"Description":"__Description__","FrameworkConfiguration":{"Fabric":{"AdminPassword":"__AdminPassword__","AdminUsername":"__AdminUsername__"}},"KmsKeyArn":"__KmsKeyArn__","LogPublishingConfiguration":{"Fabric":{"CaLogs":{"Cloudwatch":{"Enabled":true}}}},"Name":"__Name__","Tags":{"key0":"__Value__","key1":"__Value__"}},"Name":"__Name__","Tags":{"key0":"__Value__","key1":"__Value__"},"VotingPolicy":{"ApprovalThresholdPolicy":{"ProposalDurationInHours":1,"ThresholdComparator":"GREATER_THAN","ThresholdPercentage":1}}}

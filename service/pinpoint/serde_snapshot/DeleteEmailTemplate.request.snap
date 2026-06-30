@@ -1,0 +1,3 @@
+DELETE /v1/templates/__TemplateName__/email?version=__Version__
+
+

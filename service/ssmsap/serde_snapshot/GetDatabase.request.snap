@@ -1,0 +1,5 @@
+POST /get-database
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","ComponentId":"__ComponentId__","DatabaseArn":"__DatabaseArn__","DatabaseId":"__DatabaseId__"}

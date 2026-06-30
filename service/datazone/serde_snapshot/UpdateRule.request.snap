@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/rules/__Identifier__
+
+Content-Type: application/json
+
+{"description":"__Description__","detail":{"metadataFormEnforcementDetail":{"requiredMetadataForms":[{"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}]}},"includeChildDomainUnits":true,"name":"__Name__","scope":{"assetType":{"selectionMode":"ALL","specificAssetTypes":["__Member__","__Member__"]},"dataProduct":true,"project":{"selectionMode":"ALL","specificProjects":["__Member__","__Member__"]}}}

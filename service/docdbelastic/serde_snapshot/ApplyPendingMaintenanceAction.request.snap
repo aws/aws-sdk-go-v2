@@ -1,0 +1,5 @@
+POST /pending-action
+
+Content-Type: application/json
+
+{"applyAction":"__ApplyAction__","applyOn":"__ApplyOn__","optInType":"IMMEDIATE","resourceArn":"__ResourceArn__"}

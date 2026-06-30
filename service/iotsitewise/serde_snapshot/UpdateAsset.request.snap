@@ -1,0 +1,5 @@
+PUT /assets/__AssetId__
+
+Content-Type: application/json
+
+{"assetDescription":"__AssetDescription__","assetExternalId":"__AssetExternalId__","assetName":"__AssetName__","clientToken":"__ClientToken__"}

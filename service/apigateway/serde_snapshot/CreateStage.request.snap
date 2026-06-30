@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/stages
+
+Accept: application/json
+Content-Type: application/json
+
+{"cacheClusterEnabled":true,"cacheClusterSize":"0.5","canarySettings":{"deploymentId":"__DeploymentId__","percentTraffic":1,"stageVariableOverrides":{"key0":"__Value__","key1":"__Value__"},"useStageCache":true},"deploymentId":"__DeploymentId__","description":"__Description__","documentationVersion":"__DocumentationVersion__","stageName":"__StageName__","tags":{"key0":"__Value__","key1":"__Value__"},"tracingEnabled":true,"variables":{"key0":"__Value__","key1":"__Value__"}}

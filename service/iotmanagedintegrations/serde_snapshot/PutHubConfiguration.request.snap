@@ -1,0 +1,5 @@
+PUT /hub-configuration
+
+Content-Type: application/json
+
+{"HubTokenTimerExpirySettingInSeconds":1}

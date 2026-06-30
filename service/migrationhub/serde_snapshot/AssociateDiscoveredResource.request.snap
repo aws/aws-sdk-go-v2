@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.AssociateDiscoveredResource
+
+{"DiscoveredResource":{"ConfigurationId":"__ConfigurationId__","Description":"__Description__"},"DryRun":true,"MigrationTaskName":"__MigrationTaskName__","ProgressUpdateStream":"__ProgressUpdateStream__"}

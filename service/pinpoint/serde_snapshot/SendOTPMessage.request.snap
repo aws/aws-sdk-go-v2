@@ -1,0 +1,5 @@
+POST /v1/apps/__ApplicationId__/otp
+
+Content-Type: application/json
+
+{"AllowedAttempts":1,"BrandName":"__BrandName__","Channel":"__Channel__","CodeLength":1,"DestinationIdentity":"__DestinationIdentity__","EntityId":"__EntityId__","Language":"__Language__","OriginationIdentity":"__OriginationIdentity__","ReferenceId":"__ReferenceId__","TemplateId":"__TemplateId__","ValidityPeriod":1}

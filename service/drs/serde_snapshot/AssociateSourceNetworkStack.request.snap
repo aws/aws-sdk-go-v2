@@ -1,0 +1,5 @@
+POST /AssociateSourceNetworkStack
+
+Content-Type: application/json
+
+{"cfnStackName":"__CfnStackName__","sourceNetworkID":"__SourceNetworkID__"}

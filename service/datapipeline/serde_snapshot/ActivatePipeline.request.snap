@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.ActivatePipeline
+
+{"parameterValues":[{"id":"__Id__","stringValue":"__StringValue__"},{"id":"__Id__","stringValue":"__StringValue__"}],"pipelineId":"__PipelineId__","startTimestamp":946684800}

@@ -1,0 +1,5 @@
+POST /queries
+
+Content-Type: application/json
+Graphidentifier: GraphIdentifier-value
+

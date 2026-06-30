@@ -1,0 +1,5 @@
+POST /ListMemberships
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","applicationId":"__ApplicationId__","maxResults":1,"memberType":"USER","nextToken":"__NextToken__"}

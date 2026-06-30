@@ -1,0 +1,5 @@
+PUT /browsers/__BrowserIdentifier__/sessions/streams/update?sessionId=__SessionId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","streamUpdate":{"automationStreamUpdate":{"streamStatus":"ENABLED"}}}

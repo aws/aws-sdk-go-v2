@@ -1,0 +1,5 @@
+POST /getDataEndpoint
+
+Content-Type: application/json
+
+{"APIName":"PUT_MEDIA","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

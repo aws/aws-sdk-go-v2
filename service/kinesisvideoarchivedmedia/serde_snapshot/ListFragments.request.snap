@@ -1,0 +1,5 @@
+POST /listFragments
+
+Content-Type: application/json
+
+{"FragmentSelector":{"FragmentSelectorType":"PRODUCER_TIMESTAMP","TimestampRange":{"EndTimestamp":946684800,"StartTimestamp":946684800}},"MaxResults":1,"NextToken":"__NextToken__","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

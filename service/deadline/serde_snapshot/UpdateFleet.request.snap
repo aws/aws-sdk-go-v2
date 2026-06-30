@@ -1,0 +1,6 @@
+PATCH /2023-10-12/farms/__FarmId__/fleets/__FleetId__
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"configuration":{"customerManaged":{"autoScalingConfiguration":{"scaleOutWorkersPerMinute":1,"standbyWorkerCount":1,"workerIdleDurationSeconds":1},"mode":"NO_SCALING","storageProfileId":"__StorageProfileId__","tagPropagationMode":"NO_PROPAGATION","workerCapabilities":{"acceleratorCount":{"max":1,"min":1},"acceleratorTotalMemoryMiB":{"max":1,"min":1},"acceleratorTypes":["gpu","gpu"],"cpuArchitectureType":"x86_64","customAmounts":[{"max":1,"min":1,"name":"__Name__"},{"max":1,"min":1,"name":"__Name__"}],"customAttributes":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"memoryMiB":{"max":1,"min":1},"osFamily":"WINDOWS","vCpuCount":{"max":1,"min":1}}}},"description":"__Description__","displayName":"__DisplayName__","hostConfiguration":{"scriptBody":"__ScriptBody__","scriptTimeoutSeconds":1},"maxWorkerCount":1,"minWorkerCount":1,"roleArn":"__RoleArn__"}

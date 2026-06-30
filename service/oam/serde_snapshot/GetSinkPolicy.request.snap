@@ -1,0 +1,5 @@
+POST /GetSinkPolicy
+
+Content-Type: application/json
+
+{"SinkIdentifier":"__SinkIdentifier__"}

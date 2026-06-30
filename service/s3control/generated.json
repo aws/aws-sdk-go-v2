@@ -117,6 +117,7 @@
         "internal/endpoints/endpoints_test.go",
         "internal/endpoints/s3/endpoints.go",
         "options.go",
+        "serde_snapshot_test.go",
         "serializers.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",

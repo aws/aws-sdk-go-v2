@@ -1,0 +1,5 @@
+POST /network-migration/StartNetworkMigrationCodeGeneration
+
+Content-Type: application/json
+
+{"codeGenerationOutputFormatTypes":["CDK_L1","CDK_L1"],"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__"}

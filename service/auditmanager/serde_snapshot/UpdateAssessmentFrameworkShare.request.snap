@@ -1,0 +1,5 @@
+PUT /assessmentFrameworkShareRequests/__RequestId__
+
+Content-Type: application/json
+
+{"action":"ACCEPT","requestType":"SENT"}

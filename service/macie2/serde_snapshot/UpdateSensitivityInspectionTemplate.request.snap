@@ -1,0 +1,5 @@
+PUT /templates/sensitivity-inspections/__Id__
+
+Content-Type: application/json
+
+{"description":"__Description__","excludes":{"managedDataIdentifierIds":["__Member__","__Member__"]},"includes":{"allowListIds":["__Member__","__Member__"],"customDataIdentifierIds":["__Member__","__Member__"],"managedDataIdentifierIds":["__Member__","__Member__"]}}

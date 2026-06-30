@@ -1,0 +1,5 @@
+PUT /ImportDiskImage
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","executionRole":"__ExecutionRole__","infrastructureConfigurationArn":"__InfrastructureConfigurationArn__","loggingConfiguration":{"logGroupName":"__LogGroupName__"},"name":"__Name__","osVersion":"__OsVersion__","platform":"__Platform__","registerImageOptions":{"secureBootEnabled":true,"uefiData":"__UefiData__"},"semanticVersion":"__SemanticVersion__","tags":{"key0":"__Value__","key1":"__Value__"},"uri":"__Uri__","windowsConfiguration":{"imageIndex":1}}

@@ -1,0 +1,5 @@
+POST /routes/v0/calculators
+
+Content-Type: application/json
+
+{"CalculatorName":"__CalculatorName__","DataSource":"__DataSource__","Description":"__Description__","PricingPlan":"RequestBasedUsage","Tags":{"key0":"__Value__","key1":"__Value__"}}

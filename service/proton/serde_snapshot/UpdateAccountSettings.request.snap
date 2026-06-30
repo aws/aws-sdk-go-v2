@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.UpdateAccountSettings
+
+{"deletePipelineProvisioningRepository":true,"pipelineCodebuildRoleArn":"__PipelineCodebuildRoleArn__","pipelineProvisioningRepository":{"branch":"__Branch__","name":"__Name__","provider":"GITHUB"},"pipelineServiceRoleArn":"__PipelineServiceRoleArn__"}

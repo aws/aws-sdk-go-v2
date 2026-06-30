@@ -1,0 +1,4 @@
+GET /?abac=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

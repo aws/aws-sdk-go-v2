@@ -1,0 +1,5 @@
+POST /destinations
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","Expression":"__Expression__","ExpressionType":"RuleName","Name":"__Name__","RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

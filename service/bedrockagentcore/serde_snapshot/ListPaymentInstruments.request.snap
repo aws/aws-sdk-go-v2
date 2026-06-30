@@ -1,0 +1,7 @@
+POST /payments/listPaymentInstruments
+
+Content-Type: application/json
+X-Amzn-Bedrock-Agentcore-Payments-Agent-Name: __AgentName__
+X-Amzn-Bedrock-Agentcore-Payments-User-Id: __UserId__
+
+{"maxResults":1,"nextToken":"__NextToken__","paymentConnectorId":"__PaymentConnectorId__","paymentManagerArn":"__PaymentManagerArn__"}

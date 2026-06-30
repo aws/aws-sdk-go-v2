@@ -1,0 +1,3 @@
+GET /applications/__Application__/attribute-group-details?maxResults=1&nextToken=__NextToken__
+
+

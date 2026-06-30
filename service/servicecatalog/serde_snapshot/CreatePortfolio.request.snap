@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.CreatePortfolio
+
+{"AcceptLanguage":"__AcceptLanguage__","Description":"__Description__","DisplayName":"__DisplayName__","IdempotencyToken":"__IdempotencyToken__","ProviderName":"__ProviderName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

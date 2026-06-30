@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.PutAlarm
+
+{"alarmName":"__AlarmName__","comparisonOperator":"GreaterThanOrEqualToThreshold","contactProtocols":["Email","Email"],"datapointsToAlarm":1,"evaluationPeriods":1,"metricName":"CPUUtilization","monitoredResourceName":"__MonitoredResourceName__","notificationEnabled":true,"notificationTriggers":["OK","OK"],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"threshold":1,"treatMissingData":"breaching"}

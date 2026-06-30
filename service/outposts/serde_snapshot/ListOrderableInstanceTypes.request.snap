@@ -1,0 +1,3 @@
+GET /instanceTypes?MaxResults=1&NextToken=__NextToken__&OutpostGenerationFilter=GENERATION_2
+
+

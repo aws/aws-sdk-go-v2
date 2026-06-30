@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetOrganizationConformancePackDetailedStatus
+
+{"Filters":{"AccountId":"__AccountId__","Status":"CREATE_SUCCESSFUL"},"Limit":1,"NextToken":"__NextToken__","OrganizationConformancePackName":"__OrganizationConformancePackName__"}

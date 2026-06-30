@@ -1,0 +1,5 @@
+PUT /app-instance-bots/__AppInstanceBotArn__
+
+Content-Type: application/json
+
+{"Configuration":{"Lex":{"InvokedBy":{"StandardMessages":"AUTO","TargetedMessages":"ALL"},"LexBotAliasArn":"__LexBotAliasArn__","LocaleId":"__LocaleId__","RespondsTo":"STANDARD_MESSAGES","WelcomeIntent":"__WelcomeIntent__"}},"Metadata":"__Metadata__","Name":"__Name__"}

@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/entities/ASSET/__EntityIdentifier__/disassociate-governed-terms
+
+Content-Type: application/json
+
+{"governedGlossaryTerms":["__Member__","__Member__"]}

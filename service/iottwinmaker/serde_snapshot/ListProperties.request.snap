@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/properties-list
+
+Content-Type: application/json
+
+{"componentName":"__ComponentName__","componentPath":"__ComponentPath__","entityId":"__EntityId__","maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /actionTargets/get
+
+Content-Type: application/json
+
+{"ActionTargetArns":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__"}

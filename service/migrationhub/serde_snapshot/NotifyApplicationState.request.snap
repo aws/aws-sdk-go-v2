@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.NotifyApplicationState
+
+{"ApplicationId":"__ApplicationId__","DryRun":true,"Status":"NOT_STARTED","UpdateDateTime":946684800}

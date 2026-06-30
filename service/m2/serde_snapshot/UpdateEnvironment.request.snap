@@ -1,0 +1,5 @@
+PATCH /environments/__EnvironmentId__
+
+Content-Type: application/json
+
+{"applyDuringMaintenanceWindow":true,"desiredCapacity":1,"engineVersion":"__EngineVersion__","forceUpdate":true,"instanceType":"__InstanceType__","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__"}

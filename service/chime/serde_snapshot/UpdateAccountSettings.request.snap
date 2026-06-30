@@ -1,0 +1,5 @@
+PUT /accounts/__AccountId__/settings
+
+Content-Type: application/json
+
+{"AccountSettings":{"DisableRemoteControl":true,"EnableDialOut":true}}

@@ -1,0 +1,5 @@
+POST /things
+
+Content-Type: application/json
+
+{"parameters":{"key0":"__Value__","key1":"__Value__"},"templateBody":"__TemplateBody__"}

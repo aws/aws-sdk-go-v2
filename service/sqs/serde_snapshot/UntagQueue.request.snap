@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.UntagQueue
+X-Amzn-Query-Mode: true
+
+{"QueueUrl":"__QueueUrl__","TagKeys":["__Member__","__Member__"]}

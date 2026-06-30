@@ -1,0 +1,3 @@
+DELETE /things/__ThingName__?expectedVersion=1
+
+

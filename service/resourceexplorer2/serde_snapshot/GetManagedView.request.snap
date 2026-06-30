@@ -1,0 +1,5 @@
+POST /GetManagedView
+
+Content-Type: application/json
+
+{"ManagedViewArn":"__ManagedViewArn__"}

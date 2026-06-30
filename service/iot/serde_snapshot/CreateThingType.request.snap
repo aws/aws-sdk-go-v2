@@ -1,0 +1,5 @@
+POST /thing-types/__ThingTypeName__
+
+Content-Type: application/json
+
+{"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"thingTypeProperties":{"mqtt5Configuration":{"propagatingAttributes":[{"connectionAttribute":"__ConnectionAttribute__","thingAttribute":"__ThingAttribute__","userPropertyKey":"__UserPropertyKey__"},{"connectionAttribute":"__ConnectionAttribute__","thingAttribute":"__ThingAttribute__","userPropertyKey":"__UserPropertyKey__"}]},"searchableAttributes":["__Member__","__Member__"],"thingTypeDescription":"__ThingTypeDescription__"}}

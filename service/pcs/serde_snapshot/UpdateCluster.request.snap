@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.UpdateCluster
+
+{"clientToken":"__ClientToken__","clusterIdentifier":"__ClusterIdentifier__","slurmConfiguration":{"accounting":{"defaultPurgeTimeInDays":1,"mode":"STANDARD"},"cgroupCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}],"scaleDownIdleTimeInSeconds":1,"slurmCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}],"slurmRest":{"mode":"STANDARD"},"slurmdbdCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}]}}

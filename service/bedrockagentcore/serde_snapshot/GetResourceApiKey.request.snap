@@ -1,0 +1,5 @@
+POST /identities/api-key
+
+Content-Type: application/json
+
+{"resourceCredentialProviderName":"__ResourceCredentialProviderName__","workloadIdentityToken":"__WorkloadIdentityToken__"}

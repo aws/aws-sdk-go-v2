@@ -1,0 +1,5 @@
+PUT /assessments/__AssessmentId__/status
+
+Content-Type: application/json
+
+{"status":"ACTIVE"}

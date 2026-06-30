@@ -1,0 +1,5 @@
+POST /prod/inputDevices/__InputDeviceId__/reboot
+
+Content-Type: application/json
+
+{"force":"NO"}

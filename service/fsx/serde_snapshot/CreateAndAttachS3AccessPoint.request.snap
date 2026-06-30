@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateAndAttachS3AccessPoint
+
+{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","OntapConfiguration":{"FileSystemIdentity":{"Type":"UNIX","UnixUser":{"Name":"__Name__"},"WindowsUser":{"Name":"__Name__"}},"VolumeId":"__VolumeId__"},"OpenZFSConfiguration":{"FileSystemIdentity":{"PosixUser":{"Gid":1,"SecondaryGids":[1,1],"Uid":1},"Type":"POSIX"},"VolumeId":"__VolumeId__"},"S3AccessPoint":{"Policy":"__Policy__","VpcConfiguration":{"VpcId":"__VpcId__"}},"Type":"OPENZFS"}

@@ -1,0 +1,5 @@
+POST /CreateSecurityRequirementPack
+
+Content-Type: application/json
+
+{"description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","status":"ENABLED","tags":{"key0":"__Value__","key1":"__Value__"}}

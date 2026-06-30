@@ -1,0 +1,5 @@
+PUT /fuota-tasks/__Id__/multicast-group
+
+Content-Type: application/json
+
+{"MulticastGroupId":"__MulticastGroupId__"}

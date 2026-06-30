@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.UpdateEventLabel
+
+{"assignedLabel":"__AssignedLabel__","eventId":"__EventId__","eventTypeName":"__EventTypeName__","labelTimestamp":"__LabelTimestamp__"}

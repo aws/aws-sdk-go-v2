@@ -1,0 +1,5 @@
+POST /geofencing/v0/collections/__CollectionName__/positions
+
+Content-Type: application/json
+
+{"DevicePositionUpdates":[{"Accuracy":{"Horizontal":1},"DeviceId":"__DeviceId__","Position":[1,1],"PositionProperties":{"key0":"__Value__","key1":"__Value__"},"SampleTime":"2000-01-01T00:00:00Z"},{"Accuracy":{"Horizontal":1},"DeviceId":"__DeviceId__","Position":[1,1],"PositionProperties":{"key0":"__Value__","key1":"__Value__"},"SampleTime":"2000-01-01T00:00:00Z"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.BatchGetLifecyclePolicy
+
+{"identifiers":[{"name":"__Name__","type":"retention"},{"name":"__Name__","type":"retention"}]}

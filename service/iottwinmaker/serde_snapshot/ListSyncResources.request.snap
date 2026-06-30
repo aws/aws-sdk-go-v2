@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/sync-jobs/__SyncSource__/resources-list
+
+Content-Type: application/json
+
+{"filters":[{"state":"INITIALIZING"},{"state":"INITIALIZING"}],"maxResults":1,"nextToken":"__NextToken__"}

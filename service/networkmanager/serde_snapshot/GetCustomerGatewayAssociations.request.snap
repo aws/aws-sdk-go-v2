@@ -1,0 +1,3 @@
+GET /global-networks/__GlobalNetworkId__/customer-gateway-associations?customerGatewayArns=__Member__&customerGatewayArns=__Member__&maxResults=1&nextToken=__NextToken__
+
+

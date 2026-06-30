@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeLogGroups
+
+{"accountIdentifiers":["__Member__","__Member__"],"includeLinkedAccounts":true,"limit":1,"logGroupClass":"STANDARD","logGroupIdentifiers":["__Member__","__Member__"],"logGroupNamePattern":"__LogGroupNamePattern__","logGroupNamePrefix":"__LogGroupNamePrefix__","nextToken":"__NextToken__"}

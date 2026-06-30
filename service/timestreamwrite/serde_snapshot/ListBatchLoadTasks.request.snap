@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Timestream_20181101.ListBatchLoadTasks
+
+{"MaxResults":1,"NextToken":"__NextToken__","TaskStatus":"CREATED"}

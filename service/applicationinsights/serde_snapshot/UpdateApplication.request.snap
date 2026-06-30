@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.UpdateApplication
+
+{"AttachMissingPermission":true,"AutoConfigEnabled":true,"CWEMonitorEnabled":true,"OpsCenterEnabled":true,"OpsItemSNSTopicArn":"__OpsItemSNSTopicArn__","RemoveSNSTopic":true,"ResourceGroupName":"__ResourceGroupName__","SNSNotificationArn":"__SNSNotificationArn__"}

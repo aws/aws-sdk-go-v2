@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/trained-model-inference-jobs
+
+Content-Type: application/json
+
+{"configuredModelAlgorithmAssociationArn":"__ConfiguredModelAlgorithmAssociationArn__","containerExecutionParameters":{"maxPayloadInMB":1},"dataSource":{"mlInputChannelArn":"__MlInputChannelArn__"},"description":"__Description__","environment":{"key0":"__Value__","key1":"__Value__"},"kmsKeyArn":"__KmsKeyArn__","mlModelInferencePayerAccountId":"__MlModelInferencePayerAccountId__","name":"__Name__","outputConfiguration":{"accept":"__Accept__","members":[{"accountId":"__AccountId__"},{"accountId":"__AccountId__"}]},"resourceConfig":{"instanceCount":1,"instanceType":"ml.r7i.48xlarge"},"tags":{"key0":"__Value__","key1":"__Value__"},"trainedModelArn":"__TrainedModelArn__","trainedModelVersionIdentifier":"__TrainedModelVersionIdentifier__"}

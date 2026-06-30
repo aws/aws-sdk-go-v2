@@ -1,0 +1,5 @@
+POST /extensionassociations
+
+Content-Type: application/json
+
+{"ExtensionIdentifier":"__ExtensionIdentifier__","ExtensionVersionNumber":1,"Parameters":{"key0":"__Value__","key1":"__Value__"},"ResourceIdentifier":"__ResourceIdentifier__","Tags":{"key0":"__Value__","key1":"__Value__"}}

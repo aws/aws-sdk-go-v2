@@ -1,0 +1,5 @@
+POST /matchingworkflows/__WorkflowName__/generateMatches
+
+Content-Type: application/json
+
+{"processingType":"CONSISTENT","records":[{"inputSourceARN":"__InputSourceARN__","recordAttributeMap":{"key0":"__Value__","key1":"__Value__"},"uniqueId":"__UniqueId__"},{"inputSourceARN":"__InputSourceARN__","recordAttributeMap":{"key0":"__Value__","key1":"__Value__"},"uniqueId":"__UniqueId__"}]}

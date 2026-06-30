@@ -1,0 +1,5 @@
+PUT /prod/multiplexes/__MultiplexId__/programs/__ProgramName__
+
+Content-Type: application/json
+
+{"multiplexProgramSettings":{"preferredChannelPipeline":"CURRENTLY_ACTIVE","programNumber":1,"serviceDescriptor":{"providerName":"__ProviderName__","serviceName":"__ServiceName__"},"videoSettings":{"constantBitrate":1,"statmuxSettings":{"maximumBitrate":1,"minimumBitrate":1,"priority":1}}}}

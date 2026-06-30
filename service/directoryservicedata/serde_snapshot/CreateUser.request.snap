@@ -1,0 +1,5 @@
+POST /Users/CreateUser?DirectoryId=__DirectoryId__
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","EmailAddress":"__EmailAddress__","GivenName":"__GivenName__","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"},"key1":{"S":"__AttributeValueMemberS__"}},"SAMAccountName":"__SAMAccountName__","Surname":"__Surname__"}

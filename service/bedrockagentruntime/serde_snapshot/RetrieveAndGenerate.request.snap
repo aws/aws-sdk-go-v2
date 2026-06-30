@@ -1,0 +1,4 @@
+POST /retrieveAndGenerate
+
+Content-Type: application/json
+

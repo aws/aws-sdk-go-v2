@@ -1,0 +1,5 @@
+POST /ListThreatModelJobTasks
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","maxResults":1,"nextToken":"__NextToken__","threatModelJobId":"__ThreatModelJobId__"}

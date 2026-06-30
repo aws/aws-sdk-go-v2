@@ -1,0 +1,3 @@
+DELETE /v1/repository/external-connection?domain=__Domain__&domain-owner=__DomainOwner__&external-connection=__ExternalConnection__&repository=__Repository__
+
+

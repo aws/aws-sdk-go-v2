@@ -1,0 +1,5 @@
+PATCH /automated-reasoning-policies/__PolicyArn__/build-workflows/__BuildWorkflowId__/annotations
+
+Content-Type: application/json
+
+{"annotations":[{"addType":{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}},{"addType":{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}}],"lastUpdatedAnnotationSetHash":"__LastUpdatedAnnotationSetHash__"}

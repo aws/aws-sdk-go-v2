@@ -1,0 +1,5 @@
+PATCH /kx/environments/__EnvironmentId__/kxvolumes/__VolumeName__
+
+Content-Type: application/x-amz-json-1.1
+
+{"clientToken":"__ClientToken__","description":"__Description__","nas1Configuration":{"size":1,"type":"SSD_1000"}}

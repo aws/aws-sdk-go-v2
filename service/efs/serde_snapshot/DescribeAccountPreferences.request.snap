@@ -1,0 +1,5 @@
+GET /2015-02-01/account-preferences
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

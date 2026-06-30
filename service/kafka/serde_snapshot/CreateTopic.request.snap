@@ -1,0 +1,5 @@
+POST /v1/clusters/__ClusterArn__/topics
+
+Content-Type: application/json
+
+{"configs":"__Configs__","partitionCount":1,"replicationFactor":1,"topicName":"__TopicName__"}

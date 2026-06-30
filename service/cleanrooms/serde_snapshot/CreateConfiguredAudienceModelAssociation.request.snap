@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/configuredaudiencemodelassociations
+
+Content-Type: application/json
+
+{"configuredAudienceModelArn":"__ConfiguredAudienceModelArn__","configuredAudienceModelAssociationName":"__ConfiguredAudienceModelAssociationName__","description":"__Description__","manageResourcePolicies":true,"tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.ExportKey
+
+{"ExportAttributes":{"ExportDukptInitialKey":{"KeySerialNumber":"__KeySerialNumber__"},"KeyCheckValueAlgorithm":"CMAC"},"ExportKeyIdentifier":"__ExportKeyIdentifier__","KeyMaterial":{"Tr31KeyBlock":{"KeyBlockHeaders":{"KeyExportability":"EXPORTABLE","KeyModesOfUse":{"Decrypt":true,"DeriveKey":true,"Encrypt":true,"Generate":true,"NoRestrictions":true,"Sign":true,"Unwrap":true,"Verify":true,"Wrap":true},"KeyVersion":"__KeyVersion__","OptionalBlocks":{"key0":"__Value__","key1":"__Value__"}},"WrappingKeyIdentifier":"__WrappingKeyIdentifier__"}}}

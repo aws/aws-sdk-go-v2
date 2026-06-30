@@ -1,0 +1,3 @@
+GET /v1/jobs?dataSetId=__DataSetId__&maxResults=1&nextToken=__NextToken__&revisionId=__RevisionId__
+
+

@@ -1,0 +1,5 @@
+POST /UpdateReplicationConfigurationTemplate
+
+Content-Type: application/json
+
+{"arn":"__Arn__","associateDefaultSecurityGroup":true,"bandwidthThrottling":1,"createPublicIP":true,"dataPlaneRouting":"PRIVATE_IP","defaultLargeStagingDiskType":"GP2","ebsEncryption":"DEFAULT","ebsEncryptionKeyArn":"__EbsEncryptionKeyArn__","internetProtocol":"IPV4","replicationConfigurationTemplateID":"__ReplicationConfigurationTemplateID__","replicationServerInstanceType":"__ReplicationServerInstanceType__","replicationServersSecurityGroupsIDs":["__Member__","__Member__"],"stagingAreaSubnetId":"__StagingAreaSubnetId__","stagingAreaTags":{"key0":"__Value__","key1":"__Value__"},"storageConfiguration":{"fsxOntapConfiguration":{"credentialsSecretArn":"__CredentialsSecretArn__","storageVirtualMachineId":"__StorageVirtualMachineId__"},"storageType":"EBS"},"storeSnapshotOnLocalZone":true,"useDedicatedReplicationServer":true,"useFipsEndpoint":true}

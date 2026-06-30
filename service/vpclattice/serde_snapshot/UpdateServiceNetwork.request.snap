@@ -1,0 +1,5 @@
+PATCH /servicenetworks/__ServiceNetworkIdentifier__
+
+Content-Type: application/json
+
+{"authType":"NONE"}

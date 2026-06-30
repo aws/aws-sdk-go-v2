@@ -1,0 +1,4 @@
+GET /sol/vnfpkgm/v1/vnf_packages/__VnfPkgId__/package_content
+
+Accept: application/zip
+

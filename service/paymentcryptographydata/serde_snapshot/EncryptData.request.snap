@@ -1,0 +1,5 @@
+POST /keys/__KeyIdentifier__/encrypt
+
+Content-Type: application/json
+
+{"EncryptionAttributes":{"Symmetric":{"InitializationVector":"__InitializationVector__","Mode":"ECB","PaddingType":"PKCS1"}},"PlainText":"__PlainText__","WrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}}}

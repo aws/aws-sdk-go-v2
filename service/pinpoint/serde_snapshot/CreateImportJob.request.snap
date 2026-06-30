@@ -1,0 +1,5 @@
+POST /v1/apps/__ApplicationId__/jobs/import
+
+Content-Type: application/json
+
+{"DefineSegment":true,"ExternalId":"__ExternalId__","Format":"CSV","RegisterEndpoints":true,"RoleArn":"__RoleArn__","S3Url":"__S3Url__","SegmentId":"__SegmentId__","SegmentName":"__SegmentName__"}

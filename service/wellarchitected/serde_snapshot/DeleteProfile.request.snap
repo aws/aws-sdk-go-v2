@@ -1,0 +1,3 @@
+DELETE /profiles/__ProfileArn__?ClientRequestToken=__ClientRequestToken__
+
+

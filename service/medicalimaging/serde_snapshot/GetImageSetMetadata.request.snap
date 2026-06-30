@@ -1,0 +1,3 @@
+POST /datastore/__DatastoreId__/imageSet/__ImageSetId__/getImageSetMetadata?version=__VersionId__
+
+

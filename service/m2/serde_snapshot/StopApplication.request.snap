@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/stop
+
+Content-Type: application/json
+
+{"forceStop":true}

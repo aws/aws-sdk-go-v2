@@ -1,0 +1,3 @@
+GET /managed-devices?jobId=__JobId__&maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,3 @@
+GET /routingcontrol/__RoutingControlArn__/associatedRoute53HealthChecks?MaxResults=1&NextToken=__NextToken__
+
+

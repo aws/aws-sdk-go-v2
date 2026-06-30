@@ -1,0 +1,5 @@
+POST /DeleteRoom
+
+Content-Type: application/json
+
+{"identifier":"__Identifier__"}

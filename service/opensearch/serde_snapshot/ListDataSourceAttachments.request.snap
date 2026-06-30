@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/application/__Id__/listDataSourceAttachments
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

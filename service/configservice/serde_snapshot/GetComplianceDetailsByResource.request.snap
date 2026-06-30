@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetComplianceDetailsByResource
+
+{"ComplianceTypes":["COMPLIANT","COMPLIANT"],"NextToken":"__NextToken__","ResourceEvaluationId":"__ResourceEvaluationId__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

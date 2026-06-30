@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/index/attach
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"IndexReference":{"Selector":"__Selector__"},"TargetReference":{"Selector":"__Selector__"}}

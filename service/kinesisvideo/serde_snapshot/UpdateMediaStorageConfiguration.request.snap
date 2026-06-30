@@ -1,0 +1,5 @@
+POST /updateMediaStorageConfiguration
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","MediaStorageConfiguration":{"Status":"ENABLED","StreamARN":"__StreamARN__"}}

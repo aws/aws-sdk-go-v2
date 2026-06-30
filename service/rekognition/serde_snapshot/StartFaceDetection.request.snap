@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.StartFaceDetection
+
+{"ClientRequestToken":"__ClientRequestToken__","FaceAttributes":"DEFAULT","JobTag":"__JobTag__","NotificationChannel":{"RoleArn":"__RoleArn__","SNSTopicArn":"__SNSTopicArn__"},"Video":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}}}

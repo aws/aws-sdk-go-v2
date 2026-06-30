@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListDaemonTaskDefinitions
+
+{"family":"__Family__","familyPrefix":"__FamilyPrefix__","maxResults":1,"nextToken":"__NextToken__","revision":"LAST_REGISTERED","sort":"ASC","status":"ACTIVE"}

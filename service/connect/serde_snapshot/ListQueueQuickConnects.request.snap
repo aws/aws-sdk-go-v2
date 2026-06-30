@@ -1,0 +1,3 @@
+GET /queues/__InstanceId__/__QueueId__/quick-connects?maxResults=1&nextToken=__NextToken__
+
+

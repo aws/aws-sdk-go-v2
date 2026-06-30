@@ -1,0 +1,5 @@
+POST /app-instances
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Metadata":"__Metadata__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

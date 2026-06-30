@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.DescribeProvisioningArtifact
+
+{"AcceptLanguage":"__AcceptLanguage__","IncludeProvisioningArtifactParameters":true,"ProductId":"__ProductId__","ProductName":"__ProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningArtifactName":"__ProvisioningArtifactName__","Verbose":true}

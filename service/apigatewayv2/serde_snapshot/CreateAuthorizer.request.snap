@@ -1,0 +1,5 @@
+POST /v2/apis/__ApiId__/authorizers
+
+Content-Type: application/json
+
+{"authorizerCredentialsArn":"__AuthorizerCredentialsArn__","authorizerPayloadFormatVersion":"__AuthorizerPayloadFormatVersion__","authorizerResultTtlInSeconds":1,"authorizerType":"REQUEST","authorizerUri":"__AuthorizerUri__","enableSimpleResponses":true,"identitySource":["__Member__","__Member__"],"identityValidationExpression":"__IdentityValidationExpression__","jwtConfiguration":{"audience":["__Member__","__Member__"],"issuer":"__Issuer__"},"name":"__Name__"}

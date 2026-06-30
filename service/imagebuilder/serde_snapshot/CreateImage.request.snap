@@ -1,0 +1,5 @@
+PUT /CreateImage
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","containerRecipeArn":"__ContainerRecipeArn__","distributionConfigurationArn":"__DistributionConfigurationArn__","enhancedImageMetadataEnabled":true,"executionRole":"__ExecutionRole__","imageRecipeArn":"__ImageRecipeArn__","imageScanningConfiguration":{"ecrConfiguration":{"containerTags":["__Member__","__Member__"],"repositoryName":"__RepositoryName__"},"imageScanningEnabled":true},"imageTestsConfiguration":{"imageTestsEnabled":true,"timeoutMinutes":1},"infrastructureConfigurationArn":"__InfrastructureConfigurationArn__","loggingConfiguration":{"logGroupName":"__LogGroupName__"},"tags":{"key0":"__Value__","key1":"__Value__"},"workflows":[{"onFailure":"CONTINUE","parallelGroup":"__ParallelGroup__","parameters":[{"name":"__Name__","value":["__Member__","__Member__"]},{"name":"__Name__","value":["__Member__","__Member__"]}],"workflowArn":"__WorkflowArn__"},{"onFailure":"CONTINUE","parallelGroup":"__ParallelGroup__","parameters":[{"name":"__Name__","value":["__Member__","__Member__"]},{"name":"__Name__","value":["__Member__","__Member__"]}],"workflowArn":"__WorkflowArn__"}]}

@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/users/__UserId__
+
+Content-Type: application/json
+
+{"AlexaForBusinessMetadata":{"AlexaForBusinessRoomArn":"__AlexaForBusinessRoomArn__","IsAlexaForBusinessEnabled":true},"LicenseType":"Basic","UserType":"PrivateUser"}

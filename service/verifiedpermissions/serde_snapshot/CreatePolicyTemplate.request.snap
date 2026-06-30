@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.CreatePolicyTemplate
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","policyStoreId":"__PolicyStoreId__","statement":"__Statement__"}

@@ -1,0 +1,5 @@
+PUT /tables/__TableBucketARN__/__Namespace__
+
+Content-Type: application/json
+
+{"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseAlgorithm":"AES256"},"format":"ICEBERG","metadata":{"iceberg":{"partitionSpec":{"fields":[{"field-id":1,"name":"__Name__","source-id":1,"transform":"__Transform__"},{"field-id":1,"name":"__Name__","source-id":1,"transform":"__Transform__"}],"spec-id":1},"properties":{"key0":"__Value__","key1":"__Value__"},"schema":{"fields":[{"id":1,"name":"__Name__","required":true,"type":"__Type__"},{"id":1,"name":"__Name__","required":true,"type":"__Type__"}]},"schemaV2":{"fields":[{"doc":"__Doc__","id":1,"name":"__Name__","required":true},{"doc":"__Doc__","id":1,"name":"__Name__","required":true}],"identifier-field-ids":[1,1],"schema-id":1,"type":"struct"},"writeOrder":{"fields":[{"direction":"asc","null-order":"nulls-first","source-id":1,"transform":"__Transform__"},{"direction":"asc","null-order":"nulls-first","source-id":1,"transform":"__Transform__"}],"order-id":1}}},"name":"__Name__","storageClassConfiguration":{"storageClass":"STANDARD"},"tags":{"key0":"__Value__","key1":"__Value__"}}

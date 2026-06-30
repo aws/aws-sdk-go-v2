@@ -1,0 +1,5 @@
+POST /routing-profiles/__InstanceId__/__RoutingProfileId__/associate-queues
+
+Content-Type: application/json
+
+{"ManualAssignmentQueueConfigs":[{"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}},{"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}}],"QueueConfigs":[{"Delay":1,"Priority":1,"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}},{"Delay":1,"Priority":1,"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}}]}

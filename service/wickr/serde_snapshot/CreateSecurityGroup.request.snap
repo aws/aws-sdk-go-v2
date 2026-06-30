@@ -1,0 +1,6 @@
+POST /networks/__NetworkId__/security-groups
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"name":"__Name__","securityGroupSettings":{"enableGuestFederation":true,"enableRestrictedGlobalFederation":true,"federationMode":1,"globalFederation":true,"lockoutThreshold":1,"permittedNetworks":["__Member__","__Member__"],"permittedWickrAwsNetworks":[{"networkId":"__NetworkId__","region":"__Region__"},{"networkId":"__NetworkId__","region":"__Region__"}],"permittedWickrEnterpriseNetworks":[{"domain":"__Domain__","networkId":"__NetworkId__"},{"domain":"__Domain__","networkId":"__NetworkId__"}]}}

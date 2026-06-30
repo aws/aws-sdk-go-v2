@@ -1,0 +1,4 @@
+POST /2020-05-31/tagging?Operation=Untag&Resource=__Resource__
+
+Content-Type: application/xml
+

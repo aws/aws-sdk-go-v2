@@ -1,0 +1,6 @@
+POST /channelGroup/__ChannelGroupName__/channel
+
+Content-Type: application/json
+X-Amzn-Client-Token: __ClientToken__
+
+{"ChannelName":"__ChannelName__","Description":"__Description__","InputSwitchConfiguration":{"MQCSInputSwitching":true,"PreferredInput":1},"InputType":"HLS","OutputHeaderConfiguration":{"PublishMQCS":true},"tags":{"key0":"__Value__","key1":"__Value__"}}

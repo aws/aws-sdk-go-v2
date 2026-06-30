@@ -1,0 +1,5 @@
+PATCH /custom-metric/__MetricName__
+
+Content-Type: application/json
+
+{"displayName":"__DisplayName__"}

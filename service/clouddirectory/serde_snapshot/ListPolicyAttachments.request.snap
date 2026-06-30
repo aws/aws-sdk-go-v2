@@ -1,0 +1,7 @@
+POST /amazonclouddirectory/2017-01-11/policy/attachment
+
+Content-Type: application/json
+X-Amz-Consistency-Level: SERIALIZABLE
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"MaxResults":1,"NextToken":"__NextToken__","PolicyReference":{"Selector":"__Selector__"}}

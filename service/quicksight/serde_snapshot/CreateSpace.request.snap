@@ -1,0 +1,5 @@
+POST /v1/accounts/__AwsAccountId__/spaces
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","SpaceId":"__SpaceId__"}

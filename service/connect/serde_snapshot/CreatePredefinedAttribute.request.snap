@@ -1,0 +1,5 @@
+PUT /predefined-attributes/__InstanceId__
+
+Content-Type: application/json
+
+{"AttributeConfiguration":{"EnableValueValidationOnAssociation":true},"Name":"__Name__","Purposes":["__Member__","__Member__"],"Values":{"StringList":["__Member__","__Member__"]}}

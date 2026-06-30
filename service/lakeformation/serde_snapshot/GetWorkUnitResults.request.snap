@@ -1,0 +1,5 @@
+POST /GetWorkUnitResults
+
+Content-Type: application/json
+
+{"QueryId":"__QueryId__","WorkUnitId":1,"WorkUnitToken":"__WorkUnitToken__"}

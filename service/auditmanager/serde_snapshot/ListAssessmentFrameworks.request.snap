@@ -1,0 +1,3 @@
+GET /assessmentFrameworks?frameworkType=Standard&maxResults=1&nextToken=__NextToken__
+
+

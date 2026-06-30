@@ -1,0 +1,3 @@
+GET /table-record-expiration-job-status?tableArn=__TableArn__
+
+

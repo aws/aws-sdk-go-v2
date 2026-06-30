@@ -1,0 +1,5 @@
+PUT /projects/__Name__
+
+Content-Type: application/json
+
+{"RoleArn":"__RoleArn__","Sample":{"Size":1,"Type":"FIRST_N"}}

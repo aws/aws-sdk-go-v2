@@ -1,0 +1,5 @@
+POST /update-chime-webhook-configuration
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__","IamRoleArn":"__IamRoleArn__","LoggingLevel":"__LoggingLevel__","SnsTopicArns":["__Member__","__Member__"],"WebhookDescription":"__WebhookDescription__","WebhookUrl":"__WebhookUrl__"}

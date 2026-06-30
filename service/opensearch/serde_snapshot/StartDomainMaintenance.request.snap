@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/domain/__DomainName__/domainMaintenance
+
+Content-Type: application/json
+
+{"Action":"REBOOT_NODE","NodeId":"__NodeId__"}

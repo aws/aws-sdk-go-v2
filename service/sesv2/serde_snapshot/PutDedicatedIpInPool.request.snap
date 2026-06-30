@@ -1,0 +1,5 @@
+PUT /v2/email/dedicated-ips/__Ip__/pool
+
+Content-Type: application/json
+
+{"DestinationPoolName":"__DestinationPoolName__"}

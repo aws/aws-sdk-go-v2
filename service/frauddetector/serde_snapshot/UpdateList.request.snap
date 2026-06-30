@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.UpdateList
+
+{"description":"__Description__","elements":["__Member__","__Member__"],"name":"__Name__","updateMode":"REPLACE","variableType":"__VariableType__"}

@@ -1,0 +1,5 @@
+POST /vpc-attachments
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","Options":{"ApplianceModeSupport":true,"DnsSupport":true,"Ipv6Support":true,"SecurityGroupReferencingSupport":true},"RoutingPolicyLabel":"__RoutingPolicyLabel__","SubnetArns":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcArn":"__VpcArn__"}

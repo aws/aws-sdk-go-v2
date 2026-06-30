@@ -1,0 +1,5 @@
+POST /prod/offerings/__OfferingId__/purchase
+
+Content-Type: application/json
+
+{"count":1,"name":"__Name__","renewalSettings":{"automaticRenewal":"DISABLED","renewalCount":1},"requestId":"__RequestId__","start":"__Start__","tags":{"key0":"__Value__","key1":"__Value__"}}

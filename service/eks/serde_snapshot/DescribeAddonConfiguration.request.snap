@@ -1,0 +1,3 @@
+GET /addons/configuration-schemas?addonName=__AddonName__&addonVersion=__AddonVersion__
+
+

@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/vpc-connections?max-results=1&next-token=__NextToken__
+
+

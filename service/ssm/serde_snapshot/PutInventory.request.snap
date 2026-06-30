@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.PutInventory
+
+{"InstanceId":"__InstanceId__","Items":[{"CaptureTime":"__CaptureTime__","Content":[{"key0":"__Value__","key1":"__Value__"},{"key0":"__Value__","key1":"__Value__"}],"ContentHash":"__ContentHash__","Context":{"key0":"__Value__","key1":"__Value__"},"SchemaVersion":"__SchemaVersion__","TypeName":"__TypeName__"},{"CaptureTime":"__CaptureTime__","Content":[{"key0":"__Value__","key1":"__Value__"},{"key0":"__Value__","key1":"__Value__"}],"ContentHash":"__ContentHash__","Context":{"key0":"__Value__","key1":"__Value__"},"SchemaVersion":"__SchemaVersion__","TypeName":"__TypeName__"}]}

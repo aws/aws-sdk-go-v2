@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.UpdateCustomRoutingAcceleratorAttributes
+
+{"AcceleratorArn":"__AcceleratorArn__","FlowLogsEnabled":true,"FlowLogsS3Bucket":"__FlowLogsS3Bucket__","FlowLogsS3Prefix":"__FlowLogsS3Prefix__"}

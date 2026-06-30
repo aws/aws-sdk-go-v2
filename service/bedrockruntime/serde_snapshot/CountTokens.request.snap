@@ -1,0 +1,5 @@
+POST /model/__ModelId__/count-tokens
+
+Content-Type: application/json
+
+{"input":{"invokeModel":{"body":"YmxvYg=="}}}

@@ -1,0 +1,3 @@
+GET /clusters/__ClusterName__/capabilities?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,3 @@
+GET /resources/__ResourceArn__/recovery-points?managedByAWSBackupOnly=true&maxResults=1&nextToken=__NextToken__
+
+

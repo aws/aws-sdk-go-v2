@@ -1,0 +1,3 @@
+PUT /2020-05-31/distribution/__TargetDistributionId__/associate-alias?Alias=__Alias__
+
+

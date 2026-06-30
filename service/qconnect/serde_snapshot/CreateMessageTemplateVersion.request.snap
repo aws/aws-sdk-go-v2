@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/messageTemplates/__MessageTemplateId__/versions
+
+Content-Type: application/json
+
+{"messageTemplateContentSha256":"__MessageTemplateContentSha256__"}

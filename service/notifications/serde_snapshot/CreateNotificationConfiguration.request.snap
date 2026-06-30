@@ -1,0 +1,5 @@
+POST /notification-configurations
+
+Content-Type: application/json
+
+{"aggregationDuration":"LONG","description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

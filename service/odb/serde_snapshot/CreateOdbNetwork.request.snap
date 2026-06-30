@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateOdbNetwork
+
+{"availabilityZone":"__AvailabilityZone__","availabilityZoneId":"__AvailabilityZoneId__","backupSubnetCidr":"__BackupSubnetCidr__","clientSubnetCidr":"__ClientSubnetCidr__","clientToken":"__ClientToken__","crossRegionS3RestoreSourcesToEnable":["__Member__","__Member__"],"customDomainName":"__CustomDomainName__","defaultDnsPrefix":"__DefaultDnsPrefix__","displayName":"__DisplayName__","kmsAccess":"ENABLED","kmsPolicyDocument":"__KmsPolicyDocument__","s3Access":"ENABLED","s3PolicyDocument":"__S3PolicyDocument__","stsAccess":"ENABLED","stsPolicyDocument":"__StsPolicyDocument__","tags":{"key0":"__Value__","key1":"__Value__"},"zeroEtlAccess":"ENABLED"}

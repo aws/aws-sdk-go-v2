@@ -1,0 +1,5 @@
+PUT /bots/__BotId__
+
+Content-Type: application/json
+
+{"botMembers":[{"botMemberAliasId":"__BotMemberAliasId__","botMemberAliasName":"__BotMemberAliasName__","botMemberId":"__BotMemberId__","botMemberName":"__BotMemberName__","botMemberVersion":"__BotMemberVersion__"},{"botMemberAliasId":"__BotMemberAliasId__","botMemberAliasName":"__BotMemberAliasName__","botMemberId":"__BotMemberId__","botMemberName":"__BotMemberName__","botMemberVersion":"__BotMemberVersion__"}],"botName":"__BotName__","botType":"Bot","dataPrivacy":{"childDirected":true},"description":"__Description__","errorLogSettings":{"enabled":true},"idleSessionTTLInSeconds":1,"roleArn":"__RoleArn__"}

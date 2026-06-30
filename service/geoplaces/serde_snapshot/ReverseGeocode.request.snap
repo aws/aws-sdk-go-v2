@@ -1,0 +1,5 @@
+POST /v2/reverse-geocode?key=__Key__
+
+Content-Type: application/json
+
+{"AdditionalFeatures":["TimeZone","TimeZone"],"Filter":{"IncludePlaceTypes":["Locality","Locality"]},"Heading":1,"IntendedUse":"SingleUse","Language":"__Language__","MaxResults":1,"PoliticalView":"__PoliticalView__","QueryPosition":[1,1],"QueryRadius":1}

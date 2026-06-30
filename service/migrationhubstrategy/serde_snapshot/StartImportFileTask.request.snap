@@ -1,0 +1,5 @@
+POST /start-import-file-task
+
+Content-Type: application/json
+
+{"S3Bucket":"__S3Bucket__","dataSourceType":"ApplicationDiscoveryService","groupId":[{"name":"ExternalId","value":"__Value__"},{"name":"ExternalId","value":"__Value__"}],"name":"__Name__","s3bucketForReportData":"__S3bucketForReportData__","s3key":"__S3key__"}

@@ -1,0 +1,5 @@
+POST /referencestore/__ReferenceStoreId__/importjob
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","roleArn":"__RoleArn__","sources":[{"description":"__Description__","name":"__Name__","sourceFile":"__SourceFile__","tags":{"key0":"__Value__","key1":"__Value__"}},{"description":"__Description__","name":"__Name__","sourceFile":"__SourceFile__","tags":{"key0":"__Value__","key1":"__Value__"}}]}

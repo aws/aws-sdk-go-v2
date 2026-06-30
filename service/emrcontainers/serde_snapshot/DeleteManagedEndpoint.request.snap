@@ -1,0 +1,3 @@
+DELETE /virtualclusters/__VirtualClusterId__/endpoints/__Id__
+
+

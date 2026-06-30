@@ -1,0 +1,5 @@
+POST /v1/whatsapp/signup
+
+Content-Type: application/json
+
+{"setupFinalization":{"associateInProgressToken":"__AssociateInProgressToken__","phoneNumberParent":"__PhoneNumberParent__","phoneNumbers":[{"dataLocalizationRegion":"__DataLocalizationRegion__","id":"__Id__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"twoFactorPin":"__TwoFactorPin__"},{"dataLocalizationRegion":"__DataLocalizationRegion__","id":"__Id__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"twoFactorPin":"__TwoFactorPin__"}],"waba":{"eventDestinations":[{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"},{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"}],"id":"__Id__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}},"signupCallback":{"accessToken":"__AccessToken__","callbackUrl":"__CallbackUrl__"}}

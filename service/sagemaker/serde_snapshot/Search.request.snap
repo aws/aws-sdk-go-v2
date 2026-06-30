@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.Search
+
+{"CrossAccountFilterOption":"SameAccount","MaxResults":1,"NextToken":"__NextToken__","Resource":"TrainingJob","SearchExpression":{"Filters":[{"Name":"__Name__","Operator":"Equals","Value":"__Value__"},{"Name":"__Name__","Operator":"Equals","Value":"__Value__"}],"NestedFilters":[{"Filters":[{"Name":"__Name__","Operator":"Equals","Value":"__Value__"},{"Name":"__Name__","Operator":"Equals","Value":"__Value__"}],"NestedPropertyName":"__NestedPropertyName__"},{"Filters":[{"Name":"__Name__","Operator":"Equals","Value":"__Value__"},{"Name":"__Name__","Operator":"Equals","Value":"__Value__"}],"NestedPropertyName":"__NestedPropertyName__"}],"Operator":"And","SubExpressions":[{},{}]},"SortBy":"__SortBy__","SortOrder":"Ascending","VisibilityConditions":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

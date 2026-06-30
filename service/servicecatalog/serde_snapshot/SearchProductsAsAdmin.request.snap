@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.SearchProductsAsAdmin
+
+{"AcceptLanguage":"__AcceptLanguage__","Filters":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"PageSize":1,"PageToken":"__PageToken__","PortfolioId":"__PortfolioId__","ProductSource":"ACCOUNT","SortBy":"Title","SortOrder":"ASCENDING"}

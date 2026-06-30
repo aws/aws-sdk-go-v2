@@ -1,0 +1,5 @@
+POST /orgs/describeOrganizationConfiguration
+
+Content-Type: application/json
+
+{"GraphArn":"__GraphArn__"}

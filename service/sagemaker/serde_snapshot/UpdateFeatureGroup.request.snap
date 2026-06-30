@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateFeatureGroup
+
+{"FeatureAdditions":[{"CollectionConfig":{"VectorConfig":{"Dimension":1}},"CollectionType":"List","FeatureName":"__FeatureName__","FeatureType":"Integral"},{"CollectionConfig":{"VectorConfig":{"Dimension":1}},"CollectionType":"List","FeatureName":"__FeatureName__","FeatureType":"Integral"}],"FeatureGroupName":"__FeatureGroupName__","OnlineStoreConfig":{"TtlDuration":{"Unit":"Seconds","Value":1}},"ThroughputConfig":{"ProvisionedReadCapacityUnits":1,"ProvisionedWriteCapacityUnits":1,"ThroughputMode":"OnDemand"}}

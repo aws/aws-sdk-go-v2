@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/brandassignments
+
+Content-Type: application/json
+
+{"BrandArn":"__BrandArn__"}

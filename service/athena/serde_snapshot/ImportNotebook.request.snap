@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.ImportNotebook
+
+{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","NotebookS3LocationUri":"__NotebookS3LocationUri__","Payload":"__Payload__","Type":"IPYNB","WorkGroup":"__WorkGroup__"}

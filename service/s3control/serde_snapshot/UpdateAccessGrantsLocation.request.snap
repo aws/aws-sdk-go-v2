@@ -1,0 +1,6 @@
+PUT /v20180820/accessgrantsinstance/location/__AccessGrantsLocationId__
+
+Content-Md5: YCTvhGpMyapr/0LHcXuGPg==
+Content-Type: application/xml
+X-Amz-Account-Id: AccountId-value
+

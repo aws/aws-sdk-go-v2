@@ -1,0 +1,5 @@
+POST /DeleteApplication
+
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__"}

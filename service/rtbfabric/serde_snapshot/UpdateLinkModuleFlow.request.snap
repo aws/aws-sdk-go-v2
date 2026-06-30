@@ -1,0 +1,5 @@
+POST /gateway/__GatewayId__/link/__LinkId__/module-flow
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","modules":[{"dependsOn":["__Member__","__Member__"],"moduleParameters":{"noBid":{"passThroughPercentage":1,"reason":"__Reason__","reasonCode":1}},"name":"__Name__","version":"__Version__"},{"dependsOn":["__Member__","__Member__"],"moduleParameters":{"noBid":{"passThroughPercentage":1,"reason":"__Reason__","reasonCode":1}},"name":"__Name__","version":"__Version__"}]}

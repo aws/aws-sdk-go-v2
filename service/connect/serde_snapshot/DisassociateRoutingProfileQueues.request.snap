@@ -1,0 +1,5 @@
+POST /routing-profiles/__InstanceId__/__RoutingProfileId__/disassociate-queues
+
+Content-Type: application/json
+
+{"ManualAssignmentQueueReferences":[{"Channel":"VOICE","QueueId":"__QueueId__"},{"Channel":"VOICE","QueueId":"__QueueId__"}],"QueueReferences":[{"Channel":"VOICE","QueueId":"__QueueId__"},{"Channel":"VOICE","QueueId":"__QueueId__"}]}

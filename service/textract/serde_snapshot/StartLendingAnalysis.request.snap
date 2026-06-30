@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.StartLendingAnalysis
+
+{"ClientRequestToken":"__ClientRequestToken__","DocumentLocation":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"JobTag":"__JobTag__","KMSKeyId":"__KMSKeyId__","NotificationChannel":{"RoleArn":"__RoleArn__","SNSTopicArn":"__SNSTopicArn__"},"OutputConfig":{"S3Bucket":"__S3Bucket__","S3Prefix":"__S3Prefix__"}}

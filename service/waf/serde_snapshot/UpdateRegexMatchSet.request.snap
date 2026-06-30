@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.UpdateRegexMatchSet
+
+{"ChangeToken":"__ChangeToken__","RegexMatchSetId":"__RegexMatchSetId__","Updates":[{"Action":"INSERT","RegexMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"RegexPatternSetId":"__RegexPatternSetId__","TextTransformation":"NONE"}},{"Action":"INSERT","RegexMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"RegexPatternSetId":"__RegexPatternSetId__","TextTransformation":"NONE"}}]}

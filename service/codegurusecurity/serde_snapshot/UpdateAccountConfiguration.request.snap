@@ -1,0 +1,5 @@
+PUT /updateAccountConfiguration
+
+Content-Type: application/json
+
+{"encryptionConfig":{"kmsKeyArn":"__KmsKeyArn__"}}

@@ -1,0 +1,3 @@
+GET /contact/references/__InstanceId__/__ContactId__?nextToken=__NextToken__&referenceTypes=URL&referenceTypes=URL
+
+

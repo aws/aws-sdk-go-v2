@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/plugins
+
+Content-Type: application/json
+
+{"authConfiguration":{"basicAuthConfiguration":{"roleArn":"__RoleArn__","secretArn":"__SecretArn__"}},"clientToken":"__ClientToken__","customPluginConfiguration":{"apiSchema":{"payload":"__APISchemaMemberPayload__"},"apiSchemaType":"OPEN_API_V3","description":"__Description__"},"displayName":"__DisplayName__","serverUrl":"__ServerUrl__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"SERVICE_NOW"}

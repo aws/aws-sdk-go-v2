@@ -1,0 +1,5 @@
+POST /PutSupplementalTaxRegistration
+
+Content-Type: application/json
+
+{"taxRegistrationEntry":{"address":{"addressLine1":"__AddressLine1__","addressLine2":"__AddressLine2__","addressLine3":"__AddressLine3__","city":"__City__","countryCode":"__CountryCode__","districtOrCounty":"__DistrictOrCounty__","postalCode":"__PostalCode__","stateOrRegion":"__StateOrRegion__"},"legalName":"__LegalName__","registrationId":"__RegistrationId__","registrationType":"VAT"}}

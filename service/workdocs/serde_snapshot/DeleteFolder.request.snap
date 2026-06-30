@@ -1,0 +1,4 @@
+DELETE /api/v1/folders/__FolderId__
+
+Authentication: __AuthenticationToken__
+

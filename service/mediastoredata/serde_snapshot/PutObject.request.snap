@@ -1,0 +1,7 @@
+PUT /__Path__
+
+Cache-Control: __CacheControl__
+Content-Type: __ContentType__
+X-Amz-Storage-Class: TEMPORAL
+X-Amz-Upload-Availability: STANDARD
+

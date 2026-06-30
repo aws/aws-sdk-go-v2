@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/configuredTableAssociations
+
+Content-Type: application/json
+
+{"configuredTableIdentifier":"__ConfiguredTableIdentifier__","description":"__Description__","name":"__Name__","roleArn":"__RoleArn__","tags":{"key0":"__Value__","key1":"__Value__"}}

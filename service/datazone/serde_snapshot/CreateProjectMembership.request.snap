@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/projects/__ProjectIdentifier__/createMembership
+
+Content-Type: application/json
+
+{"designation":"PROJECT_OWNER","member":{"userIdentifier":"__MemberMemberUserIdentifier__"}}

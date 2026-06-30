@@ -1,0 +1,5 @@
+POST /2025-09-09/microvms
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","egressNetworkConnectors":["__Member__","__Member__"],"executionRoleArn":"__ExecutionRoleArn__","idlePolicy":{"autoResumeEnabled":true,"maxIdleDurationSeconds":1,"suspendedDurationSeconds":1},"imageIdentifier":"__ImageIdentifier__","imageVersion":"__ImageVersion__","ingressNetworkConnectors":["__Member__","__Member__"],"logging":{"disabled":{}},"maximumDurationInSeconds":1,"runHookPayload":"__RunHookPayload__"}

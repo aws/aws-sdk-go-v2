@@ -1,0 +1,5 @@
+POST /tokens/__DnsViewId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","expiresAt":"2000-01-01T00:00:00Z","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

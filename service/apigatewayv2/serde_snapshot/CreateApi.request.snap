@@ -1,0 +1,5 @@
+POST /v2/apis
+
+Content-Type: application/json
+
+{"apiKeySelectionExpression":"__ApiKeySelectionExpression__","corsConfiguration":{"allowCredentials":true,"allowHeaders":["__Member__","__Member__"],"allowMethods":["__Member__","__Member__"],"allowOrigins":["__Member__","__Member__"],"exposeHeaders":["__Member__","__Member__"],"maxAge":1},"credentialsArn":"__CredentialsArn__","description":"__Description__","disableExecuteApiEndpoint":true,"disableSchemaValidation":true,"ipAddressType":"ipv4","name":"__Name__","protocolType":"WEBSOCKET","routeKey":"__RouteKey__","routeSelectionExpression":"__RouteSelectionExpression__","tags":{"key0":"__Value__","key1":"__Value__"},"target":"__Target__","version":"__Version__"}

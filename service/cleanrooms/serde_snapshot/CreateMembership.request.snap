@@ -1,0 +1,5 @@
+POST /memberships
+
+Content-Type: application/json
+
+{"collaborationIdentifier":"__CollaborationIdentifier__","defaultJobResultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__"}},"roleArn":"__RoleArn__"},"defaultResultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__","resultFormat":"CSV","singleFileOutput":true}},"roleArn":"__RoleArn__"},"isMetricsEnabled":true,"jobLogStatus":"ENABLED","paymentConfiguration":{"jobCompute":{"isResponsible":true},"machineLearning":{"modelInference":{"isResponsible":true},"modelTraining":{"isResponsible":true},"syntheticDataGeneration":{"isResponsible":true}},"queryCompute":{"isResponsible":true}},"queryLogStatus":"ENABLED","tags":{"key0":"__Value__","key1":"__Value__"}}

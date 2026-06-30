@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDAXV3.DecreaseReplicationFactor
+
+{"AvailabilityZones":["__Member__","__Member__"],"ClusterName":"__ClusterName__","NewReplicationFactor":1,"NodeIdsToRemove":["__Member__","__Member__"]}

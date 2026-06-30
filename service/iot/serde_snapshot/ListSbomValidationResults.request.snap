@@ -1,0 +1,3 @@
+GET /packages/__PackageName__/versions/__VersionName__/sbom-validation-results?maxResults=1&nextToken=__NextToken__&validationResult=FAILED
+
+

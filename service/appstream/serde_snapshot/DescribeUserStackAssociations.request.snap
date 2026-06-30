@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.DescribeUserStackAssociations
+
+{"AuthenticationType":"API","MaxResults":1,"NextToken":"__NextToken__","StackName":"__StackName__","UserName":"__UserName__"}

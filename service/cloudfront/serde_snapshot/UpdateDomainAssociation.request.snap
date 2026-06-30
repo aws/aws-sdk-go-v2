@@ -1,0 +1,5 @@
+POST /2020-05-31/domain-association
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+

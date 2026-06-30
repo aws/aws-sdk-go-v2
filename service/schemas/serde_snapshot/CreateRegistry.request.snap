@@ -1,0 +1,5 @@
+POST /v1/registries/name/__RegistryName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/cases/__CaseId__/related-items/
+
+Content-Type: application/json
+
+{"content":{"contact":{"contactArn":"__ContactArn__"}},"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"type":"Contact"}

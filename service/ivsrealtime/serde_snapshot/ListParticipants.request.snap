@@ -1,0 +1,5 @@
+POST /ListParticipants
+
+Content-Type: application/json
+
+{"filterByPublished":true,"filterByRecordingState":"STARTING","filterByState":"CONNECTED","filterByUserId":"__FilterByUserId__","maxResults":1,"nextToken":"__NextToken__","sessionId":"__SessionId__","stageArn":"__StageArn__"}

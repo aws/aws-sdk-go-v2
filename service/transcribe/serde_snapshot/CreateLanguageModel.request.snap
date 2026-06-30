@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.CreateLanguageModel
+
+{"BaseModelName":"NarrowBand","InputDataConfig":{"DataAccessRoleArn":"__DataAccessRoleArn__","S3Uri":"__S3Uri__","TuningDataS3Uri":"__TuningDataS3Uri__"},"LanguageCode":"en-US","ModelName":"__ModelName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

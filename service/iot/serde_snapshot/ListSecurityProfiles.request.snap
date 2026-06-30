@@ -1,0 +1,3 @@
+GET /security-profiles?dimensionName=__DimensionName__&maxResults=1&metricName=__MetricName__&nextToken=__NextToken__
+
+

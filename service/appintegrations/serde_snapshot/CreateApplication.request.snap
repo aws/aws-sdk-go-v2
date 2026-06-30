@@ -1,0 +1,5 @@
+POST /applications
+
+Content-Type: application/json
+
+{"ApplicationConfig":{"ContactHandling":{"Scope":"CROSS_CONTACTS"}},"ApplicationSourceConfig":{"ExternalUrlConfig":{"AccessUrl":"__AccessUrl__","ApprovedOrigins":["__Member__","__Member__"]}},"ApplicationType":"STANDARD","ClientToken":"__ClientToken__","Description":"__Description__","IframeConfig":{"Allow":["__Member__","__Member__"],"Sandbox":["__Member__","__Member__"]},"InitializationTimeout":1,"IsService":true,"Name":"__Name__","Namespace":"__Namespace__","Permissions":["__Member__","__Member__"],"Publications":[{"Description":"__Description__","Event":"__Event__","Schema":"__Schema__"},{"Description":"__Description__","Event":"__Event__","Schema":"__Schema__"}],"Subscriptions":[{"Description":"__Description__","Event":"__Event__"},{"Description":"__Description__","Event":"__Event__"}],"Tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,5 @@
+PUT /access-preview
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__","clientToken":"__ClientToken__","configurations":{"key0":{"ebsSnapshot":{"groups":["__Member__","__Member__"],"kmsKeyId":"__KmsKeyId__","userIds":["__Member__","__Member__"]}},"key1":{"ebsSnapshot":{"groups":["__Member__","__Member__"],"kmsKeyId":"__KmsKeyId__","userIds":["__Member__","__Member__"]}}}}

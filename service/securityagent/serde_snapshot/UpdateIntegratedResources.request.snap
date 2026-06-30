@@ -1,0 +1,5 @@
+POST /UpdateIntegratedResources
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","integrationId":"__IntegrationId__","items":[{"capabilities":{"github":{"leaveComments":true,"remediateCode":true}},"resource":{"githubRepository":{"name":"__Name__","owner":"__Owner__"}}},{"capabilities":{"github":{"leaveComments":true,"remediateCode":true}},"resource":{"githubRepository":{"name":"__Name__","owner":"__Owner__"}}}]}

@@ -1,0 +1,5 @@
+PUT /restore-access-backup-vaults
+
+Content-Type: application/json
+
+{"BackupVaultName":"__BackupVaultName__","BackupVaultTags":{"key0":"__Value__","key1":"__Value__"},"CreatorRequestId":"__CreatorRequestId__","RequesterComment":"__RequesterComment__","SourceBackupVaultArn":"__SourceBackupVaultArn__"}

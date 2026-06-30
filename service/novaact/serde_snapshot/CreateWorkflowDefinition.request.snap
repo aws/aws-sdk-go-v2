@@ -1,0 +1,5 @@
+PUT /workflow-definitions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","exportConfig":{"s3BucketName":"__S3BucketName__","s3KeyPrefix":"__S3KeyPrefix__"},"name":"__Name__"}

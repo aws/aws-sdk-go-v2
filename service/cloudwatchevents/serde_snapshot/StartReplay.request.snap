@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.StartReplay
+
+{"Description":"__Description__","Destination":{"Arn":"__Arn__","FilterArns":["__Member__","__Member__"]},"EventEndTime":946684800,"EventSourceArn":"__EventSourceArn__","EventStartTime":946684800,"ReplayName":"__ReplayName__"}

@@ -1,0 +1,3 @@
+DELETE /assistants/__AssistantId__/aiagentConfiguration?aiAgentType=MANUAL_SEARCH&orchestratorUseCase=__OrchestratorUseCase__
+
+

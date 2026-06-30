@@ -1,0 +1,5 @@
+POST /ListChangeSets
+
+Content-Type: application/json
+
+{"Catalog":"__Catalog__","FilterList":[{"Name":"__Name__","ValueList":["__Member__","__Member__"]},{"Name":"__Name__","ValueList":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"__SortBy__","SortOrder":"ASCENDING"}}

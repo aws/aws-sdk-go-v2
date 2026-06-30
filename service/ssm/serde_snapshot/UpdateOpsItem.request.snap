@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateOpsItem
+
+{"ActualEndTime":946684800,"ActualStartTime":946684800,"Category":"__Category__","Description":"__Description__","Notifications":[{"Arn":"__Arn__"},{"Arn":"__Arn__"}],"OperationalData":{"key0":{"Type":"SearchableString","Value":"__Value__"},"key1":{"Type":"SearchableString","Value":"__Value__"}},"OperationalDataToDelete":["__Member__","__Member__"],"OpsItemArn":"__OpsItemArn__","OpsItemId":"__OpsItemId__","PlannedEndTime":946684800,"PlannedStartTime":946684800,"Priority":1,"RelatedOpsItems":[{"OpsItemId":"__OpsItemId__"},{"OpsItemId":"__OpsItemId__"}],"Severity":"__Severity__","Status":"Open","Title":"__Title__"}

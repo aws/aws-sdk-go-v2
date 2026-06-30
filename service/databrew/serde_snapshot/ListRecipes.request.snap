@@ -1,0 +1,3 @@
+GET /recipes?maxResults=1&nextToken=__NextToken__&recipeVersion=__RecipeVersion__
+
+

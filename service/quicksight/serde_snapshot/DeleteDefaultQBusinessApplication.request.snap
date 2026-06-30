@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/default-qbusiness-application?namespace=__Namespace__
+
+

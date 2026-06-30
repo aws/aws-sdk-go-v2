@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/object/detach
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"LinkName":"__LinkName__","ParentReference":{"Selector":"__Selector__"}}

@@ -1,0 +1,3 @@
+DELETE /workloads/__WorkloadId__?ClientRequestToken=__ClientRequestToken__
+
+

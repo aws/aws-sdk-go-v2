@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.DeleteTags
+
+{"ResourceId":"__ResourceId__","ResourceType":"BatchPrediction","TagKeys":["__Member__","__Member__"]}

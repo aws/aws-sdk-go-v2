@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/member/invite
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"],"disableEmailNotification":true,"message":"__Message__"}

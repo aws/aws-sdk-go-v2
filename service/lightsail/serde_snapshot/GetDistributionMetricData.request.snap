@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetDistributionMetricData
+
+{"distributionName":"__DistributionName__","endTime":946684800,"metricName":"Requests","period":1,"startTime":946684800,"statistics":["Minimum","Minimum"],"unit":"Seconds"}

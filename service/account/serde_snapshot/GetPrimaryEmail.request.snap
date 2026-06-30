@@ -1,0 +1,5 @@
+POST /getPrimaryEmail
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__"}

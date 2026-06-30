@@ -1,0 +1,5 @@
+PUT /hours-of-operations/__InstanceId__
+
+Content-Type: application/json
+
+{"Config":[{"Day":"SUNDAY","EndTime":{"Hours":1,"Minutes":1},"StartTime":{"Hours":1,"Minutes":1}},{"Day":"SUNDAY","EndTime":{"Hours":1,"Minutes":1},"StartTime":{"Hours":1,"Minutes":1}}],"Description":"__Description__","Name":"__Name__","ParentHoursOfOperationConfigs":[{"HoursOfOperationId":"__HoursOfOperationId__"},{"HoursOfOperationId":"__HoursOfOperationId__"}],"Tags":{"key0":"__Value__","key1":"__Value__"},"TimeZone":"__TimeZone__"}

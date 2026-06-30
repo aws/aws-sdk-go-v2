@@ -1,0 +1,5 @@
+POST /datasetsv2
+
+Content-Type: application/x-amz-json-1.1
+
+{"alias":"__Alias__","clientToken":"__ClientToken__","datasetDescription":"__DatasetDescription__","datasetTitle":"__DatasetTitle__","kind":"TABULAR","ownerInfo":{"email":"__Email__","name":"__Name__","phoneNumber":"__PhoneNumber__"},"permissionGroupParams":{"datasetPermissions":[{"permission":"__Permission__"},{"permission":"__Permission__"}],"permissionGroupId":"__PermissionGroupId__"},"schemaDefinition":{"tabularSchemaConfig":{"columns":[{"columnDescription":"__ColumnDescription__","columnName":"__ColumnName__","dataType":"STRING"},{"columnDescription":"__ColumnDescription__","columnName":"__ColumnName__","dataType":"STRING"}],"primaryKeyColumns":["__Member__","__Member__"]}}}

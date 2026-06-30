@@ -1,0 +1,5 @@
+POST /v1/whatsapp/media
+
+Content-Type: application/json
+
+{"originationPhoneNumberId":"__OriginationPhoneNumberId__","sourceS3File":{"bucketName":"__BucketName__","key":"__Key__"},"sourceS3PresignedUrl":{"headers":{"key0":"__Value__","key1":"__Value__"},"url":"__Url__"}}

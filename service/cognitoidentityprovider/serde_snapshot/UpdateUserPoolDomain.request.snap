@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateUserPoolDomain
+
+{"CustomDomainConfig":{"CertificateArn":"__CertificateArn__","SecurityPolicy":"TLS_V1"},"Domain":"__Domain__","ManagedLoginVersion":1,"Routing":{"Failover":{"PrimaryRoute53HealthCheckId":"__PrimaryRoute53HealthCheckId__","SecondaryRegion":"__SecondaryRegion__"}},"UserPoolId":"__UserPoolId__"}

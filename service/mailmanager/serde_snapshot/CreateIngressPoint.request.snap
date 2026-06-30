@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.CreateIngressPoint
+
+{"ClientToken":"__ClientToken__","IngressPointConfiguration":{"SmtpPassword":"__IngressPointConfigurationMemberSmtpPassword__"},"IngressPointName":"__IngressPointName__","NetworkConfiguration":{"PublicNetworkConfiguration":{"IpType":"IPV4"}},"RuleSetId":"__RuleSetId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TlsPolicy":"REQUIRED","TrafficPolicyId":"__TrafficPolicyId__","Type":"OPEN"}

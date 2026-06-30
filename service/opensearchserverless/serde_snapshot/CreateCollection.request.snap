@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.CreateCollection
+
+{"clientToken":"__ClientToken__","collectionGroupName":"__CollectionGroupName__","deletionProtection":"ENABLED","description":"__Description__","encryptionConfig":{"aWSOwnedKey":true,"kmsKeyArn":"__KmsKeyArn__"},"name":"__Name__","standbyReplicas":"ENABLED","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"SEARCH","vectorOptions":{"ServerlessVectorAcceleration":"ENABLED"}}

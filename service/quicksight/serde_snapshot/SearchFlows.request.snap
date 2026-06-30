@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/flows/searchFlows
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"assetName","Operator":"StringEquals","Value":"__Value__"},{"Name":"assetName","Operator":"StringEquals","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

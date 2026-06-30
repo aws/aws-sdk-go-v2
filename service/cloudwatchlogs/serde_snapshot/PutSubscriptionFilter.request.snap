@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.PutSubscriptionFilter
+
+{"applyOnTransformedLogs":true,"destinationArn":"__DestinationArn__","distribution":"Random","emitSystemFields":["__Member__","__Member__"],"fieldSelectionCriteria":"__FieldSelectionCriteria__","filterName":"__FilterName__","filterPattern":"__FilterPattern__","logGroupName":"__LogGroupName__","roleArn":"__RoleArn__"}

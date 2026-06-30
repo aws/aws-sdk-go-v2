@@ -1,0 +1,5 @@
+POST /apps/__AppId__/domains
+
+Content-Type: application/json
+
+{"autoSubDomainCreationPatterns":["__Member__","__Member__"],"autoSubDomainIAMRole":"__AutoSubDomainIAMRole__","certificateSettings":{"customCertificateArn":"__CustomCertificateArn__","type":"AMPLIFY_MANAGED"},"domainName":"__DomainName__","enableAutoSubDomain":true,"subDomainSettings":[{"branchName":"__BranchName__","prefix":"__Prefix__"},{"branchName":"__BranchName__","prefix":"__Prefix__"}]}

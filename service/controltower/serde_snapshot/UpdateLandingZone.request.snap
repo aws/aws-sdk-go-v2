@@ -1,0 +1,5 @@
+POST /update-landingzone
+
+Content-Type: application/json
+
+{"landingZoneIdentifier":"__LandingZoneIdentifier__","remediationTypes":["INHERITANCE_DRIFT","INHERITANCE_DRIFT"],"version":"__Version__"}

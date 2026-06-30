@@ -1,0 +1,5 @@
+PUT /prod/reservations/__ReservationId__
+
+Content-Type: application/json
+
+{"name":"__Name__","renewalSettings":{"automaticRenewal":"DISABLED","renewalCount":1}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.UpdateScheduledQuery
+
+{"description":"__Description__","destinationConfiguration":{"s3Configuration":{"destinationIdentifier":"__DestinationIdentifier__","kmsKeyId":"__KmsKeyId__","ownerAccountId":"__OwnerAccountId__","roleArn":"__RoleArn__"}},"endTimeOffset":1,"executionRoleArn":"__ExecutionRoleArn__","identifier":"__Identifier__","logGroupIdentifiers":["__Member__","__Member__"],"queryLanguage":"CWLI","queryString":"__QueryString__","scheduleEndTime":1,"scheduleExpression":"__ScheduleExpression__","scheduleStartTime":1,"startTimeOffset":1,"state":"ENABLED","timezone":"__Timezone__"}

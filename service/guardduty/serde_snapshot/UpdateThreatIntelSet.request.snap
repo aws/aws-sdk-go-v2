@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/threatintelset/__ThreatIntelSetId__
+
+Content-Type: application/json
+
+{"activate":true,"expectedBucketOwner":"__ExpectedBucketOwner__","location":"__Location__","name":"__Name__"}

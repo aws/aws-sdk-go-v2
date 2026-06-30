@@ -1,0 +1,6 @@
+POST /usageplans
+
+Accept: application/json
+Content-Type: application/json
+
+{"apiStages":[{"apiId":"__ApiId__","stage":"__Stage__","throttle":{"key0":{"burstLimit":1,"rateLimit":1},"key1":{"burstLimit":1,"rateLimit":1}}},{"apiId":"__ApiId__","stage":"__Stage__","throttle":{"key0":{"burstLimit":1,"rateLimit":1},"key1":{"burstLimit":1,"rateLimit":1}}}],"description":"__Description__","name":"__Name__","quota":{"limit":1,"offset":1,"period":"DAY"},"tags":{"key0":"__Value__","key1":"__Value__"},"throttle":{"burstLimit":1,"rateLimit":1}}

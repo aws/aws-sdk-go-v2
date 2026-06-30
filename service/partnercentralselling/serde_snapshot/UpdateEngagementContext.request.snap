@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.UpdateEngagementContext
+
+{"Catalog":"__Catalog__","ContextIdentifier":"__ContextIdentifier__","EngagementIdentifier":"__EngagementIdentifier__","EngagementLastModifiedAt":"2000-01-01T00:00:00Z","Payload":{"Lead":{"Customer":{"Address":{"City":"__City__","CountryCode":"US","PostalCode":"__PostalCode__","StateOrRegion":"__StateOrRegion__"},"AwsMaturity":"__AwsMaturity__","CompanyName":"__CompanyName__","Industry":"Aerospace","MarketSegment":"Enterprise","WebsiteUrl":"__WebsiteUrl__"},"Insights":{"LeadReadinessScore":"__LeadReadinessScore__"},"Interaction":{"BusinessProblem":"__BusinessProblem__","Contact":{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Phone":"__Phone__"},"CustomerAction":"__CustomerAction__","InteractionDate":"2000-01-01T00:00:00Z","SourceId":"__SourceId__","SourceName":"__SourceName__","SourceType":"__SourceType__","Usecase":"__Usecase__"},"QualificationStatus":"__QualificationStatus__"}},"Type":"CustomerProject"}

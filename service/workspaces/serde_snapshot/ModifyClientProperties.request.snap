@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifyClientProperties
+
+{"ClientProperties":{"LogUploadEnabled":"ENABLED","ReconnectEnabled":"ENABLED"},"ResourceId":"__ResourceId__"}

@@ -1,0 +1,5 @@
+POST /lenses/__LensAlias__/shares
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","SharedWith":"__SharedWith__"}

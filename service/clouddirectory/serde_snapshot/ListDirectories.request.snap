@@ -1,0 +1,5 @@
+POST /amazonclouddirectory/2017-01-11/directory/list
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","state":"ENABLED"}

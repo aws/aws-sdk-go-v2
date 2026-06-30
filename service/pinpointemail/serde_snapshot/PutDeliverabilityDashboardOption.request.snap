@@ -1,0 +1,5 @@
+PUT /v1/email/deliverability-dashboard
+
+Content-Type: application/json
+
+{"DashboardEnabled":true,"SubscribedDomains":[{"Domain":"__Domain__","InboxPlacementTrackingOption":{"Global":true,"TrackedIsps":["__Member__","__Member__"]},"SubscriptionStartDate":946684800},{"Domain":"__Domain__","InboxPlacementTrackingOption":{"Global":true,"TrackedIsps":["__Member__","__Member__"]},"SubscriptionStartDate":946684800}]}

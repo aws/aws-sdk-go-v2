@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.CreateApplication
+
+{"AttachMissingPermission":true,"AutoConfigEnabled":true,"AutoCreate":true,"CWEMonitorEnabled":true,"GroupingType":"ACCOUNT_BASED","OpsCenterEnabled":true,"OpsItemSNSTopicArn":"__OpsItemSNSTopicArn__","ResourceGroupName":"__ResourceGroupName__","SNSNotificationArn":"__SNSNotificationArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

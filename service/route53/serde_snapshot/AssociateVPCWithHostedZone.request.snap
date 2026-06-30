@@ -1,0 +1,4 @@
+POST /2013-04-01/hostedzone/__HostedZoneId__/associatevpc
+
+Content-Type: application/xml
+

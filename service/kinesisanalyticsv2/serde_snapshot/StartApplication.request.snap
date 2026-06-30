@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.StartApplication
+
+{"ApplicationName":"__ApplicationName__","RunConfiguration":{"ApplicationRestoreConfiguration":{"ApplicationRestoreType":"SKIP_RESTORE_FROM_SNAPSHOT","SnapshotName":"__SnapshotName__"},"FlinkRunConfiguration":{"AllowNonRestoredState":true},"SqlRunConfigurations":[{"InputId":"__InputId__","InputStartingPositionConfiguration":{"InputStartingPosition":"NOW"}},{"InputId":"__InputId__","InputStartingPositionConfiguration":{"InputStartingPosition":"NOW"}}]}}

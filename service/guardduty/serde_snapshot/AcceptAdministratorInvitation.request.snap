@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/administrator
+
+Content-Type: application/json
+
+{"administratorId":"__AdministratorId__","invitationId":"__InvitationId__"}

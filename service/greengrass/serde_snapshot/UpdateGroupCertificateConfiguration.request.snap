@@ -1,0 +1,5 @@
+PUT /greengrass/groups/__GroupId__/certificateauthorities/configuration/expiry
+
+Content-Type: application/json
+
+{"CertificateExpiryInMilliseconds":"__CertificateExpiryInMilliseconds__"}

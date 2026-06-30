@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMPMeteringService.RegisterUsage
+
+{"Nonce":"__Nonce__","ProductCode":"__ProductCode__","PublicKeyVersion":1}

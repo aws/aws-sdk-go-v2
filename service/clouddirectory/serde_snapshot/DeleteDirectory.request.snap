@@ -1,0 +1,4 @@
+PUT /amazonclouddirectory/2017-01-11/directory
+
+X-Amz-Data-Partition: __DirectoryArn__
+

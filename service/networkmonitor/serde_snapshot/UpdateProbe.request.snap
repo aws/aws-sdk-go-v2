@@ -1,0 +1,5 @@
+PATCH /monitors/__MonitorName__/probes/__ProbeId__
+
+Content-Type: application/json
+
+{"destination":"__Destination__","destinationPort":1,"packetSize":1,"protocol":"TCP","state":"PENDING"}

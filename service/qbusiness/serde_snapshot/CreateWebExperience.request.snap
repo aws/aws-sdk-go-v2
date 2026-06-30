@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/experiences
+
+Content-Type: application/json
+
+{"browserExtensionConfiguration":{"enabledBrowserExtensions":["FIREFOX","FIREFOX"]},"clientToken":"__ClientToken__","customizationConfiguration":{"customCSSUrl":"__CustomCSSUrl__","faviconUrl":"__FaviconUrl__","fontUrl":"__FontUrl__","logoUrl":"__LogoUrl__"},"identityProviderConfiguration":{"samlConfiguration":{"authenticationUrl":"__AuthenticationUrl__"}},"origins":["__Member__","__Member__"],"roleArn":"__RoleArn__","samplePromptsControlMode":"ENABLED","subtitle":"__Subtitle__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"title":"__Title__","welcomeMessage":"__WelcomeMessage__"}

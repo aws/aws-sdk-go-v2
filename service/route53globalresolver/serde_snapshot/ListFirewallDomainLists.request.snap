@@ -1,0 +1,3 @@
+GET /firewall-domain-lists?global_resolver_id=__GlobalResolverId__&max_results=1&next_token=__NextToken__
+
+

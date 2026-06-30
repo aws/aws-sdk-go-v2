@@ -1,0 +1,5 @@
+POST /collaborations/__CollaborationIdentifier__/batch-schema
+
+Content-Type: application/json
+
+{"names":["__Member__","__Member__"]}

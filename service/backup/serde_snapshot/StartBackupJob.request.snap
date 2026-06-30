@@ -1,0 +1,5 @@
+PUT /backup-jobs
+
+Content-Type: application/json
+
+{"BackupOptions":{"key0":"__Value__","key1":"__Value__"},"BackupVaultName":"__BackupVaultName__","CompleteWindowMinutes":1,"IamRoleArn":"__IamRoleArn__","IdempotencyToken":"__IdempotencyToken__","Index":"ENABLED","Lifecycle":{"DeleteAfterDays":1,"DeleteAfterEvent":"DELETE_AFTER_COPY","MoveToColdStorageAfterDays":1,"OptInToArchiveForSupportedResources":true},"LogicallyAirGappedBackupVaultArn":"__LogicallyAirGappedBackupVaultArn__","RecoveryPointTags":{"key0":"__Value__","key1":"__Value__"},"ResourceArn":"__ResourceArn__","StartWindowMinutes":1}

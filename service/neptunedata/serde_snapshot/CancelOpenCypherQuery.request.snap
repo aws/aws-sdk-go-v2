@@ -1,0 +1,3 @@
+DELETE /opencypher/status/__QueryId__?silent=true
+
+

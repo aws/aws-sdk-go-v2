@@ -1,0 +1,4 @@
+GET /v20180820/accessgrantsinstance/locations?locationscope=__LocationScope__&maxResults=1&nextToken=__NextToken__
+
+X-Amz-Account-Id: AccountId-value
+

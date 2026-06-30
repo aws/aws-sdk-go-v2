@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/subscriptions/__SubscriptionId__
+
+Content-Type: application/json
+
+{"type":"Q_LITE"}

@@ -1,0 +1,5 @@
+POST /2015-01-01/es/domain-info
+
+Content-Type: application/json
+
+{"DomainNames":["__Member__","__Member__"]}

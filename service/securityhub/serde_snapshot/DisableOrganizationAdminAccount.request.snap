@@ -1,0 +1,5 @@
+POST /organization/admin/disable
+
+Content-Type: application/json
+
+{"AdminAccountId":"__AdminAccountId__","Feature":"SecurityHub"}

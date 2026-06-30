@@ -1,0 +1,5 @@
+PATCH /zonalshifts/__ZonalShiftId__
+
+Content-Type: application/json
+
+{"comment":"__Comment__","expiresIn":"__ExpiresIn__"}

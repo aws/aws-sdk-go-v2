@@ -1,0 +1,5 @@
+POST /create-app-version-resource
+
+Content-Type: application/json
+
+{"additionalInfo":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"appArn":"__AppArn__","appComponents":["__Member__","__Member__"],"awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","clientToken":"__ClientToken__","logicalResourceId":{"eksSourceName":"__EksSourceName__","identifier":"__Identifier__","logicalStackName":"__LogicalStackName__","resourceGroupName":"__ResourceGroupName__","terraformSourceName":"__TerraformSourceName__"},"physicalResourceId":"__PhysicalResourceId__","resourceName":"__ResourceName__","resourceType":"__ResourceType__"}

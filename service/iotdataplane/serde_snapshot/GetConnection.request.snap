@@ -1,0 +1,3 @@
+GET /connections/__ClientId__?includeSocketInformation=true
+
+

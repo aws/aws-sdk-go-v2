@@ -1,0 +1,4 @@
+DELETE /api/v1/resources/__ResourceId__/labels?deleteAll=true&labels=__Member__&labels=__Member__
+
+Authentication: __AuthenticationToken__
+

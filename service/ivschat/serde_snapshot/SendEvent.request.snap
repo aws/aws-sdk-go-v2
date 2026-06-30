@@ -1,0 +1,5 @@
+POST /SendEvent
+
+Content-Type: application/json
+
+{"attributes":{"key0":"__Value__","key1":"__Value__"},"eventName":"__EventName__","roomIdentifier":"__RoomIdentifier__"}

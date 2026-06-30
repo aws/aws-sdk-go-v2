@@ -1,0 +1,5 @@
+PATCH /experimentTemplates/__ExperimentTemplateId__/targetAccountConfigurations/__AccountId__
+
+Content-Type: application/json
+
+{"description":"__Description__","roleArn":"__RoleArn__"}

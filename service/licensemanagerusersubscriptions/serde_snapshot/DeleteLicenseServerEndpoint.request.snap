@@ -1,0 +1,5 @@
+POST /license-server/DeleteLicenseServerEndpoint
+
+Content-Type: application/json
+
+{"LicenseServerEndpointArn":"__LicenseServerEndpointArn__","ServerType":"RDS_SAL"}

@@ -1,0 +1,5 @@
+POST /api/instance
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","instanceDescription":"__InstanceDescription__","instanceName":"__InstanceName__","kmsKeyArn":"__KmsKeyArn__","tags":{"key0":"__Value__","key1":"__Value__"},"webAppDnsDomain":"__WebAppDnsDomain__"}

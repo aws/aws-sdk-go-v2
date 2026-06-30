@@ -1,0 +1,5 @@
+POST /v1/datalake/exceptions
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","regions":["__Member__","__Member__"]}

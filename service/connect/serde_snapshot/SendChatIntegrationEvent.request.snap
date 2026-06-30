@@ -1,0 +1,5 @@
+POST /chat-integration-event
+
+Content-Type: application/json
+
+{"DestinationId":"__DestinationId__","Event":{"Content":"__Content__","ContentType":"__ContentType__","Type":"DISCONNECT"},"NewSessionDetails":{"Attributes":{"key0":"__Value__","key1":"__Value__"},"ParticipantDetails":{"DisplayName":"__DisplayName__"},"StreamingConfiguration":{"StreamingEndpointArn":"__StreamingEndpointArn__"},"SupportedMessagingContentTypes":["__Member__","__Member__"]},"SourceId":"__SourceId__","Subtype":"__Subtype__"}

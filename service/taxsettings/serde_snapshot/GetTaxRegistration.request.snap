@@ -1,0 +1,5 @@
+POST /GetTaxRegistration
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

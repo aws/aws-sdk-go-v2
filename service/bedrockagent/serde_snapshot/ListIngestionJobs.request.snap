@@ -1,0 +1,5 @@
+POST /knowledgebases/__KnowledgeBaseId__/datasources/__DataSourceId__/ingestionjobs/
+
+Content-Type: application/json
+
+{"filters":[{"attribute":"STATUS","operator":"EQ","values":["__Member__","__Member__"]},{"attribute":"STATUS","operator":"EQ","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"STATUS","order":"ASCENDING"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AppRunner.CreateConnection
+
+{"ConnectionName":"__ConnectionName__","ProviderType":"GITHUB","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+PATCH /services/__ServiceIdentifier__
+
+Content-Type: application/json
+
+{"authType":"NONE","certificateArn":"__CertificateArn__"}

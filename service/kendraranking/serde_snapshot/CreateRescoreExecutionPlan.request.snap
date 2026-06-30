@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSKendraRerankingFrontendService.CreateRescoreExecutionPlan
+
+{"CapacityUnits":{"RescoreCapacityUnits":1},"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

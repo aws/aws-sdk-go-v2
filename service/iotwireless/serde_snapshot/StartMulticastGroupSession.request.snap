@@ -1,0 +1,5 @@
+PUT /multicast-groups/__Id__/session
+
+Content-Type: application/json
+
+{"LoRaWAN":{"DlDr":1,"DlFreq":1,"PingSlotPeriod":1,"SessionStartTime":"2000-01-01T00:00:00Z","SessionTimeout":1}}

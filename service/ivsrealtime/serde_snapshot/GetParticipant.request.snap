@@ -1,0 +1,5 @@
+POST /GetParticipant
+
+Content-Type: application/json
+
+{"participantId":"__ParticipantId__","sessionId":"__SessionId__","stageArn":"__StageArn__"}

@@ -1,0 +1,3 @@
+GET /analyzed-resource?analyzerArn=__AnalyzerArn__&resourceArn=__ResourceArn__
+
+

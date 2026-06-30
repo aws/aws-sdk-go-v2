@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/event-streams/__EventStreamName__
+
+Content-Type: application/json
+
+{"Tags":{"key0":"__Value__","key1":"__Value__"},"Uri":"__Uri__"}

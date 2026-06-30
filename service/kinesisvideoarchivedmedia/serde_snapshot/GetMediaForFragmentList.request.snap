@@ -1,0 +1,5 @@
+POST /getMediaForFragmentList
+
+Content-Type: application/json
+
+{"Fragments":["__Member__","__Member__"],"StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

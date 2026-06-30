@@ -1,0 +1,5 @@
+PUT /user/__UserId__
+
+Content-Type: application/x-amz-json-1.1
+
+{"apiAccess":"ENABLED","apiAccessPrincipalArn":"__ApiAccessPrincipalArn__","clientToken":"__ClientToken__","firstName":"__FirstName__","lastName":"__LastName__","type":"SUPER_USER"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ImportModelVersion
+
+{"ClientToken":"__ClientToken__","DatasetName":"__DatasetName__","InferenceDataImportStrategy":"NO_IMPORT","LabelsInputConfiguration":{"LabelGroupName":"__LabelGroupName__","S3InputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"ModelName":"__ModelName__","RoleArn":"__RoleArn__","ServerSideKmsKeyId":"__ServerSideKmsKeyId__","SourceModelVersionArn":"__SourceModelVersionArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

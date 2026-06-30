@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/messageTemplates/__MessageTemplateId__/deactivate
+
+Content-Type: application/json
+
+{"versionNumber":1}

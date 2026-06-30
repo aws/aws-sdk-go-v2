@@ -1,0 +1,4 @@
+GET /apikeys/__ApiKey__?includeValue=true
+
+Accept: application/json
+

@@ -1,0 +1,5 @@
+POST /ListEntities
+
+Content-Type: application/json
+
+{"Catalog":"__Catalog__","EntityType":"__EntityType__","EntityTypeFilters":{"DataProductFilters":{"EntityId":{"ValueList":["__Member__","__Member__"]},"LastModifiedDate":{"DateRange":{"AfterValue":"__AfterValue__","BeforeValue":"__BeforeValue__"}},"ProductTitle":{"ValueList":["__Member__","__Member__"],"WildCardValue":"__WildCardValue__"},"Visibility":{"ValueList":["Limited","Limited"]}}},"EntityTypeSort":{"DataProductSort":{"SortBy":"EntityId","SortOrder":"ASCENDING"}},"FilterList":[{"Name":"__Name__","ValueList":["__Member__","__Member__"]},{"Name":"__Name__","ValueList":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","OwnershipType":"SELF","Sort":{"SortBy":"__SortBy__","SortOrder":"ASCENDING"}}

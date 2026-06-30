@@ -1,0 +1,3 @@
+DELETE /2015-02-01/file-systems/__SourceFileSystemId__/replication-configuration?deletionMode=ALL_CONFIGURATIONS
+
+

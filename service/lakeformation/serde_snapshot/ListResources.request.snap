@@ -1,0 +1,5 @@
+POST /ListResources
+
+Content-Type: application/json
+
+{"FilterConditionList":[{"ComparisonOperator":"EQ","Field":"RESOURCE_ARN","StringValueList":["__Member__","__Member__"]},{"ComparisonOperator":"EQ","Field":"RESOURCE_ARN","StringValueList":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__"}

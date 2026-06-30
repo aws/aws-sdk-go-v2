@@ -1,0 +1,8 @@
+PUT /__Key__?legal-hold=&versionId=__VersionId__
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+

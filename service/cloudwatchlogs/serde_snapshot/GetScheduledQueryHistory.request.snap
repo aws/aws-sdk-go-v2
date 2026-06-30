@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.GetScheduledQueryHistory
+
+{"endTime":1,"executionStatuses":["Running","Running"],"identifier":"__Identifier__","maxResults":1,"nextToken":"__NextToken__","startTime":1}

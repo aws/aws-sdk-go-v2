@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/lambda-functions?maxResults=1&nextToken=__NextToken__
+
+

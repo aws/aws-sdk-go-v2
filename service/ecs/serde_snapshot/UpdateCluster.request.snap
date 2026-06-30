@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.UpdateCluster
+
+{"cluster":"__Cluster__","configuration":{"executeCommandConfiguration":{"kmsKeyId":"__KmsKeyId__","logConfiguration":{"cloudWatchEncryptionEnabled":true,"cloudWatchLogGroupName":"__CloudWatchLogGroupName__","s3BucketName":"__S3BucketName__","s3EncryptionEnabled":true,"s3KeyPrefix":"__S3KeyPrefix__"},"logging":"NONE"},"managedStorageConfiguration":{"fargateEphemeralStorageKmsKeyId":"__FargateEphemeralStorageKmsKeyId__","kmsKeyId":"__KmsKeyId__"}},"serviceConnectDefaults":{"namespace":"__Namespace__"},"settings":[{"name":"containerInsights","value":"__Value__"},{"name":"containerInsights","value":"__Value__"}]}

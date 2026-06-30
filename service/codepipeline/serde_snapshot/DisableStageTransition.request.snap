@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.DisableStageTransition
+
+{"pipelineName":"__PipelineName__","reason":"__Reason__","stageName":"__StageName__","transitionType":"Inbound"}

@@ -1,0 +1,5 @@
+PUT /v1/policy?registryName=__RegistryName__
+
+Content-Type: application/json
+
+{"Policy":"__Policy__","RevisionId":"__RevisionId__"}

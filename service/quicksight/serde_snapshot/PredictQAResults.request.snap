@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/qa/predict
+
+Content-Type: application/json
+
+{"IncludeGeneratedAnswer":"INCLUDE","IncludeQuickSightQIndex":"INCLUDE","MaxTopicsToConsider":1,"QueryText":"__QueryText__"}

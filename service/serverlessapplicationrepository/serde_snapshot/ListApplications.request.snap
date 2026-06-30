@@ -1,0 +1,3 @@
+GET /applications?maxItems=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,3 @@
+GET /profilingGroups/__ProfilingGroupName__/profileTimes?endTime=2000-01-01T00%3A00%3A00Z&maxResults=1&nextToken=__NextToken__&orderBy=TimestampDescending&period=PT5M&startTime=2000-01-01T00%3A00%3A00Z
+
+

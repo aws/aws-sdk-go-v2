@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/hours-of-operation
+
+Content-Type: application/json
+
+{"HoursOfOperationId":"__HoursOfOperationId__"}

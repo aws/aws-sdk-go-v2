@@ -1,0 +1,4 @@
+GET /__AccountId__/vaults/__VaultName__/notification-configuration
+
+X-Amz-Glacier-Version: 2012-06-01
+

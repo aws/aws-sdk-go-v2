@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/batch-job
+
+Content-Type: application/json
+
+{"authSecretsManagerArn":"__AuthSecretsManagerArn__","batchJobIdentifier":{"fileBatchJobIdentifier":{"fileName":"__FileName__","folderPath":"__FolderPath__"}},"jobParams":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,5 @@
+POST /PutVectors
+
+Content-Type: application/json
+
+{"indexArn":"__IndexArn__","indexName":"__IndexName__","vectorBucketName":"__VectorBucketName__","vectors":[{"data":{"float32":[1,1]},"key":"__Key__"},{"data":{"float32":[1,1]},"key":"__Key__"}]}

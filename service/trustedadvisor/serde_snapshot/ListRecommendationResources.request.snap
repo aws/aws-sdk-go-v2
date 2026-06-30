@@ -1,0 +1,3 @@
+GET /v1/recommendations/__RecommendationIdentifier__/resources?exclusionStatus=excluded&language=en&maxResults=1&nextToken=__NextToken__&regionCode=__RegionCode__&status=ok
+
+

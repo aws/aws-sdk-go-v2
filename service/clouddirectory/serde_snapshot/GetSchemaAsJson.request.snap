@@ -1,0 +1,4 @@
+POST /amazonclouddirectory/2017-01-11/schema/json
+
+X-Amz-Data-Partition: __SchemaArn__
+

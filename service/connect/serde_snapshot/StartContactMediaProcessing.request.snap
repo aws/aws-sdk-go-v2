@@ -1,0 +1,5 @@
+POST /contact/start-contact-media-processing
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","FailureMode":"DELIVER_UNPROCESSED_MESSAGE","InstanceId":"__InstanceId__","ProcessorArn":"__ProcessorArn__"}

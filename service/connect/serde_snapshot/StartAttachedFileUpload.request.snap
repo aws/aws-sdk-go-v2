@@ -1,0 +1,5 @@
+PUT /attached-files/__InstanceId__?associatedResourceArn=__AssociatedResourceArn__
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","CreatedBy":{"ConnectUserArn":"__CreatedByInfoMemberConnectUserArn__"},"FileName":"__FileName__","FileSizeInBytes":1,"FileUseCaseType":"CONTACT_ANALYSIS","Tags":{"key0":"__Value__","key1":"__Value__"},"UrlExpiryInSeconds":1}

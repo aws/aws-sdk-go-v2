@@ -1,0 +1,4 @@
+POST /knowledgebases/__KnowledgeBaseId__/retrieve
+
+Content-Type: application/json
+

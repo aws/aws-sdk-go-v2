@@ -1,0 +1,3 @@
+GET /schedule-groups?MaxResults=1&NamePrefix=__NamePrefix__&NextToken=__NextToken__
+
+

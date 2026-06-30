@@ -1,0 +1,5 @@
+PUT /flows/__FlowIdentifier__/aliases/__AliasIdentifier__
+
+Content-Type: application/json
+
+{"concurrencyConfiguration":{"maxConcurrency":1,"type":"Automatic"},"description":"__Description__","name":"__Name__","routingConfiguration":[{"flowVersion":"__FlowVersion__"},{"flowVersion":"__FlowVersion__"}]}

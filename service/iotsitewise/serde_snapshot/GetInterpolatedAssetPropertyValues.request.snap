@@ -1,0 +1,3 @@
+GET /properties/interpolated?assetId=__AssetId__&endTimeInSeconds=1&endTimeOffsetInNanos=1&intervalInSeconds=1&intervalWindowInSeconds=1&maxResults=1&nextToken=__NextToken__&propertyAlias=__PropertyAlias__&propertyId=__PropertyId__&quality=GOOD&startTimeInSeconds=1&startTimeOffsetInNanos=1&type=__Type__
+
+

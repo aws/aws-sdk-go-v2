@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.ReportTaskRunnerHeartbeat
+
+{"hostname":"__Hostname__","taskrunnerId":"__TaskrunnerId__","workerGroup":"__WorkerGroup__"}

@@ -1,0 +1,3 @@
+GET /static/__FileName__?bounded-positions=__BoundedPositions__&bounding-box=__BoundingBox__&center=__Center__&color-scheme=Light&compact-overlay=__CompactOverlay__&crop-labels=true&geojson-overlay=__GeoJsonOverlay__&height=1&key=__Key__&label-size=Small&lang=__Language__&padding=1&pois=Enabled&political-view=__PoliticalView__&radius=1&scale-unit=Kilometers&style=Satellite&width=1&zoom=1
+
+

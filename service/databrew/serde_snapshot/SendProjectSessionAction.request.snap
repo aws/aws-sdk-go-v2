@@ -1,0 +1,5 @@
+PUT /projects/__Name__/sendProjectSessionAction
+
+Content-Type: application/json
+
+{"ClientSessionId":"__ClientSessionId__","Preview":true,"RecipeStep":{"Action":{"Operation":"__Operation__","Parameters":{"key0":"__Value__","key1":"__Value__"}},"ConditionExpressions":[{"Condition":"__Condition__","TargetColumn":"__TargetColumn__","Value":"__Value__"},{"Condition":"__Condition__","TargetColumn":"__TargetColumn__","Value":"__Value__"}]},"StepIndex":1,"ViewFrame":{"Analytics":"ENABLE","ColumnRange":1,"HiddenColumns":["__Member__","__Member__"],"RowRange":1,"StartColumnIndex":1,"StartRowIndex":1}}

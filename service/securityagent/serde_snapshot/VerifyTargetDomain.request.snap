@@ -1,0 +1,5 @@
+POST /VerifyTargetDomain
+
+Content-Type: application/json
+
+{"targetDomainId":"__TargetDomainId__"}

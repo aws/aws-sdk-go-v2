@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/indices/__IndexId__/groups
+
+Content-Type: application/json
+
+{"dataSourceId":"__DataSourceId__","groupMembers":{"memberGroups":[{"groupName":"__GroupName__","type":"INDEX"},{"groupName":"__GroupName__","type":"INDEX"}],"memberUsers":[{"type":"INDEX","userId":"__UserId__"},{"type":"INDEX","userId":"__UserId__"}],"s3PathForGroupMembers":{"bucket":"__Bucket__","key":"__Key__"}},"groupName":"__GroupName__","roleArn":"__RoleArn__","type":"INDEX"}

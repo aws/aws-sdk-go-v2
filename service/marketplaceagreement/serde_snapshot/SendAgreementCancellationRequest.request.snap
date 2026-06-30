@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.SendAgreementCancellationRequest
+
+{"agreementId":"__AgreementId__","clientToken":"__ClientToken__","description":"__Description__","reasonCode":"INCORRECT_TERMS_ACCEPTED"}

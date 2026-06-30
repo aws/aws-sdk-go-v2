@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.DeleteFirewallRule
+
+{"FirewallDomainListId":"__FirewallDomainListId__","FirewallRuleGroupId":"__FirewallRuleGroupId__","FirewallThreatProtectionId":"__FirewallThreatProtectionId__","Qtype":"__Qtype__"}

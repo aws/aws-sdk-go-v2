@@ -1,0 +1,3 @@
+GET /v1/entitlements?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,6 @@
+POST /participant/event
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"ClientToken":"__ClientToken__","Content":"__Content__","ContentType":"__ContentType__"}

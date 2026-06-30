@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.ListBenefitApplications
+
+{"AssociatedResourceArns":["__Member__","__Member__"],"AssociatedResources":[{"ResourceArn":"__ResourceArn__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"OPPORTUNITY"},{"ResourceArn":"__ResourceArn__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"OPPORTUNITY"}],"BenefitIdentifiers":["__Member__","__Member__"],"Catalog":"__Catalog__","FulfillmentTypes":["CREDITS","CREDITS"],"MaxResults":1,"NextToken":"__NextToken__","Programs":["__Member__","__Member__"],"Stages":["__Member__","__Member__"],"Status":["PENDING_SUBMISSION","PENDING_SUBMISSION"]}

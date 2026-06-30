@@ -1,0 +1,5 @@
+PUT /contact-flows/__InstanceId__/__ContactFlowId__/version
+
+Content-Type: application/json
+
+{"ContactFlowVersion":1,"Description":"__Description__","FlowContentSha256":"__FlowContentSha256__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetUnfilteredPartitionsMetadata
+
+{"AuditContext":{"AdditionalAuditContext":"__AdditionalAuditContext__","AllColumnsRequested":true,"RequestedColumns":["__Member__","__Member__"]},"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","Expression":"__Expression__","MaxResults":1,"NextToken":"__NextToken__","QuerySessionContext":{"AdditionalContext":{"key0":"__Value__","key1":"__Value__"},"ClusterId":"__ClusterId__","QueryAuthorizationId":"__QueryAuthorizationId__","QueryId":"__QueryId__","QueryStartTime":946684800},"Region":"__Region__","Segment":{"SegmentNumber":1,"TotalSegments":1},"SupportedPermissionTypes":["COLUMN_PERMISSION","COLUMN_PERMISSION"],"TableName":"__TableName__"}

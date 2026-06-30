@@ -1,0 +1,5 @@
+POST /listDeploymentPatternVersions
+
+Content-Type: application/json
+
+{"deploymentPatternName":"__DeploymentPatternName__","filters":[{"name":"updateFromVersion","values":["__Member__","__Member__"]},{"name":"updateFromVersion","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","workloadName":"__WorkloadName__"}

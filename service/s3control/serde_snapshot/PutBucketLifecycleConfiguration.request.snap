@@ -1,0 +1,6 @@
+PUT /v20180820/bucket/__Bucket__/lifecycleconfiguration
+
+Content-Md5: V2+rrsCktAGcuIH1hWG/7g==
+Content-Type: application/xml
+X-Amz-Account-Id: AccountId-value
+

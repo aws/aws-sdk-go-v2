@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/flows/__FlowId__/metadata
+
+

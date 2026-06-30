@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/matches?max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"MatchType":"RULE_BASED_MATCHING","SearchKey":"__SearchKey__","SearchValue":"__SearchValue__"}

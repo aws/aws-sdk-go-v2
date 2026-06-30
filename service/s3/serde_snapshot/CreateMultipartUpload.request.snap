@@ -1,0 +1,33 @@
+POST /__Key__?uploads=
+
+Cache-Control: __CacheControl__
+Content-Disposition: __ContentDisposition__
+Content-Encoding: __ContentEncoding__
+Content-Language: __ContentLanguage__
+Content-Type: __ContentType__
+Expires: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Acl: private
+X-Amz-Checksum-Algorithm: CRC32
+X-Amz-Checksum-Type: COMPOSITE
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Grant-Full-Control: __GrantFullControl__
+X-Amz-Grant-Read: __GrantRead__
+X-Amz-Grant-Read-Acp: __GrantReadACP__
+X-Amz-Grant-Write-Acp: __GrantWriteACP__
+X-Amz-Meta-Key0: __Value__
+X-Amz-Meta-Key1: __Value__
+X-Amz-Object-Lock-Legal-Hold: ON
+X-Amz-Object-Lock-Mode: GOVERNANCE
+X-Amz-Object-Lock-Retain-Until-Date: 2000-01-01T00:00:00Z
+X-Amz-Request-Payer: requester
+X-Amz-Server-Side-Encryption: AES256
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Context: __SSEKMSEncryptionContext__
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Storage-Class: STANDARD
+X-Amz-Tagging: __Tagging__
+X-Amz-Website-Redirect-Location: __WebsiteRedirectLocation__
+

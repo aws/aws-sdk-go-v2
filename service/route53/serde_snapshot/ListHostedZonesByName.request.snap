@@ -1,0 +1,3 @@
+GET /2013-04-01/hostedzonesbyname?dnsname=__DNSName__&hostedzoneid=__HostedZoneId__&maxitems=1
+
+

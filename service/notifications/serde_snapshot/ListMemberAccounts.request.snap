@@ -1,0 +1,3 @@
+GET /list-member-accounts?maxResults=1&memberAccount=__MemberAccount__&nextToken=__NextToken__&notificationConfigurationArn=__NotificationConfigurationArn__&organizationalUnitId=__OrganizationalUnitId__&status=ACTIVE
+
+

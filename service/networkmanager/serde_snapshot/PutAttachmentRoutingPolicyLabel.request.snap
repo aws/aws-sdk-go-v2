@@ -1,0 +1,5 @@
+POST /routing-policy-label
+
+Content-Type: application/json
+
+{"AttachmentId":"__AttachmentId__","ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","RoutingPolicyLabel":"__RoutingPolicyLabel__"}

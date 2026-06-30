@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/authorizers/__AuthorizerId__
+
+Accept: application/json
+Content-Type: application/json
+
+{"additionalContext":{"key0":"__Value__","key1":"__Value__"},"body":"__Body__","headers":{"key0":"__Value__","key1":"__Value__"},"multiValueHeaders":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"pathWithQueryString":"__PathWithQueryString__","stageVariables":{"key0":"__Value__","key1":"__Value__"}}

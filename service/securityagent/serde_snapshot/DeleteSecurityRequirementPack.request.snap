@@ -1,0 +1,5 @@
+POST /DeleteSecurityRequirementPack
+
+Content-Type: application/json
+
+{"packId":"__PackId__"}

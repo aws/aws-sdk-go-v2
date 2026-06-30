@@ -1,0 +1,5 @@
+PUT /2020-06-30/functions/__FunctionName__/code-signing-config
+
+Content-Type: application/json
+
+{"CodeSigningConfigArn":"__CodeSigningConfigArn__"}

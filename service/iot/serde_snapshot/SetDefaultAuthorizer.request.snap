@@ -1,0 +1,5 @@
+POST /default-authorizer
+
+Content-Type: application/json
+
+{"authorizerName":"__AuthorizerName__"}

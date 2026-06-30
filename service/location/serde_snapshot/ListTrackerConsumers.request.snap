@@ -1,0 +1,5 @@
+POST /tracking/v0/trackers/__TrackerName__/list-consumers
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

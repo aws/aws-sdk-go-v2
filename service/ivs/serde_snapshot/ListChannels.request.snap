@@ -1,0 +1,5 @@
+POST /ListChannels
+
+Content-Type: application/json
+
+{"filterByAdConfigurationArn":"__FilterByAdConfigurationArn__","filterByName":"__FilterByName__","filterByPlaybackRestrictionPolicyArn":"__FilterByPlaybackRestrictionPolicyArn__","filterByRecordingConfigurationArn":"__FilterByRecordingConfigurationArn__","maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.AssociateCreatedArtifact
+
+{"CreatedArtifact":{"Description":"__Description__","Name":"__Name__"},"DryRun":true,"MigrationTaskName":"__MigrationTaskName__","ProgressUpdateStream":"__ProgressUpdateStream__"}

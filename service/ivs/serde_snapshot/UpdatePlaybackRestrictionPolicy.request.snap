@@ -1,0 +1,5 @@
+POST /UpdatePlaybackRestrictionPolicy
+
+Content-Type: application/json
+
+{"allowedCountries":["__Member__","__Member__"],"allowedOrigins":["__Member__","__Member__"],"arn":"__Arn__","enableStrictOriginEnforcement":true,"name":"__Name__"}

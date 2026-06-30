@@ -1,0 +1,4 @@
+POST /2020-05-31/get-realtime-log-config
+
+Content-Type: application/xml
+

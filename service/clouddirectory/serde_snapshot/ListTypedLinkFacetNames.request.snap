@@ -1,0 +1,6 @@
+POST /amazonclouddirectory/2017-01-11/typedlink/facet/list
+
+Content-Type: application/json
+X-Amz-Data-Partition: __SchemaArn__
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

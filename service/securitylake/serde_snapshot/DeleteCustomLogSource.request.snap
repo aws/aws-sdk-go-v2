@@ -1,0 +1,3 @@
+DELETE /v1/datalake/logsources/custom/__SourceName__?sourceVersion=__SourceVersion__
+
+

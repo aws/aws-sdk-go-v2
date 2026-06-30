@@ -1,0 +1,6 @@
+PUT /key-value-stores/__KvsARN__/keys/__Key__
+
+Content-Type: application/json
+If-Match: __IfMatch__
+
+{"Value":"__Value__"}

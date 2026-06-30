@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.UpdateActionType
+
+{"actionType":{"description":"__Description__","executor":{"configuration":{"jobWorkerExecutorConfiguration":{"pollingAccounts":["__Member__","__Member__"],"pollingServicePrincipals":["__Member__","__Member__"]},"lambdaExecutorConfiguration":{"lambdaFunctionArn":"__LambdaFunctionArn__"}},"jobTimeout":1,"policyStatementsTemplate":"__PolicyStatementsTemplate__","type":"JobWorker"},"id":{"category":"Source","owner":"__Owner__","provider":"__Provider__","version":"__Version__"},"inputArtifactDetails":{"maximumCount":1,"minimumCount":1},"outputArtifactDetails":{"maximumCount":1,"minimumCount":1},"permissions":{"allowedAccounts":["__Member__","__Member__"]},"properties":[{"description":"__Description__","key":true,"name":"__Name__","noEcho":true,"optional":true,"queryable":true},{"description":"__Description__","key":true,"name":"__Name__","noEcho":true,"optional":true,"queryable":true}],"urls":{"configurationUrl":"__ConfigurationUrl__","entityUrlTemplate":"__EntityUrlTemplate__","executionUrlTemplate":"__ExecutionUrlTemplate__","revisionUrlTemplate":"__RevisionUrlTemplate__"}}}

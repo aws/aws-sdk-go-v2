@@ -1,0 +1,5 @@
+PATCH /reviewTemplates/__TemplateArn__/lensReviews/__LensAlias__
+
+Content-Type: application/json
+
+{"LensNotes":"__LensNotes__","PillarNotes":{"key0":"__Value__","key1":"__Value__"}}

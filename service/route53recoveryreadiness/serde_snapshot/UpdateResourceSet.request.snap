@@ -1,0 +1,5 @@
+PUT /resourcesets/__ResourceSetName__
+
+Content-Type: application/json
+
+{"resourceSetType":"__ResourceSetType__","resources":[{"componentId":"__ComponentId__","dnsTargetResource":{"domainName":"__DomainName__","hostedZoneArn":"__HostedZoneArn__","recordSetId":"__RecordSetId__","recordType":"__RecordType__","targetResource":{"nLBResource":{"arn":"__Arn__"},"r53Resource":{"domainName":"__DomainName__","recordSetId":"__RecordSetId__"}}},"readinessScopes":["__Member__","__Member__"],"resourceArn":"__ResourceArn__"},{"componentId":"__ComponentId__","dnsTargetResource":{"domainName":"__DomainName__","hostedZoneArn":"__HostedZoneArn__","recordSetId":"__RecordSetId__","recordType":"__RecordType__","targetResource":{"nLBResource":{"arn":"__Arn__"},"r53Resource":{"domainName":"__DomainName__","recordSetId":"__RecordSetId__"}}},"readinessScopes":["__Member__","__Member__"],"resourceArn":"__ResourceArn__"}]}

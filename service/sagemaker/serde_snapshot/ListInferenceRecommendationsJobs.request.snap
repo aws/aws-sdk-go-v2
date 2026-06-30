@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListInferenceRecommendationsJobs
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"LastModifiedTimeAfter":946684800,"LastModifiedTimeBefore":946684800,"MaxResults":1,"ModelNameEquals":"__ModelNameEquals__","ModelPackageVersionArnEquals":"__ModelPackageVersionArnEquals__","NameContains":"__NameContains__","NextToken":"__NextToken__","SortBy":"Name","SortOrder":"Ascending","StatusEquals":"PENDING"}

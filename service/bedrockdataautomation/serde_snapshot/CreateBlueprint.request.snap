@@ -1,0 +1,5 @@
+PUT /blueprints/
+
+Content-Type: application/json
+
+{"blueprintName":"__BlueprintName__","blueprintStage":"DEVELOPMENT","clientToken":"__ClientToken__","encryptionConfiguration":{"kmsEncryptionContext":{"key0":"__Value__","key1":"__Value__"},"kmsKeyId":"__KmsKeyId__"},"schema":"__Schema__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"DOCUMENT"}

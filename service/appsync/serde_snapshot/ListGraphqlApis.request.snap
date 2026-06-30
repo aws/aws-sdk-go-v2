@@ -1,0 +1,3 @@
+GET /v1/apis?apiType=GRAPHQL&maxResults=1&nextToken=__NextToken__&owner=CURRENT_ACCOUNT
+
+

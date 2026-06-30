@@ -1,0 +1,3 @@
+GET /core-networks/__CoreNetworkId__/core-network-policy-versions?maxResults=1&nextToken=__NextToken__
+
+

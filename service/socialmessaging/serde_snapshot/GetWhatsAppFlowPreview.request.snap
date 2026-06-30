@@ -1,0 +1,3 @@
+GET /v1/whatsapp/flow/preview?flowId=__FlowId__&id=__Id__&invalidate=true
+
+

@@ -1,0 +1,5 @@
+POST /ListAttachedLinks
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","SinkIdentifier":"__SinkIdentifier__"}

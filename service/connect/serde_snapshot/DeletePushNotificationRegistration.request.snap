@@ -1,0 +1,3 @@
+DELETE /push-notification/__InstanceId__/registrations/__RegistrationId__?contactId=__ContactId__
+
+

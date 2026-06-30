@@ -1,0 +1,5 @@
+POST /policy-engines
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","encryptionKeyArn":"__EncryptionKeyArn__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PerformanceInsightsv20180227.DescribeDimensionKeys
+
+{"AdditionalMetrics":["__Member__","__Member__"],"EndTime":946684800,"Filter":{"key0":"__Value__","key1":"__Value__"},"GroupBy":{"Dimensions":["__Member__","__Member__"],"Group":"__Group__","Limit":1},"Identifier":"__Identifier__","MaxResults":1,"Metric":"__Metric__","NextToken":"__NextToken__","PartitionBy":{"Dimensions":["__Member__","__Member__"],"Group":"__Group__","Limit":1},"PeriodInSeconds":1,"ServiceType":"RDS","StartTime":946684800}

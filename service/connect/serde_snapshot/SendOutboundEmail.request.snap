@@ -1,0 +1,5 @@
+PUT /instance/__InstanceId__/outbound-email
+
+Content-Type: application/json
+
+{"AdditionalRecipients":{"CcEmailAddresses":[{"DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__"},{"DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__"}]},"ClientToken":"__ClientToken__","DestinationEmailAddress":{"DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__"},"EmailMessage":{"MessageSourceType":"TEMPLATE","RawMessage":{"Body":"__Body__","ContentType":"__ContentType__","Subject":"__Subject__"},"TemplatedMessageConfig":{"KnowledgeBaseId":"__KnowledgeBaseId__","MessageTemplateId":"__MessageTemplateId__","TemplateAttributes":{"CustomAttributes":{"key0":"__Value__","key1":"__Value__"},"CustomerProfileAttributes":"__CustomerProfileAttributes__"}}},"FromEmailAddress":{"DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__"},"SourceCampaign":{"CampaignId":"__CampaignId__","OutboundRequestId":"__OutboundRequestId__"},"TrafficType":"GENERAL"}

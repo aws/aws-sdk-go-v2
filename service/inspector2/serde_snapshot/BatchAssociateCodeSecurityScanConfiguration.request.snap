@@ -1,0 +1,5 @@
+POST /codesecurity/scan-configuration/batch/associate
+
+Content-Type: application/json
+
+{"associateConfigurationRequests":[{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__"},{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__"}]}

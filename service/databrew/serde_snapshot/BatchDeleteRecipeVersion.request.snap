@@ -1,0 +1,5 @@
+POST /recipes/__Name__/batchDeleteRecipeVersion
+
+Content-Type: application/json
+
+{"RecipeVersions":["__Member__","__Member__"]}

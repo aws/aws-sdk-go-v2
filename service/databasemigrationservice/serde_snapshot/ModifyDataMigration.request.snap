@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ModifyDataMigration
+
+{"DataMigrationIdentifier":"__DataMigrationIdentifier__","DataMigrationName":"__DataMigrationName__","DataMigrationType":"full-load","EnableCloudwatchLogs":true,"NumberOfJobs":1,"SelectionRules":"__SelectionRules__","ServiceAccessRoleArn":"__ServiceAccessRoleArn__","SourceDataSettings":[{"CDCStartPosition":"__CDCStartPosition__","CDCStartTime":"2000-01-01T00:00:00Z","CDCStopTime":"2000-01-01T00:00:00Z","SlotName":"__SlotName__"},{"CDCStartPosition":"__CDCStartPosition__","CDCStartTime":"2000-01-01T00:00:00Z","CDCStopTime":"2000-01-01T00:00:00Z","SlotName":"__SlotName__"}],"TargetDataSettings":[{"TablePreparationMode":"do-nothing"},{"TablePreparationMode":"do-nothing"}]}

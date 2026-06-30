@@ -1,0 +1,6 @@
+POST /apps.predictQApp
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"options":{"conversation":[{"body":"__Body__","type":"USER"},{"body":"__Body__","type":"USER"}]}}

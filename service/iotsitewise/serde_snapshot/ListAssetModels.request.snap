@@ -1,0 +1,3 @@
+GET /asset-models?assetModelTypes=ASSET_MODEL&assetModelTypes=ASSET_MODEL&assetModelVersion=__AssetModelVersion__&maxResults=1&nextToken=__NextToken__
+
+

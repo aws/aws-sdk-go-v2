@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.CreatePrivateVirtualInterface
+
+{"connectionId":"__ConnectionId__","newPrivateVirtualInterface":{"addressFamily":"ipv4","amazonAddress":"__AmazonAddress__","asn":1,"asnLong":1,"authKey":"__AuthKey__","customerAddress":"__CustomerAddress__","directConnectGatewayId":"__DirectConnectGatewayId__","enableSiteLink":true,"mtu":1,"rateLimit":"__RateLimit__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"virtualGatewayId":"__VirtualGatewayId__","virtualInterfaceName":"__VirtualInterfaceName__","vlan":1}}

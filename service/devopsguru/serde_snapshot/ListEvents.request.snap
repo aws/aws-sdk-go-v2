@@ -1,0 +1,5 @@
+POST /events
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","Filters":{"DataSource":"AWS_CLOUD_TRAIL","EventClass":"INFRASTRUCTURE","EventSource":"__EventSource__","EventTimeRange":{"FromTime":946684800,"ToTime":946684800},"InsightId":"__InsightId__","ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]}},"MaxResults":1,"NextToken":"__NextToken__"}

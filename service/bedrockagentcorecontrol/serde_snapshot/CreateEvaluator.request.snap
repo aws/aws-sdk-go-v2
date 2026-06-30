@@ -1,0 +1,5 @@
+POST /evaluators/create
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","evaluatorConfig":{"llmAsAJudge":{"instructions":"__Instructions__","modelConfig":{"bedrockEvaluatorModelConfig":{"inferenceConfig":{"maxTokens":1,"stopSequences":["__Member__","__Member__"],"temperature":1,"topP":1},"modelId":"__ModelId__"}},"ratingScale":{"numerical":[{"definition":"__Definition__","label":"__Label__","value":1},{"definition":"__Definition__","label":"__Label__","value":1}]}}},"evaluatorName":"__EvaluatorName__","kmsKeyArn":"__KmsKeyArn__","level":"TOOL_CALL","tags":{"key0":"__Value__","key1":"__Value__"}}

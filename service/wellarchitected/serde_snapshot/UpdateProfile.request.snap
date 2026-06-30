@@ -1,0 +1,5 @@
+PATCH /profiles/__ProfileArn__
+
+Content-Type: application/json
+
+{"ProfileDescription":"__ProfileDescription__","ProfileQuestions":[{"QuestionId":"__QuestionId__","SelectedChoiceIds":["__Member__","__Member__"]},{"QuestionId":"__QuestionId__","SelectedChoiceIds":["__Member__","__Member__"]}]}

@@ -1,0 +1,3 @@
+POST /v1/domain/repositories?administrator-account=__AdministratorAccount__&domain=__Domain__&domain-owner=__DomainOwner__&max-results=1&next-token=__NextToken__&repository-prefix=__RepositoryPrefix__
+
+

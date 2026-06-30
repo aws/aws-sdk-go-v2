@@ -1,0 +1,21 @@
+PUT /__Key__?partNumber=1&uploadId=__UploadId__&x-id=UploadPart
+
+Content-Md5: __ContentMD5__
+Content-Type: application/octet-stream
+X-Amz-Checksum-Crc32: __ChecksumCRC32__
+X-Amz-Checksum-Crc32c: __ChecksumCRC32C__
+X-Amz-Checksum-Crc64nvme: __ChecksumCRC64NVME__
+X-Amz-Checksum-Md5: __ChecksumMD5__
+X-Amz-Checksum-Sha1: __ChecksumSHA1__
+X-Amz-Checksum-Sha256: __ChecksumSHA256__
+X-Amz-Checksum-Sha512: __ChecksumSHA512__
+X-Amz-Checksum-Xxhash128: __ChecksumXXHASH128__
+X-Amz-Checksum-Xxhash3: __ChecksumXXHASH3__
+X-Amz-Checksum-Xxhash64: __ChecksumXXHASH64__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.CreateFirewall
+
+{"AvailabilityZoneChangeProtection":true,"AvailabilityZoneMappings":[{"AvailabilityZone":"__AvailabilityZone__"},{"AvailabilityZone":"__AvailabilityZone__"}],"DeleteProtection":true,"Description":"__Description__","EnabledAnalysisTypes":["TLS_SNI","TLS_SNI"],"EncryptionConfiguration":{"KeyId":"__KeyId__","Type":"CUSTOMER_KMS"},"FirewallName":"__FirewallName__","FirewallPolicyArn":"__FirewallPolicyArn__","FirewallPolicyChangeProtection":true,"SubnetChangeProtection":true,"SubnetMappings":[{"IPAddressType":"DUALSTACK","SubnetId":"__SubnetId__"},{"IPAddressType":"DUALSTACK","SubnetId":"__SubnetId__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TransitGatewayId":"__TransitGatewayId__","VpcId":"__VpcId__"}

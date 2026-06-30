@@ -1,0 +1,6 @@
+POST /api/v1/documents/__DocumentId__/versions/__VersionId__/comment
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"NotifyCollaborators":true,"ParentId":"__ParentId__","Text":"__Text__","ThreadId":"__ThreadId__","Visibility":"PUBLIC"}

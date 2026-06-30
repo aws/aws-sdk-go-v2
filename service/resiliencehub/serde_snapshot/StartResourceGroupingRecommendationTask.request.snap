@@ -1,0 +1,5 @@
+POST /start-resource-grouping-recommendation-task
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__"}

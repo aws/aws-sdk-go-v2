@@ -1,0 +1,6 @@
+POST /service/ComputeOptimizerService/operation/GetEffectiveRecommendationPreferences
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

@@ -1,0 +1,6 @@
+POST /2020-05-31/distribution/__PrimaryDistributionId__/copy
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+Staging: true
+

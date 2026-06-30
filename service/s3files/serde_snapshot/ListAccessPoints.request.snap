@@ -1,0 +1,3 @@
+GET /access-points?fileSystemId=__FileSystemId__&maxResults=1&nextToken=__NextToken__
+
+

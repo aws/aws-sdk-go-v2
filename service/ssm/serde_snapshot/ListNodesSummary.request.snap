@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.ListNodesSummary
+
+{"Aggregators":[{"AggregatorType":"Count","Aggregators":[{},{}],"AttributeName":"AgentVersion","TypeName":"Instance"},{"AggregatorType":"Count","Aggregators":[{},{}],"AttributeName":"AgentVersion","TypeName":"Instance"}],"Filters":[{"Key":"AgentType","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"AgentType","Type":"Equal","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","SyncName":"__SyncName__"}

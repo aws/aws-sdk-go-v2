@@ -1,0 +1,3 @@
+GET /groundstation/__GroundStationId__/antenna?maxResults=1&nextToken=__NextToken__
+
+

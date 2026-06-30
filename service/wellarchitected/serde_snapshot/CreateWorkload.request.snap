@@ -1,0 +1,5 @@
+POST /workloads
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"Applications":["__Member__","__Member__"],"ArchitecturalDesign":"__ArchitecturalDesign__","AwsRegions":["__Member__","__Member__"],"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","DiscoveryConfig":{"TrustedAdvisorIntegrationStatus":"ENABLED","WorkloadResourceDefinition":["WORKLOAD_METADATA","WORKLOAD_METADATA"]},"Environment":"PRODUCTION","Industry":"__Industry__","IndustryType":"__IndustryType__","JiraConfiguration":{"IssueManagementStatus":"ENABLED","IssueManagementType":"AUTO","JiraProjectKey":"__JiraProjectKey__"},"Lenses":["__Member__","__Member__"],"NonAwsRegions":["__Member__","__Member__"],"Notes":"__Notes__","PillarPriorities":["__Member__","__Member__"],"ProfileArns":["__Member__","__Member__"],"ReviewOwner":"__ReviewOwner__","ReviewTemplateArns":["__Member__","__Member__"],"Tags":{"key0":"__Value__","key1":"__Value__"},"WorkloadName":"__WorkloadName__"}

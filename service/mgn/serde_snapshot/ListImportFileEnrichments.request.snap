@@ -1,0 +1,5 @@
+POST /network-migration/ListImportFileEnrichments
+
+Content-Type: application/json
+
+{"filters":{"jobIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

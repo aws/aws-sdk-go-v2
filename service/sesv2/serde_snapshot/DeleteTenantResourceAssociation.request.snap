@@ -1,0 +1,5 @@
+POST /v2/email/tenants/resources/delete
+
+Content-Type: application/json
+
+{"ResourceArn":"__ResourceArn__","TenantName":"__TenantName__"}

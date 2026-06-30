@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.UpdateTaskSet
+
+{"cluster":"__Cluster__","scale":{"unit":"PERCENT","value":1},"service":"__Service__","taskSet":"__TaskSet__"}

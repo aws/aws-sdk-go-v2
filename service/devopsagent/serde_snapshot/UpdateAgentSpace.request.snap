@@ -1,0 +1,5 @@
+PATCH /v1/agentspaces/__AgentSpaceId__
+
+Content-Type: application/json
+
+{"description":"__Description__","locale":"__Locale__","name":"__Name__"}

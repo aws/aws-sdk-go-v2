@@ -1,0 +1,3 @@
+DELETE /rummetrics/__AppMonitorName__/metrics?destination=CloudWatch&destinationArn=__DestinationArn__&metricDefinitionIds=__Member__&metricDefinitionIds=__Member__
+
+

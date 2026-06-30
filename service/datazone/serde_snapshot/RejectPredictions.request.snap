@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/assets/__Identifier__/reject-predictions?revision=__Revision__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","rejectChoices":[{"predictionChoices":[1,1],"predictionTarget":"__PredictionTarget__"},{"predictionChoices":[1,1],"predictionTarget":"__PredictionTarget__"}],"rejectRule":{"rule":"ALL","threshold":1}}

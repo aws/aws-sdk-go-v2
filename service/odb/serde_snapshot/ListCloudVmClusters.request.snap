@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.ListCloudVmClusters
+
+{"cloudExadataInfrastructureId":"__CloudExadataInfrastructureId__","maxResults":1,"nextToken":"__NextToken__"}

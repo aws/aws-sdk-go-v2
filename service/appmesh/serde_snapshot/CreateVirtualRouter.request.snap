@@ -1,0 +1,5 @@
+PUT /v20190125/meshes/__MeshName__/virtualRouters?meshOwner=__MeshOwner__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","spec":{"listeners":[{"portMapping":{"port":1,"protocol":"http"}},{"portMapping":{"port":1,"protocol":"http"}}]},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"virtualRouterName":"__VirtualRouterName__"}

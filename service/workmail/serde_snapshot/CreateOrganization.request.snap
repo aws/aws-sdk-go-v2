@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.CreateOrganization
+
+{"Alias":"__Alias__","ClientToken":"__ClientToken__","DirectoryId":"__DirectoryId__","Domains":[{"DomainName":"__DomainName__","HostedZoneId":"__HostedZoneId__"},{"DomainName":"__DomainName__","HostedZoneId":"__HostedZoneId__"}],"EnableInteroperability":true,"KmsKeyArn":"__KmsKeyArn__"}

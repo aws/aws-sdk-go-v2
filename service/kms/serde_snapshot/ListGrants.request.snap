@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.ListGrants
+
+{"GrantId":"__GrantId__","GranteePrincipal":"__GranteePrincipal__","GranteeServicePrincipal":"__GranteeServicePrincipal__","KeyId":"__KeyId__","Limit":1,"Marker":"__Marker__"}

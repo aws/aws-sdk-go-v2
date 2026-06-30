@@ -1,0 +1,5 @@
+POST /v2/create-system
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","sharingEnabled":true,"tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,3 @@
+DELETE /profiles/__ProfileId__/mappings?certificateField=x509Subject&specifiers=__Member__&specifiers=__Member__
+
+

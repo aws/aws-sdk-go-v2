@@ -1,0 +1,5 @@
+POST /workloads/__WorkloadId__/milestonesSummaries
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

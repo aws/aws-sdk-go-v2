@@ -1,0 +1,5 @@
+POST /codesecurity/scan-configuration/update
+
+Content-Type: application/json
+
+{"configuration":{"continuousIntegrationScanConfiguration":{"supportedEvents":["PULL_REQUEST","PULL_REQUEST"]},"periodicScanConfiguration":{"frequency":"WEEKLY","frequencyExpression":"__FrequencyExpression__"},"ruleSetCategories":["SAST","SAST"]},"scanConfigurationArn":"__ScanConfigurationArn__"}

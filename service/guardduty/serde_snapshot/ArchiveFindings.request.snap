@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/findings/archive
+
+Content-Type: application/json
+
+{"findingIds":["__Member__","__Member__"]}

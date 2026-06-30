@@ -1,0 +1,6 @@
+PUT /v20180820/bucket/__Bucket__/replication
+
+Content-Md5: cKbSVXq/M5RYe4eE00ADwA==
+Content-Type: application/xml
+X-Amz-Account-Id: AccountId-value
+

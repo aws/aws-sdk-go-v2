@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/notebook-exports
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","fileFormat":"PDF","notebookIdentifier":"__NotebookIdentifier__","owningProjectIdentifier":"__OwningProjectIdentifier__"}

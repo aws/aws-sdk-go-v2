@@ -1,0 +1,5 @@
+POST /kx/environments/__EnvironmentId__/databases/__DatabaseName__/dataviews
+
+Content-Type: application/x-amz-json-1.1
+
+{"autoUpdate":true,"availabilityZoneId":"__AvailabilityZoneId__","azMode":"SINGLE","changesetId":"__ChangesetId__","clientToken":"__ClientToken__","dataviewName":"__DataviewName__","description":"__Description__","readWrite":true,"segmentConfigurations":[{"dbPaths":["__Member__","__Member__"],"onDemand":true,"volumeName":"__VolumeName__"},{"dbPaths":["__Member__","__Member__"],"onDemand":true,"volumeName":"__VolumeName__"}],"tags":{"key0":"__Value__","key1":"__Value__"}}

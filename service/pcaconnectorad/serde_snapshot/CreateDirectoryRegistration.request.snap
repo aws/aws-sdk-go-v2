@@ -1,0 +1,5 @@
+POST /directoryRegistrations
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","DirectoryId":"__DirectoryId__","Tags":{"key0":"__Value__","key1":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: ToggleCustomerAPI.UpdateRoutingControlState
+
+{"RoutingControlArn":"__RoutingControlArn__","RoutingControlState":"On","SafetyRulesToOverride":["__Member__","__Member__"]}

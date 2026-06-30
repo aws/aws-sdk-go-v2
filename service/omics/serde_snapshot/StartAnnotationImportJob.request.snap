@@ -1,0 +1,5 @@
+POST /import/annotation
+
+Content-Type: application/json
+
+{"annotationFields":{"key0":"__Value__","key1":"__Value__"},"destinationName":"__DestinationName__","formatOptions":{"tsvOptions":{"readOptions":{"comment":"__Comment__","encoding":"__Encoding__","escape":"__Escape__","escapeQuotes":true,"header":true,"lineSep":"__LineSep__","quote":"__Quote__","quoteAll":true,"sep":"__Sep__"}}},"items":[{"source":"__Source__"},{"source":"__Source__"}],"roleArn":"__RoleArn__","runLeftNormalization":true,"versionName":"__VersionName__"}

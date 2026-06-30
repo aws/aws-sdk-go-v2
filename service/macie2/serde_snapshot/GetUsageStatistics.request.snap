@@ -1,0 +1,5 @@
+POST /usage/statistics
+
+Content-Type: application/json
+
+{"filterBy":[{"comparator":"GT","key":"accountId","values":["__Member__","__Member__"]},{"comparator":"GT","key":"accountId","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sortBy":{"key":"accountId","orderBy":"ASC"},"timeRange":"MONTH_TO_DATE"}

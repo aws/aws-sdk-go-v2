@@ -1,0 +1,7 @@
+PUT /v20180820/bucket/__Bucket__/versioning
+
+Content-Md5: tSUgQevSX4qxncFFrmkmsA==
+Content-Type: application/xml
+X-Amz-Account-Id: AccountId-value
+X-Amz-Mfa: __MFA__
+

@@ -1,0 +1,5 @@
+PATCH /appmonitor/__Name__
+
+Content-Type: application/json
+
+{"AppMonitorConfiguration":{"AllowCookies":true,"EnableXRay":true,"ExcludedPages":["__Member__","__Member__"],"FavoritePages":["__Member__","__Member__"],"GuestRoleArn":"__GuestRoleArn__","IdentityPoolId":"__IdentityPoolId__","IncludedPages":["__Member__","__Member__"],"SessionSampleRate":1,"Telemetries":["errors","errors"]},"CustomEvents":{"Status":"ENABLED"},"CwLogEnabled":true,"DeobfuscationConfiguration":{"JavaScriptSourceMaps":{"S3Uri":"__S3Uri__","Status":"ENABLED"}},"Domain":"__Domain__","DomainList":["__Member__","__Member__"]}

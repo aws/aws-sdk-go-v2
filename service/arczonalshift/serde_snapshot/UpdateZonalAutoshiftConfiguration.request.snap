@@ -1,0 +1,5 @@
+PUT /managedresources/__ResourceIdentifier__
+
+Content-Type: application/json
+
+{"zonalAutoshiftStatus":"ENABLED"}

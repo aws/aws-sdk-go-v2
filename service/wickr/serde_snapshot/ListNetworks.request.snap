@@ -1,0 +1,3 @@
+GET /networks?maxResults=1&nextToken=__NextToken__&sortDirection=ASC&sortFields=__SortFields__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateExportImageTask
+
+{"AmiDescription":"__AmiDescription__","AmiName":"__AmiName__","IamRoleArn":"__IamRoleArn__","ImageName":"__ImageName__","TagSpecifications":{"key0":"__Value__","key1":"__Value__"}}

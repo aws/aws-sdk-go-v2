@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifySamlProperties
+
+{"PropertiesToDelete":["SAML_PROPERTIES_USER_ACCESS_URL","SAML_PROPERTIES_USER_ACCESS_URL"],"ResourceId":"__ResourceId__","SamlProperties":{"RelayStateParameterName":"__RelayStateParameterName__","Status":"DISABLED","UserAccessUrl":"__UserAccessUrl__"}}

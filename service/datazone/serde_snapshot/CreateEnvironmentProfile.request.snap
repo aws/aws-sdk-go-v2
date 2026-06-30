@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/environment-profiles
+
+Content-Type: application/json
+
+{"awsAccountId":"__AwsAccountId__","awsAccountRegion":"__AwsAccountRegion__","description":"__Description__","environmentBlueprintIdentifier":"__EnvironmentBlueprintIdentifier__","name":"__Name__","projectIdentifier":"__ProjectIdentifier__","userParameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}]}

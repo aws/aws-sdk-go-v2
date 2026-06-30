@@ -1,0 +1,5 @@
+POST /2015-01-01/packages
+
+Content-Type: application/json
+
+{"PackageDescription":"__PackageDescription__","PackageName":"__PackageName__","PackageSource":{"S3BucketName":"__S3BucketName__","S3Key":"__S3Key__"},"PackageType":"TXT-DICTIONARY"}

@@ -1,0 +1,5 @@
+POST /2023-10-12/farms/__FarmId__/fleets/__FleetId__/workers/__WorkerId__/batchGetJobEntity
+
+Content-Type: application/json
+
+{"identifiers":[{"jobDetails":{"jobId":"__JobId__"}},{"jobDetails":{"jobId":"__JobId__"}}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MediaStore_20170901.PutCorsPolicy
+
+{"ContainerName":"__ContainerName__","CorsPolicy":[{"AllowedHeaders":["__Member__","__Member__"],"AllowedMethods":["PUT","PUT"],"AllowedOrigins":["__Member__","__Member__"],"ExposeHeaders":["__Member__","__Member__"],"MaxAgeSeconds":1},{"AllowedHeaders":["__Member__","__Member__"],"AllowedMethods":["PUT","PUT"],"AllowedOrigins":["__Member__","__Member__"],"ExposeHeaders":["__Member__","__Member__"],"MaxAgeSeconds":1}]}

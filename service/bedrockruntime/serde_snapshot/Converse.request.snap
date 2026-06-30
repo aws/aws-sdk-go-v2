@@ -1,0 +1,4 @@
+POST /model/__ModelId__/converse
+
+Content-Type: application/json
+

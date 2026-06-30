@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.TestIdentityProvider
+
+{"ServerId":"__ServerId__","ServerProtocol":"SFTP","SourceIp":"__SourceIp__","UserName":"__UserName__","UserPassword":"__UserPassword__"}

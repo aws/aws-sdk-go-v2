@@ -1,0 +1,4 @@
+POST /2020-05-31/verify-dns-configuration
+
+Content-Type: application/xml
+

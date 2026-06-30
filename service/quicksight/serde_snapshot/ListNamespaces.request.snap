@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/namespaces?max-results=1&next-token=__NextToken__
+
+

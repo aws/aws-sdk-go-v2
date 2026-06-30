@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/profiles/keys
+
+Content-Type: application/json
+
+{"KeyName":"__KeyName__","ProfileId":"__ProfileId__","Values":["__Member__","__Member__"]}

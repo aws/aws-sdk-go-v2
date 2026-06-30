@@ -1,0 +1,5 @@
+POST /ml/endpoints
+
+Content-Type: application/json
+
+{"id":"__Id__","instanceCount":1,"instanceType":"__InstanceType__","mlModelTrainingJobId":"__MlModelTrainingJobId__","mlModelTransformJobId":"__MlModelTransformJobId__","modelName":"__ModelName__","neptuneIamRoleArn":"__NeptuneIamRoleArn__","update":true,"volumeEncryptionKMSKey":"__VolumeEncryptionKMSKey__"}

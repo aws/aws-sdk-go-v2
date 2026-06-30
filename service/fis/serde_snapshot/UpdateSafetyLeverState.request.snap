@@ -1,0 +1,5 @@
+PATCH /safetyLevers/__Id__/state
+
+Content-Type: application/json
+
+{"state":{"reason":"__Reason__","status":"disengaged"}}

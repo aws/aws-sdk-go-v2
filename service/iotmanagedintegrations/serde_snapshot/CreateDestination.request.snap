@@ -1,0 +1,5 @@
+POST /destinations
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","DeliveryDestinationArn":"__DeliveryDestinationArn__","DeliveryDestinationType":"KINESIS","Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Tags":{"key0":"__Value__","key1":"__Value__"}}

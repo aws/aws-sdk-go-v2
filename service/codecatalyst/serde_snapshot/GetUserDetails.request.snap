@@ -1,0 +1,3 @@
+GET /userDetails?id=__Id__&userName=__UserName__
+
+
