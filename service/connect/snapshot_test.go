@@ -458,6 +458,18 @@ func TestCheckSnapshot_CreateAgentStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAttachedFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContact(context.Background(), nil, func(o *Options) {
@@ -3458,6 +3470,18 @@ func TestCheckSnapshot_StartChatContact(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartContactConversationalAnalyticsJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartContactConversationalAnalyticsJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartContactConversationalAnalyticsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartContactEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartContactEvaluation(context.Background(), nil, func(o *Options) {
@@ -4914,6 +4938,18 @@ func TestUpdateSnapshot_CreateAgentStatus(t *testing.T) {
 	_, err := svc.CreateAgentStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateAgentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAttachedFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7914,6 +7950,18 @@ func TestUpdateSnapshot_StartChatContact(t *testing.T) {
 	_, err := svc.StartChatContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartChatContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartContactConversationalAnalyticsJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartContactConversationalAnalyticsJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartContactConversationalAnalyticsJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

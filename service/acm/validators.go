@@ -30,6 +30,126 @@ func (m *validateOpAddTagsToCertificate) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAcmeDomainValidation struct {
+}
+
+func (*validateOpCreateAcmeDomainValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAcmeDomainValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAcmeDomainValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAcmeDomainValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAcmeEndpoint struct {
+}
+
+func (*validateOpCreateAcmeEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAcmeEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAcmeEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAcmeEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAcmeExternalAccountBinding struct {
+}
+
+func (*validateOpCreateAcmeExternalAccountBinding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAcmeExternalAccountBinding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAcmeExternalAccountBindingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAcmeExternalAccountBindingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAcmeDomainValidation struct {
+}
+
+func (*validateOpDeleteAcmeDomainValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAcmeDomainValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAcmeDomainValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAcmeDomainValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAcmeEndpoint struct {
+}
+
+func (*validateOpDeleteAcmeEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAcmeEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAcmeEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAcmeEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAcmeExternalAccountBinding struct {
+}
+
+func (*validateOpDeleteAcmeExternalAccountBinding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAcmeExternalAccountBinding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAcmeExternalAccountBindingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAcmeExternalAccountBindingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCertificate struct {
 }
 
@@ -45,6 +165,86 @@ func (m *validateOpDeleteCertificate) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAcmeAccount struct {
+}
+
+func (*validateOpDescribeAcmeAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAcmeAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAcmeAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAcmeAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAcmeDomainValidation struct {
+}
+
+func (*validateOpDescribeAcmeDomainValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAcmeDomainValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAcmeDomainValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAcmeDomainValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAcmeEndpoint struct {
+}
+
+func (*validateOpDescribeAcmeEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAcmeEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAcmeEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAcmeEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAcmeExternalAccountBinding struct {
+}
+
+func (*validateOpDescribeAcmeExternalAccountBinding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAcmeExternalAccountBinding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAcmeExternalAccountBindingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAcmeExternalAccountBindingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -90,6 +290,26 @@ func (m *validateOpExportCertificate) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAcmeExternalAccountBindingCredentials struct {
+}
+
+func (*validateOpGetAcmeExternalAccountBindingCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAcmeExternalAccountBindingCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAcmeExternalAccountBindingCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAcmeExternalAccountBindingCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCertificate struct {
 }
 
@@ -130,6 +350,66 @@ func (m *validateOpImportCertificate) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAcmeAccounts struct {
+}
+
+func (*validateOpListAcmeAccounts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAcmeAccounts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAcmeAccountsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAcmeAccountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAcmeDomainValidations struct {
+}
+
+func (*validateOpListAcmeDomainValidations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAcmeDomainValidations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAcmeDomainValidationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAcmeDomainValidationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAcmeExternalAccountBindings struct {
+}
+
+func (*validateOpListAcmeExternalAccountBindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAcmeExternalAccountBindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAcmeExternalAccountBindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAcmeExternalAccountBindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForCertificate struct {
 }
 
@@ -145,6 +425,26 @@ func (m *validateOpListTagsForCertificate) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +550,46 @@ func (m *validateOpResendValidationEmail) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRevokeAcmeAccount struct {
+}
+
+func (*validateOpRevokeAcmeAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeAcmeAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeAcmeAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeAcmeAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRevokeAcmeExternalAccountBinding struct {
+}
+
+func (*validateOpRevokeAcmeExternalAccountBinding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeAcmeExternalAccountBinding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeAcmeExternalAccountBindingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeAcmeExternalAccountBindingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRevokeCertificate struct {
 }
 
@@ -290,6 +630,86 @@ func (m *validateOpSearchCertificates) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAcmeDomainValidation struct {
+}
+
+func (*validateOpUpdateAcmeDomainValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAcmeDomainValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAcmeDomainValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAcmeDomainValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAcmeEndpoint struct {
+}
+
+func (*validateOpUpdateAcmeEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAcmeEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAcmeEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAcmeEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCertificateOptions struct {
 }
 
@@ -314,8 +734,48 @@ func addOpAddTagsToCertificateValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAddTagsToCertificate{}, middleware.After)
 }
 
+func addOpCreateAcmeDomainValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAcmeDomainValidation{}, middleware.After)
+}
+
+func addOpCreateAcmeEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAcmeEndpoint{}, middleware.After)
+}
+
+func addOpCreateAcmeExternalAccountBindingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAcmeExternalAccountBinding{}, middleware.After)
+}
+
+func addOpDeleteAcmeDomainValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAcmeDomainValidation{}, middleware.After)
+}
+
+func addOpDeleteAcmeEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAcmeEndpoint{}, middleware.After)
+}
+
+func addOpDeleteAcmeExternalAccountBindingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAcmeExternalAccountBinding{}, middleware.After)
+}
+
 func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCertificate{}, middleware.After)
+}
+
+func addOpDescribeAcmeAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAcmeAccount{}, middleware.After)
+}
+
+func addOpDescribeAcmeDomainValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAcmeDomainValidation{}, middleware.After)
+}
+
+func addOpDescribeAcmeEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAcmeEndpoint{}, middleware.After)
+}
+
+func addOpDescribeAcmeExternalAccountBindingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAcmeExternalAccountBinding{}, middleware.After)
 }
 
 func addOpDescribeCertificateValidationMiddleware(stack *middleware.Stack) error {
@@ -326,6 +786,10 @@ func addOpExportCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportCertificate{}, middleware.After)
 }
 
+func addOpGetAcmeExternalAccountBindingCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAcmeExternalAccountBindingCredentials{}, middleware.After)
+}
+
 func addOpGetCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCertificate{}, middleware.After)
 }
@@ -334,8 +798,24 @@ func addOpImportCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportCertificate{}, middleware.After)
 }
 
+func addOpListAcmeAccountsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAcmeAccounts{}, middleware.After)
+}
+
+func addOpListAcmeDomainValidationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAcmeDomainValidations{}, middleware.After)
+}
+
+func addOpListAcmeExternalAccountBindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAcmeExternalAccountBindings{}, middleware.After)
+}
+
 func addOpListTagsForCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForCertificate{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -358,12 +838,36 @@ func addOpResendValidationEmailValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpResendValidationEmail{}, middleware.After)
 }
 
+func addOpRevokeAcmeAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeAcmeAccount{}, middleware.After)
+}
+
+func addOpRevokeAcmeExternalAccountBindingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeAcmeExternalAccountBinding{}, middleware.After)
+}
+
 func addOpRevokeCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeCertificate{}, middleware.After)
 }
 
 func addOpSearchCertificatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchCertificates{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAcmeDomainValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAcmeDomainValidation{}, middleware.After)
+}
+
+func addOpUpdateAcmeEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAcmeEndpoint{}, middleware.After)
 }
 
 func addOpUpdateCertificateOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -511,6 +1015,24 @@ func validateDomainValidationOptionList(v []types.DomainValidationOption) error 
 	}
 }
 
+func validateExpiration(v *types.Expiration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Expiration"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSubjectAlternativeNameFilter(v types.SubjectAlternativeNameFilter) error {
 	if v == nil {
 		return nil
@@ -627,6 +1149,133 @@ func validateOpAddTagsToCertificateInput(v *AddTagsToCertificateInput) error {
 	}
 }
 
+func validateOpCreateAcmeDomainValidationInput(v *CreateAcmeDomainValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAcmeDomainValidationInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.PrevalidationOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrevalidationOptions"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAcmeEndpointInput(v *CreateAcmeEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAcmeEndpointInput"}
+	if len(v.AuthorizationBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationBehavior"))
+	}
+	if v.CertificateAuthority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthority"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateTags != nil {
+		if err := validateTagList(v.CertificateTags); err != nil {
+			invalidParams.AddNested("CertificateTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAcmeExternalAccountBindingInput(v *CreateAcmeExternalAccountBindingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAcmeExternalAccountBindingInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Expiration != nil {
+		if err := validateExpiration(v.Expiration); err != nil {
+			invalidParams.AddNested("Expiration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAcmeDomainValidationInput(v *DeleteAcmeDomainValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAcmeDomainValidationInput"}
+	if v.AcmeDomainValidationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeDomainValidationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAcmeEndpointInput(v *DeleteAcmeEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAcmeEndpointInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAcmeExternalAccountBindingInput(v *DeleteAcmeExternalAccountBindingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAcmeExternalAccountBindingInput"}
+	if v.AcmeExternalAccountBindingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeExternalAccountBindingArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCertificateInput(v *DeleteCertificateInput) error {
 	if v == nil {
 		return nil
@@ -634,6 +1283,69 @@ func validateOpDeleteCertificateInput(v *DeleteCertificateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCertificateInput"}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAcmeAccountInput(v *DescribeAcmeAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAcmeAccountInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if v.AccountUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAcmeDomainValidationInput(v *DescribeAcmeDomainValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAcmeDomainValidationInput"}
+	if v.AcmeDomainValidationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeDomainValidationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAcmeEndpointInput(v *DescribeAcmeEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAcmeEndpointInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAcmeExternalAccountBindingInput(v *DescribeAcmeExternalAccountBindingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAcmeExternalAccountBindingInput"}
+	if v.AcmeExternalAccountBindingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeExternalAccountBindingArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -667,6 +1379,21 @@ func validateOpExportCertificateInput(v *ExportCertificateInput) error {
 	}
 	if v.Passphrase == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Passphrase"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAcmeExternalAccountBindingCredentialsInput(v *GetAcmeExternalAccountBindingCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAcmeExternalAccountBindingCredentialsInput"}
+	if v.AcmeExternalAccountBindingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeExternalAccountBindingArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -713,6 +1440,51 @@ func validateOpImportCertificateInput(v *ImportCertificateInput) error {
 	}
 }
 
+func validateOpListAcmeAccountsInput(v *ListAcmeAccountsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAcmeAccountsInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAcmeDomainValidationsInput(v *ListAcmeDomainValidationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAcmeDomainValidationsInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAcmeExternalAccountBindingsInput(v *ListAcmeExternalAccountBindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAcmeExternalAccountBindingsInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForCertificateInput(v *ListTagsForCertificateInput) error {
 	if v == nil {
 		return nil
@@ -720,6 +1492,21 @@ func validateOpListTagsForCertificateInput(v *ListTagsForCertificateInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForCertificateInput"}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -826,6 +1613,39 @@ func validateOpResendValidationEmailInput(v *ResendValidationEmailInput) error {
 	}
 }
 
+func validateOpRevokeAcmeAccountInput(v *RevokeAcmeAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeAcmeAccountInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if v.AccountUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeAcmeExternalAccountBindingInput(v *RevokeAcmeExternalAccountBindingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeAcmeExternalAccountBindingInput"}
+	if v.AcmeExternalAccountBindingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeExternalAccountBindingArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRevokeCertificateInput(v *RevokeCertificateInput) error {
 	if v == nil {
 		return nil
@@ -853,6 +1673,76 @@ func validateOpSearchCertificatesInput(v *SearchCertificatesInput) error {
 		if err := validateCertificateFilterStatement(v.FilterStatement); err != nil {
 			invalidParams.AddNested("FilterStatement", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAcmeDomainValidationInput(v *UpdateAcmeDomainValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAcmeDomainValidationInput"}
+	if v.AcmeDomainValidationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeDomainValidationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAcmeEndpointInput(v *UpdateAcmeEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAcmeEndpointInput"}
+	if v.AcmeEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

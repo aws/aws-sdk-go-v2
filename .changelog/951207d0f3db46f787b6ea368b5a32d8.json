@@ -1,0 +1,8 @@
+{
+    "id": "951207d0-f3db-46f7-87b6-ea368b5a32d8",
+    "type": "feature",
+    "description": "Amazon Connect - Added CreateAttachedFile and StartContactConversationalAnalyticsJob APIs to import call recordings and run conversational analytics.",
+    "modules": [
+        "service/connect"
+    ]
+}

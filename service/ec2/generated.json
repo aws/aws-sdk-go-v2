@@ -691,6 +691,7 @@
         "api_op_ModifyVpcEncryptionControl.go",
         "api_op_ModifyVpcEndpoint.go",
         "api_op_ModifyVpcEndpointConnectionNotification.go",
+        "api_op_ModifyVpcEndpointPayerResponsibility.go",
         "api_op_ModifyVpcEndpointServiceConfiguration.go",
         "api_op_ModifyVpcEndpointServicePayerResponsibility.go",
         "api_op_ModifyVpcEndpointServicePermissions.go",

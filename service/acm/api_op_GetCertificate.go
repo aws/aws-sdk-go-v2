@@ -5,6 +5,7 @@ package acm
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -45,6 +46,11 @@ type GetCertificateInput struct {
 	CertificateArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (in *GetCertificateInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type GetCertificateOutput struct {

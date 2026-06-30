@@ -64,6 +64,10 @@ type Options struct {
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
 
+	// Provides idempotency tokens values that will be automatically populated into
+	// idempotent API operations.
+	IdempotencyTokenProvider IdempotencyTokenProvider
+
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
 
@@ -103,6 +107,9 @@ type Options struct {
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
+
+	// The service type: ACM or ACM-ACME. Injected via @staticContextParams.
+	ServiceType *string
 
 	// The client tracer provider.
 	TracerProvider tracing.TracerProvider

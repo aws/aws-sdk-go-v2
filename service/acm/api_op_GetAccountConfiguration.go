@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -28,6 +29,11 @@ func (c *Client) GetAccountConfiguration(ctx context.Context, params *GetAccount
 
 type GetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (in *GetAccountConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type GetAccountConfigurationOutput struct {

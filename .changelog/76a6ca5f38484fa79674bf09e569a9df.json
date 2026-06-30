@@ -1,0 +1,8 @@
+{
+    "id": "76a6ca5f-3848-4fa7-9674-bf09e569a9df",
+    "type": "documentation",
+    "description": "Updated threshold configuration documentation.",
+    "modules": [
+        "service/ecs"
+    ]
+}

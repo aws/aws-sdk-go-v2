@@ -146,11 +146,21 @@ type CreateStackInput struct {
 	// Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002 .
 	ClientRequestToken *string
 
+	// The deployment configuration for this stack operation, including the deployment
+	// mode.
+	DeploymentConfig *types.DeploymentConfig
+
 	// Set to true to disable rollback of the stack if stack creation failed. You can
 	// specify either DisableRollback or OnFailure , but not both.
 	//
 	// Default: false
 	DisableRollback *bool
+
+	//  Set to true to disable pre-deployment validations in changeset or stack
+	// operations.
+	//
+	// Default: false
+	DisableValidation *bool
 
 	// Whether to enable termination protection on the specified stack. If a user
 	// attempts to delete a stack with termination protection enabled, the operation

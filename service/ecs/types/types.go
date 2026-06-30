@@ -2675,9 +2675,7 @@ type DeploymentCircuitBreaker struct {
 	ResetOnHealthyTask *bool
 
 	// The threshold configuration that controls when the deployment circuit breaker
-	// triggers. For more information, see [ThresholdConfiguration].
-	//
-	// [ThresholdConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ThresholdConfiguration.html
+	// triggers.
 	ThresholdConfiguration *ThresholdConfiguration
 
 	noSmithyDocumentSerde

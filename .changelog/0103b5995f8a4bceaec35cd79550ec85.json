@@ -1,0 +1,8 @@
+{
+    "id": "0103b599-5f8a-4bce-aec3-5cd79550ec85",
+    "type": "feature",
+    "description": "This release adds AwsMarketplaceSolutions and AwsMarketplaceProducts entity types to the Associate and Disassociate APIs, returns them in GetOpportunity, and adds AwsMarketplaceSolutionArn to ListSolutions ,letting partners link Marketplace listings directly to opportunities.",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

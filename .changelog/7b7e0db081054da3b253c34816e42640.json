@@ -1,0 +1,8 @@
+{
+    "id": "7b7e0db0-8105-4da3-b253-c34816e42640",
+    "type": "feature",
+    "description": "AWS CloudFormation adds a DeploymentConfig parameter to enable Express mode, which completes stack operations as soon as resource configuration is applied. Also adds a DisableValidation parameter to skip pre-deployment validation, which now runs automatically on CreateStack and UpdateStak.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

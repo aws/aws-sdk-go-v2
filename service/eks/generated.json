@@ -11,6 +11,7 @@
         "api_op_AssociateAccessPolicy.go",
         "api_op_AssociateEncryptionConfig.go",
         "api_op_AssociateIdentityProviderConfig.go",
+        "api_op_CancelUpdate.go",
         "api_op_CreateAccessEntry.go",
         "api_op_CreateAddon.go",
         "api_op_CreateCapability.go",

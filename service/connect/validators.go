@@ -670,6 +670,26 @@ func (m *validateOpCreateAgentStatus) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAttachedFile struct {
+}
+
+func (*validateOpCreateAttachedFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAttachedFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAttachedFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAttachedFileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateContactFlow struct {
 }
 
@@ -5610,6 +5630,26 @@ func (m *validateOpStartChatContact) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartContactConversationalAnalyticsJob struct {
+}
+
+func (*validateOpStartContactConversationalAnalyticsJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartContactConversationalAnalyticsJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartContactConversationalAnalyticsJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartContactConversationalAnalyticsJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartContactEvaluation struct {
 }
 
@@ -7482,6 +7522,10 @@ func addOpCreateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgentStatus{}, middleware.After)
 }
 
+func addOpCreateAttachedFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAttachedFile{}, middleware.After)
+}
+
 func addOpCreateContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContactFlow{}, middleware.After)
 }
@@ -8470,6 +8514,10 @@ func addOpStartChatContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartChatContact{}, middleware.After)
 }
 
+func addOpStartContactConversationalAnalyticsJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartContactConversationalAnalyticsJob{}, middleware.After)
+}
+
 func addOpStartContactEvaluationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartContactEvaluation{}, middleware.After)
 }
@@ -8928,6 +8976,45 @@ func validateAllowedExtensionsList(v []types.AllowedExtension) error {
 		if err := validateAllowedExtension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsConfiguration(v *types.AnalyticsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsConfiguration"}
+	if v.LanguageConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageConfiguration"))
+	}
+	if v.RedactionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RedactionConfiguration"))
+	} else if v.RedactionConfiguration != nil {
+		if err := validateRedactionConfiguration(v.RedactionConfiguration); err != nil {
+			invalidParams.AddNested("RedactionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SentimentConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SentimentConfiguration"))
+	} else if v.SentimentConfiguration != nil {
+		if err := validateSentimentConfiguration(v.SentimentConfiguration); err != nil {
+			invalidParams.AddNested("SentimentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SummaryConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SummaryConfiguration"))
+	} else if v.SummaryConfiguration != nil {
+		if err := validateSummaryConfiguration(v.SummaryConfiguration); err != nil {
+			invalidParams.AddNested("SummaryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RulesConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11357,6 +11444,24 @@ func validateRecurrencePattern(v *types.RecurrencePattern) error {
 	}
 }
 
+func validateRedactionConfiguration(v *types.RedactionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedactionConfiguration"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if len(v.Policy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReference(v *types.Reference) error {
 	if v == nil {
 		return nil
@@ -11859,6 +11964,21 @@ func validateSendNotificationActionDefinition(v *types.SendNotificationActionDef
 	}
 }
 
+func validateSentimentConfiguration(v *types.SentimentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SentimentConfiguration"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSignInConfig(v *types.SignInConfig) error {
 	if v == nil {
 		return nil
@@ -11956,6 +12076,21 @@ func validateSubmitAutoEvaluationActionDefinition(v *types.SubmitAutoEvaluationA
 	invalidParams := smithy.InvalidParamsError{Context: "SubmitAutoEvaluationActionDefinition"}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSummaryConfiguration(v *types.SummaryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SummaryConfiguration"}
+	if v.SummaryModes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SummaryModes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13013,6 +13148,30 @@ func validateOpCreateAgentStatusInput(v *CreateAgentStatusInput) error {
 	}
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAttachedFileInput(v *CreateAttachedFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAttachedFileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.FileUseCaseType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileUseCaseType"))
+	}
+	if v.FileSourceUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSourceUri"))
+	}
+	if v.AssociatedResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17771,6 +17930,34 @@ func validateOpStartChatContactInput(v *StartChatContactInput) error {
 	if v.InitialMessage != nil {
 		if err := validateChatMessage(v.InitialMessage); err != nil {
 			invalidParams.AddNested("InitialMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartContactConversationalAnalyticsJobInput(v *StartContactConversationalAnalyticsJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartContactConversationalAnalyticsJobInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.AnalyticsModes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyticsModes"))
+	}
+	if v.AnalyticsConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyticsConfiguration"))
+	} else if v.AnalyticsConfiguration != nil {
+		if err := validateAnalyticsConfiguration(v.AnalyticsConfiguration); err != nil {
+			invalidParams.AddNested("AnalyticsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

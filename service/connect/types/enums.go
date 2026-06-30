@@ -149,6 +149,29 @@ func (AllowedUserAction) Values() []AllowedUserAction {
 	}
 }
 
+type AnalyticsMode string
+
+// Enum values for AnalyticsMode
+const (
+	AnalyticsModePostContact          AnalyticsMode = "PostContact"
+	AnalyticsModeRealTime             AnalyticsMode = "RealTime"
+	AnalyticsModeContactLens          AnalyticsMode = "ContactLens"
+	AnalyticsModeAutomatedInteraction AnalyticsMode = "AutomatedInteraction"
+)
+
+// Values returns all known values for AnalyticsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsMode) Values() []AnalyticsMode {
+	return []AnalyticsMode{
+		"PostContact",
+		"RealTime",
+		"ContactLens",
+		"AutomatedInteraction",
+	}
+}
+
 type AnsweringMachineDetectionStatus string
 
 // Enum values for AnsweringMachineDetectionStatus
@@ -316,6 +339,25 @@ func (AutoEvaluationStatus) Values() []AutoEvaluationStatus {
 		"IN_PROGRESS",
 		"FAILED",
 		"SUCCEEDED",
+	}
+}
+
+type Behavior string
+
+// Enum values for Behavior
+const (
+	BehaviorEnable  Behavior = "Enable"
+	BehaviorDisable Behavior = "Disable"
+)
+
+// Values returns all known values for Behavior. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Behavior) Values() []Behavior {
+	return []Behavior{
+		"Enable",
+		"Disable",
 	}
 }
 
@@ -1680,6 +1722,7 @@ const (
 	FileUseCaseTypeEmailMessageRedacted          FileUseCaseType = "EMAIL_MESSAGE_REDACTED"
 	FileUseCaseTypeEmailMessagePlainTextRedacted FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
 	FileUseCaseTypeAttachment                    FileUseCaseType = "ATTACHMENT"
+	FileUseCaseTypeVoiceRecording                FileUseCaseType = "VOICE_RECORDING"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -1694,6 +1737,7 @@ func (FileUseCaseType) Values() []FileUseCaseType {
 		"EMAIL_MESSAGE_REDACTED",
 		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"ATTACHMENT",
+		"VOICE_RECORDING",
 	}
 }
 
@@ -2233,6 +2277,25 @@ func (LocaleCode) Values() []LocaleCode {
 		"pt_BR",
 		"zh_CN",
 		"zh_TW",
+	}
+}
+
+type MaskMode string
+
+// Enum values for MaskMode
+const (
+	MaskModePii        MaskMode = "PII"
+	MaskModeEntityType MaskMode = "EntityType"
+)
+
+// Values returns all known values for MaskMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaskMode) Values() []MaskMode {
+	return []MaskMode{
+		"PII",
+		"EntityType",
 	}
 }
 
@@ -3312,6 +3375,27 @@ func (PhoneType) Values() []PhoneType {
 	}
 }
 
+type Policy string
+
+// Enum values for Policy
+const (
+	PolicyNone                Policy = "None"
+	PolicyRedactedOnly        Policy = "RedactedOnly"
+	PolicyRedactedAndOriginal Policy = "RedactedAndOriginal"
+)
+
+// Values returns all known values for Policy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Policy) Values() []Policy {
+	return []Policy{
+		"None",
+		"RedactedOnly",
+		"RedactedAndOriginal",
+	}
+}
+
 type PropertyValidationExceptionReason string
 
 // Enum values for PropertyValidationExceptionReason
@@ -4100,6 +4184,27 @@ func (StringComparisonType) Values() []StringComparisonType {
 		"STARTS_WITH",
 		"CONTAINS",
 		"EXACT",
+	}
+}
+
+type SummaryMode string
+
+// Enum values for SummaryMode
+const (
+	SummaryModePostContact          SummaryMode = "PostContact"
+	SummaryModeAutomatedInteraction SummaryMode = "AutomatedInteraction"
+	SummaryModeContactChain         SummaryMode = "ContactChain"
+)
+
+// Values returns all known values for SummaryMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryMode) Values() []SummaryMode {
+	return []SummaryMode{
+		"PostContact",
+		"AutomatedInteraction",
+		"ContactChain",
 	}
 }
 

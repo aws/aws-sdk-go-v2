@@ -1,0 +1,8 @@
+{
+    "id": "bc788761-2077-4a79-9854-d9a4cdd3606f",
+    "type": "feature",
+    "description": "Organization and account level telemetry rule via Observability Admin and CloudWatch pipelines for metrics",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

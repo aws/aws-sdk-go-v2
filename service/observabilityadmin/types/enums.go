@@ -191,6 +191,7 @@ const (
 	LogTypeSecurityFinding LogType = "SECURITY_FINDING_LOGS"
 	LogTypeAccess          LogType = "ACCESS_LOGS"
 	LogTypeConnection      LogType = "CONNECTION_LOGS"
+	LogTypeS3ServerAccess  LogType = "S3_SERVER_ACCESS_LOGS"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -204,6 +205,7 @@ func (LogType) Values() []LogType {
 		"SECURITY_FINDING_LOGS",
 		"ACCESS_LOGS",
 		"CONNECTION_LOGS",
+		"S3_SERVER_ACCESS_LOGS",
 	}
 }
 
@@ -291,6 +293,7 @@ const (
 	ResourceTypeAwsSecurityHubHubv2                 ResourceType = "AWS::SecurityHub::HubV2"
 	ResourceTypeAwsOtelEnrichment                   ResourceType = "AWS::CloudWatch::OTelEnrichment"
 	ResourceTypeAwsMskCluster                       ResourceType = "AWS::MSK::Cluster"
+	ResourceTypeAwsS3Bucket                         ResourceType = "AWS::S3::Bucket"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -318,6 +321,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::SecurityHub::HubV2",
 		"AWS::CloudWatch::OTelEnrichment",
 		"AWS::MSK::Cluster",
+		"AWS::S3::Bucket",
 	}
 }
 
@@ -339,6 +343,27 @@ func (RuleHealth) Values() []RuleHealth {
 		"Healthy",
 		"Unhealthy",
 		"Provisioning",
+	}
+}
+
+type SignalType string
+
+// Enum values for SignalType
+const (
+	// Log signal type. The pipeline processes log records.
+	SignalTypeLog SignalType = "LOG"
+	// Metric signal type. The pipeline processes metric records.
+	SignalTypeMetric SignalType = "METRIC"
+)
+
+// Values returns all known values for SignalType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SignalType) Values() []SignalType {
+	return []SignalType{
+		"LOG",
+		"METRIC",
 	}
 }
 

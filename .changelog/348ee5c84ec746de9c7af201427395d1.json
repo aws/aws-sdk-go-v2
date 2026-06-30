@@ -1,0 +1,8 @@
+{
+    "id": "348ee5c8-4ec7-46de-9c7a-f201427395d1",
+    "type": "feature",
+    "description": "Adds ModifyVpcEndpointPayerResponsibility API, which enables VPC endpoint service owners to modify the billing account for VPC endpoint usage charges at the individual endpoint level",
+    "modules": [
+        "service/ec2"
+    ]
+}

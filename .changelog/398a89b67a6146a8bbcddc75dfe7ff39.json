@@ -1,0 +1,8 @@
+{
+    "id": "398a89b6-7a61-46a8-bbcd-dc75dfe7ff39",
+    "type": "feature",
+    "description": "This release adds support for a new reservations-then-balanced capacity distribution strategy, which first attempts to launch instances into your Capacity Reservations and then balances remaining capacity across healthy Availability Zones.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

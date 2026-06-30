@@ -295,6 +295,12 @@ type AwsOpportunityProject struct {
 // complete picture of the solution being sold.
 type AwsOpportunityRelatedEntities struct {
 
+	// The AWS Marketplace product ARNs associated with this opportunity.
+	AwsMarketplaceProducts []string
+
+	// The AWS Marketplace solution ARNs associated with this opportunity.
+	AwsMarketplaceSolutions []string
+
 	// Specifies the AWS products associated with the opportunity. This field helps
 	// track the specific products that are part of the proposed solution.
 	AwsProducts []string
@@ -2585,6 +2591,16 @@ type RelatedEntityIdentifiers struct {
 	// [ListEntities]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html
 	AwsMarketplaceOffers []string
 
+	// Specifies the AWS Marketplace products to associate with the Opportunity . Each
+	// value is an Amazon Resource Name (ARN) that identifies a product listing in AWS
+	// Marketplace.
+	AwsMarketplaceProducts []string
+
+	// Specifies the AWS Marketplace solutions to associate with the Opportunity . Each
+	// value is an Amazon Resource Name (ARN) that identifies a solution listing in AWS
+	// Marketplace.
+	AwsMarketplaceSolutions []string
+
 	// Enables the association of specific Amazon Web Services products with the
 	// Opportunity . Partners can indicate the relevant Amazon Web Services products
 	// for the Opportunity 's solution and align with the customer's needs. Returns
@@ -2799,6 +2815,10 @@ type SolutionBase struct {
 
 	//  The SolutionBase structure provides essential information about a solution.
 	Arn *string
+
+	// The Amazon Resource Name (ARN) of the AWS Marketplace solution associated with
+	// this partner solution.
+	AwsMarketplaceSolutionArn *string
 
 	noSmithyDocumentSerde
 }

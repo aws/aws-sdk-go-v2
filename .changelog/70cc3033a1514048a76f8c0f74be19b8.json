@@ -1,0 +1,8 @@
+{
+    "id": "70cc3033-a151-4048-a76f-8c0f74be19b8",
+    "type": "feature",
+    "description": "New SDK release for SupportAuthZ.",
+    "modules": [
+        "service/supportauthz"
+    ]
+}

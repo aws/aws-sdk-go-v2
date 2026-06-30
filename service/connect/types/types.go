@@ -436,6 +436,37 @@ type AllowedExtension struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for conversational analytics.
+type AnalyticsConfiguration struct {
+
+	// The language configuration for conversational analytics.
+	//
+	// This member is required.
+	LanguageConfiguration *LanguageConfiguration
+
+	// The redaction configuration for conversational analytics.
+	//
+	// This member is required.
+	RedactionConfiguration *RedactionConfiguration
+
+	// The rules configuration for conversational analytics.
+	//
+	// This member is required.
+	RulesConfiguration *RulesConfiguration
+
+	// The sentiment configuration for conversational analytics.
+	//
+	// This member is required.
+	SentimentConfiguration *SentimentConfiguration
+
+	// The summary configuration for conversational analytics.
+	//
+	// This member is required.
+	SummaryConfiguration *SummaryConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // This API is in preview release for Connect Customer and is subject to change.
 //
 // Information about associations that are successfully created: DataSetId ,
@@ -6512,6 +6543,15 @@ type KinesisVideoStreamConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The language configuration for conversational analytics.
+type LanguageConfiguration struct {
+
+	// The language locale setting for conversational analytics.
+	LanguageLocale *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information of an Amazon Lex bot.
 type LexBot struct {
 
@@ -8843,6 +8883,33 @@ type RecurrencePattern struct {
 	noSmithyDocumentSerde
 }
 
+// The redaction configuration for conversational analytics.
+type RedactionConfiguration struct {
+
+	// Controls whether redaction is applied to the analytics output. Valid values:
+	// Enable | Disable .
+	//
+	// This member is required.
+	Behavior Behavior
+
+	// The redaction output policy that determines which versions of the transcript
+	// are stored. Valid values: None | RedactedOnly | RedactedAndOriginal .
+	//
+	// This member is required.
+	Policy Policy
+
+	// The list of PII entity types to redact from the transcript (for example, NAME ,
+	// ADDRESS , CREDIT_DEBIT_NUMBER ).
+	Entities []string
+
+	// The masking mode that determines how redacted content is replaced in the
+	// output. Valid values: PII (replaces with the literal string [PII]) | EntityType
+	// (replaces with the entity type name, for example [NAME]).
+	MaskMode MaskMode
+
+	noSmithyDocumentSerde
+}
+
 // Well-formed data on a contact, used by agents to complete a contact request.
 // You can have up to 4,096 UTF-8 bytes across all references for a contact.
 type Reference struct {
@@ -9496,6 +9563,17 @@ type RuleAction struct {
 	noSmithyDocumentSerde
 }
 
+// The rules configuration for conversational analytics. Controls whether Contact
+// Lens rules are evaluated against the analytics output.
+type RulesConfiguration struct {
+
+	// Controls whether Contact Lens rules are evaluated for the contact. Valid
+	// values: Enable | Disable .
+	Behavior Behavior
+
+	noSmithyDocumentSerde
+}
+
 // A list of ActionTypes associated with a rule.
 type RuleSummary struct {
 
@@ -10023,6 +10101,18 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The sentiment configuration for conversational analytics.
+type SentimentConfiguration struct {
+
+	// Controls whether sentiment analysis is applied to the analytics output. Valid
+	// values: Enable | Disable .
+	//
+	// This member is required.
+	Behavior Behavior
+
+	noSmithyDocumentSerde
+}
+
 // The reason for the exception.
 //
 // The following types satisfy this interface:
@@ -10210,6 +10300,18 @@ type SuccessfulRequest struct {
 	// Request identifier provided in the API call in the ContactDataRequest to create
 	// a contact.
 	RequestIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary configuration for conversational analytics.
+type SummaryConfiguration struct {
+
+	// The summary modes that determine what type of summarization is generated. Valid
+	// values: PostContact | AutomatedInteraction | ContactChain .
+	//
+	// This member is required.
+	SummaryModes []SummaryMode
 
 	noSmithyDocumentSerde
 }

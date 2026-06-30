@@ -513,6 +513,14 @@ type InstanceMetadata struct {
 	// instance.
 	OwnerAccountId *string
 
+	// The primary Region where the IAM Identity Center instance was originally
+	// enabled. The primary Region cannot be removed.
+	PrimaryRegion *string
+
+	// The list of Regions enabled in the IAM Identity Center instance, including
+	// Regions with ACTIVE, ADDING, or REMOVING status.
+	Regions []RegionMetadata
+
 	// The current status of this Identity Center instance.
 	Status InstanceStatus
 

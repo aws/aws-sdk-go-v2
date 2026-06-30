@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAccessEntry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessEntry(context.Background(), nil, func(o *Options) {
@@ -858,6 +870,18 @@ func TestUpdateSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 	_, err := svc.AssociateIdentityProviderConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateIdentityProviderConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
