@@ -71,7 +71,7 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	// initial arn look up middleware
 	err = stack.Initialize.Insert(&s3shared.ARNLookup{
 		GetARNValue: options.Accessor.GetBucketFromInput,
-	}, "legacyEndpointContextSetter", middleware.After)
+	}, "RegisterServiceMetadata", middleware.After)
 	if err != nil {
 		return err
 	}
