@@ -1,0 +1,3 @@
+GET /contact/associated/__InstanceId__?contactId=__ContactId__&maxResults=1&nextToken=__NextToken__
+
+

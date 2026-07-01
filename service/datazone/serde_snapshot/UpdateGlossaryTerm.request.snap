@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/glossary-terms/__Identifier__
+
+Content-Type: application/json
+
+{"glossaryIdentifier":"__GlossaryIdentifier__","longDescription":"__LongDescription__","name":"__Name__","shortDescription":"__ShortDescription__","status":"ENABLED","termRelations":{"classifies":["__Member__","__Member__"],"isA":["__Member__","__Member__"]}}

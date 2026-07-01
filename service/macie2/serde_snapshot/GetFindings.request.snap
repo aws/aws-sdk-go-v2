@@ -1,0 +1,5 @@
+POST /findings/describe
+
+Content-Type: application/json
+
+{"findingIds":["__Member__","__Member__"],"sortCriteria":{"attributeName":"__AttributeName__","orderBy":"ASC"}}

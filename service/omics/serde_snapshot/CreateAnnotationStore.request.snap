@@ -1,0 +1,5 @@
+POST /annotationStore
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","reference":{"referenceArn":"__ReferenceItemMemberReferenceArn__"},"sseConfig":{"keyArn":"__KeyArn__","type":"KMS"},"storeFormat":"GFF","storeOptions":{"tsvStoreOptions":{"annotationType":"GENERIC","formatToHeader":{"key0":"__Value__"},"schema":[{"key0":"LONG"},{"key0":"LONG"}]}},"tags":{"key0":"__Value__"},"versionName":"__VersionName__"}

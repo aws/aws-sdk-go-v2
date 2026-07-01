@@ -1,0 +1,5 @@
+PATCH /registries/__RegistryId__/records/__RecordId__/status
+
+Content-Type: application/json
+
+{"status":"DRAFT","statusReason":"__StatusReason__"}

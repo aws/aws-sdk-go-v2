@@ -1,0 +1,5 @@
+PUT /v2/email/contact-lists/__ContactListName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Topics":[{"DefaultSubscriptionStatus":"OPT_IN","Description":"__Description__","DisplayName":"__DisplayName__","TopicName":"__TopicName__"},{"DefaultSubscriptionStatus":"OPT_IN","Description":"__Description__","DisplayName":"__DisplayName__","TopicName":"__TopicName__"}]}

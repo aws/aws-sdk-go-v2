@@ -1,0 +1,5 @@
+POST /2018-10-31/layers/__LayerName__/versions/1/policy?RevisionId=__RevisionId__
+
+Content-Type: application/json
+
+{"Action":"__Action__","OrganizationId":"__OrganizationId__","Principal":"__Principal__","StatementId":"__StatementId__"}

@@ -1,0 +1,5 @@
+PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs/__WorkflowRunId__/sessions/__SessionId__/acts/__ActId__
+
+Content-Type: application/json
+
+{"error":{"message":"__Message__","type":"__Type__"},"status":"RUNNING"}

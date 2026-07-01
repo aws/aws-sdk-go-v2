@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DeleteLocation
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡lLocationNamep__LocationName__

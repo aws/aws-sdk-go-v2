@@ -1,0 +1,5 @@
+POST /CreateIndex
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Tags":{"key0":"__Value__"}}

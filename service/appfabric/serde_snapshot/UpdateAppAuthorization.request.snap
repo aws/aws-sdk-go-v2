@@ -1,0 +1,5 @@
+PATCH /appbundles/__AppBundleIdentifier__/appauthorizations/__AppAuthorizationIdentifier__
+
+Content-Type: application/json
+
+{"credential":{"oauth2Credential":{"clientId":"__ClientId__","clientSecret":"__ClientSecret__"}},"tenant":{"tenantDisplayName":"__TenantDisplayName__","tenantIdentifier":"__TenantIdentifier__"}}

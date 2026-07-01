@@ -1,0 +1,5 @@
+POST /datasets/__DatasetId__/examples/delete
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","exampleIds":["__Member__","__Member__"]}

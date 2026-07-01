@@ -1,0 +1,7 @@
+PUT /__AccountId__/vaults/__VaultName__/multipart-uploads/__UploadId__
+
+Content-Range: __Range__
+Content-Type: application/octet-stream
+X-Amz-Glacier-Version: 2012-06-01
+X-Amz-Sha256-Tree-Hash: __Checksum__
+

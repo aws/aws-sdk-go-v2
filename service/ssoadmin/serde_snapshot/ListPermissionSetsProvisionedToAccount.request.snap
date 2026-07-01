@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.ListPermissionSetsProvisionedToAccount
+
+{"AccountId":"__AccountId__","InstanceArn":"__InstanceArn__","MaxResults":1,"NextToken":"__NextToken__","ProvisioningStatus":"LATEST_PERMISSION_SET_PROVISIONED"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.UpdateAssessmentTarget
+
+{"assessmentTargetArn":"__AssessmentTargetArn__","assessmentTargetName":"__AssessmentTargetName__","resourceGroupArn":"__ResourceGroupArn__"}

@@ -1,0 +1,5 @@
+POST /TraceSummaries
+
+Content-Type: application/json
+
+{"EndTime":946684800,"FilterExpression":"__FilterExpression__","NextToken":"__NextToken__","Sampling":true,"SamplingStrategy":{"Name":"PartialScan","Value":1},"StartTime":946684800,"TimeRangeType":"TraceId"}

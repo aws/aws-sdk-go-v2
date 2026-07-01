@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateTrainingPlan
+
+{"SpareInstanceCountPerUltraServer":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrainingPlanName":"__TrainingPlanName__","TrainingPlanOfferingId":"__TrainingPlanOfferingId__"}

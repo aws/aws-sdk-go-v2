@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/indices/__IndexId__/groups?dataSourceId=__DataSourceId__&maxResults=1&nextToken=__NextToken__&updatedEarlierThan=2000-01-01T00%3A00%3A00Z
+
+

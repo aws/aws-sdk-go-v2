@@ -1,0 +1,4 @@
+GET /api/v1/me/root?limit=1&marker=__Marker__
+
+Authentication: __AuthenticationToken__
+

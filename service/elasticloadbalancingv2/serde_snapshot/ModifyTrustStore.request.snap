@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyTrustStore&CaCertificatesBundleS3Bucket=__CaCertificatesBundleS3Bucket__&CaCertificatesBundleS3Key=__CaCertificatesBundleS3Key__&CaCertificatesBundleS3ObjectVersion=__CaCertificatesBundleS3ObjectVersion__&TrustStoreArn=__TrustStoreArn__&Version=2015-12-01

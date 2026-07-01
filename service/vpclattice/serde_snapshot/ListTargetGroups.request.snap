@@ -1,0 +1,3 @@
+GET /targetgroups?maxResults=1&nextToken=__NextToken__&targetGroupType=IP&vpcIdentifier=__VpcIdentifier__
+
+

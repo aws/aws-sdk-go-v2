@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/RollbackAutomationEvent
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢kclientTokeno__ClientToken__geventIdk__EventId__

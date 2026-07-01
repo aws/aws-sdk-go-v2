@@ -1,0 +1,5 @@
+POST /update-group
+
+Content-Type: application/json
+
+{"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","Group":"__Group__","GroupName":"__GroupName__","Owner":"__Owner__"}

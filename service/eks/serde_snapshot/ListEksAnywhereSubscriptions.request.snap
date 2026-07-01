@@ -1,0 +1,3 @@
+GET /eks-anywhere-subscriptions?includeStatus=CREATING&includeStatus=CREATING&maxResults=1&nextToken=__NextToken__
+
+

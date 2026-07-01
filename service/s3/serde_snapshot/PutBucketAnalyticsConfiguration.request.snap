@@ -1,0 +1,6 @@
+PUT /?analytics=&id=__Id__
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+
+<AnalyticsConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Filter><Prefix>__AnalyticsFilterMemberPrefix__</Prefix></Filter><Id>__Id__</Id><StorageClassAnalysis><DataExport><Destination><S3BucketDestination><Bucket>__Bucket__</Bucket><BucketAccountId>__BucketAccountId__</BucketAccountId><Format>CSV</Format><Prefix>__Prefix__</Prefix></S3BucketDestination></Destination><OutputSchemaVersion>V_1</OutputSchemaVersion></DataExport></StorageClassAnalysis></AnalyticsConfiguration>

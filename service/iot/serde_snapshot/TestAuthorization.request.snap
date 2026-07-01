@@ -1,0 +1,5 @@
+POST /test-authorization?clientId=__ClientId__
+
+Content-Type: application/json
+
+{"authInfos":[{"actionType":"PUBLISH","resources":["__Member__","__Member__"]},{"actionType":"PUBLISH","resources":["__Member__","__Member__"]}],"cognitoIdentityPoolId":"__CognitoIdentityPoolId__","policyNamesToAdd":["__Member__","__Member__"],"policyNamesToSkip":["__Member__","__Member__"],"principal":"__Principal__"}

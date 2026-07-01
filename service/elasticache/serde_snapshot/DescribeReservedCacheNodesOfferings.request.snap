@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeReservedCacheNodesOfferings&CacheNodeType=__CacheNodeType__&Duration=__Duration__&Marker=__Marker__&MaxRecords=1&OfferingType=__OfferingType__&ProductDescription=__ProductDescription__&ReservedCacheNodesOfferingId=__ReservedCacheNodesOfferingId__&Version=2015-02-02

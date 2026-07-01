@@ -1,0 +1,5 @@
+POST /CreateApplication
+
+Content-Type: application/json
+
+{"defaultKmsKeyId":"__DefaultKmsKeyId__","idcInstanceArn":"__IdcInstanceArn__","roleArn":"__RoleArn__","tags":{"key0":"__Value__"}}

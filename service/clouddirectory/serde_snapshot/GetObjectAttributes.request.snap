@@ -1,0 +1,7 @@
+POST /amazonclouddirectory/2017-01-11/object/attributes/get
+
+Content-Type: application/json
+X-Amz-Consistency-Level: SERIALIZABLE
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"AttributeNames":["__Member__","__Member__"],"ObjectReference":{"Selector":"__Selector__"},"SchemaFacet":{"FacetName":"__FacetName__","SchemaArn":"__SchemaArn__"}}

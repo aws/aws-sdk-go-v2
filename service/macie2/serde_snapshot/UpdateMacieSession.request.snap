@@ -1,0 +1,5 @@
+PATCH /macie
+
+Content-Type: application/json
+
+{"findingPublishingFrequency":"FIFTEEN_MINUTES","status":"PAUSED"}

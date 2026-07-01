@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/insights
+
+Content-Type: application/json
+
+{"filter":{"categories":["UPGRADE_READINESS","UPGRADE_READINESS"],"kubernetesVersions":["__Member__","__Member__"],"statuses":["PASSING","PASSING"]},"maxResults":1,"nextToken":"__NextToken__"}

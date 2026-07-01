@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVpnTunnelCertificate&DryRun=true&Version=2016-11-15&VpnConnectionId=__VpnConnectionId__&VpnTunnelOutsideIpAddress=__VpnTunnelOutsideIpAddress__

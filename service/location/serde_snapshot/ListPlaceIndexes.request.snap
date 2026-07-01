@@ -1,0 +1,5 @@
+POST /places/v0/list-indexes
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

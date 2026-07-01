@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetCostAndUsageWithResources
+
+{"BillingViewArn":"__BillingViewArn__","Filter":{"And":[{},{}],"CostCategories":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Dimensions":{"Key":"AZ","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}],"Tags":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]}},"Granularity":"DAILY","GroupBy":[{"Key":"__Key__","Type":"DIMENSION"},{"Key":"__Key__","Type":"DIMENSION"}],"Metrics":["__Member__","__Member__"],"NextPageToken":"__NextPageToken__","TimePeriod":{"End":"__End__","Start":"__Start__"}}

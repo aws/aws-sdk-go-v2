@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.StartQueryExecution
+
+{"ClientRequestToken":"__ClientRequestToken__","EngineConfiguration":{"AdditionalConfigs":{"key0":"__Value__"},"Classifications":[{"Name":"__Name__","Properties":{"key0":"__Value__"}},{"Name":"__Name__","Properties":{"key0":"__Value__"}}],"CoordinatorDpuSize":1,"DefaultExecutorDpuSize":1,"MaxConcurrentDpus":1,"SparkProperties":{"key0":"__Value__"}},"ExecutionParameters":["__Member__","__Member__"],"QueryExecutionContext":{"Catalog":"__Catalog__","Database":"__Database__"},"QueryString":"__QueryString__","ResultConfiguration":{"AclConfiguration":{"S3AclOption":"BUCKET_OWNER_FULL_CONTROL"},"EncryptionConfiguration":{"EncryptionOption":"SSE_S3","KmsKey":"__KmsKey__"},"ExpectedBucketOwner":"__ExpectedBucketOwner__","OutputLocation":"__OutputLocation__"},"ResultReuseConfiguration":{"ResultReuseByAgeConfiguration":{"Enabled":true,"MaxAgeInMinutes":1}},"WorkGroup":"__WorkGroup__"}

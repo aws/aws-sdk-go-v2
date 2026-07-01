@@ -1,0 +1,5 @@
+POST /v1/routerNetworkInterface
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"public":{"allowRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}},"name":"__Name__","regionName":"__RegionName__","tags":{"key0":"__Value__"}}

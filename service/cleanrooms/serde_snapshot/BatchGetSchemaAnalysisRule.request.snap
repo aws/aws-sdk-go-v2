@@ -1,0 +1,5 @@
+POST /collaborations/__CollaborationIdentifier__/batch-schema-analysis-rule
+
+Content-Type: application/json
+
+{"schemaAnalysisRuleRequests":[{"name":"__Name__","type":"AGGREGATION"},{"name":"__Name__","type":"AGGREGATION"}]}

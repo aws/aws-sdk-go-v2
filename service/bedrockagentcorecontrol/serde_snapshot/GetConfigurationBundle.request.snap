@@ -1,0 +1,3 @@
+GET /configuration-bundles/__BundleId__?branchName=__BranchName__
+
+

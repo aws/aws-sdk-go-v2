@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53AutoNaming_v20170314.CreateService
+
+{"CreatorRequestId":"__CreatorRequestId__","Description":"__Description__","DnsConfig":{"DnsRecords":[{"TTL":1,"Type":"SRV"},{"TTL":1,"Type":"SRV"}],"NamespaceId":"__NamespaceId__","RoutingPolicy":"MULTIVALUE"},"HealthCheckConfig":{"FailureThreshold":1,"ResourcePath":"__ResourcePath__","Type":"HTTP"},"HealthCheckCustomConfig":{"FailureThreshold":1},"Name":"__Name__","NamespaceId":"__NamespaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"HTTP"}

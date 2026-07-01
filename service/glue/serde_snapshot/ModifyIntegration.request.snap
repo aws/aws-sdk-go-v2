@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ModifyIntegration
+
+{"DataFilter":"__DataFilter__","Description":"__Description__","IntegrationConfig":{"ContinuousSync":true,"RefreshInterval":"__RefreshInterval__","SourceProperties":{"key0":"__Value__"}},"IntegrationIdentifier":"__IntegrationIdentifier__","IntegrationName":"__IntegrationName__"}

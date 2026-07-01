@@ -1,0 +1,5 @@
+POST /codereviews
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","RepositoryAssociationArn":"__RepositoryAssociationArn__","Type":{"AnalysisTypes":["Security","Security"],"RepositoryAnalysis":{"RepositoryHead":{"BranchName":"__BranchName__"},"SourceCodeType":{"BranchDiff":{"DestinationBranchName":"__DestinationBranchName__","SourceBranchName":"__SourceBranchName__"},"CommitDiff":{"DestinationCommit":"__DestinationCommit__","MergeBaseCommit":"__MergeBaseCommit__","SourceCommit":"__SourceCommit__"},"RepositoryHead":{"BranchName":"__BranchName__"},"RequestMetadata":{"EventInfo":{"Name":"__Name__","State":"__State__"},"Requester":"__Requester__","RequestId":"__RequestId__","VendorName":"GitHub"},"S3BucketRepository":{"Details":{"BucketName":"__BucketName__","CodeArtifacts":{"BuildArtifactsObjectKey":"__BuildArtifactsObjectKey__","SourceCodeArtifactsObjectKey":"__SourceCodeArtifactsObjectKey__"}},"Name":"__Name__"}}}}}

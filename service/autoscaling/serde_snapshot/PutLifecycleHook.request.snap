@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutLifecycleHook&AutoScalingGroupName=__AutoScalingGroupName__&DefaultResult=__DefaultResult__&HeartbeatTimeout=1&LifecycleHookName=__LifecycleHookName__&LifecycleTransition=__LifecycleTransition__&NotificationMetadata=__NotificationMetadata__&NotificationTargetARN=__NotificationTargetARN__&RoleARN=__RoleARN__&Version=2011-01-01

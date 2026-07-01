@@ -1,0 +1,5 @@
+PUT /sourceLocation/__SourceLocationName__/vodSource/__VodSourceName__
+
+Content-Type: application/json
+
+{"HttpPackageConfigurations":[{"Path":"__Path__","SourceGroup":"__SourceGroup__","Type":"DASH"},{"Path":"__Path__","SourceGroup":"__SourceGroup__","Type":"DASH"}]}

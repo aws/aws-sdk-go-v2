@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.UpdateBillScenario
+
+{"costCategoryGroupSharingPreferenceArn":"__CostCategoryGroupSharingPreferenceArn__","expiresAt":946684800,"groupSharingPreference":"OPEN","identifier":"__Identifier__","name":"__Name__"}

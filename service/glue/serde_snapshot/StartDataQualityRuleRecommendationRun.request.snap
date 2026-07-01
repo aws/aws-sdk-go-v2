@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.StartDataQualityRuleRecommendationRun
+
+{"ClientToken":"__ClientToken__","CreatedRulesetName":"__CreatedRulesetName__","DataQualitySecurityConfiguration":"__DataQualitySecurityConfiguration__","DataSource":{"DataQualityGlueTable":{"AdditionalOptions":{"key0":"__Value__"},"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","DatabaseName":"__DatabaseName__","PreProcessingQuery":"__PreProcessingQuery__","TableName":"__TableName__"},"GlueTable":{"AdditionalOptions":{"key0":"__Value__"},"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}},"NumberOfWorkers":1,"Role":"__Role__","Timeout":1}

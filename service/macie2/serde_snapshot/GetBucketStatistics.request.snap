@@ -1,0 +1,5 @@
+POST /datasources/s3/statistics
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

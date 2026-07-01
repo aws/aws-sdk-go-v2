@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListAttachedUserPolicies&Marker=__Marker__&MaxItems=1&PathPrefix=__PathPrefix__&UserName=__UserName__&Version=2010-05-08

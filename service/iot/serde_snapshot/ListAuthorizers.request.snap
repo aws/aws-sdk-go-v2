@@ -1,0 +1,3 @@
+GET /authorizers?isAscendingOrder=true&marker=__Marker__&pageSize=1&status=ACTIVE
+
+

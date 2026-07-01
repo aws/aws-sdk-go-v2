@@ -1,0 +1,5 @@
+POST /tag-resource
+
+Content-Type: application/json
+
+{"resourceArn":"__ResourceArn__","tags":{"key0":"__Value__"}}

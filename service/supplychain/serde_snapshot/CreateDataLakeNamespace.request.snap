@@ -1,0 +1,5 @@
+PUT /api/datalake/instance/__InstanceId__/namespaces/__Name__
+
+Content-Type: application/json
+
+{"description":"__Description__","tags":{"key0":"__Value__"}}

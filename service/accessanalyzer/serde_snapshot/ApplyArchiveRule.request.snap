@@ -1,0 +1,5 @@
+PUT /archive-rule
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__","clientToken":"__ClientToken__","ruleName":"__RuleName__"}

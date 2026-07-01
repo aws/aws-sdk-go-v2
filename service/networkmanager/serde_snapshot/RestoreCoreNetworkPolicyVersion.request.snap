@@ -1,0 +1,3 @@
+POST /core-networks/__CoreNetworkId__/core-network-policy-versions/1/restore
+
+

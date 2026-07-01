@@ -1,0 +1,4 @@
+GET /api/v1/activities?activityTypes=__ActivityTypes__&endTime=2000-01-01T00%3A00%3A00Z&includeIndirectActivities=true&limit=1&marker=__Marker__&organizationId=__OrganizationId__&resourceId=__ResourceId__&startTime=2000-01-01T00%3A00%3A00Z&userId=__UserId__
+
+Authentication: __AuthenticationToken__
+

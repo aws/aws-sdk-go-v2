@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CopySnapshot&KmsKeyId=__KmsKeyId__&SourceSnapshotName=__SourceSnapshotName__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&TargetBucket=__TargetBucket__&TargetSnapshotName=__TargetSnapshotName__&Version=2015-02-02

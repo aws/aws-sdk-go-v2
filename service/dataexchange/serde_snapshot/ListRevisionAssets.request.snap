@@ -1,0 +1,3 @@
+GET /v1/data-sets/__DataSetId__/revisions/__RevisionId__/assets?maxResults=1&nextToken=__NextToken__
+
+

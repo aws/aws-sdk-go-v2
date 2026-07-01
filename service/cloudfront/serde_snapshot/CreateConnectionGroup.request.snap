@@ -1,0 +1,5 @@
+POST /2020-05-31/connection-group
+
+Content-Type: application/xml
+
+<CreateConnectionGroupRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><AnycastIpListId>__AnycastIpListId__</AnycastIpListId><Enabled>true</Enabled><Ipv6Enabled>true</Ipv6Enabled><Name>__Name__</Name><Tags><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags></CreateConnectionGroupRequest>

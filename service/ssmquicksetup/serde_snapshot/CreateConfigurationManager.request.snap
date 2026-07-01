@@ -1,0 +1,5 @@
+POST /configurationManager
+
+Content-Type: application/json
+
+{"ConfigurationDefinitions":[{"LocalDeploymentAdministrationRoleArn":"__LocalDeploymentAdministrationRoleArn__","LocalDeploymentExecutionRoleName":"__LocalDeploymentExecutionRoleName__","Parameters":{"key0":"__Value__"},"Type":"__Type__","TypeVersion":"__TypeVersion__"},{"LocalDeploymentAdministrationRoleArn":"__LocalDeploymentAdministrationRoleArn__","LocalDeploymentExecutionRoleName":"__LocalDeploymentExecutionRoleName__","Parameters":{"key0":"__Value__"},"Type":"__Type__","TypeVersion":"__TypeVersion__"}],"Description":"__Description__","Name":"__Name__","Tags":{"key0":"__Value__"}}

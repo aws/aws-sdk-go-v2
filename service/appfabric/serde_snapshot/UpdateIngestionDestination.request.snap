@@ -1,0 +1,5 @@
+PATCH /appbundles/__AppBundleIdentifier__/ingestions/__IngestionIdentifier__/ingestiondestinations/__IngestionDestinationIdentifier__
+
+Content-Type: application/json
+
+{"destinationConfiguration":{"auditLog":{"destination":{"s3Bucket":{"bucketName":"__BucketName__","prefix":"__Prefix__"}}}}}

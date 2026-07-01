@@ -1,0 +1,5 @@
+POST /GetSecurityRequirementPack
+
+Content-Type: application/json
+
+{"packId":"__PackId__"}

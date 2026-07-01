@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.RegisterActivityType
+
+{"defaultTaskHeartbeatTimeout":"__DefaultTaskHeartbeatTimeout__","defaultTaskList":{"name":"__Name__"},"defaultTaskPriority":"__DefaultTaskPriority__","defaultTaskScheduleToCloseTimeout":"__DefaultTaskScheduleToCloseTimeout__","defaultTaskScheduleToStartTimeout":"__DefaultTaskScheduleToStartTimeout__","defaultTaskStartToCloseTimeout":"__DefaultTaskStartToCloseTimeout__","description":"__Description__","domain":"__Domain__","name":"__Name__","version":"__Version__"}

@@ -1,0 +1,3 @@
+DELETE /lenses/__LensAlias__/shares/__ShareId__?ClientRequestToken=__ClientRequestToken__
+
+

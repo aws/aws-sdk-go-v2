@@ -1,0 +1,5 @@
+POST /reject-resource-grouping-recommendations
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","entries":[{"groupingRecommendationId":"__GroupingRecommendationId__","rejectionReason":"DistinctBusinessPurpose"},{"groupingRecommendationId":"__GroupingRecommendationId__","rejectionReason":"DistinctBusinessPurpose"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ListLabels
+
+{"Equipment":"__Equipment__","FaultCode":"__FaultCode__","IntervalEndTime":946684800,"IntervalStartTime":946684800,"LabelGroupName":"__LabelGroupName__","MaxResults":1,"NextToken":"__NextToken__"}

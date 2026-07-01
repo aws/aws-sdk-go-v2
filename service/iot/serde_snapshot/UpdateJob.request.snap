@@ -1,0 +1,5 @@
+PATCH /jobs/__JobId__?namespaceId=__NamespaceId__
+
+Content-Type: application/json
+
+{"abortConfig":{"criteriaList":[{"action":"CANCEL","failureType":"FAILED","minNumberOfExecutedThings":1,"thresholdPercentage":1},{"action":"CANCEL","failureType":"FAILED","minNumberOfExecutedThings":1,"thresholdPercentage":1}]},"description":"__Description__","jobExecutionsRetryConfig":{"criteriaList":[{"failureType":"FAILED","numberOfRetries":1},{"failureType":"FAILED","numberOfRetries":1}]},"jobExecutionsRolloutConfig":{"exponentialRate":{"baseRatePerMinute":1,"incrementFactor":1,"rateIncreaseCriteria":{"numberOfNotifiedThings":1,"numberOfSucceededThings":1}},"maximumPerMinute":1},"presignedUrlConfig":{"expiresInSec":1,"roleArn":"__RoleArn__"},"timeoutConfig":{"inProgressTimeoutInMinutes":1}}

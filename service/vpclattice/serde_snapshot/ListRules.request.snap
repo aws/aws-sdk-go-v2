@@ -1,0 +1,3 @@
+GET /services/__ServiceIdentifier__/listeners/__ListenerIdentifier__/rules?maxResults=1&nextToken=__NextToken__
+
+

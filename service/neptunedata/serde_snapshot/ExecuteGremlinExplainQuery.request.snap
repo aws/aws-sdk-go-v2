@@ -1,0 +1,5 @@
+POST /gremlin/explain
+
+Content-Type: application/json
+
+{"gremlin":"__GremlinQuery__"}

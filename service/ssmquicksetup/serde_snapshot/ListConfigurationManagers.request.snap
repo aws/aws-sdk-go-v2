@@ -1,0 +1,5 @@
+POST /listConfigurationManagers
+
+Content-Type: application/json
+
+{"Filters":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"MaxItems":1,"StartingToken":"__StartingToken__"}

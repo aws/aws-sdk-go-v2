@@ -1,0 +1,5 @@
+POST /spending-limit
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","deviceArn":"__DeviceArn__","spendingLimit":"__SpendingLimit__","tags":{"key0":"__Value__"},"timePeriod":{"endAt":946684800,"startAt":946684800}}

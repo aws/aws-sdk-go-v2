@@ -1,0 +1,5 @@
+POST /bots/__BotId__/replicas/__ReplicaRegion__/botaliases
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

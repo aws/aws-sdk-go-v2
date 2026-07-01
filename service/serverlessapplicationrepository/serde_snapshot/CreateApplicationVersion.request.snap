@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/versions/__SemanticVersion__
+
+Content-Type: application/json
+
+{"sourceCodeArchiveUrl":"__SourceCodeArchiveUrl__","sourceCodeUrl":"__SourceCodeUrl__","templateBody":"__TemplateBody__","templateUrl":"__TemplateUrl__"}

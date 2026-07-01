@@ -1,0 +1,3 @@
+POST /v2/domains/__DomainIdentifier__/metadata-generation-runs/__Identifier__/cancel
+
+

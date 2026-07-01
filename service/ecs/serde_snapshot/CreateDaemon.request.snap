@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.CreateDaemon
+
+{"capacityProviderArns":["__Member__","__Member__"],"clientToken":"__ClientToken__","clusterArn":"__ClusterArn__","daemonName":"__DaemonName__","daemonTaskDefinitionArn":"__DaemonTaskDefinitionArn__","deploymentConfiguration":{"alarms":{"alarmNames":["__Member__","__Member__"],"enable":true},"bakeTimeInMinutes":1,"drainPercent":1},"enableECSManagedTags":true,"enableExecuteCommand":true,"propagateTags":"DAEMON","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

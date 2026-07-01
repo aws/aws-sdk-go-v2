@@ -1,0 +1,5 @@
+POST /views/__InstanceId__/__ViewId__
+
+Content-Type: application/json
+
+{"Content":{"Actions":["__Member__","__Member__"],"Template":"__Template__"},"Status":"PUBLISHED"}

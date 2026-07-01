@@ -1,0 +1,5 @@
+PUT /cissession/start
+
+Content-Type: application/json
+
+{"message":{"sessionToken":"__SessionToken__"},"scanJobId":"__ScanJobId__"}

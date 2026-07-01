@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.StartDocumentAnalysis
+
+{"AdaptersConfig":{"Adapters":[{"AdapterId":"__AdapterId__","Pages":["__Member__","__Member__"],"Version":"__Version__"},{"AdapterId":"__AdapterId__","Pages":["__Member__","__Member__"],"Version":"__Version__"}]},"ClientRequestToken":"__ClientRequestToken__","DocumentLocation":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"FeatureTypes":["TABLES","TABLES"],"JobTag":"__JobTag__","KMSKeyId":"__KMSKeyId__","NotificationChannel":{"RoleArn":"__RoleArn__","SNSTopicArn":"__SNSTopicArn__"},"OutputConfig":{"S3Bucket":"__S3Bucket__","S3Prefix":"__S3Prefix__"},"QueriesConfig":{"Queries":[{"Alias":"__Alias__","Pages":["__Member__","__Member__"],"Text":"__Text__"},{"Alias":"__Alias__","Pages":["__Member__","__Member__"],"Text":"__Text__"}]}}

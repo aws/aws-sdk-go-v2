@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateCloudAutonomousVmCluster
+
+{"autonomousDataStorageSizeInTBs":1,"clientToken":"__ClientToken__","cloudExadataInfrastructureId":"__CloudExadataInfrastructureId__","cpuCoreCountPerNode":1,"dbServers":["__Member__","__Member__"],"description":"__Description__","displayName":"__DisplayName__","isMtlsEnabledVmCluster":true,"licenseModel":"BRING_YOUR_OWN_LICENSE","maintenanceWindow":{"customActionTimeoutInMins":1,"daysOfWeek":[{"name":"MONDAY"},{"name":"MONDAY"}],"hoursOfDay":[1,1],"isCustomActionTimeoutEnabled":true,"leadTimeInWeeks":1,"months":[{"name":"JANUARY"},{"name":"JANUARY"}],"patchingMode":"ROLLING","preference":"NO_PREFERENCE","skipRu":true,"weeksOfMonth":[1,1]},"memoryPerOracleComputeUnitInGBs":1,"odbNetworkId":"__OdbNetworkId__","scanListenerPortNonTls":1,"scanListenerPortTls":1,"tags":{"key0":"__Value__"},"timeZone":"__TimeZone__","totalContainerDatabases":1}

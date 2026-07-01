@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.ExecuteTransaction
+
+{"ClientRequestToken":"__ClientRequestToken__","ReturnConsumedCapacity":"INDEXES","TransactStatements":[{"Parameters":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ReturnValuesOnConditionCheckFailure":"ALL_OLD","Statement":"__Statement__"},{"Parameters":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ReturnValuesOnConditionCheckFailure":"ALL_OLD","Statement":"__Statement__"}]}

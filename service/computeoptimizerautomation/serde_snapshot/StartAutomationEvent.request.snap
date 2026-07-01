@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/StartAutomationEvent
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢kclientTokeno__ClientToken__srecommendedActionIdw__RecommendedActionId__

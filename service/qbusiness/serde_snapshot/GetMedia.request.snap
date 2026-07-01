@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/conversations/__ConversationId__/messages/__MessageId__/media/__MediaId__
+
+

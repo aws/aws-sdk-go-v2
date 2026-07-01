@@ -1,0 +1,5 @@
+POST /update-ms-teams-channel-configuration
+
+Content-Type: application/json
+
+{"ChannelId":"__ChannelId__","ChannelName":"__ChannelName__","ChatConfigurationArn":"__ChatConfigurationArn__","GuardrailPolicyArns":["__Member__","__Member__"],"IamRoleArn":"__IamRoleArn__","LoggingLevel":"__LoggingLevel__","SnsTopicArns":["__Member__","__Member__"],"UserAuthorizationRequired":true}

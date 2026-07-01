@@ -1,0 +1,5 @@
+PUT /accounts/__AccountId__/retention-settings
+
+Content-Type: application/json
+
+{"RetentionSettings":{"ConversationRetentionSettings":{"RetentionDays":1},"RoomRetentionSettings":{"RetentionDays":1}}}

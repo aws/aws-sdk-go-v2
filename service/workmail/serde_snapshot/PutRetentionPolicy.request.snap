@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.PutRetentionPolicy
+
+{"Description":"__Description__","FolderConfigurations":[{"Action":"NONE","Name":"INBOX","Period":1},{"Action":"NONE","Name":"INBOX","Period":1}],"Id":"__Id__","Name":"__Name__","OrganizationId":"__OrganizationId__"}

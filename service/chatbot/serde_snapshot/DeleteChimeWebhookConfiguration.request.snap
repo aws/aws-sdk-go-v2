@@ -1,0 +1,5 @@
+POST /delete-chime-webhook-configuration
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__"}

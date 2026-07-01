@@ -1,0 +1,3 @@
+GET /v1/compliance-inquiry/listQueries?complianceInquiryId=__ComplianceInquiryId__&maxResults=1&nextToken=__NextToken__
+
+

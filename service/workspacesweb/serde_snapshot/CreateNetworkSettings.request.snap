@@ -1,0 +1,5 @@
+POST /networkSettings
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"vpcId":"__VpcId__"}

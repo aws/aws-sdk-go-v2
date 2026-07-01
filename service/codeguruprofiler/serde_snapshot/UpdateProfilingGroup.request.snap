@@ -1,0 +1,5 @@
+PUT /profilingGroups/__ProfilingGroupName__
+
+Content-Type: application/json
+
+{"agentOrchestrationConfig":{"profilingEnabled":true}}

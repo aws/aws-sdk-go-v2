@@ -1,0 +1,5 @@
+POST /applications
+
+Content-Type: application/json
+
+{"author":"__Author__","description":"__Description__","homePageUrl":"__HomePageUrl__","labels":["__Member__","__Member__"],"licenseBody":"__LicenseBody__","licenseUrl":"__LicenseUrl__","name":"__Name__","readmeBody":"__ReadmeBody__","readmeUrl":"__ReadmeUrl__","semanticVersion":"__SemanticVersion__","sourceCodeArchiveUrl":"__SourceCodeArchiveUrl__","sourceCodeUrl":"__SourceCodeUrl__","spdxLicenseId":"__SpdxLicenseId__","templateBody":"__TemplateBody__","templateUrl":"__TemplateUrl__"}

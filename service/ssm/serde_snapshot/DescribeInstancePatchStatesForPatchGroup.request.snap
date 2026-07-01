@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeInstancePatchStatesForPatchGroup
+
+{"Filters":[{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","PatchGroup":"__PatchGroup__"}

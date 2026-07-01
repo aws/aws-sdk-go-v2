@@ -1,0 +1,5 @@
+POST /effective-policies?thingName=__ThingName__
+
+Content-Type: application/json
+
+{"cognitoIdentityPoolId":"__CognitoIdentityPoolId__","principal":"__Principal__"}

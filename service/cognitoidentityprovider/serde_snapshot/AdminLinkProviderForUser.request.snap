@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AdminLinkProviderForUser
+
+{"DestinationUser":{"ProviderAttributeName":"__ProviderAttributeName__","ProviderAttributeValue":"__ProviderAttributeValue__","ProviderName":"__ProviderName__"},"SourceUser":{"ProviderAttributeName":"__ProviderAttributeName__","ProviderAttributeValue":"__ProviderAttributeValue__","ProviderName":"__ProviderName__"},"UserPoolId":"__UserPoolId__"}

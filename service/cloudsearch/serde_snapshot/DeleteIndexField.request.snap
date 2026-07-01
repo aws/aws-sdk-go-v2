@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIndexField&DomainName=__DomainName__&IndexFieldName=__IndexFieldName__&Version=2013-01-01

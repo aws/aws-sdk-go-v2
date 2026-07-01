@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.DescribeCopyProductStatus
+
+{"AcceptLanguage":"__AcceptLanguage__","CopyProductToken":"__CopyProductToken__"}

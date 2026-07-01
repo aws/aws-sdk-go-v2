@@ -1,0 +1,8 @@
+POST /service/GraniteServiceVersion20100801/operation/DescribeAnomalyDetectors
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+¦iNextTokenm__NextToken__jMaxResultsiNamespacem__Namespace__jMetricNamen__MetricName__jDimensions‚¢dNameh__Name__eValuei__Value__¢dNameh__Name__eValuei__Value__tAnomalyDetectorTypes‚mSINGLE_METRICmSINGLE_METRIC

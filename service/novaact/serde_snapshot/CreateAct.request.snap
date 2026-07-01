@@ -1,0 +1,5 @@
+PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs/__WorkflowRunId__/sessions/__SessionId__/acts
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","task":"__Task__","toolSpecs":[{"description":"__Description__","inputSchema":{"json":},"name":"__Name__"},{"description":"__Description__","inputSchema":{"json":},"name":"__Name__"}]}

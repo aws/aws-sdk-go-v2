@@ -1,0 +1,5 @@
+POST /thing-types/__ThingTypeName__/deprecate
+
+Content-Type: application/json
+
+{"undoDeprecate":true}

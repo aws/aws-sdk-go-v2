@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.CreateSnapshot
+
+{"ClusterName":"__ClusterName__","KmsKeyId":"__KmsKeyId__","SnapshotName":"__SnapshotName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

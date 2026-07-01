@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: BackupOnPremises_v20210101.ImportHypervisorConfiguration
+
+{"Host":"__Host__","KmsKeyArn":"__KmsKeyArn__","Name":"__Name__","Password":"__Password__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Username":"__Username__"}

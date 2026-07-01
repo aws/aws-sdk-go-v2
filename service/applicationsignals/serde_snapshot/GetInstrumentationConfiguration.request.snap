@@ -1,0 +1,5 @@
+POST /get-instrumentation-configuration
+
+Content-Type: application/json
+
+{"Environment":"__Environment__","InstrumentationType":"BREAKPOINT","LocationIdentifier":{"CodeLocation":{"ClassName":"__ClassName__","CodeUnit":"__CodeUnit__","FilePath":"__FilePath__","Language":"Java","LineNumber":1,"MethodName":"__MethodName__"}},"Service":"__Service__","SignalType":"SNAPSHOT"}

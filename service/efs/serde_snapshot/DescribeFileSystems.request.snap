@@ -1,0 +1,3 @@
+GET /2015-02-01/file-systems?CreationToken=__CreationToken__&FileSystemId=__FileSystemId__&Marker=__Marker__&MaxItems=1
+
+

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ConfirmSubscription&AuthenticateOnUnsubscribe=__AuthenticateOnUnsubscribe__&Token=__Token__&TopicArn=__TopicArn__&Version=2010-03-31

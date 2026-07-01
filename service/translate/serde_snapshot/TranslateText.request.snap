@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShineFrontendService_20170701.TranslateText
+
+{"Settings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCode":"__TargetLanguageCode__","TerminologyNames":["__Member__","__Member__"],"Text":"__Text__"}

@@ -1,0 +1,5 @@
+POST /list-landingzone-operations
+
+Content-Type: application/json
+
+{"filter":{"statuses":["SUCCEEDED","SUCCEEDED"],"types":["DELETE","DELETE"]},"maxResults":1,"nextToken":"__NextToken__"}

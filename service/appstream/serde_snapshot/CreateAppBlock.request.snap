@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateAppBlock
+
+{"Description":"__Description__","DisplayName":"__DisplayName__","Name":"__Name__","PackagingType":"CUSTOM","PostSetupScriptDetails":{"ExecutableParameters":"__ExecutableParameters__","ExecutablePath":"__ExecutablePath__","ScriptS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"TimeoutInSeconds":1},"SetupScriptDetails":{"ExecutableParameters":"__ExecutableParameters__","ExecutablePath":"__ExecutablePath__","ScriptS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"TimeoutInSeconds":1},"SourceS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"Tags":{"key0":"__Value__"}}

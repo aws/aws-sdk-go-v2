@@ -1,0 +1,5 @@
+POST /datasources/s3
+
+Content-Type: application/json
+
+{"criteria":{"key0":{"eq":["__Member__","__Member__"],"gt":1,"gte":1,"lt":1,"lte":1,"neq":["__Member__","__Member__"],"prefix":"__Prefix__"}},"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"__AttributeName__","orderBy":"ASC"}}

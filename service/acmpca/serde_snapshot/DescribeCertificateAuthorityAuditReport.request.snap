@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ACMPrivateCA.DescribeCertificateAuthorityAuditReport
+
+{"AuditReportId":"__AuditReportId__","CertificateAuthorityArn":"__CertificateAuthorityArn__"}

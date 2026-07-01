@@ -1,0 +1,5 @@
+POST /2022-01-01/osis/validatePipeline
+
+Content-Type: application/json
+
+{"PipelineConfigurationBody":"__PipelineConfigurationBody__"}

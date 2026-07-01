@@ -1,0 +1,5 @@
+POST /2015-01-01/es/vpcEndpoints/update
+
+Content-Type: application/json
+
+{"VpcEndpointId":"__VpcEndpointId__","VpcOptions":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}

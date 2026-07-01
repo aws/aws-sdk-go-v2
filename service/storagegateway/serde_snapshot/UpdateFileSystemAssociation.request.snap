@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.UpdateFileSystemAssociation
+
+{"AuditDestinationARN":"__AuditDestinationARN__","CacheAttributes":{"CacheStaleTimeoutInSeconds":1},"FileSystemAssociationARN":"__FileSystemAssociationARN__","Password":"__Password__","UserName":"__UserName__"}

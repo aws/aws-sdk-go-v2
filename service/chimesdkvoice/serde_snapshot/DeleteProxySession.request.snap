@@ -1,0 +1,3 @@
+DELETE /voice-connectors/__VoiceConnectorId__/proxy-sessions/__ProxySessionId__
+
+

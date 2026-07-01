@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.CreateRuleSet
+
+{"ClientToken":"__ClientToken__","Rules":[{"Actions":[{"Drop":{}},{"Drop":{}}],"Conditions":[{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}},{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}}],"Name":"__Name__","Unless":[{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}},{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}}]},{"Actions":[{"Drop":{}},{"Drop":{}}],"Conditions":[{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}},{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}}],"Name":"__Name__","Unless":[{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}},{"BooleanExpression":{"Evaluate":{"Attribute":"READ_RECEIPT_REQUESTED"},"Operator":"IS_TRUE"}}]}],"RuleSetName":"__RuleSetName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

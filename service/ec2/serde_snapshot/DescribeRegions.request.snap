@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeRegions&AllRegions=true&DryRun=true&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&RegionName.1=__Member__&RegionName.2=__Member__&Version=2016-11-15

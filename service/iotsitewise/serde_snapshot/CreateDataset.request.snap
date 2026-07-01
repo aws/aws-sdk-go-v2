@@ -1,0 +1,5 @@
+POST /datasets
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","datasetDescription":"__DatasetDescription__","datasetId":"__DatasetId__","datasetName":"__DatasetName__","datasetSource":{"sourceDetail":{"kendra":{"knowledgeBaseArn":"__KnowledgeBaseArn__","roleArn":"__RoleArn__"}},"sourceFormat":"KNOWLEDGE_BASE","sourceType":"KENDRA"},"tags":{"key0":"__Value__"}}

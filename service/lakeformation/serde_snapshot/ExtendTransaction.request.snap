@@ -1,0 +1,5 @@
+POST /ExtendTransaction
+
+Content-Type: application/json
+
+{"TransactionId":"__TransactionId__"}

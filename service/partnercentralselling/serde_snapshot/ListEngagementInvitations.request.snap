@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListEngagementInvitations
+
+{"Catalog":"__Catalog__","EngagementIdentifier":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","ParticipantType":"SENDER","PayloadType":["OpportunityInvitation","OpportunityInvitation"],"SenderAwsAccountId":["__Member__","__Member__"],"Sort":{"SortBy":"InvitationDate","SortOrder":"ASCENDING"},"Status":["ACCEPTED","ACCEPTED"]}

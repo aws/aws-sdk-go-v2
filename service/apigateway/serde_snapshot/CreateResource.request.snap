@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/resources/__ParentId__
+
+Accept: application/json
+Content-Type: application/json
+
+{"pathPart":"__PathPart__"}

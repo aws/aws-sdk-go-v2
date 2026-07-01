@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteTransitGatewayClientVpnAttachment&DryRun=true&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&Version=2016-11-15

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_Regional_20161128.UpdateByteMatchSet
+
+{"ByteMatchSetId":"__ByteMatchSetId__","ChangeToken":"__ChangeToken__","Updates":[{"Action":"INSERT","ByteMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"PositionalConstraint":"EXACTLY","TargetString":"YmxvYg==","TextTransformation":"NONE"}},{"Action":"INSERT","ByteMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"PositionalConstraint":"EXACTLY","TargetString":"YmxvYg==","TextTransformation":"NONE"}}]}

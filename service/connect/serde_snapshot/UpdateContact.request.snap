@@ -1,0 +1,5 @@
+POST /contacts/__InstanceId__/__ContactId__
+
+Content-Type: application/json
+
+{"CustomerEndpoint":{"Address":"__Address__","Type":"TELEPHONE_NUMBER"},"Description":"__Description__","Name":"__Name__","QueueInfo":{"Id":"__Id__"},"References":{"key0":{"Arn":"__Arn__","Status":"AVAILABLE","StatusReason":"__StatusReason__","Type":"URL","Value":"__Value__"}},"SegmentAttributes":{"key0":{"ValueArn":"__ValueArn__","ValueInteger":1,"ValueList":[{},{}],"ValueMap":{"key0":{}},"ValueString":"__ValueString__"}},"SystemEndpoint":{"Address":"__Address__","Type":"TELEPHONE_NUMBER"},"UserInfo":{"UserId":"__UserId__"}}

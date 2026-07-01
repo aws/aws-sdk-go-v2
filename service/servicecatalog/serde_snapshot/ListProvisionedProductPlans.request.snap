@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListProvisionedProductPlans
+
+{"AcceptLanguage":"__AcceptLanguage__","AccessLevelFilter":{"Key":"Account","Value":"__Value__"},"PageSize":1,"PageToken":"__PageToken__","ProvisionProductId":"__ProvisionProductId__"}

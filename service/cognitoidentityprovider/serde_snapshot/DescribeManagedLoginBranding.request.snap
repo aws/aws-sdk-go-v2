@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.DescribeManagedLoginBranding
+
+{"ManagedLoginBrandingId":"__ManagedLoginBrandingId__","ReturnMergedResources":true,"UserPoolId":"__UserPoolId__"}

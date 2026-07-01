@@ -1,0 +1,5 @@
+PATCH /resources/__Arn__/tags
+
+Content-Type: application/json
+
+{"Keys":["__Member__","__Member__"]}

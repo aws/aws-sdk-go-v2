@@ -1,0 +1,6 @@
+POST /channels/__ChannelArn__/moderators
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"ChannelModeratorArn":"__ChannelModeratorArn__"}

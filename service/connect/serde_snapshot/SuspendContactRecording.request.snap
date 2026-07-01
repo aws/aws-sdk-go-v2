@@ -1,0 +1,5 @@
+POST /contact/suspend-recording
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","ContactRecordingType":"AGENT","InitialContactId":"__InitialContactId__","InstanceId":"__InstanceId__"}

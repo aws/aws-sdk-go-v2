@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateReplicationSubnetGroup
+
+{"ReplicationSubnetGroupDescription":"__ReplicationSubnetGroupDescription__","ReplicationSubnetGroupIdentifier":"__ReplicationSubnetGroupIdentifier__","SubnetIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+PUT /authorizer/__AuthorizerName__
+
+Content-Type: application/json
+
+{"authorizerFunctionArn":"__AuthorizerFunctionArn__","enableCachingForHttp":true,"status":"ACTIVE","tokenKeyName":"__TokenKeyName__","tokenSigningPublicKeys":{"key0":"__Value__"}}

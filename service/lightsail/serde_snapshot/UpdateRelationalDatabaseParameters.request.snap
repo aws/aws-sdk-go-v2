@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.UpdateRelationalDatabaseParameters
+
+{"parameters":[{"allowedValues":"__AllowedValues__","applyMethod":"__ApplyMethod__","applyType":"__ApplyType__","dataType":"__DataType__","description":"__Description__","isModifiable":true,"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"allowedValues":"__AllowedValues__","applyMethod":"__ApplyMethod__","applyType":"__ApplyType__","dataType":"__DataType__","description":"__Description__","isModifiable":true,"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}],"relationalDatabaseName":"__RelationalDatabaseName__"}

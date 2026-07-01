@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.UpdateFHIRDatastore
+
+{"AnalyticsConfiguration":{"Status":"ENABLED"},"DatastoreId":"__DatastoreId__","DatastoreName":"__DatastoreName__","IdentityProviderConfiguration":{"AuthorizationStrategy":"SMART_ON_FHIR_V1","FineGrainedAuthorizationEnabled":true,"IdpLambdaArn":"__IdpLambdaArn__","Metadata":"__Metadata__"},"NlpConfiguration":{"Status":"ENABLED"},"ProfileConfiguration":{"DefaultProfiles":["__Member__","__Member__"]}}

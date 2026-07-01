@@ -1,0 +1,3 @@
+GET /recommendations?maxResults=1&nextToken=__NextToken__&status=PENDING
+
+

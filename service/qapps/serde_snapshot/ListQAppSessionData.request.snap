@@ -1,0 +1,4 @@
+GET /runtime.listQAppSessionData?sessionId=__SessionId__
+
+Instance-Id: __InstanceId__
+

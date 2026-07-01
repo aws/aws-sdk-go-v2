@@ -1,0 +1,3 @@
+GET /appbundles/__AppBundleIdentifier__/appauthorizations?maxResults=1&nextToken=__NextToken__
+
+

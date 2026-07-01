@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateEndpointWeightsAndCapacities
+
+{"DesiredWeightsAndCapacities":[{"DesiredInstanceCount":1,"DesiredWeight":1,"ServerlessUpdateConfig":{"MaxConcurrency":1,"ProvisionedConcurrency":1},"VariantName":"__VariantName__"},{"DesiredInstanceCount":1,"DesiredWeight":1,"ServerlessUpdateConfig":{"MaxConcurrency":1,"ProvisionedConcurrency":1},"VariantName":"__VariantName__"}],"EndpointName":"__EndpointName__"}

@@ -1,0 +1,5 @@
+POST /vulnerabilities/search
+
+Content-Type: application/json
+
+{"filterCriteria":{"vulnerabilityIds":["__Member__","__Member__"]},"nextToken":"__NextToken__"}

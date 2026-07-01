@@ -1,0 +1,5 @@
+POST /configurationPolicyAssociation/list
+
+Content-Type: application/json
+
+{"Filters":{"AssociationStatus":"PENDING","AssociationType":"INHERITED","ConfigurationPolicyId":"__ConfigurationPolicyId__"},"MaxResults":1,"NextToken":"__NextToken__"}

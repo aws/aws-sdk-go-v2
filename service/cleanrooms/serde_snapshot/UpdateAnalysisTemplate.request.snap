@@ -1,0 +1,5 @@
+PATCH /memberships/__MembershipIdentifier__/analysistemplates/__AnalysisTemplateIdentifier__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

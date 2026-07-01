@@ -1,0 +1,3 @@
+DELETE /bots/__BotId__/botAliases/__BotAliasId__/botLocales/__LocaleId__/sessions/__SessionId__
+
+

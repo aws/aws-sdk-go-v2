@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.PutDataCatalogEncryptionSettings
+
+{"CatalogId":"__CatalogId__","DataCatalogEncryptionSettings":{"ConnectionPasswordEncryption":{"AwsKmsKeyId":"__AwsKmsKeyId__","ReturnConnectionPasswordEncrypted":true},"EncryptionAtRest":{"CatalogEncryptionMode":"DISABLED","CatalogEncryptionServiceRole":"__CatalogEncryptionServiceRole__","SseAwsKmsKeyId":"__SseAwsKmsKeyId__"}}}

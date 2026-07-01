@@ -1,0 +1,3 @@
+GET /2015-01-01/es/domain/__DomainName__/listVpcEndpointAccess?nextToken=__NextToken__
+
+

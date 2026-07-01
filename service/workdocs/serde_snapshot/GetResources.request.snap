@@ -1,0 +1,4 @@
+GET /api/v1/resources?collectionType=SHARED_WITH_ME&limit=1&marker=__Marker__&userId=__UserId__
+
+Authentication: __AuthenticationToken__
+

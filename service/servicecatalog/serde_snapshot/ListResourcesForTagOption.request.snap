@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListResourcesForTagOption
+
+{"PageSize":1,"PageToken":"__PageToken__","ResourceType":"__ResourceType__","TagOptionId":"__TagOptionId__"}

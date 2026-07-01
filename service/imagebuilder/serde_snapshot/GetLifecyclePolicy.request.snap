@@ -1,0 +1,3 @@
+GET /GetLifecyclePolicy?lifecyclePolicyArn=__LifecyclePolicyArn__
+
+

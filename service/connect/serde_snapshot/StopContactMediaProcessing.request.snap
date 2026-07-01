@@ -1,0 +1,5 @@
+POST /contact/stop-contact-media-processing
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","InstanceId":"__InstanceId__"}

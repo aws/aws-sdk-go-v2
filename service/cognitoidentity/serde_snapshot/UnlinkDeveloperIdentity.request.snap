@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityService.UnlinkDeveloperIdentity
+
+{"DeveloperProviderName":"__DeveloperProviderName__","DeveloperUserIdentifier":"__DeveloperUserIdentifier__","IdentityId":"__IdentityId__","IdentityPoolId":"__IdentityPoolId__"}

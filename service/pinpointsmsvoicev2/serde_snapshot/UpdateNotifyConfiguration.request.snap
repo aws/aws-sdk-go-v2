@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdateNotifyConfiguration
+
+{"DefaultTemplateId":"__DefaultTemplateId__","DeletionProtectionEnabled":true,"EnabledChannels":["SMS","SMS"],"EnabledCountries":["__Member__","__Member__"],"NotifyConfigurationId":"__NotifyConfigurationId__","PoolId":"__PoolId__"}

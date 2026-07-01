@@ -1,0 +1,3 @@
+GET /GetDistributionConfiguration?distributionConfigurationArn=__DistributionConfigurationArn__
+
+

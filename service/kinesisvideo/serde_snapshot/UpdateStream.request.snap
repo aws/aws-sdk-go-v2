@@ -1,0 +1,5 @@
+POST /updateStream
+
+Content-Type: application/json
+
+{"CurrentVersion":"__CurrentVersion__","DeviceName":"__DeviceName__","MediaType":"__MediaType__","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

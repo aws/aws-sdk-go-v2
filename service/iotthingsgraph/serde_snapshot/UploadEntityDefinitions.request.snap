@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.UploadEntityDefinitions
+
+{"deprecateExistingEntities":true,"document":{"language":"GRAPHQL","text":"__Text__"},"syncWithPublicNamespace":true}

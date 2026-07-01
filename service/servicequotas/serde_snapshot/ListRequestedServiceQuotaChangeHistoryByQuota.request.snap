@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota
+
+{"MaxResults":1,"NextToken":"__NextToken__","QuotaCode":"__QuotaCode__","QuotaRequestedAtLevel":"ACCOUNT","ServiceCode":"__ServiceCode__","Status":"PENDING"}

@@ -1,0 +1,5 @@
+POST /ListManagedViews
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","ServicePrincipal":"__ServicePrincipal__"}

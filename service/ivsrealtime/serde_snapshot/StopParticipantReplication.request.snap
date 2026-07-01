@@ -1,0 +1,5 @@
+POST /StopParticipantReplication
+
+Content-Type: application/json
+
+{"destinationStageArn":"__DestinationStageArn__","participantId":"__ParticipantId__","sourceStageArn":"__SourceStageArn__"}

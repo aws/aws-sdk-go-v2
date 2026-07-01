@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSBudgetServiceGateway.DescribeBudgetActionsForBudget
+
+{"AccountId":"__AccountId__","BudgetName":"__BudgetName__","MaxResults":1,"NextToken":"__NextToken__"}

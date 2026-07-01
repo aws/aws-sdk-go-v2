@@ -1,0 +1,5 @@
+POST /channels/__ChannelArn__?operation=channel-flow-callback
+
+Content-Type: application/json
+
+{"CallbackId":"__CallbackId__","ChannelMessage":{"Content":"__Content__","ContentType":"__ContentType__","MessageAttributes":{"key0":{"StringValues":["__Member__","__Member__"]}},"MessageId":"__MessageId__","Metadata":"__Metadata__","PushNotification":{"Body":"__Body__","Title":"__Title__","Type":"DEFAULT"},"SubChannelId":"__SubChannelId__"},"DeleteResource":true}

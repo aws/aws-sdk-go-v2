@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.CreateUser
+
+{"DisplayName":"__DisplayName__","FirstName":"__FirstName__","HiddenFromGlobalAddressList":true,"IdentityProviderUserId":"__IdentityProviderUserId__","LastName":"__LastName__","Name":"__Name__","OrganizationId":"__OrganizationId__","Password":"__Password__","Role":"USER"}

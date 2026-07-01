@@ -1,0 +1,3 @@
+GET /media-insights-pipeline-configurations?max-results=1&next-token=__NextToken__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.AssociateBudgetWithResource
+
+{"BudgetName":"__BudgetName__","ResourceId":"__ResourceId__"}

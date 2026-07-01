@@ -1,0 +1,5 @@
+POST /2022-09-19/emailcontacts
+
+Content-Type: application/json
+
+{"emailAddress":"__EmailAddress__","name":"__Name__","tags":{"key0":"__Value__"}}

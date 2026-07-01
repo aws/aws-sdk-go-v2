@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/transit-gateway-connect-peer-associations
+
+Content-Type: application/json
+
+{"DeviceId":"__DeviceId__","LinkId":"__LinkId__","TransitGatewayConnectPeerArn":"__TransitGatewayConnectPeerArn__"}

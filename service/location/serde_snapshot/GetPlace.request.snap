@@ -1,0 +1,3 @@
+GET /places/v0/indexes/__IndexName__/places/__PlaceId__?key=__Key__&language=__Language__
+
+

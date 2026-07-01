@@ -1,0 +1,6 @@
+DELETE /__Key__?uploadId=__UploadId__&x-id=AbortMultipartUpload
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-If-Match-Initiated-Time: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Request-Payer: requester
+

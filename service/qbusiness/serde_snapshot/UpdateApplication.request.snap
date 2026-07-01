@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__
+
+Content-Type: application/json
+
+{"attachmentsConfiguration":{"attachmentsControlMode":"ENABLED"},"autoSubscriptionConfiguration":{"autoSubscribe":"ENABLED","defaultSubscriptionType":"Q_LITE"},"description":"__Description__","displayName":"__DisplayName__","identityCenterInstanceArn":"__IdentityCenterInstanceArn__","personalizationConfiguration":{"personalizationControlMode":"ENABLED"},"qAppsConfiguration":{"qAppsControlMode":"ENABLED"},"roleArn":"__RoleArn__"}

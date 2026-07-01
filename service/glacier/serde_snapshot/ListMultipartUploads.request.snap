@@ -1,0 +1,4 @@
+GET /__AccountId__/vaults/__VaultName__/multipart-uploads?limit=1&marker=__Marker__
+
+X-Amz-Glacier-Version: 2012-06-01
+

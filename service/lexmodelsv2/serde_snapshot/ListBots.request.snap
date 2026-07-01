@@ -1,0 +1,5 @@
+POST /bots
+
+Content-Type: application/json
+
+{"filters":[{"name":"BotName","operator":"CO","values":["__Member__","__Member__"]},{"name":"BotName","operator":"CO","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"BotName","order":"Ascending"}}

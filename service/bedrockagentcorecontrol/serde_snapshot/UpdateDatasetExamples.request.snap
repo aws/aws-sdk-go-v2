@@ -1,0 +1,5 @@
+POST /datasets/__DatasetId__/examples/update
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","examples":[,]}

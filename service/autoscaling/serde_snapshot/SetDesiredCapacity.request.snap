@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetDesiredCapacity&AutoScalingGroupName=__AutoScalingGroupName__&DesiredCapacity=1&HonorCooldown=true&Version=2011-01-01

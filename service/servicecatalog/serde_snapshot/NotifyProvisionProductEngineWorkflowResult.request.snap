@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.NotifyProvisionProductEngineWorkflowResult
+
+{"FailureReason":"__FailureReason__","IdempotencyToken":"__IdempotencyToken__","Outputs":[{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"},{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"}],"RecordId":"__RecordId__","ResourceIdentifier":{"UniqueTag":{"Key":"__Key__","Value":"__Value__"}},"Status":"SUCCEEDED","WorkflowToken":"__WorkflowToken__"}

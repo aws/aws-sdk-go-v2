@@ -1,0 +1,5 @@
+POST /ota-task-configurations
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","PushConfig":{"AbortConfig":{"AbortConfigCriteriaList":[{"Action":"CANCEL","FailureType":"FAILED","MinNumberOfExecutedThings":1,"ThresholdPercentage":1},{"Action":"CANCEL","FailureType":"FAILED","MinNumberOfExecutedThings":1,"ThresholdPercentage":1}]},"RolloutConfig":{"ExponentialRolloutRate":{"BaseRatePerMinute":1,"IncrementFactor":1,"RateIncreaseCriteria":{"numberOfNotifiedThings":1,"numberOfSucceededThings":1}},"MaximumPerMinute":1},"TimeoutConfig":{"InProgressTimeoutInMinutes":1}}}

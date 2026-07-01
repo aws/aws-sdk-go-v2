@@ -1,0 +1,5 @@
+PUT /v2/email/account/dedicated-ips/warmup
+
+Content-Type: application/json
+
+{"AutoWarmupEnabled":true}

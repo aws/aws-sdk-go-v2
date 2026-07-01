@@ -1,0 +1,3 @@
+GET /security-profiles-permissions/__InstanceId__/__SecurityProfileId__?maxResults=1&nextToken=__NextToken__
+
+

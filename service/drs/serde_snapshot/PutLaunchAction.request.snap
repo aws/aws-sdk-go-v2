@@ -1,0 +1,5 @@
+POST /PutLaunchAction
+
+Content-Type: application/json
+
+{"actionCode":"__ActionCode__","actionId":"__ActionId__","actionVersion":"__ActionVersion__","active":true,"category":"MONITORING","description":"__Description__","name":"__Name__","optional":true,"order":1,"parameters":{"key0":{"type":"SSM_STORE","value":"__Value__"}},"resourceId":"__ResourceId__"}

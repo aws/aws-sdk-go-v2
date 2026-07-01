@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/searchSessions?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"searchExpression":{"filters":[{"field":"NAME","operator":"EQUALS","value":"__Value__"},{"field":"NAME","operator":"EQUALS","value":"__Value__"}]}}

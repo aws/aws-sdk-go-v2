@@ -1,0 +1,3 @@
+GET /collaborations/__CollaborationIdentifier__/privacybudgets?accessBudgetResourceArn=__AccessBudgetResourceArn__&maxResults=1&nextToken=__NextToken__&privacyBudgetType=DIFFERENTIAL_PRIVACY
+
+

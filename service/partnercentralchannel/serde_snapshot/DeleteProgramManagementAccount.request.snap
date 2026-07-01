@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.DeleteProgramManagementAccount
+
+{"catalog":"__Catalog__","clientToken":"__ClientToken__","identifier":"__Identifier__"}

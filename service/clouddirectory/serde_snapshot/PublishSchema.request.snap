@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/schema/publish
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DevelopmentSchemaArn__
+
+{"MinorVersion":"__MinorVersion__","Name":"__Name__","Version":"__Version__"}

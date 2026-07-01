@@ -1,0 +1,5 @@
+POST /v2/snap-to-roads?key=__Key__
+
+Content-Type: application/json
+
+{"SnappedGeometryFormat":"FlexiblePolyline","SnapRadius":1,"TracePoints":[{"Heading":1,"Position":[1,1],"Speed":1,"Timestamp":"__Timestamp__"},{"Heading":1,"Position":[1,1],"Speed":1,"Timestamp":"__Timestamp__"}],"TravelMode":"Car","TravelModeOptions":{"Truck":{"GrossWeight":1,"HazardousCargos":["Combustible","Combustible"],"Height":1,"Length":1,"Trailer":{"TrailerCount":1},"TunnelRestrictionCode":"__TunnelRestrictionCode__","Width":1}}}

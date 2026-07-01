@@ -1,0 +1,5 @@
+POST /v1/describejobs
+
+Content-Type: application/json
+
+{"jobs":["__Member__","__Member__"]}

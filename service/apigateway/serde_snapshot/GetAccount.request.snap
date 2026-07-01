@@ -1,0 +1,4 @@
+GET /account
+
+Accept: application/json
+

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeregisterDBProxyTargets&DBClusterIdentifiers.member.1=__Member__&DBClusterIdentifiers.member.2=__Member__&DBInstanceIdentifiers.member.1=__Member__&DBInstanceIdentifiers.member.2=__Member__&DBProxyName=__DBProxyName__&TargetGroupName=__TargetGroupName__&Version=2014-10-31

@@ -1,0 +1,5 @@
+POST /connections
+
+Content-Type: application/json
+
+{"AssetId":"__AssetId__","ClientPublicKey":"__ClientPublicKey__","DeviceSerialNumber":"__DeviceSerialNumber__","NetworkInterfaceDeviceIndex":1}

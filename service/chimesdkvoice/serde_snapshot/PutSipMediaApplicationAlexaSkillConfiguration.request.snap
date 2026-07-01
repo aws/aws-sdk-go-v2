@@ -1,0 +1,5 @@
+PUT /sip-media-applications/__SipMediaApplicationId__/alexa-skill-configuration
+
+Content-Type: application/json
+
+{"SipMediaApplicationAlexaSkillConfiguration":{"AlexaSkillIds":["__Member__","__Member__"],"AlexaSkillStatus":"ACTIVE"}}

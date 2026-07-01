@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListSnapshotsInRecycleBin&DryRun=true&MaxResults=1&NextToken=__NextToken__&SnapshotId.1=__Member__&SnapshotId.2=__Member__&Version=2016-11-15

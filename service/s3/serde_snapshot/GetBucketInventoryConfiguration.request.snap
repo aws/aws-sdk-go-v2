@@ -1,0 +1,4 @@
+GET /?id=__Id__&inventory=&x-id=GetBucketInventoryConfiguration
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

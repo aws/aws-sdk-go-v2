@@ -1,0 +1,5 @@
+POST /describe-draft-app-version-resources-import-status
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__"}

@@ -1,0 +1,5 @@
+POST /delete-slack-channel-configuration
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__"}

@@ -1,0 +1,5 @@
+PUT /v2/email/configuration-sets/__ConfigurationSetName__/reputation-options
+
+Content-Type: application/json
+
+{"ReputationMetricsEnabled":true}

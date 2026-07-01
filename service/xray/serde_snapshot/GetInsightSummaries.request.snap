@@ -1,0 +1,5 @@
+POST /InsightSummaries
+
+Content-Type: application/json
+
+{"EndTime":946684800,"GroupARN":"__GroupARN__","GroupName":"__GroupName__","MaxResults":1,"NextToken":"__NextToken__","StartTime":946684800,"States":["ACTIVE","ACTIVE"]}

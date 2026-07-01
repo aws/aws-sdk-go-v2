@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.CreateHITType
+
+{"AssignmentDurationInSeconds":1,"AutoApprovalDelayInSeconds":1,"Description":"__Description__","Keywords":"__Keywords__","QualificationRequirements":[{"ActionsGuarded":"Accept","Comparator":"LessThan","IntegerValues":[1,1],"LocaleValues":[{"Country":"__Country__","Subdivision":"__Subdivision__"},{"Country":"__Country__","Subdivision":"__Subdivision__"}],"QualificationTypeId":"__QualificationTypeId__","RequiredToPreview":true},{"ActionsGuarded":"Accept","Comparator":"LessThan","IntegerValues":[1,1],"LocaleValues":[{"Country":"__Country__","Subdivision":"__Subdivision__"},{"Country":"__Country__","Subdivision":"__Subdivision__"}],"QualificationTypeId":"__QualificationTypeId__","RequiredToPreview":true}],"Reward":"__Reward__","Title":"__Title__"}

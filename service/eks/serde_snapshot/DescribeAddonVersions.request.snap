@@ -1,0 +1,3 @@
+GET /addons/supported-versions?addonName=__AddonName__&kubernetesVersion=__KubernetesVersion__&maxResults=1&nextToken=__NextToken__&owners=__Member__&owners=__Member__&publishers=__Member__&publishers=__Member__&types=__Member__&types=__Member__
+
+

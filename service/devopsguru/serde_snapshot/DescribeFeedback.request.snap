@@ -1,0 +1,5 @@
+POST /feedback
+
+Content-Type: application/json
+
+{"InsightId":"__InsightId__"}

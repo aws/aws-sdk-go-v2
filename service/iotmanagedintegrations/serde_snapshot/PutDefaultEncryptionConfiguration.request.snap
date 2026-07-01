@@ -1,0 +1,5 @@
+POST /configuration/account/encryption
+
+Content-Type: application/json
+
+{"encryptionType":"MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION","kmsKeyArn":"__KmsKeyArn__"}

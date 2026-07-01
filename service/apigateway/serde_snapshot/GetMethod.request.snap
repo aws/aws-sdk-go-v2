@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__
+
+Accept: application/json
+

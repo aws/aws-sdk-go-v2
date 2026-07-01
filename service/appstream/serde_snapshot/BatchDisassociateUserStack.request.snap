@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.BatchDisassociateUserStack
+
+{"UserStackAssociations":[{"AuthenticationType":"API","SendEmailNotification":true,"StackName":"__StackName__","UserName":"__UserName__"},{"AuthenticationType":"API","SendEmailNotification":true,"StackName":"__StackName__","UserName":"__UserName__"}]}

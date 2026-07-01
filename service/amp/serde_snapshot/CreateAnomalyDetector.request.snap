@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/anomalydetectors
+
+Content-Type: application/json
+
+{"alias":"__Alias__","clientToken":"__ClientToken__","configuration":{"randomCutForest":{"ignoreNearExpectedFromAbove":{"amount":1},"ignoreNearExpectedFromBelow":{"amount":1},"query":"__Query__","sampleSize":1,"shingleSize":1}},"evaluationIntervalInSeconds":1,"labels":{"key0":"__Value__"},"missingDataAction":{"markAsAnomaly":true},"tags":{"key0":"__Value__"}}

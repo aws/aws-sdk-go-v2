@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PurchaseReservedInstancesOffering&DryRun=true&InstanceCount=1&LimitPrice.Amount=1&LimitPrice.CurrencyCode=USD&PurchaseTime=2000-01-01T00%3A00%3A00Z&ReservedInstancesOfferingId=__ReservedInstancesOfferingId__&Version=2016-11-15

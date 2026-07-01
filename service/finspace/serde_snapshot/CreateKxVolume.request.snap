@@ -1,0 +1,5 @@
+POST /kx/environments/__EnvironmentId__/kxvolumes
+
+Content-Type: application/x-amz-json-1.1
+
+{"availabilityZoneIds":["__Member__","__Member__"],"azMode":"SINGLE","clientToken":"__ClientToken__","description":"__Description__","nas1Configuration":{"size":1,"type":"SSD_1000"},"tags":{"key0":"__Value__"},"volumeName":"__VolumeName__","volumeType":"NAS_1"}

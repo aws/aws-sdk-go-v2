@@ -1,0 +1,5 @@
+PUT /settings
+
+Content-Type: application/json
+
+{"defaultAssessmentReportsDestination":{"destination":"__Destination__","destinationType":"S3"},"defaultExportDestination":{"destination":"__Destination__","destinationType":"S3"},"defaultProcessOwners":[{"roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"},{"roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"}],"deregistrationPolicy":{"deleteResources":"ALL"},"evidenceFinderEnabled":true,"kmsKey":"__KmsKey__","snsTopic":"__SnsTopic__"}

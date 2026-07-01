@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListEngagementResourceAssociations
+
+{"Catalog":"__Catalog__","CreatedBy":"__CreatedBy__","EngagementIdentifier":"__EngagementIdentifier__","MaxResults":1,"NextToken":"__NextToken__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"Opportunity"}

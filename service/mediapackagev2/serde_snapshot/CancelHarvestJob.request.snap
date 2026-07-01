@@ -1,0 +1,4 @@
+PUT /channelGroup/__ChannelGroupName__/channel/__ChannelName__/originEndpoint/__OriginEndpointName__/harvestJob/__HarvestJobName__
+
+X-Amzn-Update-If-Match: __ETag__
+

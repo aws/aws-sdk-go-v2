@@ -1,0 +1,3 @@
+GET /assessmentFrameworkShareRequests?maxResults=1&nextToken=__NextToken__&requestType=SENT
+
+

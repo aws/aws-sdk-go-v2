@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botversions/__BotVersion__/botlocales
+
+Content-Type: application/json
+
+{"filters":[{"name":"BotLocaleName","operator":"CO","values":["__Member__","__Member__"]},{"name":"BotLocaleName","operator":"CO","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"BotLocaleName","order":"Ascending"}}

@@ -1,0 +1,5 @@
+POST /environments
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","engineType":"microfocus","engineVersion":"__EngineVersion__","highAvailabilityConfig":{"desiredCapacity":1},"instanceType":"__InstanceType__","kmsKeyId":"__KmsKeyId__","name":"__Name__","networkType":"ipv4","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","publiclyAccessible":true,"securityGroupIds":["__Member__","__Member__"],"storageConfigurations":[{"efs":{"file-system-id":"__FileSystemId__","mount-point":"__MountPoint__"}},{"efs":{"file-system-id":"__FileSystemId__","mount-point":"__MountPoint__"}}],"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

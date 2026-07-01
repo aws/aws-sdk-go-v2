@@ -1,0 +1,5 @@
+POST /contact-flow-modules/__InstanceId__/__ContactFlowModuleId__/metadata
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","State":"ACTIVE"}

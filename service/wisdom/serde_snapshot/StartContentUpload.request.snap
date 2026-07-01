@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/upload
+
+Content-Type: application/json
+
+{"contentType":"__ContentType__","presignedUrlTimeToLive":1}

@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/contents/__ContentId__
+
+Content-Type: application/json
+
+{"metadata":{"key0":"__Value__"},"overrideLinkOutUri":"__OverrideLinkOutUri__","removeOverrideLinkOutUri":true,"revisionId":"__RevisionId__","title":"__Title__","uploadId":"__UploadId__"}

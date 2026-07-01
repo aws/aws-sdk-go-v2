@@ -1,0 +1,5 @@
+POST /profiles/__ProfileArn__/shares
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","SharedWith":"__SharedWith__"}

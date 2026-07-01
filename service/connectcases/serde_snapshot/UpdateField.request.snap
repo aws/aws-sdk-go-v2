@@ -1,0 +1,5 @@
+PUT /domains/__DomainId__/fields/__FieldId__
+
+Content-Type: application/json
+
+{"attributes":{"text":{"isMultiline":true}},"description":"__Description__","name":"__Name__"}

@@ -1,0 +1,5 @@
+POST /graphs/__GraphIdentifier__/endpoints/
+
+Content-Type: application/json
+
+{"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__","vpcSecurityGroupIds":["__Member__","__Member__"]}

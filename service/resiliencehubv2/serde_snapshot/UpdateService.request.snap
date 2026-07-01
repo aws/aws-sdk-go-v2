@@ -1,0 +1,5 @@
+POST /v2/update-service
+
+Content-Type: application/json
+
+{"associatedSystems":[{"systemArn":"__SystemArn__","systemName":"__SystemName__","userJourneyIds":["__Member__","__Member__"]},{"systemArn":"__SystemArn__","systemName":"__SystemName__","userJourneyIds":["__Member__","__Member__"]}],"dependencyDiscovery":"ENABLED","description":"__Description__","permissionModel":{"crossAccountRoles":[{"crossAccountRoleArn":"__CrossAccountRoleArn__","externalId":"__ExternalId__"},{"crossAccountRoleArn":"__CrossAccountRoleArn__","externalId":"__ExternalId__"}],"invokerRoleName":"__InvokerRoleName__"},"policyArn":"__PolicyArn__","regions":["__Member__","__Member__"],"reportConfiguration":{"reportOutputs":[{"s3":{"bucketOwner":"__BucketOwner__","bucketPath":"__BucketPath__"}},{"s3":{"bucketOwner":"__BucketOwner__","bucketPath":"__BucketPath__"}}]},"serviceArn":"__ServiceArn__"}

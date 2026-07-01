@@ -1,0 +1,5 @@
+PUT /v1/membership/__MembershipId__/update-membership
+
+Content-Type: application/json
+
+{"incidentResponseTeam":[{"communicationPreferences":["Case Created","Case Created"],"email":"__Email__","jobTitle":"__JobTitle__","name":"__Name__"},{"communicationPreferences":["Case Created","Case Created"],"email":"__Email__","jobTitle":"__JobTitle__","name":"__Name__"}],"membershipAccountsConfigurationsUpdate":{"coverEntireOrganization":true,"organizationalUnitsToAdd":["__Member__","__Member__"],"organizationalUnitsToRemove":["__Member__","__Member__"]},"membershipName":"__MembershipName__","optInFeatures":[{"featureName":"Triage","isEnabled":true},{"featureName":"Triage","isEnabled":true}],"undoMembershipCancellation":true}

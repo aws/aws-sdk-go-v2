@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyDefaultCreditSpecification&CpuCredits=__CpuCredits__&DryRun=true&InstanceFamily=t2&Version=2016-11-15

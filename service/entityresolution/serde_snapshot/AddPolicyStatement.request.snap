@@ -1,0 +1,5 @@
+POST /policies/__Arn__/__StatementId__
+
+Content-Type: application/json
+
+{"action":["__Member__","__Member__"],"condition":"__Condition__","effect":"Allow","principal":["__Member__","__Member__"]}

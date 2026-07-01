@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.ListKeys
+
+{"KeyState":"CREATE_IN_PROGRESS","MaxResults":1,"NextToken":"__NextToken__"}

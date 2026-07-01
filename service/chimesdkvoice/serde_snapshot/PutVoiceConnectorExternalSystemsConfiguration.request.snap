@@ -1,0 +1,5 @@
+PUT /voice-connectors/__VoiceConnectorId__/external-systems-configuration
+
+Content-Type: application/json
+
+{"ContactCenterSystemTypes":["GENESYS_ENGAGE_ON_PREMISES","GENESYS_ENGAGE_ON_PREMISES"],"SessionBorderControllerTypes":["RIBBON_SBC","RIBBON_SBC"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateGroup
+
+{"Description":"__Description__","GroupName":"__GroupName__","Precedence":1,"RoleArn":"__RoleArn__","UserPoolId":"__UserPoolId__"}

@@ -1,0 +1,5 @@
+POST /ListIndexesForMembers
+
+Content-Type: application/json
+
+{"AccountIdList":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__"}

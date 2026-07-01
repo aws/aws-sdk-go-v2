@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateServiceInstance
+
+{"clientToken":"__ClientToken__","name":"__Name__","serviceName":"__ServiceName__","spec":"__Spec__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__"}

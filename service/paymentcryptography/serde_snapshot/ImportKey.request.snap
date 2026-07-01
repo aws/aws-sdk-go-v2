@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.ImportKey
+
+{"Enabled":true,"KeyCheckValueAlgorithm":"CMAC","KeyMaterial":{"RootCertificatePublicKey":{"KeyAttributes":{"KeyAlgorithm":"TDES_2KEY","KeyClass":"SYMMETRIC_KEY","KeyModesOfUse":{"Decrypt":true,"DeriveKey":true,"Encrypt":true,"Generate":true,"NoRestrictions":true,"Sign":true,"Unwrap":true,"Verify":true,"Wrap":true},"KeyUsage":"TR31_B0_BASE_DERIVATION_KEY"},"PublicKeyCertificate":"__PublicKeyCertificate__"}},"ReplicationRegions":["__Member__","__Member__"],"RequesterComment":"__RequesterComment__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /StartSourceNetworkRecovery
+
+Content-Type: application/json
+
+{"deployAsNew":true,"sourceNetworks":[{"cfnStackName":"__CfnStackName__","sourceNetworkID":"__SourceNetworkID__"},{"cfnStackName":"__CfnStackName__","sourceNetworkID":"__SourceNetworkID__"}],"tags":{"key0":"__Value__"}}

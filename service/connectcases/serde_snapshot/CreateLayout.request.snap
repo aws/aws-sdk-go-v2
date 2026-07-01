@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/layouts
+
+Content-Type: application/json
+
+{"content":{"basic":{"moreInfo":{"sections":[{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}},{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}}]},"topPanel":{"sections":[{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}},{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}}]}}},"name":"__Name__"}

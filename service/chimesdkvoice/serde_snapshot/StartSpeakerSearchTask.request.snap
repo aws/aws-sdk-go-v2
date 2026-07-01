@@ -1,0 +1,5 @@
+POST /voice-connectors/__VoiceConnectorId__/speaker-search-tasks
+
+Content-Type: application/json
+
+{"CallLeg":"Caller","ClientRequestToken":"__ClientRequestToken__","TransactionId":"__TransactionId__","VoiceProfileDomainId":"__VoiceProfileDomainId__"}

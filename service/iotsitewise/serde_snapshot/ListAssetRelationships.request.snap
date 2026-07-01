@@ -1,0 +1,3 @@
+GET /assets/__AssetId__/assetRelationships?maxResults=1&nextToken=__NextToken__&traversalType=PATH_TO_ROOT
+
+

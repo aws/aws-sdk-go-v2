@@ -1,0 +1,5 @@
+POST /quick-connects/__InstanceId__/__QuickConnectId__/name
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

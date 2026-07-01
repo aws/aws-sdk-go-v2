@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/coverage/statistics
+
+Content-Type: application/json
+
+{"filterCriteria":{"filterCriterion":[{"criterionKey":"ACCOUNT_ID","filterCondition":{"equals":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"]}},{"criterionKey":"ACCOUNT_ID","filterCondition":{"equals":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"]}}]},"statisticsType":["COUNT_BY_RESOURCE_TYPE","COUNT_BY_RESOURCE_TYPE"]}

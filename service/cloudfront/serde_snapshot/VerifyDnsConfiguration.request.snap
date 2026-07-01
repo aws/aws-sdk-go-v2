@@ -1,0 +1,5 @@
+POST /2020-05-31/verify-dns-configuration
+
+Content-Type: application/xml
+
+<VerifyDnsConfigurationRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Domain>__Domain__</Domain><Identifier>__Identifier__</Identifier></VerifyDnsConfigurationRequest>

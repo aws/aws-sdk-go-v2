@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/search-group-profiles
+
+Content-Type: application/json
+
+{"groupType":"SSO_GROUP","maxResults":1,"nextToken":"__NextToken__","searchText":"__SearchText__"}

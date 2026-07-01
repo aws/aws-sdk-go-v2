@@ -1,0 +1,5 @@
+PUT /wireless-gateways/__Id__/certificate
+
+Content-Type: application/json
+
+{"IotCertificateId":"__IotCertificateId__"}

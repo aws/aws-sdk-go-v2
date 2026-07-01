@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.CreateTerms
+
+{"ClientId":"__ClientId__","Enforcement":"NONE","Links":{"key0":"__Value__"},"TermsName":"__TermsName__","TermsSource":"LINK","UserPoolId":"__UserPoolId__"}

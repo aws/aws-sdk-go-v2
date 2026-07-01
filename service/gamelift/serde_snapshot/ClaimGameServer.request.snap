@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/ClaimGameServer
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤sGameServerGroupNamew__GameServerGroupName__lGameServerIdp__GameServerId__nGameServerDatar__GameServerData__lFilterOption¡pInstanceStatuses‚fACTIVEfACTIVE

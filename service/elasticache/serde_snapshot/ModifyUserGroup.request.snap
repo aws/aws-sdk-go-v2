@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyUserGroup&Engine=__Engine__&UserGroupId=__UserGroupId__&UserIdsToAdd.member.1=__Member__&UserIdsToAdd.member.2=__Member__&UserIdsToRemove.member.1=__Member__&UserIdsToRemove.member.2=__Member__&Version=2015-02-02

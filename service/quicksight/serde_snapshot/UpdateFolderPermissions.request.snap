@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/folders/__FolderId__/permissions
+
+Content-Type: application/json
+
+{"GrantPermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"RevokePermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}]}

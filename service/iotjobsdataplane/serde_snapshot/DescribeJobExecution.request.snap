@@ -1,0 +1,3 @@
+GET /things/__ThingName__/jobs/__JobId__?executionNumber=1&includeJobDocument=true
+
+

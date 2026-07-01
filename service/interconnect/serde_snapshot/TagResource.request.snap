@@ -1,0 +1,7 @@
+POST /service/Interconnect/operation/TagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢carng__Arn__dtags¡dkey0i__Value__

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSupport_20130415.DescribeCases
+
+{"afterTime":"__AfterTime__","beforeTime":"__BeforeTime__","caseIdList":["__Member__","__Member__"],"displayId":"__DisplayId__","includeCommunications":true,"includeResolvedCases":true,"language":"__Language__","maxResults":1,"nextToken":"__NextToken__"}

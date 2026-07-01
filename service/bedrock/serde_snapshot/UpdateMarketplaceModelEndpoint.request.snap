@@ -1,0 +1,5 @@
+PATCH /marketplace-model/endpoints/__EndpointArn__
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","endpointConfig":{"sageMaker":{"executionRole":"__ExecutionRole__","initialInstanceCount":1,"instanceType":"__InstanceType__","kmsEncryptionKey":"__KmsEncryptionKey__","vpc":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}}}

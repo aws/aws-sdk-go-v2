@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.RestoreTableFromSnapshot
+
+{"activateCaseSensitiveIdentifier":true,"namespaceName":"__NamespaceName__","newTableName":"__NewTableName__","snapshotName":"__SnapshotName__","sourceDatabaseName":"__SourceDatabaseName__","sourceSchemaName":"__SourceSchemaName__","sourceTableName":"__SourceTableName__","targetDatabaseName":"__TargetDatabaseName__","targetSchemaName":"__TargetSchemaName__","workgroupName":"__WorkgroupName__"}

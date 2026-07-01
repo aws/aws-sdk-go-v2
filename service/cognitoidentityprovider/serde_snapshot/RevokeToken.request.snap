@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.RevokeToken
+
+{"ClientId":"__ClientId__","ClientSecret":"__ClientSecret__","Token":"__Token__"}

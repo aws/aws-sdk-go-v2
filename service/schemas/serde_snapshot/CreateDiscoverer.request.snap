@@ -1,0 +1,5 @@
+POST /v1/discoverers
+
+Content-Type: application/json
+
+{"CrossAccount":true,"Description":"__Description__","SourceArn":"__SourceArn__","tags":{"key0":"__Value__"}}

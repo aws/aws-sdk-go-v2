@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.CreateBGPPeer
+
+{"newBGPPeer":{"addressFamily":"ipv4","amazonAddress":"__AmazonAddress__","asn":1,"asnLong":1,"authKey":"__AuthKey__","customerAddress":"__CustomerAddress__"},"virtualInterfaceId":"__VirtualInterfaceId__"}

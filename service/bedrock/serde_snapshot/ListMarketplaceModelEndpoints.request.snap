@@ -1,0 +1,3 @@
+GET /marketplace-model/endpoints?maxResults=1&modelSourceIdentifier=__ModelSourceEquals__&nextToken=__NextToken__
+
+

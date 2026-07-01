@@ -1,0 +1,5 @@
+PATCH /accounts
+
+Content-Type: application/json
+
+{"AutoEnableControls":true,"ControlFindingGenerator":"STANDARD_CONTROL"}

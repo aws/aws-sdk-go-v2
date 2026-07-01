@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AttachVerifiedAccessTrustProvider&ClientToken=__ClientToken__&DryRun=true&VerifiedAccessInstanceId=__VerifiedAccessInstanceId__&VerifiedAccessTrustProviderId=__VerifiedAccessTrustProviderId__&Version=2016-11-15

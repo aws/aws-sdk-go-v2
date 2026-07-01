@@ -1,0 +1,5 @@
+POST /2026-02-05/listPurchaseOptions
+
+Content-Type: application/json
+
+{"filters":[{"filterType":"PRODUCT_ID","filterValues":["__Member__","__Member__"]},{"filterType":"PRODUCT_ID","filterValues":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

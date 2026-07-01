@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/projects/__ProjectIdentifier__/deleteMembership
+
+Content-Type: application/json
+
+{"member":{"userIdentifier":"__MemberMemberUserIdentifier__"}}

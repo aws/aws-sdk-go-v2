@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/notebooks/__Identifier__
+
+Content-Type: application/json
+
+{"cellOrder":[{},{}],"clientToken":"__ClientToken__","description":"__Description__","environmentConfiguration":{"imageVersion":"__ImageVersion__","packageConfig":{"packageManager":"UV","packageSpecification":"__PackageSpecification__"}},"metadata":{"key0":"__Value__"},"name":"__Name__","parameters":{"key0":"__Value__"},"status":"ACTIVE"}

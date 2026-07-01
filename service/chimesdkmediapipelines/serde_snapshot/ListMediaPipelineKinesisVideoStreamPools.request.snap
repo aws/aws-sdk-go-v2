@@ -1,0 +1,3 @@
+GET /media-pipeline-kinesis-video-stream-pools?max-results=1&next-token=__NextToken__
+
+

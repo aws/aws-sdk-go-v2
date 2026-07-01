@@ -1,0 +1,5 @@
+PATCH /rules/__Identifier__
+
+Content-Type: application/json
+
+{"Description":"__Description__","ExcludeResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"ResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"ResourceType":"EBS_SNAPSHOT","RetentionPeriod":{"RetentionPeriodUnit":"DAYS","RetentionPeriodValue":1}}

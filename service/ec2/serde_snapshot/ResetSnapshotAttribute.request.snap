@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ResetSnapshotAttribute&Attribute=productCodes&DryRun=true&SnapshotId=__SnapshotId__&Version=2016-11-15

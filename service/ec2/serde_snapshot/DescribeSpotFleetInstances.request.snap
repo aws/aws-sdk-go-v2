@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeSpotFleetInstances&DryRun=true&MaxResults=1&NextToken=__NextToken__&SpotFleetRequestId=__SpotFleetRequestId__&Version=2016-11-15

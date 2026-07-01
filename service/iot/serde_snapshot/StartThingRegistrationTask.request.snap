@@ -1,0 +1,5 @@
+POST /thing-registration-tasks
+
+Content-Type: application/json
+
+{"inputFileBucket":"__InputFileBucket__","inputFileKey":"__InputFileKey__","roleArn":"__RoleArn__","templateBody":"__TemplateBody__"}

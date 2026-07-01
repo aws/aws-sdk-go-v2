@@ -1,0 +1,5 @@
+POST /bots/__BotId__/aggregatedutterances
+
+Content-Type: application/json
+
+{"aggregationDuration":{"relativeAggregationDuration":{"timeDimension":"Hours","timeValue":1}},"botAliasId":"__BotAliasId__","botVersion":"__BotVersion__","filters":[{"name":"Utterance","operator":"CO","values":["__Member__","__Member__"]},{"name":"Utterance","operator":"CO","values":["__Member__","__Member__"]}],"localeId":"__LocaleId__","maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"HitCount","order":"Ascending"}}

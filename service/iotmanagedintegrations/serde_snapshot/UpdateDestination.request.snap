@@ -1,0 +1,5 @@
+PUT /destinations/__Name__
+
+Content-Type: application/json
+
+{"DeliveryDestinationArn":"__DeliveryDestinationArn__","DeliveryDestinationType":"KINESIS","Description":"__Description__","RoleArn":"__RoleArn__"}

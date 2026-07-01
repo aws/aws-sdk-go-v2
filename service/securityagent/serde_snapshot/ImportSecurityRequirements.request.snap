@@ -1,0 +1,5 @@
+POST /ImportSecurityRequirements
+
+Content-Type: application/json
+
+{"input":{"documents":[{"content":"YmxvYg==","format":"MD","name":"__Name__"},{"content":"YmxvYg==","format":"MD","name":"__Name__"}]},"packId":"__PackId__"}

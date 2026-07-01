@@ -1,0 +1,3 @@
+GET /v1/gateway-instances?filterArn=__FilterArn__&maxResults=1&nextToken=__NextToken__
+
+

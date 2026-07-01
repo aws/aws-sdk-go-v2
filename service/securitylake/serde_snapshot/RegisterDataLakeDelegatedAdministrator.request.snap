@@ -1,0 +1,5 @@
+POST /v1/datalake/delegate
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

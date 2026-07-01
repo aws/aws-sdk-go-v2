@@ -1,0 +1,5 @@
+PUT /CancelLifecycleExecution
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","lifecycleExecutionId":"__LifecycleExecutionId__"}

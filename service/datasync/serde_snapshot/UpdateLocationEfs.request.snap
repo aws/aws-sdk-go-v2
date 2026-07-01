@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.UpdateLocationEfs
+
+{"AccessPointArn":"__AccessPointArn__","FileSystemAccessRoleArn":"__FileSystemAccessRoleArn__","InTransitEncryption":"NONE","LocationArn":"__LocationArn__","Subdirectory":"__Subdirectory__"}

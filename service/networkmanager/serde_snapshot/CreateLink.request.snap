@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/links
+
+Content-Type: application/json
+
+{"Bandwidth":{"DownloadSpeed":1,"UploadSpeed":1},"Description":"__Description__","Provider":"__Provider__","SiteId":"__SiteId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"__Type__"}

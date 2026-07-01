@@ -1,0 +1,3 @@
+POST /domains/__DomainId__/rules-list/?maxResults=1&nextToken=__NextToken__
+
+

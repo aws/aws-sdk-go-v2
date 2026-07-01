@@ -1,0 +1,5 @@
+POST /startDICOMImportJob/datastore/__DatastoreId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","dataAccessRoleArn":"__DataAccessRoleArn__","importConfiguration":{"dicomJsonMetadataImportConfiguration":{"dicomMetadataMappings":[{"metadataFilePath":"__MetadataFilePath__","seriesInstanceUID":"__SeriesInstanceUID__","studyInstanceUID":"__StudyInstanceUID__"},{"metadataFilePath":"__MetadataFilePath__","seriesInstanceUID":"__SeriesInstanceUID__","studyInstanceUID":"__StudyInstanceUID__"}]}},"inputOwnerAccountId":"__InputOwnerAccountId__","inputS3Uri":"__InputS3Uri__","jobName":"__JobName__","outputS3Uri":"__OutputS3Uri__"}

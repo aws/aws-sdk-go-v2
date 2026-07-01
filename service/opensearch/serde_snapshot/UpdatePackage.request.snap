@@ -1,0 +1,5 @@
+POST /2021-01-01/packages/update
+
+Content-Type: application/json
+
+{"CommitMessage":"__CommitMessage__","PackageConfiguration":{"ConfigurationRequirement":"REQUIRED","LicenseFilepath":"__LicenseFilepath__","LicenseRequirement":"REQUIRED","RequiresRestartForConfigurationUpdate":true},"PackageDescription":"__PackageDescription__","PackageEncryptionOptions":{"EncryptionEnabled":true,"KmsKeyIdentifier":"__KmsKeyIdentifier__"},"PackageID":"__PackageID__","PackageSource":{"S3BucketName":"__S3BucketName__","S3Key":"__S3Key__"}}

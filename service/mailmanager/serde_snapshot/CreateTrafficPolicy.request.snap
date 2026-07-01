@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.CreateTrafficPolicy
+
+{"ClientToken":"__ClientToken__","DefaultAction":"ALLOW","MaxMessageSizeBytes":1,"PolicyStatements":[{"Action":"ALLOW","Conditions":[{"StringExpression":{"Evaluate":{"Attribute":"RECIPIENT"},"Operator":"EQUALS","Values":["__Member__","__Member__"]}},{"StringExpression":{"Evaluate":{"Attribute":"RECIPIENT"},"Operator":"EQUALS","Values":["__Member__","__Member__"]}}]},{"Action":"ALLOW","Conditions":[{"StringExpression":{"Evaluate":{"Attribute":"RECIPIENT"},"Operator":"EQUALS","Values":["__Member__","__Member__"]}},{"StringExpression":{"Evaluate":{"Attribute":"RECIPIENT"},"Operator":"EQUALS","Values":["__Member__","__Member__"]}}]}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrafficPolicyName":"__TrafficPolicyName__"}

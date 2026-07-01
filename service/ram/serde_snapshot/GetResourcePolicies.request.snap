@@ -1,0 +1,5 @@
+POST /getresourcepolicies
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","principal":"__Principal__","resourceArns":["__Member__","__Member__"]}

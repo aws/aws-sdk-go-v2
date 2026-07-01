@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RetrieveEnvironmentInfo&EnvironmentId=__EnvironmentId__&EnvironmentName=__EnvironmentName__&InfoType=tail&Version=2010-12-01

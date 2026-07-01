@@ -1,0 +1,3 @@
+DELETE /buckets/__TableBucketARN__/encryption
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.UpdateDevicePool
+
+{"arn":"__Arn__","clearMaxDevices":true,"description":"__Description__","maxDevices":1,"name":"__Name__","rules":[{"attribute":"ARN","operator":"EQUALS","value":"__Value__"},{"attribute":"ARN","operator":"EQUALS","value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /Insight
+
+Content-Type: application/json
+
+{"InsightId":"__InsightId__"}

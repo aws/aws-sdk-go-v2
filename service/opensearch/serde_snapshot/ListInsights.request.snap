@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/insights
+
+Content-Type: application/json
+
+{"Entity":{"Type":"Account","Value":"__Value__"},"MaxResults":1,"NextToken":"__NextToken__","SortOrder":"ASC","TimeRange":{"From":1,"To":1}}

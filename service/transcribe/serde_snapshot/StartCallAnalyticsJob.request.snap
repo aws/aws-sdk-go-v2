@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.StartCallAnalyticsJob
+
+{"CallAnalyticsJobName":"__CallAnalyticsJobName__","ChannelDefinitions":[{"ChannelId":1,"ParticipantRole":"AGENT"},{"ChannelId":1,"ParticipantRole":"AGENT"}],"DataAccessRoleArn":"__DataAccessRoleArn__","Media":{"MediaFileUri":"__MediaFileUri__","RedactedMediaFileUri":"__RedactedMediaFileUri__"},"OutputEncryptionKMSKeyId":"__OutputEncryptionKMSKeyId__","OutputLocation":"__OutputLocation__","Settings":{"ContentRedaction":{"PiiEntityTypes":["BANK_ACCOUNT_NUMBER","BANK_ACCOUNT_NUMBER"],"RedactionOutput":"redacted","RedactionType":"PII"},"LanguageIdSettings":{"key0":{"LanguageModelName":"__LanguageModelName__","VocabularyFilterName":"__VocabularyFilterName__","VocabularyName":"__VocabularyName__"}},"LanguageModelName":"__LanguageModelName__","LanguageOptions":["af-ZA","af-ZA"],"Summarization":{"GenerateAbstractiveSummary":true},"VocabularyFilterMethod":"remove","VocabularyFilterName":"__VocabularyFilterName__","VocabularyName":"__VocabularyName__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

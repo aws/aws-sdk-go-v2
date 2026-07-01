@@ -78,6 +78,7 @@ software.amazon.smithy.aws.go.codegen.customization.auth.GlobalAnonymousOption
 software.amazon.smithy.aws.go.codegen.customization.service.cloudfrontkeyvaluestore.CloudFrontKVSSigV4a
 software.amazon.smithy.aws.go.codegen.customization.BackfillProtocolTestServiceTrait
 software.amazon.smithy.go.codegen.integration.MiddlewareStackSnapshotTests
+software.amazon.smithy.go.codegen.integration.SerdeSnapshotTests
 software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ExpiresShapeCustomization
 software.amazon.smithy.aws.go.codegen.ClockSkewGenerator
 software.amazon.smithy.aws.go.codegen.customization.AccountIDEndpointRouting

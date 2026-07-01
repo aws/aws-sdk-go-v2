@@ -1,0 +1,10 @@
+PUT /?object-lock=
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Bucket-Object-Lock-Token: __Token__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+
+<ObjectLockConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><ObjectLockEnabled>Enabled</ObjectLockEnabled><Rule><DefaultRetention><Days>1</Days><Mode>GOVERNANCE</Mode><Years>1</Years></DefaultRetention></Rule></ObjectLockConfiguration>

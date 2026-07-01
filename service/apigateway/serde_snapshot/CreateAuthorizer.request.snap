@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/authorizers
+
+Accept: application/json
+Content-Type: application/json
+
+{"authorizerCredentials":"__AuthorizerCredentials__","authorizerResultTtlInSeconds":1,"authorizerUri":"__AuthorizerUri__","authType":"__AuthType__","identitySource":"__IdentitySource__","identityValidationExpression":"__IdentityValidationExpression__","name":"__Name__","providerARNs":["__Member__","__Member__"],"type":"TOKEN"}

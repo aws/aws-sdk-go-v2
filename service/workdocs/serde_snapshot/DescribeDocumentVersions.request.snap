@@ -1,0 +1,4 @@
+GET /api/v1/documents/__DocumentId__/versions?fields=__Fields__&include=__Include__&limit=1&marker=__Marker__
+
+Authentication: __AuthenticationToken__
+

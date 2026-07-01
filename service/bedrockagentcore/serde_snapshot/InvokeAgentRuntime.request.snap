@@ -1,0 +1,14 @@
+POST /runtimes/__AgentRuntimeArn__/invocations?accountId=__AccountId__&qualifier=__Qualifier__
+
+Accept: __Accept__
+Baggage: __Baggage__
+Content-Type: __ContentType__
+Mcp-Protocol-Version: __McpProtocolVersion__
+Mcp-Session-Id: __McpSessionId__
+Traceparent: __TraceParent__
+Tracestate: __TraceState__
+X-Amzn-Bedrock-Agentcore-Runtime-Session-Id: __RuntimeSessionId__
+X-Amzn-Bedrock-Agentcore-Runtime-User-Id: __RuntimeUserId__
+X-Amzn-Trace-Id: __TraceId__
+
+blob

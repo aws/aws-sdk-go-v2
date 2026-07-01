@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.CreateHITWithHITType
+
+{"AssignmentReviewPolicy":{"Parameters":[{"Key":"__Key__","MapEntries":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"Values":["__Member__","__Member__"]},{"Key":"__Key__","MapEntries":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"Values":["__Member__","__Member__"]}],"PolicyName":"__PolicyName__"},"HITLayoutId":"__HITLayoutId__","HITLayoutParameters":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"HITReviewPolicy":{"Parameters":[{"Key":"__Key__","MapEntries":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"Values":["__Member__","__Member__"]},{"Key":"__Key__","MapEntries":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"Values":["__Member__","__Member__"]}],"PolicyName":"__PolicyName__"},"HITTypeId":"__HITTypeId__","LifetimeInSeconds":1,"MaxAssignments":1,"Question":"__Question__","RequesterAnnotation":"__RequesterAnnotation__","UniqueRequestToken":"__UniqueRequestToken__"}

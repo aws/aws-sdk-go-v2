@@ -1,0 +1,5 @@
+PUT /v1/batch-update-recommendation-resource-exclusion
+
+Content-Type: application/json
+
+{"recommendationResourceExclusions":[{"arn":"__Arn__","isExcluded":true},{"arn":"__Arn__","isExcluded":true}]}

@@ -1,0 +1,5 @@
+POST /2013-04-01/delegationset
+
+Content-Type: application/xml
+
+<CreateReusableDelegationSetRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><CallerReference>__CallerReference__</CallerReference><HostedZoneId>__HostedZoneId__</HostedZoneId></CreateReusableDelegationSetRequest>

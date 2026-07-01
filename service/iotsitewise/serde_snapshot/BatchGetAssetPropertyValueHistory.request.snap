@@ -1,0 +1,5 @@
+POST /properties/batch/history
+
+Content-Type: application/json
+
+{"entries":[{"assetId":"__AssetId__","endDate":946684800,"entryId":"__EntryId__","propertyAlias":"__PropertyAlias__","propertyId":"__PropertyId__","qualities":["GOOD","GOOD"],"startDate":946684800,"timeOrdering":"ASCENDING"},{"assetId":"__AssetId__","endDate":946684800,"entryId":"__EntryId__","propertyAlias":"__PropertyAlias__","propertyId":"__PropertyId__","qualities":["GOOD","GOOD"],"startDate":946684800,"timeOrdering":"ASCENDING"}],"maxResults":1,"nextToken":"__NextToken__"}

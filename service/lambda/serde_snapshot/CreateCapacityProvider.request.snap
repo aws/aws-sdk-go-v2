@@ -1,0 +1,5 @@
+POST /2025-11-30/capacity-providers
+
+Content-Type: application/json
+
+{"CapacityProviderName":"__CapacityProviderName__","CapacityProviderScalingConfig":{"MaxVCpuCount":1,"ScalingMode":"Auto","ScalingPolicies":[{"PredefinedMetricType":"LambdaCapacityProviderAverageCPUUtilization","TargetValue":1},{"PredefinedMetricType":"LambdaCapacityProviderAverageCPUUtilization","TargetValue":1}]},"InstanceRequirements":{"AllowedInstanceTypes":["__Member__","__Member__"],"Architectures":["x86_64","x86_64"],"ExcludedInstanceTypes":["__Member__","__Member__"]},"KmsKeyArn":"__KmsKeyArn__","PermissionsConfig":{"CapacityProviderOperatorRoleArn":"__CapacityProviderOperatorRoleArn__"},"PropagateTags":{"ExplicitTags":{"key0":"__Value__"},"Mode":"None"},"Tags":{"key0":"__Value__"},"VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.GetSnapshots
+
+{"IndexId":"__IndexId__","Interval":"THIS_MONTH","MaxResults":1,"MetricType":"QUERIES_BY_COUNT","NextToken":"__NextToken__"}

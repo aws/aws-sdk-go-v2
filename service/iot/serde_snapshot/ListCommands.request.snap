@@ -1,0 +1,3 @@
+GET /commands?commandParameterName=__CommandParameterName__&maxResults=1&namespace=AWS-IoT&nextToken=__NextToken__&sortOrder=ASCENDING
+
+

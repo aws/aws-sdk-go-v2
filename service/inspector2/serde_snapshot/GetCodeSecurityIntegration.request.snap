@@ -1,0 +1,5 @@
+POST /codesecurity/integration/get
+
+Content-Type: application/json
+
+{"integrationArn":"__IntegrationArn__","tags":{"key0":"__Value__"}}

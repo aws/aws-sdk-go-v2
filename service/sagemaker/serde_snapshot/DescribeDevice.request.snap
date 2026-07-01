@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeDevice
+
+{"DeviceFleetName":"__DeviceFleetName__","DeviceName":"__DeviceName__","NextToken":"__NextToken__"}

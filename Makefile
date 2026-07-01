@@ -9,6 +9,7 @@ LINT_IGNORE_PRIVATE_METRICS='aws/middleware/private/metrics'
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
+SERDE_SNAPSHOT_TAGS=-tags "serde_snapshot"
 
 SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
@@ -321,6 +322,21 @@ test-ci-check-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-ci-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast ./..."
+
+test-update-serde-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-serde-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SERDE_SNAPSHOT_TAGS} -run TestSerdeUpdateSnapshot ."
+
+test-check-serde-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-serde-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SERDE_SNAPSHOT_TAGS} -run TestSerdeCheckSnapshot ."
+
+test-ci-check-serde-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-serde-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SERDE_SNAPSHOT_TAGS} -run TestSerdeCheckSnapshot -failfast ."
 
 cachedep: cachedep-modules-.
 

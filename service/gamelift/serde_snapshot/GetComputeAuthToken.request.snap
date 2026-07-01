@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/GetComputeAuthToken
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢gFleetIdk__FleetId__kComputeNameo__ComputeName__

@@ -1,0 +1,3 @@
+GET /billing-groups/__BillingGroupName__/things?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/customvocabulary/DEFAULT/batchdelete
+
+Content-Type: application/json
+
+{"customVocabularyItemList":[{"itemId":"__ItemId__"},{"itemId":"__ItemId__"}]}

@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/cases/__CaseId__
+
+Content-Type: application/json
+
+{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"nextToken":"__NextToken__"}

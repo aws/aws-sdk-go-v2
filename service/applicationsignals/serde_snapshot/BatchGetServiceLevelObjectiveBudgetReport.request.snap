@@ -1,0 +1,5 @@
+POST /budget-report
+
+Content-Type: application/json
+
+{"SloIds":["__Member__","__Member__"],"Timestamp":946684800}

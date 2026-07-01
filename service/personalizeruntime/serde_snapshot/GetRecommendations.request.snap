@@ -1,0 +1,5 @@
+POST /recommendations
+
+Content-Type: application/json
+
+{"campaignArn":"__CampaignArn__","context":{"key0":"__Value__"},"filterArn":"__FilterArn__","filterValues":{"key0":"__Value__"},"itemId":"__ItemId__","metadataColumns":{"key0":["__Member__","__Member__"]},"numResults":1,"promotions":[{"filterArn":"__FilterArn__","filterValues":{"key0":"__Value__"},"name":"__Name__","percentPromotedItems":1},{"filterArn":"__FilterArn__","filterValues":{"key0":"__Value__"},"name":"__Name__","percentPromotedItems":1}],"recommenderArn":"__RecommenderArn__","userId":"__UserId__"}

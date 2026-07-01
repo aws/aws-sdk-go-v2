@@ -1,0 +1,3 @@
+GET /access-preview/__AccessPreviewId__?analyzerArn=__AnalyzerArn__
+
+

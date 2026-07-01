@@ -1,0 +1,6 @@
+PUT /2020-05-31/distribution-tenant/__Id__/associate-web-acl
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<AssociateDistributionTenantWebACLRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><WebACLArn>__WebACLArn__</WebACLArn></AssociateDistributionTenantWebACLRequest>

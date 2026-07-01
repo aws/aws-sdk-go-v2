@@ -1,0 +1,5 @@
+POST /cluster-snapshot/__SnapshotArn__/copy
+
+Content-Type: application/json
+
+{"copyTags":true,"kmsKeyId":"__KmsKeyId__","tags":{"key0":"__Value__"},"targetSnapshotName":"__TargetSnapshotName__"}

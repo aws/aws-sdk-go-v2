@@ -1,0 +1,5 @@
+POST /v1/feed
+
+Content-Type: application/json
+
+{"name":"__Name__","outputs":[{"description":"__Description__","name":"__Name__","outputConfig":{"cropping":{}},"status":"ENABLED"},{"description":"__Description__","name":"__Name__","outputConfig":{"cropping":{}},"status":"ENABLED"}],"tags":{"key0":"__Value__"}}

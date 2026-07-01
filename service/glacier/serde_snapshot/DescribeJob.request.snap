@@ -1,0 +1,4 @@
+GET /__AccountId__/vaults/__VaultName__/jobs/__JobId__
+
+X-Amz-Glacier-Version: 2012-06-01
+

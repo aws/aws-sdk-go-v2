@@ -1,0 +1,5 @@
+POST /voice-connector-groups/__VoiceConnectorGroupId__?operation=disassociate-phone-numbers
+
+Content-Type: application/json
+
+{"E164PhoneNumbers":["__Member__","__Member__"]}

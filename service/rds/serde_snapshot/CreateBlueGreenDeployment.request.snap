@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateBlueGreenDeployment&BlueGreenDeploymentName=__BlueGreenDeploymentName__&Source=__Source__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&TargetAllocatedStorage=1&TargetDBClusterParameterGroupName=__TargetDBClusterParameterGroupName__&TargetDBInstanceClass=__TargetDBInstanceClass__&TargetDBParameterGroupName=__TargetDBParameterGroupName__&TargetEngineVersion=__TargetEngineVersion__&TargetIops=1&TargetStorageThroughput=1&TargetStorageType=__TargetStorageType__&UpgradeTargetStorageConfig=true&Version=2014-10-31

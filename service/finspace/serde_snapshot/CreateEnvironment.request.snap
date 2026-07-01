@@ -1,0 +1,5 @@
+POST /environment
+
+Content-Type: application/x-amz-json-1.1
+
+{"dataBundles":["__Member__","__Member__"],"description":"__Description__","federationMode":"FEDERATED","federationParameters":{"applicationCallBackURL":"__ApplicationCallBackURL__","attributeMap":{"key0":"__Value__"},"federationProviderName":"__FederationProviderName__","federationURN":"__FederationURN__","samlMetadataDocument":"__SamlMetadataDocument__","samlMetadataURL":"__SamlMetadataURL__"},"kmsKeyId":"__KmsKeyId__","name":"__Name__","superuserParameters":{"emailAddress":"__EmailAddress__","firstName":"__FirstName__","lastName":"__LastName__"},"tags":{"key0":"__Value__"}}

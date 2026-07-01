@@ -1,0 +1,3 @@
+GET /networks/__NetworkId__/oidc?certificate=__Certificate__&clientId=__ClientId__&clientSecret=__ClientSecret__&code=__Code__&codeVerifier=__CodeVerifier__&grantType=__GrantType__&redirectUri=__RedirectUri__&url=__Url__
+
+

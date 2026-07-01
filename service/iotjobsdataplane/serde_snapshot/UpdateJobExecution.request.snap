@@ -1,0 +1,5 @@
+POST /things/__ThingName__/jobs/__JobId__
+
+Content-Type: application/json
+
+{"executionNumber":1,"expectedVersion":1,"includeJobDocument":true,"includeJobExecutionState":true,"status":"QUEUED","statusDetails":{"key0":"__Value__"},"stepTimeoutInMinutes":1}

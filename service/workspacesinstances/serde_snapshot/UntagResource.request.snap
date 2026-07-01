@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: EUCMIFrontendAPIService.UntagResource
+
+{"TagKeys":["__Member__","__Member__"],"WorkspaceInstanceId":"__WorkspaceInstanceId__"}

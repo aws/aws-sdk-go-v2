@@ -1,0 +1,3 @@
+DELETE /replication/v1/replicators/__ReplicatorArn__?currentVersion=__CurrentVersion__
+
+

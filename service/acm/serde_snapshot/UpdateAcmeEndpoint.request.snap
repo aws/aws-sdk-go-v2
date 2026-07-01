@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.UpdateAcmeEndpoint
+
+{"AcmeEndpointArn":"__AcmeEndpointArn__","AuthorizationBehavior":"PRE_APPROVED","CertificateAuthority":{"PublicCertificateAuthority":{"AllowedKeyAlgorithms":["RSA_2048","RSA_2048"]}},"Contact":"REQUIRED"}

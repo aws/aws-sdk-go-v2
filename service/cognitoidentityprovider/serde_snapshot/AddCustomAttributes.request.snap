@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AddCustomAttributes
+
+{"CustomAttributes":[{"AttributeDataType":"String","DeveloperOnlyAttribute":true,"Mutable":true,"Name":"__Name__","NumberAttributeConstraints":{"MaxValue":"__MaxValue__","MinValue":"__MinValue__"},"Required":true,"StringAttributeConstraints":{"MaxLength":"__MaxLength__","MinLength":"__MinLength__"}},{"AttributeDataType":"String","DeveloperOnlyAttribute":true,"Mutable":true,"Name":"__Name__","NumberAttributeConstraints":{"MaxValue":"__MaxValue__","MinValue":"__MinValue__"},"Required":true,"StringAttributeConstraints":{"MaxLength":"__MaxLength__","MinLength":"__MinLength__"}}],"UserPoolId":"__UserPoolId__"}

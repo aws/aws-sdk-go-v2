@@ -1,0 +1,5 @@
+POST /knowledgebases/__KnowledgeBaseId__/datasources/__DataSourceId__/documents/getDocuments
+
+Content-Type: application/json
+
+{"documentIdentifiers":[{"custom":{"id":"__Id__"},"dataSourceType":"CUSTOM","s3":{"uri":"__Uri__"}},{"custom":{"id":"__Id__"},"dataSourceType":"CUSTOM","s3":{"uri":"__Uri__"}}]}

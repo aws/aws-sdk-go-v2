@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.CreateTrail
+
+{"CloudWatchLogsLogGroupArn":"__CloudWatchLogsLogGroupArn__","CloudWatchLogsRoleArn":"__CloudWatchLogsRoleArn__","EnableLogFileValidation":true,"IncludeGlobalServiceEvents":true,"IsMultiRegionTrail":true,"IsOrganizationTrail":true,"KmsKeyId":"__KmsKeyId__","Name":"__Name__","S3BucketName":"__S3BucketName__","S3KeyPrefix":"__S3KeyPrefix__","SnsTopicName":"__SnsTopicName__","TagsList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

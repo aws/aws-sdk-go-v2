@@ -1,0 +1,5 @@
+POST /network-migration/DeleteNetworkMigrationDefinition
+
+Content-Type: application/json
+
+{"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__"}

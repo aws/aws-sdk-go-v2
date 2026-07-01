@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/aiprompts/__AiPromptId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","inferenceConfiguration":{"maxTokensToSample":1,"temperature":1,"topK":1,"topP":1},"modelId":"__ModelId__","templateConfiguration":{"textFullAIPromptEditTemplateConfiguration":{"text":"__Text__"}},"visibilityStatus":"SAVED"}

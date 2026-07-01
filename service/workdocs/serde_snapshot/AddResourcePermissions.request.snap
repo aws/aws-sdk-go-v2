@@ -1,0 +1,6 @@
+POST /api/v1/resources/__ResourceId__/permissions
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"NotificationOptions":{"EmailMessage":"__EmailMessage__","SendEmail":true},"Principals":[{"Id":"__Id__","Role":"VIEWER","Type":"USER"},{"Id":"__Id__","Role":"VIEWER","Type":"USER"}]}

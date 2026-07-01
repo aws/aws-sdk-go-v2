@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShineFrontendService_20170701.UpdateParallelData
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","ParallelDataConfig":{"Format":"TSV","S3Uri":"__S3Uri__"}}

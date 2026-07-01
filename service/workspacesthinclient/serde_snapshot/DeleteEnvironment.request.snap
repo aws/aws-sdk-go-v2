@@ -1,0 +1,3 @@
+DELETE /environments/__Id__?clientToken=__ClientToken__
+
+

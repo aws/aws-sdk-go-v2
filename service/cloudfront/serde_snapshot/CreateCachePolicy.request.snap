@@ -1,0 +1,5 @@
+POST /2020-05-31/cache-policy
+
+Content-Type: application/xml
+
+<CachePolicyConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Comment>__Comment__</Comment><DefaultTTL>1</DefaultTTL><MaxTTL>1</MaxTTL><MinTTL>1</MinTTL><Name>__Name__</Name><ParametersInCacheKeyAndForwardedToOrigin><CookiesConfig><CookieBehavior>none</CookieBehavior><Cookies><Items><Name>__Member__</Name><Name>__Member__</Name></Items><Quantity>1</Quantity></Cookies></CookiesConfig><EnableAcceptEncodingBrotli>true</EnableAcceptEncodingBrotli><EnableAcceptEncodingGzip>true</EnableAcceptEncodingGzip><HeadersConfig><HeaderBehavior>none</HeaderBehavior><Headers><Items><Name>__Member__</Name><Name>__Member__</Name></Items><Quantity>1</Quantity></Headers></HeadersConfig><QueryStringsConfig><QueryStringBehavior>none</QueryStringBehavior><QueryStrings><Items><Name>__Member__</Name><Name>__Member__</Name></Items><Quantity>1</Quantity></QueryStrings></QueryStringsConfig></ParametersInCacheKeyAndForwardedToOrigin></CachePolicyConfig>

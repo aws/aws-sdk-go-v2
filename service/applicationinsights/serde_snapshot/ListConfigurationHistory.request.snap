@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.ListConfigurationHistory
+
+{"AccountId":"__AccountId__","EndTime":946684800,"EventStatus":"INFO","MaxResults":1,"NextToken":"__NextToken__","ResourceGroupName":"__ResourceGroupName__","StartTime":946684800}

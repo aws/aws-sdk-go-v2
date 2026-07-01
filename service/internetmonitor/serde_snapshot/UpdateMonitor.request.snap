@@ -1,0 +1,5 @@
+PATCH /v20210603/Monitors/__MonitorName__
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","HealthEventsConfig":{"AvailabilityLocalHealthEventsConfig":{"HealthScoreThreshold":1,"MinTrafficImpact":1,"Status":"ENABLED"},"AvailabilityScoreThreshold":1,"PerformanceLocalHealthEventsConfig":{"HealthScoreThreshold":1,"MinTrafficImpact":1,"Status":"ENABLED"},"PerformanceScoreThreshold":1},"InternetMeasurementsLogDelivery":{"S3Config":{"BucketName":"__BucketName__","BucketPrefix":"__BucketPrefix__","LogDeliveryStatus":"ENABLED"}},"MaxCityNetworksToMonitor":1,"ResourcesToAdd":["__Member__","__Member__"],"ResourcesToRemove":["__Member__","__Member__"],"Status":"PENDING","TrafficPercentageToMonitor":1}

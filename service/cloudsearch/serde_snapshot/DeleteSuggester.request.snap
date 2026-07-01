@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteSuggester&DomainName=__DomainName__&SuggesterName=__SuggesterName__&Version=2013-01-01

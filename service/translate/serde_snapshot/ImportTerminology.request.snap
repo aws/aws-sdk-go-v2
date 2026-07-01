@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShineFrontendService_20170701.ImportTerminology
+
+{"Description":"__Description__","EncryptionKey":{"Id":"__Id__","Type":"KMS"},"MergeStrategy":"OVERWRITE","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TerminologyData":{"Directionality":"UNI","File":"YmxvYg==","Format":"CSV"}}

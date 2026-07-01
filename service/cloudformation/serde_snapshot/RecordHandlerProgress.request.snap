@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RecordHandlerProgress&BearerToken=__BearerToken__&ClientRequestToken=__ClientRequestToken__&CurrentOperationStatus=PENDING&ErrorCode=NotUpdatable&OperationStatus=PENDING&ResourceModel=__ResourceModel__&StatusMessage=__StatusMessage__&Version=2010-05-15

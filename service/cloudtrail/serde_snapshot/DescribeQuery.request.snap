@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.DescribeQuery
+
+{"EventDataStore":"__EventDataStore__","EventDataStoreOwnerAccountId":"__EventDataStoreOwnerAccountId__","QueryAlias":"__QueryAlias__","QueryId":"__QueryId__","RefreshId":"__RefreshId__"}

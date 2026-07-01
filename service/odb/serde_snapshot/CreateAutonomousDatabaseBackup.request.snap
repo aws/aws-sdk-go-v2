@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateAutonomousDatabaseBackup
+
+{"autonomousDatabaseId":"__AutonomousDatabaseId__","clientToken":"__ClientToken__","displayName":"__DisplayName__","retentionPeriodInDays":1,"tags":{"key0":"__Value__"}}

@@ -1,0 +1,5 @@
+PUT /packaging_groups/__Id__
+
+Content-Type: application/json
+
+{"authorization":{"cdnIdentifierSecret":"__CdnIdentifierSecret__","secretsRoleArn":"__SecretsRoleArn__"}}

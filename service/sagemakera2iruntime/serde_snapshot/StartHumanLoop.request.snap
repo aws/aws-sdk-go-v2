@@ -1,0 +1,5 @@
+POST /human-loops
+
+Content-Type: application/json
+
+{"DataAttributes":{"ContentClassifiers":["FreeOfPersonallyIdentifiableInformation","FreeOfPersonallyIdentifiableInformation"]},"FlowDefinitionArn":"__FlowDefinitionArn__","HumanLoopInput":{"InputContent":"__InputContent__"},"HumanLoopName":"__HumanLoopName__"}

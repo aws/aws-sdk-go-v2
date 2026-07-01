@@ -1,0 +1,5 @@
+PATCH /configured-audience-model/__ConfiguredAudienceModelArn__
+
+Content-Type: application/json
+
+{"audienceModelArn":"__AudienceModelArn__","audienceSizeConfig":{"audienceSizeBins":[1,1],"audienceSizeType":"ABSOLUTE"},"description":"__Description__","minMatchingSeedSize":1,"outputConfig":{"destination":{"s3Destination":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__"},"sharedAudienceMetrics":["ALL","ALL"]}

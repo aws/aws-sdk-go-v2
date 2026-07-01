@@ -1,0 +1,5 @@
+PATCH /extensions/__ExtensionIdentifier__
+
+Content-Type: application/json
+
+{"Actions":{"key0":[{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"},{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"}]},"Description":"__Description__","Parameters":{"key0":{"Description":"__Description__","Dynamic":true,"Required":true}},"VersionNumber":1}

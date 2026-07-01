@@ -1,0 +1,3 @@
+GET /maps/v0/maps/__MapName__/sprites/__FileName__?key=__Key__
+
+

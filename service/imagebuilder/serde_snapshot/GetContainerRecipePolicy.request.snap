@@ -1,0 +1,3 @@
+GET /GetContainerRecipePolicy?containerRecipeArn=__ContainerRecipeArn__
+
+

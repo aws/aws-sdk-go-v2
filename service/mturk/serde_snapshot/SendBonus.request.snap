@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.SendBonus
+
+{"AssignmentId":"__AssignmentId__","BonusAmount":"__BonusAmount__","Reason":"__Reason__","UniqueRequestToken":"__UniqueRequestToken__","WorkerId":"__WorkerId__"}

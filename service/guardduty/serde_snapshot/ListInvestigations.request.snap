@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/investigation/list
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"START_TIME","orderBy":"ASC"}}

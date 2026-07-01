@@ -1,0 +1,5 @@
+POST /v1/deregisterjobdefinition
+
+Content-Type: application/json
+
+{"jobDefinition":"__JobDefinition__"}

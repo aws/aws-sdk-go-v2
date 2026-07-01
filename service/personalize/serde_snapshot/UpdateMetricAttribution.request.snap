@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.UpdateMetricAttribution
+
+{"addMetrics":[{"eventType":"__EventType__","expression":"__Expression__","metricName":"__MetricName__"},{"eventType":"__EventType__","expression":"__Expression__","metricName":"__MetricName__"}],"metricAttributionArn":"__MetricAttributionArn__","metricsOutputConfig":{"roleArn":"__RoleArn__","s3DataDestination":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"removeMetrics":["__Member__","__Member__"]}

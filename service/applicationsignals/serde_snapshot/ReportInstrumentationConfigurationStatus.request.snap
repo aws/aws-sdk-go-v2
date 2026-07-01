@@ -1,0 +1,5 @@
+POST /report-instrumentation-configuration-status
+
+Content-Type: application/json
+
+{"Configurations":[{"ErrorCause":"FILE_NOT_FOUND","InstrumentationType":"BREAKPOINT","LocationHash":"__LocationHash__","SignalType":"SNAPSHOT","Status":"READY","Time":946684800},{"ErrorCause":"FILE_NOT_FOUND","InstrumentationType":"BREAKPOINT","LocationHash":"__LocationHash__","SignalType":"SNAPSHOT","Status":"READY","Time":946684800}],"Environment":"__Environment__","Service":"__Service__"}

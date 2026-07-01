@@ -1,0 +1,5 @@
+POST /servicenetworkserviceassociations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","serviceIdentifier":"__ServiceIdentifier__","serviceNetworkIdentifier":"__ServiceNetworkIdentifier__","tags":{"key0":"__Value__"}}

@@ -1,0 +1,5 @@
+PUT /scan/job
+
+Content-Type: application/json
+
+{"BackupVaultName":"__BackupVaultName__","ContinuousScanEndTime":946684800,"IamRoleArn":"__IamRoleArn__","IdempotencyToken":"__IdempotencyToken__","MalwareScanner":"GUARDDUTY","RecoveryPointArn":"__RecoveryPointArn__","ScanBaseRecoveryPointArn":"__ScanBaseRecoveryPointArn__","ScanMode":"FULL_SCAN","ScannerRoleArn":"__ScannerRoleArn__"}

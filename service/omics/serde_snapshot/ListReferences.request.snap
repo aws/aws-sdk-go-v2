@@ -1,0 +1,5 @@
+POST /referencestore/__ReferenceStoreId__/references?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"createdAfter":"2000-01-01T00:00:00Z","createdBefore":"2000-01-01T00:00:00Z","md5":"__Md5__","name":"__Name__"}}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateStoreImageTask&Bucket=__Bucket__&DryRun=true&ImageId=__ImageId__&S3ObjectTag.1.Key=__Key__&S3ObjectTag.1.Value=__Value__&S3ObjectTag.2.Key=__Key__&S3ObjectTag.2.Value=__Value__&Version=2016-11-15

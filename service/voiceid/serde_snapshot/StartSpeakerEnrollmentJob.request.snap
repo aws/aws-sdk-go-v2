@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.StartSpeakerEnrollmentJob
+
+{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DomainId":"__DomainId__","EnrollmentConfig":{"ExistingEnrollmentAction":"SKIP","FraudDetectionConfig":{"FraudDetectionAction":"IGNORE","RiskThreshold":1,"WatchlistIds":["__Member__","__Member__"]}},"InputDataConfig":{"S3Uri":"__S3Uri__"},"JobName":"__JobName__","OutputDataConfig":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}}

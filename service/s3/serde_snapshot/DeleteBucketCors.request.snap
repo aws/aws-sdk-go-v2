@@ -1,0 +1,4 @@
+DELETE /?cors=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

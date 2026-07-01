@@ -1,0 +1,5 @@
+POST /sessionLoggers
+
+Content-Type: application/json
+
+{"additionalEncryptionContext":{"key0":"__Value__"},"clientToken":"__ClientToken__","customerManagedKey":"__CustomerManagedKey__","displayName":"__DisplayName__","eventFilter":{"all":{}},"logConfiguration":{"s3":{"bucket":"__Bucket__","bucketOwner":"__BucketOwner__","folderStructure":"Flat","keyPrefix":"__KeyPrefix__","logFileFormat":"JSONLines"}},"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

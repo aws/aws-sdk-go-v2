@@ -1,0 +1,5 @@
+POST /sbomexport/get
+
+Content-Type: application/json
+
+{"reportId":"__ReportId__"}

@@ -1,0 +1,5 @@
+POST /v2/campaigns/__Id__/communication-limits
+
+Content-Type: application/json
+
+{"communicationLimitsOverride":{"allChannelSubtypes":{"communicationLimitsList":[{"frequency":1,"maxCountPerRecipient":1,"unit":"DAY"},{"frequency":1,"maxCountPerRecipient":1,"unit":"DAY"}]},"instanceLimitsHandling":"OPT_IN"}}

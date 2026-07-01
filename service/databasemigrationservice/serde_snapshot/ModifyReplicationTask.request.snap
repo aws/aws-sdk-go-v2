@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ModifyReplicationTask
+
+{"CdcStartPosition":"__CdcStartPosition__","CdcStartTime":946684800,"CdcStopPosition":"__CdcStopPosition__","MigrationType":"full-load","ReplicationTaskArn":"__ReplicationTaskArn__","ReplicationTaskIdentifier":"__ReplicationTaskIdentifier__","ReplicationTaskSettings":"__ReplicationTaskSettings__","TableMappings":"__TableMappings__","TaskData":"__TaskData__"}

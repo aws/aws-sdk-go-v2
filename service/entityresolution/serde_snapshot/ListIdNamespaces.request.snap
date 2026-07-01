@@ -1,0 +1,3 @@
+GET /idnamespaces?maxResults=1&nextToken=__NextToken__
+
+

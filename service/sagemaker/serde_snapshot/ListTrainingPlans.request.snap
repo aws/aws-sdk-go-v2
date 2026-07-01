@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListTrainingPlans
+
+{"Filters":[{"Name":"Status","Value":"__Value__"},{"Name":"Status","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__","SortBy":"TrainingPlanName","SortOrder":"Ascending","StartTimeAfter":946684800,"StartTimeBefore":946684800}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListTestGridSessions
+
+{"creationTimeAfter":946684800,"creationTimeBefore":946684800,"endTimeAfter":946684800,"endTimeBefore":946684800,"maxResult":1,"nextToken":"__NextToken__","projectArn":"__ProjectArn__","status":"ACTIVE"}

@@ -1,0 +1,5 @@
+POST /properties
+
+Content-Type: application/json
+
+{"enablePartialEntryProcessing":true,"entries":[{"assetId":"__AssetId__","entryId":"__EntryId__","propertyAlias":"__PropertyAlias__","propertyId":"__PropertyId__","propertyValues":[{"quality":"GOOD","timestamp":{"offsetInNanos":1,"timeInSeconds":1},"value":{"booleanValue":true,"doubleValue":1,"integerValue":1,"nullValue":{"valueType":"D"},"stringValue":"__StringValue__"}},{"quality":"GOOD","timestamp":{"offsetInNanos":1,"timeInSeconds":1},"value":{"booleanValue":true,"doubleValue":1,"integerValue":1,"nullValue":{"valueType":"D"},"stringValue":"__StringValue__"}}]},{"assetId":"__AssetId__","entryId":"__EntryId__","propertyAlias":"__PropertyAlias__","propertyId":"__PropertyId__","propertyValues":[{"quality":"GOOD","timestamp":{"offsetInNanos":1,"timeInSeconds":1},"value":{"booleanValue":true,"doubleValue":1,"integerValue":1,"nullValue":{"valueType":"D"},"stringValue":"__StringValue__"}},{"quality":"GOOD","timestamp":{"offsetInNanos":1,"timeInSeconds":1},"value":{"booleanValue":true,"doubleValue":1,"integerValue":1,"nullValue":{"valueType":"D"},"stringValue":"__StringValue__"}}]}]}

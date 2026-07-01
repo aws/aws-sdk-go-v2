@@ -1,0 +1,5 @@
+POST /user/ListProductSubscriptions
+
+Content-Type: application/json
+
+{"Filters":[{"Attribute":"__Attribute__","Operation":"__Operation__","Value":"__Value__"},{"Attribute":"__Attribute__","Operation":"__Operation__","Value":"__Value__"}],"IdentityProvider":{"ActiveDirectoryIdentityProvider":{"ActiveDirectorySettings":{"DomainCredentialsProvider":{"SecretsManagerCredentialsProvider":{"SecretId":"__SecretId__"}},"DomainIpv4List":["__Member__","__Member__"],"DomainIpv6List":["__Member__","__Member__"],"DomainName":"__DomainName__","DomainNetworkSettings":{"Subnets":["__Member__","__Member__"]}},"ActiveDirectoryType":"SELF_MANAGED","DirectoryId":"__DirectoryId__","IsSharedActiveDirectory":true}},"MaxResults":1,"NextToken":"__NextToken__","Product":"__Product__"}

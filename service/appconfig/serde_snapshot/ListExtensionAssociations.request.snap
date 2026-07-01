@@ -1,0 +1,3 @@
+GET /extensionassociations?extension_identifier=__ExtensionIdentifier__&extension_version_number=1&max_results=1&next_token=__NextToken__&resource_identifier=__ResourceIdentifier__
+
+

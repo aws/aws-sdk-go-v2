@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssumeRoot&DurationSeconds=1&TargetPrincipal=__TargetPrincipal__&TaskPolicyArn.arn=__Arn__&Version=2011-06-15

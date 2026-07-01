@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateInferenceExperiment
+
+{"DataStorageConfig":{"ContentType":{"CsvContentTypes":["__Member__","__Member__"],"JsonContentTypes":["__Member__","__Member__"]},"Destination":"__Destination__","KmsKey":"__KmsKey__"},"Description":"__Description__","ModelVariants":[{"InfrastructureConfig":{"InfrastructureType":"RealTimeInference","RealTimeInferenceConfig":{"InstanceCount":1,"InstanceType":"ml.t2.medium"}},"ModelName":"__ModelName__","VariantName":"__VariantName__"},{"InfrastructureConfig":{"InfrastructureType":"RealTimeInference","RealTimeInferenceConfig":{"InstanceCount":1,"InstanceType":"ml.t2.medium"}},"ModelName":"__ModelName__","VariantName":"__VariantName__"}],"Name":"__Name__","Schedule":{"EndTime":946684800,"StartTime":946684800},"ShadowModeConfig":{"ShadowModelVariants":[{"SamplingPercentage":1,"ShadowModelVariantName":"__ShadowModelVariantName__"},{"SamplingPercentage":1,"ShadowModelVariantName":"__ShadowModelVariantName__"}],"SourceModelVariantName":"__SourceModelVariantName__"}}

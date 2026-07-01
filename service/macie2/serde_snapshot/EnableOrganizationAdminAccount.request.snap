@@ -1,0 +1,5 @@
+POST /admin
+
+Content-Type: application/json
+
+{"adminAccountId":"__AdminAccountId__","clientToken":"__ClientToken__"}

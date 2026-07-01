@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CancelConversionTask&ConversionTaskId=__ConversionTaskId__&DryRun=true&ReasonMessage=__ReasonMessage__&Version=2016-11-15

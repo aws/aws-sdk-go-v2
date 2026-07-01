@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.UpdateInvoiceUnit
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","InvoiceUnitArn":"__InvoiceUnitArn__","Rule":{"BillSourceAccounts":["__Member__","__Member__"],"LinkedAccounts":["__Member__","__Member__"]},"TaxInheritanceDisabled":true}

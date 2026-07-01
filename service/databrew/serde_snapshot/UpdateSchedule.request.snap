@@ -1,0 +1,5 @@
+PUT /schedules/__Name__
+
+Content-Type: application/json
+
+{"CronExpression":"__CronExpression__","JobNames":["__Member__","__Member__"]}

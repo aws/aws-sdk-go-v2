@@ -1,0 +1,5 @@
+POST /v2/campaigns/__Id__/flow
+
+Content-Type: application/json
+
+{"connectCampaignFlowArn":"__ConnectCampaignFlowArn__"}

@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/topics/__TopicId__/batch-delete-reviewed-answers
+
+Content-Type: application/json
+
+{"AnswerIds":["__Member__","__Member__"]}

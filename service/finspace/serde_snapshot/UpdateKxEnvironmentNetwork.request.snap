@@ -1,0 +1,5 @@
+PUT /kx/environments/__EnvironmentId__/network
+
+Content-Type: application/x-amz-json-1.1
+
+{"clientToken":"__ClientToken__","customDNSConfiguration":[{"customDNSServerIP":"__CustomDNSServerIP__","customDNSServerName":"__CustomDNSServerName__"},{"customDNSServerIP":"__CustomDNSServerIP__","customDNSServerName":"__CustomDNSServerName__"}],"transitGatewayConfiguration":{"attachmentNetworkAclConfiguration":[{"cidrBlock":"__CidrBlock__","icmpTypeCode":{"code":1,"type":1},"portRange":{"from":1,"to":1},"protocol":"__Protocol__","ruleAction":"allow","ruleNumber":1},{"cidrBlock":"__CidrBlock__","icmpTypeCode":{"code":1,"type":1},"portRange":{"from":1,"to":1},"protocol":"__Protocol__","ruleAction":"allow","ruleNumber":1}],"routableCIDRSpace":"__RoutableCIDRSpace__","transitGatewayID":"__TransitGatewayID__"}}

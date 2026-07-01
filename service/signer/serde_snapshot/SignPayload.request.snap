@@ -1,0 +1,5 @@
+POST /signing-jobs/with-payload
+
+Content-Type: application/json
+
+{"payload":"YmxvYg==","payloadFormat":"__PayloadFormat__","profileName":"__ProfileName__","profileOwner":"__ProfileOwner__"}

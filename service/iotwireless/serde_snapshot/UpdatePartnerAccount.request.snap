@@ -1,0 +1,5 @@
+PATCH /partner-accounts/__PartnerAccountId__?partnerType=Sidewalk
+
+Content-Type: application/json
+
+{"Sidewalk":{"AppServerPrivateKey":"__AppServerPrivateKey__"}}

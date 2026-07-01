@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/users/__UserId__?operation=associate-phone-number
+
+Content-Type: application/json
+
+{"E164PhoneNumber":"__E164PhoneNumber__"}

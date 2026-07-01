@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.DeleteBGPPeer
+
+{"asn":1,"asnLong":1,"bgpPeerId":"__BgpPeerId__","customerAddress":"__CustomerAddress__","virtualInterfaceId":"__VirtualInterfaceId__"}

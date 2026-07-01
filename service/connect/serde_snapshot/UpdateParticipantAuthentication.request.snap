@@ -1,0 +1,5 @@
+POST /contact/update-participant-authentication
+
+Content-Type: application/json
+
+{"Code":"__Code__","Error":"__Error__","ErrorDescription":"__ErrorDescription__","InstanceId":"__InstanceId__","State":"__State__"}

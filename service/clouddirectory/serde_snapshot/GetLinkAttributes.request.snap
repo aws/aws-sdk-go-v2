@@ -1,0 +1,6 @@
+POST /amazonclouddirectory/2017-01-11/typedlink/attributes/get
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"AttributeNames":["__Member__","__Member__"],"ConsistencyLevel":"SERIALIZABLE","TypedLinkSpecifier":{"IdentityAttributeValues":[{"AttributeName":"__AttributeName__","Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}},{"AttributeName":"__AttributeName__","Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}],"SourceObjectReference":{"Selector":"__Selector__"},"TargetObjectReference":{"Selector":"__Selector__"},"TypedLinkFacet":{"SchemaArn":"__SchemaArn__","TypedLinkName":"__TypedLinkName__"}}}

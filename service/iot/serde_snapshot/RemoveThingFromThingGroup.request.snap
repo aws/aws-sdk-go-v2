@@ -1,0 +1,5 @@
+PUT /thing-groups/removeThingFromThingGroup
+
+Content-Type: application/json
+
+{"thingArn":"__ThingArn__","thingGroupArn":"__ThingGroupArn__","thingGroupName":"__ThingGroupName__","thingName":"__ThingName__"}

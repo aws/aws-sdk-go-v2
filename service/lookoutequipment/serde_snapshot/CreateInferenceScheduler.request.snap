@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.CreateInferenceScheduler
+
+{"ClientToken":"__ClientToken__","DataDelayOffsetInMinutes":1,"DataInputConfiguration":{"InferenceInputNameConfiguration":{"ComponentTimestampDelimiter":"__ComponentTimestampDelimiter__","TimestampFormat":"__TimestampFormat__"},"InputTimeZoneOffset":"__InputTimeZoneOffset__","S3InputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"DataOutputConfiguration":{"KmsKeyId":"__KmsKeyId__","S3OutputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"DataUploadFrequency":"PT5M","InferenceSchedulerName":"__InferenceSchedulerName__","ModelName":"__ModelName__","RoleArn":"__RoleArn__","ServerSideKmsKeyId":"__ServerSideKmsKeyId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ModifyInstanceProfile
+
+{"AvailabilityZone":"__AvailabilityZone__","Description":"__Description__","InstanceProfileIdentifier":"__InstanceProfileIdentifier__","InstanceProfileName":"__InstanceProfileName__","KmsKeyArn":"__KmsKeyArn__","NetworkType":"__NetworkType__","PubliclyAccessible":true,"SubnetGroupIdentifier":"__SubnetGroupIdentifier__","VpcSecurityGroups":["__Member__","__Member__"]}

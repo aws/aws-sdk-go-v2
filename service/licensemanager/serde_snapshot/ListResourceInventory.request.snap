@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.ListResourceInventory
+
+{"Filters":[{"Condition":"EQUALS","Name":"__Name__","Value":"__Value__"},{"Condition":"EQUALS","Name":"__Name__","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

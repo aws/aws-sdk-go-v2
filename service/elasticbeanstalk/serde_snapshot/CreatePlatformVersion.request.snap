@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreatePlatformVersion&EnvironmentName=__EnvironmentName__&OptionSettings.member.1.Namespace=__Namespace__&OptionSettings.member.1.OptionName=__OptionName__&OptionSettings.member.1.ResourceName=__ResourceName__&OptionSettings.member.1.Value=__Value__&OptionSettings.member.2.Namespace=__Namespace__&OptionSettings.member.2.OptionName=__OptionName__&OptionSettings.member.2.ResourceName=__ResourceName__&OptionSettings.member.2.Value=__Value__&PlatformDefinitionBundle.S3Bucket=__S3Bucket__&PlatformDefinitionBundle.S3Key=__S3Key__&PlatformName=__PlatformName__&PlatformVersion=__PlatformVersion__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2010-12-01

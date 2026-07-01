@@ -1,0 +1,5 @@
+POST /amazonclouddirectory/2017-01-11/schema/development
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

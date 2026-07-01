@@ -1,0 +1,5 @@
+PATCH /findings/batchupdate
+
+Content-Type: application/json
+
+{"Confidence":1,"Criticality":1,"FindingIdentifiers":[{"Id":"__Id__","ProductArn":"__ProductArn__"},{"Id":"__Id__","ProductArn":"__ProductArn__"}],"Note":{"Text":"__Text__","UpdatedBy":"__UpdatedBy__"},"RelatedFindings":[{"Id":"__Id__","ProductArn":"__ProductArn__"},{"Id":"__Id__","ProductArn":"__ProductArn__"}],"Severity":{"Label":"INFORMATIONAL","Normalized":1,"Product":1},"Types":["__Member__","__Member__"],"UserDefinedFields":{"key0":"__Value__"},"VerificationState":"UNKNOWN","Workflow":{"Status":"NEW"}}

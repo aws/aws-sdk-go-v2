@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.CreateCallAnalyticsCategory
+
+{"CategoryName":"__CategoryName__","InputType":"REAL_TIME","Rules":[{"NonTalkTimeFilter":{"AbsoluteTimeRange":{"EndTime":1,"First":1,"Last":1,"StartTime":1},"Negate":true,"RelativeTimeRange":{"EndPercentage":1,"First":1,"Last":1,"StartPercentage":1},"Threshold":1}},{"NonTalkTimeFilter":{"AbsoluteTimeRange":{"EndTime":1,"First":1,"Last":1,"StartTime":1},"Negate":true,"RelativeTimeRange":{"EndPercentage":1,"First":1,"Last":1,"StartPercentage":1},"Threshold":1}}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

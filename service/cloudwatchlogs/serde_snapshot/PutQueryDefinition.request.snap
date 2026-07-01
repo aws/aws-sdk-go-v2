@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.PutQueryDefinition
+
+{"clientToken":"__ClientToken__","logGroupNames":["__Member__","__Member__"],"name":"__Name__","parameters":[{"defaultValue":"__DefaultValue__","description":"__Description__","name":"__Name__"},{"defaultValue":"__DefaultValue__","description":"__Description__","name":"__Name__"}],"queryDefinitionId":"__QueryDefinitionId__","queryLanguage":"CWLI","queryString":"__QueryString__"}

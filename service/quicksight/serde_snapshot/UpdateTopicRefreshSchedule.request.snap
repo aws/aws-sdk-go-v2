@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/topics/__TopicId__/schedules/__DatasetId__
+
+Content-Type: application/json
+
+{"RefreshSchedule":{"BasedOnSpiceSchedule":true,"IsEnabled":true,"RepeatAt":"__RepeatAt__","StartingAt":946684800,"Timezone":"__Timezone__","TopicScheduleType":"HOURLY"}}

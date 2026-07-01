@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/scenes
+
+Content-Type: application/json
+
+{"capabilities":["__Member__","__Member__"],"contentLocation":"__ContentLocation__","description":"__Description__","sceneId":"__SceneId__","sceneMetadata":{"key0":"__Value__"},"tags":{"key0":"__Value__"}}

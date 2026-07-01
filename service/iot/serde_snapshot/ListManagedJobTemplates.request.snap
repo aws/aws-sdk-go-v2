@@ -1,0 +1,3 @@
+GET /managed-job-templates?maxResults=1&nextToken=__NextToken__&templateName=__TemplateName__
+
+

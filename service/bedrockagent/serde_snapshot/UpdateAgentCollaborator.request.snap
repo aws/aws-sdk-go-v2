@@ -1,0 +1,5 @@
+PUT /agents/__AgentId__/agentversions/__AgentVersion__/agentcollaborators/__CollaboratorId__/
+
+Content-Type: application/json
+
+{"agentDescriptor":{"aliasArn":"__AliasArn__"},"collaborationInstruction":"__CollaborationInstruction__","collaboratorName":"__CollaboratorName__","relayConversationHistory":"TO_COLLABORATOR"}

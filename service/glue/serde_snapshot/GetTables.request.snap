@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetTables
+
+{"AttributesToGet":["NAME","NAME"],"AuditContext":{"AdditionalAuditContext":"__AdditionalAuditContext__","AllColumnsRequested":true,"RequestedColumns":["__Member__","__Member__"]},"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","Expression":"__Expression__","IncludeStatusDetails":true,"MaxResults":1,"NextToken":"__NextToken__","QueryAsOfTime":946684800,"TransactionId":"__TransactionId__"}

@@ -1,0 +1,5 @@
+POST /contact/__ContactId__/versions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","satelliteArn":"__SatelliteArn__","trackingOverrides":{"programTrackSettings":{"azEl":{"ephemerisId":"__EphemerisId__"}}}}

@@ -1,0 +1,3 @@
+DELETE /billing-groups/__BillingGroupName__?expectedVersion=1
+
+

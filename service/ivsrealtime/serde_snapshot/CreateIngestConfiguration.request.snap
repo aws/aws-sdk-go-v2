@@ -1,0 +1,5 @@
+POST /CreateIngestConfiguration
+
+Content-Type: application/json
+
+{"attributes":{"key0":"__Value__"},"ingestProtocol":"RTMP","insecureIngest":true,"name":"__Name__","redundantIngest":true,"stageArn":"__StageArn__","tags":{"key0":"__Value__"},"userId":"__UserId__"}

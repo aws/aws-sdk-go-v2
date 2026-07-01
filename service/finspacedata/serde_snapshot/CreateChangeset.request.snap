@@ -1,0 +1,5 @@
+POST /datasets/__DatasetId__/changesetsv2
+
+Content-Type: application/x-amz-json-1.1
+
+{"changeType":"REPLACE","clientToken":"__ClientToken__","formatParams":{"key0":"__Value__"},"sourceParams":{"key0":"__Value__"}}

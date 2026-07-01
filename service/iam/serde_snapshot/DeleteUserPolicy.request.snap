@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteUserPolicy&PolicyName=__PolicyName__&UserName=__UserName__&Version=2010-05-08

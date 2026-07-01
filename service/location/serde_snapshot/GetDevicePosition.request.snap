@@ -1,0 +1,3 @@
+GET /tracking/v0/trackers/__TrackerName__/devices/__DeviceId__/positions/latest
+
+

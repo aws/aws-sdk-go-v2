@@ -1,0 +1,5 @@
+PUT /v1/registries/name/__RegistryName__/schemas/name/__SchemaName__
+
+Content-Type: application/json
+
+{"ClientTokenId":"__ClientTokenId__","Content":"__Content__","Description":"__Description__","Type":"OpenApi3"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchUpdateBillScenarioCommitmentModification
+
+{"billScenarioId":"__BillScenarioId__","commitmentModifications":[{"group":"__Group__","id":"__Id__"},{"group":"__Group__","id":"__Id__"}]}

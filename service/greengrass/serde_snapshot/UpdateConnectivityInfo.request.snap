@@ -1,0 +1,5 @@
+PUT /greengrass/things/__ThingName__/connectivityInfo
+
+Content-Type: application/json
+
+{"ConnectivityInfo":[{"HostAddress":"__HostAddress__","Id":"__Id__","Metadata":"__Metadata__","PortNumber":1},{"HostAddress":"__HostAddress__","Id":"__Id__","Metadata":"__Metadata__","PortNumber":1}]}

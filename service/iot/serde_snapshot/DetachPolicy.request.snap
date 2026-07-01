@@ -1,0 +1,5 @@
+POST /target-policies/__PolicyName__
+
+Content-Type: application/json
+
+{"target":"__Target__"}

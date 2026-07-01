@@ -1,0 +1,5 @@
+POST /ListTelemetryRulesForOrganization
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","RuleNamePrefix":"__RuleNamePrefix__","SourceAccountIds":["__Member__","__Member__"],"SourceOrganizationUnitIds":["__Member__","__Member__"]}

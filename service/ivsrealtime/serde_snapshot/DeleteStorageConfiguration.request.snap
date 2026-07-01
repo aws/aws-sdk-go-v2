@@ -1,0 +1,5 @@
+POST /DeleteStorageConfiguration
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

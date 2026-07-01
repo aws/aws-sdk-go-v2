@@ -1,0 +1,5 @@
+POST /networks/__NetworkId__/tdf?dryRun=true
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","clientSecret":"__ClientSecret__","domain":"__Domain__","provider":"__Provider__"}

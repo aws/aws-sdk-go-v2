@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.UpdateDbInstance
+
+{"allocatedStorage":1,"dbInstanceType":"db.influx.medium","dbParameterGroupIdentifier":"__DbParameterGroupIdentifier__","dbStorageType":"InfluxIOIncludedT1","deploymentType":"SINGLE_AZ","identifier":"__Identifier__","logDeliveryConfiguration":{"s3Configuration":{"bucketName":"__BucketName__","enabled":true}},"maintenanceSchedule":{"preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","timezone":"__Timezone__"},"port":1}

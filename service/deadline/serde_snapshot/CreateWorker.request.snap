@@ -1,0 +1,6 @@
+POST /2023-10-12/farms/__FarmId__/fleets/__FleetId__/workers
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"hostProperties":{"hostName":"__HostName__","ipAddresses":{"ipV4Addresses":["__Member__","__Member__"],"ipV6Addresses":["__Member__","__Member__"]}},"tags":{"key0":"__Value__"}}

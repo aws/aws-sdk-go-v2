@@ -1,0 +1,5 @@
+POST /managed-things-command/__ManagedThingId__
+
+Content-Type: application/json
+
+{"AccountAssociationId":"__AccountAssociationId__","ConnectorAssociationId":"__ConnectorAssociationId__","Endpoints":[{"capabilities":[{"actions":[{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"},{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"}],"id":"__Id__","name":"__Name__","version":"__Version__"},{"actions":[{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"},{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"}],"id":"__Id__","name":"__Name__","version":"__Version__"}],"endpointId":"__EndpointId__"},{"capabilities":[{"actions":[{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"},{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"}],"id":"__Id__","name":"__Name__","version":"__Version__"},{"actions":[{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"},{"actionTraceId":"__ActionTraceId__","name":"__Name__","ref":"__Ref__"}],"id":"__Id__","name":"__Name__","version":"__Version__"}],"endpointId":"__EndpointId__"}]}

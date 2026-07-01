@@ -1,0 +1,5 @@
+PUT /2019-09-25/functions/__FunctionName__/event-invoke-config?Qualifier=__Qualifier__
+
+Content-Type: application/json
+
+{"DestinationConfig":{"OnFailure":{"Destination":"__Destination__"},"OnSuccess":{"Destination":"__Destination__"}},"MaximumEventAgeInSeconds":1,"MaximumRetryAttempts":1}

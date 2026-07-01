@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteOpenIDConnectProvider&OpenIDConnectProviderArn=__OpenIDConnectProviderArn__&Version=2010-05-08

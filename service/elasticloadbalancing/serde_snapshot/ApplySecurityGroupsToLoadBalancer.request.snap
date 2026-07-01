@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ApplySecurityGroupsToLoadBalancer&LoadBalancerName=__LoadBalancerName__&SecurityGroups.member.1=__Member__&SecurityGroups.member.2=__Member__&Version=2012-06-01

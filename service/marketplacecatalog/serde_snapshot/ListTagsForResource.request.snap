@@ -1,0 +1,5 @@
+POST /ListTagsForResource
+
+Content-Type: application/json
+
+{"ResourceArn":"__ResourceArn__"}

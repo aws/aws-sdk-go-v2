@@ -1,0 +1,5 @@
+POST /wireless-gateway-task-definitions
+
+Content-Type: application/json
+
+{"AutoCreateTasks":true,"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Update":{"LoRaWAN":{"CurrentVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"},"SigKeyCrc":1,"UpdateSignature":"__UpdateSignature__","UpdateVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"}},"UpdateDataRole":"__UpdateDataRole__","UpdateDataSource":"__UpdateDataSource__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShield_20160616.AssociateProactiveEngagementDetails
+
+{"EmergencyContactList":[{"ContactNotes":"__ContactNotes__","EmailAddress":"__EmailAddress__","PhoneNumber":"__PhoneNumber__"},{"ContactNotes":"__ContactNotes__","EmailAddress":"__EmailAddress__","PhoneNumber":"__PhoneNumber__"}]}

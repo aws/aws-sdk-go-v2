@@ -1,0 +1,5 @@
+POST /datasets/__DatasetId__/dataviewsv2
+
+Content-Type: application/x-amz-json-1.1
+
+{"asOfTimestamp":1,"autoUpdate":true,"clientToken":"__ClientToken__","destinationTypeParams":{"destinationType":"__DestinationType__","s3DestinationExportFileFormat":"PARQUET","s3DestinationExportFileFormatOptions":{"key0":"__Value__"}},"partitionColumns":["__Member__","__Member__"],"sortColumns":["__Member__","__Member__"]}

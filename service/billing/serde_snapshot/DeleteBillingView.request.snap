@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.DeleteBillingView
+
+{"arn":"__Arn__","force":true}

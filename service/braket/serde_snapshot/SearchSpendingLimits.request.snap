@@ -1,0 +1,5 @@
+POST /spending-limits
+
+Content-Type: application/json
+
+{"filters":[{"name":"__Name__","operator":"EQUAL","values":["__Member__","__Member__"]},{"name":"__Name__","operator":"EQUAL","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

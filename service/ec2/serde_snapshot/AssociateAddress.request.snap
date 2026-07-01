@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssociateAddress&AllocationId=__AllocationId__&AllowReassociation=true&DryRun=true&InstanceId=__InstanceId__&NetworkInterfaceId=__NetworkInterfaceId__&PrivateIpAddress=__PrivateIpAddress__&PublicIp=__PublicIp__&Version=2016-11-15

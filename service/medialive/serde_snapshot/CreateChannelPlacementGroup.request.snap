@@ -1,0 +1,5 @@
+POST /prod/clusters/__ClusterId__/channelplacementgroups
+
+Content-Type: application/json
+
+{"name":"__Name__","nodes":["__Member__","__Member__"],"requestId":"__RequestId__","tags":{"key0":"__Value__"}}

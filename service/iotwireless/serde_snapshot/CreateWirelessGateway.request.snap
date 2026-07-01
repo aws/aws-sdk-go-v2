@@ -1,0 +1,5 @@
+POST /wireless-gateways
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","LoRaWAN":{"Beaconing":{"DataRate":1,"Frequencies":[1,1]},"GatewayEui":"__GatewayEui__","JoinEuiFilters":[["__Member__","__Member__"],["__Member__","__Member__"]],"MaxEirp":1,"NetIdFilters":["__Member__","__Member__"],"RfRegion":"__RfRegion__","SubBands":[1,1]},"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

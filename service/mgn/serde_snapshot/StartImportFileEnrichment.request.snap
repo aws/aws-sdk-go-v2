@@ -1,0 +1,5 @@
+POST /network-migration/StartImportFileEnrichment
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","ipAssignmentStrategy":"STATIC","s3BucketSource":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"},"s3BucketTarget":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"}}

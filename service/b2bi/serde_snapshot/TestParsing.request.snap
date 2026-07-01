@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.TestParsing
+
+{"advancedOptions":{"x12":{"splitOptions":{"splitBy":"NONE"},"validationOptions":{"validationRules":[{"codeListValidationRule":{"codesToAdd":["__Member__","__Member__"],"codesToRemove":["__Member__","__Member__"],"elementId":"__ElementId__"}},{"codeListValidationRule":{"codesToAdd":["__Member__","__Member__"],"codesToRemove":["__Member__","__Member__"],"elementId":"__ElementId__"}}]}}},"ediType":{"x12Details":{"transactionSet":"X12_100","version":"VERSION_4010"}},"fileFormat":"XML","inputFile":{"bucketName":"__BucketName__","key":"__Key__"}}

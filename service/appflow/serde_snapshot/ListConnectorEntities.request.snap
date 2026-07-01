@@ -1,0 +1,5 @@
+POST /list-connector-entities
+
+Content-Type: application/json
+
+{"apiVersion":"__ApiVersion__","connectorProfileName":"__ConnectorProfileName__","connectorType":"Salesforce","entitiesPath":"__EntitiesPath__","maxResults":1,"nextToken":"__NextToken__"}

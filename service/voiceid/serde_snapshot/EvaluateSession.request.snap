@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.EvaluateSession
+
+{"DomainId":"__DomainId__","SessionNameOrId":"__SessionNameOrId__"}

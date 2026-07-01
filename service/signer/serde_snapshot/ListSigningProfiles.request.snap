@@ -1,0 +1,3 @@
+GET /signing-profiles?includeCanceled=true&maxResults=1&nextToken=__NextToken__&platformId=__PlatformId__&statuses=Active&statuses=Active
+
+

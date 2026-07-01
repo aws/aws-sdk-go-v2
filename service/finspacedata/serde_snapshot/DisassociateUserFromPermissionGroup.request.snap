@@ -1,0 +1,3 @@
+DELETE /permission-group/__PermissionGroupId__/users/__UserId__?clientToken=__ClientToken__
+
+

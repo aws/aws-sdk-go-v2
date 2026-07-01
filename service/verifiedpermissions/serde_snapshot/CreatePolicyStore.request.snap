@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.CreatePolicyStore
+
+{"clientToken":"__ClientToken__","deletionProtection":"ENABLED","description":"__Description__","encryptionSettings":{"kmsEncryptionSettings":{"encryptionContext":{"key0":"__Value__"},"key":"__Key__"}},"tags":{"key0":"__Value__"},"validationSettings":{"mode":"OFF"}}

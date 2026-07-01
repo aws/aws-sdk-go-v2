@@ -1,0 +1,3 @@
+GET /jobs?maxResults=1&namespaceId=__NamespaceId__&nextToken=__NextToken__&status=IN_PROGRESS&targetSelection=CONTINUOUS&thingGroupId=__ThingGroupId__&thingGroupName=__ThingGroupName__
+
+

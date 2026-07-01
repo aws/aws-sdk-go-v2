@@ -1,0 +1,5 @@
+PUT /CreateWorkflow
+
+Content-Type: application/json
+
+{"changeDescription":"__ChangeDescription__","clientToken":"__ClientToken__","data":"__Data__","description":"__Description__","dryRun":true,"kmsKeyId":"__KmsKeyId__","name":"__Name__","semanticVersion":"__SemanticVersion__","tags":{"key0":"__Value__"},"type":"BUILD","uri":"__Uri__"}

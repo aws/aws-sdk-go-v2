@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.CreateResolverEndpoint
+
+{"CreatorRequestId":"__CreatorRequestId__","Direction":"INBOUND","Dns64Enabled":true,"IpAddresses":[{"Ip":"__Ip__","Ipv6":"__Ipv6__","SubnetId":"__SubnetId__"},{"Ip":"__Ip__","Ipv6":"__Ipv6__","SubnetId":"__SubnetId__"}],"Ipv6InternetAccessEnabled":true,"Name":"__Name__","OutpostArn":"__OutpostArn__","PreferredInstanceType":"__PreferredInstanceType__","Protocols":["DoH","DoH"],"ResolverEndpointType":"IPV6","RniEnhancedMetricsEnabled":true,"SecurityGroupIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TargetNameServerMetricsEnabled":true}

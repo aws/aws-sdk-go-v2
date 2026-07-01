@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.SendRcsMessage
+
+{"ConfigurationSetName":"__ConfigurationSetName__","Context":{"key0":"__Value__"},"DestinationPhoneNumber":"__DestinationPhoneNumber__","DryRun":true,"FallbackConfiguration":{"Channel":"SMS","MediaUrls":["__Member__","__Member__"],"MessageBody":"__MessageBody__","OriginationIdentity":"__OriginationIdentity__"},"MaxPrice":"__MaxPrice__","MessageFeedbackEnabled":true,"MessageTrafficType":"__MessageTrafficType__","OriginationIdentity":"__OriginationIdentity__","ProtectConfigurationId":"__ProtectConfigurationId__","RcsMessageContent":{"Content":{"TextMessage":{"Body":"__Body__"}},"Suggestions":[{"Reply":{"PostbackData":"__PostbackData__","Text":"__Text__"}},{"Reply":{"PostbackData":"__PostbackData__","Text":"__Text__"}}]},"TimeToLive":1}

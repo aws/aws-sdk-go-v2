@@ -1,0 +1,5 @@
+POST /pindata/verify
+
+Content-Type: application/json
+
+{"DukptAttributes":{"DukptDerivationType":"TDES_2KEY","KeySerialNumber":"__KeySerialNumber__"},"EncryptedPinBlock":"__EncryptedPinBlock__","EncryptionKeyIdentifier":"__EncryptionKeyIdentifier__","EncryptionWrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}},"PinBlockFormat":"ISO_FORMAT_0","PinDataLength":1,"PrimaryAccountNumber":"__PrimaryAccountNumber__","VerificationAttributes":{"VisaPin":{"PinVerificationKeyIndex":1,"VerificationValue":"__VerificationValue__"}},"VerificationKeyIdentifier":"__VerificationKeyIdentifier__"}

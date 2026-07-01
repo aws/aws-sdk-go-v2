@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateExperiment
+
+{"Description":"__Description__","DisplayName":"__DisplayName__","ExperimentName":"__ExperimentName__"}

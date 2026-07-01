@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.StartMedicalScribeJob
+
+{"ChannelDefinitions":[{"ChannelId":1,"ParticipantRole":"PATIENT"},{"ChannelId":1,"ParticipantRole":"PATIENT"}],"DataAccessRoleArn":"__DataAccessRoleArn__","KMSEncryptionContext":{"key0":"__Value__"},"Media":{"MediaFileUri":"__MediaFileUri__","RedactedMediaFileUri":"__RedactedMediaFileUri__"},"MedicalScribeContext":{"PatientContext":{"Pronouns":"HE_HIM"}},"MedicalScribeJobName":"__MedicalScribeJobName__","OutputBucketName":"__OutputBucketName__","OutputEncryptionKMSKeyId":"__OutputEncryptionKMSKeyId__","Settings":{"ChannelIdentification":true,"ClinicalNoteGenerationSettings":{"NoteTemplate":"HISTORY_AND_PHYSICAL"},"MaxSpeakerLabels":1,"ShowSpeakerLabels":true,"VocabularyFilterMethod":"remove","VocabularyFilterName":"__VocabularyFilterName__","VocabularyName":"__VocabularyName__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

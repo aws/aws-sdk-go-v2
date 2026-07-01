@@ -1,0 +1,5 @@
+POST /RemoveTemplateAction
+
+Content-Type: application/json
+
+{"actionID":"__ActionID__","launchConfigurationTemplateID":"__LaunchConfigurationTemplateID__"}

@@ -1,0 +1,3 @@
+DELETE /browsers/__BrowserId__?clientToken=__ClientToken__
+
+

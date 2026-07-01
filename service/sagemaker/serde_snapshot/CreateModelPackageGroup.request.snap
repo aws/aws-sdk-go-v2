@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateModelPackageGroup
+
+{"ManagedConfiguration":{"ManagedStorageType":"Restricted"},"ModelPackageGroupDescription":"__ModelPackageGroupDescription__","ModelPackageGroupName":"__ModelPackageGroupName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

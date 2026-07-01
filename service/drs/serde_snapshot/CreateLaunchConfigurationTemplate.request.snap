@@ -1,0 +1,5 @@
+POST /CreateLaunchConfigurationTemplate
+
+Content-Type: application/json
+
+{"copyPrivateIp":true,"copyTags":true,"exportBucketArn":"__ExportBucketArn__","launchDisposition":"STOPPED","launchIntoSourceInstance":true,"licensing":{"osByol":true},"postLaunchEnabled":true,"tags":{"key0":"__Value__"},"targetInstanceTypeRightSizingMethod":"NONE"}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=VerifySMSSandboxPhoneNumber&OneTimePassword=__OneTimePassword__&PhoneNumber=__PhoneNumber__&Version=2010-03-31

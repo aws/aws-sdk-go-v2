@@ -1,0 +1,5 @@
+POST /getDeployment
+
+Content-Type: application/json
+
+{"deploymentId":"__DeploymentId__"}

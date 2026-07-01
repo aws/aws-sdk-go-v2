@@ -1,0 +1,5 @@
+POST /notification-hubs
+
+Content-Type: application/json
+
+{"notificationHubRegion":"__NotificationHubRegion__"}

@@ -1,0 +1,5 @@
+POST /create-landingzone
+
+Content-Type: application/json
+
+{"remediationTypes":["INHERITANCE_DRIFT","INHERITANCE_DRIFT"],"tags":{"key0":"__Value__"},"version":"__Version__"}

@@ -1,0 +1,5 @@
+POST /2020-05-31/get-realtime-log-config
+
+Content-Type: application/xml
+
+<GetRealtimeLogConfigRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ARN>__ARN__</ARN><Name>__Name__</Name></GetRealtimeLogConfigRequest>

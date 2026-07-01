@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/client-vpc-connection
+
+Content-Type: application/json
+
+{"vpcConnectionArn":"__VpcConnectionArn__"}

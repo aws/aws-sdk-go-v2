@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/outbound-caller-config
+
+Content-Type: application/json
+
+{"OutboundCallerConfig":{"OutboundCallerIdName":"__OutboundCallerIdName__","OutboundCallerIdNumberId":"__OutboundCallerIdNumberId__","OutboundFlowId":"__OutboundFlowId__"}}

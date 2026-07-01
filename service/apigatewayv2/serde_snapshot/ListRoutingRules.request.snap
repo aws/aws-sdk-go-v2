@@ -1,0 +1,3 @@
+GET /v2/domainnames/__DomainName__/routingrules?domainNameId=__DomainNameId__&maxResults=1&nextToken=__NextToken__
+
+

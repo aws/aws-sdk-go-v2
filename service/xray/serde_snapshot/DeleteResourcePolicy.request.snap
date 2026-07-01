@@ -1,0 +1,5 @@
+POST /DeleteResourcePolicy
+
+Content-Type: application/json
+
+{"PolicyName":"__PolicyName__","PolicyRevisionId":"__PolicyRevisionId__"}

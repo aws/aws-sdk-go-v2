@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/trained-models/__TrainedModelArn__/export-jobs
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","outputConfiguration":{"members":[{"accountId":"__AccountId__"},{"accountId":"__AccountId__"}]},"trainedModelVersionIdentifier":"__TrainedModelVersionIdentifier__"}

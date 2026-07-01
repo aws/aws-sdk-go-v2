@@ -1,0 +1,4 @@
+GET /domainnames/__DomainName__/basepathmappings?domainNameId=__DomainNameId__&limit=1&position=__Position__
+
+Accept: application/json
+

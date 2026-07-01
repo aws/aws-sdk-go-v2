@@ -1,0 +1,5 @@
+POST /untagStream
+
+Content-Type: application/json
+
+{"StreamARN":"__StreamARN__","StreamName":"__StreamName__","TagKeyList":["__Member__","__Member__"]}

@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.SendMessageBatch
+X-Amzn-Query-Mode: true
+
+{"Entries":[{"DelaySeconds":1,"Id":"__Id__","MessageAttributes":{"key0":{"BinaryListValues":["YmxvYg==","YmxvYg=="],"BinaryValue":"YmxvYg==","DataType":"__DataType__","StringListValues":["__Member__","__Member__"],"StringValue":"__StringValue__"}},"MessageBody":"__MessageBody__","MessageDeduplicationId":"__MessageDeduplicationId__","MessageGroupId":"__MessageGroupId__","MessageSystemAttributes":{"key0":{"BinaryListValues":["YmxvYg==","YmxvYg=="],"BinaryValue":"YmxvYg==","DataType":"__DataType__","StringListValues":["__Member__","__Member__"],"StringValue":"__StringValue__"}}},{"DelaySeconds":1,"Id":"__Id__","MessageAttributes":{"key0":{"BinaryListValues":["YmxvYg==","YmxvYg=="],"BinaryValue":"YmxvYg==","DataType":"__DataType__","StringListValues":["__Member__","__Member__"],"StringValue":"__StringValue__"}},"MessageBody":"__MessageBody__","MessageDeduplicationId":"__MessageDeduplicationId__","MessageGroupId":"__MessageGroupId__","MessageSystemAttributes":{"key0":{"BinaryListValues":["YmxvYg==","YmxvYg=="],"BinaryValue":"YmxvYg==","DataType":"__DataType__","StringListValues":["__Member__","__Member__"],"StringValue":"__StringValue__"}}}],"QueueUrl":"__QueueUrl__"}

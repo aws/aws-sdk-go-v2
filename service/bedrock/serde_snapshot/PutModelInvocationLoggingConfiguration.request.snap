@@ -1,0 +1,5 @@
+PUT /logging/modelinvocations
+
+Content-Type: application/json
+
+{"loggingConfig":{"audioDataDeliveryEnabled":true,"cloudWatchConfig":{"largeDataDeliveryS3Config":{"bucketName":"__BucketName__","keyPrefix":"__KeyPrefix__"},"logGroupName":"__LogGroupName__","roleArn":"__RoleArn__"},"embeddingDataDeliveryEnabled":true,"imageDataDeliveryEnabled":true,"s3Config":{"bucketName":"__BucketName__","keyPrefix":"__KeyPrefix__"},"textDataDeliveryEnabled":true,"videoDataDeliveryEnabled":true}}

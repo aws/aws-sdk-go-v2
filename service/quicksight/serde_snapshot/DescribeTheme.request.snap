@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/themes/__ThemeId__?alias-name=__AliasName__&version-number=1
+
+

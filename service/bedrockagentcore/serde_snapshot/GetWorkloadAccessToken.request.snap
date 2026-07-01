@@ -1,0 +1,5 @@
+POST /identities/GetWorkloadAccessToken
+
+Content-Type: application/json
+
+{"workloadName":"__WorkloadName__"}

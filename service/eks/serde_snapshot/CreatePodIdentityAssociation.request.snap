@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/pod-identity-associations
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","disableSessionTags":true,"namespace":"__Namespace__","policy":"__Policy__","roleArn":"__RoleArn__","serviceAccount":"__ServiceAccount__","tags":{"key0":"__Value__"},"targetRoleArn":"__TargetRoleArn__"}

@@ -1,0 +1,5 @@
+POST /2015-01-01/es/ccs/inboundConnection/search
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__"}

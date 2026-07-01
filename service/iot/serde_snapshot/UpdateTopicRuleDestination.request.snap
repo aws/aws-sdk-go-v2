@@ -1,0 +1,5 @@
+PATCH /destinations
+
+Content-Type: application/json
+
+{"arn":"__Arn__","status":"ENABLED"}

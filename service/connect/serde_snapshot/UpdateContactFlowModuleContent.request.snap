@@ -1,0 +1,5 @@
+POST /contact-flow-modules/__InstanceId__/__ContactFlowModuleId__/content
+
+Content-Type: application/json
+
+{"Content":"__Content__","Settings":"__Settings__"}

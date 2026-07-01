@@ -1,0 +1,4 @@
+GET /usageplans/__UsagePlanId__
+
+Accept: application/json
+

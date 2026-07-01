@@ -1,0 +1,5 @@
+POST /createpermission
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","name":"__Name__","policyTemplate":"__PolicyTemplate__","resourceType":"__ResourceType__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

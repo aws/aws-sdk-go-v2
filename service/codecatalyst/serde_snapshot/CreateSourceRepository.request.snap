@@ -1,0 +1,5 @@
+PUT /v1/spaces/__SpaceName__/projects/__ProjectName__/sourceRepositories/__Name__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

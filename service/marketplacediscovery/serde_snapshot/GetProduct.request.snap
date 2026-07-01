@@ -1,0 +1,5 @@
+POST /2026-02-05/getProduct
+
+Content-Type: application/json
+
+{"productId":"__ProductId__"}

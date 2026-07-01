@@ -1,0 +1,3 @@
+GET /provisioned-model-throughputs?creationTimeAfter=2000-01-01T00%3A00%3A00Z&creationTimeBefore=2000-01-01T00%3A00%3A00Z&maxResults=1&modelArnEquals=__ModelArnEquals__&nameContains=__NameContains__&nextToken=__NextToken__&sortBy=CreationTime&sortOrder=Ascending&statusEquals=Creating
+
+

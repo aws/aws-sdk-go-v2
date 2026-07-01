@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: BackupOnPremises_v20210101.PutBandwidthRateLimitSchedule
+
+{"BandwidthRateLimitIntervals":[{"AverageUploadRateLimitInBitsPerSec":1,"DaysOfWeek":[1,1],"EndHourOfDay":1,"EndMinuteOfHour":1,"StartHourOfDay":1,"StartMinuteOfHour":1},{"AverageUploadRateLimitInBitsPerSec":1,"DaysOfWeek":[1,1],"EndHourOfDay":1,"EndMinuteOfHour":1,"StartHourOfDay":1,"StartMinuteOfHour":1}],"GatewayArn":"__GatewayArn__"}

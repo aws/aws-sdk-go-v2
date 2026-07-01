@@ -1,0 +1,5 @@
+PUT /v2/email/reputation/entities/RESOURCE/__ReputationEntityReference__/customer-managed-status
+
+Content-Type: application/json
+
+{"SendingStatus":"ENABLED"}

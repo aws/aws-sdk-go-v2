@@ -1,0 +1,6 @@
+PUT /2020-05-31/origin-access-identity/cloudfront/__Id__/config
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<CloudFrontOriginAccessIdentityConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CallerReference>__CallerReference__</CallerReference><Comment>__Comment__</Comment></CloudFrontOriginAccessIdentityConfig>

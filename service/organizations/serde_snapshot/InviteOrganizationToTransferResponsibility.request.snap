@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.InviteOrganizationToTransferResponsibility
+
+{"Notes":"__Notes__","SourceName":"__SourceName__","StartTimestamp":946684800,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Target":{"Id":"__Id__","Type":"ACCOUNT"},"Type":"BILLING"}

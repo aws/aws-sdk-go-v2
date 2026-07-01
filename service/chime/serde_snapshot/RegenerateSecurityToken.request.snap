@@ -1,0 +1,3 @@
+POST /accounts/__AccountId__/bots/__BotId__?operation=regenerate-security-token
+
+

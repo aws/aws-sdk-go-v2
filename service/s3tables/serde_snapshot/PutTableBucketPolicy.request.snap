@@ -1,0 +1,5 @@
+PUT /buckets/__TableBucketARN__/policy
+
+Content-Type: application/json
+
+{"resourcePolicy":"__ResourcePolicy__"}

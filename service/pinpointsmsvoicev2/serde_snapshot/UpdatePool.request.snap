@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdatePool
+
+{"DeletionProtectionEnabled":true,"OptOutListName":"__OptOutListName__","PoolId":"__PoolId__","SelfManagedOptOutsEnabled":true,"SharedRoutesEnabled":true,"TwoWayChannelArn":"__TwoWayChannelArn__","TwoWayChannelRole":"__TwoWayChannelRole__","TwoWayEnabled":true}

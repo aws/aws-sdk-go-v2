@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=EnableImageDeprecation&DeprecateAt=2000-01-01T00%3A00%3A00Z&DryRun=true&ImageId=__ImageId__&Version=2016-11-15

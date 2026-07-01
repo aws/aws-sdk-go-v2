@@ -1,0 +1,5 @@
+POST /GetVectors
+
+Content-Type: application/json
+
+{"indexArn":"__IndexArn__","indexName":"__IndexName__","keys":["__Member__","__Member__"],"returnData":true,"returnMetadata":true,"vectorBucketName":"__VectorBucketName__"}

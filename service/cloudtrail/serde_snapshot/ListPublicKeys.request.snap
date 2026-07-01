@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListPublicKeys
+
+{"EndTime":946684800,"NextToken":"__NextToken__","StartTime":946684800}

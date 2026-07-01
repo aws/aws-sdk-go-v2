@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssociateTrunkInterface&BranchInterfaceId=__BranchInterfaceId__&ClientToken=__ClientToken__&DryRun=true&GreKey=1&TrunkInterfaceId=__TrunkInterfaceId__&Version=2016-11-15&VlanId=1

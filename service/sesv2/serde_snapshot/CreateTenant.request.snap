@@ -1,0 +1,5 @@
+POST /v2/email/tenants
+
+Content-Type: application/json
+
+{"SuppressionAttributes":{"SuppressedReasons":["BOUNCE","BOUNCE"],"SuppressionScope":"ACCOUNT"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TenantName":"__TenantName__"}

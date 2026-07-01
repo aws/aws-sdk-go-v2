@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.StartSession
+
+{"ClientRequestToken":"__ClientRequestToken__","ClusterId":"__ClusterId__","EngineConfigurations":[{"Classification":"__Classification__","Configurations":[{},{}],"Properties":{"key0":"__Value__"}},{"Classification":"__Classification__","Configurations":[{},{}],"Properties":{"key0":"__Value__"}}],"ExecutionRoleArn":"__ExecutionRoleArn__","MonitoringConfiguration":{"CloudWatchLoggingConfiguration":{"Enabled":true,"EncryptionKeyArn":"__EncryptionKeyArn__","LogGroup":"__LogGroup__","LogStreamNamePrefix":"__LogStreamNamePrefix__","LogTypes":{"key0":["__Member__","__Member__"]}},"ManagedLoggingConfiguration":{"Enabled":true,"EncryptionKeyArn":"__EncryptionKeyArn__"},"S3LoggingConfiguration":{"Enabled":true,"EncryptionKeyArn":"__EncryptionKeyArn__","LogTypes":{"key0":["__Member__","__Member__"]},"LogUri":"__LogUri__"}},"Name":"__Name__","SessionIdleTimeoutInMinutes":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

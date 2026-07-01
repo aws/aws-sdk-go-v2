@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.CreateVpcEndpoint
+
+{"clientToken":"__ClientToken__","name":"__Name__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}

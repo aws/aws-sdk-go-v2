@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ContinueServiceDeployment
+
+{"action":"ROLLBACK","hookId":"__HookId__","serviceDeploymentArn":"__ServiceDeploymentArn__"}

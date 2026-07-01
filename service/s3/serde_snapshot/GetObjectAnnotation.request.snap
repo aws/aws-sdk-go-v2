@@ -1,0 +1,6 @@
+GET /__Key__?annotation=&annotationName=__AnnotationName__&versionId=__VersionId__&x-id=GetObjectAnnotation
+
+X-Amz-Checksum-Mode: ENABLED
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+

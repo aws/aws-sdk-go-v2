@@ -1,0 +1,5 @@
+POST /graph/removal
+
+Content-Type: application/json
+
+{"GraphArn":"__GraphArn__"}

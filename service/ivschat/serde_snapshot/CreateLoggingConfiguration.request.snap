@@ -1,0 +1,5 @@
+POST /CreateLoggingConfiguration
+
+Content-Type: application/json
+
+{"destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"name":"__Name__","tags":{"key0":"__Value__"}}

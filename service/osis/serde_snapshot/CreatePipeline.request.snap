@@ -1,0 +1,5 @@
+POST /2022-01-01/osis/createPipeline
+
+Content-Type: application/json
+
+{"BufferOptions":{"PersistentBufferEnabled":true},"EncryptionAtRestOptions":{"KmsKeyArn":"__KmsKeyArn__"},"LogPublishingOptions":{"CloudWatchLogDestination":{"LogGroup":"__LogGroup__"},"IsLoggingEnabled":true},"MaxUnits":1,"MinUnits":1,"PipelineConfigurationBody":"__PipelineConfigurationBody__","PipelineName":"__PipelineName__","PipelineRoleArn":"__PipelineRoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcOptions":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"VpcAttachmentOptions":{"AttachToVpc":true,"CidrBlock":"__CidrBlock__"},"VpcEndpointManagement":"CUSTOMER"}}

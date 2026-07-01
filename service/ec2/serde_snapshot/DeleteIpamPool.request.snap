@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIpamPool&Cascade=true&DryRun=true&IpamPoolId=__IpamPoolId__&Version=2016-11-15

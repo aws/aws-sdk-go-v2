@@ -1,0 +1,3 @@
+GET /insights/controls-by-assessment?assessmentId=__AssessmentId__&controlDomainId=__ControlDomainId__&maxResults=1&nextToken=__NextToken__
+
+

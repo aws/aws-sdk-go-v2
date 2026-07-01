@@ -1,0 +1,5 @@
+POST /v1/discover
+
+Content-Type: application/json
+
+{"Events":["__Member__","__Member__"],"Type":"OpenApi3"}

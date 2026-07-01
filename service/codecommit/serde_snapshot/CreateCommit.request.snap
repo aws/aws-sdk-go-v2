@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.CreateCommit
+
+{"authorName":"__AuthorName__","branchName":"__BranchName__","commitMessage":"__CommitMessage__","deleteFiles":[{"filePath":"__FilePath__"},{"filePath":"__FilePath__"}],"email":"__Email__","keepEmptyFolders":true,"parentCommitId":"__ParentCommitId__","putFiles":[{"fileContent":"YmxvYg==","fileMode":"EXECUTABLE","filePath":"__FilePath__","sourceFile":{"filePath":"__FilePath__","isMove":true}},{"fileContent":"YmxvYg==","fileMode":"EXECUTABLE","filePath":"__FilePath__","sourceFile":{"filePath":"__FilePath__","isMove":true}}],"repositoryName":"__RepositoryName__","setFileModes":[{"fileMode":"EXECUTABLE","filePath":"__FilePath__"},{"fileMode":"EXECUTABLE","filePath":"__FilePath__"}]}

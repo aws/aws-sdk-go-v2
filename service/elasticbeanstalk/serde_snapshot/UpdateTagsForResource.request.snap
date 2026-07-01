@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateTagsForResource&ResourceArn=__ResourceArn__&TagsToAdd.member.1.Key=__Key__&TagsToAdd.member.1.Value=__Value__&TagsToAdd.member.2.Key=__Key__&TagsToAdd.member.2.Value=__Value__&TagsToRemove.member.1=__Member__&TagsToRemove.member.2=__Member__&Version=2010-12-01

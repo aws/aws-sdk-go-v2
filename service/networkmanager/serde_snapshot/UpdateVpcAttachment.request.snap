@@ -1,0 +1,5 @@
+PATCH /vpc-attachments/__AttachmentId__
+
+Content-Type: application/json
+
+{"AddSubnetArns":["__Member__","__Member__"],"Options":{"ApplianceModeSupport":true,"DnsSupport":true,"Ipv6Support":true,"SecurityGroupReferencingSupport":true},"RemoveSubnetArns":["__Member__","__Member__"]}

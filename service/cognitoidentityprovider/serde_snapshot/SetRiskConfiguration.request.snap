@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.SetRiskConfiguration
+
+{"AccountTakeoverRiskConfiguration":{"Actions":{"HighAction":{"EventAction":"BLOCK","Notify":true},"LowAction":{"EventAction":"BLOCK","Notify":true},"MediumAction":{"EventAction":"BLOCK","Notify":true}},"NotifyConfiguration":{"BlockEmail":{"HtmlBody":"__HtmlBody__","Subject":"__Subject__","TextBody":"__TextBody__"},"From":"__From__","MfaEmail":{"HtmlBody":"__HtmlBody__","Subject":"__Subject__","TextBody":"__TextBody__"},"NoActionEmail":{"HtmlBody":"__HtmlBody__","Subject":"__Subject__","TextBody":"__TextBody__"},"ReplyTo":"__ReplyTo__","SourceArn":"__SourceArn__"}},"ClientId":"__ClientId__","CompromisedCredentialsRiskConfiguration":{"Actions":{"EventAction":"BLOCK"},"EventFilter":["SIGN_IN","SIGN_IN"]},"RiskExceptionConfiguration":{"BlockedIPRangeList":["__Member__","__Member__"],"SkippedIPRangeList":["__Member__","__Member__"]},"UserPoolId":"__UserPoolId__"}

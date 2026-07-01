@@ -1,0 +1,5 @@
+PATCH /dimensions/__Name__
+
+Content-Type: application/json
+
+{"stringValues":["__Member__","__Member__"]}

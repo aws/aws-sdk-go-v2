@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.DisassociateApplicationFromEntitlement
+
+{"ApplicationIdentifier":"__ApplicationIdentifier__","EntitlementName":"__EntitlementName__","StackName":"__StackName__"}

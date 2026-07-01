@@ -1,0 +1,5 @@
+POST /kx/environments
+
+Content-Type: application/x-amz-json-1.1
+
+{"clientToken":"__ClientToken__","description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","tags":{"key0":"__Value__"}}

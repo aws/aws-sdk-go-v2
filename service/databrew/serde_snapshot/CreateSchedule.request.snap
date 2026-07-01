@@ -1,0 +1,5 @@
+POST /schedules
+
+Content-Type: application/json
+
+{"CronExpression":"__CronExpression__","JobNames":["__Member__","__Member__"],"Name":"__Name__","Tags":{"key0":"__Value__"}}

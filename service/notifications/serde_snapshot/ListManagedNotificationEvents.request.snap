@@ -1,0 +1,3 @@
+GET /managed-notification-events?endTime=2000-01-01T00%3A00%3A00Z&locale=de_DE&maxResults=1&nextToken=__NextToken__&organizationalUnitId=__OrganizationalUnitId__&relatedAccount=__RelatedAccount__&source=__Source__&startTime=2000-01-01T00%3A00%3A00Z
+
+

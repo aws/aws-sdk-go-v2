@@ -1,0 +1,5 @@
+POST /browserSettings
+
+Content-Type: application/json
+
+{"additionalEncryptionContext":{"key0":"__Value__"},"browserPolicy":"__BrowserPolicy__","clientToken":"__ClientToken__","customerManagedKey":"__CustomerManagedKey__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"webContentFilteringPolicy":{"allowedUrls":["__Member__","__Member__"],"blockedCategories":["Cults","Cults"],"blockedUrls":["__Member__","__Member__"]}}

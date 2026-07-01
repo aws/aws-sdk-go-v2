@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.CreateDocument
+
+{"Attachments":[{"Key":"SourceUrl","Name":"__Name__","Values":["__Member__","__Member__"]},{"Key":"SourceUrl","Name":"__Name__","Values":["__Member__","__Member__"]}],"Content":"__Content__","DisplayName":"__DisplayName__","DocumentFormat":"YAML","DocumentType":"Command","Name":"__Name__","Requires":[{"Name":"__Name__","RequireType":"__RequireType__","Version":"__Version__","VersionName":"__VersionName__"},{"Name":"__Name__","RequireType":"__RequireType__","Version":"__Version__","VersionName":"__VersionName__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TargetType":"__TargetType__","VersionName":"__VersionName__"}

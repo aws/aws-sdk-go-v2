@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/experiences/__WebExperienceId__/anonymous-url
+
+Content-Type: application/json
+
+{"sessionDurationInMinutes":1}

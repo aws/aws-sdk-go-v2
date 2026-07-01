@@ -1,0 +1,3 @@
+GET /requester-gateways?maxResults=1&nextToken=__NextToken__
+
+

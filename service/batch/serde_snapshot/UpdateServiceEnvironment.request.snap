@@ -1,0 +1,5 @@
+POST /v1/updateserviceenvironment
+
+Content-Type: application/json
+
+{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"serviceEnvironment":"__ServiceEnvironment__","state":"ENABLED"}

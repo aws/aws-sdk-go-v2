@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.UpdateIntegrationTableProperties
+
+{"ResourceArn":"__ResourceArn__","SourceTableConfig":{"Fields":["__Member__","__Member__"],"FilterPredicate":"__FilterPredicate__","PrimaryKey":["__Member__","__Member__"],"RecordUpdateField":"__RecordUpdateField__"},"TableName":"__TableName__","TargetTableConfig":{"PartitionSpec":[{"ConversionSpec":"__ConversionSpec__","FieldName":"__FieldName__","FunctionSpec":"__FunctionSpec__"},{"ConversionSpec":"__ConversionSpec__","FieldName":"__FieldName__","FunctionSpec":"__FunctionSpec__"}],"TargetTableName":"__TargetTableName__","UnnestSpec":"TOPLEVEL"}}

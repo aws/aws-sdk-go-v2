@@ -1,0 +1,3 @@
+GET /directoryRegistrations/__DirectoryRegistrationArn__/servicePrincipalNames/__ConnectorArn__
+
+

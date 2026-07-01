@@ -1,0 +1,3 @@
+GET /v1/discoverers?discovererIdPrefix=__DiscovererIdPrefix__&limit=1&nextToken=__NextToken__&sourceArnPrefix=__SourceArnPrefix__
+
+

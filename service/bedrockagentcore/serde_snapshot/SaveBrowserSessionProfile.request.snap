@@ -1,0 +1,7 @@
+PUT /browser-profiles/__ProfileIdentifier__/save
+
+Content-Type: application/json
+Traceparent: __TraceParent__
+X-Amzn-Trace-Id: __TraceId__
+
+{"browserIdentifier":"__BrowserIdentifier__","clientToken":"__ClientToken__","sessionId":"__SessionId__"}

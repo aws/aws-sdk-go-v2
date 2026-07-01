@@ -1,0 +1,5 @@
+PUT /account-associations/__AccountAssociationId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

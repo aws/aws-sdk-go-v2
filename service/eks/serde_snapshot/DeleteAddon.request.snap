@@ -1,0 +1,3 @@
+DELETE /clusters/__ClusterName__/addons/__AddonName__?preserve=true
+
+

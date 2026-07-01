@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.CreateApplicationPresignedUrl
+
+{"ApplicationName":"__ApplicationName__","SessionExpirationDurationInSeconds":1,"UrlType":"FLINK_DASHBOARD_URL"}

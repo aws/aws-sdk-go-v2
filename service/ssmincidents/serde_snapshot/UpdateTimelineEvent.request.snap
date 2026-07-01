@@ -1,0 +1,5 @@
+POST /updateTimelineEvent
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","eventData":"__EventData__","eventId":"__EventId__","eventReferences":[{"resource":"__EventReferenceMemberResource__"},{"resource":"__EventReferenceMemberResource__"}],"eventTime":946684800,"eventType":"__EventType__","incidentRecordArn":"__IncidentRecordArn__"}

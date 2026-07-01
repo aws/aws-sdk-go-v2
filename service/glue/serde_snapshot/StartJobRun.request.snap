@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.StartJobRun
+
+{"AllocatedCapacity":1,"Arguments":{"key0":"__Value__"},"ExecutionClass":"FLEX","ExecutionRoleSessionPolicy":"__ExecutionRoleSessionPolicy__","JobName":"__JobName__","JobRunId":"__JobRunId__","JobRunQueuingEnabled":true,"MaxCapacity":1,"NotificationProperty":{"NotifyDelayAfter":1},"NumberOfWorkers":1,"SecurityConfiguration":"__SecurityConfiguration__","Timeout":1,"WorkerType":"Standard"}

@@ -1,0 +1,5 @@
+PUT /phone-number/__PhoneNumberId__
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","InstanceId":"__InstanceId__","TargetArn":"__TargetArn__"}

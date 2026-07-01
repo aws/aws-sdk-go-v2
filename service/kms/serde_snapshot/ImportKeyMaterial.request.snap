@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.ImportKeyMaterial
+
+{"EncryptedKeyMaterial":"YmxvYg==","ExpirationModel":"KEY_MATERIAL_EXPIRES","ImportToken":"YmxvYg==","ImportType":"NEW_KEY_MATERIAL","KeyId":"__KeyId__","KeyMaterialDescription":"__KeyMaterialDescription__","KeyMaterialId":"__KeyMaterialId__","ValidTo":946684800}

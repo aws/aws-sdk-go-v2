@@ -1,0 +1,6 @@
+POST /apps.create
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appDefinition":{"cards":[{"textInput":{"defaultValue":"__DefaultValue__","id":"__Id__","placeholder":"__Placeholder__","title":"__Title__","type":"text-input"}},{"textInput":{"defaultValue":"__DefaultValue__","id":"__Id__","placeholder":"__Placeholder__","title":"__Title__","type":"text-input"}}],"initialPrompt":"__InitialPrompt__"},"description":"__Description__","tags":{"key0":"__Value__"},"title":"__Title__"}

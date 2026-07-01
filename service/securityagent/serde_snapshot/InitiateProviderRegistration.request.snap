@@ -1,0 +1,5 @@
+POST /oauth2/provider/register
+
+Content-Type: application/json
+
+{"provider":"GITHUB"}

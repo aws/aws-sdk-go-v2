@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.CreateVehicle
+
+{"associationBehavior":"CreateIotThing","attributes":{"key0":"__Value__"},"decoderManifestArn":"__DecoderManifestArn__","modelManifestArn":"__ModelManifestArn__","stateTemplates":[{"identifier":"__Identifier__","stateTemplateUpdateStrategy":{"periodic":{"stateTemplateUpdateRate":{"unit":"MILLISECOND","value":1}}}},{"identifier":"__Identifier__","stateTemplateUpdateStrategy":{"periodic":{"stateTemplateUpdateRate":{"unit":"MILLISECOND","value":1}}}}],"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"vehicleName":"__VehicleName__"}

@@ -1,0 +1,5 @@
+PATCH /applications/__ApplicationId__/environments/__EnvironmentId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Monitors":[{"AlarmArn":"__AlarmArn__","AlarmRoleArn":"__AlarmRoleArn__"},{"AlarmArn":"__AlarmArn__","AlarmRoleArn":"__AlarmRoleArn__"}],"Name":"__Name__"}

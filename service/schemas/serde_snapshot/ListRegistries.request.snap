@@ -1,0 +1,3 @@
+GET /v1/registries?limit=1&nextToken=__NextToken__&registryNamePrefix=__RegistryNamePrefix__&scope=__Scope__
+
+

@@ -1,0 +1,5 @@
+POST /StartTraceRetrieval
+
+Content-Type: application/json
+
+{"EndTime":946684800,"StartTime":946684800,"TraceIds":["__Member__","__Member__"]}

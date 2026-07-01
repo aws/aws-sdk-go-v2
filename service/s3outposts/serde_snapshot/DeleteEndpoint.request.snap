@@ -1,0 +1,3 @@
+DELETE /S3Outposts/DeleteEndpoint?endpointId=__EndpointId__&outpostId=__OutpostId__
+
+

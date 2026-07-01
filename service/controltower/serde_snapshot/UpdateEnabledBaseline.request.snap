@@ -1,0 +1,5 @@
+POST /update-enabled-baseline
+
+Content-Type: application/json
+
+{"baselineVersion":"__BaselineVersion__","enabledBaselineIdentifier":"__EnabledBaselineIdentifier__","parameters":[{"key":"__Key__"},{"key":"__Key__"}]}

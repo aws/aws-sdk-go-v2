@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.GetGroupMembershipId
+
+{"GroupId":"__GroupId__","IdentityStoreId":"__IdentityStoreId__","MemberId":{"UserId":"__MemberIdMemberUserId__"}}

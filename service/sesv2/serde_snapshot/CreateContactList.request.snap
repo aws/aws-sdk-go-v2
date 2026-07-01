@@ -1,0 +1,5 @@
+POST /v2/email/contact-lists
+
+Content-Type: application/json
+
+{"ContactListName":"__ContactListName__","Description":"__Description__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Topics":[{"DefaultSubscriptionStatus":"OPT_IN","Description":"__Description__","DisplayName":"__DisplayName__","TopicName":"__TopicName__"},{"DefaultSubscriptionStatus":"OPT_IN","Description":"__Description__","DisplayName":"__DisplayName__","TopicName":"__TopicName__"}]}

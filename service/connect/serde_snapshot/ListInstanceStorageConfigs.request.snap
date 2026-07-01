@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/storage-configs?maxResults=1&nextToken=__NextToken__&resourceType=CHAT_TRANSCRIPTS
+
+

@@ -1,0 +1,5 @@
+POST /2023-10-12/farms/__FarmId__/sessions-statistics-aggregation
+
+Content-Type: application/json
+
+{"endTime":"2000-01-01T00:00:00Z","groupBy":["QUEUE_ID","QUEUE_ID"],"period":"HOURLY","resourceIds":{"queueIds":["__Member__","__Member__"]},"startTime":"2000-01-01T00:00:00Z","statistics":["SUM","SUM"],"timezone":"__Timezone__"}

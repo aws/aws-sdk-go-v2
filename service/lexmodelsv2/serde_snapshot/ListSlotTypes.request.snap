@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/slottypes
+
+Content-Type: application/json
+
+{"filters":[{"name":"SlotTypeName","operator":"CO","values":["__Member__","__Member__"]},{"name":"SlotTypeName","operator":"CO","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"SlotTypeName","order":"Ascending"}}

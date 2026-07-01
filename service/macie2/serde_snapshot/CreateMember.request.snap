@@ -1,0 +1,5 @@
+POST /members
+
+Content-Type: application/json
+
+{"account":{"accountId":"__AccountId__","email":"__Email__"},"tags":{"key0":"__Value__"}}

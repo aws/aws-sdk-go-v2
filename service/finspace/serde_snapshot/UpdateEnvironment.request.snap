@@ -1,0 +1,5 @@
+PUT /environment/__EnvironmentId__
+
+Content-Type: application/x-amz-json-1.1
+
+{"description":"__Description__","federationMode":"FEDERATED","federationParameters":{"applicationCallBackURL":"__ApplicationCallBackURL__","attributeMap":{"key0":"__Value__"},"federationProviderName":"__FederationProviderName__","federationURN":"__FederationURN__","samlMetadataDocument":"__SamlMetadataDocument__","samlMetadataURL":"__SamlMetadataURL__"},"name":"__Name__"}

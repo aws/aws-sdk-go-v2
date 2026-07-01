@@ -1,0 +1,5 @@
+POST /orders
+
+Content-Type: application/json
+
+{"LineItems":[{"CatalogItemId":"__CatalogItemId__","Quantity":1},{"CatalogItemId":"__CatalogItemId__","Quantity":1}],"OutpostIdentifier":"__OutpostIdentifier__","PaymentOption":"ALL_UPFRONT","PaymentTerm":"THREE_YEARS","QuoteIdentifier":"__QuoteIdentifier__","QuoteOptionIdentifier":"__QuoteOptionIdentifier__"}

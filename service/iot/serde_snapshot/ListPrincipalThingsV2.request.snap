@@ -1,0 +1,4 @@
+GET /principals/things-v2?maxResults=1&nextToken=__NextToken__&thingPrincipalType=EXCLUSIVE_THING
+
+X-Amzn-Principal: __Principal__
+

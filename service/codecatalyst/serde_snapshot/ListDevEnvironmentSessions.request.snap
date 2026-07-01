@@ -1,0 +1,5 @@
+POST /v1/spaces/__SpaceName__/projects/__ProjectName__/devEnvironments/__DevEnvironmentId__/sessions
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

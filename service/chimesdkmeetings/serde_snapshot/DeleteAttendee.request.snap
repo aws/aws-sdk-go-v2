@@ -1,0 +1,3 @@
+DELETE /meetings/__MeetingId__/attendees/__AttendeeId__
+
+

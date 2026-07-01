@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceId__
+
+Content-Type: application/json
+
+{"description":"__Description__","role":"__Role__","s3Location":"__S3Location__"}

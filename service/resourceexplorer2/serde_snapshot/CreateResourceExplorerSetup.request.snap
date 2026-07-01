@@ -1,0 +1,5 @@
+POST /CreateResourceExplorerSetup
+
+Content-Type: application/json
+
+{"AggregatorRegions":["__Member__","__Member__"],"RegionList":["__Member__","__Member__"],"ViewName":"__ViewName__"}

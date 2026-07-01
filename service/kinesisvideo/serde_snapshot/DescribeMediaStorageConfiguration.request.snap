@@ -1,0 +1,5 @@
+POST /describeMediaStorageConfiguration
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","ChannelName":"__ChannelName__"}

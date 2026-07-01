@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateUserGroup&Engine=__Engine__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&UserGroupId=__UserGroupId__&UserIds.member.1=__Member__&UserIds.member.2=__Member__&Version=2015-02-02

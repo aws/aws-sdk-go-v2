@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateModelCardExportJob
+
+{"ModelCardExportJobName":"__ModelCardExportJobName__","ModelCardName":"__ModelCardName__","ModelCardVersion":1,"OutputConfig":{"S3OutputPath":"__S3OutputPath__"}}

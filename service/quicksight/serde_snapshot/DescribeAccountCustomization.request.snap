@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/customizations?namespace=__Namespace__&resolved=true
+
+

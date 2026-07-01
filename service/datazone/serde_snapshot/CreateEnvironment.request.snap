@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/environments
+
+Content-Type: application/json
+
+{"deploymentOrder":1,"description":"__Description__","environmentAccountIdentifier":"__EnvironmentAccountIdentifier__","environmentAccountRegion":"__EnvironmentAccountRegion__","environmentBlueprintIdentifier":"__EnvironmentBlueprintIdentifier__","environmentConfigurationId":"__EnvironmentConfigurationId__","environmentConfigurationName":"__EnvironmentConfigurationName__","environmentProfileIdentifier":"__EnvironmentProfileIdentifier__","glossaryTerms":["__Member__","__Member__"],"name":"__Name__","projectIdentifier":"__ProjectIdentifier__","userParameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /prod/channels/__ChannelId__/restartChannelPipelines
+
+Content-Type: application/json
+
+{"pipelineIds":["PIPELINE_0","PIPELINE_0"]}

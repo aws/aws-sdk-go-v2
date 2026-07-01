@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/environments/__Identifier__
+
+Content-Type: application/json
+
+{"blueprintVersion":"__BlueprintVersion__","description":"__Description__","environmentConfigurationName":"__EnvironmentConfigurationName__","glossaryTerms":["__Member__","__Member__"],"name":"__Name__","userParameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}]}

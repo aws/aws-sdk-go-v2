@@ -1,0 +1,5 @@
+POST /metrics/current/__InstanceId__
+
+Content-Type: application/json
+
+{"CurrentMetrics":[{"MetricId":"__MetricId__","Name":"AGENTS_ONLINE","Unit":"SECONDS"},{"MetricId":"__MetricId__","Name":"AGENTS_ONLINE","Unit":"SECONDS"}],"Filters":{"AgentStatuses":["__Member__","__Member__"],"Channels":["VOICE","VOICE"],"Queues":["__Member__","__Member__"],"RoutingProfiles":["__Member__","__Member__"],"RoutingStepExpressions":["__Member__","__Member__"],"Subtypes":["__Member__","__Member__"],"ValidationTestTypes":["__Member__","__Member__"]},"Groupings":["QUEUE","QUEUE"],"MaxResults":1,"NextToken":"__NextToken__","SortCriteria":[{"SortByMetric":"AGENTS_ONLINE","SortOrder":"ASCENDING"},{"SortByMetric":"AGENTS_ONLINE","SortOrder":"ASCENDING"}]}

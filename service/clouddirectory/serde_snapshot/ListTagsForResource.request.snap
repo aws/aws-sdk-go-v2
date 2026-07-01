@@ -1,0 +1,5 @@
+POST /amazonclouddirectory/2017-01-11/tags
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","ResourceArn":"__ResourceArn__"}

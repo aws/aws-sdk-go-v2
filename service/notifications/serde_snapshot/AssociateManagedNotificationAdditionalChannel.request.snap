@@ -1,0 +1,5 @@
+PUT /channels/associate-managed-notification/__ChannelArn__
+
+Content-Type: application/json
+
+{"managedNotificationConfigurationArn":"__ManagedNotificationConfigurationArn__"}

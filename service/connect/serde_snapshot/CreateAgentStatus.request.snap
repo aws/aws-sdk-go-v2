@@ -1,0 +1,5 @@
+PUT /agent-status/__InstanceId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","DisplayOrder":1,"Name":"__Name__","State":"ENABLED","Tags":{"key0":"__Value__"}}

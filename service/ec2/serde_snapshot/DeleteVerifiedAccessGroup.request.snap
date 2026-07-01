@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteVerifiedAccessGroup&ClientToken=__ClientToken__&DryRun=true&VerifiedAccessGroupId=__VerifiedAccessGroupId__&Version=2016-11-15

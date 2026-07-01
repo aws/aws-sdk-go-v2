@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationId__/configurationprofiles/__ConfigurationProfileId__/hostedconfigurationversions/1
+
+

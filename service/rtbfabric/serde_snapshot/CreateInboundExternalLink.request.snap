@@ -1,0 +1,5 @@
+POST /responder-gateway/__GatewayId__/inbound-external-link
+
+Content-Type: application/json
+
+{"attributes":{"customerProvidedId":"__CustomerProvidedId__","responderErrorMasking":[{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1},{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1}]},"clientToken":"__ClientToken__","logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"tags":{"key0":"__Value__"}}

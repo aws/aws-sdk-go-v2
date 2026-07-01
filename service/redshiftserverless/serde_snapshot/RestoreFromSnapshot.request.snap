@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.RestoreFromSnapshot
+
+{"adminPasswordSecretKmsKeyId":"__AdminPasswordSecretKmsKeyId__","manageAdminPassword":true,"namespaceName":"__NamespaceName__","ownerAccount":"__OwnerAccount__","snapshotArn":"__SnapshotArn__","snapshotName":"__SnapshotName__","workgroupName":"__WorkgroupName__"}

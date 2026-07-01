@@ -1,0 +1,3 @@
+GET /automationrules/list?MaxResults=1&NextToken=__NextToken__
+
+

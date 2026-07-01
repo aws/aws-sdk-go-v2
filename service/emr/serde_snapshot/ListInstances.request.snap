@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.ListInstances
+
+{"ClusterId":"__ClusterId__","InstanceFleetId":"__InstanceFleetId__","InstanceFleetType":"MASTER","InstanceGroupId":"__InstanceGroupId__","InstanceGroupTypes":["MASTER","MASTER"],"InstanceStates":["AWAITING_FULFILLMENT","AWAITING_FULFILLMENT"],"Marker":"__Marker__"}

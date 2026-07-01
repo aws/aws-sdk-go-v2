@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceId__/logging
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","logGroupArn":"__LogGroupArn__"}

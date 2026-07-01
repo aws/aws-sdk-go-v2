@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__
+
+Content-Type: application/json
+
+{"DefaultLicense":"Basic","Name":"__Name__"}

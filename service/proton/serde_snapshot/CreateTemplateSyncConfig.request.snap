@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateTemplateSyncConfig
+
+{"branch":"__Branch__","repositoryName":"__RepositoryName__","repositoryProvider":"GITHUB","subdirectory":"__Subdirectory__","templateName":"__TemplateName__","templateType":"ENVIRONMENT"}

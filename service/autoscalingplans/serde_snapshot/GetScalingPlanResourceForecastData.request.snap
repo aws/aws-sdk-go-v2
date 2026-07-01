@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData
+
+{"EndTime":946684800,"ForecastDataType":"CapacityForecast","ResourceId":"__ResourceId__","ScalableDimension":"autoscaling:autoScalingGroup:DesiredCapacity","ScalingPlanName":"__ScalingPlanName__","ScalingPlanVersion":1,"ServiceNamespace":"autoscaling","StartTime":946684800}

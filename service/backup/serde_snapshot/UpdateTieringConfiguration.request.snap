@@ -1,0 +1,5 @@
+PUT /tiering-configurations/__TieringConfigurationName__
+
+Content-Type: application/json
+
+{"TieringConfiguration":{"BackupVaultName":"__BackupVaultName__","ResourceSelection":[{"Resources":["__Member__","__Member__"],"ResourceType":"__ResourceType__","TieringDownSettingsInDays":1},{"Resources":["__Member__","__Member__"],"ResourceType":"__ResourceType__","TieringDownSettingsInDays":1}]}}

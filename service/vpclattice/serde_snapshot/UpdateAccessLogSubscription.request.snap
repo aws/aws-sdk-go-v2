@@ -1,0 +1,5 @@
+PATCH /accesslogsubscriptions/__AccessLogSubscriptionIdentifier__
+
+Content-Type: application/json
+
+{"destinationArn":"__DestinationArn__"}

@@ -1,0 +1,5 @@
+POST /sip-media-applications/__SipMediaApplicationId__/calls/__TransactionId__
+
+Content-Type: application/json
+
+{"Arguments":{"key0":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListUsers
+
+{"AttributesToGet":["__Member__","__Member__"],"Filter":"__Filter__","Limit":1,"PaginationToken":"__PaginationToken__","UserPoolId":"__UserPoolId__"}

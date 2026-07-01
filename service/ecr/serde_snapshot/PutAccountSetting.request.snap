@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.PutAccountSetting
+
+{"name":"__Name__","value":"__Value__"}

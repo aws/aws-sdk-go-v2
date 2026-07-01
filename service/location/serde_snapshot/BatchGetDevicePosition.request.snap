@@ -1,0 +1,5 @@
+POST /tracking/v0/trackers/__TrackerName__/get-positions
+
+Content-Type: application/json
+
+{"DeviceIds":["__Member__","__Member__"]}

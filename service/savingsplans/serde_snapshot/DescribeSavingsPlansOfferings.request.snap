@@ -1,0 +1,5 @@
+POST /DescribeSavingsPlansOfferings
+
+Content-Type: application/json
+
+{"currencies":["CNY","CNY"],"descriptions":["__Member__","__Member__"],"durations":[1,1],"filters":[{"name":"region","values":["__Member__","__Member__"]},{"name":"region","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","offeringIds":["__Member__","__Member__"],"operations":["__Member__","__Member__"],"paymentOptions":["All Upfront","All Upfront"],"planTypes":["Compute","Compute"],"productType":"EC2","serviceCodes":["__Member__","__Member__"],"usageTypes":["__Member__","__Member__"]}

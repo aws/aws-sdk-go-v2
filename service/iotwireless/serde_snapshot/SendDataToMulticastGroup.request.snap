@@ -1,0 +1,5 @@
+POST /multicast-groups/__Id__/data
+
+Content-Type: application/json
+
+{"PayloadData":"__PayloadData__","WirelessMetadata":{"LoRaWAN":{"FPort":1}}}

@@ -1,0 +1,5 @@
+POST /evaluation-forms/__InstanceId__/__EvaluationFormId__/deactivate
+
+Content-Type: application/json
+
+{"EvaluationFormVersion":1}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.CreateUser
+
+{"HomeDirectory":"__HomeDirectory__","HomeDirectoryMappings":[{"Entry":"__Entry__","Target":"__Target__","Type":"FILE"},{"Entry":"__Entry__","Target":"__Target__","Type":"FILE"}],"HomeDirectoryType":"PATH","Policy":"__Policy__","PosixProfile":{"Gid":1,"SecondaryGids":[1,1],"Uid":1},"Role":"__Role__","ServerId":"__ServerId__","SshPublicKeyBody":"__SshPublicKeyBody__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserName":"__UserName__"}

@@ -1,0 +1,5 @@
+PUT /contact/participant-role-config/__InstanceId__/__ContactId__
+
+Content-Type: application/json
+
+{"ChannelConfiguration":{"Chat":{"ParticipantTimerConfigList":[{"ParticipantRole":"CUSTOMER","TimerType":"IDLE","TimerValue":{"ParticipantTimerAction":"Unset"}},{"ParticipantRole":"CUSTOMER","TimerType":"IDLE","TimerValue":{"ParticipantTimerAction":"Unset"}}]}}}

@@ -1,0 +1,5 @@
+PATCH /shareInvitations/__ShareInvitationId__
+
+Content-Type: application/json
+
+{"ShareInvitationAction":"ACCEPT"}

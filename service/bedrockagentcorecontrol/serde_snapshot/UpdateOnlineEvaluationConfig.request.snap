@@ -1,0 +1,5 @@
+PUT /online-evaluation-configs/__OnlineEvaluationConfigId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","clusteringConfig":{"frequencies":["DAILY","DAILY"]},"dataSourceConfig":{"cloudWatchLogs":{"logGroupNames":["__Member__","__Member__"],"serviceNames":["__Member__","__Member__"]}},"description":"__Description__","evaluationExecutionRoleArn":"__EvaluationExecutionRoleArn__","evaluators":[{"evaluatorId":"__EvaluatorReferenceMemberEvaluatorId__"},{"evaluatorId":"__EvaluatorReferenceMemberEvaluatorId__"}],"executionStatus":"ENABLED","insights":[{"insightId":"__InsightId__"},{"insightId":"__InsightId__"}],"rule":{"filters":[{"key":"__Key__","operator":"Equals","value":{"stringValue":"__FilterValueMemberStringValue__"}},{"key":"__Key__","operator":"Equals","value":{"stringValue":"__FilterValueMemberStringValue__"}}],"samplingConfig":{"samplingPercentage":1},"sessionConfig":{"sessionTimeoutMinutes":1}}}

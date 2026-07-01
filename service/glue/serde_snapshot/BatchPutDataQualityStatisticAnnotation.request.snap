@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.BatchPutDataQualityStatisticAnnotation
+
+{"ClientToken":"__ClientToken__","InclusionAnnotations":[{"InclusionAnnotation":"INCLUDE","ProfileId":"__ProfileId__","StatisticId":"__StatisticId__"},{"InclusionAnnotation":"INCLUDE","ProfileId":"__ProfileId__","StatisticId":"__StatisticId__"}]}

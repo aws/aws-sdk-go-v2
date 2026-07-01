@@ -1,0 +1,5 @@
+PUT /domains/__DomainId__/cases/__CaseId__
+
+Content-Type: application/json
+
+{"fields":[{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"performedBy":{"userArn":"__UserUnionMemberUserArn__"}}

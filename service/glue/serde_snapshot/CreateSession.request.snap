@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateSession
+
+{"Command":{"Name":"__Name__","PythonVersion":"__PythonVersion__"},"Connections":{"Connections":["__Member__","__Member__"]},"DefaultArguments":{"key0":"__Value__"},"Description":"__Description__","GlueVersion":"__GlueVersion__","Id":"__Id__","IdleTimeout":1,"MaxCapacity":1,"NumberOfWorkers":1,"RequestOrigin":"__RequestOrigin__","Role":"__Role__","SecurityConfiguration":"__SecurityConfiguration__","SessionType":"LIVY","Tags":{"key0":"__Value__"},"Timeout":1,"WorkerType":"Standard"}

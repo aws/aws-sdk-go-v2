@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisioningArtifact
+
+{"AcceptLanguage":"__AcceptLanguage__","Active":true,"Description":"__Description__","Guidance":"DEFAULT","Name":"__Name__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__"}

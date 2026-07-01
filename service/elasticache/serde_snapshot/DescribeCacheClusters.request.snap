@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeCacheClusters&CacheClusterId=__CacheClusterId__&Marker=__Marker__&MaxRecords=1&ShowCacheClustersNotInReplicationGroups=true&ShowCacheNodeInfo=true&Version=2015-02-02

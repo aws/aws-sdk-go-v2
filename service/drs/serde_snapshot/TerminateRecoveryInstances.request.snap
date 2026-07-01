@@ -1,0 +1,5 @@
+POST /TerminateRecoveryInstances
+
+Content-Type: application/json
+
+{"recoveryInstanceIDs":["__Member__","__Member__"]}

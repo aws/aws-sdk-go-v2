@@ -1,0 +1,5 @@
+POST /GetIndexingRules
+
+Content-Type: application/json
+
+{"NextToken":"__NextToken__"}

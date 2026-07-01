@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/namespaces/__Namespace__/self-upgrade-configuration
+
+Content-Type: application/json
+
+{"SelfUpgradeStatus":"AUTO_APPROVAL"}

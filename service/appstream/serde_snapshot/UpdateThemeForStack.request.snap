@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.UpdateThemeForStack
+
+{"AttributesToDelete":["FOOTER_LINKS","FOOTER_LINKS"],"FaviconS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"FooterLinks":[{"DisplayName":"__DisplayName__","FooterLinkURL":"__FooterLinkURL__"},{"DisplayName":"__DisplayName__","FooterLinkURL":"__FooterLinkURL__"}],"OrganizationLogoS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"StackName":"__StackName__","State":"ENABLED","ThemeStyling":"LIGHT_BLUE","TitleText":"__TitleText__"}

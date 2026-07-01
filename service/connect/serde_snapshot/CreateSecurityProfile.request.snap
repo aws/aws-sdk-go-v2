@@ -1,0 +1,5 @@
+PUT /security-profiles/__InstanceId__
+
+Content-Type: application/json
+
+{"AllowedAccessControlHierarchyGroupId":"__AllowedAccessControlHierarchyGroupId__","AllowedAccessControlTags":{"key0":"__Value__"},"AllowedFlowModules":[{"FlowModuleId":"__FlowModuleId__","Type":"MCP"},{"FlowModuleId":"__FlowModuleId__","Type":"MCP"}],"Applications":[{"ApplicationPermissions":["__Member__","__Member__"],"Namespace":"__Namespace__","Type":"MCP"},{"ApplicationPermissions":["__Member__","__Member__"],"Namespace":"__Namespace__","Type":"MCP"}],"Description":"__Description__","GranularAccessControlConfiguration":{"DataTableAccessControlConfiguration":{"PrimaryAttributeAccessControlConfiguration":{"PrimaryAttributeValues":[{"AccessType":"ALLOW","AttributeName":"__AttributeName__","Values":["__Member__","__Member__"]},{"AccessType":"ALLOW","AttributeName":"__AttributeName__","Values":["__Member__","__Member__"]}]}}},"HierarchyRestrictedResources":["__Member__","__Member__"],"Permissions":["__Member__","__Member__"],"SecurityProfileName":"__SecurityProfileName__","TagRestrictedResources":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}}

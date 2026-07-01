@@ -1,0 +1,3 @@
+GET /greengrass/things/__ThingName__/connectivityInfo
+
+

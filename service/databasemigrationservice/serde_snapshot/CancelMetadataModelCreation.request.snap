@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CancelMetadataModelCreation
+
+{"MigrationProjectIdentifier":"__MigrationProjectIdentifier__","RequestIdentifier":"__RequestIdentifier__"}

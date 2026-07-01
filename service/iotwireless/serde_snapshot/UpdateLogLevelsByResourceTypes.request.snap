@@ -1,0 +1,5 @@
+POST /log-levels
+
+Content-Type: application/json
+
+{"DefaultLogLevel":"INFO","FuotaTaskLogOptions":[{"Events":[{"Event":"Fuota","LogLevel":"INFO"},{"Event":"Fuota","LogLevel":"INFO"}],"LogLevel":"INFO","Type":"LoRaWAN"},{"Events":[{"Event":"Fuota","LogLevel":"INFO"},{"Event":"Fuota","LogLevel":"INFO"}],"LogLevel":"INFO","Type":"LoRaWAN"}],"WirelessDeviceLogOptions":[{"Events":[{"Event":"Join","LogLevel":"INFO"},{"Event":"Join","LogLevel":"INFO"}],"LogLevel":"INFO","Type":"Sidewalk"},{"Events":[{"Event":"Join","LogLevel":"INFO"},{"Event":"Join","LogLevel":"INFO"}],"LogLevel":"INFO","Type":"Sidewalk"}],"WirelessGatewayLogOptions":[{"Events":[{"Event":"CUPS_Request","LogLevel":"INFO"},{"Event":"CUPS_Request","LogLevel":"INFO"}],"LogLevel":"INFO","Type":"LoRaWAN"},{"Events":[{"Event":"CUPS_Request","LogLevel":"INFO"},{"Event":"CUPS_Request","LogLevel":"INFO"}],"LogLevel":"INFO","Type":"LoRaWAN"}]}

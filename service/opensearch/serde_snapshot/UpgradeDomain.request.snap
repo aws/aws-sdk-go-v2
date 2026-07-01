@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/upgradeDomain
+
+Content-Type: application/json
+
+{"AdvancedOptions":{"key0":"__Value__"},"DomainName":"__DomainName__","PerformCheckOnly":true,"TargetVersion":"__TargetVersion__"}

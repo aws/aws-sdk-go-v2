@@ -1,0 +1,3 @@
+GET /cacertificates?isAscendingOrder=true&marker=__Marker__&pageSize=1&templateName=__TemplateName__
+
+

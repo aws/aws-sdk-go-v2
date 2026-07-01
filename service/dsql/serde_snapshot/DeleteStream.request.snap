@@ -1,0 +1,3 @@
+DELETE /stream/__ClusterIdentifier__/__StreamIdentifier__?client-token=__ClientToken__
+
+

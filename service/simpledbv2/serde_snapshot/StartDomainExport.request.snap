@@ -1,0 +1,5 @@
+POST /v2/StartDomainExport
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","domainName":"__DomainName__","s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3KeyPrefix":"__S3KeyPrefix__","s3SseAlgorithm":"AES256","s3SseKmsKeyId":"__S3SseKmsKeyId__"}

@@ -1,0 +1,5 @@
+POST /attached-files-configurations/__InstanceId__/EMAIL
+
+Content-Type: application/json
+
+{"ExtensionConfiguration":{"AllowedExtensions":[{"Extension":"__Extension__"},{"Extension":"__Extension__"}]},"MaximumSizeLimitInBytes":1}

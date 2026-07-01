@@ -1,0 +1,8 @@
+POST /service/GraniteServiceVersion20100801/operation/PutCompositeAlarm
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+«nActionsEnabledõpAlarmDescriptiont__AlarmDescription__iAlarmNamem__AlarmName__wInsufficientDataActions‚j__Member__j__Member__dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__qActionsSuppressoru__ActionsSuppressor__xActionsSuppressorWaitPeriodlAlarmActions‚j__Member__j__Member__iAlarmRulem__AlarmRule__iOKActions‚j__Member__j__Member__x ActionsSuppressorExtensionPeriod

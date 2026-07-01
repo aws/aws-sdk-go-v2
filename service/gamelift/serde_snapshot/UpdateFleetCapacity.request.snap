@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateFleetCapacity
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦gMaxSizehLocationl__Location__xManagedCapacityConfiguration¢tZeroCapacityStrategyfMANUALxScaleInAfterInactivityMinutesgFleetIdk__FleetId__pDesiredInstancesgMinSize

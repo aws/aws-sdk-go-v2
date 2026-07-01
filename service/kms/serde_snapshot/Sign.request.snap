@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.Sign
+
+{"DryRun":true,"GrantTokens":["__Member__","__Member__"],"KeyId":"__KeyId__","Message":"YmxvYg==","MessageType":"RAW","SigningAlgorithm":"RSASSA_PSS_SHA_256"}

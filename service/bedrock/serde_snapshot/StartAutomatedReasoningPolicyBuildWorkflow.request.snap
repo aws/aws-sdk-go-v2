@@ -1,0 +1,6 @@
+POST /automated-reasoning-policies/__PolicyArn__/build-workflows/INGEST_CONTENT/start
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientRequestToken__
+
+{"policyDefinition":{"rules":[{"alternateExpression":"__AlternateExpression__","expression":"__Expression__","id":"__Id__"},{"alternateExpression":"__AlternateExpression__","expression":"__Expression__","id":"__Id__"}],"types":[{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]},{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}],"variables":[{"description":"__Description__","name":"__Name__","type":"__Type__"},{"description":"__Description__","name":"__Name__","type":"__Type__"}],"version":"__Version__"},"workflowContent":{"documents":[{"document":"YmxvYg==","documentContentType":"pdf","documentDescription":"__DocumentDescription__","documentName":"__DocumentName__"},{"document":"YmxvYg==","documentContentType":"pdf","documentDescription":"__DocumentDescription__","documentName":"__DocumentName__"}]}}

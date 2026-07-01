@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RegisterInstanceEventNotificationAttributes&DryRun=true&InstanceTagAttribute.IncludeAllTagsOfInstance=true&InstanceTagAttribute.InstanceTagKey.1=__Member__&InstanceTagAttribute.InstanceTagKey.2=__Member__&Version=2016-11-15

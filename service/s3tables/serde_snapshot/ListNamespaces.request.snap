@@ -1,0 +1,3 @@
+GET /namespaces/__TableBucketARN__?continuationToken=__ContinuationToken__&maxNamespaces=1&prefix=__Prefix__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.UpdateCollection
+
+{"clientToken":"__ClientToken__","deletionProtection":"ENABLED","description":"__Description__","id":"__Id__","vectorOptions":{"ServerlessVectorAcceleration":"ENABLED"}}

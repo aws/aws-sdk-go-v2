@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PerformanceInsightsv20180227.UntagResource
+
+{"ResourceARN":"__ResourceARN__","ServiceType":"RDS","TagKeys":["__Member__","__Member__"]}

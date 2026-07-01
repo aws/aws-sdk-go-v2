@@ -1,0 +1,4 @@
+GET /api/v1/documents/__DocumentId__/path?fields=__Fields__&limit=1&marker=__Marker__
+
+Authentication: __AuthenticationToken__
+

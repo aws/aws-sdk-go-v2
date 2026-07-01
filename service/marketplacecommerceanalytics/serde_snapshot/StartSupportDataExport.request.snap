@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MarketplaceCommerceAnalytics20150701.StartSupportDataExport
+
+{"customerDefinedValues":{"key0":"__Value__"},"dataSetType":"customer_support_contacts_data","destinationS3BucketName":"__DestinationS3BucketName__","destinationS3Prefix":"__DestinationS3Prefix__","fromDate":946684800,"roleNameArn":"__RoleNameArn__","snsTopicArn":"__SnsTopicArn__"}

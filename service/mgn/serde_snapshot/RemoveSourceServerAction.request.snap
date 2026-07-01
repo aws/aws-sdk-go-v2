@@ -1,0 +1,5 @@
+POST /RemoveSourceServerAction
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","actionID":"__ActionID__","sourceServerID":"__SourceServerID__"}

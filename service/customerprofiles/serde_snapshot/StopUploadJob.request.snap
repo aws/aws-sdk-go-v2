@@ -1,0 +1,3 @@
+PUT /domains/__DomainName__/upload-jobs/__JobId__/stop
+
+

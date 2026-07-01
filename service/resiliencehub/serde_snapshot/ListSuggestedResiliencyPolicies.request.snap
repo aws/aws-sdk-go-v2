@@ -1,0 +1,3 @@
+GET /list-suggested-resiliency-policies?maxResults=1&nextToken=__NextToken__
+
+

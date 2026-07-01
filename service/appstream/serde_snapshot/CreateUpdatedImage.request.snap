@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateUpdatedImage
+
+{"dryRun":true,"existingImageName":"__ExistingImageName__","newImageDescription":"__NewImageDescription__","newImageDisplayName":"__NewImageDisplayName__","newImageName":"__NewImageName__","newImageTags":{"key0":"__Value__"}}

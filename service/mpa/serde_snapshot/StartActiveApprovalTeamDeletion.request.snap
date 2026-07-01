@@ -1,0 +1,5 @@
+POST /approval-teams/__Arn__?Delete=
+
+Content-Type: application/json
+
+{"PendingWindowDays":1}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.CreateConnectClientAddIn
+
+{"Name":"__Name__","ResourceId":"__ResourceId__","URL":"__URL__"}

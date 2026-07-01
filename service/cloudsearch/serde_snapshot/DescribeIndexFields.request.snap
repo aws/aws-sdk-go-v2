@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeIndexFields&Deployed=true&DomainName=__DomainName__&FieldNames.member.1=__Member__&FieldNames.member.2=__Member__&Version=2013-01-01

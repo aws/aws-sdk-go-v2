@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.RenderUiTemplate
+
+{"HumanTaskUiArn":"__HumanTaskUiArn__","RoleArn":"__RoleArn__","Task":{"Input":"__Input__"},"UiTemplate":{"Content":"__Content__"}}

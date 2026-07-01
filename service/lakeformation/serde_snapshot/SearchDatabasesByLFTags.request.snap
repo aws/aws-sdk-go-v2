@@ -1,0 +1,5 @@
+POST /SearchDatabasesByLFTags
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","Expression":[{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__"}

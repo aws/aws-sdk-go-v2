@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVpcEndpoint&AddRouteTableId.1=__Member__&AddRouteTableId.2=__Member__&AddSecurityGroupId.1=__Member__&AddSecurityGroupId.2=__Member__&AddSubnetId.1=__Member__&AddSubnetId.2=__Member__&DnsOptions.DnsRecordIpType=ipv4&DnsOptions.PrivateDnsOnlyForInboundResolverEndpoint=true&DnsOptions.PrivateDnsPreference=__PrivateDnsPreference__&DnsOptions.PrivateDnsSpecifiedDomain.1=__Member__&DnsOptions.PrivateDnsSpecifiedDomain.2=__Member__&DryRun=true&IpAddressType=ipv4&PolicyDocument=__PolicyDocument__&PrivateDnsEnabled=true&RemoveRouteTableId.1=__Member__&RemoveRouteTableId.2=__Member__&RemoveSecurityGroupId.1=__Member__&RemoveSecurityGroupId.2=__Member__&RemoveSubnetId.1=__Member__&RemoveSubnetId.2=__Member__&ResetPolicy=true&SubnetConfiguration.1.Ipv4=__Ipv4__&SubnetConfiguration.1.Ipv6=__Ipv6__&SubnetConfiguration.1.SubnetId=__SubnetId__&SubnetConfiguration.2.Ipv4=__Ipv4__&SubnetConfiguration.2.Ipv6=__Ipv6__&SubnetConfiguration.2.SubnetId=__SubnetId__&Version=2016-11-15&VpcEndpointId=__VpcEndpointId__

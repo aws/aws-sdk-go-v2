@@ -1,0 +1,5 @@
+POST /access-sources
+
+Content-Type: application/json
+
+{"cidr":"__Cidr__","clientToken":"__ClientToken__","dnsViewId":"__DnsViewId__","ipAddressType":"IPV4","name":"__Name__","protocol":"DO53","tags":{"key0":"__Value__"}}

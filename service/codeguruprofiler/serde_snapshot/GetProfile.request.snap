@@ -1,0 +1,4 @@
+GET /profilingGroups/__ProfilingGroupName__/profile?endTime=2000-01-01T00%3A00%3A00Z&maxDepth=1&period=__Period__&startTime=2000-01-01T00%3A00%3A00Z
+
+Accept: __Accept__
+

@@ -1,0 +1,3 @@
+GET /workspaces/__WorkspaceId__/anomalydetectors?alias=__Alias__&maxResults=1&nextToken=__NextToken__
+
+

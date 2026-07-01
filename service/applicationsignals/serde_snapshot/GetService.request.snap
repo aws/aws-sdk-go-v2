@@ -1,0 +1,5 @@
+POST /service?EndTime=2000-01-01T00%3A00%3A00Z&StartTime=2000-01-01T00%3A00%3A00Z
+
+Content-Type: application/json
+
+{"KeyAttributes":{"key0":"__Value__"}}

@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/stages/__StageName__
+
+Accept: application/json
+

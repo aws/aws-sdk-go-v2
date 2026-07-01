@@ -1,0 +1,8 @@
+POST /service/GraniteServiceVersion20100801/operation/ListMetrics
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+§iNextTokenm__NextToken__nRecentlyActivedPT3HuIncludeLinkedAccountsõmOwningAccountq__OwningAccount__iNamespacem__Namespace__jMetricNamen__MetricName__jDimensions‚¢dNameh__Name__eValuei__Value__¢dNameh__Name__eValuei__Value__

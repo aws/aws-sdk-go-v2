@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/themes/__ThemeId__/aliases/__AliasName__
+
+Content-Type: application/json
+
+{"ThemeVersionNumber":1}

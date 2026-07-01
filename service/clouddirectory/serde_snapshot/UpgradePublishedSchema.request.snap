@@ -1,0 +1,5 @@
+PUT /amazonclouddirectory/2017-01-11/schema/upgradepublished
+
+Content-Type: application/json
+
+{"DevelopmentSchemaArn":"__DevelopmentSchemaArn__","DryRun":true,"MinorVersion":"__MinorVersion__","PublishedSchemaArn":"__PublishedSchemaArn__"}

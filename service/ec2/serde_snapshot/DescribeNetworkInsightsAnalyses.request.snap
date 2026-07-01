@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeNetworkInsightsAnalyses&AnalysisEndTime=2000-01-01T00%3A00%3A00Z&AnalysisStartTime=2000-01-01T00%3A00%3A00Z&DryRun=true&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&MaxResults=1&NetworkInsightsAnalysisId.1=__Member__&NetworkInsightsAnalysisId.2=__Member__&NetworkInsightsPathId=__NetworkInsightsPathId__&NextToken=__NextToken__&Version=2016-11-15

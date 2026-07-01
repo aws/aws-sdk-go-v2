@@ -1,0 +1,5 @@
+POST /identities/get-token-vault
+
+Content-Type: application/json
+
+{"tokenVaultId":"__TokenVaultId__"}

@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/plugins/__PluginId__
+
+Content-Type: application/json
+
+{"authConfiguration":{"basicAuthConfiguration":{"roleArn":"__RoleArn__","secretArn":"__SecretArn__"}},"customPluginConfiguration":{"apiSchema":{"payload":"__APISchemaMemberPayload__"},"apiSchemaType":"OPEN_API_V3","description":"__Description__"},"displayName":"__DisplayName__","serverUrl":"__ServerUrl__","state":"ENABLED"}

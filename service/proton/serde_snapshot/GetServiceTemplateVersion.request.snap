@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.GetServiceTemplateVersion
+
+{"majorVersion":"__MajorVersion__","minorVersion":"__MinorVersion__","templateName":"__TemplateName__"}

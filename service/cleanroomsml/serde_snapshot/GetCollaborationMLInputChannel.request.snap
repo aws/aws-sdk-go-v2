@@ -1,0 +1,3 @@
+GET /collaborations/__CollaborationIdentifier__/ml-input-channels/__MlInputChannelArn__
+
+

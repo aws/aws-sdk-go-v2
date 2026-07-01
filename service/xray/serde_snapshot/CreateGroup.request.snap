@@ -1,0 +1,5 @@
+POST /CreateGroup
+
+Content-Type: application/json
+
+{"FilterExpression":"__FilterExpression__","GroupName":"__GroupName__","InsightsConfiguration":{"InsightsEnabled":true,"NotificationsEnabled":true},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/intermediateTables/__IntermediateTableIdentifier__/analysisRule
+
+Content-Type: application/json
+
+{"analysisRulePolicy":{"v1":{"custom":{"additionalAnalyses":"ALLOWED","allowedAdditionalAnalyses":["__Member__","__Member__"],"allowedAnalyses":["__Member__","__Member__"],"allowedAnalysisProviders":["__Member__","__Member__"],"allowedResultReceivers":["__Member__","__Member__"],"differentialPrivacy":{"columns":[{"name":"__Name__"},{"name":"__Name__"}]},"disallowedOutputColumns":["__Member__","__Member__"]}}},"analysisRuleType":"CUSTOM"}

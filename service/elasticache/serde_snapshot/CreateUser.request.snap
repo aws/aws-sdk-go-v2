@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AccessString=__AccessString__&Action=CreateUser&AuthenticationMode.Passwords.member.1=__Member__&AuthenticationMode.Passwords.member.2=__Member__&AuthenticationMode.Type=password&Engine=__Engine__&NoPasswordRequired=true&Passwords.member.1=__Member__&Passwords.member.2=__Member__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&UserId=__UserId__&UserName=__UserName__&Version=2015-02-02

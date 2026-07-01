@@ -1,0 +1,5 @@
+POST /servicenetworkresourceassociations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","privateDnsEnabled":true,"resourceConfigurationIdentifier":"__ResourceConfigurationIdentifier__","serviceNetworkIdentifier":"__ServiceNetworkIdentifier__","tags":{"key0":"__Value__"}}

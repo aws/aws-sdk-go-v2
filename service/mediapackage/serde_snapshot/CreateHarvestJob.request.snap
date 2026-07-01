@@ -1,0 +1,5 @@
+POST /harvest_jobs
+
+Content-Type: application/json
+
+{"endTime":"__EndTime__","id":"__Id__","originEndpointId":"__OriginEndpointId__","s3Destination":{"bucketName":"__BucketName__","manifestKey":"__ManifestKey__","roleArn":"__RoleArn__"},"startTime":"__StartTime__"}

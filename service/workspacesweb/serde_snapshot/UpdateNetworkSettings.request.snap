@@ -1,0 +1,5 @@
+PATCH /networkSettings/__NetworkSettingsArn__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeOptedOutNumbers
+
+{"Filters":[{"Name":"end-user-opted-out","Values":["__Member__","__Member__"]},{"Name":"end-user-opted-out","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","OptedOutNumbers":["__Member__","__Member__"],"OptOutListName":"__OptOutListName__"}

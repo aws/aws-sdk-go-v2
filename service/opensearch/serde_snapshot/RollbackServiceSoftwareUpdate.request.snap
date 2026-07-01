@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/serviceSoftwareUpdate/rollback
+
+Content-Type: application/json
+
+{"DomainName":"__DomainName__"}

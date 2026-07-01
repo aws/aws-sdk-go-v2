@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.CreateQuerySuggestionsBlockList
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","IndexId":"__IndexId__","Name":"__Name__","RoleArn":"__RoleArn__","SourceS3Path":{"Bucket":"__Bucket__","Key":"__Key__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

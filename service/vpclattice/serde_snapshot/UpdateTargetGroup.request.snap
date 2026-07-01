@@ -1,0 +1,5 @@
+PATCH /targetgroups/__TargetGroupIdentifier__
+
+Content-Type: application/json
+
+{"healthCheck":{"enabled":true,"healthCheckIntervalSeconds":1,"healthCheckTimeoutSeconds":1,"healthyThresholdCount":1,"matcher":{"httpCode":"__MatcherMemberHttpCode__"},"path":"__Path__","port":1,"protocol":"HTTP","protocolVersion":"HTTP1","unhealthyThresholdCount":1}}

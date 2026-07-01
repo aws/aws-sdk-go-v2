@@ -1,0 +1,5 @@
+POST /delete-landingzone
+
+Content-Type: application/json
+
+{"landingZoneIdentifier":"__LandingZoneIdentifier__"}

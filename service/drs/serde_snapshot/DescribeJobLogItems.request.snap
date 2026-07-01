@@ -1,0 +1,5 @@
+POST /DescribeJobLogItems
+
+Content-Type: application/json
+
+{"jobID":"__JobID__","maxResults":1,"nextToken":"__NextToken__"}

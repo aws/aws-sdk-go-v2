@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RejectVpcEndpointConnections&DryRun=true&ServiceId=__ServiceId__&Version=2016-11-15&VpcEndpointId.1=__Member__&VpcEndpointId.2=__Member__

@@ -1,0 +1,5 @@
+POST /authentication-profiles/__InstanceId__/__AuthenticationProfileId__
+
+Content-Type: application/json
+
+{"AllowedIps":["__Member__","__Member__"],"BlockedIps":["__Member__","__Member__"],"Description":"__Description__","Name":"__Name__","PeriodicSessionDuration":1,"SessionInactivityDuration":1,"SessionInactivityHandlingEnabled":true}

@@ -1,0 +1,5 @@
+POST /ListImportErrors
+
+Content-Type: application/json
+
+{"importID":"__ImportID__","maxResults":1,"nextToken":"__NextToken__"}

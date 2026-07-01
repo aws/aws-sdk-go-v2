@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: EUCMIFrontendAPIService.CreateVolume
+
+{"AvailabilityZone":"__AvailabilityZone__","ClientToken":"__ClientToken__","Encrypted":true,"Iops":1,"KmsKeyId":"__KmsKeyId__","SizeInGB":1,"SnapshotId":"__SnapshotId__","TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"ResourceType":"instance","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"Throughput":1,"VolumeType":"standard"}

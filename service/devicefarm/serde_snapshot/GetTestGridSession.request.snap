@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.GetTestGridSession
+
+{"projectArn":"__ProjectArn__","sessionArn":"__SessionArn__","sessionId":"__SessionId__"}

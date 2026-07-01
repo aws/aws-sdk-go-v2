@@ -1,0 +1,3 @@
+DELETE /global-networks/__GlobalNetworkId__/transit-gateway-connect-peer-associations/__TransitGatewayConnectPeerArn__
+
+

@@ -1,0 +1,5 @@
+PUT /voice-connectors/__VoiceConnectorId__/origination
+
+Content-Type: application/json
+
+{"Origination":{"Disabled":true,"Routes":[{"Host":"__Host__","Port":1,"Priority":1,"Protocol":"TCP","Weight":1},{"Host":"__Host__","Port":1,"Priority":1,"Protocol":"TCP","Weight":1}]}}

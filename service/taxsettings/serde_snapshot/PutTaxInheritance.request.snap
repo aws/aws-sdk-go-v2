@@ -1,0 +1,5 @@
+POST /PutTaxInheritance
+
+Content-Type: application/json
+
+{"heritageStatus":"OptIn"}

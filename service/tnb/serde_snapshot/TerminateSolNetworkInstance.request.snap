@@ -1,0 +1,5 @@
+POST /sol/nslcm/v1/ns_instances/__NsInstanceId__/terminate
+
+Content-Type: application/json
+
+{"tags":{"key0":"__Value__"}}

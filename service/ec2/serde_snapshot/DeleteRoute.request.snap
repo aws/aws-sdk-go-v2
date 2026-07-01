@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteRoute&DestinationCidrBlock=__DestinationCidrBlock__&DestinationIpv6CidrBlock=__DestinationIpv6CidrBlock__&DestinationPrefixListId=__DestinationPrefixListId__&DryRun=true&RouteTableId=__RouteTableId__&Version=2016-11-15

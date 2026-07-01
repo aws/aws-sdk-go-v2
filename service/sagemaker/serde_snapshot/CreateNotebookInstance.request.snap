@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateNotebookInstance
+
+{"AcceleratorTypes":["ml.eia1.medium","ml.eia1.medium"],"AdditionalCodeRepositories":["__Member__","__Member__"],"DefaultCodeRepository":"__DefaultCodeRepository__","DirectInternetAccess":"Enabled","InstanceMetadataServiceConfiguration":{"MinimumInstanceMetadataServiceVersion":"__MinimumInstanceMetadataServiceVersion__"},"InstanceType":"ml.t2.medium","IpAddressType":"ipv4","KmsKeyId":"__KmsKeyId__","LifecycleConfigName":"__LifecycleConfigName__","NotebookInstanceName":"__NotebookInstanceName__","PlatformIdentifier":"__PlatformIdentifier__","RoleArn":"__RoleArn__","RootAccess":"Enabled","SecurityGroupIds":["__Member__","__Member__"],"SubnetId":"__SubnetId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeSizeInGB":1}

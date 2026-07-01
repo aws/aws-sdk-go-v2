@@ -1,0 +1,6 @@
+POST /greengrass/groups/__GroupId__/deployments/$reset
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"Force":true}

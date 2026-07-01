@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.RequestPhoneNumber
+
+{"ClientToken":"__ClientToken__","DeletionProtectionEnabled":true,"InternationalSendingEnabled":true,"IsoCountryCode":"__IsoCountryCode__","MessageType":"TRANSACTIONAL","NumberCapabilities":["SMS","SMS"],"NumberType":"LONG_CODE","OptOutListName":"__OptOutListName__","PoolId":"__PoolId__","RegistrationId":"__RegistrationId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

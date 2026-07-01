@@ -1,0 +1,3 @@
+DELETE /v1/sms-voice/configuration-sets/__ConfigurationSetName__
+
+

@@ -1,0 +1,4 @@
+GET /?object-lock=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

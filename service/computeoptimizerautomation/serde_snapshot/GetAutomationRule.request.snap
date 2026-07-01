@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/GetAutomationRule
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡gruleArnk__RuleArn__

@@ -1,0 +1,5 @@
+POST /marketplace-model/endpoints/__EndpointIdentifier__/registration
+
+Content-Type: application/json
+
+{"modelSourceIdentifier":"__ModelSourceIdentifier__"}

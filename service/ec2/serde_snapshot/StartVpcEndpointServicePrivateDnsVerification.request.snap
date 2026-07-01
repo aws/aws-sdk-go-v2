@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=StartVpcEndpointServicePrivateDnsVerification&DryRun=true&ServiceId=__ServiceId__&Version=2016-11-15

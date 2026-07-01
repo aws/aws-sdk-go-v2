@@ -1,0 +1,5 @@
+POST /cryptogram/generate
+
+Content-Type: application/json
+
+{"KeyIdentifier":"__KeyIdentifier__","MajorKeyDerivationMode":"EMV_OPTION_A","SessionKeyDerivationAttributes":{"EmvCommon":{"ApplicationTransactionCounter":"__ApplicationTransactionCounter__","PanSequenceNumber":"__PanSequenceNumber__","PrimaryAccountNumber":"__PrimaryAccountNumber__"}},"TransactionData":"__TransactionData__"}

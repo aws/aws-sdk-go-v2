@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.DeleteAttributes
+
+{"attributes":[{"name":"__Name__","targetId":"__TargetId__","targetType":"container-instance","value":"__Value__"},{"name":"__Name__","targetId":"__TargetId__","targetType":"container-instance","value":"__Value__"}],"cluster":"__Cluster__"}

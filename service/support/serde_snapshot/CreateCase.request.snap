@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSupport_20130415.CreateCase
+
+{"attachmentSetId":"__AttachmentSetId__","categoryCode":"__CategoryCode__","ccEmailAddresses":["__Member__","__Member__"],"communicationBody":"__CommunicationBody__","issueType":"__IssueType__","language":"__Language__","serviceCode":"__ServiceCode__","severityCode":"__SeverityCode__","subject":"__Subject__"}

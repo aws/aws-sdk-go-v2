@@ -1,0 +1,5 @@
+POST /core-networks/__CoreNetworkId__/core-network-policy
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","LatestVersionId":1,"PolicyDocument":"__PolicyDocument__"}

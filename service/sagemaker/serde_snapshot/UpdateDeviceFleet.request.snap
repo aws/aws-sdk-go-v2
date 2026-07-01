@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateDeviceFleet
+
+{"Description":"__Description__","DeviceFleetName":"__DeviceFleetName__","EnableIotRoleAlias":true,"OutputConfig":{"KmsKeyId":"__KmsKeyId__","PresetDeploymentConfig":"__PresetDeploymentConfig__","PresetDeploymentType":"GreengrassV2Component","S3OutputLocation":"__S3OutputLocation__"},"RoleArn":"__RoleArn__"}

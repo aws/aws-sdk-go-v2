@@ -1,0 +1,5 @@
+POST /CreateStage
+
+Content-Type: application/json
+
+{"autoParticipantRecordingConfiguration":{"hlsConfiguration":{"targetSegmentDurationSeconds":1},"mediaTypes":["AUDIO_VIDEO","AUDIO_VIDEO"],"recordingReconnectWindowSeconds":1,"recordParticipantReplicas":true,"storageConfigurationArn":"__StorageConfigurationArn__","thumbnailConfiguration":{"recordingMode":"INTERVAL","storage":["SEQUENTIAL","SEQUENTIAL"],"targetIntervalSeconds":1}},"name":"__Name__","participantTokenConfigurations":[{"attributes":{"key0":"__Value__"},"capabilities":["PUBLISH","PUBLISH"],"duration":1,"userId":"__UserId__"},{"attributes":{"key0":"__Value__"},"capabilities":["PUBLISH","PUBLISH"],"duration":1,"userId":"__UserId__"}],"tags":{"key0":"__Value__"}}

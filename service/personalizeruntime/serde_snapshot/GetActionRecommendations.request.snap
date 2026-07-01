@@ -1,0 +1,5 @@
+POST /action-recommendations
+
+Content-Type: application/json
+
+{"campaignArn":"__CampaignArn__","filterArn":"__FilterArn__","filterValues":{"key0":"__Value__"},"numResults":1,"userId":"__UserId__"}

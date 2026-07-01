@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/email
+
+Content-Type: application/json
+
+{"ConfigurationSet":"__ConfigurationSet__","Enabled":true,"FromAddress":"__FromAddress__","Identity":"__Identity__","OrchestrationSendingRoleArn":"__OrchestrationSendingRoleArn__","RoleArn":"__RoleArn__"}

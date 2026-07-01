@@ -1,0 +1,3 @@
+DELETE /sequencestore/__SequenceStoreId__/upload/__UploadId__/abort
+
+

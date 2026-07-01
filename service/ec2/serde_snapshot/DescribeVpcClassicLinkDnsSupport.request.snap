@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeVpcClassicLinkDnsSupport&MaxResults=1&NextToken=__NextToken__&Version=2016-11-15&VpcIds.1=__Member__&VpcIds.2=__Member__

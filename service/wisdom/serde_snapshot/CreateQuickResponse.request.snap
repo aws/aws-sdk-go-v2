@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/quickResponses
+
+Content-Type: application/json
+
+{"channels":["__Member__","__Member__"],"clientToken":"__ClientToken__","content":{"content":"__QuickResponseDataProviderMemberContent__"},"contentType":"__ContentType__","description":"__Description__","groupingConfiguration":{"criteria":"__Criteria__","values":["__Member__","__Member__"]},"isActive":true,"language":"__Language__","name":"__Name__","shortcutKey":"__ShortcutKey__","tags":{"key0":"__Value__"}}

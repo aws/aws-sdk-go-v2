@@ -1,0 +1,5 @@
+PUT /access-points
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","fileSystemId":"__FileSystemId__","posixUser":{"gid":1,"secondaryGids":[1,1],"uid":1},"rootDirectory":{"creationPermissions":{"ownerGid":1,"ownerUid":1,"permissions":"__Permissions__"},"path":"__Path__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /promotepermissioncreatedfrompolicy
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","name":"__Name__","permissionArn":"__PermissionArn__"}

@@ -1,0 +1,5 @@
+PUT /v2/connect-instance/__ConnectInstanceId__/communication-limits
+
+Content-Type: application/json
+
+{"communicationLimitsConfig":{"allChannelSubtypes":{"communicationLimitsList":[{"frequency":1,"maxCountPerRecipient":1,"unit":"DAY"},{"frequency":1,"maxCountPerRecipient":1,"unit":"DAY"}]}}}

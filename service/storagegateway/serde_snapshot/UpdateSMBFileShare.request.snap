@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.UpdateSMBFileShare
+
+{"AccessBasedEnumeration":true,"AdminUserList":["__Member__","__Member__"],"AuditDestinationARN":"__AuditDestinationARN__","CacheAttributes":{"CacheStaleTimeoutInSeconds":1},"CaseSensitivity":"ClientSpecified","DefaultStorageClass":"__DefaultStorageClass__","EncryptionType":"SseS3","FileShareARN":"__FileShareARN__","FileShareName":"__FileShareName__","GuessMIMETypeEnabled":true,"InvalidUserList":["__Member__","__Member__"],"KMSEncrypted":true,"KMSKey":"__KMSKey__","NotificationPolicy":"__NotificationPolicy__","ObjectACL":"private","OplocksEnabled":true,"ReadOnly":true,"RequesterPays":true,"SMBACLEnabled":true,"ValidUserList":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+POST /sbomexport/cancel
+
+Content-Type: application/json
+
+{"reportId":"__ReportId__"}

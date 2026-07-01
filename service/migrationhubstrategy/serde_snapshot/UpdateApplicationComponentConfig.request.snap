@@ -1,0 +1,5 @@
+POST /update-applicationcomponent-config/
+
+Content-Type: application/json
+
+{"applicationComponentId":"__ApplicationComponentId__","appType":"DotNetFramework","configureOnly":true,"inclusionStatus":"excludeFromAssessment","secretsManagerKey":"__SecretsManagerKey__","sourceCodeList":[{"location":"__Location__","projectName":"__ProjectName__","sourceVersion":"__SourceVersion__","versionControl":"GITHUB"},{"location":"__Location__","projectName":"__ProjectName__","sourceVersion":"__SourceVersion__","versionControl":"GITHUB"}],"strategyOption":{"isPreferred":true,"strategy":"Rehost","targetDestination":"None specified","toolName":"App2Container"}}

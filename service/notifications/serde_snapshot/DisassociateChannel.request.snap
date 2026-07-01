@@ -1,0 +1,5 @@
+POST /channels/disassociate/__Arn__
+
+Content-Type: application/json
+
+{"notificationConfigurationArn":"__NotificationConfigurationArn__"}

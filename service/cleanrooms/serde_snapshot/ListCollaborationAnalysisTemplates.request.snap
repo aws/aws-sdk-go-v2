@@ -1,0 +1,3 @@
+GET /collaborations/__CollaborationIdentifier__/analysistemplates?maxResults=1&nextToken=__NextToken__
+
+

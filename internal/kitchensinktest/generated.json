@@ -21,6 +21,7 @@
         "internal/endpoints/endpoints_test.go",
         "options.go",
         "schemas/schemas.go",
+        "serde_snapshot_test.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",
         "type_registry.go",

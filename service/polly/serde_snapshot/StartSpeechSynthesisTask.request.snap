@@ -1,0 +1,5 @@
+POST /v1/synthesisTasks
+
+Content-Type: application/json
+
+{"Engine":"standard","LanguageCode":"arb","LexiconNames":["__Member__","__Member__"],"OutputFormat":"json","OutputS3BucketName":"__OutputS3BucketName__","OutputS3KeyPrefix":"__OutputS3KeyPrefix__","SampleRate":"__SampleRate__","SnsTopicArn":"__SnsTopicArn__","SpeechMarkTypes":["sentence","sentence"],"Text":"__Text__","TextType":"ssml","VoiceId":"Aditi"}

@@ -1,0 +1,5 @@
+PUT /PutContainerRecipePolicy
+
+Content-Type: application/json
+
+{"containerRecipeArn":"__ContainerRecipeArn__","policy":"__Policy__"}

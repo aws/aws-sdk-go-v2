@@ -1,0 +1,5 @@
+POST /listNotificationRules
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"EVENT_TYPE_ID","Value":"__Value__"},{"Name":"EVENT_TYPE_ID","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

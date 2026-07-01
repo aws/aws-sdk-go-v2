@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssumeRoleWithSAML&DurationSeconds=1&Policy=__Policy__&PolicyArns.member.1.arn=__Arn__&PolicyArns.member.2.arn=__Arn__&PrincipalArn=__PrincipalArn__&RoleArn=__RoleArn__&SAMLAssertion=__SAMLAssertion__&Version=2011-06-15

@@ -1,0 +1,5 @@
+PUT /graphs/__GraphIdentifier__
+
+Content-Type: application/json
+
+{"skipSnapshot":true}

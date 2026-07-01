@@ -1,0 +1,5 @@
+POST /GetSink
+
+Content-Type: application/json
+
+{"Identifier":"__Identifier__","IncludeTags":true}

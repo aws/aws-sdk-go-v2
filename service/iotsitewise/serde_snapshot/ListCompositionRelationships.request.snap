@@ -1,0 +1,3 @@
+GET /asset-models/__AssetModelId__/composition-relationships?maxResults=1&nextToken=__NextToken__
+
+

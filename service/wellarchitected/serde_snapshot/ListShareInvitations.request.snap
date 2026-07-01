@@ -1,0 +1,3 @@
+GET /shareInvitations?LensNamePrefix=__LensNamePrefix__&MaxResults=1&NextToken=__NextToken__&ProfileNamePrefix=__ProfileNamePrefix__&ShareResourceType=WORKLOAD&TemplateNamePrefix=__TemplateNamePrefix__&WorkloadNamePrefix=__WorkloadNamePrefix__
+
+

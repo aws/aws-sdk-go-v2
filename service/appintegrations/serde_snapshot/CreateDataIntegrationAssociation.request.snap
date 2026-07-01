@@ -1,0 +1,5 @@
+POST /dataIntegrations/__DataIntegrationIdentifier__/associations
+
+Content-Type: application/json
+
+{"ClientAssociationMetadata":{"key0":"__Value__"},"ClientId":"__ClientId__","ClientToken":"__ClientToken__","DestinationURI":"__DestinationURI__","ExecutionConfiguration":{"ExecutionMode":"ON_DEMAND","OnDemandConfiguration":{"EndTime":"__EndTime__","StartTime":"__StartTime__"},"ScheduleConfiguration":{"FirstExecutionFrom":"__FirstExecutionFrom__","Object":"__Object__","ScheduleExpression":"__ScheduleExpression__"}},"ObjectConfiguration":{"key0":{"key0":["__Member__","__Member__"]}}}

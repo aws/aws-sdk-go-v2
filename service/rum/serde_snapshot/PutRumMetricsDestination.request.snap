@@ -1,0 +1,5 @@
+POST /rummetrics/__AppMonitorName__/metricsdestination
+
+Content-Type: application/json
+
+{"Destination":"CloudWatch","DestinationArn":"__DestinationArn__","IamRoleArn":"__IamRoleArn__"}

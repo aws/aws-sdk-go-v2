@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=MoveCapacityReservationInstances&ClientToken=__ClientToken__&DestinationCapacityReservationId=__DestinationCapacityReservationId__&DryRun=true&InstanceCount=1&SourceCapacityReservationId=__SourceCapacityReservationId__&Version=2016-11-15

@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/outbound-email-config
+
+Content-Type: application/json
+
+{"OutboundEmailConfig":{"OutboundEmailAddressId":"__OutboundEmailAddressId__"}}

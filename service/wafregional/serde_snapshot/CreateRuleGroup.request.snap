@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_Regional_20161128.CreateRuleGroup
+
+{"ChangeToken":"__ChangeToken__","MetricName":"__MetricName__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

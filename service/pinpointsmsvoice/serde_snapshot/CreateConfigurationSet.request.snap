@@ -1,0 +1,5 @@
+POST /v1/sms-voice/configuration-sets
+
+Content-Type: application/json
+
+{"ConfigurationSetName":"__ConfigurationSetName__"}

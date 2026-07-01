@@ -1,0 +1,3 @@
+DELETE /v2/domains/__DomainIdentifier__/assets/__AssetIdentifier__/filters/__Identifier__
+
+

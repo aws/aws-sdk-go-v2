@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Firehose_20150804.StartDeliveryStreamEncryption
+
+{"DeliveryStreamEncryptionConfigurationInput":{"KeyARN":"__KeyARN__","KeyType":"AWS_OWNED_CMK"},"DeliveryStreamName":"__DeliveryStreamName__"}

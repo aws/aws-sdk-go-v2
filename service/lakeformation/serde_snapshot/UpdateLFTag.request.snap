@@ -1,0 +1,5 @@
+POST /UpdateLFTag
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValuesToAdd":["__Member__","__Member__"],"TagValuesToDelete":["__Member__","__Member__"]}

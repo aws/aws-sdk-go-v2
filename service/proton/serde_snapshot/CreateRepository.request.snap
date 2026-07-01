@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateRepository
+
+{"connectionArn":"__ConnectionArn__","encryptionKey":"__EncryptionKey__","name":"__Name__","provider":"GITHUB","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

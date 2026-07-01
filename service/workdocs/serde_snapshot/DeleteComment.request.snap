@@ -1,0 +1,4 @@
+DELETE /api/v1/documents/__DocumentId__/versions/__VersionId__/comment/__CommentId__
+
+Authentication: __AuthenticationToken__
+

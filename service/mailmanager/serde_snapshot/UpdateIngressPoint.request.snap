@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: MailManagerSvc.UpdateIngressPoint
+
+{"IngressPointConfiguration":{"SmtpPassword":"__IngressPointConfigurationMemberSmtpPassword__"},"IngressPointId":"__IngressPointId__","IngressPointName":"__IngressPointName__","RuleSetId":"__RuleSetId__","StatusToUpdate":"ACTIVE","TlsPolicy":"REQUIRED","TrafficPolicyId":"__TrafficPolicyId__"}

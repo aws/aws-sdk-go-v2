@@ -1,0 +1,3 @@
+GET /asset/agent-space/__AgentSpaceId__/assets/__AssetId__/content?assetVersion=1
+
+

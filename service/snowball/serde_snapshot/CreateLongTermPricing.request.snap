@@ -1,0 +1,7 @@
+POST /service/AWSIESnowballJobManagementService/operation/CreateLongTermPricing
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£sLongTermPricingTypegOneYearxIsLongTermPricingAutoRenewõlSnowballTypehSTANDARD

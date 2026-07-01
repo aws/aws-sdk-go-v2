@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateFleetAttributes
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+§xNewGameSessionProtectionPolicylNoProtectionxResourceCreationLimitPolicy¢xNewGameSessionsPerCreatoruPolicyPeriodInMinuteslMetricGroups‚j__Member__j__Member__uAnywhereConfiguration¡dCosth__Cost__gFleetIdk__FleetId__dNameh__Name__kDescriptiono__Description__

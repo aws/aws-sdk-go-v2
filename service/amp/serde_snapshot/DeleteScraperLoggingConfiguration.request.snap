@@ -1,0 +1,3 @@
+DELETE /scrapers/__ScraperId__/logging-configuration?clientToken=__ClientToken__
+
+

@@ -1,0 +1,5 @@
+POST /opencypher
+
+Content-Type: application/json
+
+{"query":"__OpenCypherQuery__","parameters":"__Parameters__"}

@@ -1,0 +1,3 @@
+GET /stream/__ClusterIdentifier__?max-results=1&next-token=__NextToken__
+
+
