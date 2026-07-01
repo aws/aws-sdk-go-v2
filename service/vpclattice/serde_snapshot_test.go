@@ -568,9 +568,10 @@ func TestSerdeCheckSnapshot_CreateService(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		CustomDomainName: ptr.String("__CustomDomainName__"),
-		CertificateArn:   ptr.String("__CertificateArn__"),
-		AuthType:         types.AuthType("NONE"),
+		CustomDomainName:   ptr.String("__CustomDomainName__"),
+		CertificateArn:     ptr.String("__CertificateArn__"),
+		AuthType:           types.AuthType("NONE"),
+		IdleTimeoutSeconds: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2621,9 +2622,10 @@ func TestSerdeCheckSnapshot_UpdateRule(t *testing.T) {
 
 func TestSerdeCheckSnapshot_UpdateService(t *testing.T) {
 	input := &UpdateServiceInput{
-		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
-		CertificateArn:    ptr.String("__CertificateArn__"),
-		AuthType:          types.AuthType("NONE"),
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		CertificateArn:     ptr.String("__CertificateArn__"),
+		AuthType:           types.AuthType("NONE"),
+		IdleTimeoutSeconds: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3142,9 +3144,10 @@ func TestSerdeUpdateSnapshot_CreateService(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		CustomDomainName: ptr.String("__CustomDomainName__"),
-		CertificateArn:   ptr.String("__CertificateArn__"),
-		AuthType:         types.AuthType("NONE"),
+		CustomDomainName:   ptr.String("__CustomDomainName__"),
+		CertificateArn:     ptr.String("__CertificateArn__"),
+		AuthType:           types.AuthType("NONE"),
+		IdleTimeoutSeconds: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5195,9 +5198,10 @@ func TestSerdeUpdateSnapshot_UpdateRule(t *testing.T) {
 
 func TestSerdeUpdateSnapshot_UpdateService(t *testing.T) {
 	input := &UpdateServiceInput{
-		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
-		CertificateArn:    ptr.String("__CertificateArn__"),
-		AuthType:          types.AuthType("NONE"),
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		CertificateArn:     ptr.String("__CertificateArn__"),
+		AuthType:           types.AuthType("NONE"),
+		IdleTimeoutSeconds: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""

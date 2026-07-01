@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¢srecommendedActionIdw__RecommendedActionId__kclientTokeno__ClientToken__
+¢kclientTokeno__ClientToken__srecommendedActionIdw__RecommendedActionId__

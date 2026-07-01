@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¢kComputeNameo__ComputeName__gFleetIdk__FleetId__
+¢gFleetIdk__FleetId__kComputeNameo__ComputeName__

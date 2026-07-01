@@ -2,4 +2,4 @@ PUT /2015-03-31/functions/__FunctionName__/code
 
 Content-Type: application/json
 
-{"Architectures":["x86_64","x86_64"],"DryRun":true,"ImageUri":"__ImageUri__","Publish":true,"PublishTo":"LATEST_PUBLISHED","RevisionId":"__RevisionId__","S3Bucket":"__S3Bucket__","S3Key":"__S3Key__","S3ObjectVersion":"__S3ObjectVersion__","SourceKMSKeyArn":"__SourceKMSKeyArn__","ZipFile":"YmxvYg=="}
+{"Architectures":["x86_64","x86_64"],"DryRun":true,"ImageUri":"__ImageUri__","Publish":true,"PublishTo":"LATEST_PUBLISHED","RevisionId":"__RevisionId__","S3Bucket":"__S3Bucket__","S3Key":"__S3Key__","S3ObjectStorageMode":"COPY","S3ObjectVersion":"__S3ObjectVersion__","SourceKMSKeyArn":"__SourceKMSKeyArn__","ZipFile":"YmxvYg=="}

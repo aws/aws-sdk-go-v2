@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-£gFleetIdk__FleetId__gActions‚lAUTO_SCALINGlAUTO_SCALINGhLocationl__Location__
+£hLocationl__Location__gFleetIdk__FleetId__gActions‚lAUTO_SCALINGlAUTO_SCALING

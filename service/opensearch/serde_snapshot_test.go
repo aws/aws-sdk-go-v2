@@ -830,6 +830,8 @@ func TestSerdeCheckSnapshot_CreateDomain(t *testing.T) {
 			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2305,6 +2307,41 @@ func TestSerdeCheckSnapshot_GetUpgradeStatus(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_InsightFeedback(t *testing.T) {
+	input := &InsightFeedbackInput{
+		Entity: &types.InsightFeedbackEntity{
+			Type:  types.InsightFeedbackEntityType("DomainName"),
+			Value: ptr.String("__Value__"),
+		},
+		InsightId:    ptr.String("__InsightId__"),
+		Thumbs:       types.InsightFeedbackThumbs("Up"),
+		FeedbackText: ptr.String("__FeedbackText__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.InsightFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InsightFeedback"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_ListApplications(t *testing.T) {
 	input := &ListApplicationsInput{
 		NextToken: ptr.String("__NextToken__"),
@@ -3410,6 +3447,8 @@ func TestSerdeCheckSnapshot_UpdateDomainConfig(t *testing.T) {
 			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4300,6 +4339,8 @@ func TestSerdeUpdateSnapshot_CreateDomain(t *testing.T) {
 			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5775,6 +5816,41 @@ func TestSerdeUpdateSnapshot_GetUpgradeStatus(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_InsightFeedback(t *testing.T) {
+	input := &InsightFeedbackInput{
+		Entity: &types.InsightFeedbackEntity{
+			Type:  types.InsightFeedbackEntityType("DomainName"),
+			Value: ptr.String("__Value__"),
+		},
+		InsightId:    ptr.String("__InsightId__"),
+		Thumbs:       types.InsightFeedbackThumbs("Up"),
+		FeedbackText: ptr.String("__FeedbackText__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.InsightFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InsightFeedback"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_ListApplications(t *testing.T) {
 	input := &ListApplicationsInput{
 		NextToken: ptr.String("__NextToken__"),
@@ -6880,6 +6956,8 @@ func TestSerdeUpdateSnapshot_UpdateDomainConfig(t *testing.T) {
 			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

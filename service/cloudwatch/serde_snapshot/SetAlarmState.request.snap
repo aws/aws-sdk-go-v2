@@ -5,4 +5,4 @@ Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 X-Amzn-Query-Mode: true
 
-¤iAlarmNamem__AlarmName__jStateValuebOKkStateReasono__StateReason__oStateReasonDatas__StateReasonData__
+¤kStateReasono__StateReason__oStateReasonDatas__StateReasonData__iAlarmNamem__AlarmName__jStateValuebOK

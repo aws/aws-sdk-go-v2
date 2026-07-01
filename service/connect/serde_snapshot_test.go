@@ -1562,6 +1562,42 @@ func TestSerdeCheckSnapshot_CreateAgentStatus(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_CreateAttachedFile(t *testing.T) {
+	input := &CreateAttachedFileInput{
+		ClientToken:           ptr.String("__ClientToken__"),
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileUseCaseType:       types.FileUseCaseType("CONTACT_ANALYSIS"),
+		FileSourceUri:         ptr.String("__FileSourceUri__"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAttachedFile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAttachedFile"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_CreateContact(t *testing.T) {
 	input := &CreateContactInput{
 		InstanceId:       ptr.String("__InstanceId__"),
@@ -13003,6 +13039,62 @@ func TestSerdeCheckSnapshot_SendOutboundEmail(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_SendOutboundWebNotification(t *testing.T) {
+	input := &SendOutboundWebNotificationInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		BrowserId:   ptr.String("__BrowserId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Source: &types.WebNotificationSource{
+			SourceCampaign: &types.SourceCampaign{
+				CampaignId:        ptr.String("__CampaignId__"),
+				OutboundRequestId: ptr.String("__OutboundRequestId__"),
+			},
+		},
+		Destination: &types.WidgetDestination{
+			WidgetId:  ptr.String("__WidgetId__"),
+			ProfileId: ptr.String("__ProfileId__"),
+		},
+		Content: &types.WebNotificationContent{
+			Type:    types.NotificationType("WIDGET_VIEW"),
+			ViewArn: ptr.String("__ViewArn__"),
+			Attributes: &types.ContentAttributes{
+				RecommenderConfig: &types.RecommenderConfig{
+					DomainName:      ptr.String("__DomainName__"),
+					RecommenderName: ptr.String("__RecommenderName__"),
+					Context: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendOutboundWebNotification(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendOutboundWebNotification"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_StartAttachedFileUpload(t *testing.T) {
 	input := &StartAttachedFileUploadInput{
 		ClientToken:           ptr.String("__ClientToken__"),
@@ -13111,6 +13203,67 @@ func TestSerdeCheckSnapshot_StartChatContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartChatContact"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_StartContactConversationalAnalyticsJob(t *testing.T) {
+	input := &StartContactConversationalAnalyticsJobInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		AnalyticsModes: []types.AnalyticsMode{
+			types.AnalyticsMode("PostContact"),
+			types.AnalyticsMode("PostContact"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			LanguageConfiguration: &types.LanguageConfiguration{
+				LanguageLocale: ptr.String("__LanguageLocale__"),
+			},
+			RedactionConfiguration: &types.RedactionConfiguration{
+				Behavior: types.Behavior("Enable"),
+				Policy:   types.Policy("None"),
+				Entities: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaskMode: types.MaskMode("PII"),
+			},
+			SentimentConfiguration: &types.SentimentConfiguration{
+				Behavior: types.Behavior("Enable"),
+			},
+			SummaryConfiguration: &types.SummaryConfiguration{
+				SummaryModes: []types.SummaryMode{
+					types.SummaryMode("PostContact"),
+					types.SummaryMode("PostContact"),
+				},
+			},
+			RulesConfiguration: &types.RulesConfiguration{
+				Behavior: types.Behavior("Enable"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartContactConversationalAnalyticsJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartContactConversationalAnalyticsJob"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -19212,6 +19365,42 @@ func TestSerdeUpdateSnapshot_CreateAgentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentStatus"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_CreateAttachedFile(t *testing.T) {
+	input := &CreateAttachedFileInput{
+		ClientToken:           ptr.String("__ClientToken__"),
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileUseCaseType:       types.FileUseCaseType("CONTACT_ANALYSIS"),
+		FileSourceUri:         ptr.String("__FileSourceUri__"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAttachedFile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAttachedFile"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -30659,6 +30848,62 @@ func TestSerdeUpdateSnapshot_SendOutboundEmail(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_SendOutboundWebNotification(t *testing.T) {
+	input := &SendOutboundWebNotificationInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		BrowserId:   ptr.String("__BrowserId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Source: &types.WebNotificationSource{
+			SourceCampaign: &types.SourceCampaign{
+				CampaignId:        ptr.String("__CampaignId__"),
+				OutboundRequestId: ptr.String("__OutboundRequestId__"),
+			},
+		},
+		Destination: &types.WidgetDestination{
+			WidgetId:  ptr.String("__WidgetId__"),
+			ProfileId: ptr.String("__ProfileId__"),
+		},
+		Content: &types.WebNotificationContent{
+			Type:    types.NotificationType("WIDGET_VIEW"),
+			ViewArn: ptr.String("__ViewArn__"),
+			Attributes: &types.ContentAttributes{
+				RecommenderConfig: &types.RecommenderConfig{
+					DomainName:      ptr.String("__DomainName__"),
+					RecommenderName: ptr.String("__RecommenderName__"),
+					Context: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendOutboundWebNotification(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendOutboundWebNotification"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_StartAttachedFileUpload(t *testing.T) {
 	input := &StartAttachedFileUploadInput{
 		ClientToken:           ptr.String("__ClientToken__"),
@@ -30767,6 +31012,67 @@ func TestSerdeUpdateSnapshot_StartChatContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartChatContact"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_StartContactConversationalAnalyticsJob(t *testing.T) {
+	input := &StartContactConversationalAnalyticsJobInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		AnalyticsModes: []types.AnalyticsMode{
+			types.AnalyticsMode("PostContact"),
+			types.AnalyticsMode("PostContact"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			LanguageConfiguration: &types.LanguageConfiguration{
+				LanguageLocale: ptr.String("__LanguageLocale__"),
+			},
+			RedactionConfiguration: &types.RedactionConfiguration{
+				Behavior: types.Behavior("Enable"),
+				Policy:   types.Policy("None"),
+				Entities: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaskMode: types.MaskMode("PII"),
+			},
+			SentimentConfiguration: &types.SentimentConfiguration{
+				Behavior: types.Behavior("Enable"),
+			},
+			SummaryConfiguration: &types.SummaryConfiguration{
+				SummaryModes: []types.SummaryMode{
+					types.SummaryMode("PostContact"),
+					types.SummaryMode("PostContact"),
+				},
+			},
+			RulesConfiguration: &types.RulesConfiguration{
+				Behavior: types.Behavior("Enable"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartContactConversationalAnalyticsJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartContactConversationalAnalyticsJob"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

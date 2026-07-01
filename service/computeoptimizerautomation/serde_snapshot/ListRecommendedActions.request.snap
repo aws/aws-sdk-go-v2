@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-£gfilters‚¢dnamelResourceTypefvalues‚j__Member__j__Member__¢dnamelResourceTypefvalues‚j__Member__j__Member__jmaxResultsinextTokenm__NextToken__
+£inextTokenm__NextToken__gfilters‚¢dnamelResourceTypefvalues‚j__Member__j__Member__¢dnamelResourceTypefvalues‚j__Member__j__Member__jmaxResults

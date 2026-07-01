@@ -1,0 +1,5 @@
+POST /BatchWriteRecord
+
+Content-Type: application/json
+
+{"Entries":[{"FeatureGroupName":"__FeatureGroupName__","Record":[{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]},{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]}],"TargetStores":["OnlineStore","OnlineStore"],"TtlDuration":{"Unit":"Seconds","Value":1}},{"FeatureGroupName":"__FeatureGroupName__","Record":[{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]},{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]}],"TargetStores":["OnlineStore","OnlineStore"],"TtlDuration":{"Unit":"Seconds","Value":1}}],"TtlDuration":{"Unit":"Seconds","Value":1}}

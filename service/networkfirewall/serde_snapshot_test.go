@@ -363,6 +363,75 @@ func TestSerdeCheckSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_CreateContainerAssociation(t *testing.T) {
+	input := &CreateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContainerAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_CreateFirewall(t *testing.T) {
 	input := &CreateFirewallInput{
 		FirewallName:      ptr.String("__FirewallName__"),
@@ -1687,6 +1756,36 @@ func TestSerdeCheckSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_DeleteContainerAssociation(t *testing.T) {
+	input := &DeleteContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContainerAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_DeleteFirewall(t *testing.T) {
 	input := &DeleteFirewallInput{
 		FirewallName: ptr.String("__FirewallName__"),
@@ -2014,6 +2113,36 @@ func TestSerdeCheckSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcEndpointAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DescribeContainerAssociation(t *testing.T) {
+	input := &DescribeContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContainerAssociation"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -2647,6 +2776,36 @@ func TestSerdeCheckSnapshot_ListAnalysisReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAnalysisReports"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListContainerAssociations(t *testing.T) {
+	input := &ListContainerAssociationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContainerAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContainerAssociations"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -3317,6 +3476,77 @@ func TestSerdeCheckSnapshot_UpdateAvailabilityZoneChangeProtection(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAvailabilityZoneChangeProtection"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateContainerAssociation(t *testing.T) {
+	input := &UpdateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContainerAssociation"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -4700,6 +4930,75 @@ func TestSerdeUpdateSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.T) 
 	}
 }
 
+func TestSerdeUpdateSnapshot_CreateContainerAssociation(t *testing.T) {
+	input := &CreateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContainerAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_CreateFirewall(t *testing.T) {
 	input := &CreateFirewallInput{
 		FirewallName:      ptr.String("__FirewallName__"),
@@ -6024,6 +6323,36 @@ func TestSerdeUpdateSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_DeleteContainerAssociation(t *testing.T) {
+	input := &DeleteContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContainerAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_DeleteFirewall(t *testing.T) {
 	input := &DeleteFirewallInput{
 		FirewallName: ptr.String("__FirewallName__"),
@@ -6351,6 +6680,36 @@ func TestSerdeUpdateSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcEndpointAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DescribeContainerAssociation(t *testing.T) {
+	input := &DescribeContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContainerAssociation"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -6984,6 +7343,36 @@ func TestSerdeUpdateSnapshot_ListAnalysisReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAnalysisReports"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListContainerAssociations(t *testing.T) {
+	input := &ListContainerAssociationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContainerAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContainerAssociations"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -7654,6 +8043,77 @@ func TestSerdeUpdateSnapshot_UpdateAvailabilityZoneChangeProtection(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAvailabilityZoneChangeProtection"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateContainerAssociation(t *testing.T) {
+	input := &UpdateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateContainerAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContainerAssociation"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

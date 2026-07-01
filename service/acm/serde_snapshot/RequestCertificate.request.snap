@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.RequestCertificate
+
+{"CertificateAuthorityArn":"__CertificateAuthorityArn__","DomainName":"__DomainName__","DomainValidationOptions":[{"DomainName":"__DomainName__","ValidationDomain":"__ValidationDomain__"},{"DomainName":"__DomainName__","ValidationDomain":"__ValidationDomain__"}],"IdempotencyToken":"__IdempotencyToken__","KeyAlgorithm":"RSA_1024","ManagedBy":"CLOUDFRONT","Options":{"CertificateTransparencyLoggingPreference":"ENABLED","Export":"ENABLED"},"SubjectAlternativeNames":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ValidationMethod":"EMAIL"}

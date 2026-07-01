@@ -220,6 +220,248 @@ func TestSerdeCheckSnapshot_AddTagsToCertificate(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_CreateAcmeDomainValidation(t *testing.T) {
+	input := &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_CreateAcmeEndpoint(t *testing.T) {
+	input := &CreateAcmeEndpointInput{
+		IdempotencyToken:      ptr.String("__IdempotencyToken__"),
+		AuthorizationBehavior: types.AcmeAuthorizationBehavior("PRE_APPROVED"),
+		Contact:               types.AcmeContact("REQUIRED"),
+		CertificateAuthority: &types.CertificateAuthorityMemberPublicCertificateAuthority{
+			Value: types.PublicCertificateAuthority{
+				AllowedKeyAlgorithms: []types.PublicKeyAlgorithm{
+					types.PublicKeyAlgorithm("RSA_2048"),
+					types.PublicKeyAlgorithm("RSA_2048"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CertificateTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAcmeEndpoint"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_CreateAcmeExternalAccountBinding(t *testing.T) {
+	input := &CreateAcmeExternalAccountBindingInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		RoleArn:          ptr.String("__RoleArn__"),
+		Expiration: &types.Expiration{
+			Value: ptr.Int64(1),
+			Type:  types.TimeType("MINUTES"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAcmeExternalAccountBinding"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DeleteAcmeDomainValidation(t *testing.T) {
+	input := &DeleteAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DeleteAcmeEndpoint(t *testing.T) {
+	input := &DeleteAcmeEndpointInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAcmeEndpoint"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DeleteAcmeExternalAccountBinding(t *testing.T) {
+	input := &DeleteAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAcmeExternalAccountBinding"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_DeleteCertificate(t *testing.T) {
 	input := &DeleteCertificateInput{
 		CertificateArn: ptr.String("__CertificateArn__"),
@@ -243,6 +485,123 @@ func TestSerdeCheckSnapshot_DeleteCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCertificate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DescribeAcmeAccount(t *testing.T) {
+	input := &DescribeAcmeAccountInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+		AccountUrl:      ptr.String("__AccountUrl__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeAccount"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DescribeAcmeDomainValidation(t *testing.T) {
+	input := &DescribeAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DescribeAcmeEndpoint(t *testing.T) {
+	input := &DescribeAcmeEndpointInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeEndpoint"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DescribeAcmeExternalAccountBinding(t *testing.T) {
+	input := &DescribeAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeExternalAccountBinding"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -335,6 +694,35 @@ func TestSerdeCheckSnapshot_GetAccountConfiguration(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_GetAcmeExternalAccountBindingCredentials(t *testing.T) {
+	input := &GetAcmeExternalAccountBindingCredentialsInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAcmeExternalAccountBindingCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAcmeExternalAccountBindingCredentials"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_GetCertificate(t *testing.T) {
 	input := &GetCertificateInput{
 		CertificateArn: ptr.String("__CertificateArn__"),
@@ -406,11 +794,138 @@ func TestSerdeCheckSnapshot_ImportCertificate(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_ListAcmeAccounts(t *testing.T) {
+	input := &ListAcmeAccountsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeAccounts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeAccounts"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListAcmeDomainValidations(t *testing.T) {
+	input := &ListAcmeDomainValidationsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeDomainValidations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeDomainValidations"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListAcmeEndpoints(t *testing.T) {
+	input := &ListAcmeEndpointsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeEndpoints"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
+	input := &ListAcmeExternalAccountBindingsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeExternalAccountBindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeExternalAccountBindings"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_ListCertificates(t *testing.T) {
 	input := &ListCertificatesInput{
 		CertificateStatuses: []types.CertificateStatus{
 			types.CertificateStatus("PENDING_VALIDATION"),
 			types.CertificateStatus("PENDING_VALIDATION"),
+		},
+		CertificateKeyPairOrigins: []types.CertificateKeyPairOrigin{
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 		},
 		Includes: &types.Filters{
 			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
@@ -481,6 +996,35 @@ func TestSerdeCheckSnapshot_ListTagsForCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForCertificate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
+	input := &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -680,6 +1224,65 @@ func TestSerdeCheckSnapshot_ResendValidationEmail(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_RevokeAcmeAccount(t *testing.T) {
+	input := &RevokeAcmeAccountInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+		AccountUrl:      ptr.String("__AccountUrl__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeAcmeAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeAcmeAccount"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_RevokeAcmeExternalAccountBinding(t *testing.T) {
+	input := &RevokeAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeAcmeExternalAccountBinding"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_RevokeCertificate(t *testing.T) {
 	input := &RevokeCertificateInput{
 		CertificateArn:   ptr.String("__CertificateArn__"),
@@ -750,6 +1353,156 @@ func TestSerdeCheckSnapshot_SearchCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchCertificates"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
+	input := &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
+	input := &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateAcmeDomainValidation(t *testing.T) {
+	input := &UpdateAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateAcmeEndpoint(t *testing.T) {
+	input := &UpdateAcmeEndpointInput{
+		AcmeEndpointArn:       ptr.String("__AcmeEndpointArn__"),
+		AuthorizationBehavior: types.AcmeAuthorizationBehavior("PRE_APPROVED"),
+		Contact:               types.AcmeContact("REQUIRED"),
+		CertificateAuthority: &types.CertificateAuthorityMemberPublicCertificateAuthority{
+			Value: types.PublicCertificateAuthority{
+				AllowedKeyAlgorithms: []types.PublicKeyAlgorithm{
+					types.PublicKeyAlgorithm("RSA_2048"),
+					types.PublicKeyAlgorithm("RSA_2048"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAcmeEndpoint"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -827,6 +1580,248 @@ func TestSerdeUpdateSnapshot_AddTagsToCertificate(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_CreateAcmeDomainValidation(t *testing.T) {
+	input := &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_CreateAcmeEndpoint(t *testing.T) {
+	input := &CreateAcmeEndpointInput{
+		IdempotencyToken:      ptr.String("__IdempotencyToken__"),
+		AuthorizationBehavior: types.AcmeAuthorizationBehavior("PRE_APPROVED"),
+		Contact:               types.AcmeContact("REQUIRED"),
+		CertificateAuthority: &types.CertificateAuthorityMemberPublicCertificateAuthority{
+			Value: types.PublicCertificateAuthority{
+				AllowedKeyAlgorithms: []types.PublicKeyAlgorithm{
+					types.PublicKeyAlgorithm("RSA_2048"),
+					types.PublicKeyAlgorithm("RSA_2048"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CertificateTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAcmeEndpoint"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_CreateAcmeExternalAccountBinding(t *testing.T) {
+	input := &CreateAcmeExternalAccountBindingInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		RoleArn:          ptr.String("__RoleArn__"),
+		Expiration: &types.Expiration{
+			Value: ptr.Int64(1),
+			Type:  types.TimeType("MINUTES"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAcmeExternalAccountBinding"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DeleteAcmeDomainValidation(t *testing.T) {
+	input := &DeleteAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DeleteAcmeEndpoint(t *testing.T) {
+	input := &DeleteAcmeEndpointInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAcmeEndpoint"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DeleteAcmeExternalAccountBinding(t *testing.T) {
+	input := &DeleteAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAcmeExternalAccountBinding"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_DeleteCertificate(t *testing.T) {
 	input := &DeleteCertificateInput{
 		CertificateArn: ptr.String("__CertificateArn__"),
@@ -850,6 +1845,123 @@ func TestSerdeUpdateSnapshot_DeleteCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCertificate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DescribeAcmeAccount(t *testing.T) {
+	input := &DescribeAcmeAccountInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+		AccountUrl:      ptr.String("__AccountUrl__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeAccount"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DescribeAcmeDomainValidation(t *testing.T) {
+	input := &DescribeAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DescribeAcmeEndpoint(t *testing.T) {
+	input := &DescribeAcmeEndpointInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeEndpoint"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DescribeAcmeExternalAccountBinding(t *testing.T) {
+	input := &DescribeAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAcmeExternalAccountBinding"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -942,6 +2054,35 @@ func TestSerdeUpdateSnapshot_GetAccountConfiguration(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_GetAcmeExternalAccountBindingCredentials(t *testing.T) {
+	input := &GetAcmeExternalAccountBindingCredentialsInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAcmeExternalAccountBindingCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAcmeExternalAccountBindingCredentials"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_GetCertificate(t *testing.T) {
 	input := &GetCertificateInput{
 		CertificateArn: ptr.String("__CertificateArn__"),
@@ -1013,11 +2154,138 @@ func TestSerdeUpdateSnapshot_ImportCertificate(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_ListAcmeAccounts(t *testing.T) {
+	input := &ListAcmeAccountsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeAccounts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeAccounts"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListAcmeDomainValidations(t *testing.T) {
+	input := &ListAcmeDomainValidationsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeDomainValidations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeDomainValidations"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListAcmeEndpoints(t *testing.T) {
+	input := &ListAcmeEndpointsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeEndpoints"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
+	input := &ListAcmeExternalAccountBindingsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAcmeExternalAccountBindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAcmeExternalAccountBindings"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_ListCertificates(t *testing.T) {
 	input := &ListCertificatesInput{
 		CertificateStatuses: []types.CertificateStatus{
 			types.CertificateStatus("PENDING_VALIDATION"),
 			types.CertificateStatus("PENDING_VALIDATION"),
+		},
+		CertificateKeyPairOrigins: []types.CertificateKeyPairOrigin{
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 		},
 		Includes: &types.Filters{
 			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
@@ -1088,6 +2356,35 @@ func TestSerdeUpdateSnapshot_ListTagsForCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForCertificate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
+	input := &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -1287,6 +2584,65 @@ func TestSerdeUpdateSnapshot_ResendValidationEmail(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_RevokeAcmeAccount(t *testing.T) {
+	input := &RevokeAcmeAccountInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+		AccountUrl:      ptr.String("__AccountUrl__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeAcmeAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeAcmeAccount"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_RevokeAcmeExternalAccountBinding(t *testing.T) {
+	input := &RevokeAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeAcmeExternalAccountBinding(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeAcmeExternalAccountBinding"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_RevokeCertificate(t *testing.T) {
 	input := &RevokeCertificateInput{
 		CertificateArn:   ptr.String("__CertificateArn__"),
@@ -1357,6 +2713,156 @@ func TestSerdeUpdateSnapshot_SearchCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchCertificates"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
+	input := &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
+	input := &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateAcmeDomainValidation(t *testing.T) {
+	input := &UpdateAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAcmeDomainValidation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAcmeDomainValidation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateAcmeEndpoint(t *testing.T) {
+	input := &UpdateAcmeEndpointInput{
+		AcmeEndpointArn:       ptr.String("__AcmeEndpointArn__"),
+		AuthorizationBehavior: types.AcmeAuthorizationBehavior("PRE_APPROVED"),
+		Contact:               types.AcmeContact("REQUIRED"),
+		CertificateAuthority: &types.CertificateAuthorityMemberPublicCertificateAuthority{
+			Value: types.PublicCertificateAuthority{
+				AllowedKeyAlgorithms: []types.PublicKeyAlgorithm{
+					types.PublicKeyAlgorithm("RSA_2048"),
+					types.PublicKeyAlgorithm("RSA_2048"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAcmeEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAcmeEndpoint"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

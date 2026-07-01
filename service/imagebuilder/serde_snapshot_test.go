@@ -961,6 +961,10 @@ func TestSerdeCheckSnapshot_CreateImageRecipe(t *testing.T) {
 		AmiTags: map[string]string{
 			"key0": "__Value__",
 		},
+		AmiWatermarks: []string{
+			"__Member__",
+			"__Member__",
+		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -4696,6 +4700,10 @@ func TestSerdeUpdateSnapshot_CreateImageRecipe(t *testing.T) {
 		},
 		AmiTags: map[string]string{
 			"key0": "__Value__",
+		},
+		AmiWatermarks: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}

@@ -2,4 +2,4 @@ POST /services
 
 Content-Type: application/json
 
-{"authType":"NONE","certificateArn":"__CertificateArn__","clientToken":"__ClientToken__","customDomainName":"__CustomDomainName__","name":"__Name__","tags":{"key0":"__Value__"}}
+{"authType":"NONE","certificateArn":"__CertificateArn__","clientToken":"__ClientToken__","customDomainName":"__CustomDomainName__","idleTimeoutSeconds":1,"name":"__Name__","tags":{"key0":"__Value__"}}

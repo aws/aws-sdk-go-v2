@@ -2,4 +2,4 @@ PATCH /settings
 
 Content-Type: application/json
 
-{"DeletionProtection":{"Enabled":true,"ProtectionPeriodInMinutes":1}}
+{"DeletionProtection":{"Enabled":true,"ProtectionPeriodInMinutes":1},"VendedMetrics":{"Enabled":true}}

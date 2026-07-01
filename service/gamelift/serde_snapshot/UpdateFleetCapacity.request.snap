@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¦gFleetIdk__FleetId__pDesiredInstancesgMinSizegMaxSizehLocationl__Location__xManagedCapacityConfiguration¢xScaleInAfterInactivityMinutestZeroCapacityStrategyfMANUAL
+¦gMaxSizehLocationl__Location__xManagedCapacityConfiguration¢tZeroCapacityStrategyfMANUALxScaleInAfterInactivityMinutesgFleetIdk__FleetId__pDesiredInstancesgMinSize

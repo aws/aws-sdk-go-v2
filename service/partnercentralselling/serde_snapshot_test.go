@@ -1588,6 +1588,10 @@ func TestSerdeCheckSnapshot_ListSolutions(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		AwsMarketplaceSolutionArn: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3658,6 +3662,10 @@ func TestSerdeUpdateSnapshot_ListSolutions(t *testing.T) {
 			"__Member__",
 		},
 		Category: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AwsMarketplaceSolutionArn: []string{
 			"__Member__",
 			"__Member__",
 		},

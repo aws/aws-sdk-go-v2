@@ -916,6 +916,116 @@ func TestSerdeCheckSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_CreateIntermediateTable(t *testing.T) {
+	input := &CreateIntermediateTableInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		PopulationAnalysisConfiguration: &types.PopulationAnalysisConfigurationMemberSqlParameters{
+			Value: types.PopulationAnalysisSqlParameters{
+				QueryString:         ptr.String("__QueryString__"),
+				AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+			},
+		},
+		KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+		RetentionInDays: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T) {
+	input := &CreateIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+		AnalysisRulePolicy: &types.IntermediateTableAnalysisRulePolicyMemberV1{
+			Value: &types.IntermediateTableAnalysisRulePolicyV1MemberCustom{
+				Value: types.IntermediateTableAnalysisRuleCustom{
+					AllowedAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAnalysisProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DifferentialPrivacy: &types.DifferentialPrivacyConfiguration{
+						Columns: []types.DifferentialPrivacyColumn{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					DisallowedOutputColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIntermediateTableAnalysisRule"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_CreateMembership(t *testing.T) {
 	input := &CreateMembershipInput{
 		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
@@ -1299,6 +1409,67 @@ func TestSerdeCheckSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_DeleteIntermediateTable(t *testing.T) {
+	input := &DeleteIntermediateTableInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DeleteIntermediateTableAnalysisRule(t *testing.T) {
+	input := &DeleteIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIntermediateTableAnalysisRule"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_DeleteMember(t *testing.T) {
 	input := &DeleteMemberInput{
 		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
@@ -1382,6 +1553,37 @@ func TestSerdeCheckSnapshot_DeletePrivacyBudgetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePrivacyBudgetTemplate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DisallowIntermediateTable(t *testing.T) {
+	input := &DisallowIntermediateTableInput{
+		MembershipIdentifier:  ptr.String("__MembershipIdentifier__"),
+		IntermediateTableName: ptr.String("__IntermediateTableName__"),
+		IncludeDescendants:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisallowIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisallowIntermediateTable"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -1801,6 +2003,67 @@ func TestSerdeCheckSnapshot_GetIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIdNamespaceAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_GetIntermediateTable(t *testing.T) {
+	input := &GetIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_GetIntermediateTableAnalysisRule(t *testing.T) {
+	input := &GetIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIntermediateTableAnalysisRule"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -2392,6 +2655,69 @@ func TestSerdeCheckSnapshot_ListIdNamespaceAssociations(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_ListIntermediateTables(t *testing.T) {
+	input := &ListIntermediateTablesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIntermediateTables(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIntermediateTables"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListIntermediateTableVersions(t *testing.T) {
+	input := &ListIntermediateTableVersionsInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		NextToken:                   ptr.String("__NextToken__"),
+		MaxResults:                  ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIntermediateTableVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIntermediateTableVersions"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_ListMembers(t *testing.T) {
 	input := &ListMembersInput{
 		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
@@ -2668,6 +2994,51 @@ func TestSerdeCheckSnapshot_PopulateIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PopulateIdMappingTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_PopulateIntermediateTable(t *testing.T) {
+	input := &PopulateIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ComputeConfiguration: &types.IntermediateTableComputeConfigurationMemberQueryComputeConfiguration{
+			Value: types.WorkerComputeConfiguration{
+				Type:   types.WorkerComputeType("CR.1X"),
+				Number: ptr.Int32(1),
+				Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+					Value: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		AnalysisPayerAccountId: ptr.String("__AnalysisPayerAccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PopulateIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PopulateIntermediateTable"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -3248,6 +3619,116 @@ func TestSerdeCheckSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIdNamespaceAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateIntermediateTable(t *testing.T) {
+	input := &UpdateIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		Description:                 ptr.String("__Description__"),
+		KmsKeyArn:                   ptr.String("__KmsKeyArn__"),
+		Columns: []types.IntermediateTableColumn{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T) {
+	input := &UpdateIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+		AnalysisRulePolicy: &types.IntermediateTableAnalysisRulePolicyMemberV1{
+			Value: &types.IntermediateTableAnalysisRulePolicyV1MemberCustom{
+				Value: types.IntermediateTableAnalysisRuleCustom{
+					AllowedAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAnalysisProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DifferentialPrivacy: &types.DifferentialPrivacyConfiguration{
+						Columns: []types.DifferentialPrivacyColumn{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					DisallowedOutputColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntermediateTableAnalysisRule"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -4157,6 +4638,116 @@ func TestSerdeUpdateSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_CreateIntermediateTable(t *testing.T) {
+	input := &CreateIntermediateTableInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		PopulationAnalysisConfiguration: &types.PopulationAnalysisConfigurationMemberSqlParameters{
+			Value: types.PopulationAnalysisSqlParameters{
+				QueryString:         ptr.String("__QueryString__"),
+				AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+			},
+		},
+		KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+		RetentionInDays: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T) {
+	input := &CreateIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+		AnalysisRulePolicy: &types.IntermediateTableAnalysisRulePolicyMemberV1{
+			Value: &types.IntermediateTableAnalysisRulePolicyV1MemberCustom{
+				Value: types.IntermediateTableAnalysisRuleCustom{
+					AllowedAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAnalysisProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DifferentialPrivacy: &types.DifferentialPrivacyConfiguration{
+						Columns: []types.DifferentialPrivacyColumn{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					DisallowedOutputColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIntermediateTableAnalysisRule"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_CreateMembership(t *testing.T) {
 	input := &CreateMembershipInput{
 		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
@@ -4540,6 +5131,67 @@ func TestSerdeUpdateSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_DeleteIntermediateTable(t *testing.T) {
+	input := &DeleteIntermediateTableInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DeleteIntermediateTableAnalysisRule(t *testing.T) {
+	input := &DeleteIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteIntermediateTableAnalysisRule"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_DeleteMember(t *testing.T) {
 	input := &DeleteMemberInput{
 		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
@@ -4623,6 +5275,37 @@ func TestSerdeUpdateSnapshot_DeletePrivacyBudgetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePrivacyBudgetTemplate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DisallowIntermediateTable(t *testing.T) {
+	input := &DisallowIntermediateTableInput{
+		MembershipIdentifier:  ptr.String("__MembershipIdentifier__"),
+		IntermediateTableName: ptr.String("__IntermediateTableName__"),
+		IncludeDescendants:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisallowIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisallowIntermediateTable"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -5042,6 +5725,67 @@ func TestSerdeUpdateSnapshot_GetIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIdNamespaceAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_GetIntermediateTable(t *testing.T) {
+	input := &GetIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_GetIntermediateTableAnalysisRule(t *testing.T) {
+	input := &GetIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIntermediateTableAnalysisRule"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -5633,6 +6377,69 @@ func TestSerdeUpdateSnapshot_ListIdNamespaceAssociations(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_ListIntermediateTables(t *testing.T) {
+	input := &ListIntermediateTablesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIntermediateTables(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIntermediateTables"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListIntermediateTableVersions(t *testing.T) {
+	input := &ListIntermediateTableVersionsInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		NextToken:                   ptr.String("__NextToken__"),
+		MaxResults:                  ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIntermediateTableVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIntermediateTableVersions"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_ListMembers(t *testing.T) {
 	input := &ListMembersInput{
 		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
@@ -5909,6 +6716,51 @@ func TestSerdeUpdateSnapshot_PopulateIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PopulateIdMappingTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_PopulateIntermediateTable(t *testing.T) {
+	input := &PopulateIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ComputeConfiguration: &types.IntermediateTableComputeConfigurationMemberQueryComputeConfiguration{
+			Value: types.WorkerComputeConfiguration{
+				Type:   types.WorkerComputeType("CR.1X"),
+				Number: ptr.Int32(1),
+				Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+					Value: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		AnalysisPayerAccountId: ptr.String("__AnalysisPayerAccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PopulateIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PopulateIntermediateTable"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -6489,6 +7341,116 @@ func TestSerdeUpdateSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIdNamespaceAssociation"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateIntermediateTable(t *testing.T) {
+	input := &UpdateIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		Description:                 ptr.String("__Description__"),
+		KmsKeyArn:                   ptr.String("__KmsKeyArn__"),
+		Columns: []types.IntermediateTableColumn{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntermediateTable(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntermediateTable"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T) {
+	input := &UpdateIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+		AnalysisRulePolicy: &types.IntermediateTableAnalysisRulePolicyMemberV1{
+			Value: &types.IntermediateTableAnalysisRulePolicyV1MemberCustom{
+				Value: types.IntermediateTableAnalysisRuleCustom{
+					AllowedAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAnalysisProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DifferentialPrivacy: &types.DifferentialPrivacyConfiguration{
+						Columns: []types.DifferentialPrivacyColumn{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					DisallowedOutputColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntermediateTableAnalysisRule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntermediateTableAnalysisRule"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

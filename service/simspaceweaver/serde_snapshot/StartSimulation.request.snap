@@ -1,5 +1,0 @@
-POST /startsimulation
-
-Content-Type: application/json
-
-{"ClientToken":"__ClientToken__","Description":"__Description__","MaximumDuration":"__MaximumDuration__","Name":"__Name__","RoleArn":"__RoleArn__","SchemaS3Location":{"BucketName":"__BucketName__","ObjectKey":"__ObjectKey__"},"SnapshotS3Location":{"BucketName":"__BucketName__","ObjectKey":"__ObjectKey__"},"Tags":{"key0":"__Value__"}}

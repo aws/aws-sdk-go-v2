@@ -1,0 +1,5 @@
+POST /instance/__InstanceId__/outbound-web-notification
+
+Content-Type: application/json
+
+{"BrowserId":"__BrowserId__","ClientToken":"__ClientToken__","Content":{"Attributes":{"RecommenderConfig":{"Context":{"key0":"__Value__"},"DomainName":"__DomainName__","RecommenderName":"__RecommenderName__"}},"Type":"WIDGET_VIEW","ViewArn":"__ViewArn__"},"Destination":{"ProfileId":"__ProfileId__","WidgetId":"__WidgetId__"},"ExpiresAt":946684800,"SessionId":"__SessionId__","Source":{"SourceCampaign":{"CampaignId":"__CampaignId__","OutboundRequestId":"__OutboundRequestId__"}}}

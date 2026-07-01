@@ -438,6 +438,11 @@ func TestSerdeCheckSnapshot_CreateChangeSet(t *testing.T) {
 		OnStackFailure:          types.OnStackFailure("DO_NOTHING"),
 		ImportExistingResources: ptr.Bool(true),
 		DeploymentMode:          types.DeploymentMode("REVERT_DRIFT"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -577,6 +582,11 @@ func TestSerdeCheckSnapshot_CreateStack(t *testing.T) {
 		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
 		EnableTerminationProtection: ptr.Bool(true),
 		RetainExceptOnCreate:        ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -948,6 +958,10 @@ func TestSerdeCheckSnapshot_DeleteStack(t *testing.T) {
 		RoleARN:            ptr.String("__RoleARN__"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		DeletionMode:       types.DeletionMode("STANDARD"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2994,6 +3008,10 @@ func TestSerdeCheckSnapshot_RollbackStack(t *testing.T) {
 		RoleARN:              ptr.String("__RoleARN__"),
 		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
 		RetainExceptOnCreate: ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3373,6 +3391,11 @@ func TestSerdeCheckSnapshot_UpdateStack(t *testing.T) {
 		DisableRollback:      ptr.Bool(true),
 		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
 		RetainExceptOnCreate: ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3901,6 +3924,11 @@ func TestSerdeUpdateSnapshot_CreateChangeSet(t *testing.T) {
 		OnStackFailure:          types.OnStackFailure("DO_NOTHING"),
 		ImportExistingResources: ptr.Bool(true),
 		DeploymentMode:          types.DeploymentMode("REVERT_DRIFT"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4040,6 +4068,11 @@ func TestSerdeUpdateSnapshot_CreateStack(t *testing.T) {
 		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
 		EnableTerminationProtection: ptr.Bool(true),
 		RetainExceptOnCreate:        ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4411,6 +4444,10 @@ func TestSerdeUpdateSnapshot_DeleteStack(t *testing.T) {
 		RoleARN:            ptr.String("__RoleARN__"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		DeletionMode:       types.DeletionMode("STANDARD"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6457,6 +6494,10 @@ func TestSerdeUpdateSnapshot_RollbackStack(t *testing.T) {
 		RoleARN:              ptr.String("__RoleARN__"),
 		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
 		RetainExceptOnCreate: ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6836,6 +6877,11 @@ func TestSerdeUpdateSnapshot_UpdateStack(t *testing.T) {
 		DisableRollback:      ptr.Bool(true),
 		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
 		RetainExceptOnCreate: ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -344,6 +344,84 @@ func TestSerdeCheckSnapshot_CreateEnvironment(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_CreateExperimentDefinition(t *testing.T) {
+	input := &CreateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		Name:                           ptr.String("__Name__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		FlagKey:                        ptr.String("__FlagKey__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExperimentDefinition"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_CreateExtension(t *testing.T) {
 	input := &CreateExtensionInput{
 		Name:        ptr.String("__Name__"),
@@ -587,6 +665,37 @@ func TestSerdeCheckSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DeleteExperimentDefinition(t *testing.T) {
+	input := &DeleteExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		DeleteType:                     types.DeleteType("ARCHIVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExperimentDefinition"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -892,6 +1001,67 @@ func TestSerdeCheckSnapshot_GetEnvironment(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_GetExperimentDefinition(t *testing.T) {
+	input := &GetExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExperimentDefinition"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_GetExperimentRun(t *testing.T) {
+	input := &GetExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExperimentRun"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_GetExtension(t *testing.T) {
 	input := &GetExtensionInput{
 		ExtensionIdentifier: ptr.String("__ExtensionIdentifier__"),
@@ -1137,6 +1307,106 @@ func TestSerdeCheckSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_ListExperimentDefinitions(t *testing.T) {
+	input := &ListExperimentDefinitionsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		Status:                         types.ExperimentDefinitionStatus("ACTIVE"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExperimentDefinitions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExperimentDefinitions"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListExperimentRunEvents(t *testing.T) {
+	input := &ListExperimentRunEventsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExperimentRunEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExperimentRunEvents"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListExperimentRuns(t *testing.T) {
+	input := &ListExperimentRunsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+		Status:                         types.ExperimentRunStatus("RUNNING"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExperimentRuns(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExperimentRuns"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_ListExtensionAssociations(t *testing.T) {
 	input := &ListExtensionAssociationsInput{
 		ResourceIdentifier:     ptr.String("__ResourceIdentifier__"),
@@ -1278,6 +1548,7 @@ func TestSerdeCheckSnapshot_StartDeployment(t *testing.T) {
 		DynamicExtensionParameters: map[string]string{
 			"key0": "__Value__",
 		},
+		LatestDeploymentNumber: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1298,6 +1569,54 @@ func TestSerdeCheckSnapshot_StartDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDeployment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_StartExperimentRun(t *testing.T) {
+	input := &StartExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Description:                    ptr.String("__Description__"),
+		ExposurePercentage:             ptr.Float32(1.0),
+		TreatmentOverrides: &types.TreatmentOverridesMemberInline{
+			Value: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartExperimentRun"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -1330,6 +1649,50 @@ func TestSerdeCheckSnapshot_StopDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopDeployment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_StopExperimentRun(t *testing.T) {
+	input := &StopExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		Result: &types.ExperimentRunResult{
+			ExecutiveSummary:   ptr.String("__ExecutiveSummary__"),
+			ReasonsToLaunch:    ptr.String("__ReasonsToLaunch__"),
+			ReasonsNotToLaunch: ptr.String("__ReasonsNotToLaunch__"),
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopExperimentRun"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -1406,6 +1769,9 @@ func TestSerdeCheckSnapshot_UpdateAccountSettings(t *testing.T) {
 		DeletionProtection: &types.DeletionProtectionSettings{
 			Enabled:                   ptr.Bool(true),
 			ProtectionPeriodInMinutes: ptr.Int32(1),
+		},
+		VendedMetrics: &types.VendedMetricsSettings{
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1578,6 +1944,124 @@ func TestSerdeCheckSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateExperimentDefinition(t *testing.T) {
+	input := &UpdateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExperimentDefinition"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateExperimentRun(t *testing.T) {
+	input := &UpdateExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		Description:                    ptr.String("__Description__"),
+		ExposurePercentage:             ptr.Float32(1.0),
+		TreatmentOverrides: &types.TreatmentOverridesMemberInline{
+			Value: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExperimentRun"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -1863,6 +2347,84 @@ func TestSerdeUpdateSnapshot_CreateEnvironment(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_CreateExperimentDefinition(t *testing.T) {
+	input := &CreateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		Name:                           ptr.String("__Name__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		FlagKey:                        ptr.String("__FlagKey__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExperimentDefinition"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_CreateExtension(t *testing.T) {
 	input := &CreateExtensionInput{
 		Name:        ptr.String("__Name__"),
@@ -2106,6 +2668,37 @@ func TestSerdeUpdateSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DeleteExperimentDefinition(t *testing.T) {
+	input := &DeleteExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		DeleteType:                     types.DeleteType("ARCHIVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExperimentDefinition"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -2411,6 +3004,67 @@ func TestSerdeUpdateSnapshot_GetEnvironment(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_GetExperimentDefinition(t *testing.T) {
+	input := &GetExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExperimentDefinition"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_GetExperimentRun(t *testing.T) {
+	input := &GetExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExperimentRun"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_GetExtension(t *testing.T) {
 	input := &GetExtensionInput{
 		ExtensionIdentifier: ptr.String("__ExtensionIdentifier__"),
@@ -2656,6 +3310,106 @@ func TestSerdeUpdateSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_ListExperimentDefinitions(t *testing.T) {
+	input := &ListExperimentDefinitionsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		Status:                         types.ExperimentDefinitionStatus("ACTIVE"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExperimentDefinitions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExperimentDefinitions"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListExperimentRunEvents(t *testing.T) {
+	input := &ListExperimentRunEventsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExperimentRunEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExperimentRunEvents"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListExperimentRuns(t *testing.T) {
+	input := &ListExperimentRunsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+		Status:                         types.ExperimentRunStatus("RUNNING"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExperimentRuns(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExperimentRuns"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_ListExtensionAssociations(t *testing.T) {
 	input := &ListExtensionAssociationsInput{
 		ResourceIdentifier:     ptr.String("__ResourceIdentifier__"),
@@ -2797,6 +3551,7 @@ func TestSerdeUpdateSnapshot_StartDeployment(t *testing.T) {
 		DynamicExtensionParameters: map[string]string{
 			"key0": "__Value__",
 		},
+		LatestDeploymentNumber: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2817,6 +3572,54 @@ func TestSerdeUpdateSnapshot_StartDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDeployment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_StartExperimentRun(t *testing.T) {
+	input := &StartExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Description:                    ptr.String("__Description__"),
+		ExposurePercentage:             ptr.Float32(1.0),
+		TreatmentOverrides: &types.TreatmentOverridesMemberInline{
+			Value: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartExperimentRun"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -2849,6 +3652,50 @@ func TestSerdeUpdateSnapshot_StopDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopDeployment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_StopExperimentRun(t *testing.T) {
+	input := &StopExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		Result: &types.ExperimentRunResult{
+			ExecutiveSummary:   ptr.String("__ExecutiveSummary__"),
+			ReasonsToLaunch:    ptr.String("__ReasonsToLaunch__"),
+			ReasonsNotToLaunch: ptr.String("__ReasonsNotToLaunch__"),
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopExperimentRun"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -2925,6 +3772,9 @@ func TestSerdeUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
 		DeletionProtection: &types.DeletionProtectionSettings{
 			Enabled:                   ptr.Bool(true),
 			ProtectionPeriodInMinutes: ptr.Int32(1),
+		},
+		VendedMetrics: &types.VendedMetricsSettings{
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3097,6 +3947,124 @@ func TestSerdeUpdateSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironment"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateExperimentDefinition(t *testing.T) {
+	input := &UpdateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExperimentDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExperimentDefinition"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateExperimentRun(t *testing.T) {
+	input := &UpdateExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		Description:                    ptr.String("__Description__"),
+		ExposurePercentage:             ptr.Float32(1.0),
+		TreatmentOverrides: &types.TreatmentOverridesMemberInline{
+			Value: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExperimentRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExperimentRun"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

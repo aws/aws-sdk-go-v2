@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¤iNextTokenm__NextToken__sGameServerGroupNamew__GameServerGroupName__iSortOrderiASCENDINGeLimit
+¤iSortOrderiASCENDINGeLimitiNextTokenm__NextToken__sGameServerGroupNamew__GameServerGroupName__

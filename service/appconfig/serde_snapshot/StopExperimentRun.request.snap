@@ -1,0 +1,5 @@
+PATCH /applications/__ApplicationIdentifier__/experimentdefinitions/__ExperimentDefinitionIdentifier__/experimentruns/1/stop
+
+Content-Type: application/json
+
+{"DeploymentParameters":{"DynamicExtensionParameters":{"key0":"__Value__"},"Tags":{"key0":"__Value__"}},"Result":{"ExecutiveSummary":"__ExecutiveSummary__","ReasonsNotToLaunch":"__ReasonsNotToLaunch__","ReasonsToLaunch":"__ReasonsToLaunch__"}}

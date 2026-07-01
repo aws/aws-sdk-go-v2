@@ -234,6 +234,98 @@ func TestSerdeCheckSnapshot_BatchGetRecord(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_BatchWriteRecord(t *testing.T) {
+	input := &BatchWriteRecordInput{
+		Entries: []types.BatchWriteRecordEntry{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchWriteRecord(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchWriteRecord"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_DeleteRecord(t *testing.T) {
 	input := &DeleteRecordInput{
 		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
@@ -299,6 +391,38 @@ func TestSerdeCheckSnapshot_GetRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecord"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ListRecords(t *testing.T) {
+	input := &ListRecordsInput{
+		FeatureGroupName:          ptr.String("__FeatureGroupName__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		IncludeSoftDeletedRecords: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecords"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -412,6 +536,98 @@ func TestSerdeUpdateSnapshot_BatchGetRecord(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_BatchWriteRecord(t *testing.T) {
+	input := &BatchWriteRecordInput{
+		Entries: []types.BatchWriteRecordEntry{
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				FeatureGroupName: ptr.String("__FeatureGroupName__"),
+				Record: []types.FeatureValue{
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						FeatureName:   ptr.String("__FeatureName__"),
+						ValueAsString: ptr.String("__ValueAsString__"),
+						ValueAsStringList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				TargetStores: []types.TargetStore{
+					types.TargetStore("OnlineStore"),
+					types.TargetStore("OnlineStore"),
+				},
+				TtlDuration: &types.TtlDuration{
+					Unit:  types.TtlDurationUnit("Seconds"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchWriteRecord(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchWriteRecord"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_DeleteRecord(t *testing.T) {
 	input := &DeleteRecordInput{
 		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
@@ -477,6 +693,38 @@ func TestSerdeUpdateSnapshot_GetRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecord"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ListRecords(t *testing.T) {
+	input := &ListRecordsInput{
+		FeatureGroupName:          ptr.String("__FeatureGroupName__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		IncludeSoftDeletedRecords: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecords"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

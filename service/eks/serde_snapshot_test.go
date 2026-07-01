@@ -314,6 +314,37 @@ func TestSerdeCheckSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_CancelUpdate(t *testing.T) {
+	input := &CancelUpdateInput{
+		Name:               ptr.String("__Name__"),
+		UpdateId:           ptr.String("__UpdateId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelUpdate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelUpdate"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_CreateAccessEntry(t *testing.T) {
 	input := &CreateAccessEntryInput{
 		ClusterName:  ptr.String("__ClusterName__"),
@@ -2614,6 +2645,9 @@ func TestSerdeCheckSnapshot_UpdateClusterVersion(t *testing.T) {
 		Version:            ptr.String("__Version__"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		Force:              true,
+		RollbackConfig: &types.RollbackConfig{
+			TimeoutMinutes: ptr.Int32(1),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2975,6 +3009,37 @@ func TestSerdeUpdateSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIdentityProviderConfig"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_CancelUpdate(t *testing.T) {
+	input := &CancelUpdateInput{
+		Name:               ptr.String("__Name__"),
+		UpdateId:           ptr.String("__UpdateId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelUpdate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelUpdate"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -5281,6 +5346,9 @@ func TestSerdeUpdateSnapshot_UpdateClusterVersion(t *testing.T) {
 		Version:            ptr.String("__Version__"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		Force:              true,
+		RollbackConfig: &types.RollbackConfig{
+			TimeoutMinutes: ptr.Int32(1),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

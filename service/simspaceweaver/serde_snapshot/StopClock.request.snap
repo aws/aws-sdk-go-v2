@@ -1,5 +1,0 @@
-POST /stopclock
-
-Content-Type: application/json
-
-{"Simulation":"__Simulation__"}

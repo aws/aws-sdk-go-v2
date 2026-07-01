@@ -636,11 +636,14 @@ func TestSerdeCheckSnapshot_AllocateHosts(t *testing.T) {
 			"__Member__",
 		},
 		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
-		AutoPlacement:      types.AutoPlacement("on"),
-		ClientToken:        ptr.String("__ClientToken__"),
-		InstanceType:       ptr.String("__InstanceType__"),
-		Quantity:           ptr.Int32(1),
-		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		CpuOptions: &types.HostCpuOptionsRequest{
+			AmdSevSnp: types.AmdSevSnp("enabled"),
+		},
+		AutoPlacement:    types.AutoPlacement("on"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		InstanceType:     ptr.String("__InstanceType__"),
+		Quantity:         ptr.Int32(1),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8271,9 +8274,10 @@ func TestSerdeCheckSnapshot_CreatePlacementGroup(t *testing.T) {
 		Operator: &types.OperatorRequest{
 			Principal: ptr.String("__Principal__"),
 		},
-		DryRun:    ptr.Bool(true),
-		GroupName: ptr.String("__GroupName__"),
-		Strategy:  types.PlacementStrategy("cluster"),
+		ParentGroupId: ptr.String("__ParentGroupId__"),
+		DryRun:        ptr.Bool(true),
+		GroupName:     ptr.String("__GroupName__"),
+		Strategy:      types.PlacementStrategy("cluster"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14792,6 +14796,35 @@ func TestSerdeCheckSnapshot_DescribeAccountAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountAttributes"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T) {
+	input := &DescribeAccountVpcEncryptionControlInput{
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAccountVpcEncryptionControl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountVpcEncryptionControl"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -22883,8 +22916,9 @@ func TestSerdeCheckSnapshot_DescribeVolumesModifications(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -29598,6 +29632,44 @@ func TestSerdeCheckSnapshot_LockSnapshot(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
+	input := &ModifyAccountVpcEncryptionControlInput{
+		DryRun:                    ptr.Bool(true),
+		Mode:                      types.AccountVpcEncryptionControlMode("unmanaged"),
+		InternetGateway:           types.VpcEncryptionControlExclusionStateInput("enable"),
+		EgressOnlyInternetGateway: types.VpcEncryptionControlExclusionStateInput("enable"),
+		NatGateway:                types.VpcEncryptionControlExclusionStateInput("enable"),
+		VirtualPrivateGateway:     types.VpcEncryptionControlExclusionStateInput("enable"),
+		VpcPeering:                types.VpcEncryptionControlExclusionStateInput("enable"),
+		Lambda:                    types.VpcEncryptionControlExclusionStateInput("enable"),
+		VpcLattice:                types.VpcEncryptionControlExclusionStateInput("enable"),
+		ElasticFileSystem:         types.VpcEncryptionControlExclusionStateInput("enable"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyAccountVpcEncryptionControl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyAccountVpcEncryptionControl"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_ModifyAddressAttribute(t *testing.T) {
 	input := &ModifyAddressAttributeInput{
 		AllocationId: ptr.String("__AllocationId__"),
@@ -33633,6 +33705,39 @@ func TestSerdeCheckSnapshot_ModifyVpcEndpointConnectionNotification(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyVpcEndpointConnectionNotification"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_ModifyVpcEndpointPayerResponsibility(t *testing.T) {
+	input := &ModifyVpcEndpointPayerResponsibilityInput{
+		DryRun:              ptr.Bool(true),
+		ServiceId:           ptr.String("__ServiceId__"),
+		VpcEndpointId:       ptr.String("__VpcEndpointId__"),
+		PayerResponsibility: types.PayerResponsibilityType("vpc-endpoint-account"),
+		Scope:               types.PayerResponsibilityScope("vpc-endpoint-charges"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyVpcEndpointPayerResponsibility(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyVpcEndpointPayerResponsibility"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -39921,11 +40026,14 @@ func TestSerdeUpdateSnapshot_AllocateHosts(t *testing.T) {
 			"__Member__",
 		},
 		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
-		AutoPlacement:      types.AutoPlacement("on"),
-		ClientToken:        ptr.String("__ClientToken__"),
-		InstanceType:       ptr.String("__InstanceType__"),
-		Quantity:           ptr.Int32(1),
-		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		CpuOptions: &types.HostCpuOptionsRequest{
+			AmdSevSnp: types.AmdSevSnp("enabled"),
+		},
+		AutoPlacement:    types.AutoPlacement("on"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		InstanceType:     ptr.String("__InstanceType__"),
+		Quantity:         ptr.Int32(1),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -47556,9 +47664,10 @@ func TestSerdeUpdateSnapshot_CreatePlacementGroup(t *testing.T) {
 		Operator: &types.OperatorRequest{
 			Principal: ptr.String("__Principal__"),
 		},
-		DryRun:    ptr.Bool(true),
-		GroupName: ptr.String("__GroupName__"),
-		Strategy:  types.PlacementStrategy("cluster"),
+		ParentGroupId: ptr.String("__ParentGroupId__"),
+		DryRun:        ptr.Bool(true),
+		GroupName:     ptr.String("__GroupName__"),
+		Strategy:      types.PlacementStrategy("cluster"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -54077,6 +54186,35 @@ func TestSerdeUpdateSnapshot_DescribeAccountAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountAttributes"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T) {
+	input := &DescribeAccountVpcEncryptionControlInput{
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAccountVpcEncryptionControl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountVpcEncryptionControl"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -62168,8 +62306,9 @@ func TestSerdeUpdateSnapshot_DescribeVolumesModifications(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -68883,6 +69022,44 @@ func TestSerdeUpdateSnapshot_LockSnapshot(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
+	input := &ModifyAccountVpcEncryptionControlInput{
+		DryRun:                    ptr.Bool(true),
+		Mode:                      types.AccountVpcEncryptionControlMode("unmanaged"),
+		InternetGateway:           types.VpcEncryptionControlExclusionStateInput("enable"),
+		EgressOnlyInternetGateway: types.VpcEncryptionControlExclusionStateInput("enable"),
+		NatGateway:                types.VpcEncryptionControlExclusionStateInput("enable"),
+		VirtualPrivateGateway:     types.VpcEncryptionControlExclusionStateInput("enable"),
+		VpcPeering:                types.VpcEncryptionControlExclusionStateInput("enable"),
+		Lambda:                    types.VpcEncryptionControlExclusionStateInput("enable"),
+		VpcLattice:                types.VpcEncryptionControlExclusionStateInput("enable"),
+		ElasticFileSystem:         types.VpcEncryptionControlExclusionStateInput("enable"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyAccountVpcEncryptionControl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyAccountVpcEncryptionControl"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_ModifyAddressAttribute(t *testing.T) {
 	input := &ModifyAddressAttributeInput{
 		AllocationId: ptr.String("__AllocationId__"),
@@ -72918,6 +73095,39 @@ func TestSerdeUpdateSnapshot_ModifyVpcEndpointConnectionNotification(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyVpcEndpointConnectionNotification"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_ModifyVpcEndpointPayerResponsibility(t *testing.T) {
+	input := &ModifyVpcEndpointPayerResponsibilityInput{
+		DryRun:              ptr.Bool(true),
+		ServiceId:           ptr.String("__ServiceId__"),
+		VpcEndpointId:       ptr.String("__VpcEndpointId__"),
+		PayerResponsibility: types.PayerResponsibilityType("vpc-endpoint-account"),
+		Scope:               types.PayerResponsibilityScope("vpc-endpoint-charges"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyVpcEndpointPayerResponsibility(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyVpcEndpointPayerResponsibility"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}

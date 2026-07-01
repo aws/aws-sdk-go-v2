@@ -2653,6 +2653,7 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -2991,6 +2992,11 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -3873,6 +3879,7 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -4211,6 +4218,11 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -5578,6 +5590,7 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -5916,6 +5929,11 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -6798,6 +6816,7 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -7136,6 +7155,11 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -9621,6 +9645,7 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -9959,6 +9984,11 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -10841,6 +10871,7 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -11179,6 +11210,11 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -12546,6 +12582,7 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -12884,6 +12921,11 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -13766,6 +13808,7 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -14104,6 +14147,11 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -15027,6 +15075,7 @@ func TestSerdeCheckSnapshot_CreatePreset(t *testing.T) {
 						DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 						EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 						EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+						ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 						FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 						FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 						FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -15365,6 +15414,11 @@ func TestSerdeCheckSnapshot_CreatePreset(t *testing.T) {
 						L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 						Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 						Profile: types.DolbyVisionProfile("PROFILE_5"),
+					},
+					DurationControl: &types.DurationControl{
+						IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+						IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+						IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 					},
 					Hdr10Plus: &types.Hdr10Plus{
 						MasteringMonitorNits: ptr.Int32(1),
@@ -18646,6 +18700,7 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -18984,6 +19039,11 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -19866,6 +19926,7 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -20204,6 +20265,11 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -21571,6 +21637,7 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -21909,6 +21976,11 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -22791,6 +22863,7 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -23129,6 +23202,11 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -24049,6 +24127,7 @@ func TestSerdeCheckSnapshot_UpdatePreset(t *testing.T) {
 						DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 						EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 						EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+						ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 						FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 						FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 						FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -24387,6 +24466,11 @@ func TestSerdeCheckSnapshot_UpdatePreset(t *testing.T) {
 						L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 						Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 						Profile: types.DolbyVisionProfile("PROFILE_5"),
+					},
+					DurationControl: &types.DurationControl{
+						IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+						IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+						IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 					},
 					Hdr10Plus: &types.Hdr10Plus{
 						MasteringMonitorNits: ptr.Int32(1),
@@ -26993,6 +27077,7 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -27331,6 +27416,11 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -28213,6 +28303,7 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -28551,6 +28642,11 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -29918,6 +30014,7 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -30256,6 +30353,11 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -31138,6 +31240,7 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -31476,6 +31579,11 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -33961,6 +34069,7 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -34299,6 +34408,11 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -35181,6 +35295,7 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -35519,6 +35634,11 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -36886,6 +37006,7 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -37224,6 +37345,11 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -38106,6 +38232,7 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -38444,6 +38571,11 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -39367,6 +39499,7 @@ func TestSerdeUpdateSnapshot_CreatePreset(t *testing.T) {
 						DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 						EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 						EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+						ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 						FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 						FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 						FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -39705,6 +39838,11 @@ func TestSerdeUpdateSnapshot_CreatePreset(t *testing.T) {
 						L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 						Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 						Profile: types.DolbyVisionProfile("PROFILE_5"),
+					},
+					DurationControl: &types.DurationControl{
+						IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+						IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+						IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 					},
 					Hdr10Plus: &types.Hdr10Plus{
 						MasteringMonitorNits: ptr.Int32(1),
@@ -42986,6 +43124,7 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -43324,6 +43463,11 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -44206,6 +44350,7 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -44544,6 +44689,11 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -45911,6 +46061,7 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -46249,6 +46400,11 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -47131,6 +47287,7 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 										EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 										EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+										ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 										FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 										FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 										FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -47469,6 +47626,11 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 										L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 										Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 										Profile: types.DolbyVisionProfile("PROFILE_5"),
+									},
+									DurationControl: &types.DurationControl{
+										IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+										IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+										IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 									},
 									Hdr10Plus: &types.Hdr10Plus{
 										MasteringMonitorNits: ptr.Int32(1),
@@ -48389,6 +48551,7 @@ func TestSerdeUpdateSnapshot_UpdatePreset(t *testing.T) {
 						DynamicSubGop:                       types.H264DynamicSubGop("ADAPTIVE"),
 						EndOfStreamMarkers:                  types.H264EndOfStreamMarkers("INCLUDE"),
 						EntropyEncoding:                     types.H264EntropyEncoding("CABAC"),
+						ExplicitWeightedPrediction:          types.H264ExplicitWeightedPrediction("DISABLED"),
 						FieldEncoding:                       types.H264FieldEncoding("PAFF"),
 						FlickerAdaptiveQuantization:         types.H264FlickerAdaptiveQuantization("DISABLED"),
 						FramerateControl:                    types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
@@ -48727,6 +48890,11 @@ func TestSerdeUpdateSnapshot_UpdatePreset(t *testing.T) {
 						L6Mode:  types.DolbyVisionLevel6Mode("PASSTHROUGH"),
 						Mapping: types.DolbyVisionMapping("HDR10_NOMAP"),
 						Profile: types.DolbyVisionProfile("PROFILE_5"),
+					},
+					DurationControl: &types.DurationControl{
+						IntegerDurationMaximumCompressionDenominator: ptr.Int32(1),
+						IntegerDurationMaximumCompressionNumerator:   ptr.Int32(1),
+						IntegerDurationTrimThresholdMilliseconds:     ptr.Int32(1),
 					},
 					Hdr10Plus: &types.Hdr10Plus{
 						MasteringMonitorNits: ptr.Int32(1),
