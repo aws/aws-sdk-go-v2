@@ -2131,6 +2131,9 @@
                     "target": "com.amazonaws.connect#SendOutboundEmail"
                 },
                 {
+                    "target": "com.amazonaws.connect#SendOutboundWebNotification"
+                },
+                {
                     "target": "com.amazonaws.connect#StartAttachedFileUpload"
                 },
                 {
@@ -10397,6 +10400,20 @@
                 }
             }
         },
+        "com.amazonaws.connect#ContentAttributes": {
+            "type": "structure",
+            "members": {
+                "RecommenderConfig": {
+                    "target": "com.amazonaws.connect#RecommenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the recommender used to generate personalized recommendations for the notification\n   content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Optional attributes used to populate the content of an outbound web notification, such as recommender\n   configuration for personalized content.</p>"
+            }
+        },
         "com.amazonaws.connect#ContentType": {
             "type": "string",
             "traits": {
@@ -15288,6 +15305,15 @@
         },
         "com.amazonaws.connect#CustomerProfileAttributesSerialized": {
             "type": "string"
+        },
+        "com.amazonaws.connect#CustomerProfileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
         },
         "com.amazonaws.connect#CustomerQualityMetrics": {
             "type": "structure",
@@ -40876,6 +40902,23 @@
                 "smithy.api#documentation": "<p>A list of notification summaries.</p>"
             }
         },
+        "com.amazonaws.connect#NotificationType": {
+            "type": "enum",
+            "members": {
+                "WIDGET_VIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WIDGET_VIEW"
+                    }
+                },
+                "WIDGET_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WIDGET_ACTION"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#NullableBoolean": {
             "type": "boolean"
         },
@@ -42313,6 +42356,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The list of persistent connection configuration settings for each channel.</p>"
+            }
+        },
+        "com.amazonaws.connect#PersonalizeDomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.connect#PhoneNumber": {
@@ -46518,6 +46570,70 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#RecommenderConfig": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.connect#PersonalizeDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Personalize domain that hosts the recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderName": {
+                    "target": "com.amazonaws.connect#RecommenderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender used to generate the recommendations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.connect#RecommenderContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of contextual key-value pairs supplied to the recommender to influence the recommendations\n   returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the recommender used to generate personalized recommendations included in an outbound web\n   notification.</p>"
+            }
+        },
+        "com.amazonaws.connect#RecommenderContext": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#RecommenderContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#RecommenderContextValue"
+            }
+        },
+        "com.amazonaws.connect#RecommenderContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.connect#RecommenderContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.connect#RecommenderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
                 }
             }
         },
@@ -52558,6 +52674,112 @@
             }
         },
         "com.amazonaws.connect#SendOutboundEmailResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SendOutboundWebNotification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SendOutboundWebNotificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SendOutboundWebNotificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends an outbound web notification to a customer's web browser for outbound campaigns. For more information\n   about outbound campaigns, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html\">Set up Connect Customer outbound\n    campaigns</a>.</p>\n         <note>\n            <p>Only the Connect Customer outbound campaigns service principal is allowed to assume a role in your account\n    and call this API.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/instance/{InstanceId}/outbound-web-notification",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#SendOutboundWebNotificationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "BrowserId": {
+                    "target": "com.amazonaws.connect#WebBrowserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the customer's web browser instance to which the notification is being sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.connect#WebSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the customer's web session to which the notification is being sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, in Unix epoch time format, at which the web notification expires. After this time, the\n   notification is no longer delivered to the customer's browser.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.connect#WebNotificationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the web notification. A <code>SourceCampaign</code> object identifies the campaign and outbound\n   request that triggered this notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.connect#WidgetDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the web notification, specifying the communication widget that delivers the notification\n   and the customer profile of the recipient.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#WebNotificationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the web notification, including the notification type, the view to render, and any optional\n   attributes used to populate it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SendOutboundWebNotificationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -64437,6 +64659,15 @@
                 "target": "com.amazonaws.connect#ViewAction"
             }
         },
+        "com.amazonaws.connect#ViewArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.connect#ViewContent": {
             "type": "structure",
             "members": {
@@ -65320,6 +65551,66 @@
                 }
             }
         },
+        "com.amazonaws.connect#WebBrowserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.connect#WebNotificationContent": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#NotificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of web notification to send.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewArn": {
+                    "target": "com.amazonaws.connect#ViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view to render for the notification.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.connect#ContentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional attributes used to populate the notification content, such as recommender configuration for\n   personalized content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of an outbound web notification, including the notification type, the view to render, and any\n   optional attributes used to populate the view.</p>"
+            }
+        },
+        "com.amazonaws.connect#WebNotificationSource": {
+            "type": "structure",
+            "members": {
+                "SourceCampaign": {
+                    "target": "com.amazonaws.connect#SourceCampaign",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the campaign that triggered the web notification, including the campaign identifier and\n   outbound request identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of an outbound web notification. Identifies the campaign and outbound request that triggered the\n   notification.</p>"
+            }
+        },
+        "com.amazonaws.connect#WebSessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
         "com.amazonaws.connect#WeekdayOccurrenceInteger": {
             "type": "integer",
             "traits": {
@@ -65338,6 +65629,37 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#WidgetDestination": {
+            "type": "structure",
+            "members": {
+                "WidgetId": {
+                    "target": "com.amazonaws.connect#WidgetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the communication widget that delivers the notification to the customer's browser.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.connect#CustomerProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the customer profile associated with the browser session that should receive the\n   notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination for an outbound web notification, specifying the communication widget that delivers the\n   notification and the customer profile of the recipient.</p>"
+            }
+        },
+        "com.amazonaws.connect#WidgetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
                 }
             }
         },

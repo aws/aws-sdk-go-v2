@@ -33385,6 +33385,42 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#FileSource": {
+            "type": "structure",
+            "members": {
+                "DataSourceArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UploadSettings": {
+                    "target": "com.amazonaws.quicksight#UploadSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the format for the source file.</p>"
+                    }
+                },
+                "SheetIndex": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The zero-based index of the sheet to use within the file. For files that contain\n            multiple sheets, this identifies which sheet to read. Files that contain a single sheet,\n            or that have no concept of sheets, use sheet 0.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputColumns": {
+                    "target": "com.amazonaws.quicksight#InputColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column schema of the file.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A physical table type that contains the schema and upload settings for a file-based data source.</p>"
+            }
+        },
         "com.amazonaws.quicksight#FilledMapAggregatedFieldWells": {
             "type": "structure",
             "members": {
@@ -52228,13 +52264,19 @@
                 "S3Source": {
                     "target": "com.amazonaws.quicksight#S3Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>A physical table type for as S3 data source.</p>"
+                        "smithy.api#documentation": "<p>A physical table type for an S3 data source.</p>"
                     }
                 },
                 "SaaSTable": {
                     "target": "com.amazonaws.quicksight#SaaSTable",
                     "traits": {
                         "smithy.api#documentation": "<p>A physical table type for Software-as-a-Service (SaaS) sources.</p>"
+                    }
+                },
+                "FileSource": {
+                    "target": "com.amazonaws.quicksight#FileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A physical table type for a file data source.</p>"
                     }
                 }
             },

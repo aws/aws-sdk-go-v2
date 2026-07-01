@@ -6123,7 +6123,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, or MPEG-PS. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, or MP3. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -8338,6 +8338,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion or Timecode track is enabled."
+            }
+        },
+        "com.amazonaws.mediaconvert#DurationControl": {
+            "type": "structure",
+            "members": {
+                "IntegerDurationMaximumCompressionDenominator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Required. Denominator of the maximum allowed compression ratio.",
+                        "smithy.api#jsonName": "integerDurationMaximumCompressionDenominator"
+                    }
+                },
+                "IntegerDurationMaximumCompressionNumerator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Required. Numerator of the maximum allowed compression ratio, defined as overrun divided by target duration. For example, numerator 5 with denominator 100 means max 5% compression. Set to 0 to disable compression entirely (only trim or pad will be used).",
+                        "smithy.api#jsonName": "integerDurationMaximumCompressionNumerator"
+                    }
+                },
+                "IntegerDurationTrimThresholdMilliseconds": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max500",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of fractional milliseconds past an integer second that qualify for the trim path (frame dropping). Default is 0 (trimming disabled).",
+                        "smithy.api#jsonName": "integerDurationTrimThresholdMilliseconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for integer-second duration normalization. When this preprocessor is present, the output duration will be adjusted to an exact integer-second boundary. If the input is within the trim threshold of an integer second, trailing frames are dropped. If within the compression threshold and less than 500ms over the previous integer second, the output is sped up slightly. Otherwise, black frames are padded to the next integer second."
             }
         },
         "com.amazonaws.mediaconvert#DvbNitSettings": {
@@ -10665,6 +10694,12 @@
                     "traits": {
                         "smithy.api#enumValue": "mpegps"
                     }
+                },
+                "mp3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp3"
+                    }
                 }
             }
         },
@@ -11567,6 +11602,26 @@
                 "smithy.api#documentation": "Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC."
             }
         },
+        "com.amazonaws.mediaconvert#H264ExplicitWeightedPrediction": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Enable or disable explicit weighted prediction for the H.264 encoder. Weighted prediction improves compression efficiency for content with fading or brightness changes between frames."
+            }
+        },
         "com.amazonaws.mediaconvert#H264FieldEncoding": {
             "type": "enum",
             "members": {
@@ -11993,6 +12048,13 @@
                     "traits": {
                         "smithy.api#documentation": "Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.",
                         "smithy.api#jsonName": "entropyEncoding"
+                    }
+                },
+                "ExplicitWeightedPrediction": {
+                    "target": "com.amazonaws.mediaconvert#H264ExplicitWeightedPrediction",
+                    "traits": {
+                        "smithy.api#documentation": "Enable or disable explicit weighted prediction for the H.264 encoder. Weighted prediction improves compression efficiency for content with fading or brightness changes between frames.",
+                        "smithy.api#jsonName": "explicitWeightedPrediction"
                     }
                 },
                 "FieldEncoding": {
@@ -16256,7 +16318,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -16529,7 +16591,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -28310,6 +28372,13 @@
                     "traits": {
                         "smithy.api#documentation": "Enable Dolby Vision feature to produce Dolby Vision compatible video output.",
                         "smithy.api#jsonName": "dolbyVision"
+                    }
+                },
+                "DurationControl": {
+                    "target": "com.amazonaws.mediaconvert#DurationControl",
+                    "traits": {
+                        "smithy.api#documentation": "Enable integer-second duration normalization. When enabled, the output duration is adjusted to land on an exact integer-second boundary. The adjustment method (trim, compress, or pad) is chosen automatically based on how far the input duration is from the nearest integer second.",
+                        "smithy.api#jsonName": "durationControl"
                     }
                 },
                 "Hdr10Plus": {

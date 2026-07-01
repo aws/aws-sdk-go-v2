@@ -949,6 +949,9 @@
                     "target": "com.amazonaws.opensearch#GetUpgradeStatus"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#InsightFeedback"
+                },
+                {
                     "target": "com.amazonaws.opensearch#ListApplications"
                 },
                 {
@@ -4604,6 +4607,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain.</p>\n         <important>\n            <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n                points in time when snapshots are suspended. Use this feature only for short-term\n                operational needs such as migrations or maintenance windows.</p>\n         </important>\n         <p>Maximum suspension duration: 3 days.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.opensearch#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.opensearch#EngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode for the domain. For valid values and requirements, see <code>EngineMode</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7978,6 +7993,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies <code>AutomatedSnapshotPauseOptions</code> for the domain.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.opensearch#UseCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case configured for the domain.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.opensearch#EngineModeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode configured for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8690,6 +8717,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the domain's automated snapshot pause options.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.opensearch#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary use case for the domain.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.opensearch#EngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8703,6 +8742,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>List that contains the status of each specified OpenSearch Service domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DomainUseCase": {
+            "type": "enum",
+            "members": {
+                "SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEARCH"
+                    }
+                },
+                "VECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VECTOR"
+                    }
+                },
+                "OBSERVABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBSERVABILITY"
+                    }
+                },
+                "MIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIXED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The primary use case for the domain, which determines the default configuration and the\n            engine modes that are available. Valid values are <code>SEARCH</code> (full-text search,\n            e-commerce, content discovery, and hybrid and semantic search), <code>VECTOR</code> (k-NN\n            and semantic search, and retrieval-augmented generation), <code>OBSERVABILITY</code> (logs,\n            metrics, traces, and dashboards), and <code>MIXED</code> (a combination of search and\n            analytics). If you don't specify a use case, <code>MIXED</code> is used.</p>"
             }
         },
         "com.amazonaws.opensearch#Double": {
@@ -8935,6 +9006,48 @@
             },
             "value": {
                 "target": "com.amazonaws.opensearch#ServiceUrl"
+            }
+        },
+        "com.amazonaws.opensearch#EngineMode": {
+            "type": "enum",
+            "members": {
+                "GENERAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERAL"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIMIZED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The engine mode for the domain. Valid values are <code>GENERAL</code> (the standard\n            OpenSearch engine) and <code>OPTIMIZED</code>. If you don't specify an engine mode,\n            <code>GENERAL</code> is used. <code>OPTIMIZED</code> requires OpenSearch 3.5 or later,\n            OpenSearch Optimized instance types (OR1, OR2, OM2, or OI2) for the data tier,\n            and is available only for the <code>OBSERVABILITY</code> use cases. The engine mode\n            can't be changed after the domain is created.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#EngineModeStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#EngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode configured for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the engine mode for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the engine mode for the domain.</p>"
             }
         },
         "com.amazonaws.opensearch#EngineType": {
@@ -10620,6 +10733,160 @@
                 "smithy.api#pattern": "^([a-z][a-z0-9\\-]+|\\d{12})$"
             }
         },
+        "com.amazonaws.opensearch#InsightFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#InsightFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#InsightFeedbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits feedback for an existing insight in an Amazon OpenSearch Service domain.\n            Allows users to provide a thumbs up or thumbs down rating and optional text feedback\n            for a specific insight.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/insight-feedback",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#InsightFeedbackEntity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.opensearch#InsightFeedbackEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the entity. Possible values are <code>DomainName</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.opensearch#InsightEntityValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the entity, such as a domain name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the entity for which to submit insight feedback. An entity represents an\n            Amazon OpenSearch Service domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightFeedbackEntityType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DomainName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of entity for which to submit insight feedback. Possible values are\n            <code>DomainName</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "Entity": {
+                    "target": "com.amazonaws.opensearch#InsightFeedbackEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity for which to submit insight feedback. Specifies the type and value of the\n            entity, such as a domain name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InsightId": {
+                    "target": "com.amazonaws.opensearch#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the insight for which to submit feedback.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Thumbs": {
+                    "target": "com.amazonaws.opensearch#InsightFeedbackThumbs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The thumbs up or thumbs down feedback for the insight. Possible values are\n            <code>Up</code> and <code>Down</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeedbackText": {
+                    "target": "com.amazonaws.opensearch#InsightFeedbackText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional text feedback providing additional details about the insight. Maximum length\n            is 1000 characters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>InsightFeedback</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#InsightFeedbackResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.opensearch#InsightResponseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the feedback submission. Possible values are <code>SUCCESS</code> and\n            <code>ERROR</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of an <code>InsightFeedback</code> request. Contains the status of the\n            feedback submission.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#InsightFeedbackText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Optional text feedback providing additional details about an insight. Maximum length\n            is 1000 characters.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.opensearch#InsightFeedbackThumbs": {
+            "type": "enum",
+            "members": {
+                "UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Up"
+                    }
+                },
+                "DOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Down"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The thumbs up or thumbs down feedback for an insight. Possible values are\n            <code>Up</code> and <code>Down</code>.</p>"
+            }
+        },
         "com.amazonaws.opensearch#InsightField": {
             "type": "structure",
             "members": {
@@ -10727,6 +10994,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The priority level of an insight. Possible values are <code>CRITICAL</code>,\n            <code>HIGH</code>, <code>MEDIUM</code>, and <code>LOW</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightResponseStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an insight response. Possible values are <code>SUCCESS</code> and\n            <code>ERROR</code>.</p>"
             }
         },
         "com.amazonaws.opensearch#InsightSortOrder": {
@@ -17103,6 +17390,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain.</p>\n         <important>\n            <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n                points in time when snapshots are suspended. Use this feature only for short-term\n                operational needs such as migrations or maintenance windows.</p>\n         </important>\n         <p>Maximum suspension duration: 3 days.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.opensearch#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.opensearch#EngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode for the domain. The engine mode can't be changed after the domain is created. For valid values, see <code>EngineMode</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17831,6 +18130,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#UpgradeStepItem"
+            }
+        },
+        "com.amazonaws.opensearch#UseCaseStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case configured for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the use case for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the use case for the domain.</p>"
             }
         },
         "com.amazonaws.opensearch#UserPoolId": {
