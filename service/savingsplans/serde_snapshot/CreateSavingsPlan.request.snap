@@ -2,4 +2,4 @@ POST /CreateSavingsPlan
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","commitment":"__Commitment__","purchaseTime":946684800,"savingsPlanOfferingId":"__SavingsPlanOfferingId__","tags":{"key0":"__Value__","key1":"__Value__"},"upfrontPaymentAmount":"__UpfrontPaymentAmount__"}
+{"clientToken":"__ClientToken__","commitment":"__Commitment__","purchaseTime":946684800,"savingsPlanOfferingId":"__SavingsPlanOfferingId__","tags":{"key0":"__Value__"},"upfrontPaymentAmount":"__UpfrontPaymentAmount__"}

@@ -2,4 +2,4 @@ PUT /things/__ThingName__/jobs/$next
 
 Content-Type: application/json
 
-{"statusDetails":{"key0":"__Value__","key1":"__Value__"},"stepTimeoutInMinutes":1}
+{"statusDetails":{"key0":"__Value__"},"stepTimeoutInMinutes":1}

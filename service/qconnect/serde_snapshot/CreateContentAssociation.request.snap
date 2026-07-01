@@ -2,4 +2,4 @@ POST /knowledgeBases/__KnowledgeBaseId__/contents/__ContentId__/associations
 
 Content-Type: application/json
 
-{"association":{"amazonConnectGuideAssociation":{"flowId":"__FlowId__"}},"associationType":"AMAZON_CONNECT_GUIDE","clientToken":"__ClientToken__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"association":{"amazonConnectGuideAssociation":{"flowId":"__FlowId__"}},"associationType":"AMAZON_CONNECT_GUIDE","clientToken":"__ClientToken__","tags":{"key0":"__Value__"}}

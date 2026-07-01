@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyHosts&AutoPlacement=on&HostId.1=__Member__&HostId.2=__Member__&HostMaintenance=on&HostRecovery=on&InstanceFamily=__InstanceFamily__&InstanceType=__InstanceType__&Version=2016-11-15

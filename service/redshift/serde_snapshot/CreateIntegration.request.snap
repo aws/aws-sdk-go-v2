@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateIntegration&AdditionalEncryptionContext.entry.1.key=key0&AdditionalEncryptionContext.entry.1.value=__Value__&Description=__Description__&IntegrationName=__IntegrationName__&KMSKeyId=__KMSKeyId__&SourceArn=__SourceArn__&TagList.Tag.1.Key=__Key__&TagList.Tag.1.Value=__Value__&TagList.Tag.2.Key=__Key__&TagList.Tag.2.Value=__Value__&TargetArn=__TargetArn__&Version=2012-12-01

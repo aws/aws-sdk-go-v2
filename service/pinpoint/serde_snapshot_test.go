@@ -7,7 +7,6 @@ package pinpoint
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -173,13 +179,15 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_CreateApp(t *testing.T) {
 	input := &CreateAppInput{
 		CreateApplicationRequest: &types.CreateApplicationRequest{
 			Name: ptr.String("__Name__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -192,6 +200,7 @@ func TestSerdeCheckSnapshot_CreateApp(t *testing.T) {
 	_, err := svc.CreateApp(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -440,7 +449,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -457,13 +465,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -474,10 +475,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -748,7 +745,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -765,13 +761,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -782,10 +771,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -1071,7 +1056,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 					},
 					CustomConfig: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Layout: types.Layout("BOTTOM_BANNER"),
 				},
@@ -1089,13 +1073,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 									"__Member__",
 								},
 							},
-							"key1": {
-								AttributeType: types.AttributeType("INCLUSIVE"),
-								Values: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
 						},
 						EventType: &types.SetDimension{
 							DimensionType: types.DimensionType("INCLUSIVE"),
@@ -1106,10 +1083,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 						},
 						Metrics: map[string]types.MetricDimension{
 							"key0": {
-								ComparisonOperator: ptr.String("__ComparisonOperator__"),
-								Value:              ptr.Float64(1.0),
-							},
-							"key1": {
 								ComparisonOperator: ptr.String("__ComparisonOperator__"),
 								Value:              ptr.Float64(1.0),
 							},
@@ -1130,7 +1103,6 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 			SegmentVersion: ptr.Int32(1),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateConfiguration: &types.TemplateConfiguration{
 				EmailTemplate: &types.Template{
@@ -1168,6 +1140,7 @@ func TestSerdeCheckSnapshot_CreateCampaign(t *testing.T) {
 	_, err := svc.CreateCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1202,7 +1175,6 @@ func TestSerdeCheckSnapshot_CreateEmailTemplate(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			TextPart:            ptr.String("__TextPart__"),
@@ -1218,6 +1190,7 @@ func TestSerdeCheckSnapshot_CreateEmailTemplate(t *testing.T) {
 	_, err := svc.CreateEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1252,6 +1225,7 @@ func TestSerdeCheckSnapshot_CreateExportJob(t *testing.T) {
 	_, err := svc.CreateExportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1290,6 +1264,7 @@ func TestSerdeCheckSnapshot_CreateImportJob(t *testing.T) {
 	_, err := svc.CreateImportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1428,12 +1403,10 @@ func TestSerdeCheckSnapshot_CreateInAppTemplate(t *testing.T) {
 			},
 			CustomConfig: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Layout: types.Layout("BOTTOM_BANNER"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -1448,6 +1421,7 @@ func TestSerdeCheckSnapshot_CreateInAppTemplate(t *testing.T) {
 	_, err := svc.CreateInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1496,13 +1470,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -1516,10 +1483,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -1530,13 +1493,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -1615,20 +1571,9 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -1649,13 +1594,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -1669,10 +1607,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -1683,13 +1617,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -1768,20 +1695,9 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -1828,13 +1744,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -1848,10 +1757,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -1862,13 +1767,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -1947,20 +1845,9 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -1984,13 +1871,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -2004,10 +1884,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -2018,13 +1894,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -2103,730 +1972,9 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-						},
-						DefaultActivity: ptr.String("__DefaultActivity__"),
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					PUSH: &types.PushMessageActivity{
-						MessageConfig: &types.JourneyPushMessage{
-							TimeToLive: ptr.String("__TimeToLive__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					RandomSplit: &types.RandomSplitActivity{
-						Branches: []types.RandomSplitEntry{
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-						},
-					},
-					SMS: &types.SMSMessageActivity{
-						MessageConfig: &types.JourneySMSMessage{
-							MessageType:       types.MessageType("TRANSACTIONAL"),
-							OriginationNumber: ptr.String("__OriginationNumber__"),
-							SenderId:          ptr.String("__SenderId__"),
-							EntityId:          ptr.String("__EntityId__"),
-							TemplateId:        ptr.String("__TemplateId__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Wait: &types.WaitActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						WaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					ContactCenter: &types.ContactCenterActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-					},
-				},
-				"key1": {
-					CUSTOM: &types.CustomMessageActivity{
-						DeliveryUri: ptr.String("__DeliveryUri__"),
-						EndpointTypes: []types.EndpointTypesElement{
-							types.EndpointTypesElement("PUSH"),
-							types.EndpointTypesElement("PUSH"),
-						},
-						MessageConfig: &types.JourneyCustomMessage{
-							Data: ptr.String("__Data__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					ConditionalSplit: &types.ConditionalSplitActivity{
-						Condition: &types.Condition{
-							Conditions: []types.SimpleCondition{
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-							},
-							Operator: types.Operator("ALL"),
-						},
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-						FalseActivity: ptr.String("__FalseActivity__"),
-						TrueActivity:  ptr.String("__TrueActivity__"),
-					},
-					Description: ptr.String("__Description__"),
-					EMAIL: &types.EmailMessageActivity{
-						MessageConfig: &types.JourneyEmailMessage{
-							FromAddress: ptr.String("__FromAddress__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Holdout: &types.HoldoutActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						Percentage:   ptr.Int32(1),
-					},
-					MultiCondition: &types.MultiConditionalSplitActivity{
-						Branches: []types.MultiConditionalBranch{
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -2928,13 +2076,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 										"__Member__",
 									},
 								},
-								"key1": {
-									AttributeType: types.AttributeType("INCLUSIVE"),
-									Values: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
 							},
 							EventType: &types.SetDimension{
 								DimensionType: types.DimensionType("INCLUSIVE"),
@@ -2945,10 +2086,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 							},
 							Metrics: map[string]types.MetricDimension{
 								"key0": {
-									ComparisonOperator: ptr.String("__ComparisonOperator__"),
-									Value:              ptr.Float64(1.0),
-								},
-								"key1": {
 									ComparisonOperator: ptr.String("__ComparisonOperator__"),
 									Value:              ptr.Float64(1.0),
 								},
@@ -2982,29 +2119,9 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				SMS: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -3026,16 +2143,6 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				VOICE: map[string][]types.OpenHoursRule{
 					"key0": {
@@ -3048,29 +2155,9 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				CUSTOM: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -3159,6 +2246,7 @@ func TestSerdeCheckSnapshot_CreateJourney(t *testing.T) {
 	_, err := svc.CreateJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3230,7 +2318,6 @@ func TestSerdeCheckSnapshot_CreatePushTemplate(t *testing.T) {
 			RecommenderId: ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -3245,6 +2332,7 @@ func TestSerdeCheckSnapshot_CreatePushTemplate(t *testing.T) {
 	_, err := svc.CreatePushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3265,7 +2353,6 @@ func TestSerdeCheckSnapshot_CreateRecommenderConfiguration(t *testing.T) {
 		CreateRecommenderConfiguration: &types.CreateRecommenderConfigurationShape{
 			Attributes: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Description:                   ptr.String("__Description__"),
 			Name:                          ptr.String("__Name__"),
@@ -3286,6 +2373,7 @@ func TestSerdeCheckSnapshot_CreateRecommenderConfiguration(t *testing.T) {
 	_, err := svc.CreateRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3308,13 +2396,6 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 			Dimensions: &types.SegmentDimensions{
 				Attributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -3393,20 +2474,9 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 						ComparisonOperator: ptr.String("__ComparisonOperator__"),
 						Value:              ptr.Float64(1.0),
 					},
-					"key1": {
-						ComparisonOperator: ptr.String("__ComparisonOperator__"),
-						Value:              ptr.Float64(1.0),
-					},
 				},
 				UserAttributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -3429,13 +2499,6 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -3508,20 +2571,9 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -3539,13 +2591,6 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -3618,20 +2663,9 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -3665,13 +2699,6 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -3744,20 +2771,9 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -3775,13 +2791,6 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -3854,20 +2863,9 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -3895,7 +2893,6 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -3908,6 +2905,7 @@ func TestSerdeCheckSnapshot_CreateSegment(t *testing.T) {
 	_, err := svc.CreateSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3931,7 +2929,6 @@ func TestSerdeCheckSnapshot_CreateSmsTemplate(t *testing.T) {
 			RecommenderId:        ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -3946,6 +2943,7 @@ func TestSerdeCheckSnapshot_CreateSmsTemplate(t *testing.T) {
 	_, err := svc.CreateSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3970,7 +2968,6 @@ func TestSerdeCheckSnapshot_CreateVoiceTemplate(t *testing.T) {
 			LanguageCode:         ptr.String("__LanguageCode__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			VoiceId:             ptr.String("__VoiceId__"),
@@ -3985,6 +2982,7 @@ func TestSerdeCheckSnapshot_CreateVoiceTemplate(t *testing.T) {
 	_, err := svc.CreateVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4013,6 +3011,7 @@ func TestSerdeCheckSnapshot_DeleteAdmChannel(t *testing.T) {
 	_, err := svc.DeleteAdmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4041,6 +3040,7 @@ func TestSerdeCheckSnapshot_DeleteApnsChannel(t *testing.T) {
 	_, err := svc.DeleteApnsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4069,6 +3069,7 @@ func TestSerdeCheckSnapshot_DeleteApnsSandboxChannel(t *testing.T) {
 	_, err := svc.DeleteApnsSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4097,6 +3098,7 @@ func TestSerdeCheckSnapshot_DeleteApnsVoipChannel(t *testing.T) {
 	_, err := svc.DeleteApnsVoipChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4125,6 +3127,7 @@ func TestSerdeCheckSnapshot_DeleteApnsVoipSandboxChannel(t *testing.T) {
 	_, err := svc.DeleteApnsVoipSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4153,6 +3156,7 @@ func TestSerdeCheckSnapshot_DeleteApp(t *testing.T) {
 	_, err := svc.DeleteApp(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4181,6 +3185,7 @@ func TestSerdeCheckSnapshot_DeleteBaiduChannel(t *testing.T) {
 	_, err := svc.DeleteBaiduChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4210,6 +3215,7 @@ func TestSerdeCheckSnapshot_DeleteCampaign(t *testing.T) {
 	_, err := svc.DeleteCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4238,6 +3244,7 @@ func TestSerdeCheckSnapshot_DeleteEmailChannel(t *testing.T) {
 	_, err := svc.DeleteEmailChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4267,6 +3274,7 @@ func TestSerdeCheckSnapshot_DeleteEmailTemplate(t *testing.T) {
 	_, err := svc.DeleteEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4296,6 +3304,7 @@ func TestSerdeCheckSnapshot_DeleteEndpoint(t *testing.T) {
 	_, err := svc.DeleteEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4324,6 +3333,7 @@ func TestSerdeCheckSnapshot_DeleteEventStream(t *testing.T) {
 	_, err := svc.DeleteEventStream(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4352,6 +3362,7 @@ func TestSerdeCheckSnapshot_DeleteGcmChannel(t *testing.T) {
 	_, err := svc.DeleteGcmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4381,6 +3392,7 @@ func TestSerdeCheckSnapshot_DeleteInAppTemplate(t *testing.T) {
 	_, err := svc.DeleteInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4410,6 +3422,7 @@ func TestSerdeCheckSnapshot_DeleteJourney(t *testing.T) {
 	_, err := svc.DeleteJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4439,6 +3452,7 @@ func TestSerdeCheckSnapshot_DeletePushTemplate(t *testing.T) {
 	_, err := svc.DeletePushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4467,6 +3481,7 @@ func TestSerdeCheckSnapshot_DeleteRecommenderConfiguration(t *testing.T) {
 	_, err := svc.DeleteRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4496,6 +3511,7 @@ func TestSerdeCheckSnapshot_DeleteSegment(t *testing.T) {
 	_, err := svc.DeleteSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4524,6 +3540,7 @@ func TestSerdeCheckSnapshot_DeleteSmsChannel(t *testing.T) {
 	_, err := svc.DeleteSmsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4553,6 +3570,7 @@ func TestSerdeCheckSnapshot_DeleteSmsTemplate(t *testing.T) {
 	_, err := svc.DeleteSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4582,6 +3600,7 @@ func TestSerdeCheckSnapshot_DeleteUserEndpoints(t *testing.T) {
 	_, err := svc.DeleteUserEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4610,6 +3629,7 @@ func TestSerdeCheckSnapshot_DeleteVoiceChannel(t *testing.T) {
 	_, err := svc.DeleteVoiceChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4639,6 +3659,7 @@ func TestSerdeCheckSnapshot_DeleteVoiceTemplate(t *testing.T) {
 	_, err := svc.DeleteVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4667,6 +3688,7 @@ func TestSerdeCheckSnapshot_GetAdmChannel(t *testing.T) {
 	_, err := svc.GetAdmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4695,6 +3717,7 @@ func TestSerdeCheckSnapshot_GetApnsChannel(t *testing.T) {
 	_, err := svc.GetApnsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4723,6 +3746,7 @@ func TestSerdeCheckSnapshot_GetApnsSandboxChannel(t *testing.T) {
 	_, err := svc.GetApnsSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4751,6 +3775,7 @@ func TestSerdeCheckSnapshot_GetApnsVoipChannel(t *testing.T) {
 	_, err := svc.GetApnsVoipChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4779,6 +3804,7 @@ func TestSerdeCheckSnapshot_GetApnsVoipSandboxChannel(t *testing.T) {
 	_, err := svc.GetApnsVoipSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4807,6 +3833,7 @@ func TestSerdeCheckSnapshot_GetApp(t *testing.T) {
 	_, err := svc.GetApp(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4840,6 +3867,7 @@ func TestSerdeCheckSnapshot_GetApplicationDateRangeKpi(t *testing.T) {
 	_, err := svc.GetApplicationDateRangeKpi(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4868,6 +3896,7 @@ func TestSerdeCheckSnapshot_GetApplicationSettings(t *testing.T) {
 	_, err := svc.GetApplicationSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4897,6 +3926,7 @@ func TestSerdeCheckSnapshot_GetApps(t *testing.T) {
 	_, err := svc.GetApps(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4925,6 +3955,7 @@ func TestSerdeCheckSnapshot_GetBaiduChannel(t *testing.T) {
 	_, err := svc.GetBaiduChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4954,6 +3985,7 @@ func TestSerdeCheckSnapshot_GetCampaign(t *testing.T) {
 	_, err := svc.GetCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4985,6 +4017,7 @@ func TestSerdeCheckSnapshot_GetCampaignActivities(t *testing.T) {
 	_, err := svc.GetCampaignActivities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5019,6 +4052,7 @@ func TestSerdeCheckSnapshot_GetCampaignDateRangeKpi(t *testing.T) {
 	_, err := svc.GetCampaignDateRangeKpi(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5049,6 +4083,7 @@ func TestSerdeCheckSnapshot_GetCampaigns(t *testing.T) {
 	_, err := svc.GetCampaigns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5079,6 +4114,7 @@ func TestSerdeCheckSnapshot_GetCampaignVersion(t *testing.T) {
 	_, err := svc.GetCampaignVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5110,6 +4146,7 @@ func TestSerdeCheckSnapshot_GetCampaignVersions(t *testing.T) {
 	_, err := svc.GetCampaignVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5138,6 +4175,7 @@ func TestSerdeCheckSnapshot_GetChannels(t *testing.T) {
 	_, err := svc.GetChannels(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5166,6 +4204,7 @@ func TestSerdeCheckSnapshot_GetEmailChannel(t *testing.T) {
 	_, err := svc.GetEmailChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5195,6 +4234,7 @@ func TestSerdeCheckSnapshot_GetEmailTemplate(t *testing.T) {
 	_, err := svc.GetEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5224,6 +4264,7 @@ func TestSerdeCheckSnapshot_GetEndpoint(t *testing.T) {
 	_, err := svc.GetEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5252,6 +4293,7 @@ func TestSerdeCheckSnapshot_GetEventStream(t *testing.T) {
 	_, err := svc.GetEventStream(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5281,6 +4323,7 @@ func TestSerdeCheckSnapshot_GetExportJob(t *testing.T) {
 	_, err := svc.GetExportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5311,6 +4354,7 @@ func TestSerdeCheckSnapshot_GetExportJobs(t *testing.T) {
 	_, err := svc.GetExportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5339,6 +4383,7 @@ func TestSerdeCheckSnapshot_GetGcmChannel(t *testing.T) {
 	_, err := svc.GetGcmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5368,6 +4413,7 @@ func TestSerdeCheckSnapshot_GetImportJob(t *testing.T) {
 	_, err := svc.GetImportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5398,6 +4444,7 @@ func TestSerdeCheckSnapshot_GetImportJobs(t *testing.T) {
 	_, err := svc.GetImportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5427,6 +4474,7 @@ func TestSerdeCheckSnapshot_GetInAppMessages(t *testing.T) {
 	_, err := svc.GetInAppMessages(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5456,6 +4504,7 @@ func TestSerdeCheckSnapshot_GetInAppTemplate(t *testing.T) {
 	_, err := svc.GetInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5485,6 +4534,7 @@ func TestSerdeCheckSnapshot_GetJourney(t *testing.T) {
 	_, err := svc.GetJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5519,6 +4569,7 @@ func TestSerdeCheckSnapshot_GetJourneyDateRangeKpi(t *testing.T) {
 	_, err := svc.GetJourneyDateRangeKpi(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5551,6 +4602,7 @@ func TestSerdeCheckSnapshot_GetJourneyExecutionActivityMetrics(t *testing.T) {
 	_, err := svc.GetJourneyExecutionActivityMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5582,6 +4634,7 @@ func TestSerdeCheckSnapshot_GetJourneyExecutionMetrics(t *testing.T) {
 	_, err := svc.GetJourneyExecutionMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5615,6 +4668,7 @@ func TestSerdeCheckSnapshot_GetJourneyRunExecutionActivityMetrics(t *testing.T) 
 	_, err := svc.GetJourneyRunExecutionActivityMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5647,6 +4701,7 @@ func TestSerdeCheckSnapshot_GetJourneyRunExecutionMetrics(t *testing.T) {
 	_, err := svc.GetJourneyRunExecutionMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5678,6 +4733,7 @@ func TestSerdeCheckSnapshot_GetJourneyRuns(t *testing.T) {
 	_, err := svc.GetJourneyRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5707,6 +4763,7 @@ func TestSerdeCheckSnapshot_GetPushTemplate(t *testing.T) {
 	_, err := svc.GetPushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5735,6 +4792,7 @@ func TestSerdeCheckSnapshot_GetRecommenderConfiguration(t *testing.T) {
 	_, err := svc.GetRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5764,6 +4822,7 @@ func TestSerdeCheckSnapshot_GetRecommenderConfigurations(t *testing.T) {
 	_, err := svc.GetRecommenderConfigurations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5793,6 +4852,7 @@ func TestSerdeCheckSnapshot_GetSegment(t *testing.T) {
 	_, err := svc.GetSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5824,6 +4884,7 @@ func TestSerdeCheckSnapshot_GetSegmentExportJobs(t *testing.T) {
 	_, err := svc.GetSegmentExportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5855,6 +4916,7 @@ func TestSerdeCheckSnapshot_GetSegmentImportJobs(t *testing.T) {
 	_, err := svc.GetSegmentImportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5885,6 +4947,7 @@ func TestSerdeCheckSnapshot_GetSegments(t *testing.T) {
 	_, err := svc.GetSegments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5915,6 +4978,7 @@ func TestSerdeCheckSnapshot_GetSegmentVersion(t *testing.T) {
 	_, err := svc.GetSegmentVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5946,6 +5010,7 @@ func TestSerdeCheckSnapshot_GetSegmentVersions(t *testing.T) {
 	_, err := svc.GetSegmentVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5974,6 +5039,7 @@ func TestSerdeCheckSnapshot_GetSmsChannel(t *testing.T) {
 	_, err := svc.GetSmsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6003,6 +5069,7 @@ func TestSerdeCheckSnapshot_GetSmsTemplate(t *testing.T) {
 	_, err := svc.GetSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6032,6 +5099,7 @@ func TestSerdeCheckSnapshot_GetUserEndpoints(t *testing.T) {
 	_, err := svc.GetUserEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6060,6 +5128,7 @@ func TestSerdeCheckSnapshot_GetVoiceChannel(t *testing.T) {
 	_, err := svc.GetVoiceChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6089,6 +5158,7 @@ func TestSerdeCheckSnapshot_GetVoiceTemplate(t *testing.T) {
 	_, err := svc.GetVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6119,6 +5189,7 @@ func TestSerdeCheckSnapshot_ListJourneys(t *testing.T) {
 	_, err := svc.ListJourneys(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6147,6 +5218,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6178,6 +5250,7 @@ func TestSerdeCheckSnapshot_ListTemplates(t *testing.T) {
 	_, err := svc.ListTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6209,6 +5282,7 @@ func TestSerdeCheckSnapshot_ListTemplateVersions(t *testing.T) {
 	_, err := svc.ListTemplateVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6240,6 +5314,7 @@ func TestSerdeCheckSnapshot_PhoneNumberValidate(t *testing.T) {
 	_, err := svc.PhoneNumberValidate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6268,10 +5343,6 @@ func TestSerdeCheckSnapshot_PutEvents(t *testing.T) {
 								"__Member__",
 								"__Member__",
 							},
-							"key1": {
-								"__Member__",
-								"__Member__",
-							},
 						},
 						ChannelType: types.ChannelType("PUSH"),
 						Demographic: &types.EndpointDemographic{
@@ -6296,17 +5367,12 @@ func TestSerdeCheckSnapshot_PutEvents(t *testing.T) {
 						},
 						Metrics: map[string]float64{
 							"key0": 1.0,
-							"key1": 1.0,
 						},
 						OptOut:    ptr.String("__OptOut__"),
 						RequestId: ptr.String("__RequestId__"),
 						User: &types.EndpointUser{
 							UserAttributes: map[string][]string{
 								"key0": {
-									"__Member__",
-									"__Member__",
-								},
-								"key1": {
 									"__Member__",
 									"__Member__",
 								},
@@ -6321,139 +5387,11 @@ func TestSerdeCheckSnapshot_PutEvents(t *testing.T) {
 							AppVersionCode: ptr.String("__AppVersionCode__"),
 							Attributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
 							EventType:        ptr.String("__EventType__"),
 							Metrics: map[string]float64{
 								"key0": 1.0,
-								"key1": 1.0,
-							},
-							SdkName: ptr.String("__SdkName__"),
-							Session: &types.Session{
-								Duration:       ptr.Int32(1),
-								Id:             ptr.String("__Id__"),
-								StartTimestamp: ptr.String("__StartTimestamp__"),
-								StopTimestamp:  ptr.String("__StopTimestamp__"),
-							},
-							Timestamp: ptr.String("__Timestamp__"),
-						},
-						"key1": {
-							AppPackageName: ptr.String("__AppPackageName__"),
-							AppTitle:       ptr.String("__AppTitle__"),
-							AppVersionCode: ptr.String("__AppVersionCode__"),
-							Attributes: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
-							EventType:        ptr.String("__EventType__"),
-							Metrics: map[string]float64{
-								"key0": 1.0,
-								"key1": 1.0,
-							},
-							SdkName: ptr.String("__SdkName__"),
-							Session: &types.Session{
-								Duration:       ptr.Int32(1),
-								Id:             ptr.String("__Id__"),
-								StartTimestamp: ptr.String("__StartTimestamp__"),
-								StopTimestamp:  ptr.String("__StopTimestamp__"),
-							},
-							Timestamp: ptr.String("__Timestamp__"),
-						},
-					},
-				},
-				"key1": {
-					Endpoint: &types.PublicEndpoint{
-						Address: ptr.String("__Address__"),
-						Attributes: map[string][]string{
-							"key0": {
-								"__Member__",
-								"__Member__",
-							},
-							"key1": {
-								"__Member__",
-								"__Member__",
-							},
-						},
-						ChannelType: types.ChannelType("PUSH"),
-						Demographic: &types.EndpointDemographic{
-							AppVersion:      ptr.String("__AppVersion__"),
-							Locale:          ptr.String("__Locale__"),
-							Make:            ptr.String("__Make__"),
-							Model:           ptr.String("__Model__"),
-							ModelVersion:    ptr.String("__ModelVersion__"),
-							Platform:        ptr.String("__Platform__"),
-							PlatformVersion: ptr.String("__PlatformVersion__"),
-							Timezone:        ptr.String("__Timezone__"),
-						},
-						EffectiveDate:  ptr.String("__EffectiveDate__"),
-						EndpointStatus: ptr.String("__EndpointStatus__"),
-						Location: &types.EndpointLocation{
-							City:       ptr.String("__City__"),
-							Country:    ptr.String("__Country__"),
-							Latitude:   ptr.Float64(1.0),
-							Longitude:  ptr.Float64(1.0),
-							PostalCode: ptr.String("__PostalCode__"),
-							Region:     ptr.String("__Region__"),
-						},
-						Metrics: map[string]float64{
-							"key0": 1.0,
-							"key1": 1.0,
-						},
-						OptOut:    ptr.String("__OptOut__"),
-						RequestId: ptr.String("__RequestId__"),
-						User: &types.EndpointUser{
-							UserAttributes: map[string][]string{
-								"key0": {
-									"__Member__",
-									"__Member__",
-								},
-								"key1": {
-									"__Member__",
-									"__Member__",
-								},
-							},
-							UserId: ptr.String("__UserId__"),
-						},
-					},
-					Events: map[string]types.Event{
-						"key0": {
-							AppPackageName: ptr.String("__AppPackageName__"),
-							AppTitle:       ptr.String("__AppTitle__"),
-							AppVersionCode: ptr.String("__AppVersionCode__"),
-							Attributes: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
-							EventType:        ptr.String("__EventType__"),
-							Metrics: map[string]float64{
-								"key0": 1.0,
-								"key1": 1.0,
-							},
-							SdkName: ptr.String("__SdkName__"),
-							Session: &types.Session{
-								Duration:       ptr.Int32(1),
-								Id:             ptr.String("__Id__"),
-								StartTimestamp: ptr.String("__StartTimestamp__"),
-								StopTimestamp:  ptr.String("__StopTimestamp__"),
-							},
-							Timestamp: ptr.String("__Timestamp__"),
-						},
-						"key1": {
-							AppPackageName: ptr.String("__AppPackageName__"),
-							AppTitle:       ptr.String("__AppTitle__"),
-							AppVersionCode: ptr.String("__AppVersionCode__"),
-							Attributes: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
-							EventType:        ptr.String("__EventType__"),
-							Metrics: map[string]float64{
-								"key0": 1.0,
-								"key1": 1.0,
 							},
 							SdkName: ptr.String("__SdkName__"),
 							Session: &types.Session{
@@ -6478,6 +5416,7 @@ func TestSerdeCheckSnapshot_PutEvents(t *testing.T) {
 	_, err := svc.PutEvents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6510,6 +5449,7 @@ func TestSerdeCheckSnapshot_PutEventStream(t *testing.T) {
 	_, err := svc.PutEventStream(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6545,6 +5485,7 @@ func TestSerdeCheckSnapshot_RemoveAttributes(t *testing.T) {
 	_, err := svc.RemoveAttributes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6570,35 +5511,10 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					ChannelType:  types.ChannelType("PUSH"),
 					Context: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					RawContent: ptr.String("__RawContent__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TitleOverride: ptr.String("__TitleOverride__"),
-				},
-				"key1": {
-					BodyOverride: ptr.String("__BodyOverride__"),
-					ChannelType:  types.ChannelType("PUSH"),
-					Context: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					RawContent: ptr.String("__RawContent__"),
-					Substitutions: map[string][]string{
-						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6608,41 +5524,16 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 			},
 			Context: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Endpoints: map[string]types.EndpointSendConfiguration{
 				"key0": {
 					BodyOverride: ptr.String("__BodyOverride__"),
 					Context: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					RawContent: ptr.String("__RawContent__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TitleOverride: ptr.String("__TitleOverride__"),
-				},
-				"key1": {
-					BodyOverride: ptr.String("__BodyOverride__"),
-					Context: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					RawContent: ptr.String("__RawContent__"),
-					Substitutions: map[string][]string{
-						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6657,7 +5548,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					ConsolidationKey: ptr.String("__ConsolidationKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					ExpiresAfter:      ptr.String("__ExpiresAfter__"),
 					IconReference:     ptr.String("__IconReference__"),
@@ -6670,10 +5560,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6690,7 +5576,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					CollapseId:   ptr.String("__CollapseId__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					MediaUrl:                      ptr.String("__MediaUrl__"),
 					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
@@ -6700,10 +5585,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6718,7 +5599,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:     ptr.String("__IconReference__"),
 					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
@@ -6729,10 +5609,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6748,10 +5624,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				DefaultPushNotificationMessage: &types.DefaultPushNotificationMessage{
@@ -6759,15 +5631,10 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SilentPush: ptr.Bool(true),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6815,10 +5682,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				GCMMessage: &types.GCMMessage{
@@ -6827,7 +5690,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					CollapseKey: ptr.String("__CollapseKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:                 ptr.String("__IconReference__"),
 					ImageIconUrl:                  ptr.String("__ImageIconUrl__"),
@@ -6841,10 +5703,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6865,10 +5723,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					EntityId:   ptr.String("__EntityId__"),
 					TemplateId: ptr.String("__TemplateId__"),
@@ -6879,10 +5733,6 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 					OriginationNumber: ptr.String("__OriginationNumber__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -6924,6 +5774,7 @@ func TestSerdeCheckSnapshot_SendMessages(t *testing.T) {
 	_, err := svc.SendMessages(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6965,6 +5816,7 @@ func TestSerdeCheckSnapshot_SendOTPMessage(t *testing.T) {
 	_, err := svc.SendOTPMessage(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6986,7 +5838,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 		SendUsersMessageRequest: &types.SendUsersMessageRequest{
 			Context: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			MessageConfiguration: &types.DirectMessageConfiguration{
 				ADMMessage: &types.ADMMessage{
@@ -6995,7 +5846,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					ConsolidationKey: ptr.String("__ConsolidationKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					ExpiresAfter:      ptr.String("__ExpiresAfter__"),
 					IconReference:     ptr.String("__IconReference__"),
@@ -7008,10 +5858,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7028,7 +5874,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					CollapseId:   ptr.String("__CollapseId__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					MediaUrl:                      ptr.String("__MediaUrl__"),
 					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
@@ -7038,10 +5883,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7056,7 +5897,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:     ptr.String("__IconReference__"),
 					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
@@ -7067,10 +5907,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7086,10 +5922,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				DefaultPushNotificationMessage: &types.DefaultPushNotificationMessage{
@@ -7097,15 +5929,10 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SilentPush: ptr.Bool(true),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7153,10 +5980,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				GCMMessage: &types.GCMMessage{
@@ -7165,7 +5988,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					CollapseKey: ptr.String("__CollapseKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:                 ptr.String("__IconReference__"),
 					ImageIconUrl:                  ptr.String("__ImageIconUrl__"),
@@ -7179,10 +6001,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7203,10 +6021,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					EntityId:   ptr.String("__EntityId__"),
 					TemplateId: ptr.String("__TemplateId__"),
@@ -7217,10 +6031,6 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					OriginationNumber: ptr.String("__OriginationNumber__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7256,34 +6066,10 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 					BodyOverride: ptr.String("__BodyOverride__"),
 					Context: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					RawContent: ptr.String("__RawContent__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TitleOverride: ptr.String("__TitleOverride__"),
-				},
-				"key1": {
-					BodyOverride: ptr.String("__BodyOverride__"),
-					Context: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					RawContent: ptr.String("__RawContent__"),
-					Substitutions: map[string][]string{
-						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -7302,6 +6088,7 @@ func TestSerdeCheckSnapshot_SendUsersMessages(t *testing.T) {
 	_, err := svc.SendUsersMessages(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7323,7 +6110,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		TagsModel: &types.TagsModel{
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -7336,6 +6122,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7368,6 +6155,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7401,6 +6189,7 @@ func TestSerdeCheckSnapshot_UpdateAdmChannel(t *testing.T) {
 	_, err := svc.UpdateAdmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7439,6 +6228,7 @@ func TestSerdeCheckSnapshot_UpdateApnsChannel(t *testing.T) {
 	_, err := svc.UpdateApnsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7477,6 +6267,7 @@ func TestSerdeCheckSnapshot_UpdateApnsSandboxChannel(t *testing.T) {
 	_, err := svc.UpdateApnsSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7515,6 +6306,7 @@ func TestSerdeCheckSnapshot_UpdateApnsVoipChannel(t *testing.T) {
 	_, err := svc.UpdateApnsVoipChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7553,6 +6345,7 @@ func TestSerdeCheckSnapshot_UpdateApnsVoipSandboxChannel(t *testing.T) {
 	_, err := svc.UpdateApnsVoipSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7609,6 +6402,7 @@ func TestSerdeCheckSnapshot_UpdateApplicationSettings(t *testing.T) {
 	_, err := svc.UpdateApplicationSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7642,6 +6436,7 @@ func TestSerdeCheckSnapshot_UpdateBaiduChannel(t *testing.T) {
 	_, err := svc.UpdateBaiduChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7891,7 +6686,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -7908,13 +6702,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -7925,10 +6712,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -8199,7 +6982,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -8216,13 +6998,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -8233,10 +7008,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -8522,7 +7293,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 					},
 					CustomConfig: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Layout: types.Layout("BOTTOM_BANNER"),
 				},
@@ -8540,13 +7310,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 									"__Member__",
 								},
 							},
-							"key1": {
-								AttributeType: types.AttributeType("INCLUSIVE"),
-								Values: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
 						},
 						EventType: &types.SetDimension{
 							DimensionType: types.DimensionType("INCLUSIVE"),
@@ -8557,10 +7320,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 						},
 						Metrics: map[string]types.MetricDimension{
 							"key0": {
-								ComparisonOperator: ptr.String("__ComparisonOperator__"),
-								Value:              ptr.Float64(1.0),
-							},
-							"key1": {
 								ComparisonOperator: ptr.String("__ComparisonOperator__"),
 								Value:              ptr.Float64(1.0),
 							},
@@ -8581,7 +7340,6 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 			SegmentVersion: ptr.Int32(1),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateConfiguration: &types.TemplateConfiguration{
 				EmailTemplate: &types.Template{
@@ -8619,6 +7377,7 @@ func TestSerdeCheckSnapshot_UpdateCampaign(t *testing.T) {
 	_, err := svc.UpdateCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8655,6 +7414,7 @@ func TestSerdeCheckSnapshot_UpdateEmailChannel(t *testing.T) {
 	_, err := svc.UpdateEmailChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8690,7 +7450,6 @@ func TestSerdeCheckSnapshot_UpdateEmailTemplate(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			TextPart:            ptr.String("__TextPart__"),
@@ -8707,6 +7466,7 @@ func TestSerdeCheckSnapshot_UpdateEmailTemplate(t *testing.T) {
 	_, err := svc.UpdateEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8730,10 +7490,6 @@ func TestSerdeCheckSnapshot_UpdateEndpoint(t *testing.T) {
 			Address: ptr.String("__Address__"),
 			Attributes: map[string][]string{
 				"key0": {
-					"__Member__",
-					"__Member__",
-				},
-				"key1": {
 					"__Member__",
 					"__Member__",
 				},
@@ -8761,17 +7517,12 @@ func TestSerdeCheckSnapshot_UpdateEndpoint(t *testing.T) {
 			},
 			Metrics: map[string]float64{
 				"key0": 1.0,
-				"key1": 1.0,
 			},
 			OptOut:    ptr.String("__OptOut__"),
 			RequestId: ptr.String("__RequestId__"),
 			User: &types.EndpointUser{
 				UserAttributes: map[string][]string{
 					"key0": {
-						"__Member__",
-						"__Member__",
-					},
-					"key1": {
 						"__Member__",
 						"__Member__",
 					},
@@ -8789,6 +7540,7 @@ func TestSerdeCheckSnapshot_UpdateEndpoint(t *testing.T) {
 	_, err := svc.UpdateEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8816,10 +7568,6 @@ func TestSerdeCheckSnapshot_UpdateEndpointsBatch(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					ChannelType: types.ChannelType("PUSH"),
 					Demographic: &types.EndpointDemographic{
@@ -8845,17 +7593,12 @@ func TestSerdeCheckSnapshot_UpdateEndpointsBatch(t *testing.T) {
 					},
 					Metrics: map[string]float64{
 						"key0": 1.0,
-						"key1": 1.0,
 					},
 					OptOut:    ptr.String("__OptOut__"),
 					RequestId: ptr.String("__RequestId__"),
 					User: &types.EndpointUser{
 						UserAttributes: map[string][]string{
 							"key0": {
-								"__Member__",
-								"__Member__",
-							},
-							"key1": {
 								"__Member__",
 								"__Member__",
 							},
@@ -8870,10 +7613,6 @@ func TestSerdeCheckSnapshot_UpdateEndpointsBatch(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					ChannelType: types.ChannelType("PUSH"),
 					Demographic: &types.EndpointDemographic{
@@ -8899,17 +7638,12 @@ func TestSerdeCheckSnapshot_UpdateEndpointsBatch(t *testing.T) {
 					},
 					Metrics: map[string]float64{
 						"key0": 1.0,
-						"key1": 1.0,
 					},
 					OptOut:    ptr.String("__OptOut__"),
 					RequestId: ptr.String("__RequestId__"),
 					User: &types.EndpointUser{
 						UserAttributes: map[string][]string{
 							"key0": {
-								"__Member__",
-								"__Member__",
-							},
-							"key1": {
 								"__Member__",
 								"__Member__",
 							},
@@ -8929,6 +7663,7 @@ func TestSerdeCheckSnapshot_UpdateEndpointsBatch(t *testing.T) {
 	_, err := svc.UpdateEndpointsBatch(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8963,6 +7698,7 @@ func TestSerdeCheckSnapshot_UpdateGcmChannel(t *testing.T) {
 	_, err := svc.UpdateGcmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9102,12 +7838,10 @@ func TestSerdeCheckSnapshot_UpdateInAppTemplate(t *testing.T) {
 			},
 			CustomConfig: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Layout: types.Layout("BOTTOM_BANNER"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -9123,6 +7857,7 @@ func TestSerdeCheckSnapshot_UpdateInAppTemplate(t *testing.T) {
 	_, err := svc.UpdateInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9172,13 +7907,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -9192,10 +7920,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -9206,13 +7930,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9291,20 +8008,9 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9325,13 +8031,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -9345,10 +8044,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -9359,13 +8054,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9444,20 +8132,9 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9504,13 +8181,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -9524,10 +8194,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -9538,13 +8204,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9623,20 +8282,9 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9660,13 +8308,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -9680,10 +8321,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -9694,13 +8331,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -9779,730 +8409,9 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-						},
-						DefaultActivity: ptr.String("__DefaultActivity__"),
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					PUSH: &types.PushMessageActivity{
-						MessageConfig: &types.JourneyPushMessage{
-							TimeToLive: ptr.String("__TimeToLive__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					RandomSplit: &types.RandomSplitActivity{
-						Branches: []types.RandomSplitEntry{
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-						},
-					},
-					SMS: &types.SMSMessageActivity{
-						MessageConfig: &types.JourneySMSMessage{
-							MessageType:       types.MessageType("TRANSACTIONAL"),
-							OriginationNumber: ptr.String("__OriginationNumber__"),
-							SenderId:          ptr.String("__SenderId__"),
-							EntityId:          ptr.String("__EntityId__"),
-							TemplateId:        ptr.String("__TemplateId__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Wait: &types.WaitActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						WaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					ContactCenter: &types.ContactCenterActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-					},
-				},
-				"key1": {
-					CUSTOM: &types.CustomMessageActivity{
-						DeliveryUri: ptr.String("__DeliveryUri__"),
-						EndpointTypes: []types.EndpointTypesElement{
-							types.EndpointTypesElement("PUSH"),
-							types.EndpointTypesElement("PUSH"),
-						},
-						MessageConfig: &types.JourneyCustomMessage{
-							Data: ptr.String("__Data__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					ConditionalSplit: &types.ConditionalSplitActivity{
-						Condition: &types.Condition{
-							Conditions: []types.SimpleCondition{
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-							},
-							Operator: types.Operator("ALL"),
-						},
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-						FalseActivity: ptr.String("__FalseActivity__"),
-						TrueActivity:  ptr.String("__TrueActivity__"),
-					},
-					Description: ptr.String("__Description__"),
-					EMAIL: &types.EmailMessageActivity{
-						MessageConfig: &types.JourneyEmailMessage{
-							FromAddress: ptr.String("__FromAddress__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Holdout: &types.HoldoutActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						Percentage:   ptr.Int32(1),
-					},
-					MultiCondition: &types.MultiConditionalSplitActivity{
-						Branches: []types.MultiConditionalBranch{
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -10604,13 +8513,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 										"__Member__",
 									},
 								},
-								"key1": {
-									AttributeType: types.AttributeType("INCLUSIVE"),
-									Values: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
 							},
 							EventType: &types.SetDimension{
 								DimensionType: types.DimensionType("INCLUSIVE"),
@@ -10621,10 +8523,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 							},
 							Metrics: map[string]types.MetricDimension{
 								"key0": {
-									ComparisonOperator: ptr.String("__ComparisonOperator__"),
-									Value:              ptr.Float64(1.0),
-								},
-								"key1": {
 									ComparisonOperator: ptr.String("__ComparisonOperator__"),
 									Value:              ptr.Float64(1.0),
 								},
@@ -10658,29 +8556,9 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				SMS: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -10702,16 +8580,6 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				VOICE: map[string][]types.OpenHoursRule{
 					"key0": {
@@ -10724,29 +8592,9 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				CUSTOM: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -10835,6 +8683,7 @@ func TestSerdeCheckSnapshot_UpdateJourney(t *testing.T) {
 	_, err := svc.UpdateJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10867,6 +8716,7 @@ func TestSerdeCheckSnapshot_UpdateJourneyState(t *testing.T) {
 	_, err := svc.UpdateJourneyState(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10939,7 +8789,6 @@ func TestSerdeCheckSnapshot_UpdatePushTemplate(t *testing.T) {
 			RecommenderId: ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -10955,6 +8804,7 @@ func TestSerdeCheckSnapshot_UpdatePushTemplate(t *testing.T) {
 	_, err := svc.UpdatePushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10976,7 +8826,6 @@ func TestSerdeCheckSnapshot_UpdateRecommenderConfiguration(t *testing.T) {
 		UpdateRecommenderConfiguration: &types.UpdateRecommenderConfigurationShape{
 			Attributes: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Description:                   ptr.String("__Description__"),
 			Name:                          ptr.String("__Name__"),
@@ -10997,6 +8846,7 @@ func TestSerdeCheckSnapshot_UpdateRecommenderConfiguration(t *testing.T) {
 	_, err := svc.UpdateRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11020,13 +8870,6 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 			Dimensions: &types.SegmentDimensions{
 				Attributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -11105,20 +8948,9 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 						ComparisonOperator: ptr.String("__ComparisonOperator__"),
 						Value:              ptr.Float64(1.0),
 					},
-					"key1": {
-						ComparisonOperator: ptr.String("__ComparisonOperator__"),
-						Value:              ptr.Float64(1.0),
-					},
 				},
 				UserAttributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -11141,13 +8973,6 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -11220,20 +9045,9 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -11251,13 +9065,6 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -11330,20 +9137,9 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -11377,13 +9173,6 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -11456,20 +9245,9 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -11487,13 +9265,6 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -11566,20 +9337,9 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -11607,7 +9367,6 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -11620,6 +9379,7 @@ func TestSerdeCheckSnapshot_UpdateSegment(t *testing.T) {
 	_, err := svc.UpdateSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11653,6 +9413,7 @@ func TestSerdeCheckSnapshot_UpdateSmsChannel(t *testing.T) {
 	_, err := svc.UpdateSmsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11677,7 +9438,6 @@ func TestSerdeCheckSnapshot_UpdateSmsTemplate(t *testing.T) {
 			RecommenderId:        ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -11693,6 +9453,7 @@ func TestSerdeCheckSnapshot_UpdateSmsTemplate(t *testing.T) {
 	_, err := svc.UpdateSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11725,6 +9486,7 @@ func TestSerdeCheckSnapshot_UpdateTemplateActiveVersion(t *testing.T) {
 	_, err := svc.UpdateTemplateActiveVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11756,6 +9518,7 @@ func TestSerdeCheckSnapshot_UpdateVoiceChannel(t *testing.T) {
 	_, err := svc.UpdateVoiceChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11782,7 +9545,6 @@ func TestSerdeCheckSnapshot_UpdateVoiceTemplate(t *testing.T) {
 			LanguageCode:         ptr.String("__LanguageCode__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			VoiceId:             ptr.String("__VoiceId__"),
@@ -11797,6 +9559,7 @@ func TestSerdeCheckSnapshot_UpdateVoiceTemplate(t *testing.T) {
 	_, err := svc.UpdateVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11830,6 +9593,7 @@ func TestSerdeCheckSnapshot_VerifyOTPMessage(t *testing.T) {
 	_, err := svc.VerifyOTPMessage(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11850,7 +9614,6 @@ func TestSerdeUpdateSnapshot_CreateApp(t *testing.T) {
 			Name: ptr.String("__Name__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -11863,6 +9626,7 @@ func TestSerdeUpdateSnapshot_CreateApp(t *testing.T) {
 	_, err := svc.CreateApp(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12111,7 +9875,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -12128,13 +9891,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -12145,10 +9901,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -12419,7 +10171,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -12436,13 +10187,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -12453,10 +10197,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -12742,7 +10482,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 					},
 					CustomConfig: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Layout: types.Layout("BOTTOM_BANNER"),
 				},
@@ -12760,13 +10499,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 									"__Member__",
 								},
 							},
-							"key1": {
-								AttributeType: types.AttributeType("INCLUSIVE"),
-								Values: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
 						},
 						EventType: &types.SetDimension{
 							DimensionType: types.DimensionType("INCLUSIVE"),
@@ -12777,10 +10509,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 						},
 						Metrics: map[string]types.MetricDimension{
 							"key0": {
-								ComparisonOperator: ptr.String("__ComparisonOperator__"),
-								Value:              ptr.Float64(1.0),
-							},
-							"key1": {
 								ComparisonOperator: ptr.String("__ComparisonOperator__"),
 								Value:              ptr.Float64(1.0),
 							},
@@ -12801,7 +10529,6 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 			SegmentVersion: ptr.Int32(1),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateConfiguration: &types.TemplateConfiguration{
 				EmailTemplate: &types.Template{
@@ -12839,6 +10566,7 @@ func TestSerdeUpdateSnapshot_CreateCampaign(t *testing.T) {
 	_, err := svc.CreateCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12873,7 +10601,6 @@ func TestSerdeUpdateSnapshot_CreateEmailTemplate(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			TextPart:            ptr.String("__TextPart__"),
@@ -12889,6 +10616,7 @@ func TestSerdeUpdateSnapshot_CreateEmailTemplate(t *testing.T) {
 	_, err := svc.CreateEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12923,6 +10651,7 @@ func TestSerdeUpdateSnapshot_CreateExportJob(t *testing.T) {
 	_, err := svc.CreateExportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12961,6 +10690,7 @@ func TestSerdeUpdateSnapshot_CreateImportJob(t *testing.T) {
 	_, err := svc.CreateImportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13099,12 +10829,10 @@ func TestSerdeUpdateSnapshot_CreateInAppTemplate(t *testing.T) {
 			},
 			CustomConfig: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Layout: types.Layout("BOTTOM_BANNER"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -13119,6 +10847,7 @@ func TestSerdeUpdateSnapshot_CreateInAppTemplate(t *testing.T) {
 	_, err := svc.CreateInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13167,13 +10896,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -13187,10 +10909,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -13201,13 +10919,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13286,20 +10997,9 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13320,13 +11020,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -13340,10 +11033,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -13354,13 +11043,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13439,20 +11121,9 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13499,13 +11170,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -13519,10 +11183,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -13533,13 +11193,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13618,20 +11271,9 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13655,13 +11297,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -13675,10 +11310,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -13689,13 +11320,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -13774,730 +11398,9 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-						},
-						DefaultActivity: ptr.String("__DefaultActivity__"),
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					PUSH: &types.PushMessageActivity{
-						MessageConfig: &types.JourneyPushMessage{
-							TimeToLive: ptr.String("__TimeToLive__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					RandomSplit: &types.RandomSplitActivity{
-						Branches: []types.RandomSplitEntry{
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-						},
-					},
-					SMS: &types.SMSMessageActivity{
-						MessageConfig: &types.JourneySMSMessage{
-							MessageType:       types.MessageType("TRANSACTIONAL"),
-							OriginationNumber: ptr.String("__OriginationNumber__"),
-							SenderId:          ptr.String("__SenderId__"),
-							EntityId:          ptr.String("__EntityId__"),
-							TemplateId:        ptr.String("__TemplateId__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Wait: &types.WaitActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						WaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					ContactCenter: &types.ContactCenterActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-					},
-				},
-				"key1": {
-					CUSTOM: &types.CustomMessageActivity{
-						DeliveryUri: ptr.String("__DeliveryUri__"),
-						EndpointTypes: []types.EndpointTypesElement{
-							types.EndpointTypesElement("PUSH"),
-							types.EndpointTypesElement("PUSH"),
-						},
-						MessageConfig: &types.JourneyCustomMessage{
-							Data: ptr.String("__Data__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					ConditionalSplit: &types.ConditionalSplitActivity{
-						Condition: &types.Condition{
-							Conditions: []types.SimpleCondition{
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-							},
-							Operator: types.Operator("ALL"),
-						},
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-						FalseActivity: ptr.String("__FalseActivity__"),
-						TrueActivity:  ptr.String("__TrueActivity__"),
-					},
-					Description: ptr.String("__Description__"),
-					EMAIL: &types.EmailMessageActivity{
-						MessageConfig: &types.JourneyEmailMessage{
-							FromAddress: ptr.String("__FromAddress__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Holdout: &types.HoldoutActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						Percentage:   ptr.Int32(1),
-					},
-					MultiCondition: &types.MultiConditionalSplitActivity{
-						Branches: []types.MultiConditionalBranch{
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -14599,13 +11502,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 										"__Member__",
 									},
 								},
-								"key1": {
-									AttributeType: types.AttributeType("INCLUSIVE"),
-									Values: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
 							},
 							EventType: &types.SetDimension{
 								DimensionType: types.DimensionType("INCLUSIVE"),
@@ -14616,10 +11512,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 							},
 							Metrics: map[string]types.MetricDimension{
 								"key0": {
-									ComparisonOperator: ptr.String("__ComparisonOperator__"),
-									Value:              ptr.Float64(1.0),
-								},
-								"key1": {
 									ComparisonOperator: ptr.String("__ComparisonOperator__"),
 									Value:              ptr.Float64(1.0),
 								},
@@ -14653,29 +11545,9 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				SMS: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -14697,16 +11569,6 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				VOICE: map[string][]types.OpenHoursRule{
 					"key0": {
@@ -14719,29 +11581,9 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				CUSTOM: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -14830,6 +11672,7 @@ func TestSerdeUpdateSnapshot_CreateJourney(t *testing.T) {
 	_, err := svc.CreateJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14901,7 +11744,6 @@ func TestSerdeUpdateSnapshot_CreatePushTemplate(t *testing.T) {
 			RecommenderId: ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -14916,6 +11758,7 @@ func TestSerdeUpdateSnapshot_CreatePushTemplate(t *testing.T) {
 	_, err := svc.CreatePushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14936,7 +11779,6 @@ func TestSerdeUpdateSnapshot_CreateRecommenderConfiguration(t *testing.T) {
 		CreateRecommenderConfiguration: &types.CreateRecommenderConfigurationShape{
 			Attributes: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Description:                   ptr.String("__Description__"),
 			Name:                          ptr.String("__Name__"),
@@ -14957,6 +11799,7 @@ func TestSerdeUpdateSnapshot_CreateRecommenderConfiguration(t *testing.T) {
 	_, err := svc.CreateRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14979,13 +11822,6 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 			Dimensions: &types.SegmentDimensions{
 				Attributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -15064,20 +11900,9 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 						ComparisonOperator: ptr.String("__ComparisonOperator__"),
 						Value:              ptr.Float64(1.0),
 					},
-					"key1": {
-						ComparisonOperator: ptr.String("__ComparisonOperator__"),
-						Value:              ptr.Float64(1.0),
-					},
 				},
 				UserAttributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -15100,13 +11925,6 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -15179,20 +11997,9 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -15210,13 +12017,6 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -15289,20 +12089,9 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -15336,13 +12125,6 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -15415,20 +12197,9 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -15446,13 +12217,6 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -15525,20 +12289,9 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -15566,7 +12319,6 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -15579,6 +12331,7 @@ func TestSerdeUpdateSnapshot_CreateSegment(t *testing.T) {
 	_, err := svc.CreateSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15602,7 +12355,6 @@ func TestSerdeUpdateSnapshot_CreateSmsTemplate(t *testing.T) {
 			RecommenderId:        ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -15617,6 +12369,7 @@ func TestSerdeUpdateSnapshot_CreateSmsTemplate(t *testing.T) {
 	_, err := svc.CreateSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15641,7 +12394,6 @@ func TestSerdeUpdateSnapshot_CreateVoiceTemplate(t *testing.T) {
 			LanguageCode:         ptr.String("__LanguageCode__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			VoiceId:             ptr.String("__VoiceId__"),
@@ -15656,6 +12408,7 @@ func TestSerdeUpdateSnapshot_CreateVoiceTemplate(t *testing.T) {
 	_, err := svc.CreateVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15684,6 +12437,7 @@ func TestSerdeUpdateSnapshot_DeleteAdmChannel(t *testing.T) {
 	_, err := svc.DeleteAdmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15712,6 +12466,7 @@ func TestSerdeUpdateSnapshot_DeleteApnsChannel(t *testing.T) {
 	_, err := svc.DeleteApnsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15740,6 +12495,7 @@ func TestSerdeUpdateSnapshot_DeleteApnsSandboxChannel(t *testing.T) {
 	_, err := svc.DeleteApnsSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15768,6 +12524,7 @@ func TestSerdeUpdateSnapshot_DeleteApnsVoipChannel(t *testing.T) {
 	_, err := svc.DeleteApnsVoipChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15796,6 +12553,7 @@ func TestSerdeUpdateSnapshot_DeleteApnsVoipSandboxChannel(t *testing.T) {
 	_, err := svc.DeleteApnsVoipSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15824,6 +12582,7 @@ func TestSerdeUpdateSnapshot_DeleteApp(t *testing.T) {
 	_, err := svc.DeleteApp(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15852,6 +12611,7 @@ func TestSerdeUpdateSnapshot_DeleteBaiduChannel(t *testing.T) {
 	_, err := svc.DeleteBaiduChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15881,6 +12641,7 @@ func TestSerdeUpdateSnapshot_DeleteCampaign(t *testing.T) {
 	_, err := svc.DeleteCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15909,6 +12670,7 @@ func TestSerdeUpdateSnapshot_DeleteEmailChannel(t *testing.T) {
 	_, err := svc.DeleteEmailChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15938,6 +12700,7 @@ func TestSerdeUpdateSnapshot_DeleteEmailTemplate(t *testing.T) {
 	_, err := svc.DeleteEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15967,6 +12730,7 @@ func TestSerdeUpdateSnapshot_DeleteEndpoint(t *testing.T) {
 	_, err := svc.DeleteEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15995,6 +12759,7 @@ func TestSerdeUpdateSnapshot_DeleteEventStream(t *testing.T) {
 	_, err := svc.DeleteEventStream(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16023,6 +12788,7 @@ func TestSerdeUpdateSnapshot_DeleteGcmChannel(t *testing.T) {
 	_, err := svc.DeleteGcmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16052,6 +12818,7 @@ func TestSerdeUpdateSnapshot_DeleteInAppTemplate(t *testing.T) {
 	_, err := svc.DeleteInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16081,6 +12848,7 @@ func TestSerdeUpdateSnapshot_DeleteJourney(t *testing.T) {
 	_, err := svc.DeleteJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16110,6 +12878,7 @@ func TestSerdeUpdateSnapshot_DeletePushTemplate(t *testing.T) {
 	_, err := svc.DeletePushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16138,6 +12907,7 @@ func TestSerdeUpdateSnapshot_DeleteRecommenderConfiguration(t *testing.T) {
 	_, err := svc.DeleteRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16167,6 +12937,7 @@ func TestSerdeUpdateSnapshot_DeleteSegment(t *testing.T) {
 	_, err := svc.DeleteSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16195,6 +12966,7 @@ func TestSerdeUpdateSnapshot_DeleteSmsChannel(t *testing.T) {
 	_, err := svc.DeleteSmsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16224,6 +12996,7 @@ func TestSerdeUpdateSnapshot_DeleteSmsTemplate(t *testing.T) {
 	_, err := svc.DeleteSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16253,6 +13026,7 @@ func TestSerdeUpdateSnapshot_DeleteUserEndpoints(t *testing.T) {
 	_, err := svc.DeleteUserEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16281,6 +13055,7 @@ func TestSerdeUpdateSnapshot_DeleteVoiceChannel(t *testing.T) {
 	_, err := svc.DeleteVoiceChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16310,6 +13085,7 @@ func TestSerdeUpdateSnapshot_DeleteVoiceTemplate(t *testing.T) {
 	_, err := svc.DeleteVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16338,6 +13114,7 @@ func TestSerdeUpdateSnapshot_GetAdmChannel(t *testing.T) {
 	_, err := svc.GetAdmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16366,6 +13143,7 @@ func TestSerdeUpdateSnapshot_GetApnsChannel(t *testing.T) {
 	_, err := svc.GetApnsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16394,6 +13172,7 @@ func TestSerdeUpdateSnapshot_GetApnsSandboxChannel(t *testing.T) {
 	_, err := svc.GetApnsSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16422,6 +13201,7 @@ func TestSerdeUpdateSnapshot_GetApnsVoipChannel(t *testing.T) {
 	_, err := svc.GetApnsVoipChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16450,6 +13230,7 @@ func TestSerdeUpdateSnapshot_GetApnsVoipSandboxChannel(t *testing.T) {
 	_, err := svc.GetApnsVoipSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16478,6 +13259,7 @@ func TestSerdeUpdateSnapshot_GetApp(t *testing.T) {
 	_, err := svc.GetApp(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16511,6 +13293,7 @@ func TestSerdeUpdateSnapshot_GetApplicationDateRangeKpi(t *testing.T) {
 	_, err := svc.GetApplicationDateRangeKpi(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16539,6 +13322,7 @@ func TestSerdeUpdateSnapshot_GetApplicationSettings(t *testing.T) {
 	_, err := svc.GetApplicationSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16568,6 +13352,7 @@ func TestSerdeUpdateSnapshot_GetApps(t *testing.T) {
 	_, err := svc.GetApps(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16596,6 +13381,7 @@ func TestSerdeUpdateSnapshot_GetBaiduChannel(t *testing.T) {
 	_, err := svc.GetBaiduChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16625,6 +13411,7 @@ func TestSerdeUpdateSnapshot_GetCampaign(t *testing.T) {
 	_, err := svc.GetCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16656,6 +13443,7 @@ func TestSerdeUpdateSnapshot_GetCampaignActivities(t *testing.T) {
 	_, err := svc.GetCampaignActivities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16690,6 +13478,7 @@ func TestSerdeUpdateSnapshot_GetCampaignDateRangeKpi(t *testing.T) {
 	_, err := svc.GetCampaignDateRangeKpi(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16720,6 +13509,7 @@ func TestSerdeUpdateSnapshot_GetCampaigns(t *testing.T) {
 	_, err := svc.GetCampaigns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16750,6 +13540,7 @@ func TestSerdeUpdateSnapshot_GetCampaignVersion(t *testing.T) {
 	_, err := svc.GetCampaignVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16781,6 +13572,7 @@ func TestSerdeUpdateSnapshot_GetCampaignVersions(t *testing.T) {
 	_, err := svc.GetCampaignVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16809,6 +13601,7 @@ func TestSerdeUpdateSnapshot_GetChannels(t *testing.T) {
 	_, err := svc.GetChannels(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16837,6 +13630,7 @@ func TestSerdeUpdateSnapshot_GetEmailChannel(t *testing.T) {
 	_, err := svc.GetEmailChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16866,6 +13660,7 @@ func TestSerdeUpdateSnapshot_GetEmailTemplate(t *testing.T) {
 	_, err := svc.GetEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16895,6 +13690,7 @@ func TestSerdeUpdateSnapshot_GetEndpoint(t *testing.T) {
 	_, err := svc.GetEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16923,6 +13719,7 @@ func TestSerdeUpdateSnapshot_GetEventStream(t *testing.T) {
 	_, err := svc.GetEventStream(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16952,6 +13749,7 @@ func TestSerdeUpdateSnapshot_GetExportJob(t *testing.T) {
 	_, err := svc.GetExportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16982,6 +13780,7 @@ func TestSerdeUpdateSnapshot_GetExportJobs(t *testing.T) {
 	_, err := svc.GetExportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17010,6 +13809,7 @@ func TestSerdeUpdateSnapshot_GetGcmChannel(t *testing.T) {
 	_, err := svc.GetGcmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17039,6 +13839,7 @@ func TestSerdeUpdateSnapshot_GetImportJob(t *testing.T) {
 	_, err := svc.GetImportJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17069,6 +13870,7 @@ func TestSerdeUpdateSnapshot_GetImportJobs(t *testing.T) {
 	_, err := svc.GetImportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17098,6 +13900,7 @@ func TestSerdeUpdateSnapshot_GetInAppMessages(t *testing.T) {
 	_, err := svc.GetInAppMessages(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17127,6 +13930,7 @@ func TestSerdeUpdateSnapshot_GetInAppTemplate(t *testing.T) {
 	_, err := svc.GetInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17156,6 +13960,7 @@ func TestSerdeUpdateSnapshot_GetJourney(t *testing.T) {
 	_, err := svc.GetJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17190,6 +13995,7 @@ func TestSerdeUpdateSnapshot_GetJourneyDateRangeKpi(t *testing.T) {
 	_, err := svc.GetJourneyDateRangeKpi(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17222,6 +14028,7 @@ func TestSerdeUpdateSnapshot_GetJourneyExecutionActivityMetrics(t *testing.T) {
 	_, err := svc.GetJourneyExecutionActivityMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17253,6 +14060,7 @@ func TestSerdeUpdateSnapshot_GetJourneyExecutionMetrics(t *testing.T) {
 	_, err := svc.GetJourneyExecutionMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17286,6 +14094,7 @@ func TestSerdeUpdateSnapshot_GetJourneyRunExecutionActivityMetrics(t *testing.T)
 	_, err := svc.GetJourneyRunExecutionActivityMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17318,6 +14127,7 @@ func TestSerdeUpdateSnapshot_GetJourneyRunExecutionMetrics(t *testing.T) {
 	_, err := svc.GetJourneyRunExecutionMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17349,6 +14159,7 @@ func TestSerdeUpdateSnapshot_GetJourneyRuns(t *testing.T) {
 	_, err := svc.GetJourneyRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17378,6 +14189,7 @@ func TestSerdeUpdateSnapshot_GetPushTemplate(t *testing.T) {
 	_, err := svc.GetPushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17406,6 +14218,7 @@ func TestSerdeUpdateSnapshot_GetRecommenderConfiguration(t *testing.T) {
 	_, err := svc.GetRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17435,6 +14248,7 @@ func TestSerdeUpdateSnapshot_GetRecommenderConfigurations(t *testing.T) {
 	_, err := svc.GetRecommenderConfigurations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17464,6 +14278,7 @@ func TestSerdeUpdateSnapshot_GetSegment(t *testing.T) {
 	_, err := svc.GetSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17495,6 +14310,7 @@ func TestSerdeUpdateSnapshot_GetSegmentExportJobs(t *testing.T) {
 	_, err := svc.GetSegmentExportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17526,6 +14342,7 @@ func TestSerdeUpdateSnapshot_GetSegmentImportJobs(t *testing.T) {
 	_, err := svc.GetSegmentImportJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17556,6 +14373,7 @@ func TestSerdeUpdateSnapshot_GetSegments(t *testing.T) {
 	_, err := svc.GetSegments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17586,6 +14404,7 @@ func TestSerdeUpdateSnapshot_GetSegmentVersion(t *testing.T) {
 	_, err := svc.GetSegmentVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17617,6 +14436,7 @@ func TestSerdeUpdateSnapshot_GetSegmentVersions(t *testing.T) {
 	_, err := svc.GetSegmentVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17645,6 +14465,7 @@ func TestSerdeUpdateSnapshot_GetSmsChannel(t *testing.T) {
 	_, err := svc.GetSmsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17674,6 +14495,7 @@ func TestSerdeUpdateSnapshot_GetSmsTemplate(t *testing.T) {
 	_, err := svc.GetSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17703,6 +14525,7 @@ func TestSerdeUpdateSnapshot_GetUserEndpoints(t *testing.T) {
 	_, err := svc.GetUserEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17731,6 +14554,7 @@ func TestSerdeUpdateSnapshot_GetVoiceChannel(t *testing.T) {
 	_, err := svc.GetVoiceChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17760,6 +14584,7 @@ func TestSerdeUpdateSnapshot_GetVoiceTemplate(t *testing.T) {
 	_, err := svc.GetVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17790,6 +14615,7 @@ func TestSerdeUpdateSnapshot_ListJourneys(t *testing.T) {
 	_, err := svc.ListJourneys(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17818,6 +14644,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17849,6 +14676,7 @@ func TestSerdeUpdateSnapshot_ListTemplates(t *testing.T) {
 	_, err := svc.ListTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17880,6 +14708,7 @@ func TestSerdeUpdateSnapshot_ListTemplateVersions(t *testing.T) {
 	_, err := svc.ListTemplateVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17911,6 +14740,7 @@ func TestSerdeUpdateSnapshot_PhoneNumberValidate(t *testing.T) {
 	_, err := svc.PhoneNumberValidate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17939,10 +14769,6 @@ func TestSerdeUpdateSnapshot_PutEvents(t *testing.T) {
 								"__Member__",
 								"__Member__",
 							},
-							"key1": {
-								"__Member__",
-								"__Member__",
-							},
 						},
 						ChannelType: types.ChannelType("PUSH"),
 						Demographic: &types.EndpointDemographic{
@@ -17967,17 +14793,12 @@ func TestSerdeUpdateSnapshot_PutEvents(t *testing.T) {
 						},
 						Metrics: map[string]float64{
 							"key0": 1.0,
-							"key1": 1.0,
 						},
 						OptOut:    ptr.String("__OptOut__"),
 						RequestId: ptr.String("__RequestId__"),
 						User: &types.EndpointUser{
 							UserAttributes: map[string][]string{
 								"key0": {
-									"__Member__",
-									"__Member__",
-								},
-								"key1": {
 									"__Member__",
 									"__Member__",
 								},
@@ -17992,139 +14813,11 @@ func TestSerdeUpdateSnapshot_PutEvents(t *testing.T) {
 							AppVersionCode: ptr.String("__AppVersionCode__"),
 							Attributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
 							EventType:        ptr.String("__EventType__"),
 							Metrics: map[string]float64{
 								"key0": 1.0,
-								"key1": 1.0,
-							},
-							SdkName: ptr.String("__SdkName__"),
-							Session: &types.Session{
-								Duration:       ptr.Int32(1),
-								Id:             ptr.String("__Id__"),
-								StartTimestamp: ptr.String("__StartTimestamp__"),
-								StopTimestamp:  ptr.String("__StopTimestamp__"),
-							},
-							Timestamp: ptr.String("__Timestamp__"),
-						},
-						"key1": {
-							AppPackageName: ptr.String("__AppPackageName__"),
-							AppTitle:       ptr.String("__AppTitle__"),
-							AppVersionCode: ptr.String("__AppVersionCode__"),
-							Attributes: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
-							EventType:        ptr.String("__EventType__"),
-							Metrics: map[string]float64{
-								"key0": 1.0,
-								"key1": 1.0,
-							},
-							SdkName: ptr.String("__SdkName__"),
-							Session: &types.Session{
-								Duration:       ptr.Int32(1),
-								Id:             ptr.String("__Id__"),
-								StartTimestamp: ptr.String("__StartTimestamp__"),
-								StopTimestamp:  ptr.String("__StopTimestamp__"),
-							},
-							Timestamp: ptr.String("__Timestamp__"),
-						},
-					},
-				},
-				"key1": {
-					Endpoint: &types.PublicEndpoint{
-						Address: ptr.String("__Address__"),
-						Attributes: map[string][]string{
-							"key0": {
-								"__Member__",
-								"__Member__",
-							},
-							"key1": {
-								"__Member__",
-								"__Member__",
-							},
-						},
-						ChannelType: types.ChannelType("PUSH"),
-						Demographic: &types.EndpointDemographic{
-							AppVersion:      ptr.String("__AppVersion__"),
-							Locale:          ptr.String("__Locale__"),
-							Make:            ptr.String("__Make__"),
-							Model:           ptr.String("__Model__"),
-							ModelVersion:    ptr.String("__ModelVersion__"),
-							Platform:        ptr.String("__Platform__"),
-							PlatformVersion: ptr.String("__PlatformVersion__"),
-							Timezone:        ptr.String("__Timezone__"),
-						},
-						EffectiveDate:  ptr.String("__EffectiveDate__"),
-						EndpointStatus: ptr.String("__EndpointStatus__"),
-						Location: &types.EndpointLocation{
-							City:       ptr.String("__City__"),
-							Country:    ptr.String("__Country__"),
-							Latitude:   ptr.Float64(1.0),
-							Longitude:  ptr.Float64(1.0),
-							PostalCode: ptr.String("__PostalCode__"),
-							Region:     ptr.String("__Region__"),
-						},
-						Metrics: map[string]float64{
-							"key0": 1.0,
-							"key1": 1.0,
-						},
-						OptOut:    ptr.String("__OptOut__"),
-						RequestId: ptr.String("__RequestId__"),
-						User: &types.EndpointUser{
-							UserAttributes: map[string][]string{
-								"key0": {
-									"__Member__",
-									"__Member__",
-								},
-								"key1": {
-									"__Member__",
-									"__Member__",
-								},
-							},
-							UserId: ptr.String("__UserId__"),
-						},
-					},
-					Events: map[string]types.Event{
-						"key0": {
-							AppPackageName: ptr.String("__AppPackageName__"),
-							AppTitle:       ptr.String("__AppTitle__"),
-							AppVersionCode: ptr.String("__AppVersionCode__"),
-							Attributes: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
-							EventType:        ptr.String("__EventType__"),
-							Metrics: map[string]float64{
-								"key0": 1.0,
-								"key1": 1.0,
-							},
-							SdkName: ptr.String("__SdkName__"),
-							Session: &types.Session{
-								Duration:       ptr.Int32(1),
-								Id:             ptr.String("__Id__"),
-								StartTimestamp: ptr.String("__StartTimestamp__"),
-								StopTimestamp:  ptr.String("__StopTimestamp__"),
-							},
-							Timestamp: ptr.String("__Timestamp__"),
-						},
-						"key1": {
-							AppPackageName: ptr.String("__AppPackageName__"),
-							AppTitle:       ptr.String("__AppTitle__"),
-							AppVersionCode: ptr.String("__AppVersionCode__"),
-							Attributes: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
-							EventType:        ptr.String("__EventType__"),
-							Metrics: map[string]float64{
-								"key0": 1.0,
-								"key1": 1.0,
 							},
 							SdkName: ptr.String("__SdkName__"),
 							Session: &types.Session{
@@ -18149,6 +14842,7 @@ func TestSerdeUpdateSnapshot_PutEvents(t *testing.T) {
 	_, err := svc.PutEvents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18181,6 +14875,7 @@ func TestSerdeUpdateSnapshot_PutEventStream(t *testing.T) {
 	_, err := svc.PutEventStream(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18216,6 +14911,7 @@ func TestSerdeUpdateSnapshot_RemoveAttributes(t *testing.T) {
 	_, err := svc.RemoveAttributes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18241,35 +14937,10 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					ChannelType:  types.ChannelType("PUSH"),
 					Context: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					RawContent: ptr.String("__RawContent__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TitleOverride: ptr.String("__TitleOverride__"),
-				},
-				"key1": {
-					BodyOverride: ptr.String("__BodyOverride__"),
-					ChannelType:  types.ChannelType("PUSH"),
-					Context: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					RawContent: ptr.String("__RawContent__"),
-					Substitutions: map[string][]string{
-						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18279,41 +14950,16 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 			},
 			Context: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Endpoints: map[string]types.EndpointSendConfiguration{
 				"key0": {
 					BodyOverride: ptr.String("__BodyOverride__"),
 					Context: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					RawContent: ptr.String("__RawContent__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TitleOverride: ptr.String("__TitleOverride__"),
-				},
-				"key1": {
-					BodyOverride: ptr.String("__BodyOverride__"),
-					Context: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					RawContent: ptr.String("__RawContent__"),
-					Substitutions: map[string][]string{
-						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18328,7 +14974,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					ConsolidationKey: ptr.String("__ConsolidationKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					ExpiresAfter:      ptr.String("__ExpiresAfter__"),
 					IconReference:     ptr.String("__IconReference__"),
@@ -18341,10 +14986,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18361,7 +15002,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					CollapseId:   ptr.String("__CollapseId__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					MediaUrl:                      ptr.String("__MediaUrl__"),
 					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
@@ -18371,10 +15011,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18389,7 +15025,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:     ptr.String("__IconReference__"),
 					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
@@ -18400,10 +15035,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18419,10 +15050,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				DefaultPushNotificationMessage: &types.DefaultPushNotificationMessage{
@@ -18430,15 +15057,10 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SilentPush: ptr.Bool(true),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18486,10 +15108,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				GCMMessage: &types.GCMMessage{
@@ -18498,7 +15116,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					CollapseKey: ptr.String("__CollapseKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:                 ptr.String("__IconReference__"),
 					ImageIconUrl:                  ptr.String("__ImageIconUrl__"),
@@ -18512,10 +15129,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18536,10 +15149,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					EntityId:   ptr.String("__EntityId__"),
 					TemplateId: ptr.String("__TemplateId__"),
@@ -18550,10 +15159,6 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 					OriginationNumber: ptr.String("__OriginationNumber__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18595,6 +15200,7 @@ func TestSerdeUpdateSnapshot_SendMessages(t *testing.T) {
 	_, err := svc.SendMessages(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18636,6 +15242,7 @@ func TestSerdeUpdateSnapshot_SendOTPMessage(t *testing.T) {
 	_, err := svc.SendOTPMessage(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18657,7 +15264,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 		SendUsersMessageRequest: &types.SendUsersMessageRequest{
 			Context: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			MessageConfiguration: &types.DirectMessageConfiguration{
 				ADMMessage: &types.ADMMessage{
@@ -18666,7 +15272,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					ConsolidationKey: ptr.String("__ConsolidationKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					ExpiresAfter:      ptr.String("__ExpiresAfter__"),
 					IconReference:     ptr.String("__IconReference__"),
@@ -18679,10 +15284,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18699,7 +15300,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					CollapseId:   ptr.String("__CollapseId__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					MediaUrl:                      ptr.String("__MediaUrl__"),
 					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
@@ -18709,10 +15309,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18727,7 +15323,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:     ptr.String("__IconReference__"),
 					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
@@ -18738,10 +15333,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:             ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18757,10 +15348,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				DefaultPushNotificationMessage: &types.DefaultPushNotificationMessage{
@@ -18768,15 +15355,10 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					Body:   ptr.String("__Body__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SilentPush: ptr.Bool(true),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18824,10 +15406,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 				},
 				GCMMessage: &types.GCMMessage{
@@ -18836,7 +15414,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					CollapseKey: ptr.String("__CollapseKey__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					IconReference:                 ptr.String("__IconReference__"),
 					ImageIconUrl:                  ptr.String("__ImageIconUrl__"),
@@ -18850,10 +15427,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					Sound:                         ptr.String("__Sound__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18874,10 +15447,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					EntityId:   ptr.String("__EntityId__"),
 					TemplateId: ptr.String("__TemplateId__"),
@@ -18888,10 +15457,6 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					OriginationNumber: ptr.String("__OriginationNumber__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18927,34 +15492,10 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 					BodyOverride: ptr.String("__BodyOverride__"),
 					Context: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					RawContent: ptr.String("__RawContent__"),
 					Substitutions: map[string][]string{
 						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TitleOverride: ptr.String("__TitleOverride__"),
-				},
-				"key1": {
-					BodyOverride: ptr.String("__BodyOverride__"),
-					Context: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					RawContent: ptr.String("__RawContent__"),
-					Substitutions: map[string][]string{
-						"key0": {
-							"__Member__",
-							"__Member__",
-						},
-						"key1": {
 							"__Member__",
 							"__Member__",
 						},
@@ -18973,6 +15514,7 @@ func TestSerdeUpdateSnapshot_SendUsersMessages(t *testing.T) {
 	_, err := svc.SendUsersMessages(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18994,7 +15536,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		TagsModel: &types.TagsModel{
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -19007,6 +15548,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19039,6 +15581,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19072,6 +15615,7 @@ func TestSerdeUpdateSnapshot_UpdateAdmChannel(t *testing.T) {
 	_, err := svc.UpdateAdmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19110,6 +15654,7 @@ func TestSerdeUpdateSnapshot_UpdateApnsChannel(t *testing.T) {
 	_, err := svc.UpdateApnsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19148,6 +15693,7 @@ func TestSerdeUpdateSnapshot_UpdateApnsSandboxChannel(t *testing.T) {
 	_, err := svc.UpdateApnsSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19186,6 +15732,7 @@ func TestSerdeUpdateSnapshot_UpdateApnsVoipChannel(t *testing.T) {
 	_, err := svc.UpdateApnsVoipChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19224,6 +15771,7 @@ func TestSerdeUpdateSnapshot_UpdateApnsVoipSandboxChannel(t *testing.T) {
 	_, err := svc.UpdateApnsVoipSandboxChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19280,6 +15828,7 @@ func TestSerdeUpdateSnapshot_UpdateApplicationSettings(t *testing.T) {
 	_, err := svc.UpdateApplicationSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19313,6 +15862,7 @@ func TestSerdeUpdateSnapshot_UpdateBaiduChannel(t *testing.T) {
 	_, err := svc.UpdateBaiduChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19562,7 +16112,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -19579,13 +16128,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -19596,10 +16138,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -19870,7 +16408,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 							},
 							CustomConfig: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Layout: types.Layout("BOTTOM_BANNER"),
 						},
@@ -19887,13 +16424,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								EventType: &types.SetDimension{
 									DimensionType: types.DimensionType("INCLUSIVE"),
@@ -19904,10 +16434,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 								},
 								Metrics: map[string]types.MetricDimension{
 									"key0": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
-									"key1": {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
@@ -20193,7 +16719,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 					},
 					CustomConfig: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Layout: types.Layout("BOTTOM_BANNER"),
 				},
@@ -20211,13 +16736,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 									"__Member__",
 								},
 							},
-							"key1": {
-								AttributeType: types.AttributeType("INCLUSIVE"),
-								Values: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
 						},
 						EventType: &types.SetDimension{
 							DimensionType: types.DimensionType("INCLUSIVE"),
@@ -20228,10 +16746,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 						},
 						Metrics: map[string]types.MetricDimension{
 							"key0": {
-								ComparisonOperator: ptr.String("__ComparisonOperator__"),
-								Value:              ptr.Float64(1.0),
-							},
-							"key1": {
 								ComparisonOperator: ptr.String("__ComparisonOperator__"),
 								Value:              ptr.Float64(1.0),
 							},
@@ -20252,7 +16766,6 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 			SegmentVersion: ptr.Int32(1),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateConfiguration: &types.TemplateConfiguration{
 				EmailTemplate: &types.Template{
@@ -20290,6 +16803,7 @@ func TestSerdeUpdateSnapshot_UpdateCampaign(t *testing.T) {
 	_, err := svc.UpdateCampaign(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20326,6 +16840,7 @@ func TestSerdeUpdateSnapshot_UpdateEmailChannel(t *testing.T) {
 	_, err := svc.UpdateEmailChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20361,7 +16876,6 @@ func TestSerdeUpdateSnapshot_UpdateEmailTemplate(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			TextPart:            ptr.String("__TextPart__"),
@@ -20378,6 +16892,7 @@ func TestSerdeUpdateSnapshot_UpdateEmailTemplate(t *testing.T) {
 	_, err := svc.UpdateEmailTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20401,10 +16916,6 @@ func TestSerdeUpdateSnapshot_UpdateEndpoint(t *testing.T) {
 			Address: ptr.String("__Address__"),
 			Attributes: map[string][]string{
 				"key0": {
-					"__Member__",
-					"__Member__",
-				},
-				"key1": {
 					"__Member__",
 					"__Member__",
 				},
@@ -20432,17 +16943,12 @@ func TestSerdeUpdateSnapshot_UpdateEndpoint(t *testing.T) {
 			},
 			Metrics: map[string]float64{
 				"key0": 1.0,
-				"key1": 1.0,
 			},
 			OptOut:    ptr.String("__OptOut__"),
 			RequestId: ptr.String("__RequestId__"),
 			User: &types.EndpointUser{
 				UserAttributes: map[string][]string{
 					"key0": {
-						"__Member__",
-						"__Member__",
-					},
-					"key1": {
 						"__Member__",
 						"__Member__",
 					},
@@ -20460,6 +16966,7 @@ func TestSerdeUpdateSnapshot_UpdateEndpoint(t *testing.T) {
 	_, err := svc.UpdateEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20487,10 +16994,6 @@ func TestSerdeUpdateSnapshot_UpdateEndpointsBatch(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					ChannelType: types.ChannelType("PUSH"),
 					Demographic: &types.EndpointDemographic{
@@ -20516,17 +17019,12 @@ func TestSerdeUpdateSnapshot_UpdateEndpointsBatch(t *testing.T) {
 					},
 					Metrics: map[string]float64{
 						"key0": 1.0,
-						"key1": 1.0,
 					},
 					OptOut:    ptr.String("__OptOut__"),
 					RequestId: ptr.String("__RequestId__"),
 					User: &types.EndpointUser{
 						UserAttributes: map[string][]string{
 							"key0": {
-								"__Member__",
-								"__Member__",
-							},
-							"key1": {
 								"__Member__",
 								"__Member__",
 							},
@@ -20541,10 +17039,6 @@ func TestSerdeUpdateSnapshot_UpdateEndpointsBatch(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
-						"key1": {
-							"__Member__",
-							"__Member__",
-						},
 					},
 					ChannelType: types.ChannelType("PUSH"),
 					Demographic: &types.EndpointDemographic{
@@ -20570,17 +17064,12 @@ func TestSerdeUpdateSnapshot_UpdateEndpointsBatch(t *testing.T) {
 					},
 					Metrics: map[string]float64{
 						"key0": 1.0,
-						"key1": 1.0,
 					},
 					OptOut:    ptr.String("__OptOut__"),
 					RequestId: ptr.String("__RequestId__"),
 					User: &types.EndpointUser{
 						UserAttributes: map[string][]string{
 							"key0": {
-								"__Member__",
-								"__Member__",
-							},
-							"key1": {
 								"__Member__",
 								"__Member__",
 							},
@@ -20600,6 +17089,7 @@ func TestSerdeUpdateSnapshot_UpdateEndpointsBatch(t *testing.T) {
 	_, err := svc.UpdateEndpointsBatch(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20634,6 +17124,7 @@ func TestSerdeUpdateSnapshot_UpdateGcmChannel(t *testing.T) {
 	_, err := svc.UpdateGcmChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20773,12 +17264,10 @@ func TestSerdeUpdateSnapshot_UpdateInAppTemplate(t *testing.T) {
 			},
 			CustomConfig: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Layout: types.Layout("BOTTOM_BANNER"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -20794,6 +17283,7 @@ func TestSerdeUpdateSnapshot_UpdateInAppTemplate(t *testing.T) {
 	_, err := svc.UpdateInAppTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -20843,13 +17333,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -20863,10 +17346,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -20877,13 +17356,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -20962,20 +17434,9 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -20996,13 +17457,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -21016,10 +17470,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -21030,13 +17480,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -21115,20 +17558,9 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -21175,13 +17607,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -21195,10 +17620,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -21209,13 +17630,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -21294,20 +17708,9 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -21331,13 +17734,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 														"__Member__",
 													},
 												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
 											},
 											EventType: &types.SetDimension{
 												DimensionType: types.DimensionType("INCLUSIVE"),
@@ -21351,10 +17747,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 													ComparisonOperator: ptr.String("__ComparisonOperator__"),
 													Value:              ptr.Float64(1.0),
 												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
 											},
 										},
 										MessageActivity: ptr.String("__MessageActivity__"),
@@ -21365,13 +17757,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 									SegmentDimensions: &types.SegmentDimensions{
 										Attributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -21450,730 +17835,9 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 												ComparisonOperator: ptr.String("__ComparisonOperator__"),
 												Value:              ptr.Float64(1.0),
 											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
 										},
 										UserAttributes: map[string]types.AttributeDimension{
 											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-						},
-						DefaultActivity: ptr.String("__DefaultActivity__"),
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					PUSH: &types.PushMessageActivity{
-						MessageConfig: &types.JourneyPushMessage{
-							TimeToLive: ptr.String("__TimeToLive__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					RandomSplit: &types.RandomSplitActivity{
-						Branches: []types.RandomSplitEntry{
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-							{
-								NextActivity: ptr.String("__NextActivity__"),
-								Percentage:   ptr.Int32(1),
-							},
-						},
-					},
-					SMS: &types.SMSMessageActivity{
-						MessageConfig: &types.JourneySMSMessage{
-							MessageType:       types.MessageType("TRANSACTIONAL"),
-							OriginationNumber: ptr.String("__OriginationNumber__"),
-							SenderId:          ptr.String("__SenderId__"),
-							EntityId:          ptr.String("__EntityId__"),
-							TemplateId:        ptr.String("__TemplateId__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Wait: &types.WaitActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						WaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-					},
-					ContactCenter: &types.ContactCenterActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-					},
-				},
-				"key1": {
-					CUSTOM: &types.CustomMessageActivity{
-						DeliveryUri: ptr.String("__DeliveryUri__"),
-						EndpointTypes: []types.EndpointTypesElement{
-							types.EndpointTypesElement("PUSH"),
-							types.EndpointTypesElement("PUSH"),
-						},
-						MessageConfig: &types.JourneyCustomMessage{
-							Data: ptr.String("__Data__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					ConditionalSplit: &types.ConditionalSplitActivity{
-						Condition: &types.Condition{
-							Conditions: []types.SimpleCondition{
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-							},
-							Operator: types.Operator("ALL"),
-						},
-						EvaluationWaitTime: &types.WaitTime{
-							WaitFor:   ptr.String("__WaitFor__"),
-							WaitUntil: ptr.String("__WaitUntil__"),
-						},
-						FalseActivity: ptr.String("__FalseActivity__"),
-						TrueActivity:  ptr.String("__TrueActivity__"),
-					},
-					Description: ptr.String("__Description__"),
-					EMAIL: &types.EmailMessageActivity{
-						MessageConfig: &types.JourneyEmailMessage{
-							FromAddress: ptr.String("__FromAddress__"),
-						},
-						NextActivity:    ptr.String("__NextActivity__"),
-						TemplateName:    ptr.String("__TemplateName__"),
-						TemplateVersion: ptr.String("__TemplateVersion__"),
-					},
-					Holdout: &types.HoldoutActivity{
-						NextActivity: ptr.String("__NextActivity__"),
-						Percentage:   ptr.Int32(1),
-					},
-					MultiCondition: &types.MultiConditionalSplitActivity{
-						Branches: []types.MultiConditionalBranch{
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								NextActivity: ptr.String("__NextActivity__"),
-							},
-							{
-								Condition: &types.SimpleCondition{
-									EventCondition: &types.EventCondition{
-										Dimensions: &types.EventDimensions{
-											Attributes: map[string]types.AttributeDimension{
-												"key0": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-												"key1": {
-													AttributeType: types.AttributeType("INCLUSIVE"),
-													Values: []string{
-														"__Member__",
-														"__Member__",
-													},
-												},
-											},
-											EventType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Metrics: map[string]types.MetricDimension{
-												"key0": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-												"key1": {
-													ComparisonOperator: ptr.String("__ComparisonOperator__"),
-													Value:              ptr.Float64(1.0),
-												},
-											},
-										},
-										MessageActivity: ptr.String("__MessageActivity__"),
-									},
-									SegmentCondition: &types.SegmentCondition{
-										SegmentId: ptr.String("__SegmentId__"),
-									},
-									SegmentDimensions: &types.SegmentDimensions{
-										Attributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Behavior: &types.SegmentBehaviors{
-											Recency: &types.RecencyDimension{
-												Duration:    types.Duration("HR_24"),
-												RecencyType: types.RecencyType("ACTIVE"),
-											},
-										},
-										Demographic: &types.SegmentDemographics{
-											AppVersion: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Channel: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											DeviceType: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Make: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Model: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											Platform: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-										Location: &types.SegmentLocation{
-											Country: &types.SetDimension{
-												DimensionType: types.DimensionType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											GPSPoint: &types.GPSPointDimension{
-												Coordinates: &types.GPSCoordinates{
-													Latitude:  ptr.Float64(1.0),
-													Longitude: ptr.Float64(1.0),
-												},
-												RangeInKilometers: ptr.Float64(1.0),
-											},
-										},
-										Metrics: map[string]types.MetricDimension{
-											"key0": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-											"key1": {
-												ComparisonOperator: ptr.String("__ComparisonOperator__"),
-												Value:              ptr.Float64(1.0),
-											},
-										},
-										UserAttributes: map[string]types.AttributeDimension{
-											"key0": {
-												AttributeType: types.AttributeType("INCLUSIVE"),
-												Values: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											"key1": {
 												AttributeType: types.AttributeType("INCLUSIVE"),
 												Values: []string{
 													"__Member__",
@@ -22275,13 +17939,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 										"__Member__",
 									},
 								},
-								"key1": {
-									AttributeType: types.AttributeType("INCLUSIVE"),
-									Values: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
 							},
 							EventType: &types.SetDimension{
 								DimensionType: types.DimensionType("INCLUSIVE"),
@@ -22292,10 +17949,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 							},
 							Metrics: map[string]types.MetricDimension{
 								"key0": {
-									ComparisonOperator: ptr.String("__ComparisonOperator__"),
-									Value:              ptr.Float64(1.0),
-								},
-								"key1": {
 									ComparisonOperator: ptr.String("__ComparisonOperator__"),
 									Value:              ptr.Float64(1.0),
 								},
@@ -22329,29 +17982,9 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				SMS: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -22373,16 +18006,6 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				VOICE: map[string][]types.OpenHoursRule{
 					"key0": {
@@ -22395,29 +18018,9 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 							EndTime:   ptr.String("__EndTime__"),
 						},
 					},
-					"key1": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
 				},
 				CUSTOM: map[string][]types.OpenHoursRule{
 					"key0": {
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-						{
-							StartTime: ptr.String("__StartTime__"),
-							EndTime:   ptr.String("__EndTime__"),
-						},
-					},
-					"key1": {
 						{
 							StartTime: ptr.String("__StartTime__"),
 							EndTime:   ptr.String("__EndTime__"),
@@ -22506,6 +18109,7 @@ func TestSerdeUpdateSnapshot_UpdateJourney(t *testing.T) {
 	_, err := svc.UpdateJourney(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22538,6 +18142,7 @@ func TestSerdeUpdateSnapshot_UpdateJourneyState(t *testing.T) {
 	_, err := svc.UpdateJourneyState(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22610,7 +18215,6 @@ func TestSerdeUpdateSnapshot_UpdatePushTemplate(t *testing.T) {
 			RecommenderId: ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -22626,6 +18230,7 @@ func TestSerdeUpdateSnapshot_UpdatePushTemplate(t *testing.T) {
 	_, err := svc.UpdatePushTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22647,7 +18252,6 @@ func TestSerdeUpdateSnapshot_UpdateRecommenderConfiguration(t *testing.T) {
 		UpdateRecommenderConfiguration: &types.UpdateRecommenderConfigurationShape{
 			Attributes: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Description:                   ptr.String("__Description__"),
 			Name:                          ptr.String("__Name__"),
@@ -22668,6 +18272,7 @@ func TestSerdeUpdateSnapshot_UpdateRecommenderConfiguration(t *testing.T) {
 	_, err := svc.UpdateRecommenderConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22691,13 +18296,6 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 			Dimensions: &types.SegmentDimensions{
 				Attributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -22776,20 +18374,9 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 						ComparisonOperator: ptr.String("__ComparisonOperator__"),
 						Value:              ptr.Float64(1.0),
 					},
-					"key1": {
-						ComparisonOperator: ptr.String("__ComparisonOperator__"),
-						Value:              ptr.Float64(1.0),
-					},
 				},
 				UserAttributes: map[string]types.AttributeDimension{
 					"key0": {
-						AttributeType: types.AttributeType("INCLUSIVE"),
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
 						AttributeType: types.AttributeType("INCLUSIVE"),
 						Values: []string{
 							"__Member__",
@@ -22812,13 +18399,6 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -22891,20 +18471,9 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -22922,13 +18491,6 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -23001,20 +18563,9 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -23048,13 +18599,6 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -23127,20 +18671,9 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -23158,13 +18691,6 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 											"__Member__",
 										},
 									},
-									"key1": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
 								},
 								Behavior: &types.SegmentBehaviors{
 									Recency: &types.RecencyDimension{
@@ -23237,20 +18763,9 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 										ComparisonOperator: ptr.String("__ComparisonOperator__"),
 										Value:              ptr.Float64(1.0),
 									},
-									"key1": {
-										ComparisonOperator: ptr.String("__ComparisonOperator__"),
-										Value:              ptr.Float64(1.0),
-									},
 								},
 								UserAttributes: map[string]types.AttributeDimension{
 									"key0": {
-										AttributeType: types.AttributeType("INCLUSIVE"),
-										Values: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									"key1": {
 										AttributeType: types.AttributeType("INCLUSIVE"),
 										Values: []string{
 											"__Member__",
@@ -23278,7 +18793,6 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -23291,6 +18805,7 @@ func TestSerdeUpdateSnapshot_UpdateSegment(t *testing.T) {
 	_, err := svc.UpdateSegment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23324,6 +18839,7 @@ func TestSerdeUpdateSnapshot_UpdateSmsChannel(t *testing.T) {
 	_, err := svc.UpdateSmsChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23348,7 +18864,6 @@ func TestSerdeUpdateSnapshot_UpdateSmsTemplate(t *testing.T) {
 			RecommenderId:        ptr.String("__RecommenderId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 		},
@@ -23364,6 +18879,7 @@ func TestSerdeUpdateSnapshot_UpdateSmsTemplate(t *testing.T) {
 	_, err := svc.UpdateSmsTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23396,6 +18912,7 @@ func TestSerdeUpdateSnapshot_UpdateTemplateActiveVersion(t *testing.T) {
 	_, err := svc.UpdateTemplateActiveVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23427,6 +18944,7 @@ func TestSerdeUpdateSnapshot_UpdateVoiceChannel(t *testing.T) {
 	_, err := svc.UpdateVoiceChannel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23453,7 +18971,6 @@ func TestSerdeUpdateSnapshot_UpdateVoiceTemplate(t *testing.T) {
 			LanguageCode:         ptr.String("__LanguageCode__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TemplateDescription: ptr.String("__TemplateDescription__"),
 			VoiceId:             ptr.String("__VoiceId__"),
@@ -23468,6 +18985,7 @@ func TestSerdeUpdateSnapshot_UpdateVoiceTemplate(t *testing.T) {
 	_, err := svc.UpdateVoiceTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23501,6 +19019,7 @@ func TestSerdeUpdateSnapshot_VerifyOTPMessage(t *testing.T) {
 	_, err := svc.VerifyOTPMessage(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

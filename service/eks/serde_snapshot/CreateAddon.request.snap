@@ -2,4 +2,4 @@ POST /clusters/__ClusterName__/addons
 
 Content-Type: application/json
 
-{"addonName":"__AddonName__","addonVersion":"__AddonVersion__","clientRequestToken":"__ClientRequestToken__","configurationValues":"__ConfigurationValues__","namespaceConfig":{"namespace":"__Namespace__"},"podIdentityAssociations":[{"roleArn":"__RoleArn__","serviceAccount":"__ServiceAccount__"},{"roleArn":"__RoleArn__","serviceAccount":"__ServiceAccount__"}],"resolveConflicts":"OVERWRITE","serviceAccountRoleArn":"__ServiceAccountRoleArn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"addonName":"__AddonName__","addonVersion":"__AddonVersion__","clientRequestToken":"__ClientRequestToken__","configurationValues":"__ConfigurationValues__","namespaceConfig":{"namespace":"__Namespace__"},"podIdentityAssociations":[{"roleArn":"__RoleArn__","serviceAccount":"__ServiceAccount__"},{"roleArn":"__RoleArn__","serviceAccount":"__ServiceAccount__"}],"resolveConflicts":"OVERWRITE","serviceAccountRoleArn":"__ServiceAccountRoleArn__","tags":{"key0":"__Value__"}}

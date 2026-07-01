@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: Odb.CreateOdbPeeringConnection
 
-{"clientToken":"__ClientToken__","displayName":"__DisplayName__","odbNetworkId":"__OdbNetworkId__","peerNetworkCidrsToBeAdded":["__Member__","__Member__"],"peerNetworkId":"__PeerNetworkId__","peerNetworkRouteTableIds":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","displayName":"__DisplayName__","odbNetworkId":"__OdbNetworkId__","peerNetworkCidrsToBeAdded":["__Member__","__Member__"],"peerNetworkId":"__PeerNetworkId__","peerNetworkRouteTableIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

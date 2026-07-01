@@ -3,3 +3,4 @@ POST /2020-05-31/domain-association
 Content-Type: application/xml
 If-Match: __IfMatch__
 
+<UpdateDomainAssociationRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Domain>__Domain__</Domain><TargetResource><DistributionId>__DistributionId__</DistributionId><DistributionTenantId>__DistributionTenantId__</DistributionTenantId></TargetResource></UpdateDomainAssociationRequest>

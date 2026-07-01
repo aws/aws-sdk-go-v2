@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyVpnConnectionOptions&DryRun=true&LocalIpv4NetworkCidr=__LocalIpv4NetworkCidr__&LocalIpv6NetworkCidr=__LocalIpv6NetworkCidr__&RemoteIpv4NetworkCidr=__RemoteIpv4NetworkCidr__&RemoteIpv6NetworkCidr=__RemoteIpv6NetworkCidr__&TunnelBandwidth=standard&Version=2016-11-15&VpnConnectionId=__VpnConnectionId__

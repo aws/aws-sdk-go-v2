@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AdvertiseByoipCidr&Asn=__Asn__&Cidr=__Cidr__&DryRun=true&NetworkBorderGroup=__NetworkBorderGroup__&Version=2016-11-15

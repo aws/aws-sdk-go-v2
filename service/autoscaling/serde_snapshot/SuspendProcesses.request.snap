@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SuspendProcesses&AutoScalingGroupName=__AutoScalingGroupName__&ScalingProcesses.member.1=__Member__&ScalingProcesses.member.2=__Member__&Version=2011-01-01

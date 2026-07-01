@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeEvents&ApplicationName=__ApplicationName__&EndTime=2000-01-01T00%3A00%3A00Z&EnvironmentId=__EnvironmentId__&EnvironmentName=__EnvironmentName__&MaxRecords=1&NextToken=__NextToken__&PlatformArn=__PlatformArn__&RequestId=__RequestId__&Severity=TRACE&StartTime=2000-01-01T00%3A00%3A00Z&TemplateName=__TemplateName__&Version=2010-12-01&VersionLabel=__VersionLabel__

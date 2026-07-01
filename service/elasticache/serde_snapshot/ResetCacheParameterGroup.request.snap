@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ResetCacheParameterGroup&CacheParameterGroupName=__CacheParameterGroupName__&ParameterNameValues.ParameterNameValue.1.ParameterName=__ParameterName__&ParameterNameValues.ParameterNameValue.1.ParameterValue=__ParameterValue__&ParameterNameValues.ParameterNameValue.2.ParameterName=__ParameterName__&ParameterNameValues.ParameterNameValue.2.ParameterValue=__ParameterValue__&ResetAllParameters=true&Version=2015-02-02

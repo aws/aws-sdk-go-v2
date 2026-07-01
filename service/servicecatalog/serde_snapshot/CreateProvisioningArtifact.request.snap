@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWS242ServiceCatalogService.CreateProvisioningArtifact
 
-{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","Parameters":{"Description":"__Description__","DisableTemplateValidation":true,"Info":{"key0":"__Value__","key1":"__Value__"},"Name":"__Name__","Type":"CLOUD_FORMATION_TEMPLATE"},"ProductId":"__ProductId__"}
+{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","Parameters":{"Description":"__Description__","DisableTemplateValidation":true,"Info":{"key0":"__Value__"},"Name":"__Name__","Type":"CLOUD_FORMATION_TEMPLATE"},"ProductId":"__ProductId__"}

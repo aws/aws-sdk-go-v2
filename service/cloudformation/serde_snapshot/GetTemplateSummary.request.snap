@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetTemplateSummary&CallAs=SELF&StackName=__StackName__&StackSetName=__StackSetName__&TemplateBody=__TemplateBody__&TemplateSummaryConfig.TreatUnrecognizedResourceTypesAsWarnings=true&TemplateURL=__TemplateURL__&Version=2010-05-15

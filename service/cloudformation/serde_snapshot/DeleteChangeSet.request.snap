@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteChangeSet&ChangeSetName=__ChangeSetName__&StackName=__StackName__&Version=2010-05-15

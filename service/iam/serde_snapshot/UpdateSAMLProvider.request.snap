@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=UpdateSAMLProvider&AddPrivateKey=__AddPrivateKey__&AssertionEncryptionMode=Required&RemovePrivateKey=__RemovePrivateKey__&SAMLMetadataDocument=__SAMLMetadataDocument__&SAMLProviderArn=__SAMLProviderArn__&Version=2010-05-08

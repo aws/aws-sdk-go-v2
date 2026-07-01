@@ -2,4 +2,4 @@ PUT /sessions/
 
 Content-Type: application/json
 
-{"encryptionKeyArn":"__EncryptionKeyArn__","sessionMetadata":{"key0":"__Value__","key1":"__Value__"},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"encryptionKeyArn":"__EncryptionKeyArn__","sessionMetadata":{"key0":"__Value__"},"tags":{"key0":"__Value__"}}

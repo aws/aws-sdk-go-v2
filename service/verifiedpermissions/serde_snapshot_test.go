@@ -7,7 +7,6 @@ package verifiedpermissions
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
@@ -117,18 +116,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -141,7 +145,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -154,7 +157,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -171,6 +177,9 @@ func serdeNewClient() *Client {
 		Region:             "us-east-1",
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
+}
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
 }
 func TestSerdeCheckSnapshot_BatchGetPolicy(t *testing.T) {
 	input := &BatchGetPolicyInput{
@@ -194,6 +203,7 @@ func TestSerdeCheckSnapshot_BatchGetPolicy(t *testing.T) {
 	_, err := svc.BatchGetPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -223,9 +233,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -239,9 +246,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -255,9 +259,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -271,9 +272,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -299,9 +297,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -323,9 +318,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -340,6 +332,7 @@ func TestSerdeCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 	_, err := svc.BatchIsAuthorized(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -371,9 +364,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -387,9 +377,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -403,9 +390,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -419,9 +403,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -443,9 +424,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -463,9 +441,6 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -480,6 +455,7 @@ func TestSerdeCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 	_, err := svc.BatchIsAuthorizedWithToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -522,6 +498,7 @@ func TestSerdeCheckSnapshot_CreateIdentitySource(t *testing.T) {
 	_, err := svc.CreateIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -558,6 +535,7 @@ func TestSerdeCheckSnapshot_CreatePolicy(t *testing.T) {
 	_, err := svc.CreatePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -586,13 +564,11 @@ func TestSerdeCheckSnapshot_CreatePolicyStore(t *testing.T) {
 				Key: ptr.String("__Key__"),
 				EncryptionContext: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -604,6 +580,7 @@ func TestSerdeCheckSnapshot_CreatePolicyStore(t *testing.T) {
 	_, err := svc.CreatePolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -633,6 +610,7 @@ func TestSerdeCheckSnapshot_CreatePolicyStoreAlias(t *testing.T) {
 	_, err := svc.CreatePolicyStoreAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -665,6 +643,7 @@ func TestSerdeCheckSnapshot_CreatePolicyTemplate(t *testing.T) {
 	_, err := svc.CreatePolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -694,6 +673,7 @@ func TestSerdeCheckSnapshot_DeleteIdentitySource(t *testing.T) {
 	_, err := svc.DeleteIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -723,6 +703,7 @@ func TestSerdeCheckSnapshot_DeletePolicy(t *testing.T) {
 	_, err := svc.DeletePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -751,6 +732,7 @@ func TestSerdeCheckSnapshot_DeletePolicyStore(t *testing.T) {
 	_, err := svc.DeletePolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -780,6 +762,7 @@ func TestSerdeCheckSnapshot_DeletePolicyStoreAlias(t *testing.T) {
 	_, err := svc.DeletePolicyStoreAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -809,6 +792,7 @@ func TestSerdeCheckSnapshot_DeletePolicyTemplate(t *testing.T) {
 	_, err := svc.DeletePolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -838,6 +822,7 @@ func TestSerdeCheckSnapshot_GetIdentitySource(t *testing.T) {
 	_, err := svc.GetIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -867,6 +852,7 @@ func TestSerdeCheckSnapshot_GetPolicy(t *testing.T) {
 	_, err := svc.GetPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -896,6 +882,7 @@ func TestSerdeCheckSnapshot_GetPolicyStore(t *testing.T) {
 	_, err := svc.GetPolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -924,6 +911,7 @@ func TestSerdeCheckSnapshot_GetPolicyStoreAlias(t *testing.T) {
 	_, err := svc.GetPolicyStoreAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -953,6 +941,7 @@ func TestSerdeCheckSnapshot_GetPolicyTemplate(t *testing.T) {
 	_, err := svc.GetPolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -981,6 +970,7 @@ func TestSerdeCheckSnapshot_GetSchema(t *testing.T) {
 	_, err := svc.GetSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1016,9 +1006,6 @@ func TestSerdeCheckSnapshot_IsAuthorized(t *testing.T) {
 				"key0": &types.AttributeValueMemberBoolean{
 					Value: true,
 				},
-				"key1": &types.AttributeValueMemberBoolean{
-					Value: true,
-				},
 			},
 		},
 		Entities: &types.EntitiesDefinitionMemberEntityList{
@@ -1032,9 +1019,6 @@ func TestSerdeCheckSnapshot_IsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1048,9 +1032,6 @@ func TestSerdeCheckSnapshot_IsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1064,9 +1045,6 @@ func TestSerdeCheckSnapshot_IsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1080,9 +1058,6 @@ func TestSerdeCheckSnapshot_IsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1099,6 +1074,7 @@ func TestSerdeCheckSnapshot_IsAuthorized(t *testing.T) {
 	_, err := svc.IsAuthorized(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1132,9 +1108,6 @@ func TestSerdeCheckSnapshot_IsAuthorizedWithToken(t *testing.T) {
 				"key0": &types.AttributeValueMemberBoolean{
 					Value: true,
 				},
-				"key1": &types.AttributeValueMemberBoolean{
-					Value: true,
-				},
 			},
 		},
 		Entities: &types.EntitiesDefinitionMemberEntityList{
@@ -1148,9 +1121,6 @@ func TestSerdeCheckSnapshot_IsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1164,9 +1134,6 @@ func TestSerdeCheckSnapshot_IsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1180,9 +1147,6 @@ func TestSerdeCheckSnapshot_IsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1196,9 +1160,6 @@ func TestSerdeCheckSnapshot_IsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1215,6 +1176,7 @@ func TestSerdeCheckSnapshot_IsAuthorizedWithToken(t *testing.T) {
 	_, err := svc.IsAuthorizedWithToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1253,6 +1215,7 @@ func TestSerdeCheckSnapshot_ListIdentitySources(t *testing.T) {
 	_, err := svc.ListIdentitySources(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1293,6 +1256,7 @@ func TestSerdeCheckSnapshot_ListPolicies(t *testing.T) {
 	_, err := svc.ListPolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1325,6 +1289,7 @@ func TestSerdeCheckSnapshot_ListPolicyStoreAliases(t *testing.T) {
 	_, err := svc.ListPolicyStoreAliases(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1354,6 +1319,7 @@ func TestSerdeCheckSnapshot_ListPolicyStores(t *testing.T) {
 	_, err := svc.ListPolicyStores(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1384,6 +1350,7 @@ func TestSerdeCheckSnapshot_ListPolicyTemplates(t *testing.T) {
 	_, err := svc.ListPolicyTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1412,6 +1379,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1443,6 +1411,7 @@ func TestSerdeCheckSnapshot_PutSchema(t *testing.T) {
 	_, err := svc.PutSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1463,7 +1432,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1475,6 +1443,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1507,6 +1476,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1549,6 +1519,7 @@ func TestSerdeCheckSnapshot_UpdateIdentitySource(t *testing.T) {
 	_, err := svc.UpdateIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1585,6 +1556,7 @@ func TestSerdeCheckSnapshot_UpdatePolicy(t *testing.T) {
 	_, err := svc.UpdatePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1618,6 +1590,7 @@ func TestSerdeCheckSnapshot_UpdatePolicyStore(t *testing.T) {
 	_, err := svc.UpdatePolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1650,6 +1623,7 @@ func TestSerdeCheckSnapshot_UpdatePolicyTemplate(t *testing.T) {
 	_, err := svc.UpdatePolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1686,6 +1660,7 @@ func TestSerdeUpdateSnapshot_BatchGetPolicy(t *testing.T) {
 	_, err := svc.BatchGetPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1715,9 +1690,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1731,9 +1703,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1747,9 +1716,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1763,9 +1729,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1791,9 +1754,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -1815,9 +1775,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -1832,6 +1789,7 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 	_, err := svc.BatchIsAuthorized(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1863,9 +1821,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1879,9 +1834,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1895,9 +1847,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -1911,9 +1860,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -1935,9 +1881,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -1955,9 +1898,6 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 				},
 			},
@@ -1972,6 +1912,7 @@ func TestSerdeUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 	_, err := svc.BatchIsAuthorizedWithToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2014,6 +1955,7 @@ func TestSerdeUpdateSnapshot_CreateIdentitySource(t *testing.T) {
 	_, err := svc.CreateIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2050,6 +1992,7 @@ func TestSerdeUpdateSnapshot_CreatePolicy(t *testing.T) {
 	_, err := svc.CreatePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2078,13 +2021,11 @@ func TestSerdeUpdateSnapshot_CreatePolicyStore(t *testing.T) {
 				Key: ptr.String("__Key__"),
 				EncryptionContext: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2096,6 +2037,7 @@ func TestSerdeUpdateSnapshot_CreatePolicyStore(t *testing.T) {
 	_, err := svc.CreatePolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2125,6 +2067,7 @@ func TestSerdeUpdateSnapshot_CreatePolicyStoreAlias(t *testing.T) {
 	_, err := svc.CreatePolicyStoreAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2157,6 +2100,7 @@ func TestSerdeUpdateSnapshot_CreatePolicyTemplate(t *testing.T) {
 	_, err := svc.CreatePolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2186,6 +2130,7 @@ func TestSerdeUpdateSnapshot_DeleteIdentitySource(t *testing.T) {
 	_, err := svc.DeleteIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2215,6 +2160,7 @@ func TestSerdeUpdateSnapshot_DeletePolicy(t *testing.T) {
 	_, err := svc.DeletePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2243,6 +2189,7 @@ func TestSerdeUpdateSnapshot_DeletePolicyStore(t *testing.T) {
 	_, err := svc.DeletePolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2272,6 +2219,7 @@ func TestSerdeUpdateSnapshot_DeletePolicyStoreAlias(t *testing.T) {
 	_, err := svc.DeletePolicyStoreAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2301,6 +2249,7 @@ func TestSerdeUpdateSnapshot_DeletePolicyTemplate(t *testing.T) {
 	_, err := svc.DeletePolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2330,6 +2279,7 @@ func TestSerdeUpdateSnapshot_GetIdentitySource(t *testing.T) {
 	_, err := svc.GetIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2359,6 +2309,7 @@ func TestSerdeUpdateSnapshot_GetPolicy(t *testing.T) {
 	_, err := svc.GetPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2388,6 +2339,7 @@ func TestSerdeUpdateSnapshot_GetPolicyStore(t *testing.T) {
 	_, err := svc.GetPolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2416,6 +2368,7 @@ func TestSerdeUpdateSnapshot_GetPolicyStoreAlias(t *testing.T) {
 	_, err := svc.GetPolicyStoreAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2445,6 +2398,7 @@ func TestSerdeUpdateSnapshot_GetPolicyTemplate(t *testing.T) {
 	_, err := svc.GetPolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2473,6 +2427,7 @@ func TestSerdeUpdateSnapshot_GetSchema(t *testing.T) {
 	_, err := svc.GetSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2508,9 +2463,6 @@ func TestSerdeUpdateSnapshot_IsAuthorized(t *testing.T) {
 				"key0": &types.AttributeValueMemberBoolean{
 					Value: true,
 				},
-				"key1": &types.AttributeValueMemberBoolean{
-					Value: true,
-				},
 			},
 		},
 		Entities: &types.EntitiesDefinitionMemberEntityList{
@@ -2524,9 +2476,6 @@ func TestSerdeUpdateSnapshot_IsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -2540,9 +2489,6 @@ func TestSerdeUpdateSnapshot_IsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -2556,9 +2502,6 @@ func TestSerdeUpdateSnapshot_IsAuthorized(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -2572,9 +2515,6 @@ func TestSerdeUpdateSnapshot_IsAuthorized(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -2591,6 +2531,7 @@ func TestSerdeUpdateSnapshot_IsAuthorized(t *testing.T) {
 	_, err := svc.IsAuthorized(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2624,9 +2565,6 @@ func TestSerdeUpdateSnapshot_IsAuthorizedWithToken(t *testing.T) {
 				"key0": &types.AttributeValueMemberBoolean{
 					Value: true,
 				},
-				"key1": &types.AttributeValueMemberBoolean{
-					Value: true,
-				},
 			},
 		},
 		Entities: &types.EntitiesDefinitionMemberEntityList{
@@ -2640,9 +2578,6 @@ func TestSerdeUpdateSnapshot_IsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -2656,9 +2591,6 @@ func TestSerdeUpdateSnapshot_IsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -2672,9 +2604,6 @@ func TestSerdeUpdateSnapshot_IsAuthorizedWithToken(t *testing.T) {
 						"key0": &types.AttributeValueMemberBoolean{
 							Value: true,
 						},
-						"key1": &types.AttributeValueMemberBoolean{
-							Value: true,
-						},
 					},
 					Parents: []types.EntityIdentifier{
 						{
@@ -2688,9 +2617,6 @@ func TestSerdeUpdateSnapshot_IsAuthorizedWithToken(t *testing.T) {
 					},
 					Tags: map[string]types.CedarTagValue{
 						"key0": &types.CedarTagValueMemberBoolean{
-							Value: true,
-						},
-						"key1": &types.CedarTagValueMemberBoolean{
 							Value: true,
 						},
 					},
@@ -2707,6 +2633,7 @@ func TestSerdeUpdateSnapshot_IsAuthorizedWithToken(t *testing.T) {
 	_, err := svc.IsAuthorizedWithToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2745,6 +2672,7 @@ func TestSerdeUpdateSnapshot_ListIdentitySources(t *testing.T) {
 	_, err := svc.ListIdentitySources(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2785,6 +2713,7 @@ func TestSerdeUpdateSnapshot_ListPolicies(t *testing.T) {
 	_, err := svc.ListPolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2817,6 +2746,7 @@ func TestSerdeUpdateSnapshot_ListPolicyStoreAliases(t *testing.T) {
 	_, err := svc.ListPolicyStoreAliases(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2846,6 +2776,7 @@ func TestSerdeUpdateSnapshot_ListPolicyStores(t *testing.T) {
 	_, err := svc.ListPolicyStores(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2876,6 +2807,7 @@ func TestSerdeUpdateSnapshot_ListPolicyTemplates(t *testing.T) {
 	_, err := svc.ListPolicyTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2904,6 +2836,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2935,6 +2868,7 @@ func TestSerdeUpdateSnapshot_PutSchema(t *testing.T) {
 	_, err := svc.PutSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2955,7 +2889,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2967,6 +2900,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2999,6 +2933,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3041,6 +2976,7 @@ func TestSerdeUpdateSnapshot_UpdateIdentitySource(t *testing.T) {
 	_, err := svc.UpdateIdentitySource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3077,6 +3013,7 @@ func TestSerdeUpdateSnapshot_UpdatePolicy(t *testing.T) {
 	_, err := svc.UpdatePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3110,6 +3047,7 @@ func TestSerdeUpdateSnapshot_UpdatePolicyStore(t *testing.T) {
 	_, err := svc.UpdatePolicyStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3142,6 +3080,7 @@ func TestSerdeUpdateSnapshot_UpdatePolicyTemplate(t *testing.T) {
 	_, err := svc.UpdatePolicyTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

@@ -2,4 +2,4 @@ POST /license-server/CreateLicenseServerEndpoint
 
 Content-Type: application/json
 
-{"IdentityProviderArn":"__IdentityProviderArn__","LicenseServerSettings":{"ServerSettings":{"RdsSalSettings":{"RdsSalCredentialsProvider":{"SecretsManagerCredentialsProvider":{"SecretId":"__SecretId__"}}}},"ServerType":"RDS_SAL"},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"IdentityProviderArn":"__IdentityProviderArn__","LicenseServerSettings":{"ServerSettings":{"RdsSalSettings":{"RdsSalCredentialsProvider":{"SecretsManagerCredentialsProvider":{"SecretId":"__SecretId__"}}}},"ServerType":"RDS_SAL"},"Tags":{"key0":"__Value__"}}

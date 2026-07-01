@@ -2,4 +2,4 @@ POST /v1/package/versions/copy?destination-repository=__DestinationRepository__&
 
 Content-Type: application/json
 
-{"allowOverwrite":true,"includeFromUpstream":true,"versionRevisions":{"key0":"__Value__","key1":"__Value__"},"versions":["__Member__","__Member__"]}
+{"allowOverwrite":true,"includeFromUpstream":true,"versionRevisions":{"key0":"__Value__"},"versions":["__Member__","__Member__"]}

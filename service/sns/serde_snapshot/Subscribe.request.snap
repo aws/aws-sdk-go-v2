@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=Subscribe&Attributes.entry.1.key=key0&Attributes.entry.1.value=__Value__&Endpoint=__Endpoint__&Protocol=__Protocol__&ReturnSubscriptionArn=true&TopicArn=__TopicArn__&Version=2010-03-31

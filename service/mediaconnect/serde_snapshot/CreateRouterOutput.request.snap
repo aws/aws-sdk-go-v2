@@ -2,4 +2,4 @@ POST /v1/routerOutput
 
 Content-Type: application/json
 
-{"availabilityZone":"__AvailabilityZone__","clientToken":"__ClientToken__","configuration":{"standard":{"networkInterfaceArn":"__NetworkInterfaceArn__","protocol":"RTP","protocolConfiguration":{"rist":{"destinationAddress":"__DestinationAddress__","destinationPort":1}}}},"maintenanceConfiguration":{"preferredDayTime":{"day":"MONDAY","time":"__Time__"}},"maximumBitrate":1,"name":"__Name__","regionName":"__RegionName__","routingScope":"REGIONAL","tags":{"key0":"__Value__","key1":"__Value__"},"tier":"OUTPUT_100"}
+{"availabilityZone":"__AvailabilityZone__","clientToken":"__ClientToken__","configuration":{"standard":{"networkInterfaceArn":"__NetworkInterfaceArn__","protocol":"RTP","protocolConfiguration":{"rist":{"destinationAddress":"__DestinationAddress__","destinationPort":1}}}},"maintenanceConfiguration":{"preferredDayTime":{"day":"MONDAY","time":"__Time__"}},"maximumBitrate":1,"name":"__Name__","regionName":"__RegionName__","routingScope":"REGIONAL","tags":{"key0":"__Value__"},"tier":"OUTPUT_100"}

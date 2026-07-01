@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=UpdateGeneratedTemplate&AddResources.member.1.LogicalResourceId=__LogicalResourceId__&AddResources.member.1.ResourceIdentifier.entry.1.key=key0&AddResources.member.1.ResourceIdentifier.entry.1.value=__Value__&AddResources.member.1.ResourceType=__ResourceType__&AddResources.member.2.LogicalResourceId=__LogicalResourceId__&AddResources.member.2.ResourceIdentifier.entry.1.key=key0&AddResources.member.2.ResourceIdentifier.entry.1.value=__Value__&AddResources.member.2.ResourceType=__ResourceType__&GeneratedTemplateName=__GeneratedTemplateName__&NewGeneratedTemplateName=__NewGeneratedTemplateName__&RefreshAllResources=true&RemoveResources.member.1=__Member__&RemoveResources.member.2=__Member__&TemplateConfiguration.DeletionPolicy=DELETE&TemplateConfiguration.UpdateReplacePolicy=DELETE&Version=2010-05-15

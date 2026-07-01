@@ -5,3 +5,4 @@ Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 X-Amz-Confirm-Remove-Self-Bucket-Access: true
 
+<PutBucketPolicyRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><Policy>__Policy__</Policy></PutBucketPolicyRequest>

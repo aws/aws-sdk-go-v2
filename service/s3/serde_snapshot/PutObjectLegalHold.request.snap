@@ -6,3 +6,4 @@ X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 X-Amz-Request-Payer: requester
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<LegalHold xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Status>ON</Status></LegalHold>

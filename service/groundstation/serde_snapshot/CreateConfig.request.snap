@@ -2,4 +2,4 @@ POST /config
 
 Content-Type: application/json
 
-{"configData":{"antennaDownlinkConfig":{"spectrumConfig":{"bandwidth":{"units":"GHz","value":1},"centerFrequency":{"units":"GHz","value":1},"polarization":"RIGHT_HAND"}}},"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"configData":{"antennaDownlinkConfig":{"spectrumConfig":{"bandwidth":{"units":"GHz","value":1},"centerFrequency":{"units":"GHz","value":1},"polarization":"RIGHT_HAND"}}},"name":"__Name__","tags":{"key0":"__Value__"}}

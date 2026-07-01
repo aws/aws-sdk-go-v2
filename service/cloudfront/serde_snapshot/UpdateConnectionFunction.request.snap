@@ -3,3 +3,4 @@ PUT /2020-05-31/connection-function/__Id__
 Content-Type: application/xml
 If-Match: __IfMatch__
 
+<UpdateConnectionFunctionRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ConnectionFunctionCode>YmxvYg==</ConnectionFunctionCode><ConnectionFunctionConfig><Comment>__Comment__</Comment><KeyValueStoreAssociations><Items><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation></Items><Quantity>1</Quantity></KeyValueStoreAssociations><Runtime>cloudfront-js-1.0</Runtime></ConnectionFunctionConfig></UpdateConnectionFunctionRequest>

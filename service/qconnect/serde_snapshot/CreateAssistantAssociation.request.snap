@@ -2,4 +2,4 @@ POST /assistants/__AssistantId__/associations
 
 Content-Type: application/json
 
-{"association":{"knowledgeBaseId":"__AssistantAssociationInputDataMemberKnowledgeBaseId__"},"associationType":"KNOWLEDGE_BASE","clientToken":"__ClientToken__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"association":{"knowledgeBaseId":"__AssistantAssociationInputDataMemberKnowledgeBaseId__"},"associationType":"KNOWLEDGE_BASE","clientToken":"__ClientToken__","tags":{"key0":"__Value__"}}

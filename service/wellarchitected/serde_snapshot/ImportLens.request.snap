@@ -2,4 +2,4 @@ PUT /importLens
 
 Content-Type: application/json
 
-{"ClientRequestToken":"__ClientRequestToken__","JSONString":"__JSONString__","LensAlias":"__LensAlias__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientRequestToken":"__ClientRequestToken__","JSONString":"__JSONString__","LensAlias":"__LensAlias__","Tags":{"key0":"__Value__"}}

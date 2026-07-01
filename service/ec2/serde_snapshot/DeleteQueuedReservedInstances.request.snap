@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteQueuedReservedInstances&DryRun=true&ReservedInstancesId.1=__Member__&ReservedInstancesId.2=__Member__&Version=2016-11-15

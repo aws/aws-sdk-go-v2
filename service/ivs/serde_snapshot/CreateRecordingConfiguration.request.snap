@@ -2,4 +2,4 @@ POST /CreateRecordingConfiguration
 
 Content-Type: application/json
 
-{"destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"name":"__Name__","recordingReconnectWindowSeconds":1,"renditionConfiguration":{"renditionSelection":"ALL","renditions":["SD","SD"]},"tags":{"key0":"__Value__","key1":"__Value__"},"thumbnailConfiguration":{"recordingMode":"DISABLED","resolution":"SD","storage":["SEQUENTIAL","SEQUENTIAL"],"targetIntervalSeconds":1}}
+{"destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"name":"__Name__","recordingReconnectWindowSeconds":1,"renditionConfiguration":{"renditions":["SD","SD"],"renditionSelection":"ALL"},"tags":{"key0":"__Value__"},"thumbnailConfiguration":{"recordingMode":"DISABLED","resolution":"SD","storage":["SEQUENTIAL","SEQUENTIAL"],"targetIntervalSeconds":1}}

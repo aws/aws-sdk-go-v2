@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DisableFastSnapshotRestores&AvailabilityZone.1=__Member__&AvailabilityZone.2=__Member__&AvailabilityZoneId.1=__Member__&AvailabilityZoneId.2=__Member__&DryRun=true&SourceSnapshotId.1=__Member__&SourceSnapshotId.2=__Member__&Version=2016-11-15

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyVpnConnection&CustomerGatewayId=__CustomerGatewayId__&DryRun=true&TransitGatewayId=__TransitGatewayId__&Version=2016-11-15&VpnConnectionId=__VpnConnectionId__&VpnGatewayId=__VpnGatewayId__

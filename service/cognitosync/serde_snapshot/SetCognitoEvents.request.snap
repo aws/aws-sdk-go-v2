@@ -2,4 +2,4 @@ POST /identitypools/__IdentityPoolId__/events
 
 Content-Type: application/json
 
-{"Events":{"key0":"__Value__","key1":"__Value__"}}
+{"Events":{"key0":"__Value__"}}

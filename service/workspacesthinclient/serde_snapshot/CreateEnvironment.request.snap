@@ -2,4 +2,4 @@ POST /environments
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","desiredSoftwareSetId":"__DesiredSoftwareSetId__","desktopArn":"__DesktopArn__","desktopEndpoint":"__DesktopEndpoint__","deviceCreationTags":{"key0":"__Value__","key1":"__Value__"},"kmsKeyArn":"__KmsKeyArn__","maintenanceWindow":{"applyTimeOf":"UTC","daysOfTheWeek":["MONDAY","MONDAY"],"endTimeHour":1,"endTimeMinute":1,"startTimeHour":1,"startTimeMinute":1,"type":"SYSTEM"},"name":"__Name__","softwareSetUpdateMode":"USE_LATEST","softwareSetUpdateSchedule":"USE_MAINTENANCE_WINDOW","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","desiredSoftwareSetId":"__DesiredSoftwareSetId__","desktopArn":"__DesktopArn__","desktopEndpoint":"__DesktopEndpoint__","deviceCreationTags":{"key0":"__Value__"},"kmsKeyArn":"__KmsKeyArn__","maintenanceWindow":{"applyTimeOf":"UTC","daysOfTheWeek":["MONDAY","MONDAY"],"endTimeHour":1,"endTimeMinute":1,"startTimeHour":1,"startTimeMinute":1,"type":"SYSTEM"},"name":"__Name__","softwareSetUpdateMode":"USE_LATEST","softwareSetUpdateSchedule":"USE_MAINTENANCE_WINDOW","tags":{"key0":"__Value__"}}

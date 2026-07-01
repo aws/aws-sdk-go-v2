@@ -2,4 +2,4 @@ PUT /restore-testing/plans
 
 Content-Type: application/json
 
-{"CreatorRequestId":"__CreatorRequestId__","RestoreTestingPlan":{"RecoveryPointSelection":{"Algorithm":"LATEST_WITHIN_WINDOW","ExcludeVaults":["__Member__","__Member__"],"IncludeVaults":["__Member__","__Member__"],"RecoveryPointTypes":["CONTINUOUS","CONTINUOUS"],"SelectionWindowDays":1},"RestoreTestingPlanName":"__RestoreTestingPlanName__","ScheduleExpression":"__ScheduleExpression__","ScheduleExpressionTimezone":"__ScheduleExpressionTimezone__","StartWindowHours":1},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"CreatorRequestId":"__CreatorRequestId__","RestoreTestingPlan":{"RecoveryPointSelection":{"Algorithm":"LATEST_WITHIN_WINDOW","ExcludeVaults":["__Member__","__Member__"],"IncludeVaults":["__Member__","__Member__"],"RecoveryPointTypes":["CONTINUOUS","CONTINUOUS"],"SelectionWindowDays":1},"RestoreTestingPlanName":"__RestoreTestingPlanName__","ScheduleExpression":"__ScheduleExpression__","ScheduleExpressionTimezone":"__ScheduleExpressionTimezone__","StartWindowHours":1},"Tags":{"key0":"__Value__"}}

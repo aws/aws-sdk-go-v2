@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SignalResource&LogicalResourceId=__LogicalResourceId__&StackName=__StackName__&Status=SUCCESS&UniqueId=__UniqueId__&Version=2010-05-15

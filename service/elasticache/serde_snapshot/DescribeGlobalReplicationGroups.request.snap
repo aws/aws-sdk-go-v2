@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeGlobalReplicationGroups&GlobalReplicationGroupId=__GlobalReplicationGroupId__&Marker=__Marker__&MaxRecords=1&ShowMemberInfo=true&Version=2015-02-02

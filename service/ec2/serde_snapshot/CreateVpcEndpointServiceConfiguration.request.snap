@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+AcceptanceRequired=true&Action=CreateVpcEndpointServiceConfiguration&ClientToken=__ClientToken__&DryRun=true&GatewayLoadBalancerArn.1=__Member__&GatewayLoadBalancerArn.2=__Member__&NetworkLoadBalancerArn.1=__Member__&NetworkLoadBalancerArn.2=__Member__&PrivateDnsName=__PrivateDnsName__&SupportedIpAddressType.1=__Member__&SupportedIpAddressType.2=__Member__&SupportedRegion.1=__Member__&SupportedRegion.2=__Member__&TagSpecification.1.ResourceType=capacity-reservation&TagSpecification.1.Tag.1.Key=__Key__&TagSpecification.1.Tag.1.Value=__Value__&TagSpecification.1.Tag.2.Key=__Key__&TagSpecification.1.Tag.2.Value=__Value__&TagSpecification.2.ResourceType=capacity-reservation&TagSpecification.2.Tag.1.Key=__Key__&TagSpecification.2.Tag.1.Value=__Value__&TagSpecification.2.Tag.2.Key=__Key__&TagSpecification.2.Tag.2.Value=__Value__&Version=2016-11-15

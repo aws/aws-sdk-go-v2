@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteTransitGatewayRouteTable&DryRun=true&TransitGatewayRouteTableId=__TransitGatewayRouteTableId__&Version=2016-11-15

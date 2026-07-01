@@ -2,4 +2,4 @@ POST /portals
 
 Content-Type: application/json
 
-{"additionalEncryptionContext":{"key0":"__Value__","key1":"__Value__"},"authenticationType":"Standard","clientToken":"__ClientToken__","customerManagedKey":"__CustomerManagedKey__","displayName":"__DisplayName__","instanceType":"standard.regular","maxConcurrentSessions":1,"portalCustomDomain":"__PortalCustomDomain__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"additionalEncryptionContext":{"key0":"__Value__"},"authenticationType":"Standard","clientToken":"__ClientToken__","customerManagedKey":"__CustomerManagedKey__","displayName":"__DisplayName__","instanceType":"standard.regular","maxConcurrentSessions":1,"portalCustomDomain":"__PortalCustomDomain__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

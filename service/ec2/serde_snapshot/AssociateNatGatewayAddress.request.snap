@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AssociateNatGatewayAddress&AllocationId.1=__Member__&AllocationId.2=__Member__&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&DryRun=true&NatGatewayId=__NatGatewayId__&PrivateIpAddress.1=__Member__&PrivateIpAddress.2=__Member__&Version=2016-11-15

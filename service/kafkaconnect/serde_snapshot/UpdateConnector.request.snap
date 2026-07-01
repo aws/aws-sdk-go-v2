@@ -2,4 +2,4 @@ PUT /v1/connectors/__ConnectorArn__?currentVersion=__CurrentVersion__
 
 Content-Type: application/json
 
-{"capacity":{"autoScaling":{"maxAutoscalingTaskCount":1,"maxWorkerCount":1,"mcuCount":1,"minWorkerCount":1,"scaleInPolicy":{"cpuUtilizationPercentage":1},"scaleOutPolicy":{"cpuUtilizationPercentage":1}},"provisionedCapacity":{"mcuCount":1,"workerCount":1}},"connectorConfiguration":{"key0":"__Value__","key1":"__Value__"}}
+{"capacity":{"autoScaling":{"maxAutoscalingTaskCount":1,"maxWorkerCount":1,"mcuCount":1,"minWorkerCount":1,"scaleInPolicy":{"cpuUtilizationPercentage":1},"scaleOutPolicy":{"cpuUtilizationPercentage":1}},"provisionedCapacity":{"mcuCount":1,"workerCount":1}},"connectorConfiguration":{"key0":"__Value__"}}

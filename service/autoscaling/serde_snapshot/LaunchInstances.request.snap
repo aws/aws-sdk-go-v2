@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=LaunchInstances&AutoScalingGroupName=__AutoScalingGroupName__&AvailabilityZoneIds.member.1=__Member__&AvailabilityZoneIds.member.2=__Member__&AvailabilityZones.member.1=__Member__&AvailabilityZones.member.2=__Member__&ClientToken=__ClientToken__&RequestedCapacity=1&RetryStrategy=retry-with-group-configuration&SubnetIds.member.1=__Member__&SubnetIds.member.2=__Member__&Version=2011-01-01

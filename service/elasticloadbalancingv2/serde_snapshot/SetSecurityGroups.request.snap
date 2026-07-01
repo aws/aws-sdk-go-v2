@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SetSecurityGroups&EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic=on&LoadBalancerArn=__LoadBalancerArn__&SecurityGroups.member.1=__Member__&SecurityGroups.member.2=__Member__&Version=2015-12-01

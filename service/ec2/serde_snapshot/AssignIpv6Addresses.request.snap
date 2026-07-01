@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AssignIpv6Addresses&Ipv6AddressCount=1&Ipv6Addresses.1=__Member__&Ipv6Addresses.2=__Member__&Ipv6Prefix.1=__Member__&Ipv6Prefix.2=__Member__&Ipv6PrefixCount=1&NetworkInterfaceId=__NetworkInterfaceId__&Version=2016-11-15

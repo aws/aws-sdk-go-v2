@@ -2,4 +2,4 @@ POST /prod/inputs/__InputId__/partners
 
 Content-Type: application/json
 
-{"requestId":"__RequestId__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"requestId":"__RequestId__","tags":{"key0":"__Value__"}}

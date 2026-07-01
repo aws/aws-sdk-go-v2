@@ -2,4 +2,4 @@ POST /accessors
 
 Content-Type: application/json
 
-{"AccessorType":"BILLING_TOKEN","ClientRequestToken":"__ClientRequestToken__","NetworkType":"ETHEREUM_GOERLI","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"AccessorType":"BILLING_TOKEN","ClientRequestToken":"__ClientRequestToken__","NetworkType":"ETHEREUM_GOERLI","Tags":{"key0":"__Value__"}}

@@ -2,4 +2,4 @@ POST /authorizer/__AuthorizerName__
 
 Content-Type: application/json
 
-{"authorizerFunctionArn":"__AuthorizerFunctionArn__","enableCachingForHttp":true,"signingDisabled":true,"status":"ACTIVE","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"tokenKeyName":"__TokenKeyName__","tokenSigningPublicKeys":{"key0":"__Value__","key1":"__Value__"}}
+{"authorizerFunctionArn":"__AuthorizerFunctionArn__","enableCachingForHttp":true,"signingDisabled":true,"status":"ACTIVE","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"tokenKeyName":"__TokenKeyName__","tokenSigningPublicKeys":{"key0":"__Value__"}}

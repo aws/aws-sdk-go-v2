@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SageMaker.UpdateAction
 
-{"ActionName":"__ActionName__","Description":"__Description__","Properties":{"key0":"__Value__","key1":"__Value__"},"PropertiesToRemove":["__Member__","__Member__"],"Status":"Unknown"}
+{"ActionName":"__ActionName__","Description":"__Description__","Properties":{"key0":"__Value__"},"PropertiesToRemove":["__Member__","__Member__"],"Status":"Unknown"}

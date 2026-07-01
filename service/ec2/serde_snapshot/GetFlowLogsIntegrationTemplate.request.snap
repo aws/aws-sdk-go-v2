@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetFlowLogsIntegrationTemplate&ConfigDeliveryS3DestinationArn=__ConfigDeliveryS3DestinationArn__&DryRun=true&FlowLogId=__FlowLogId__&IntegrateService.AthenaIntegration.1.IntegrationResultS3DestinationArn=__IntegrationResultS3DestinationArn__&IntegrateService.AthenaIntegration.1.PartitionEndDate=2000-01-01T00%3A00%3A00Z&IntegrateService.AthenaIntegration.1.PartitionLoadFrequency=none&IntegrateService.AthenaIntegration.1.PartitionStartDate=2000-01-01T00%3A00%3A00Z&IntegrateService.AthenaIntegration.2.IntegrationResultS3DestinationArn=__IntegrationResultS3DestinationArn__&IntegrateService.AthenaIntegration.2.PartitionEndDate=2000-01-01T00%3A00%3A00Z&IntegrateService.AthenaIntegration.2.PartitionLoadFrequency=none&IntegrateService.AthenaIntegration.2.PartitionStartDate=2000-01-01T00%3A00%3A00Z&Version=2016-11-15

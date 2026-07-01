@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: RekognitionService.CreateProject
 
-{"AutoUpdate":"ENABLED","Feature":"CONTENT_MODERATION","ProjectName":"__ProjectName__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"AutoUpdate":"ENABLED","Feature":"CONTENT_MODERATION","ProjectName":"__ProjectName__","Tags":{"key0":"__Value__"}}

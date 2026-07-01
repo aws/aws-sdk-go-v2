@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateConfigurationSetTrackingOptions&ConfigurationSetName=__ConfigurationSetName__&TrackingOptions.CustomRedirectDomain=__CustomRedirectDomain__&Version=2010-12-01

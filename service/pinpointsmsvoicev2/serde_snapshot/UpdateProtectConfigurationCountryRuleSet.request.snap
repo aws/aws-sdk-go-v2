@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: PinpointSMSVoiceV2.UpdateProtectConfigurationCountryRuleSet
 
-{"CountryRuleSetUpdates":{"key0":{"ProtectStatus":"ALLOW"},"key1":{"ProtectStatus":"ALLOW"}},"NumberCapability":"SMS","ProtectConfigurationId":"__ProtectConfigurationId__"}
+{"CountryRuleSetUpdates":{"key0":{"ProtectStatus":"ALLOW"}},"NumberCapability":"SMS","ProtectConfigurationId":"__ProtectConfigurationId__"}

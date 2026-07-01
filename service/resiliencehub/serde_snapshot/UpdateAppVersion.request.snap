@@ -2,4 +2,4 @@ POST /update-app-version
 
 Content-Type: application/json
 
-{"additionalInfo":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"appArn":"__AppArn__"}
+{"additionalInfo":{"key0":["__Member__","__Member__"]},"appArn":"__AppArn__"}

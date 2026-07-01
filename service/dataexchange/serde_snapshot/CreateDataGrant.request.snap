@@ -2,4 +2,4 @@ POST /v1/data-grants
 
 Content-Type: application/json
 
-{"Description":"__Description__","EndsAt":"2000-01-01T00:00:00Z","GrantDistributionScope":"AWS_ORGANIZATION","Name":"__Name__","ReceiverPrincipal":"__ReceiverPrincipal__","SourceDataSetId":"__SourceDataSetId__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Description":"__Description__","EndsAt":"2000-01-01T00:00:00Z","GrantDistributionScope":"AWS_ORGANIZATION","Name":"__Name__","ReceiverPrincipal":"__ReceiverPrincipal__","SourceDataSetId":"__SourceDataSetId__","Tags":{"key0":"__Value__"}}

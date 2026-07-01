@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DetectStackSetDrift&CallAs=SELF&OperationId=__OperationId__&OperationPreferences.ConcurrencyMode=STRICT_FAILURE_TOLERANCE&OperationPreferences.FailureToleranceCount=1&OperationPreferences.FailureTolerancePercentage=1&OperationPreferences.MaxConcurrentCount=1&OperationPreferences.MaxConcurrentPercentage=1&OperationPreferences.RegionConcurrencyType=SEQUENTIAL&OperationPreferences.RegionOrder.member.1=__Member__&OperationPreferences.RegionOrder.member.2=__Member__&StackSetName=__StackSetName__&Version=2010-05-15

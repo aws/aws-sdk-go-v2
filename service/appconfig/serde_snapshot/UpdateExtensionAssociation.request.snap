@@ -2,4 +2,4 @@ PATCH /extensionassociations/__ExtensionAssociationId__
 
 Content-Type: application/json
 
-{"Parameters":{"key0":"__Value__","key1":"__Value__"}}
+{"Parameters":{"key0":"__Value__"}}

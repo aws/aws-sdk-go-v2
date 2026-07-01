@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=RemoveTrustStoreRevocations&RevocationIds.member.1=1&RevocationIds.member.2=1&TrustStoreArn=__TrustStoreArn__&Version=2015-12-01

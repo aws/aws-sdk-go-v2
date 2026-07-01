@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CompleteLifecycleAction&AutoScalingGroupName=__AutoScalingGroupName__&InstanceId=__InstanceId__&LifecycleActionResult=__LifecycleActionResult__&LifecycleActionToken=__LifecycleActionToken__&LifecycleHookName=__LifecycleHookName__&Version=2011-01-01

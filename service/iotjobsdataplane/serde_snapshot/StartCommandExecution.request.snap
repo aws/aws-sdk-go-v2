@@ -2,4 +2,4 @@ POST /command-executions
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","commandArn":"__CommandArn__","executionTimeoutSeconds":1,"parameters":{"key0":{"B":true,"BIN":"YmxvYg==","D":1,"I":1,"L":1,"S":"__S__","UL":"__UL__"},"key1":{"B":true,"BIN":"YmxvYg==","D":1,"I":1,"L":1,"S":"__S__","UL":"__UL__"}},"targetArn":"__TargetArn__"}
+{"clientToken":"__ClientToken__","commandArn":"__CommandArn__","executionTimeoutSeconds":1,"parameters":{"key0":{"B":true,"BIN":"YmxvYg==","D":1,"I":1,"L":1,"S":"__S__","UL":"__UL__"}},"targetArn":"__TargetArn__"}

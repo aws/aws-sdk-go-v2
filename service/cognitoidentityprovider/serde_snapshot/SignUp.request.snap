@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.SignUp
 
-{"AnalyticsMetadata":{"AnalyticsEndpointId":"__AnalyticsEndpointId__"},"ClientId":"__ClientId__","ClientMetadata":{"key0":"__Value__","key1":"__Value__"},"Password":"__Password__","SecretHash":"__SecretHash__","UserAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"UserContextData":{"EncodedData":"__EncodedData__","IpAddress":"__IpAddress__"},"Username":"__Username__","ValidationData":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}]}
+{"AnalyticsMetadata":{"AnalyticsEndpointId":"__AnalyticsEndpointId__"},"ClientId":"__ClientId__","ClientMetadata":{"key0":"__Value__"},"Password":"__Password__","SecretHash":"__SecretHash__","UserAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"UserContextData":{"EncodedData":"__EncodedData__","IpAddress":"__IpAddress__"},"Username":"__Username__","ValidationData":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}]}

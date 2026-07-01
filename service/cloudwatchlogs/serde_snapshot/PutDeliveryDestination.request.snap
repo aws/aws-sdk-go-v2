@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Logs_20140328.PutDeliveryDestination
 
-{"deliveryDestinationConfiguration":{"destinationResourceArn":"__DestinationResourceArn__"},"deliveryDestinationType":"S3","name":"__Name__","outputFormat":"json","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"deliveryDestinationConfiguration":{"destinationResourceArn":"__DestinationResourceArn__"},"deliveryDestinationType":"S3","name":"__Name__","outputFormat":"json","tags":{"key0":"__Value__"}}

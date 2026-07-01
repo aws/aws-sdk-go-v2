@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: GlobalAccelerator_V20180706.CreateAccelerator
 
-{"Enabled":true,"IdempotencyToken":"__IdempotencyToken__","IpAddressType":"IPV4","IpAddresses":["__Member__","__Member__"],"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"Enabled":true,"IdempotencyToken":"__IdempotencyToken__","IpAddresses":["__Member__","__Member__"],"IpAddressType":"IPV4","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

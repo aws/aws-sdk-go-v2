@@ -2,4 +2,4 @@ PUT /configuration-bundles/__BundleId__
 
 Content-Type: application/json
 
-{"branchName":"__BranchName__","bundleName":"__BundleName__","clientToken":"__ClientToken__","commitMessage":"__CommitMessage__","components":{"key0":{},"key1":{}},"createdBy":{"arn":"__Arn__","name":"__Name__"},"description":"__Description__","kmsKeyArn":"__KmsKeyArn__","parentVersionIds":["__Member__","__Member__"]}
+{"branchName":"__BranchName__","bundleName":"__BundleName__","clientToken":"__ClientToken__","commitMessage":"__CommitMessage__","components":{"key0":{}},"createdBy":{"arn":"__Arn__","name":"__Name__"},"description":"__Description__","kmsKeyArn":"__KmsKeyArn__","parentVersionIds":["__Member__","__Member__"]}

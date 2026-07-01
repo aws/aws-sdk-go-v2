@@ -7,7 +7,6 @@ package mediaconvert
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
@@ -117,18 +116,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -141,7 +145,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -154,7 +157,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -172,6 +178,9 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_AssociateCertificate(t *testing.T) {
 	input := &AssociateCertificateInput{
 		Arn: ptr.String("__Arn__"),
@@ -185,6 +194,7 @@ func TestSerdeCheckSnapshot_AssociateCertificate(t *testing.T) {
 	_, err := svc.AssociateCertificate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -213,6 +223,7 @@ func TestSerdeCheckSnapshot_CancelJob(t *testing.T) {
 	_, err := svc.CancelJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -301,72 +312,9 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -471,52 +419,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -535,13 +437,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -713,63 +608,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -834,63 +672,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -1037,72 +818,9 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -1207,52 +925,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -1271,13 +943,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -1449,63 +1114,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -1570,63 +1178,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -7682,11 +7233,9 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 		StatusUpdateInterval:  types.StatusUpdateInterval("SECONDS_10"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		UserMetadata: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -7698,6 +7247,7 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 	_, err := svc.CreateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7784,72 +7334,9 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -7954,52 +7441,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -8012,13 +7453,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -8169,63 +7603,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -8290,63 +7667,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -8493,72 +7813,9 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -8663,52 +7920,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -8721,13 +7932,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -8878,63 +8082,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -8999,63 +8146,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -15110,7 +14200,6 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 		StatusUpdateInterval: types.StatusUpdateInterval("SECONDS_10"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -15122,6 +14211,7 @@ func TestSerdeCheckSnapshot_CreateJobTemplate(t *testing.T) {
 	_, err := svc.CreateJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16348,7 +15438,6 @@ func TestSerdeCheckSnapshot_CreatePreset(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -16360,6 +15449,7 @@ func TestSerdeCheckSnapshot_CreatePreset(t *testing.T) {
 	_, err := svc.CreatePreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16390,7 +15480,6 @@ func TestSerdeCheckSnapshot_CreateQueue(t *testing.T) {
 		Status: types.QueueStatus("ACTIVE"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -16402,6 +15491,7 @@ func TestSerdeCheckSnapshot_CreateQueue(t *testing.T) {
 	_, err := svc.CreateQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16431,6 +15521,7 @@ func TestSerdeCheckSnapshot_CreateResourceShare(t *testing.T) {
 	_, err := svc.CreateResourceShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16459,6 +15550,7 @@ func TestSerdeCheckSnapshot_DeleteJobTemplate(t *testing.T) {
 	_, err := svc.DeleteJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16485,6 +15577,7 @@ func TestSerdeCheckSnapshot_DeletePolicy(t *testing.T) {
 	_, err := svc.DeletePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16513,6 +15606,7 @@ func TestSerdeCheckSnapshot_DeletePreset(t *testing.T) {
 	_, err := svc.DeletePreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16541,6 +15635,7 @@ func TestSerdeCheckSnapshot_DeleteQueue(t *testing.T) {
 	_, err := svc.DeleteQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16571,6 +15666,7 @@ func TestSerdeCheckSnapshot_DescribeEndpoints(t *testing.T) {
 	_, err := svc.DescribeEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16599,6 +15695,7 @@ func TestSerdeCheckSnapshot_DisassociateCertificate(t *testing.T) {
 	_, err := svc.DisassociateCertificate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16627,6 +15724,7 @@ func TestSerdeCheckSnapshot_GetJob(t *testing.T) {
 	_, err := svc.GetJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16655,6 +15753,7 @@ func TestSerdeCheckSnapshot_GetJobsQueryResults(t *testing.T) {
 	_, err := svc.GetJobsQueryResults(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16683,6 +15782,7 @@ func TestSerdeCheckSnapshot_GetJobTemplate(t *testing.T) {
 	_, err := svc.GetJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16709,6 +15809,7 @@ func TestSerdeCheckSnapshot_GetPolicy(t *testing.T) {
 	_, err := svc.GetPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16737,6 +15838,7 @@ func TestSerdeCheckSnapshot_GetPreset(t *testing.T) {
 	_, err := svc.GetPreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16765,6 +15867,7 @@ func TestSerdeCheckSnapshot_GetQueue(t *testing.T) {
 	_, err := svc.GetQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16797,6 +15900,7 @@ func TestSerdeCheckSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16829,6 +15933,7 @@ func TestSerdeCheckSnapshot_ListJobTemplates(t *testing.T) {
 	_, err := svc.ListJobTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16861,6 +15966,7 @@ func TestSerdeCheckSnapshot_ListPresets(t *testing.T) {
 	_, err := svc.ListPresets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16892,6 +15998,7 @@ func TestSerdeCheckSnapshot_ListQueues(t *testing.T) {
 	_, err := svc.ListQueues(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16920,6 +16027,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16949,6 +16057,7 @@ func TestSerdeCheckSnapshot_ListVersions(t *testing.T) {
 	_, err := svc.ListVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16984,6 +16093,7 @@ func TestSerdeCheckSnapshot_Probe(t *testing.T) {
 	_, err := svc.Probe(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17016,6 +16126,7 @@ func TestSerdeCheckSnapshot_PutPolicy(t *testing.T) {
 	_, err := svc.PutPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17049,6 +16160,7 @@ func TestSerdeCheckSnapshot_SearchJobs(t *testing.T) {
 	_, err := svc.SearchJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17095,6 +16207,7 @@ func TestSerdeCheckSnapshot_StartJobsQuery(t *testing.T) {
 	_, err := svc.StartJobsQuery(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17115,7 +16228,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		Arn: ptr.String("__Arn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -17127,6 +16239,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17159,6 +16272,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17245,72 +16359,9 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -17415,52 +16466,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -17473,13 +16478,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -17630,63 +16628,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -17751,63 +16692,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -17954,72 +16838,9 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -18124,52 +16945,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -18182,13 +16957,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -18339,63 +17107,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -18460,63 +17171,6 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -24579,6 +23233,7 @@ func TestSerdeCheckSnapshot_UpdateJobTemplate(t *testing.T) {
 	_, err := svc.UpdateJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25813,6 +24468,7 @@ func TestSerdeCheckSnapshot_UpdatePreset(t *testing.T) {
 	_, err := svc.UpdatePreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25850,6 +24506,7 @@ func TestSerdeCheckSnapshot_UpdateQueue(t *testing.T) {
 	_, err := svc.UpdateQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25877,6 +24534,7 @@ func TestSerdeUpdateSnapshot_AssociateCertificate(t *testing.T) {
 	_, err := svc.AssociateCertificate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25905,6 +24563,7 @@ func TestSerdeUpdateSnapshot_CancelJob(t *testing.T) {
 	_, err := svc.CancelJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25993,72 +24652,9 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -26163,52 +24759,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -26227,13 +24777,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -26405,63 +24948,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -26526,63 +25012,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -26729,72 +25158,9 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -26899,52 +25265,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -26963,13 +25283,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -27141,63 +25454,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -27262,63 +25518,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -33374,11 +31573,9 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 		StatusUpdateInterval:  types.StatusUpdateInterval("SECONDS_10"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		UserMetadata: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -33390,6 +31587,7 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 	_, err := svc.CreateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33476,72 +31674,9 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -33646,52 +31781,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -33704,13 +31793,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -33861,63 +31943,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -33982,63 +32007,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -34185,72 +32153,9 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -34355,52 +32260,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -34413,13 +32272,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -34570,63 +32422,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -34691,63 +32486,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -40802,7 +38540,6 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 		StatusUpdateInterval: types.StatusUpdateInterval("SECONDS_10"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -40814,6 +38551,7 @@ func TestSerdeUpdateSnapshot_CreateJobTemplate(t *testing.T) {
 	_, err := svc.CreateJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42040,7 +39778,6 @@ func TestSerdeUpdateSnapshot_CreatePreset(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -42052,6 +39789,7 @@ func TestSerdeUpdateSnapshot_CreatePreset(t *testing.T) {
 	_, err := svc.CreatePreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42082,7 +39820,6 @@ func TestSerdeUpdateSnapshot_CreateQueue(t *testing.T) {
 		Status: types.QueueStatus("ACTIVE"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -42094,6 +39831,7 @@ func TestSerdeUpdateSnapshot_CreateQueue(t *testing.T) {
 	_, err := svc.CreateQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42123,6 +39861,7 @@ func TestSerdeUpdateSnapshot_CreateResourceShare(t *testing.T) {
 	_, err := svc.CreateResourceShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42151,6 +39890,7 @@ func TestSerdeUpdateSnapshot_DeleteJobTemplate(t *testing.T) {
 	_, err := svc.DeleteJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42177,6 +39917,7 @@ func TestSerdeUpdateSnapshot_DeletePolicy(t *testing.T) {
 	_, err := svc.DeletePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42205,6 +39946,7 @@ func TestSerdeUpdateSnapshot_DeletePreset(t *testing.T) {
 	_, err := svc.DeletePreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42233,6 +39975,7 @@ func TestSerdeUpdateSnapshot_DeleteQueue(t *testing.T) {
 	_, err := svc.DeleteQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42263,6 +40006,7 @@ func TestSerdeUpdateSnapshot_DescribeEndpoints(t *testing.T) {
 	_, err := svc.DescribeEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42291,6 +40035,7 @@ func TestSerdeUpdateSnapshot_DisassociateCertificate(t *testing.T) {
 	_, err := svc.DisassociateCertificate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42319,6 +40064,7 @@ func TestSerdeUpdateSnapshot_GetJob(t *testing.T) {
 	_, err := svc.GetJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42347,6 +40093,7 @@ func TestSerdeUpdateSnapshot_GetJobsQueryResults(t *testing.T) {
 	_, err := svc.GetJobsQueryResults(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42375,6 +40122,7 @@ func TestSerdeUpdateSnapshot_GetJobTemplate(t *testing.T) {
 	_, err := svc.GetJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42401,6 +40149,7 @@ func TestSerdeUpdateSnapshot_GetPolicy(t *testing.T) {
 	_, err := svc.GetPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42429,6 +40178,7 @@ func TestSerdeUpdateSnapshot_GetPreset(t *testing.T) {
 	_, err := svc.GetPreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42457,6 +40207,7 @@ func TestSerdeUpdateSnapshot_GetQueue(t *testing.T) {
 	_, err := svc.GetQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42489,6 +40240,7 @@ func TestSerdeUpdateSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42521,6 +40273,7 @@ func TestSerdeUpdateSnapshot_ListJobTemplates(t *testing.T) {
 	_, err := svc.ListJobTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42553,6 +40306,7 @@ func TestSerdeUpdateSnapshot_ListPresets(t *testing.T) {
 	_, err := svc.ListPresets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42584,6 +40338,7 @@ func TestSerdeUpdateSnapshot_ListQueues(t *testing.T) {
 	_, err := svc.ListQueues(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42612,6 +40367,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42641,6 +40397,7 @@ func TestSerdeUpdateSnapshot_ListVersions(t *testing.T) {
 	_, err := svc.ListVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42676,6 +40433,7 @@ func TestSerdeUpdateSnapshot_Probe(t *testing.T) {
 	_, err := svc.Probe(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42708,6 +40466,7 @@ func TestSerdeUpdateSnapshot_PutPolicy(t *testing.T) {
 	_, err := svc.PutPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42741,6 +40500,7 @@ func TestSerdeUpdateSnapshot_SearchJobs(t *testing.T) {
 	_, err := svc.SearchJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42787,6 +40547,7 @@ func TestSerdeUpdateSnapshot_StartJobsQuery(t *testing.T) {
 	_, err := svc.StartJobsQuery(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42807,7 +40568,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		Arn: ptr.String("__Arn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -42819,6 +40579,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42851,6 +40612,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42937,72 +40699,9 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -43107,52 +40806,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -43165,13 +40818,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -43322,63 +40968,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -43443,63 +41032,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -43646,72 +41178,9 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 								"__Member__",
 							},
 						},
-						"key1": {
-							AudioSelectorNames: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
 					},
 					AudioSelectors: map[string]types.AudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-								RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-								RenditionLanguageCode: types.LanguageCode("ENG"),
-								RenditionName:         ptr.String("__RenditionName__"),
-							},
-							LanguageCode: types.LanguageCode("ENG"),
-							Offset:       ptr.Int32(1),
-							Pids: []int32{
-								1,
-								1,
-							},
-							ProgramSelection: ptr.Int32(1),
-							RemixSettings: &types.RemixSettings{
-								AudioDescriptionAudioChannel: ptr.Int32(1),
-								AudioDescriptionDataChannel:  ptr.Int32(1),
-								ChannelMapping: &types.ChannelMapping{
-									OutputChannels: []types.OutputChannelMapping{
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-										{
-											InputChannels: []int32{
-												1,
-												1,
-											},
-											InputChannelsFineTune: []float64{
-												1.0,
-												1.0,
-											},
-										},
-									},
-								},
-								ChannelsIn:  ptr.Int32(1),
-								ChannelsOut: ptr.Int32(1),
-							},
-							SelectorType: types.AudioSelectorType("PID"),
-							Streams: []int32{
-								1,
-								1,
-							},
-							Tracks: []int32{
-								1,
-								1,
-							},
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 							DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -43816,52 +41285,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 							},
 						},
-						"key1": {
-							CustomLanguageCode: ptr.String("__CustomLanguageCode__"),
-							LanguageCode:       types.LanguageCode("ENG"),
-							SourceSettings: &types.CaptionSourceSettings{
-								AncillarySourceSettings: &types.AncillarySourceSettings{
-									Convert608To708:              types.AncillaryConvert608To708("UPCONVERT"),
-									SourceAncillaryChannelNumber: ptr.Int32(1),
-									TerminateCaptions:            types.AncillaryTerminateCaptions("END_OF_INPUT"),
-								},
-								DvbSubSourceSettings: &types.DvbSubSourceSettings{
-									Pid: ptr.Int32(1),
-								},
-								EmbeddedSourceSettings: &types.EmbeddedSourceSettings{
-									Convert608To708:        types.EmbeddedConvert608To708("UPCONVERT"),
-									Source608ChannelNumber: ptr.Int32(1),
-									Source608TrackNumber:   ptr.Int32(1),
-									TerminateCaptions:      types.EmbeddedTerminateCaptions("END_OF_INPUT"),
-								},
-								FileSourceSettings: &types.FileSourceSettings{
-									ByteRateLimit:     types.CaptionSourceByteRateLimit("ENABLED"),
-									Convert608To708:   types.FileSourceConvert608To708("UPCONVERT"),
-									ConvertPaintToPop: types.CaptionSourceConvertPaintOnToPopOn("ENABLED"),
-									Framerate: &types.CaptionSourceFramerate{
-										FramerateDenominator: ptr.Int32(1),
-										FramerateNumerator:   ptr.Int32(1),
-									},
-									SourceFile:             ptr.String("__SourceFile__"),
-									TimeDelta:              ptr.Int32(1),
-									TimeDeltaUnits:         types.FileSourceTimeDeltaUnits("SECONDS"),
-									UpconvertSTLToTeletext: types.CaptionSourceUpconvertSTLToTeletext("UPCONVERT"),
-								},
-								SourceType: types.CaptionSourceType("ANCILLARY"),
-								TeletextSourceSettings: &types.TeletextSourceSettings{
-									PageNumber: ptr.String("__PageNumber__"),
-								},
-								TrackSourceSettings: &types.TrackSourceSettings{
-									StreamNumber: ptr.Int32(1),
-									TrackNumber:  ptr.Int32(1),
-								},
-								WebvttHlsSourceSettings: &types.WebvttHlsSourceSettings{
-									RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-									RenditionLanguageCode: types.LanguageCode("ENG"),
-									RenditionName:         ptr.String("__RenditionName__"),
-								},
-							},
-						},
 					},
 					Crop: &types.Rectangle{
 						Height: ptr.Int32(1),
@@ -43874,13 +41297,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 					DolbyVisionMetadataXml: ptr.String("__DolbyVisionMetadataXml__"),
 					DynamicAudioSelectors: map[string]types.DynamicAudioSelector{
 						"key0": {
-							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-							LanguageCode:            types.LanguageCode("ENG"),
-							Offset:                  ptr.Int32(1),
-							SelectorType:            types.DynamicAudioSelectorType("ALL_TRACKS"),
-						},
-						"key1": {
 							AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 							ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
 							LanguageCode:            types.LanguageCode("ENG"),
@@ -44031,63 +41447,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 											1,
 										},
 									},
-									"key1": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
 								},
 								FileInput: ptr.String("__FileInput__"),
 								InputClippings: []types.VideoOverlayInputClipping{
@@ -44152,63 +41511,6 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 							Input: &types.VideoOverlayInput{
 								AudioSelectors: map[string]types.AudioSelector{
 									"key0": {
-										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
-										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
-										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
-										ExternalAudioFileInput:  ptr.String("__ExternalAudioFileInput__"),
-										HlsRenditionGroupSettings: &types.HlsRenditionGroupSettings{
-											RenditionGroupId:      ptr.String("__RenditionGroupId__"),
-											RenditionLanguageCode: types.LanguageCode("ENG"),
-											RenditionName:         ptr.String("__RenditionName__"),
-										},
-										LanguageCode: types.LanguageCode("ENG"),
-										Offset:       ptr.Int32(1),
-										Pids: []int32{
-											1,
-											1,
-										},
-										ProgramSelection: ptr.Int32(1),
-										RemixSettings: &types.RemixSettings{
-											AudioDescriptionAudioChannel: ptr.Int32(1),
-											AudioDescriptionDataChannel:  ptr.Int32(1),
-											ChannelMapping: &types.ChannelMapping{
-												OutputChannels: []types.OutputChannelMapping{
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-													{
-														InputChannels: []int32{
-															1,
-															1,
-														},
-														InputChannelsFineTune: []float64{
-															1.0,
-															1.0,
-														},
-													},
-												},
-											},
-											ChannelsIn:  ptr.Int32(1),
-											ChannelsOut: ptr.Int32(1),
-										},
-										SelectorType: types.AudioSelectorType("PID"),
-										Streams: []int32{
-											1,
-											1,
-										},
-										Tracks: []int32{
-											1,
-											1,
-										},
-									},
-									"key1": {
 										AudioDurationCorrection: types.AudioDurationCorrection("DISABLED"),
 										CustomLanguageCode:      ptr.String("__CustomLanguageCode__"),
 										DefaultSelection:        types.AudioDefaultSelection("DEFAULT"),
@@ -50271,6 +47573,7 @@ func TestSerdeUpdateSnapshot_UpdateJobTemplate(t *testing.T) {
 	_, err := svc.UpdateJobTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -51505,6 +48808,7 @@ func TestSerdeUpdateSnapshot_UpdatePreset(t *testing.T) {
 	_, err := svc.UpdatePreset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -51542,6 +48846,7 @@ func TestSerdeUpdateSnapshot_UpdateQueue(t *testing.T) {
 	_, err := svc.UpdateQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

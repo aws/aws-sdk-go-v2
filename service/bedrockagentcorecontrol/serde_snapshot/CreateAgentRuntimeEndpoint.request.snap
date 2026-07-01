@@ -2,4 +2,4 @@ PUT /runtimes/__AgentRuntimeId__/runtime-endpoints/
 
 Content-Type: application/json
 
-{"agentRuntimeVersion":"__AgentRuntimeVersion__","clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"agentRuntimeVersion":"__AgentRuntimeVersion__","clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","tags":{"key0":"__Value__"}}

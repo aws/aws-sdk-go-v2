@@ -2,4 +2,4 @@ POST /opencypher/explain
 
 Content-Type: application/json
 
-{"explain":"static","parameters":"__Parameters__","query":"__OpenCypherQuery__"}
+{"explain":"static","query":"__OpenCypherQuery__","parameters":"__Parameters__"}

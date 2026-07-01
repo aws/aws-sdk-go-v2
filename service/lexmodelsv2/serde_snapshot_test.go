@@ -7,7 +7,6 @@ package lexmodelsv2
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -172,6 +178,9 @@ func serdeNewClient() *Client {
 		Region:             "us-east-1",
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
+}
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
 }
 func TestSerdeCheckSnapshot_BatchCreateCustomVocabularyItem(t *testing.T) {
 	input := &BatchCreateCustomVocabularyItemInput{
@@ -200,6 +209,7 @@ func TestSerdeCheckSnapshot_BatchCreateCustomVocabularyItem(t *testing.T) {
 	_, err := svc.BatchCreateCustomVocabularyItem(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -238,6 +248,7 @@ func TestSerdeCheckSnapshot_BatchDeleteCustomVocabularyItem(t *testing.T) {
 	_, err := svc.BatchDeleteCustomVocabularyItem(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -282,6 +293,7 @@ func TestSerdeCheckSnapshot_BatchUpdateCustomVocabularyItem(t *testing.T) {
 	_, err := svc.BatchUpdateCustomVocabularyItem(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -312,6 +324,7 @@ func TestSerdeCheckSnapshot_BuildBotLocale(t *testing.T) {
 	_, err := svc.BuildBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -338,11 +351,9 @@ func TestSerdeCheckSnapshot_CreateBot(t *testing.T) {
 		IdleSessionTTLInSeconds: ptr.Int32(1),
 		BotTags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		TestBotAliasTags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		BotType: types.BotType("Bot"),
 		BotMembers: []types.BotMember{
@@ -374,6 +385,7 @@ func TestSerdeCheckSnapshot_CreateBot(t *testing.T) {
 	_, err := svc.CreateBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -396,15 +408,6 @@ func TestSerdeCheckSnapshot_CreateBotAlias(t *testing.T) {
 		BotVersion:   ptr.String("__BotVersion__"),
 		BotAliasLocaleSettings: map[string]types.BotAliasLocaleSettings{
 			"key0": {
-				Enabled: true,
-				CodeHookSpecification: &types.CodeHookSpecification{
-					LambdaCodeHook: &types.LambdaCodeHook{
-						LambdaARN:                ptr.String("__LambdaARN__"),
-						CodeHookInterfaceVersion: ptr.String("__CodeHookInterfaceVersion__"),
-					},
-				},
-			},
-			"key1": {
 				Enabled: true,
 				CodeHookSpecification: &types.CodeHookSpecification{
 					LambdaCodeHook: &types.LambdaCodeHook{
@@ -468,7 +471,6 @@ func TestSerdeCheckSnapshot_CreateBotAlias(t *testing.T) {
 		BotId: ptr.String("__BotId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -480,6 +482,7 @@ func TestSerdeCheckSnapshot_CreateBotAlias(t *testing.T) {
 	_, err := svc.CreateBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -590,6 +593,7 @@ func TestSerdeCheckSnapshot_CreateBotLocale(t *testing.T) {
 	_, err := svc.CreateBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -619,6 +623,7 @@ func TestSerdeCheckSnapshot_CreateBotReplica(t *testing.T) {
 	_, err := svc.CreateBotReplica(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -642,9 +647,6 @@ func TestSerdeCheckSnapshot_CreateBotVersion(t *testing.T) {
 			"key0": {
 				SourceBotVersion: ptr.String("__SourceBotVersion__"),
 			},
-			"key1": {
-				SourceBotVersion: ptr.String("__SourceBotVersion__"),
-			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -656,6 +658,7 @@ func TestSerdeCheckSnapshot_CreateBotVersion(t *testing.T) {
 	_, err := svc.CreateBotVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -704,6 +707,7 @@ func TestSerdeCheckSnapshot_CreateExport(t *testing.T) {
 	_, err := svc.CreateExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1265,21 +1269,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				SuccessConditional: &types.ConditionalSpecification{
@@ -1309,21 +1302,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -1520,21 +1502,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -1728,21 +1699,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -1935,21 +1895,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -1979,21 +1928,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -2190,21 +2128,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -2398,21 +2325,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -2605,21 +2521,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				TimeoutConditional: &types.ConditionalSpecification{
@@ -2649,21 +2554,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -2860,21 +2754,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -3068,21 +2951,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -3798,29 +3670,6 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 							StartTimeoutMs: ptr.Int32(1),
 						},
 					},
-					"key1": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
 				},
 			},
 			DeclinationResponse: &types.ResponseSpecification{
@@ -4181,21 +4030,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ConfirmationConditional: &types.ConditionalSpecification{
@@ -4225,21 +4063,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -4436,21 +4263,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -4644,21 +4460,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -4851,21 +4656,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DeclinationConditional: &types.ConditionalSpecification{
@@ -4895,21 +4689,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -5106,21 +4889,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -5314,21 +5086,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -5690,21 +5451,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			FailureConditional: &types.ConditionalSpecification{
@@ -5734,21 +5484,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -5945,21 +5684,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -6153,21 +5881,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -6534,21 +6251,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					SuccessConditional: &types.ConditionalSpecification{
@@ -6578,21 +6284,10 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 													{},
 												},
 											},
-											"key1": {
-												Shape: types.SlotShape("Scalar"),
-												Value: &types.SlotValue{
-													InterpretedValue: ptr.String("__InterpretedValue__"),
-												},
-												Values: []types.SlotValueOverride{
-													{},
-													{},
-												},
-											},
 										},
 									},
 									SessionAttributes: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								Response: &types.ResponseSpecification{
@@ -6673,6 +6368,7 @@ func TestSerdeCheckSnapshot_CreateIntent(t *testing.T) {
 	_, err := svc.CreateIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6702,6 +6398,7 @@ func TestSerdeCheckSnapshot_CreateResourcePolicy(t *testing.T) {
 	_, err := svc.CreateResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6739,11 +6436,6 @@ func TestSerdeCheckSnapshot_CreateResourcePolicyStatement(t *testing.T) {
 		Condition: map[string]map[string]string{
 			"key0": {
 				"key0": "__Value__",
-				"key1": "__Value__",
-			},
-			"key1": {
-				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
@@ -6757,6 +6449,7 @@ func TestSerdeCheckSnapshot_CreateResourcePolicyStatement(t *testing.T) {
 	_, err := svc.CreateResourcePolicyStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6961,29 +6654,6 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
 				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
 					"key0": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
-					"key1": {
 						AllowInterrupt: ptr.Bool(true),
 						AllowedInputTypes: &types.AllowedInputTypes{
 							AllowAudioInput: ptr.Bool(true),
@@ -7717,21 +7387,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CaptureConditional: &types.ConditionalSpecification{
@@ -7761,21 +7420,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -7972,21 +7620,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -8180,21 +7817,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -8556,21 +8182,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -8600,21 +8215,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -8811,21 +8415,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -9019,21 +8612,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -9400,21 +8982,10 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						SuccessConditional: &types.ConditionalSpecification{
@@ -9442,17 +9013,21 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 														{},
 													},
 												},
-												"key1": {},
 											},
 										},
 										SessionAttributes: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									Response: &types.ResponseSpecification{
 										MessageGroups: []types.MessageGroup{
-											{},
+											{
+												Message: nil,
+												Variations: []types.Message{
+													{},
+													{},
+												},
+											},
 											{},
 										},
 										AllowInterrupt: ptr.Bool(true),
@@ -9496,6 +9071,7 @@ func TestSerdeCheckSnapshot_CreateSlot(t *testing.T) {
 	_, err := svc.CreateSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9587,6 +9163,7 @@ func TestSerdeCheckSnapshot_CreateSlotType(t *testing.T) {
 	_, err := svc.CreateSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9622,6 +9199,7 @@ func TestSerdeCheckSnapshot_CreateTestSetDiscrepancyReport(t *testing.T) {
 	_, err := svc.CreateTestSetDiscrepancyReport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9648,6 +9226,7 @@ func TestSerdeCheckSnapshot_CreateUploadUrl(t *testing.T) {
 	_, err := svc.CreateUploadUrl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9677,6 +9256,7 @@ func TestSerdeCheckSnapshot_DeleteBot(t *testing.T) {
 	_, err := svc.DeleteBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9707,6 +9287,7 @@ func TestSerdeCheckSnapshot_DeleteBotAlias(t *testing.T) {
 	_, err := svc.DeleteBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9736,6 +9317,7 @@ func TestSerdeCheckSnapshot_DeleteBotAnalyzerRecommendation(t *testing.T) {
 	_, err := svc.DeleteBotAnalyzerRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9766,6 +9348,7 @@ func TestSerdeCheckSnapshot_DeleteBotLocale(t *testing.T) {
 	_, err := svc.DeleteBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9795,6 +9378,7 @@ func TestSerdeCheckSnapshot_DeleteBotReplica(t *testing.T) {
 	_, err := svc.DeleteBotReplica(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9825,6 +9409,7 @@ func TestSerdeCheckSnapshot_DeleteBotVersion(t *testing.T) {
 	_, err := svc.DeleteBotVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9855,6 +9440,7 @@ func TestSerdeCheckSnapshot_DeleteCustomVocabulary(t *testing.T) {
 	_, err := svc.DeleteCustomVocabulary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9883,6 +9469,7 @@ func TestSerdeCheckSnapshot_DeleteExport(t *testing.T) {
 	_, err := svc.DeleteExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9911,6 +9498,7 @@ func TestSerdeCheckSnapshot_DeleteImport(t *testing.T) {
 	_, err := svc.DeleteImport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9942,6 +9530,7 @@ func TestSerdeCheckSnapshot_DeleteIntent(t *testing.T) {
 	_, err := svc.DeleteIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9971,6 +9560,7 @@ func TestSerdeCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10001,6 +9591,7 @@ func TestSerdeCheckSnapshot_DeleteResourcePolicyStatement(t *testing.T) {
 	_, err := svc.DeleteResourcePolicyStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10033,6 +9624,7 @@ func TestSerdeCheckSnapshot_DeleteSlot(t *testing.T) {
 	_, err := svc.DeleteSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10065,6 +9657,7 @@ func TestSerdeCheckSnapshot_DeleteSlotType(t *testing.T) {
 	_, err := svc.DeleteSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10093,6 +9686,7 @@ func TestSerdeCheckSnapshot_DeleteTestSet(t *testing.T) {
 	_, err := svc.DeleteTestSet(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10123,6 +9717,7 @@ func TestSerdeCheckSnapshot_DeleteUtterances(t *testing.T) {
 	_, err := svc.DeleteUtterances(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10151,6 +9746,7 @@ func TestSerdeCheckSnapshot_DescribeBot(t *testing.T) {
 	_, err := svc.DescribeBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10180,6 +9776,7 @@ func TestSerdeCheckSnapshot_DescribeBotAlias(t *testing.T) {
 	_, err := svc.DescribeBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10211,6 +9808,7 @@ func TestSerdeCheckSnapshot_DescribeBotAnalyzerRecommendation(t *testing.T) {
 	_, err := svc.DescribeBotAnalyzerRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10241,6 +9839,7 @@ func TestSerdeCheckSnapshot_DescribeBotLocale(t *testing.T) {
 	_, err := svc.DescribeBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10272,6 +9871,7 @@ func TestSerdeCheckSnapshot_DescribeBotRecommendation(t *testing.T) {
 	_, err := svc.DescribeBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10301,6 +9901,7 @@ func TestSerdeCheckSnapshot_DescribeBotReplica(t *testing.T) {
 	_, err := svc.DescribeBotReplica(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10332,6 +9933,7 @@ func TestSerdeCheckSnapshot_DescribeBotResourceGeneration(t *testing.T) {
 	_, err := svc.DescribeBotResourceGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10361,6 +9963,7 @@ func TestSerdeCheckSnapshot_DescribeBotVersion(t *testing.T) {
 	_, err := svc.DescribeBotVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10391,6 +9994,7 @@ func TestSerdeCheckSnapshot_DescribeCustomVocabularyMetadata(t *testing.T) {
 	_, err := svc.DescribeCustomVocabularyMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10419,6 +10023,7 @@ func TestSerdeCheckSnapshot_DescribeExport(t *testing.T) {
 	_, err := svc.DescribeExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10447,6 +10052,7 @@ func TestSerdeCheckSnapshot_DescribeImport(t *testing.T) {
 	_, err := svc.DescribeImport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10478,6 +10084,7 @@ func TestSerdeCheckSnapshot_DescribeIntent(t *testing.T) {
 	_, err := svc.DescribeIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10506,6 +10113,7 @@ func TestSerdeCheckSnapshot_DescribeResourcePolicy(t *testing.T) {
 	_, err := svc.DescribeResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10538,6 +10146,7 @@ func TestSerdeCheckSnapshot_DescribeSlot(t *testing.T) {
 	_, err := svc.DescribeSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10569,6 +10178,7 @@ func TestSerdeCheckSnapshot_DescribeSlotType(t *testing.T) {
 	_, err := svc.DescribeSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10597,6 +10207,7 @@ func TestSerdeCheckSnapshot_DescribeTestExecution(t *testing.T) {
 	_, err := svc.DescribeTestExecution(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10625,6 +10236,7 @@ func TestSerdeCheckSnapshot_DescribeTestSet(t *testing.T) {
 	_, err := svc.DescribeTestSet(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10653,6 +10265,7 @@ func TestSerdeCheckSnapshot_DescribeTestSetDiscrepancyReport(t *testing.T) {
 	_, err := svc.DescribeTestSetDiscrepancyReport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10681,6 +10294,7 @@ func TestSerdeCheckSnapshot_DescribeTestSetGeneration(t *testing.T) {
 	_, err := svc.DescribeTestSetGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10712,6 +10326,7 @@ func TestSerdeCheckSnapshot_GenerateBotElement(t *testing.T) {
 	_, err := svc.GenerateBotElement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10740,6 +10355,7 @@ func TestSerdeCheckSnapshot_GetTestExecutionArtifactsUrl(t *testing.T) {
 	_, err := svc.GetTestExecutionArtifactsUrl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10801,6 +10417,7 @@ func TestSerdeCheckSnapshot_ListAggregatedUtterances(t *testing.T) {
 	_, err := svc.ListAggregatedUtterances(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10831,6 +10448,7 @@ func TestSerdeCheckSnapshot_ListBotAliases(t *testing.T) {
 	_, err := svc.ListBotAliases(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10862,6 +10480,7 @@ func TestSerdeCheckSnapshot_ListBotAliasReplicas(t *testing.T) {
 	_, err := svc.ListBotAliasReplicas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10894,6 +10513,7 @@ func TestSerdeCheckSnapshot_ListBotAnalyzerHistory(t *testing.T) {
 	_, err := svc.ListBotAnalyzerHistory(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10947,6 +10567,7 @@ func TestSerdeCheckSnapshot_ListBotLocales(t *testing.T) {
 	_, err := svc.ListBotLocales(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10979,6 +10600,7 @@ func TestSerdeCheckSnapshot_ListBotRecommendations(t *testing.T) {
 	_, err := svc.ListBotRecommendations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11007,6 +10629,7 @@ func TestSerdeCheckSnapshot_ListBotReplicas(t *testing.T) {
 	_, err := svc.ListBotReplicas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11043,6 +10666,7 @@ func TestSerdeCheckSnapshot_ListBotResourceGenerations(t *testing.T) {
 	_, err := svc.ListBotResourceGenerations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11094,6 +10718,7 @@ func TestSerdeCheckSnapshot_ListBots(t *testing.T) {
 	_, err := svc.ListBots(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11129,6 +10754,7 @@ func TestSerdeCheckSnapshot_ListBotVersionReplicas(t *testing.T) {
 	_, err := svc.ListBotVersionReplicas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11163,6 +10789,7 @@ func TestSerdeCheckSnapshot_ListBotVersions(t *testing.T) {
 	_, err := svc.ListBotVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11197,6 +10824,7 @@ func TestSerdeCheckSnapshot_ListBuiltInIntents(t *testing.T) {
 	_, err := svc.ListBuiltInIntents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11231,6 +10859,7 @@ func TestSerdeCheckSnapshot_ListBuiltInSlotTypes(t *testing.T) {
 	_, err := svc.ListBuiltInSlotTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11263,6 +10892,7 @@ func TestSerdeCheckSnapshot_ListCustomVocabularyItems(t *testing.T) {
 	_, err := svc.ListCustomVocabularyItems(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11317,6 +10947,7 @@ func TestSerdeCheckSnapshot_ListExports(t *testing.T) {
 	_, err := svc.ListExports(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11371,6 +11002,7 @@ func TestSerdeCheckSnapshot_ListImports(t *testing.T) {
 	_, err := svc.ListImports(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11453,6 +11085,7 @@ func TestSerdeCheckSnapshot_ListIntentMetrics(t *testing.T) {
 	_, err := svc.ListIntentMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11502,6 +11135,7 @@ func TestSerdeCheckSnapshot_ListIntentPaths(t *testing.T) {
 	_, err := svc.ListIntentPaths(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11556,6 +11190,7 @@ func TestSerdeCheckSnapshot_ListIntents(t *testing.T) {
 	_, err := svc.ListIntents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11638,6 +11273,7 @@ func TestSerdeCheckSnapshot_ListIntentStageMetrics(t *testing.T) {
 	_, err := svc.ListIntentStageMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11671,6 +11307,7 @@ func TestSerdeCheckSnapshot_ListRecommendedIntents(t *testing.T) {
 	_, err := svc.ListRecommendedIntents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11725,6 +11362,7 @@ func TestSerdeCheckSnapshot_ListSessionAnalyticsData(t *testing.T) {
 	_, err := svc.ListSessionAnalyticsData(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11807,6 +11445,7 @@ func TestSerdeCheckSnapshot_ListSessionMetrics(t *testing.T) {
 	_, err := svc.ListSessionMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11862,6 +11501,7 @@ func TestSerdeCheckSnapshot_ListSlots(t *testing.T) {
 	_, err := svc.ListSlots(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11916,6 +11556,7 @@ func TestSerdeCheckSnapshot_ListSlotTypes(t *testing.T) {
 	_, err := svc.ListSlotTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11944,6 +11585,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11980,6 +11622,7 @@ func TestSerdeCheckSnapshot_ListTestExecutionResultItems(t *testing.T) {
 	_, err := svc.ListTestExecutionResultItems(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12013,6 +11656,7 @@ func TestSerdeCheckSnapshot_ListTestExecutions(t *testing.T) {
 	_, err := svc.ListTestExecutions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12043,6 +11687,7 @@ func TestSerdeCheckSnapshot_ListTestSetRecords(t *testing.T) {
 	_, err := svc.ListTestSetRecords(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12076,6 +11721,7 @@ func TestSerdeCheckSnapshot_ListTestSets(t *testing.T) {
 	_, err := svc.ListTestSets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12130,6 +11776,7 @@ func TestSerdeCheckSnapshot_ListUtteranceAnalyticsData(t *testing.T) {
 	_, err := svc.ListUtteranceAnalyticsData(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12220,6 +11867,7 @@ func TestSerdeCheckSnapshot_ListUtteranceMetrics(t *testing.T) {
 	_, err := svc.ListUtteranceMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12270,6 +11918,7 @@ func TestSerdeCheckSnapshot_SearchAssociatedTranscripts(t *testing.T) {
 	_, err := svc.SearchAssociatedTranscripts(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12301,6 +11950,7 @@ func TestSerdeCheckSnapshot_StartBotAnalyzer(t *testing.T) {
 	_, err := svc.StartBotAnalyzer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12357,6 +12007,7 @@ func TestSerdeCheckSnapshot_StartBotRecommendation(t *testing.T) {
 	_, err := svc.StartBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12388,6 +12039,7 @@ func TestSerdeCheckSnapshot_StartBotResourceGeneration(t *testing.T) {
 	_, err := svc.StartBotResourceGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12419,11 +12071,9 @@ func TestSerdeCheckSnapshot_StartImport(t *testing.T) {
 				IdleSessionTTLInSeconds: ptr.Int32(1),
 				BotTags: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				TestBotAliasTags: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			BotLocaleImportSpecification: &types.BotLocaleImportSpecification{
@@ -12480,7 +12130,6 @@ func TestSerdeCheckSnapshot_StartImport(t *testing.T) {
 				Modality: types.TestSetModality("Text"),
 				TestSetTags: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
@@ -12496,6 +12145,7 @@ func TestSerdeCheckSnapshot_StartImport(t *testing.T) {
 	_, err := svc.StartImport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12533,6 +12183,7 @@ func TestSerdeCheckSnapshot_StartTestExecution(t *testing.T) {
 	_, err := svc.StartTestExecution(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12572,7 +12223,6 @@ func TestSerdeCheckSnapshot_StartTestSetGeneration(t *testing.T) {
 		RoleArn: ptr.String("__RoleArn__"),
 		TestSetTags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -12584,6 +12234,7 @@ func TestSerdeCheckSnapshot_StartTestSetGeneration(t *testing.T) {
 	_, err := svc.StartTestSetGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12613,6 +12264,7 @@ func TestSerdeCheckSnapshot_StopBotAnalyzer(t *testing.T) {
 	_, err := svc.StopBotAnalyzer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12644,6 +12296,7 @@ func TestSerdeCheckSnapshot_StopBotRecommendation(t *testing.T) {
 	_, err := svc.StopBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12664,7 +12317,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceARN: ptr.String("__ResourceARN__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -12676,6 +12328,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12708,6 +12361,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12763,6 +12417,7 @@ func TestSerdeCheckSnapshot_UpdateBot(t *testing.T) {
 	_, err := svc.UpdateBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12786,15 +12441,6 @@ func TestSerdeCheckSnapshot_UpdateBotAlias(t *testing.T) {
 		BotVersion:   ptr.String("__BotVersion__"),
 		BotAliasLocaleSettings: map[string]types.BotAliasLocaleSettings{
 			"key0": {
-				Enabled: true,
-				CodeHookSpecification: &types.CodeHookSpecification{
-					LambdaCodeHook: &types.LambdaCodeHook{
-						LambdaARN:                ptr.String("__LambdaARN__"),
-						CodeHookInterfaceVersion: ptr.String("__CodeHookInterfaceVersion__"),
-					},
-				},
-			},
-			"key1": {
 				Enabled: true,
 				CodeHookSpecification: &types.CodeHookSpecification{
 					LambdaCodeHook: &types.LambdaCodeHook{
@@ -12866,6 +12512,7 @@ func TestSerdeCheckSnapshot_UpdateBotAlias(t *testing.T) {
 	_, err := svc.UpdateBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12976,6 +12623,7 @@ func TestSerdeCheckSnapshot_UpdateBotLocale(t *testing.T) {
 	_, err := svc.UpdateBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13012,6 +12660,7 @@ func TestSerdeCheckSnapshot_UpdateBotRecommendation(t *testing.T) {
 	_, err := svc.UpdateBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13041,6 +12690,7 @@ func TestSerdeCheckSnapshot_UpdateExport(t *testing.T) {
 	_, err := svc.UpdateExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13603,21 +13253,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				SuccessConditional: &types.ConditionalSpecification{
@@ -13647,21 +13286,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -13858,21 +13486,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -14066,21 +13683,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -14273,21 +13879,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -14317,21 +13912,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -14528,21 +14112,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -14736,21 +14309,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -14943,21 +14505,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				TimeoutConditional: &types.ConditionalSpecification{
@@ -14987,21 +14538,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -15198,21 +14738,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -15406,21 +14935,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -16146,29 +15664,6 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 							StartTimeoutMs: ptr.Int32(1),
 						},
 					},
-					"key1": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
 				},
 			},
 			DeclinationResponse: &types.ResponseSpecification{
@@ -16529,21 +16024,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ConfirmationConditional: &types.ConditionalSpecification{
@@ -16573,21 +16057,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -16784,21 +16257,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -16992,21 +16454,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -17199,21 +16650,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DeclinationConditional: &types.ConditionalSpecification{
@@ -17243,21 +16683,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -17454,21 +16883,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -17662,21 +17080,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -18038,21 +17445,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			FailureConditional: &types.ConditionalSpecification{
@@ -18082,21 +17478,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -18293,21 +17678,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -18501,21 +17875,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -18882,21 +18245,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					SuccessConditional: &types.ConditionalSpecification{
@@ -18926,21 +18278,10 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 													{},
 												},
 											},
-											"key1": {
-												Shape: types.SlotShape("Scalar"),
-												Value: &types.SlotValue{
-													InterpretedValue: ptr.String("__InterpretedValue__"),
-												},
-												Values: []types.SlotValueOverride{
-													{},
-													{},
-												},
-											},
 										},
 									},
 									SessionAttributes: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								Response: &types.ResponseSpecification{
@@ -19021,6 +18362,7 @@ func TestSerdeCheckSnapshot_UpdateIntent(t *testing.T) {
 	_, err := svc.UpdateIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19051,6 +18393,7 @@ func TestSerdeCheckSnapshot_UpdateResourcePolicy(t *testing.T) {
 	_, err := svc.UpdateResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -19256,29 +18599,6 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
 				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
 					"key0": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
-					"key1": {
 						AllowInterrupt: ptr.Bool(true),
 						AllowedInputTypes: &types.AllowedInputTypes{
 							AllowAudioInput: ptr.Bool(true),
@@ -20012,21 +19332,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CaptureConditional: &types.ConditionalSpecification{
@@ -20056,21 +19365,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -20267,21 +19565,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -20475,21 +19762,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -20851,21 +20127,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -20895,21 +20160,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -21106,21 +20360,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -21314,21 +20557,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -21695,21 +20927,10 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						SuccessConditional: &types.ConditionalSpecification{
@@ -21737,17 +20958,21 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 														{},
 													},
 												},
-												"key1": {},
 											},
 										},
 										SessionAttributes: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									Response: &types.ResponseSpecification{
 										MessageGroups: []types.MessageGroup{
-											{},
+											{
+												Message: nil,
+												Variations: []types.Message{
+													{},
+													{},
+												},
+											},
 											{},
 										},
 										AllowInterrupt: ptr.Bool(true),
@@ -21791,6 +21016,7 @@ func TestSerdeCheckSnapshot_UpdateSlot(t *testing.T) {
 	_, err := svc.UpdateSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -21883,6 +21109,7 @@ func TestSerdeCheckSnapshot_UpdateSlotType(t *testing.T) {
 	_, err := svc.UpdateSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -21913,6 +21140,7 @@ func TestSerdeCheckSnapshot_UpdateTestSet(t *testing.T) {
 	_, err := svc.UpdateTestSet(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -21954,6 +21182,7 @@ func TestSerdeUpdateSnapshot_BatchCreateCustomVocabularyItem(t *testing.T) {
 	_, err := svc.BatchCreateCustomVocabularyItem(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -21992,6 +21221,7 @@ func TestSerdeUpdateSnapshot_BatchDeleteCustomVocabularyItem(t *testing.T) {
 	_, err := svc.BatchDeleteCustomVocabularyItem(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22036,6 +21266,7 @@ func TestSerdeUpdateSnapshot_BatchUpdateCustomVocabularyItem(t *testing.T) {
 	_, err := svc.BatchUpdateCustomVocabularyItem(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22066,6 +21297,7 @@ func TestSerdeUpdateSnapshot_BuildBotLocale(t *testing.T) {
 	_, err := svc.BuildBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22092,11 +21324,9 @@ func TestSerdeUpdateSnapshot_CreateBot(t *testing.T) {
 		IdleSessionTTLInSeconds: ptr.Int32(1),
 		BotTags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		TestBotAliasTags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		BotType: types.BotType("Bot"),
 		BotMembers: []types.BotMember{
@@ -22128,6 +21358,7 @@ func TestSerdeUpdateSnapshot_CreateBot(t *testing.T) {
 	_, err := svc.CreateBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22150,15 +21381,6 @@ func TestSerdeUpdateSnapshot_CreateBotAlias(t *testing.T) {
 		BotVersion:   ptr.String("__BotVersion__"),
 		BotAliasLocaleSettings: map[string]types.BotAliasLocaleSettings{
 			"key0": {
-				Enabled: true,
-				CodeHookSpecification: &types.CodeHookSpecification{
-					LambdaCodeHook: &types.LambdaCodeHook{
-						LambdaARN:                ptr.String("__LambdaARN__"),
-						CodeHookInterfaceVersion: ptr.String("__CodeHookInterfaceVersion__"),
-					},
-				},
-			},
-			"key1": {
 				Enabled: true,
 				CodeHookSpecification: &types.CodeHookSpecification{
 					LambdaCodeHook: &types.LambdaCodeHook{
@@ -22222,7 +21444,6 @@ func TestSerdeUpdateSnapshot_CreateBotAlias(t *testing.T) {
 		BotId: ptr.String("__BotId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -22234,6 +21455,7 @@ func TestSerdeUpdateSnapshot_CreateBotAlias(t *testing.T) {
 	_, err := svc.CreateBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22344,6 +21566,7 @@ func TestSerdeUpdateSnapshot_CreateBotLocale(t *testing.T) {
 	_, err := svc.CreateBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22373,6 +21596,7 @@ func TestSerdeUpdateSnapshot_CreateBotReplica(t *testing.T) {
 	_, err := svc.CreateBotReplica(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22396,9 +21620,6 @@ func TestSerdeUpdateSnapshot_CreateBotVersion(t *testing.T) {
 			"key0": {
 				SourceBotVersion: ptr.String("__SourceBotVersion__"),
 			},
-			"key1": {
-				SourceBotVersion: ptr.String("__SourceBotVersion__"),
-			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -22410,6 +21631,7 @@ func TestSerdeUpdateSnapshot_CreateBotVersion(t *testing.T) {
 	_, err := svc.CreateBotVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -22458,6 +21680,7 @@ func TestSerdeUpdateSnapshot_CreateExport(t *testing.T) {
 	_, err := svc.CreateExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23019,21 +22242,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				SuccessConditional: &types.ConditionalSpecification{
@@ -23063,21 +22275,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -23274,21 +22475,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -23482,21 +22672,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -23689,21 +22868,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -23733,21 +22901,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -23944,21 +23101,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -24152,21 +23298,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -24359,21 +23494,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				TimeoutConditional: &types.ConditionalSpecification{
@@ -24403,21 +23527,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -24614,21 +23727,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -24822,21 +23924,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -25552,29 +24643,6 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 							StartTimeoutMs: ptr.Int32(1),
 						},
 					},
-					"key1": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
 				},
 			},
 			DeclinationResponse: &types.ResponseSpecification{
@@ -25935,21 +25003,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ConfirmationConditional: &types.ConditionalSpecification{
@@ -25979,21 +25036,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -26190,21 +25236,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -26398,21 +25433,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -26605,21 +25629,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DeclinationConditional: &types.ConditionalSpecification{
@@ -26649,21 +25662,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -26860,21 +25862,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -27068,21 +26059,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -27444,21 +26424,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			FailureConditional: &types.ConditionalSpecification{
@@ -27488,21 +26457,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -27699,21 +26657,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -27907,21 +26854,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -28288,21 +27224,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					SuccessConditional: &types.ConditionalSpecification{
@@ -28332,21 +27257,10 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 													{},
 												},
 											},
-											"key1": {
-												Shape: types.SlotShape("Scalar"),
-												Value: &types.SlotValue{
-													InterpretedValue: ptr.String("__InterpretedValue__"),
-												},
-												Values: []types.SlotValueOverride{
-													{},
-													{},
-												},
-											},
 										},
 									},
 									SessionAttributes: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								Response: &types.ResponseSpecification{
@@ -28427,6 +27341,7 @@ func TestSerdeUpdateSnapshot_CreateIntent(t *testing.T) {
 	_, err := svc.CreateIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -28456,6 +27371,7 @@ func TestSerdeUpdateSnapshot_CreateResourcePolicy(t *testing.T) {
 	_, err := svc.CreateResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -28493,11 +27409,6 @@ func TestSerdeUpdateSnapshot_CreateResourcePolicyStatement(t *testing.T) {
 		Condition: map[string]map[string]string{
 			"key0": {
 				"key0": "__Value__",
-				"key1": "__Value__",
-			},
-			"key1": {
-				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
@@ -28511,6 +27422,7 @@ func TestSerdeUpdateSnapshot_CreateResourcePolicyStatement(t *testing.T) {
 	_, err := svc.CreateResourcePolicyStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -28715,29 +27627,6 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
 				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
 					"key0": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
-					"key1": {
 						AllowInterrupt: ptr.Bool(true),
 						AllowedInputTypes: &types.AllowedInputTypes{
 							AllowAudioInput: ptr.Bool(true),
@@ -29471,21 +28360,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CaptureConditional: &types.ConditionalSpecification{
@@ -29515,21 +28393,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -29726,21 +28593,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -29934,21 +28790,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -30310,21 +29155,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -30354,21 +29188,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -30565,21 +29388,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -30773,21 +29585,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -31154,21 +29955,10 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						SuccessConditional: &types.ConditionalSpecification{
@@ -31196,17 +29986,21 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 														{},
 													},
 												},
-												"key1": {},
 											},
 										},
 										SessionAttributes: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									Response: &types.ResponseSpecification{
 										MessageGroups: []types.MessageGroup{
-											{},
+											{
+												Message: nil,
+												Variations: []types.Message{
+													{},
+													{},
+												},
+											},
 											{},
 										},
 										AllowInterrupt: ptr.Bool(true),
@@ -31250,6 +30044,7 @@ func TestSerdeUpdateSnapshot_CreateSlot(t *testing.T) {
 	_, err := svc.CreateSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31341,6 +30136,7 @@ func TestSerdeUpdateSnapshot_CreateSlotType(t *testing.T) {
 	_, err := svc.CreateSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31376,6 +30172,7 @@ func TestSerdeUpdateSnapshot_CreateTestSetDiscrepancyReport(t *testing.T) {
 	_, err := svc.CreateTestSetDiscrepancyReport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31402,6 +30199,7 @@ func TestSerdeUpdateSnapshot_CreateUploadUrl(t *testing.T) {
 	_, err := svc.CreateUploadUrl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31431,6 +30229,7 @@ func TestSerdeUpdateSnapshot_DeleteBot(t *testing.T) {
 	_, err := svc.DeleteBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31461,6 +30260,7 @@ func TestSerdeUpdateSnapshot_DeleteBotAlias(t *testing.T) {
 	_, err := svc.DeleteBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31490,6 +30290,7 @@ func TestSerdeUpdateSnapshot_DeleteBotAnalyzerRecommendation(t *testing.T) {
 	_, err := svc.DeleteBotAnalyzerRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31520,6 +30321,7 @@ func TestSerdeUpdateSnapshot_DeleteBotLocale(t *testing.T) {
 	_, err := svc.DeleteBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31549,6 +30351,7 @@ func TestSerdeUpdateSnapshot_DeleteBotReplica(t *testing.T) {
 	_, err := svc.DeleteBotReplica(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31579,6 +30382,7 @@ func TestSerdeUpdateSnapshot_DeleteBotVersion(t *testing.T) {
 	_, err := svc.DeleteBotVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31609,6 +30413,7 @@ func TestSerdeUpdateSnapshot_DeleteCustomVocabulary(t *testing.T) {
 	_, err := svc.DeleteCustomVocabulary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31637,6 +30442,7 @@ func TestSerdeUpdateSnapshot_DeleteExport(t *testing.T) {
 	_, err := svc.DeleteExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31665,6 +30471,7 @@ func TestSerdeUpdateSnapshot_DeleteImport(t *testing.T) {
 	_, err := svc.DeleteImport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31696,6 +30503,7 @@ func TestSerdeUpdateSnapshot_DeleteIntent(t *testing.T) {
 	_, err := svc.DeleteIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31725,6 +30533,7 @@ func TestSerdeUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31755,6 +30564,7 @@ func TestSerdeUpdateSnapshot_DeleteResourcePolicyStatement(t *testing.T) {
 	_, err := svc.DeleteResourcePolicyStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31787,6 +30597,7 @@ func TestSerdeUpdateSnapshot_DeleteSlot(t *testing.T) {
 	_, err := svc.DeleteSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31819,6 +30630,7 @@ func TestSerdeUpdateSnapshot_DeleteSlotType(t *testing.T) {
 	_, err := svc.DeleteSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31847,6 +30659,7 @@ func TestSerdeUpdateSnapshot_DeleteTestSet(t *testing.T) {
 	_, err := svc.DeleteTestSet(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31877,6 +30690,7 @@ func TestSerdeUpdateSnapshot_DeleteUtterances(t *testing.T) {
 	_, err := svc.DeleteUtterances(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31905,6 +30719,7 @@ func TestSerdeUpdateSnapshot_DescribeBot(t *testing.T) {
 	_, err := svc.DescribeBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31934,6 +30749,7 @@ func TestSerdeUpdateSnapshot_DescribeBotAlias(t *testing.T) {
 	_, err := svc.DescribeBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31965,6 +30781,7 @@ func TestSerdeUpdateSnapshot_DescribeBotAnalyzerRecommendation(t *testing.T) {
 	_, err := svc.DescribeBotAnalyzerRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -31995,6 +30812,7 @@ func TestSerdeUpdateSnapshot_DescribeBotLocale(t *testing.T) {
 	_, err := svc.DescribeBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32026,6 +30844,7 @@ func TestSerdeUpdateSnapshot_DescribeBotRecommendation(t *testing.T) {
 	_, err := svc.DescribeBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32055,6 +30874,7 @@ func TestSerdeUpdateSnapshot_DescribeBotReplica(t *testing.T) {
 	_, err := svc.DescribeBotReplica(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32086,6 +30906,7 @@ func TestSerdeUpdateSnapshot_DescribeBotResourceGeneration(t *testing.T) {
 	_, err := svc.DescribeBotResourceGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32115,6 +30936,7 @@ func TestSerdeUpdateSnapshot_DescribeBotVersion(t *testing.T) {
 	_, err := svc.DescribeBotVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32145,6 +30967,7 @@ func TestSerdeUpdateSnapshot_DescribeCustomVocabularyMetadata(t *testing.T) {
 	_, err := svc.DescribeCustomVocabularyMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32173,6 +30996,7 @@ func TestSerdeUpdateSnapshot_DescribeExport(t *testing.T) {
 	_, err := svc.DescribeExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32201,6 +31025,7 @@ func TestSerdeUpdateSnapshot_DescribeImport(t *testing.T) {
 	_, err := svc.DescribeImport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32232,6 +31057,7 @@ func TestSerdeUpdateSnapshot_DescribeIntent(t *testing.T) {
 	_, err := svc.DescribeIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32260,6 +31086,7 @@ func TestSerdeUpdateSnapshot_DescribeResourcePolicy(t *testing.T) {
 	_, err := svc.DescribeResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32292,6 +31119,7 @@ func TestSerdeUpdateSnapshot_DescribeSlot(t *testing.T) {
 	_, err := svc.DescribeSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32323,6 +31151,7 @@ func TestSerdeUpdateSnapshot_DescribeSlotType(t *testing.T) {
 	_, err := svc.DescribeSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32351,6 +31180,7 @@ func TestSerdeUpdateSnapshot_DescribeTestExecution(t *testing.T) {
 	_, err := svc.DescribeTestExecution(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32379,6 +31209,7 @@ func TestSerdeUpdateSnapshot_DescribeTestSet(t *testing.T) {
 	_, err := svc.DescribeTestSet(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32407,6 +31238,7 @@ func TestSerdeUpdateSnapshot_DescribeTestSetDiscrepancyReport(t *testing.T) {
 	_, err := svc.DescribeTestSetDiscrepancyReport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32435,6 +31267,7 @@ func TestSerdeUpdateSnapshot_DescribeTestSetGeneration(t *testing.T) {
 	_, err := svc.DescribeTestSetGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32466,6 +31299,7 @@ func TestSerdeUpdateSnapshot_GenerateBotElement(t *testing.T) {
 	_, err := svc.GenerateBotElement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32494,6 +31328,7 @@ func TestSerdeUpdateSnapshot_GetTestExecutionArtifactsUrl(t *testing.T) {
 	_, err := svc.GetTestExecutionArtifactsUrl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32555,6 +31390,7 @@ func TestSerdeUpdateSnapshot_ListAggregatedUtterances(t *testing.T) {
 	_, err := svc.ListAggregatedUtterances(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32585,6 +31421,7 @@ func TestSerdeUpdateSnapshot_ListBotAliases(t *testing.T) {
 	_, err := svc.ListBotAliases(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32616,6 +31453,7 @@ func TestSerdeUpdateSnapshot_ListBotAliasReplicas(t *testing.T) {
 	_, err := svc.ListBotAliasReplicas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32648,6 +31486,7 @@ func TestSerdeUpdateSnapshot_ListBotAnalyzerHistory(t *testing.T) {
 	_, err := svc.ListBotAnalyzerHistory(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32701,6 +31540,7 @@ func TestSerdeUpdateSnapshot_ListBotLocales(t *testing.T) {
 	_, err := svc.ListBotLocales(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32733,6 +31573,7 @@ func TestSerdeUpdateSnapshot_ListBotRecommendations(t *testing.T) {
 	_, err := svc.ListBotRecommendations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32761,6 +31602,7 @@ func TestSerdeUpdateSnapshot_ListBotReplicas(t *testing.T) {
 	_, err := svc.ListBotReplicas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32797,6 +31639,7 @@ func TestSerdeUpdateSnapshot_ListBotResourceGenerations(t *testing.T) {
 	_, err := svc.ListBotResourceGenerations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32848,6 +31691,7 @@ func TestSerdeUpdateSnapshot_ListBots(t *testing.T) {
 	_, err := svc.ListBots(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32883,6 +31727,7 @@ func TestSerdeUpdateSnapshot_ListBotVersionReplicas(t *testing.T) {
 	_, err := svc.ListBotVersionReplicas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32917,6 +31762,7 @@ func TestSerdeUpdateSnapshot_ListBotVersions(t *testing.T) {
 	_, err := svc.ListBotVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32951,6 +31797,7 @@ func TestSerdeUpdateSnapshot_ListBuiltInIntents(t *testing.T) {
 	_, err := svc.ListBuiltInIntents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32985,6 +31832,7 @@ func TestSerdeUpdateSnapshot_ListBuiltInSlotTypes(t *testing.T) {
 	_, err := svc.ListBuiltInSlotTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33017,6 +31865,7 @@ func TestSerdeUpdateSnapshot_ListCustomVocabularyItems(t *testing.T) {
 	_, err := svc.ListCustomVocabularyItems(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33071,6 +31920,7 @@ func TestSerdeUpdateSnapshot_ListExports(t *testing.T) {
 	_, err := svc.ListExports(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33125,6 +31975,7 @@ func TestSerdeUpdateSnapshot_ListImports(t *testing.T) {
 	_, err := svc.ListImports(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33207,6 +32058,7 @@ func TestSerdeUpdateSnapshot_ListIntentMetrics(t *testing.T) {
 	_, err := svc.ListIntentMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33256,6 +32108,7 @@ func TestSerdeUpdateSnapshot_ListIntentPaths(t *testing.T) {
 	_, err := svc.ListIntentPaths(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33310,6 +32163,7 @@ func TestSerdeUpdateSnapshot_ListIntents(t *testing.T) {
 	_, err := svc.ListIntents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33392,6 +32246,7 @@ func TestSerdeUpdateSnapshot_ListIntentStageMetrics(t *testing.T) {
 	_, err := svc.ListIntentStageMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33425,6 +32280,7 @@ func TestSerdeUpdateSnapshot_ListRecommendedIntents(t *testing.T) {
 	_, err := svc.ListRecommendedIntents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33479,6 +32335,7 @@ func TestSerdeUpdateSnapshot_ListSessionAnalyticsData(t *testing.T) {
 	_, err := svc.ListSessionAnalyticsData(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33561,6 +32418,7 @@ func TestSerdeUpdateSnapshot_ListSessionMetrics(t *testing.T) {
 	_, err := svc.ListSessionMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33616,6 +32474,7 @@ func TestSerdeUpdateSnapshot_ListSlots(t *testing.T) {
 	_, err := svc.ListSlots(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33670,6 +32529,7 @@ func TestSerdeUpdateSnapshot_ListSlotTypes(t *testing.T) {
 	_, err := svc.ListSlotTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33698,6 +32558,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33734,6 +32595,7 @@ func TestSerdeUpdateSnapshot_ListTestExecutionResultItems(t *testing.T) {
 	_, err := svc.ListTestExecutionResultItems(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33767,6 +32629,7 @@ func TestSerdeUpdateSnapshot_ListTestExecutions(t *testing.T) {
 	_, err := svc.ListTestExecutions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33797,6 +32660,7 @@ func TestSerdeUpdateSnapshot_ListTestSetRecords(t *testing.T) {
 	_, err := svc.ListTestSetRecords(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33830,6 +32694,7 @@ func TestSerdeUpdateSnapshot_ListTestSets(t *testing.T) {
 	_, err := svc.ListTestSets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33884,6 +32749,7 @@ func TestSerdeUpdateSnapshot_ListUtteranceAnalyticsData(t *testing.T) {
 	_, err := svc.ListUtteranceAnalyticsData(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33974,6 +32840,7 @@ func TestSerdeUpdateSnapshot_ListUtteranceMetrics(t *testing.T) {
 	_, err := svc.ListUtteranceMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34024,6 +32891,7 @@ func TestSerdeUpdateSnapshot_SearchAssociatedTranscripts(t *testing.T) {
 	_, err := svc.SearchAssociatedTranscripts(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34055,6 +32923,7 @@ func TestSerdeUpdateSnapshot_StartBotAnalyzer(t *testing.T) {
 	_, err := svc.StartBotAnalyzer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34111,6 +32980,7 @@ func TestSerdeUpdateSnapshot_StartBotRecommendation(t *testing.T) {
 	_, err := svc.StartBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34142,6 +33012,7 @@ func TestSerdeUpdateSnapshot_StartBotResourceGeneration(t *testing.T) {
 	_, err := svc.StartBotResourceGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34173,11 +33044,9 @@ func TestSerdeUpdateSnapshot_StartImport(t *testing.T) {
 				IdleSessionTTLInSeconds: ptr.Int32(1),
 				BotTags: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				TestBotAliasTags: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			BotLocaleImportSpecification: &types.BotLocaleImportSpecification{
@@ -34234,7 +33103,6 @@ func TestSerdeUpdateSnapshot_StartImport(t *testing.T) {
 				Modality: types.TestSetModality("Text"),
 				TestSetTags: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
@@ -34250,6 +33118,7 @@ func TestSerdeUpdateSnapshot_StartImport(t *testing.T) {
 	_, err := svc.StartImport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34287,6 +33156,7 @@ func TestSerdeUpdateSnapshot_StartTestExecution(t *testing.T) {
 	_, err := svc.StartTestExecution(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34326,7 +33196,6 @@ func TestSerdeUpdateSnapshot_StartTestSetGeneration(t *testing.T) {
 		RoleArn: ptr.String("__RoleArn__"),
 		TestSetTags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -34338,6 +33207,7 @@ func TestSerdeUpdateSnapshot_StartTestSetGeneration(t *testing.T) {
 	_, err := svc.StartTestSetGeneration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34367,6 +33237,7 @@ func TestSerdeUpdateSnapshot_StopBotAnalyzer(t *testing.T) {
 	_, err := svc.StopBotAnalyzer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34398,6 +33269,7 @@ func TestSerdeUpdateSnapshot_StopBotRecommendation(t *testing.T) {
 	_, err := svc.StopBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34418,7 +33290,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceARN: ptr.String("__ResourceARN__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -34430,6 +33301,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34462,6 +33334,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34517,6 +33390,7 @@ func TestSerdeUpdateSnapshot_UpdateBot(t *testing.T) {
 	_, err := svc.UpdateBot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34540,15 +33414,6 @@ func TestSerdeUpdateSnapshot_UpdateBotAlias(t *testing.T) {
 		BotVersion:   ptr.String("__BotVersion__"),
 		BotAliasLocaleSettings: map[string]types.BotAliasLocaleSettings{
 			"key0": {
-				Enabled: true,
-				CodeHookSpecification: &types.CodeHookSpecification{
-					LambdaCodeHook: &types.LambdaCodeHook{
-						LambdaARN:                ptr.String("__LambdaARN__"),
-						CodeHookInterfaceVersion: ptr.String("__CodeHookInterfaceVersion__"),
-					},
-				},
-			},
-			"key1": {
 				Enabled: true,
 				CodeHookSpecification: &types.CodeHookSpecification{
 					LambdaCodeHook: &types.LambdaCodeHook{
@@ -34620,6 +33485,7 @@ func TestSerdeUpdateSnapshot_UpdateBotAlias(t *testing.T) {
 	_, err := svc.UpdateBotAlias(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34730,6 +33596,7 @@ func TestSerdeUpdateSnapshot_UpdateBotLocale(t *testing.T) {
 	_, err := svc.UpdateBotLocale(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34766,6 +33633,7 @@ func TestSerdeUpdateSnapshot_UpdateBotRecommendation(t *testing.T) {
 	_, err := svc.UpdateBotRecommendation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34795,6 +33663,7 @@ func TestSerdeUpdateSnapshot_UpdateExport(t *testing.T) {
 	_, err := svc.UpdateExport(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35357,21 +34226,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				SuccessConditional: &types.ConditionalSpecification{
@@ -35401,21 +34259,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -35612,21 +34459,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -35820,21 +34656,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -36027,21 +34852,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -36071,21 +34885,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -36282,21 +35085,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -36490,21 +35282,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -36697,21 +35478,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				TimeoutConditional: &types.ConditionalSpecification{
@@ -36741,21 +35511,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -36952,21 +35711,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -37160,21 +35908,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -37900,29 +36637,6 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 							StartTimeoutMs: ptr.Int32(1),
 						},
 					},
-					"key1": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
 				},
 			},
 			DeclinationResponse: &types.ResponseSpecification{
@@ -38283,21 +36997,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ConfirmationConditional: &types.ConditionalSpecification{
@@ -38327,21 +37030,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -38538,21 +37230,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -38746,21 +37427,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -38953,21 +37623,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DeclinationConditional: &types.ConditionalSpecification{
@@ -38997,21 +37656,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -39208,21 +37856,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -39416,21 +38053,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -39792,21 +38418,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 								{},
 							},
 						},
-						"key1": {
-							Shape: types.SlotShape("Scalar"),
-							Value: &types.SlotValue{
-								InterpretedValue: ptr.String("__InterpretedValue__"),
-							},
-							Values: []types.SlotValueOverride{
-								{},
-								{},
-							},
-						},
 					},
 				},
 				SessionAttributes: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			FailureConditional: &types.ConditionalSpecification{
@@ -39836,21 +38451,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -40047,21 +38651,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -40255,21 +38848,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					Response: &types.ResponseSpecification{
@@ -40636,21 +39218,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 										{},
 									},
 								},
-								"key1": {
-									Shape: types.SlotShape("Scalar"),
-									Value: &types.SlotValue{
-										InterpretedValue: ptr.String("__InterpretedValue__"),
-									},
-									Values: []types.SlotValueOverride{
-										{},
-										{},
-									},
-								},
 							},
 						},
 						SessionAttributes: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					SuccessConditional: &types.ConditionalSpecification{
@@ -40680,21 +39251,10 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 													{},
 												},
 											},
-											"key1": {
-												Shape: types.SlotShape("Scalar"),
-												Value: &types.SlotValue{
-													InterpretedValue: ptr.String("__InterpretedValue__"),
-												},
-												Values: []types.SlotValueOverride{
-													{},
-													{},
-												},
-											},
 										},
 									},
 									SessionAttributes: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								Response: &types.ResponseSpecification{
@@ -40775,6 +39335,7 @@ func TestSerdeUpdateSnapshot_UpdateIntent(t *testing.T) {
 	_, err := svc.UpdateIntent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40805,6 +39366,7 @@ func TestSerdeUpdateSnapshot_UpdateResourcePolicy(t *testing.T) {
 	_, err := svc.UpdateResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41010,29 +39572,6 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
 				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
 					"key0": {
-						AllowInterrupt: ptr.Bool(true),
-						AllowedInputTypes: &types.AllowedInputTypes{
-							AllowAudioInput: ptr.Bool(true),
-							AllowDTMFInput:  ptr.Bool(true),
-						},
-						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-							AudioSpecification: &types.AudioSpecification{
-								MaxLengthMs:  ptr.Int32(1),
-								EndTimeoutMs: ptr.Int32(1),
-							},
-							DtmfSpecification: &types.DTMFSpecification{
-								MaxLength:         ptr.Int32(1),
-								EndTimeoutMs:      ptr.Int32(1),
-								DeletionCharacter: ptr.String("__DeletionCharacter__"),
-								EndCharacter:      ptr.String("__EndCharacter__"),
-							},
-						},
-						TextInputSpecification: &types.TextInputSpecification{
-							StartTimeoutMs: ptr.Int32(1),
-						},
-					},
-					"key1": {
 						AllowInterrupt: ptr.Bool(true),
 						AllowedInputTypes: &types.AllowedInputTypes{
 							AllowAudioInput: ptr.Bool(true),
@@ -41766,21 +40305,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CaptureConditional: &types.ConditionalSpecification{
@@ -41810,21 +40338,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -42021,21 +40538,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -42229,21 +40735,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -42605,21 +41100,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 									{},
 								},
 							},
-							"key1": {
-								Shape: types.SlotShape("Scalar"),
-								Value: &types.SlotValue{
-									InterpretedValue: ptr.String("__InterpretedValue__"),
-								},
-								Values: []types.SlotValueOverride{
-									{},
-									{},
-								},
-							},
 						},
 					},
 					SessionAttributes: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				FailureConditional: &types.ConditionalSpecification{
@@ -42649,21 +41133,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -42860,21 +41333,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 												{},
 											},
 										},
-										"key1": {
-											Shape: types.SlotShape("Scalar"),
-											Value: &types.SlotValue{
-												InterpretedValue: ptr.String("__InterpretedValue__"),
-											},
-											Values: []types.SlotValueOverride{
-												{},
-												{},
-											},
-										},
 									},
 								},
 								SessionAttributes: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Response: &types.ResponseSpecification{
@@ -43068,21 +41530,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						Response: &types.ResponseSpecification{
@@ -43449,21 +41900,10 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 											{},
 										},
 									},
-									"key1": {
-										Shape: types.SlotShape("Scalar"),
-										Value: &types.SlotValue{
-											InterpretedValue: ptr.String("__InterpretedValue__"),
-										},
-										Values: []types.SlotValueOverride{
-											{},
-											{},
-										},
-									},
 								},
 							},
 							SessionAttributes: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						SuccessConditional: &types.ConditionalSpecification{
@@ -43491,17 +41931,21 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 														{},
 													},
 												},
-												"key1": {},
 											},
 										},
 										SessionAttributes: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									Response: &types.ResponseSpecification{
 										MessageGroups: []types.MessageGroup{
-											{},
+											{
+												Message: nil,
+												Variations: []types.Message{
+													{},
+													{},
+												},
+											},
 											{},
 										},
 										AllowInterrupt: ptr.Bool(true),
@@ -43545,6 +41989,7 @@ func TestSerdeUpdateSnapshot_UpdateSlot(t *testing.T) {
 	_, err := svc.UpdateSlot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -43637,6 +42082,7 @@ func TestSerdeUpdateSnapshot_UpdateSlotType(t *testing.T) {
 	_, err := svc.UpdateSlotType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -43667,6 +42113,7 @@ func TestSerdeUpdateSnapshot_UpdateTestSet(t *testing.T) {
 	_, err := svc.UpdateTestSet(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

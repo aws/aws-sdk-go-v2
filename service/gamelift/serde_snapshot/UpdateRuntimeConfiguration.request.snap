@@ -4,3 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
+¢gFleetIdk__FleetId__tRuntimeConfiguration£oServerProcesses‚£tConcurrentExecutionsjLaunchPathn__LaunchPath__jParametersn__Parameters__£jLaunchPathn__LaunchPath__jParametersn__Parameters__tConcurrentExecutionsx#MaxConcurrentGameSessionActivationsx#GameSessionActivationTimeoutSeconds

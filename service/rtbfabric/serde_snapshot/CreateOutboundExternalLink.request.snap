@@ -2,4 +2,4 @@ POST /requester-gateway/__GatewayId__/outbound-external-link
 
 Content-Type: application/json
 
-{"attributes":{"customerProvidedId":"__CustomerProvidedId__","responderErrorMasking":[{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1},{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1}]},"clientToken":"__ClientToken__","logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"publicEndpoint":"__PublicEndpoint__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"attributes":{"customerProvidedId":"__CustomerProvidedId__","responderErrorMasking":[{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1},{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1}]},"clientToken":"__ClientToken__","logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"publicEndpoint":"__PublicEndpoint__","tags":{"key0":"__Value__"}}

@@ -2,4 +2,4 @@ POST /projects
 
 Content-Type: application/json
 
-{"DatasetName":"__DatasetName__","Name":"__Name__","RecipeName":"__RecipeName__","RoleArn":"__RoleArn__","Sample":{"Size":1,"Type":"FIRST_N"},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"DatasetName":"__DatasetName__","Name":"__Name__","RecipeName":"__RecipeName__","RoleArn":"__RoleArn__","Sample":{"Size":1,"Type":"FIRST_N"},"Tags":{"key0":"__Value__"}}

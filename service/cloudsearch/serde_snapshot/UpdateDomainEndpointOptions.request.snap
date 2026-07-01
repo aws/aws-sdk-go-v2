@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=UpdateDomainEndpointOptions&DomainEndpointOptions.EnforceHTTPS=true&DomainEndpointOptions.TLSSecurityPolicy=Policy-Min-TLS-1-0-2019-07&DomainName=__DomainName__&Version=2013-01-01

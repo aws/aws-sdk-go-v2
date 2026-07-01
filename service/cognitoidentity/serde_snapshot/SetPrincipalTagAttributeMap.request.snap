@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityService.SetPrincipalTagAttributeMap
 
-{"IdentityPoolId":"__IdentityPoolId__","IdentityProviderName":"__IdentityProviderName__","PrincipalTags":{"key0":"__Value__","key1":"__Value__"},"UseDefaults":true}
+{"IdentityPoolId":"__IdentityPoolId__","IdentityProviderName":"__IdentityProviderName__","PrincipalTags":{"key0":"__Value__"},"UseDefaults":true}

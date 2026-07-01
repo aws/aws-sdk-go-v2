@@ -2,4 +2,4 @@ POST /clusters/__ClusterName__/fargate-profiles
 
 Content-Type: application/json
 
-{"clientRequestToken":"__ClientRequestToken__","fargateProfileName":"__FargateProfileName__","podExecutionRoleArn":"__PodExecutionRoleArn__","selectors":[{"labels":{"key0":"__Value__","key1":"__Value__"},"namespace":"__Namespace__"},{"labels":{"key0":"__Value__","key1":"__Value__"},"namespace":"__Namespace__"}],"subnets":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientRequestToken":"__ClientRequestToken__","fargateProfileName":"__FargateProfileName__","podExecutionRoleArn":"__PodExecutionRoleArn__","selectors":[{"labels":{"key0":"__Value__"},"namespace":"__Namespace__"},{"labels":{"key0":"__Value__"},"namespace":"__Namespace__"}],"subnets":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

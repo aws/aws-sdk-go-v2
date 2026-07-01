@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=UpdateConfigurationTemplate&ApplicationName=__ApplicationName__&Description=__Description__&OptionSettings.member.1.Namespace=__Namespace__&OptionSettings.member.1.OptionName=__OptionName__&OptionSettings.member.1.ResourceName=__ResourceName__&OptionSettings.member.1.Value=__Value__&OptionSettings.member.2.Namespace=__Namespace__&OptionSettings.member.2.OptionName=__OptionName__&OptionSettings.member.2.ResourceName=__ResourceName__&OptionSettings.member.2.Value=__Value__&OptionsToRemove.member.1.Namespace=__Namespace__&OptionsToRemove.member.1.OptionName=__OptionName__&OptionsToRemove.member.1.ResourceName=__ResourceName__&OptionsToRemove.member.2.Namespace=__Namespace__&OptionsToRemove.member.2.OptionName=__OptionName__&OptionsToRemove.member.2.ResourceName=__ResourceName__&TemplateName=__TemplateName__&Version=2010-12-01

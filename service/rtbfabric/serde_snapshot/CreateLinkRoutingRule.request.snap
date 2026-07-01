@@ -2,4 +2,4 @@ POST /responder-gateway/__GatewayId__/link/__LinkId__/routing-rule
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","conditions":{"hostHeader":"__HostHeader__","hostHeaderWildcard":"__HostHeaderWildcard__","pathExact":"__PathExact__","pathPrefix":"__PathPrefix__","queryStringEquals":{"key":"__Key__","value":"__Value__"},"queryStringExists":"__QueryStringExists__"},"priority":1,"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","conditions":{"hostHeader":"__HostHeader__","hostHeaderWildcard":"__HostHeaderWildcard__","pathExact":"__PathExact__","pathPrefix":"__PathPrefix__","queryStringEquals":{"key":"__Key__","value":"__Value__"},"queryStringExists":"__QueryStringExists__"},"priority":1,"tags":{"key0":"__Value__"}}

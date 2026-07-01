@@ -3,4 +3,4 @@ POST /2023-10-12/farms
 Content-Type: application/json
 X-Amz-Client-Token: __ClientToken__
 
-{"costScaleFactor":1,"description":"__Description__","displayName":"__DisplayName__","kmsKeyArn":"__KmsKeyArn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"costScaleFactor":1,"description":"__Description__","displayName":"__DisplayName__","kmsKeyArn":"__KmsKeyArn__","tags":{"key0":"__Value__"}}

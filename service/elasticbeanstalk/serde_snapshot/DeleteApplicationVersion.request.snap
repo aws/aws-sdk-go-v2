@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteApplicationVersion&ApplicationName=__ApplicationName__&DeleteSourceBundle=true&Version=2010-12-01&VersionLabel=__VersionLabel__

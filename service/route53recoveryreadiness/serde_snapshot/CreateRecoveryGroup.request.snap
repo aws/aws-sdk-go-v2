@@ -2,4 +2,4 @@ POST /recoverygroups
 
 Content-Type: application/json
 
-{"cells":["__Member__","__Member__"],"recoveryGroupName":"__RecoveryGroupName__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"cells":["__Member__","__Member__"],"recoveryGroupName":"__RecoveryGroupName__","tags":{"key0":"__Value__"}}

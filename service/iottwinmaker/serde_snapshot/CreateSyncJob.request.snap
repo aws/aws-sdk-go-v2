@@ -2,4 +2,4 @@ POST /workspaces/__WorkspaceId__/sync-jobs/__SyncSource__
 
 Content-Type: application/json
 
-{"syncRole":"__SyncRole__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"syncRole":"__SyncRole__","tags":{"key0":"__Value__"}}

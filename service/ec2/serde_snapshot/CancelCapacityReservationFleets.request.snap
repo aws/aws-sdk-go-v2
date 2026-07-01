@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CancelCapacityReservationFleets&CapacityReservationFleetId.1=__Member__&CapacityReservationFleetId.2=__Member__&DryRun=true&Version=2016-11-15

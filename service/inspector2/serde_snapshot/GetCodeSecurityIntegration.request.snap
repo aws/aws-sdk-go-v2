@@ -2,4 +2,4 @@ POST /codesecurity/integration/get
 
 Content-Type: application/json
 
-{"integrationArn":"__IntegrationArn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"integrationArn":"__IntegrationArn__","tags":{"key0":"__Value__"}}

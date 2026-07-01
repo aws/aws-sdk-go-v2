@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetCapacityManagerMetricDimensions&DryRun=true&EndTime=2000-01-01T00%3A00%3A00Z&FilterBy.1.DimensionCondition.Comparison=equals&FilterBy.1.DimensionCondition.Dimension=resource-region&FilterBy.1.DimensionCondition.Value.1=__Member__&FilterBy.1.DimensionCondition.Value.2=__Member__&FilterBy.2.DimensionCondition.Comparison=equals&FilterBy.2.DimensionCondition.Dimension=resource-region&FilterBy.2.DimensionCondition.Value.1=__Member__&FilterBy.2.DimensionCondition.Value.2=__Member__&GroupBy.1=resource-region&GroupBy.2=resource-region&MaxResults=1&MetricName.1=reservation-total-capacity-hrs-vcpu&MetricName.2=reservation-total-capacity-hrs-vcpu&NextToken=__NextToken__&StartTime=2000-01-01T00%3A00%3A00Z&Version=2016-11-15

@@ -2,4 +2,4 @@ POST /phone-number/claim
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","InstanceId":"__InstanceId__","PhoneNumber":"__PhoneNumber__","PhoneNumberDescription":"__PhoneNumberDescription__","Tags":{"key0":"__Value__","key1":"__Value__"},"TargetArn":"__TargetArn__"}
+{"ClientToken":"__ClientToken__","InstanceId":"__InstanceId__","PhoneNumber":"__PhoneNumber__","PhoneNumberDescription":"__PhoneNumberDescription__","Tags":{"key0":"__Value__"},"TargetArn":"__TargetArn__"}

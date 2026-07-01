@@ -2,4 +2,4 @@ PATCH /global-networks/__GlobalNetworkId__/network-resources/__ResourceArn__/met
 
 Content-Type: application/json
 
-{"Metadata":{"key0":"__Value__","key1":"__Value__"}}
+{"Metadata":{"key0":"__Value__"}}

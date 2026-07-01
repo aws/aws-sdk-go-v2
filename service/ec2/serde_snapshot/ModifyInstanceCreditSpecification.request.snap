@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyInstanceCreditSpecification&ClientToken=__ClientToken__&DryRun=true&InstanceCreditSpecification.1.CpuCredits=__CpuCredits__&InstanceCreditSpecification.1.InstanceId=__InstanceId__&InstanceCreditSpecification.2.CpuCredits=__CpuCredits__&InstanceCreditSpecification.2.InstanceId=__InstanceId__&Version=2016-11-15

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyDBInstance&ApplyImmediately=true&AutoMinorVersionUpgrade=true&CACertificateIdentifier=__CACertificateIdentifier__&CertificateRotationRestart=true&CopyTagsToSnapshot=true&DBInstanceClass=__DBInstanceClass__&DBInstanceIdentifier=__DBInstanceIdentifier__&EnablePerformanceInsights=true&NewDBInstanceIdentifier=__NewDBInstanceIdentifier__&PerformanceInsightsKMSKeyId=__PerformanceInsightsKMSKeyId__&PreferredMaintenanceWindow=__PreferredMaintenanceWindow__&PromotionTier=1&Version=2014-10-31

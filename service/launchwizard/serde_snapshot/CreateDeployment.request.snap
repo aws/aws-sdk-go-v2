@@ -2,4 +2,4 @@ POST /createDeployment
 
 Content-Type: application/json
 
-{"deploymentPatternName":"__DeploymentPatternName__","dryRun":true,"name":"__Name__","specifications":{"key0":"__Value__","key1":"__Value__"},"tags":{"key0":"__Value__","key1":"__Value__"},"workloadName":"__WorkloadName__"}
+{"deploymentPatternName":"__DeploymentPatternName__","dryRun":true,"name":"__Name__","specifications":{"key0":"__Value__"},"tags":{"key0":"__Value__"},"workloadName":"__WorkloadName__"}

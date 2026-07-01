@@ -2,4 +2,4 @@ POST /device-discoveries
 
 Content-Type: application/json
 
-{"AccountAssociationId":"__AccountAssociationId__","AuthenticationMaterial":"__AuthenticationMaterial__","AuthenticationMaterialType":"ZWAVE_INSTALL_CODE","ClientToken":"__ClientToken__","ConnectorAssociationIdentifier":"__ConnectorAssociationIdentifier__","ConnectorDeviceIdList":["__Member__","__Member__"],"ControllerIdentifier":"__ControllerIdentifier__","CustomProtocolDetail":{"key0":"__Value__","key1":"__Value__"},"DiscoveryType":"ZWAVE","EndDeviceIdentifier":"__EndDeviceIdentifier__","Protocol":"ZWAVE","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"AccountAssociationId":"__AccountAssociationId__","AuthenticationMaterial":"__AuthenticationMaterial__","AuthenticationMaterialType":"ZWAVE_INSTALL_CODE","ClientToken":"__ClientToken__","ConnectorAssociationIdentifier":"__ConnectorAssociationIdentifier__","ConnectorDeviceIdList":["__Member__","__Member__"],"ControllerIdentifier":"__ControllerIdentifier__","CustomProtocolDetail":{"key0":"__Value__"},"DiscoveryType":"ZWAVE","EndDeviceIdentifier":"__EndDeviceIdentifier__","Protocol":"ZWAVE","Tags":{"key0":"__Value__"}}

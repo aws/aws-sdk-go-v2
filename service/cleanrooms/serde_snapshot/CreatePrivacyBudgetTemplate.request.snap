@@ -2,4 +2,4 @@ POST /memberships/__MembershipIdentifier__/privacybudgettemplates
 
 Content-Type: application/json
 
-{"autoRefresh":"CALENDAR_MONTH","parameters":{"differentialPrivacy":{"epsilon":1,"usersNoisePerQuery":1}},"privacyBudgetType":"DIFFERENTIAL_PRIVACY","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"autoRefresh":"CALENDAR_MONTH","parameters":{"differentialPrivacy":{"epsilon":1,"usersNoisePerQuery":1}},"privacyBudgetType":"DIFFERENTIAL_PRIVACY","tags":{"key0":"__Value__"}}

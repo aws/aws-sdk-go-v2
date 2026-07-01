@@ -2,4 +2,4 @@ POST /get-application
 
 Content-Type: application/json
 
-{"AppRegistryArn":"__AppRegistryArn__","ApplicationArn":"__ApplicationArn__","ApplicationId":"__ApplicationId__"}
+{"ApplicationArn":"__ApplicationArn__","ApplicationId":"__ApplicationId__","AppRegistryArn":"__AppRegistryArn__"}

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ListAllowedNodeTypeModifications&CacheClusterId=__CacheClusterId__&ReplicationGroupId=__ReplicationGroupId__&Version=2015-02-02

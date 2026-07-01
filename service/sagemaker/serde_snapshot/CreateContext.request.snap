@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SageMaker.CreateContext
 
-{"ContextName":"__ContextName__","ContextType":"__ContextType__","Description":"__Description__","Properties":{"key0":"__Value__","key1":"__Value__"},"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"ContextName":"__ContextName__","ContextType":"__ContextType__","Description":"__Description__","Properties":{"key0":"__Value__"},"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

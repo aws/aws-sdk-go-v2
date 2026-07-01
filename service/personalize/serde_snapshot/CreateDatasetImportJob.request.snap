@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AmazonPersonalize.CreateDatasetImportJob
 
-{"dataSource":{"dataLocation":"__DataLocation__"},"datasetArn":"__DatasetArn__","importMode":"FULL","jobName":"__JobName__","publishAttributionMetricsToS3":true,"roleArn":"__RoleArn__","tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}
+{"datasetArn":"__DatasetArn__","dataSource":{"dataLocation":"__DataLocation__"},"importMode":"FULL","jobName":"__JobName__","publishAttributionMetricsToS3":true,"roleArn":"__RoleArn__","tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}

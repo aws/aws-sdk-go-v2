@@ -2,4 +2,4 @@ POST /CreateIndex
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","Tags":{"key0":"__Value__"}}

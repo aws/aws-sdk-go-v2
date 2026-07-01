@@ -7,7 +7,6 @@ package iottwinmaker
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -173,6 +179,9 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 	input := &BatchPutPropertyValuesInput{
 		WorkspaceId: ptr.String("__WorkspaceId__"),
@@ -183,7 +192,6 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 					ComponentPath: ptr.String("__ComponentPath__"),
 					ExternalIdProperty: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					EntityId:     ptr.String("__EntityId__"),
 					PropertyName: ptr.String("__PropertyName__"),
@@ -203,7 +211,6 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -227,7 +234,6 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -245,7 +251,6 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 					ComponentPath: ptr.String("__ComponentPath__"),
 					ExternalIdProperty: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					EntityId:     ptr.String("__EntityId__"),
 					PropertyName: ptr.String("__PropertyName__"),
@@ -265,7 +270,6 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -289,7 +293,6 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -312,6 +315,7 @@ func TestSerdeCheckSnapshot_BatchPutPropertyValues(t *testing.T) {
 	_, err := svc.BatchPutPropertyValues(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -340,6 +344,7 @@ func TestSerdeCheckSnapshot_CancelMetadataTransferJob(t *testing.T) {
 	_, err := svc.CancelMetadataTransferJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -379,7 +384,6 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -399,7 +403,6 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -430,7 +433,6 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -440,89 +442,6 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 				},
 				Configuration: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				DisplayName: ptr.String("__DisplayName__"),
-			},
-			"key1": {
-				DataType: &types.DataType{
-					Type:       types.Type("RELATIONSHIP"),
-					NestedType: nil,
-					AllowedValues: []types.DataValue{
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-					},
-					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-					Relationship: &types.Relationship{
-						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-						RelationshipType:      ptr.String("__RelationshipType__"),
-					},
-				},
-				IsRequiredInEntity: ptr.Bool(true),
-				IsExternalId:       ptr.Bool(true),
-				IsStoredExternally: ptr.Bool(true),
-				IsTimeSeries:       ptr.Bool(true),
-				DefaultValue: &types.DataValue{
-					BooleanValue: ptr.Bool(true),
-					DoubleValue:  ptr.Float64(1.0),
-					IntegerValue: ptr.Int32(1),
-					LongValue:    ptr.Int64(1),
-					StringValue:  ptr.String("__StringValue__"),
-					ListValue: []types.DataValue{
-						{},
-						{},
-					},
-					MapValue: map[string]types.DataValue{
-						"key0": {},
-						"key1": {},
-					},
-					RelationshipValue: &types.RelationshipValue{
-						TargetEntityId:      ptr.String("__TargetEntityId__"),
-						TargetComponentName: ptr.String("__TargetComponentName__"),
-					},
-					Expression: ptr.String("__Expression__"),
-				},
-				Configuration: map[string]string{
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				DisplayName: ptr.String("__DisplayName__"),
 			},
@@ -545,33 +464,12 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 					IsNative: ptr.Bool(true),
 				},
 			},
-			"key1": {
-				RequiredProperties: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Scope: types.Scope("ENTITY"),
-				ImplementedBy: &types.DataConnector{
-					Lambda: &types.LambdaFunction{
-						Arn: ptr.String("__Arn__"),
-					},
-					IsNative: ptr.Bool(true),
-				},
-			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		PropertyGroups: map[string]types.PropertyGroupRequest{
 			"key0": {
-				GroupType: types.GroupType("TABULAR"),
-				PropertyNames: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			"key1": {
 				GroupType: types.GroupType("TABULAR"),
 				PropertyNames: []string{
 					"__Member__",
@@ -582,9 +480,6 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 		ComponentTypeName: ptr.String("__ComponentTypeName__"),
 		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
 			"key0": {
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-			},
-			"key1": {
 				ComponentTypeId: ptr.String("__ComponentTypeId__"),
 			},
 		},
@@ -598,6 +493,7 @@ func TestSerdeCheckSnapshot_CreateComponentType(t *testing.T) {
 	_, err := svc.CreateComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -642,7 +538,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -662,7 +557,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -693,7 +587,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -703,7 +596,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -719,112 +611,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -837,248 +623,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 				},
 				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				Description:     ptr.String("__Description__"),
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-				Properties: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -1111,7 +655,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -1131,7 +674,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -1162,7 +704,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -1172,7 +713,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -1188,112 +728,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -1306,247 +740,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 				},
 				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				Description: ptr.String("__Description__"),
-				Properties: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -1560,7 +753,6 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 		ParentEntityId: ptr.String("__ParentEntityId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1572,6 +764,7 @@ func TestSerdeCheckSnapshot_CreateEntity(t *testing.T) {
 	_, err := svc.CreateEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1694,6 +887,7 @@ func TestSerdeCheckSnapshot_CreateMetadataTransferJob(t *testing.T) {
 	_, err := svc.CreateMetadataTransferJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1721,11 +915,9 @@ func TestSerdeCheckSnapshot_CreateScene(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		SceneMetadata: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1737,6 +929,7 @@ func TestSerdeCheckSnapshot_CreateScene(t *testing.T) {
 	_, err := svc.CreateScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1759,7 +952,6 @@ func TestSerdeCheckSnapshot_CreateSyncJob(t *testing.T) {
 		SyncRole:    ptr.String("__SyncRole__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1771,6 +963,7 @@ func TestSerdeCheckSnapshot_CreateSyncJob(t *testing.T) {
 	_, err := svc.CreateSyncJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1794,7 +987,6 @@ func TestSerdeCheckSnapshot_CreateWorkspace(t *testing.T) {
 		Role:        ptr.String("__Role__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1806,6 +998,7 @@ func TestSerdeCheckSnapshot_CreateWorkspace(t *testing.T) {
 	_, err := svc.CreateWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1835,6 +1028,7 @@ func TestSerdeCheckSnapshot_DeleteComponentType(t *testing.T) {
 	_, err := svc.DeleteComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1865,6 +1059,7 @@ func TestSerdeCheckSnapshot_DeleteEntity(t *testing.T) {
 	_, err := svc.DeleteEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1894,6 +1089,7 @@ func TestSerdeCheckSnapshot_DeleteScene(t *testing.T) {
 	_, err := svc.DeleteScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1923,6 +1119,7 @@ func TestSerdeCheckSnapshot_DeleteSyncJob(t *testing.T) {
 	_, err := svc.DeleteSyncJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1951,6 +1148,7 @@ func TestSerdeCheckSnapshot_DeleteWorkspace(t *testing.T) {
 	_, err := svc.DeleteWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1982,6 +1180,7 @@ func TestSerdeCheckSnapshot_ExecuteQuery(t *testing.T) {
 	_, err := svc.ExecuteQuery(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2011,6 +1210,7 @@ func TestSerdeCheckSnapshot_GetComponentType(t *testing.T) {
 	_, err := svc.GetComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2040,6 +1240,7 @@ func TestSerdeCheckSnapshot_GetEntity(t *testing.T) {
 	_, err := svc.GetEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2068,6 +1269,7 @@ func TestSerdeCheckSnapshot_GetMetadataTransferJob(t *testing.T) {
 	_, err := svc.GetMetadataTransferJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2094,6 +1296,7 @@ func TestSerdeCheckSnapshot_GetPricingPlan(t *testing.T) {
 	_, err := svc.GetPricingPlan(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2150,7 +1353,6 @@ func TestSerdeCheckSnapshot_GetPropertyValue(t *testing.T) {
 						},
 						MapValue: map[string]types.DataValue{
 							"key0": {},
-							"key1": {},
 						},
 						RelationshipValue: &types.RelationshipValue{
 							TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2174,7 +1376,6 @@ func TestSerdeCheckSnapshot_GetPropertyValue(t *testing.T) {
 						},
 						MapValue: map[string]types.DataValue{
 							"key0": {},
-							"key1": {},
 						},
 						RelationshipValue: &types.RelationshipValue{
 							TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2195,6 +1396,7 @@ func TestSerdeCheckSnapshot_GetPropertyValue(t *testing.T) {
 	_, err := svc.GetPropertyValue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2237,7 +1439,6 @@ func TestSerdeCheckSnapshot_GetPropertyValueHistory(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2261,7 +1462,6 @@ func TestSerdeCheckSnapshot_GetPropertyValueHistory(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2292,6 +1492,7 @@ func TestSerdeCheckSnapshot_GetPropertyValueHistory(t *testing.T) {
 	_, err := svc.GetPropertyValueHistory(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2321,6 +1522,7 @@ func TestSerdeCheckSnapshot_GetScene(t *testing.T) {
 	_, err := svc.GetScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2350,6 +1552,7 @@ func TestSerdeCheckSnapshot_GetSyncJob(t *testing.T) {
 	_, err := svc.GetSyncJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2378,6 +1581,7 @@ func TestSerdeCheckSnapshot_GetWorkspace(t *testing.T) {
 	_, err := svc.GetWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2410,6 +1614,7 @@ func TestSerdeCheckSnapshot_ListComponents(t *testing.T) {
 	_, err := svc.ListComponents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2448,6 +1653,7 @@ func TestSerdeCheckSnapshot_ListComponentTypes(t *testing.T) {
 	_, err := svc.ListComponentTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2486,6 +1692,7 @@ func TestSerdeCheckSnapshot_ListEntities(t *testing.T) {
 	_, err := svc.ListEntities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2525,6 +1732,7 @@ func TestSerdeCheckSnapshot_ListMetadataTransferJobs(t *testing.T) {
 	_, err := svc.ListMetadataTransferJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2558,6 +1766,7 @@ func TestSerdeCheckSnapshot_ListProperties(t *testing.T) {
 	_, err := svc.ListProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2588,6 +1797,7 @@ func TestSerdeCheckSnapshot_ListScenes(t *testing.T) {
 	_, err := svc.ListScenes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2618,6 +1828,7 @@ func TestSerdeCheckSnapshot_ListSyncJobs(t *testing.T) {
 	_, err := svc.ListSyncJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2657,6 +1868,7 @@ func TestSerdeCheckSnapshot_ListSyncResources(t *testing.T) {
 	_, err := svc.ListSyncResources(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2687,6 +1899,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2716,6 +1929,7 @@ func TestSerdeCheckSnapshot_ListWorkspaces(t *testing.T) {
 	_, err := svc.ListWorkspaces(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2736,7 +1950,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceARN: ptr.String("__ResourceARN__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2748,6 +1961,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2780,6 +1994,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2819,7 +2034,6 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2839,7 +2053,6 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2870,7 +2083,6 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -2880,89 +2092,6 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 				},
 				Configuration: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				DisplayName: ptr.String("__DisplayName__"),
-			},
-			"key1": {
-				DataType: &types.DataType{
-					Type:       types.Type("RELATIONSHIP"),
-					NestedType: nil,
-					AllowedValues: []types.DataValue{
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-					},
-					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-					Relationship: &types.Relationship{
-						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-						RelationshipType:      ptr.String("__RelationshipType__"),
-					},
-				},
-				IsRequiredInEntity: ptr.Bool(true),
-				IsExternalId:       ptr.Bool(true),
-				IsStoredExternally: ptr.Bool(true),
-				IsTimeSeries:       ptr.Bool(true),
-				DefaultValue: &types.DataValue{
-					BooleanValue: ptr.Bool(true),
-					DoubleValue:  ptr.Float64(1.0),
-					IntegerValue: ptr.Int32(1),
-					LongValue:    ptr.Int64(1),
-					StringValue:  ptr.String("__StringValue__"),
-					ListValue: []types.DataValue{
-						{},
-						{},
-					},
-					MapValue: map[string]types.DataValue{
-						"key0": {},
-						"key1": {},
-					},
-					RelationshipValue: &types.RelationshipValue{
-						TargetEntityId:      ptr.String("__TargetEntityId__"),
-						TargetComponentName: ptr.String("__TargetComponentName__"),
-					},
-					Expression: ptr.String("__Expression__"),
-				},
-				Configuration: map[string]string{
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				DisplayName: ptr.String("__DisplayName__"),
 			},
@@ -2985,29 +2114,9 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 					IsNative: ptr.Bool(true),
 				},
 			},
-			"key1": {
-				RequiredProperties: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Scope: types.Scope("ENTITY"),
-				ImplementedBy: &types.DataConnector{
-					Lambda: &types.LambdaFunction{
-						Arn: ptr.String("__Arn__"),
-					},
-					IsNative: ptr.Bool(true),
-				},
-			},
 		},
 		PropertyGroups: map[string]types.PropertyGroupRequest{
 			"key0": {
-				GroupType: types.GroupType("TABULAR"),
-				PropertyNames: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			"key1": {
 				GroupType: types.GroupType("TABULAR"),
 				PropertyNames: []string{
 					"__Member__",
@@ -3018,9 +2127,6 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 		ComponentTypeName: ptr.String("__ComponentTypeName__"),
 		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
 			"key0": {
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-			},
-			"key1": {
 				ComponentTypeId: ptr.String("__ComponentTypeId__"),
 			},
 		},
@@ -3034,6 +2140,7 @@ func TestSerdeCheckSnapshot_UpdateComponentType(t *testing.T) {
 	_, err := svc.UpdateComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3079,7 +2186,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3099,7 +2205,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3130,7 +2235,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3140,7 +2244,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -3156,112 +2259,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3274,249 +2271,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 				},
 				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				UpdateType:      types.ComponentUpdateType("CREATE"),
-				Description:     ptr.String("__Description__"),
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-				PropertyUpdates: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -3550,7 +2304,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3570,7 +2323,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3601,7 +2353,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3611,7 +2362,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -3627,112 +2377,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -3745,248 +2389,6 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 				},
 				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				UpdateType:  types.ComponentUpdateType("CREATE"),
-				Description: ptr.String("__Description__"),
-				PropertyUpdates: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -4011,6 +2413,7 @@ func TestSerdeCheckSnapshot_UpdateEntity(t *testing.T) {
 	_, err := svc.UpdateEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4043,6 +2446,7 @@ func TestSerdeCheckSnapshot_UpdatePricingPlan(t *testing.T) {
 	_, err := svc.UpdatePricingPlan(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4070,7 +2474,6 @@ func TestSerdeCheckSnapshot_UpdateScene(t *testing.T) {
 		},
 		SceneMetadata: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4082,6 +2485,7 @@ func TestSerdeCheckSnapshot_UpdateScene(t *testing.T) {
 	_, err := svc.UpdateScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4113,6 +2517,7 @@ func TestSerdeCheckSnapshot_UpdateWorkspace(t *testing.T) {
 	_, err := svc.UpdateWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4137,7 +2542,6 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 					ComponentPath: ptr.String("__ComponentPath__"),
 					ExternalIdProperty: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					EntityId:     ptr.String("__EntityId__"),
 					PropertyName: ptr.String("__PropertyName__"),
@@ -4157,7 +2561,6 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4181,7 +2584,6 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4199,7 +2601,6 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 					ComponentPath: ptr.String("__ComponentPath__"),
 					ExternalIdProperty: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					EntityId:     ptr.String("__EntityId__"),
 					PropertyName: ptr.String("__PropertyName__"),
@@ -4219,7 +2620,6 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4243,7 +2643,6 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4266,6 +2665,7 @@ func TestSerdeUpdateSnapshot_BatchPutPropertyValues(t *testing.T) {
 	_, err := svc.BatchPutPropertyValues(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4294,6 +2694,7 @@ func TestSerdeUpdateSnapshot_CancelMetadataTransferJob(t *testing.T) {
 	_, err := svc.CancelMetadataTransferJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4333,7 +2734,6 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4353,7 +2753,6 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4384,7 +2783,6 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4394,89 +2792,6 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 				},
 				Configuration: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				DisplayName: ptr.String("__DisplayName__"),
-			},
-			"key1": {
-				DataType: &types.DataType{
-					Type:       types.Type("RELATIONSHIP"),
-					NestedType: nil,
-					AllowedValues: []types.DataValue{
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-					},
-					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-					Relationship: &types.Relationship{
-						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-						RelationshipType:      ptr.String("__RelationshipType__"),
-					},
-				},
-				IsRequiredInEntity: ptr.Bool(true),
-				IsExternalId:       ptr.Bool(true),
-				IsStoredExternally: ptr.Bool(true),
-				IsTimeSeries:       ptr.Bool(true),
-				DefaultValue: &types.DataValue{
-					BooleanValue: ptr.Bool(true),
-					DoubleValue:  ptr.Float64(1.0),
-					IntegerValue: ptr.Int32(1),
-					LongValue:    ptr.Int64(1),
-					StringValue:  ptr.String("__StringValue__"),
-					ListValue: []types.DataValue{
-						{},
-						{},
-					},
-					MapValue: map[string]types.DataValue{
-						"key0": {},
-						"key1": {},
-					},
-					RelationshipValue: &types.RelationshipValue{
-						TargetEntityId:      ptr.String("__TargetEntityId__"),
-						TargetComponentName: ptr.String("__TargetComponentName__"),
-					},
-					Expression: ptr.String("__Expression__"),
-				},
-				Configuration: map[string]string{
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				DisplayName: ptr.String("__DisplayName__"),
 			},
@@ -4499,33 +2814,12 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 					IsNative: ptr.Bool(true),
 				},
 			},
-			"key1": {
-				RequiredProperties: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Scope: types.Scope("ENTITY"),
-				ImplementedBy: &types.DataConnector{
-					Lambda: &types.LambdaFunction{
-						Arn: ptr.String("__Arn__"),
-					},
-					IsNative: ptr.Bool(true),
-				},
-			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		PropertyGroups: map[string]types.PropertyGroupRequest{
 			"key0": {
-				GroupType: types.GroupType("TABULAR"),
-				PropertyNames: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			"key1": {
 				GroupType: types.GroupType("TABULAR"),
 				PropertyNames: []string{
 					"__Member__",
@@ -4536,9 +2830,6 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 		ComponentTypeName: ptr.String("__ComponentTypeName__"),
 		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
 			"key0": {
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-			},
-			"key1": {
 				ComponentTypeId: ptr.String("__ComponentTypeId__"),
 			},
 		},
@@ -4552,6 +2843,7 @@ func TestSerdeUpdateSnapshot_CreateComponentType(t *testing.T) {
 	_, err := svc.CreateComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4596,7 +2888,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4616,7 +2907,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4647,7 +2937,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4657,7 +2946,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -4673,112 +2961,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -4791,248 +2973,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 				},
 				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				Description:     ptr.String("__Description__"),
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-				Properties: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -5065,7 +3005,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -5085,7 +3024,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -5116,7 +3054,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -5126,7 +3063,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -5142,112 +3078,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -5260,247 +3090,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 				},
 				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				Description: ptr.String("__Description__"),
-				Properties: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroups: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -5514,7 +3103,6 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 		ParentEntityId: ptr.String("__ParentEntityId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5526,6 +3114,7 @@ func TestSerdeUpdateSnapshot_CreateEntity(t *testing.T) {
 	_, err := svc.CreateEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5648,6 +3237,7 @@ func TestSerdeUpdateSnapshot_CreateMetadataTransferJob(t *testing.T) {
 	_, err := svc.CreateMetadataTransferJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5675,11 +3265,9 @@ func TestSerdeUpdateSnapshot_CreateScene(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		SceneMetadata: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5691,6 +3279,7 @@ func TestSerdeUpdateSnapshot_CreateScene(t *testing.T) {
 	_, err := svc.CreateScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5713,7 +3302,6 @@ func TestSerdeUpdateSnapshot_CreateSyncJob(t *testing.T) {
 		SyncRole:    ptr.String("__SyncRole__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5725,6 +3313,7 @@ func TestSerdeUpdateSnapshot_CreateSyncJob(t *testing.T) {
 	_, err := svc.CreateSyncJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5748,7 +3337,6 @@ func TestSerdeUpdateSnapshot_CreateWorkspace(t *testing.T) {
 		Role:        ptr.String("__Role__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5760,6 +3348,7 @@ func TestSerdeUpdateSnapshot_CreateWorkspace(t *testing.T) {
 	_, err := svc.CreateWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5789,6 +3378,7 @@ func TestSerdeUpdateSnapshot_DeleteComponentType(t *testing.T) {
 	_, err := svc.DeleteComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5819,6 +3409,7 @@ func TestSerdeUpdateSnapshot_DeleteEntity(t *testing.T) {
 	_, err := svc.DeleteEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5848,6 +3439,7 @@ func TestSerdeUpdateSnapshot_DeleteScene(t *testing.T) {
 	_, err := svc.DeleteScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5877,6 +3469,7 @@ func TestSerdeUpdateSnapshot_DeleteSyncJob(t *testing.T) {
 	_, err := svc.DeleteSyncJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5905,6 +3498,7 @@ func TestSerdeUpdateSnapshot_DeleteWorkspace(t *testing.T) {
 	_, err := svc.DeleteWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5936,6 +3530,7 @@ func TestSerdeUpdateSnapshot_ExecuteQuery(t *testing.T) {
 	_, err := svc.ExecuteQuery(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5965,6 +3560,7 @@ func TestSerdeUpdateSnapshot_GetComponentType(t *testing.T) {
 	_, err := svc.GetComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5994,6 +3590,7 @@ func TestSerdeUpdateSnapshot_GetEntity(t *testing.T) {
 	_, err := svc.GetEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6022,6 +3619,7 @@ func TestSerdeUpdateSnapshot_GetMetadataTransferJob(t *testing.T) {
 	_, err := svc.GetMetadataTransferJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6048,6 +3646,7 @@ func TestSerdeUpdateSnapshot_GetPricingPlan(t *testing.T) {
 	_, err := svc.GetPricingPlan(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6104,7 +3703,6 @@ func TestSerdeUpdateSnapshot_GetPropertyValue(t *testing.T) {
 						},
 						MapValue: map[string]types.DataValue{
 							"key0": {},
-							"key1": {},
 						},
 						RelationshipValue: &types.RelationshipValue{
 							TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6128,7 +3726,6 @@ func TestSerdeUpdateSnapshot_GetPropertyValue(t *testing.T) {
 						},
 						MapValue: map[string]types.DataValue{
 							"key0": {},
-							"key1": {},
 						},
 						RelationshipValue: &types.RelationshipValue{
 							TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6149,6 +3746,7 @@ func TestSerdeUpdateSnapshot_GetPropertyValue(t *testing.T) {
 	_, err := svc.GetPropertyValue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6191,7 +3789,6 @@ func TestSerdeUpdateSnapshot_GetPropertyValueHistory(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6215,7 +3812,6 @@ func TestSerdeUpdateSnapshot_GetPropertyValueHistory(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6246,6 +3842,7 @@ func TestSerdeUpdateSnapshot_GetPropertyValueHistory(t *testing.T) {
 	_, err := svc.GetPropertyValueHistory(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6275,6 +3872,7 @@ func TestSerdeUpdateSnapshot_GetScene(t *testing.T) {
 	_, err := svc.GetScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6304,6 +3902,7 @@ func TestSerdeUpdateSnapshot_GetSyncJob(t *testing.T) {
 	_, err := svc.GetSyncJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6332,6 +3931,7 @@ func TestSerdeUpdateSnapshot_GetWorkspace(t *testing.T) {
 	_, err := svc.GetWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6364,6 +3964,7 @@ func TestSerdeUpdateSnapshot_ListComponents(t *testing.T) {
 	_, err := svc.ListComponents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6402,6 +4003,7 @@ func TestSerdeUpdateSnapshot_ListComponentTypes(t *testing.T) {
 	_, err := svc.ListComponentTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6440,6 +4042,7 @@ func TestSerdeUpdateSnapshot_ListEntities(t *testing.T) {
 	_, err := svc.ListEntities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6479,6 +4082,7 @@ func TestSerdeUpdateSnapshot_ListMetadataTransferJobs(t *testing.T) {
 	_, err := svc.ListMetadataTransferJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6512,6 +4116,7 @@ func TestSerdeUpdateSnapshot_ListProperties(t *testing.T) {
 	_, err := svc.ListProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6542,6 +4147,7 @@ func TestSerdeUpdateSnapshot_ListScenes(t *testing.T) {
 	_, err := svc.ListScenes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6572,6 +4178,7 @@ func TestSerdeUpdateSnapshot_ListSyncJobs(t *testing.T) {
 	_, err := svc.ListSyncJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6611,6 +4218,7 @@ func TestSerdeUpdateSnapshot_ListSyncResources(t *testing.T) {
 	_, err := svc.ListSyncResources(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6641,6 +4249,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6670,6 +4279,7 @@ func TestSerdeUpdateSnapshot_ListWorkspaces(t *testing.T) {
 	_, err := svc.ListWorkspaces(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6690,7 +4300,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceARN: ptr.String("__ResourceARN__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6702,6 +4311,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6734,6 +4344,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6773,7 +4384,6 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6793,7 +4403,6 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6824,7 +4433,6 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 					},
 					MapValue: map[string]types.DataValue{
 						"key0": {},
-						"key1": {},
 					},
 					RelationshipValue: &types.RelationshipValue{
 						TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -6834,89 +4442,6 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 				},
 				Configuration: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				DisplayName: ptr.String("__DisplayName__"),
-			},
-			"key1": {
-				DataType: &types.DataType{
-					Type:       types.Type("RELATIONSHIP"),
-					NestedType: nil,
-					AllowedValues: []types.DataValue{
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-					},
-					UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-					Relationship: &types.Relationship{
-						TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-						RelationshipType:      ptr.String("__RelationshipType__"),
-					},
-				},
-				IsRequiredInEntity: ptr.Bool(true),
-				IsExternalId:       ptr.Bool(true),
-				IsStoredExternally: ptr.Bool(true),
-				IsTimeSeries:       ptr.Bool(true),
-				DefaultValue: &types.DataValue{
-					BooleanValue: ptr.Bool(true),
-					DoubleValue:  ptr.Float64(1.0),
-					IntegerValue: ptr.Int32(1),
-					LongValue:    ptr.Int64(1),
-					StringValue:  ptr.String("__StringValue__"),
-					ListValue: []types.DataValue{
-						{},
-						{},
-					},
-					MapValue: map[string]types.DataValue{
-						"key0": {},
-						"key1": {},
-					},
-					RelationshipValue: &types.RelationshipValue{
-						TargetEntityId:      ptr.String("__TargetEntityId__"),
-						TargetComponentName: ptr.String("__TargetComponentName__"),
-					},
-					Expression: ptr.String("__Expression__"),
-				},
-				Configuration: map[string]string{
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				DisplayName: ptr.String("__DisplayName__"),
 			},
@@ -6939,29 +4464,9 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 					IsNative: ptr.Bool(true),
 				},
 			},
-			"key1": {
-				RequiredProperties: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Scope: types.Scope("ENTITY"),
-				ImplementedBy: &types.DataConnector{
-					Lambda: &types.LambdaFunction{
-						Arn: ptr.String("__Arn__"),
-					},
-					IsNative: ptr.Bool(true),
-				},
-			},
 		},
 		PropertyGroups: map[string]types.PropertyGroupRequest{
 			"key0": {
-				GroupType: types.GroupType("TABULAR"),
-				PropertyNames: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			"key1": {
 				GroupType: types.GroupType("TABULAR"),
 				PropertyNames: []string{
 					"__Member__",
@@ -6972,9 +4477,6 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 		ComponentTypeName: ptr.String("__ComponentTypeName__"),
 		CompositeComponentTypes: map[string]types.CompositeComponentTypeRequest{
 			"key0": {
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-			},
-			"key1": {
 				ComponentTypeId: ptr.String("__ComponentTypeId__"),
 			},
 		},
@@ -6988,6 +4490,7 @@ func TestSerdeUpdateSnapshot_UpdateComponentType(t *testing.T) {
 	_, err := svc.UpdateComponentType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7033,7 +4536,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7053,7 +4555,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7084,7 +4585,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7094,7 +4594,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -7110,112 +4609,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7228,249 +4621,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 				},
 				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				UpdateType:      types.ComponentUpdateType("CREATE"),
-				Description:     ptr.String("__Description__"),
-				ComponentTypeId: ptr.String("__ComponentTypeId__"),
-				PropertyUpdates: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -7504,7 +4654,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7524,7 +4673,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 										},
 										MapValue: map[string]types.DataValue{
 											"key0": {},
-											"key1": {},
 										},
 										RelationshipValue: &types.RelationshipValue{
 											TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7555,7 +4703,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 								},
 								MapValue: map[string]types.DataValue{
 									"key0": {},
-									"key1": {},
 								},
 								RelationshipValue: &types.RelationshipValue{
 									TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7565,7 +4712,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 							},
 							Configuration: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							DisplayName: ptr.String("__DisplayName__"),
 						},
@@ -7581,112 +4727,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 							},
 							MapValue: map[string]types.DataValue{
 								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
 							},
 							RelationshipValue: &types.RelationshipValue{
 								TargetEntityId:      ptr.String("__TargetEntityId__"),
@@ -7699,248 +4739,6 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 				},
 				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
 					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-				},
-			},
-			"key1": {
-				UpdateType:  types.ComponentUpdateType("CREATE"),
-				Description: ptr.String("__Description__"),
-				PropertyUpdates: map[string]types.PropertyRequest{
-					"key0": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-					"key1": {
-						Definition: &types.PropertyDefinitionRequest{
-							DataType: &types.DataType{
-								Type:       types.Type("RELATIONSHIP"),
-								NestedType: nil,
-								AllowedValues: []types.DataValue{
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-									{
-										BooleanValue: ptr.Bool(true),
-										DoubleValue:  ptr.Float64(1.0),
-										IntegerValue: ptr.Int32(1),
-										LongValue:    ptr.Int64(1),
-										StringValue:  ptr.String("__StringValue__"),
-										ListValue: []types.DataValue{
-											{},
-											{},
-										},
-										MapValue: map[string]types.DataValue{
-											"key0": {},
-											"key1": {},
-										},
-										RelationshipValue: &types.RelationshipValue{
-											TargetEntityId:      ptr.String("__TargetEntityId__"),
-											TargetComponentName: ptr.String("__TargetComponentName__"),
-										},
-										Expression: ptr.String("__Expression__"),
-									},
-								},
-								UnitOfMeasure: ptr.String("__UnitOfMeasure__"),
-								Relationship: &types.Relationship{
-									TargetComponentTypeId: ptr.String("__TargetComponentTypeId__"),
-									RelationshipType:      ptr.String("__RelationshipType__"),
-								},
-							},
-							IsRequiredInEntity: ptr.Bool(true),
-							IsExternalId:       ptr.Bool(true),
-							IsStoredExternally: ptr.Bool(true),
-							IsTimeSeries:       ptr.Bool(true),
-							DefaultValue: &types.DataValue{
-								BooleanValue: ptr.Bool(true),
-								DoubleValue:  ptr.Float64(1.0),
-								IntegerValue: ptr.Int32(1),
-								LongValue:    ptr.Int64(1),
-								StringValue:  ptr.String("__StringValue__"),
-								ListValue: []types.DataValue{
-									{},
-									{},
-								},
-								MapValue: map[string]types.DataValue{
-									"key0": {},
-									"key1": {},
-								},
-								RelationshipValue: &types.RelationshipValue{
-									TargetEntityId:      ptr.String("__TargetEntityId__"),
-									TargetComponentName: ptr.String("__TargetComponentName__"),
-								},
-								Expression: ptr.String("__Expression__"),
-							},
-							Configuration: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							DisplayName: ptr.String("__DisplayName__"),
-						},
-						Value: &types.DataValue{
-							BooleanValue: ptr.Bool(true),
-							DoubleValue:  ptr.Float64(1.0),
-							IntegerValue: ptr.Int32(1),
-							LongValue:    ptr.Int64(1),
-							StringValue:  ptr.String("__StringValue__"),
-							ListValue: []types.DataValue{
-								{},
-								{},
-							},
-							MapValue: map[string]types.DataValue{
-								"key0": {},
-								"key1": {},
-							},
-							RelationshipValue: &types.RelationshipValue{
-								TargetEntityId:      ptr.String("__TargetEntityId__"),
-								TargetComponentName: ptr.String("__TargetComponentName__"),
-							},
-							Expression: ptr.String("__Expression__"),
-						},
-						UpdateType: types.PropertyUpdateType("UPDATE"),
-					},
-				},
-				PropertyGroupUpdates: map[string]types.ComponentPropertyGroupRequest{
-					"key0": {
-						GroupType: types.GroupType("TABULAR"),
-						PropertyNames: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UpdateType: types.PropertyGroupUpdateType("UPDATE"),
-					},
-					"key1": {
 						GroupType: types.GroupType("TABULAR"),
 						PropertyNames: []string{
 							"__Member__",
@@ -7965,6 +4763,7 @@ func TestSerdeUpdateSnapshot_UpdateEntity(t *testing.T) {
 	_, err := svc.UpdateEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7997,6 +4796,7 @@ func TestSerdeUpdateSnapshot_UpdatePricingPlan(t *testing.T) {
 	_, err := svc.UpdatePricingPlan(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8024,7 +4824,6 @@ func TestSerdeUpdateSnapshot_UpdateScene(t *testing.T) {
 		},
 		SceneMetadata: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -8036,6 +4835,7 @@ func TestSerdeUpdateSnapshot_UpdateScene(t *testing.T) {
 	_, err := svc.UpdateScene(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8067,6 +4867,7 @@ func TestSerdeUpdateSnapshot_UpdateWorkspace(t *testing.T) {
 	_, err := svc.UpdateWorkspace(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

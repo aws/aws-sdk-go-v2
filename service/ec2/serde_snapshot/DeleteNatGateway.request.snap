@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteNatGateway&DryRun=true&NatGatewayId=__NatGatewayId__&Version=2016-11-15

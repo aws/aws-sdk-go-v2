@@ -2,4 +2,4 @@ POST /create-recommendation-template
 
 Content-Type: application/json
 
-{"assessmentArn":"__AssessmentArn__","bucketName":"__BucketName__","clientToken":"__ClientToken__","format":"CfnYaml","name":"__Name__","recommendationIds":["__Member__","__Member__"],"recommendationTypes":["Alarm","Alarm"],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"assessmentArn":"__AssessmentArn__","bucketName":"__BucketName__","clientToken":"__ClientToken__","format":"CfnYaml","name":"__Name__","recommendationIds":["__Member__","__Member__"],"recommendationTypes":["Alarm","Alarm"],"tags":{"key0":"__Value__"}}

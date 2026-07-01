@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateTags&DryRun=true&ResourceId.1=__Member__&ResourceId.2=__Member__&Tag.1.Key=__Key__&Tag.1.Value=__Value__&Tag.2.Key=__Key__&Tag.2.Value=__Value__&Version=2016-11-15

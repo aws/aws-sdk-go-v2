@@ -2,4 +2,4 @@ POST /contact-evaluations/__InstanceId__/__EvaluationId__
 
 Content-Type: application/json
 
-{"Answers":{"key0":{"Value":{"StringValue":"__EvaluationAnswerDataMemberStringValue__"}},"key1":{"Value":{"StringValue":"__EvaluationAnswerDataMemberStringValue__"}}},"Notes":{"key0":{"Value":"__Value__"},"key1":{"Value":"__Value__"}},"UpdatedBy":{"ConnectUserArn":"__EvaluatorUserUnionMemberConnectUserArn__"}}
+{"Answers":{"key0":{"Value":{"StringValue":"__EvaluationAnswerDataMemberStringValue__"}}},"Notes":{"key0":{"Value":"__Value__"}},"UpdatedBy":{"ConnectUserArn":"__EvaluatorUserUnionMemberConnectUserArn__"}}

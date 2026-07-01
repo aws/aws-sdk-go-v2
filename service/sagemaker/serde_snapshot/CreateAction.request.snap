@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SageMaker.CreateAction
 
-{"ActionName":"__ActionName__","ActionType":"__ActionType__","Description":"__Description__","MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"Properties":{"key0":"__Value__","key1":"__Value__"},"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"},"Status":"Unknown","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"ActionName":"__ActionName__","ActionType":"__ActionType__","Description":"__Description__","MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"Properties":{"key0":"__Value__"},"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"},"Status":"Unknown","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

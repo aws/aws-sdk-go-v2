@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AmazonForecastRuntime.QueryForecast
 
-{"EndDate":"__EndDate__","Filters":{"key0":"__Value__","key1":"__Value__"},"ForecastArn":"__ForecastArn__","NextToken":"__NextToken__","StartDate":"__StartDate__"}
+{"EndDate":"__EndDate__","Filters":{"key0":"__Value__"},"ForecastArn":"__ForecastArn__","NextToken":"__NextToken__","StartDate":"__StartDate__"}

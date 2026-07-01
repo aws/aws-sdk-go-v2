@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=EnableSnapshotBlockPublicAccess&DryRun=true&State=block-all-sharing&Version=2016-11-15

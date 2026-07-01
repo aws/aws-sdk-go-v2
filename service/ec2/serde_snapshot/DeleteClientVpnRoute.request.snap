@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteClientVpnRoute&ClientVpnEndpointId=__ClientVpnEndpointId__&DestinationCidrBlock=__DestinationCidrBlock__&DryRun=true&TargetVpcSubnetId=__TargetVpcSubnetId__&Version=2016-11-15

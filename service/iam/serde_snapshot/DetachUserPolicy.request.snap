@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DetachUserPolicy&PolicyArn=__PolicyArn__&UserName=__UserName__&Version=2010-05-08

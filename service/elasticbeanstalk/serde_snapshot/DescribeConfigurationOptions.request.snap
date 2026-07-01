@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeConfigurationOptions&ApplicationName=__ApplicationName__&EnvironmentName=__EnvironmentName__&Options.member.1.Namespace=__Namespace__&Options.member.1.OptionName=__OptionName__&Options.member.1.ResourceName=__ResourceName__&Options.member.2.Namespace=__Namespace__&Options.member.2.OptionName=__OptionName__&Options.member.2.ResourceName=__ResourceName__&PlatformArn=__PlatformArn__&SolutionStackName=__SolutionStackName__&TemplateName=__TemplateName__&Version=2010-12-01

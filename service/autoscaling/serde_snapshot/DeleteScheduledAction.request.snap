@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteScheduledAction&AutoScalingGroupName=__AutoScalingGroupName__&ScheduledActionName=__ScheduledActionName__&Version=2011-01-01

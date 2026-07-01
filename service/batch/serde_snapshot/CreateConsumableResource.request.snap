@@ -2,4 +2,4 @@ POST /v1/createconsumableresource
 
 Content-Type: application/json
 
-{"consumableResourceName":"__ConsumableResourceName__","resourceType":"__ResourceType__","tags":{"key0":"__Value__","key1":"__Value__"},"totalQuantity":1}
+{"consumableResourceName":"__ConsumableResourceName__","resourceType":"__ResourceType__","tags":{"key0":"__Value__"},"totalQuantity":1}

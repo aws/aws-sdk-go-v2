@@ -2,4 +2,4 @@ PUT /buckets
 
 Content-Type: application/json
 
-{"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseAlgorithm":"AES256"},"name":"__Name__","storageClassConfiguration":{"storageClass":"STANDARD"},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseAlgorithm":"AES256"},"name":"__Name__","storageClassConfiguration":{"storageClass":"STANDARD"},"tags":{"key0":"__Value__"}}

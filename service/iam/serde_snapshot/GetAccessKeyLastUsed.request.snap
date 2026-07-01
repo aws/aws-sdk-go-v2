@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+AccessKeyId=__AccessKeyId__&Action=GetAccessKeyLastUsed&Version=2010-05-08

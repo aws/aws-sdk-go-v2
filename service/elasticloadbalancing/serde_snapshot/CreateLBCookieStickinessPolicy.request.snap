@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateLBCookieStickinessPolicy&CookieExpirationPeriod=1&LoadBalancerName=__LoadBalancerName__&PolicyName=__PolicyName__&Version=2012-06-01

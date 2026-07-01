@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=RemoveListenerCertificates&Certificates.member.1.CertificateArn=__CertificateArn__&Certificates.member.1.IsDefault=true&Certificates.member.2.CertificateArn=__CertificateArn__&Certificates.member.2.IsDefault=true&ListenerArn=__ListenerArn__&Version=2015-12-01

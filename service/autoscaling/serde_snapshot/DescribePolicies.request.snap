@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribePolicies&AutoScalingGroupName=__AutoScalingGroupName__&MaxRecords=1&NextToken=__NextToken__&PolicyNames.member.1=__Member__&PolicyNames.member.2=__Member__&PolicyTypes.member.1=__Member__&PolicyTypes.member.2=__Member__&Version=2011-01-01

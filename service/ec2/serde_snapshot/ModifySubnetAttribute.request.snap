@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifySubnetAttribute&AssignIpv6AddressOnCreation.Value=true&CustomerOwnedIpv4Pool=__CustomerOwnedIpv4Pool__&DisableLniAtDeviceIndex.Value=true&EnableDns64.Value=true&EnableLniAtDeviceIndex=1&EnableResourceNameDnsAAAARecordOnLaunch.Value=true&EnableResourceNameDnsARecordOnLaunch.Value=true&MapCustomerOwnedIpOnLaunch.Value=true&MapPublicIpOnLaunch.Value=true&PrivateDnsHostnameTypeOnLaunch=ip-name&SubnetId=__SubnetId__&Version=2016-11-15

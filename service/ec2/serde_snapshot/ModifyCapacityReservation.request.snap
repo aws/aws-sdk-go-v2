@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Accept=true&Action=ModifyCapacityReservation&AdditionalInfo=__AdditionalInfo__&CapacityReservationId=__CapacityReservationId__&DryRun=true&EndDate=2000-01-01T00%3A00%3A00Z&EndDateType=unlimited&InstanceCount=1&InstanceMatchCriteria=open&Version=2016-11-15

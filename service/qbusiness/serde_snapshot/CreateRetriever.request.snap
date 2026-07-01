@@ -2,4 +2,4 @@ POST /applications/__ApplicationId__/retrievers
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","configuration":{"nativeIndexConfiguration":{"boostingOverride":{"key0":{"numberConfiguration":{"boostingLevel":"NONE","boostingType":"PRIORITIZE_LARGER_VALUES"}},"key1":{"numberConfiguration":{"boostingLevel":"NONE","boostingType":"PRIORITIZE_LARGER_VALUES"}}},"indexId":"__IndexId__","version":1}},"displayName":"__DisplayName__","roleArn":"__RoleArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"NATIVE_INDEX"}
+{"clientToken":"__ClientToken__","configuration":{"nativeIndexConfiguration":{"boostingOverride":{"key0":{"numberConfiguration":{"boostingLevel":"NONE","boostingType":"PRIORITIZE_LARGER_VALUES"}}},"indexId":"__IndexId__","version":1}},"displayName":"__DisplayName__","roleArn":"__RoleArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"NATIVE_INDEX"}

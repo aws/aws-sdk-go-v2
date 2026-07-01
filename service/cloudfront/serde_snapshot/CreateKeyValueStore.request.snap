@@ -2,3 +2,4 @@ POST /2020-05-31/key-value-store
 
 Content-Type: application/xml
 
+<CreateKeyValueStoreRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Comment>__Comment__</Comment><ImportSource><SourceARN>__SourceARN__</SourceARN><SourceType>S3</SourceType></ImportSource><Name>__Name__</Name><Tags><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags></CreateKeyValueStoreRequest>

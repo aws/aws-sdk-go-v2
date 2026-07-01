@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSGlue.GetEntityRecords
 
-{"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","ConnectionOptions":{"key0":"__Value__","key1":"__Value__"},"DataStoreApiVersion":"__DataStoreApiVersion__","EntityName":"__EntityName__","FilterPredicate":"__FilterPredicate__","Limit":1,"NextToken":"__NextToken__","OrderBy":"__OrderBy__","SelectedFields":["__Member__","__Member__"]}
+{"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","ConnectionOptions":{"key0":"__Value__"},"DataStoreApiVersion":"__DataStoreApiVersion__","EntityName":"__EntityName__","FilterPredicate":"__FilterPredicate__","Limit":1,"NextToken":"__NextToken__","OrderBy":"__OrderBy__","SelectedFields":["__Member__","__Member__"]}

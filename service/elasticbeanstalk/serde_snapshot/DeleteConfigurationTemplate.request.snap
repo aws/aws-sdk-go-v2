@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteConfigurationTemplate&ApplicationName=__ApplicationName__&TemplateName=__TemplateName__&Version=2010-12-01

@@ -2,4 +2,4 @@ POST /v2/apis/__ApiId__/routes/__RouteId__/routeresponses
 
 Content-Type: application/json
 
-{"modelSelectionExpression":"__ModelSelectionExpression__","responseModels":{"key0":"__Value__","key1":"__Value__"},"responseParameters":{"key0":{"required":true},"key1":{"required":true}},"routeResponseKey":"__RouteResponseKey__"}
+{"modelSelectionExpression":"__ModelSelectionExpression__","responseModels":{"key0":"__Value__"},"responseParameters":{"key0":{"required":true}},"routeResponseKey":"__RouteResponseKey__"}

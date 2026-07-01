@@ -2,4 +2,4 @@ POST /kx/environments/__EnvironmentId__/databases
 
 Content-Type: application/x-amz-json-1.1
 
-{"clientToken":"__ClientToken__","databaseName":"__DatabaseName__","description":"__Description__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","databaseName":"__DatabaseName__","description":"__Description__","tags":{"key0":"__Value__"}}

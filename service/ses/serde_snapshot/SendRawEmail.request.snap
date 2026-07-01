@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SendRawEmail&ConfigurationSetName=__ConfigurationSetName__&Destinations.member.1=__Member__&Destinations.member.2=__Member__&FromArn=__FromArn__&RawMessage.Data=YmxvYg%3D%3D&ReturnPathArn=__ReturnPathArn__&Source=__Source__&SourceArn=__SourceArn__&Tags.member.1.Name=__Name__&Tags.member.1.Value=__Value__&Tags.member.2.Name=__Name__&Tags.member.2.Value=__Value__&Version=2010-12-01

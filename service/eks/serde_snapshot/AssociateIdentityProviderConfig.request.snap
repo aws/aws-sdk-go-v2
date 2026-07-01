@@ -2,4 +2,4 @@ POST /clusters/__ClusterName__/identity-provider-configs/associate
 
 Content-Type: application/json
 
-{"clientRequestToken":"__ClientRequestToken__","oidc":{"clientId":"__ClientId__","groupsClaim":"__GroupsClaim__","groupsPrefix":"__GroupsPrefix__","identityProviderConfigName":"__IdentityProviderConfigName__","issuerUrl":"__IssuerUrl__","requiredClaims":{"key0":"__Value__","key1":"__Value__"},"usernameClaim":"__UsernameClaim__","usernamePrefix":"__UsernamePrefix__"},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientRequestToken":"__ClientRequestToken__","oidc":{"clientId":"__ClientId__","groupsClaim":"__GroupsClaim__","groupsPrefix":"__GroupsPrefix__","identityProviderConfigName":"__IdentityProviderConfigName__","issuerUrl":"__IssuerUrl__","requiredClaims":{"key0":"__Value__"},"usernameClaim":"__UsernameClaim__","usernamePrefix":"__UsernamePrefix__"},"tags":{"key0":"__Value__"}}

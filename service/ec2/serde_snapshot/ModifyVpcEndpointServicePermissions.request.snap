@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyVpcEndpointServicePermissions&AddAllowedPrincipals.1=__Member__&AddAllowedPrincipals.2=__Member__&DryRun=true&RemoveAllowedPrincipals.1=__Member__&RemoveAllowedPrincipals.2=__Member__&ServiceId=__ServiceId__&Version=2016-11-15

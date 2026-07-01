@@ -2,4 +2,4 @@ POST /experiments
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","experimentOptions":{"actionsMode":"skip-all"},"experimentTemplateId":"__ExperimentTemplateId__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","experimentOptions":{"actionsMode":"skip-all"},"experimentTemplateId":"__ExperimentTemplateId__","tags":{"key0":"__Value__"}}

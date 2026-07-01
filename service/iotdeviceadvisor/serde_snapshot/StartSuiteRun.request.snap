@@ -2,4 +2,4 @@ POST /suiteDefinitions/__SuiteDefinitionId__/suiteRuns
 
 Content-Type: application/json
 
-{"suiteDefinitionVersion":"__SuiteDefinitionVersion__","suiteRunConfiguration":{"parallelRun":true,"primaryDevice":{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},"selectedTestList":["__Member__","__Member__"]},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"suiteDefinitionVersion":"__SuiteDefinitionVersion__","suiteRunConfiguration":{"parallelRun":true,"primaryDevice":{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},"selectedTestList":["__Member__","__Member__"]},"tags":{"key0":"__Value__"}}

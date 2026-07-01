@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityService.SetIdentityPoolRoles
 
-{"IdentityPoolId":"__IdentityPoolId__","RoleMappings":{"key0":{"AmbiguousRoleResolution":"AuthenticatedRole","RulesConfiguration":{"Rules":[{"Claim":"__Claim__","MatchType":"Equals","RoleARN":"__RoleARN__","Value":"__Value__"},{"Claim":"__Claim__","MatchType":"Equals","RoleARN":"__RoleARN__","Value":"__Value__"}]},"Type":"Token"},"key1":{"AmbiguousRoleResolution":"AuthenticatedRole","RulesConfiguration":{"Rules":[{"Claim":"__Claim__","MatchType":"Equals","RoleARN":"__RoleARN__","Value":"__Value__"},{"Claim":"__Claim__","MatchType":"Equals","RoleARN":"__RoleARN__","Value":"__Value__"}]},"Type":"Token"}},"Roles":{"key0":"__Value__","key1":"__Value__"}}
+{"IdentityPoolId":"__IdentityPoolId__","RoleMappings":{"key0":{"AmbiguousRoleResolution":"AuthenticatedRole","RulesConfiguration":{"Rules":[{"Claim":"__Claim__","MatchType":"Equals","RoleARN":"__RoleARN__","Value":"__Value__"},{"Claim":"__Claim__","MatchType":"Equals","RoleARN":"__RoleARN__","Value":"__Value__"}]},"Type":"Token"}},"Roles":{"key0":"__Value__"}}

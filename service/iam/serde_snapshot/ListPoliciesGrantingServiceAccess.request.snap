@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ListPoliciesGrantingServiceAccess&Arn=__Arn__&Marker=__Marker__&ServiceNamespaces.member.1=__Member__&ServiceNamespaces.member.2=__Member__&Version=2010-05-08

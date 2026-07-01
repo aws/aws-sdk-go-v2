@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SetLoadBalancerPoliciesForBackendServer&InstancePort=1&LoadBalancerName=__LoadBalancerName__&PolicyNames.member.1=__Member__&PolicyNames.member.2=__Member__&Version=2012-06-01

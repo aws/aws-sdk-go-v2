@@ -2,4 +2,4 @@ POST /geofencing/v0/collections
 
 Content-Type: application/json
 
-{"CollectionName":"__CollectionName__","Description":"__Description__","KmsKeyId":"__KmsKeyId__","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"CollectionName":"__CollectionName__","Description":"__Description__","KmsKeyId":"__KmsKeyId__","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__","Tags":{"key0":"__Value__"}}

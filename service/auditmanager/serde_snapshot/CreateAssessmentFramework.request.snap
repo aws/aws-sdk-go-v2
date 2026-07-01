@@ -2,4 +2,4 @@ POST /assessmentFrameworks
 
 Content-Type: application/json
 
-{"complianceType":"__ComplianceType__","controlSets":[{"controls":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"},{"controls":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}],"description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"complianceType":"__ComplianceType__","controlSets":[{"controls":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"},{"controls":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}],"description":"__Description__","name":"__Name__","tags":{"key0":"__Value__"}}

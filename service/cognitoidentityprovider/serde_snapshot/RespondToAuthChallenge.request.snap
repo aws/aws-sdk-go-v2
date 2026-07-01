@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.RespondToAuthChallenge
 
-{"AnalyticsMetadata":{"AnalyticsEndpointId":"__AnalyticsEndpointId__"},"ChallengeName":"SMS_MFA","ChallengeResponses":{"key0":"__Value__","key1":"__Value__"},"ClientId":"__ClientId__","ClientMetadata":{"key0":"__Value__","key1":"__Value__"},"Session":"__Session__","UserContextData":{"EncodedData":"__EncodedData__","IpAddress":"__IpAddress__"}}
+{"AnalyticsMetadata":{"AnalyticsEndpointId":"__AnalyticsEndpointId__"},"ChallengeName":"SMS_MFA","ChallengeResponses":{"key0":"__Value__"},"ClientId":"__ClientId__","ClientMetadata":{"key0":"__Value__"},"Session":"__Session__","UserContextData":{"EncodedData":"__EncodedData__","IpAddress":"__IpAddress__"}}

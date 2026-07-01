@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=FailoverGlobalReplicationGroup&GlobalReplicationGroupId=__GlobalReplicationGroupId__&PrimaryRegion=__PrimaryRegion__&PrimaryReplicationGroupId=__PrimaryReplicationGroupId__&Version=2015-02-02

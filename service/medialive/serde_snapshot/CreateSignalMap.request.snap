@@ -2,4 +2,4 @@ POST /prod/signal-maps
 
 Content-Type: application/json
 
-{"cloudWatchAlarmTemplateGroupIdentifiers":["__Member__","__Member__"],"description":"__Description__","discoveryEntryPointArn":"__DiscoveryEntryPointArn__","eventBridgeRuleTemplateGroupIdentifiers":["__Member__","__Member__"],"name":"__Name__","requestId":"__RequestId__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"cloudWatchAlarmTemplateGroupIdentifiers":["__Member__","__Member__"],"description":"__Description__","discoveryEntryPointArn":"__DiscoveryEntryPointArn__","eventBridgeRuleTemplateGroupIdentifiers":["__Member__","__Member__"],"name":"__Name__","requestId":"__RequestId__","tags":{"key0":"__Value__"}}

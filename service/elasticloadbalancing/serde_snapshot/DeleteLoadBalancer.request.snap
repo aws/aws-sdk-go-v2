@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteLoadBalancer&LoadBalancerName=__LoadBalancerName__&Version=2012-06-01

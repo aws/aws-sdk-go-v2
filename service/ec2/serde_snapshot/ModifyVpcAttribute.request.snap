@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyVpcAttribute&EnableDnsHostnames.Value=true&EnableDnsSupport.Value=true&EnableNetworkAddressUsageMetrics.Value=true&Version=2016-11-15&VpcId=__VpcId__

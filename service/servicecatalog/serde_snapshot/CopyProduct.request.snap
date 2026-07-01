@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWS242ServiceCatalogService.CopyProduct
 
-{"AcceptLanguage":"__AcceptLanguage__","CopyOptions":["CopyTags","CopyTags"],"IdempotencyToken":"__IdempotencyToken__","SourceProductArn":"__SourceProductArn__","SourceProvisioningArtifactIdentifiers":[{"key0":"__Value__","key1":"__Value__"},{"key0":"__Value__","key1":"__Value__"}],"TargetProductId":"__TargetProductId__","TargetProductName":"__TargetProductName__"}
+{"AcceptLanguage":"__AcceptLanguage__","CopyOptions":["CopyTags","CopyTags"],"IdempotencyToken":"__IdempotencyToken__","SourceProductArn":"__SourceProductArn__","SourceProvisioningArtifactIdentifiers":[{"key0":"__Value__"},{"key0":"__Value__"}],"TargetProductId":"__TargetProductId__","TargetProductName":"__TargetProductName__"}

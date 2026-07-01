@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SageMaker.CreateArtifact
 
-{"ArtifactName":"__ArtifactName__","ArtifactType":"__ArtifactType__","MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"Properties":{"key0":"__Value__","key1":"__Value__"},"Source":{"SourceTypes":[{"SourceIdType":"MD5Hash","Value":"__Value__"},{"SourceIdType":"MD5Hash","Value":"__Value__"}],"SourceUri":"__SourceUri__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"ArtifactName":"__ArtifactName__","ArtifactType":"__ArtifactType__","MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"Properties":{"key0":"__Value__"},"Source":{"SourceTypes":[{"SourceIdType":"MD5Hash","Value":"__Value__"},{"SourceIdType":"MD5Hash","Value":"__Value__"}],"SourceUri":"__SourceUri__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -2,4 +2,4 @@ POST /assistants/__AssistantId__/sessions
 
 Content-Type: application/json
 
-{"aiAgentConfiguration":{"key0":{"aiAgentId":"__AiAgentId__"},"key1":{"aiAgentId":"__AiAgentId__"}},"clientToken":"__ClientToken__","contactArn":"__ContactArn__","description":"__Description__","name":"__Name__","orchestratorConfigurationList":[{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"},{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"}],"removeOrchestratorConfigurationList":true,"tagFilter":{"tagCondition":{"key":"__Key__","value":"__Value__"}},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"aiAgentConfiguration":{"key0":{"aiAgentId":"__AiAgentId__"}},"clientToken":"__ClientToken__","contactArn":"__ContactArn__","description":"__Description__","name":"__Name__","orchestratorConfigurationList":[{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"},{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"}],"removeOrchestratorConfigurationList":true,"tagFilter":{"tagCondition":{"key":"__Key__","value":"__Value__"}},"tags":{"key0":"__Value__"}}

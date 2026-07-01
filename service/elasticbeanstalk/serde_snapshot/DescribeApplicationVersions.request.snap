@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeApplicationVersions&ApplicationName=__ApplicationName__&MaxRecords=1&NextToken=__NextToken__&Version=2010-12-01&VersionLabels.member.1=__Member__&VersionLabels.member.2=__Member__

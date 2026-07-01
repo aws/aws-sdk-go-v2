@@ -4,4 +4,4 @@ Content-Type: application/x-amz-json-1.0
 X-Amz-Target: AmazonSQS.TagQueue
 X-Amzn-Query-Mode: true
 
-{"QueueUrl":"__QueueUrl__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"QueueUrl":"__QueueUrl__","Tags":{"key0":"__Value__"}}

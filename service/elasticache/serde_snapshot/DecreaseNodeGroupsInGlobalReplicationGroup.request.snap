@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DecreaseNodeGroupsInGlobalReplicationGroup&ApplyImmediately=true&GlobalNodeGroupsToRemove.GlobalNodeGroupId.1=__Member__&GlobalNodeGroupsToRemove.GlobalNodeGroupId.2=__Member__&GlobalNodeGroupsToRetain.GlobalNodeGroupId.1=__Member__&GlobalNodeGroupsToRetain.GlobalNodeGroupId.2=__Member__&GlobalReplicationGroupId=__GlobalReplicationGroupId__&NodeGroupCount=1&Version=2015-02-02

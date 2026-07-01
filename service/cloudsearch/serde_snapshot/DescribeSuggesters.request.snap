@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeSuggesters&Deployed=true&DomainName=__DomainName__&SuggesterNames.member.1=__Member__&SuggesterNames.member.2=__Member__&Version=2013-01-01

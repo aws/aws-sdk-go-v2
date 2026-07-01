@@ -4,3 +4,4 @@ Content-Md5: kB+OOT1CyZdCnq9LmcXlnA==
 Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 
+<PutAccessGrantsInstanceResourcePolicyRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><Organization>__Organization__</Organization><Policy>__Policy__</Policy></PutAccessGrantsInstanceResourcePolicyRequest>

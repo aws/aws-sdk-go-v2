@@ -3,3 +3,4 @@ PUT /2020-05-31/field-level-encryption-profile/__Id__/config
 Content-Type: application/xml
 If-Match: __IfMatch__
 
+<FieldLevelEncryptionProfileConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CallerReference>__CallerReference__</CallerReference><Comment>__Comment__</Comment><EncryptionEntities><Items><EncryptionEntity><FieldPatterns><Items><FieldPattern>__Member__</FieldPattern><FieldPattern>__Member__</FieldPattern></Items><Quantity>1</Quantity></FieldPatterns><ProviderId>__ProviderId__</ProviderId><PublicKeyId>__PublicKeyId__</PublicKeyId></EncryptionEntity><EncryptionEntity><FieldPatterns><Items><FieldPattern>__Member__</FieldPattern><FieldPattern>__Member__</FieldPattern></Items><Quantity>1</Quantity></FieldPatterns><ProviderId>__ProviderId__</ProviderId><PublicKeyId>__PublicKeyId__</PublicKeyId></EncryptionEntity></Items><Quantity>1</Quantity></EncryptionEntities><Name>__Name__</Name></FieldLevelEncryptionProfileConfig>

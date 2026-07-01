@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: ServiceQuotasV20190624.StartAutoManagement
 
-{"ExclusionList":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"NotificationArn":"__NotificationArn__","OptInLevel":"ACCOUNT","OptInType":"NotifyOnly"}
+{"ExclusionList":{"key0":["__Member__","__Member__"]},"NotificationArn":"__NotificationArn__","OptInLevel":"ACCOUNT","OptInType":"NotifyOnly"}

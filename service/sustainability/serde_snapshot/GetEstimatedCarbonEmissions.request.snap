@@ -2,4 +2,4 @@ POST /v1/estimated-carbon-emissions
 
 Content-Type: application/json
 
-{"EmissionsTypes":["TOTAL_LBM_CARBON_EMISSIONS","TOTAL_LBM_CARBON_EMISSIONS"],"FilterBy":{"Dimensions":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]}},"Granularity":"YEARLY_CALENDAR","GranularityConfiguration":{"FiscalYearStartMonth":1},"GroupBy":["USAGE_ACCOUNT_ID","USAGE_ACCOUNT_ID"],"MaxResults":1,"NextToken":"__NextToken__","TimePeriod":{"End":"2000-01-01T00:00:00Z","Start":"2000-01-01T00:00:00Z"}}
+{"EmissionsTypes":["TOTAL_LBM_CARBON_EMISSIONS","TOTAL_LBM_CARBON_EMISSIONS"],"FilterBy":{"Dimensions":{"key0":["__Member__","__Member__"]}},"Granularity":"YEARLY_CALENDAR","GranularityConfiguration":{"FiscalYearStartMonth":1},"GroupBy":["USAGE_ACCOUNT_ID","USAGE_ACCOUNT_ID"],"MaxResults":1,"NextToken":"__NextToken__","TimePeriod":{"End":"2000-01-01T00:00:00Z","Start":"2000-01-01T00:00:00Z"}}

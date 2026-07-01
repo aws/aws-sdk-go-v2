@@ -2,4 +2,4 @@ POST /findingv2
 
 Content-Type: application/json
 
-{"analyzerArn":"__AnalyzerArn__","filter":{"key0":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]},"key1":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]}},"maxResults":1,"nextToken":"__NextToken__","sort":{"attributeName":"__AttributeName__","orderBy":"ASC"}}
+{"analyzerArn":"__AnalyzerArn__","filter":{"key0":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]}},"maxResults":1,"nextToken":"__NextToken__","sort":{"attributeName":"__AttributeName__","orderBy":"ASC"}}

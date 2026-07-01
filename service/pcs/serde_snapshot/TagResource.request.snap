@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: AWSParallelComputingService.TagResource
 
-{"resourceArn":"__ResourceArn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"resourceArn":"__ResourceArn__","tags":{"key0":"__Value__"}}

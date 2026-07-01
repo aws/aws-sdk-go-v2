@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SetLoadBalancerListenerSSLCertificate&LoadBalancerName=__LoadBalancerName__&LoadBalancerPort=1&SSLCertificateId=__SSLCertificateId__&Version=2012-06-01

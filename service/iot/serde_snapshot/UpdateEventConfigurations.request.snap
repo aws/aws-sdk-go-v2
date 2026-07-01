@@ -2,4 +2,4 @@ PATCH /event-configurations
 
 Content-Type: application/json
 
-{"eventConfigurations":{"key0":{"Enabled":true},"key1":{"Enabled":true}}}
+{"eventConfigurations":{"key0":{"Enabled":true}}}

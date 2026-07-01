@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ActivateType&AutoUpdate=true&ExecutionRoleArn=__ExecutionRoleArn__&LoggingConfig.LogGroupName=__LogGroupName__&LoggingConfig.LogRoleArn=__LogRoleArn__&MajorVersion=1&PublicTypeArn=__PublicTypeArn__&PublisherId=__PublisherId__&Type=RESOURCE&TypeName=__TypeName__&TypeNameAlias=__TypeNameAlias__&Version=2010-05-15&VersionBump=MAJOR

@@ -2,4 +2,4 @@ PUT /views/__InstanceId__
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","Content":{"Actions":["__Member__","__Member__"],"Template":"__Template__"},"Description":"__Description__","Name":"__Name__","Status":"PUBLISHED","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","Content":{"Actions":["__Member__","__Member__"],"Template":"__Template__"},"Description":"__Description__","Name":"__Name__","Status":"PUBLISHED","Tags":{"key0":"__Value__"}}

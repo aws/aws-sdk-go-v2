@@ -2,3 +2,4 @@ POST /2013-04-01/hostedzone/__HostedZoneId__/associatevpc
 
 Content-Type: application/xml
 
+<AssociateVPCWithHostedZoneRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><Comment>__Comment__</Comment><VPC><VPCId>__VPCId__</VPCId><VPCRegion>us-east-1</VPCRegion></VPC></AssociateVPCWithHostedZoneRequest>

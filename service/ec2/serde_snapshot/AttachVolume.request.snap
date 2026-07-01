@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AttachVolume&Device=__Device__&DryRun=true&EbsCardIndex=1&InstanceId=__InstanceId__&Version=2016-11-15&VolumeId=__VolumeId__

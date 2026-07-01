@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.SetUICustomization
 
-{"CSS":"__CSS__","ClientId":"__ClientId__","ImageFile":"YmxvYg==","UserPoolId":"__UserPoolId__"}
+{"ClientId":"__ClientId__","CSS":"__CSS__","ImageFile":"YmxvYg==","UserPoolId":"__UserPoolId__"}

@@ -2,4 +2,4 @@ PATCH /workspaces/__WorkspaceId__/configuration
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","limitsPerLabelSet":[{"labelSet":{"key0":"__Value__","key1":"__Value__"},"limits":{"maxSeries":1}},{"labelSet":{"key0":"__Value__","key1":"__Value__"},"limits":{"maxSeries":1}}],"outOfOrderTimeWindowInSeconds":1,"retentionPeriodInDays":1,"ruleQueryOffsetInSeconds":1}
+{"clientToken":"__ClientToken__","limitsPerLabelSet":[{"labelSet":{"key0":"__Value__"},"limits":{"maxSeries":1}},{"labelSet":{"key0":"__Value__"},"limits":{"maxSeries":1}}],"outOfOrderTimeWindowInSeconds":1,"retentionPeriodInDays":1,"ruleQueryOffsetInSeconds":1}

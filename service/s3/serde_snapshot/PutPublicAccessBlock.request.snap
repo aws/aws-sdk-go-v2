@@ -5,3 +5,4 @@ Content-Type: application/xml
 X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<PublicAccessBlockConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><BlockPublicAcls>true</BlockPublicAcls><BlockPublicPolicy>true</BlockPublicPolicy><IgnorePublicAcls>true</IgnorePublicAcls><RestrictPublicBuckets>true</RestrictPublicBuckets></PublicAccessBlockConfiguration>

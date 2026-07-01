@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.AdminCreateUser
 
-{"ClientMetadata":{"key0":"__Value__","key1":"__Value__"},"DesiredDeliveryMediums":["SMS","SMS"],"ForceAliasCreation":true,"MessageAction":"RESEND","TemporaryPassword":"__TemporaryPassword__","UserAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"UserPoolId":"__UserPoolId__","Username":"__Username__","ValidationData":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}]}
+{"ClientMetadata":{"key0":"__Value__"},"DesiredDeliveryMediums":["SMS","SMS"],"ForceAliasCreation":true,"MessageAction":"RESEND","TemporaryPassword":"__TemporaryPassword__","UserAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"Username":"__Username__","UserPoolId":"__UserPoolId__","ValidationData":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}]}

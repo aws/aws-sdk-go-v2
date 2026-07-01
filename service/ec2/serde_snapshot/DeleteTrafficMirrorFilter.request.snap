@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteTrafficMirrorFilter&DryRun=true&TrafficMirrorFilterId=__TrafficMirrorFilterId__&Version=2016-11-15

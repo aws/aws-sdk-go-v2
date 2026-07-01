@@ -2,4 +2,4 @@ POST /scopes
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","tags":{"key0":"__Value__","key1":"__Value__"},"targets":[{"region":"__Region__","targetIdentifier":{"targetId":{"accountId":"__TargetIdMemberAccountId__"},"targetType":"ACCOUNT"}},{"region":"__Region__","targetIdentifier":{"targetId":{"accountId":"__TargetIdMemberAccountId__"},"targetType":"ACCOUNT"}}]}
+{"clientToken":"__ClientToken__","tags":{"key0":"__Value__"},"targets":[{"region":"__Region__","targetIdentifier":{"targetId":{"accountId":"__TargetIdMemberAccountId__"},"targetType":"ACCOUNT"}},{"region":"__Region__","targetIdentifier":{"targetId":{"accountId":"__TargetIdMemberAccountId__"},"targetType":"ACCOUNT"}}]}

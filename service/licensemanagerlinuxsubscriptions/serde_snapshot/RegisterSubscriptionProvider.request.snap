@@ -2,4 +2,4 @@ POST /subscription/RegisterSubscriptionProvider
 
 Content-Type: application/json
 
-{"SecretArn":"__SecretArn__","SubscriptionProviderSource":"RedHat","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"SecretArn":"__SecretArn__","SubscriptionProviderSource":"RedHat","Tags":{"key0":"__Value__"}}

@@ -2,4 +2,4 @@ POST /sol/nslcm/v1/ns_instances/__NsInstanceId__/update
 
 Content-Type: application/json
 
-{"modifyVnfInfoData":{"vnfInstanceId":"__VnfInstanceId__"},"tags":{"key0":"__Value__","key1":"__Value__"},"updateNs":{"nsdInfoId":"__NsdInfoId__"},"updateType":"MODIFY_VNF_INFORMATION"}
+{"modifyVnfInfoData":{"vnfInstanceId":"__VnfInstanceId__"},"tags":{"key0":"__Value__"},"updateNs":{"nsdInfoId":"__NsdInfoId__"},"updateType":"MODIFY_VNF_INFORMATION"}

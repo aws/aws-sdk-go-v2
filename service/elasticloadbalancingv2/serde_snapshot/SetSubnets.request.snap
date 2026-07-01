@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SetSubnets&EnablePrefixForIpv6SourceNat=on&IpAddressType=ipv4&LoadBalancerArn=__LoadBalancerArn__&SubnetMappings.member.1.AllocationId=__AllocationId__&SubnetMappings.member.1.IPv6Address=__IPv6Address__&SubnetMappings.member.1.PrivateIPv4Address=__PrivateIPv4Address__&SubnetMappings.member.1.SourceNatIpv6Prefix=__SourceNatIpv6Prefix__&SubnetMappings.member.1.SubnetId=__SubnetId__&SubnetMappings.member.2.AllocationId=__AllocationId__&SubnetMappings.member.2.IPv6Address=__IPv6Address__&SubnetMappings.member.2.PrivateIPv4Address=__PrivateIPv4Address__&SubnetMappings.member.2.SourceNatIpv6Prefix=__SourceNatIpv6Prefix__&SubnetMappings.member.2.SubnetId=__SubnetId__&Subnets.member.1=__Member__&Subnets.member.2=__Member__&Version=2015-12-01

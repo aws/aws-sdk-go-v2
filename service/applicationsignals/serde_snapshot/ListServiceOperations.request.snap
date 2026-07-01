@@ -2,4 +2,4 @@ POST /service-operations?EndTime=2000-01-01T00%3A00%3A00Z&MaxResults=1&NextToken
 
 Content-Type: application/json
 
-{"KeyAttributes":{"key0":"__Value__","key1":"__Value__"}}
+{"KeyAttributes":{"key0":"__Value__"}}

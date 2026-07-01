@@ -2,4 +2,4 @@ PUT /domains/__DomainName__/domain-object-types/__ObjectTypeName__
 
 Content-Type: application/json
 
-{"Description":"__Description__","EncryptionKey":"__EncryptionKey__","Fields":{"key0":{"ContentType":"STRING","FeatureType":"TEXTUAL","Source":"__Source__","Target":"__Target__"},"key1":{"ContentType":"STRING","FeatureType":"TEXTUAL","Source":"__Source__","Target":"__Target__"}},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Description":"__Description__","EncryptionKey":"__EncryptionKey__","Fields":{"key0":{"ContentType":"STRING","FeatureType":"TEXTUAL","Source":"__Source__","Target":"__Target__"}},"Tags":{"key0":"__Value__"}}

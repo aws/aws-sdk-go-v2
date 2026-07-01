@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateTrustStore&CaCertificatesBundleS3Bucket=__CaCertificatesBundleS3Bucket__&CaCertificatesBundleS3Key=__CaCertificatesBundleS3Key__&CaCertificatesBundleS3ObjectVersion=__CaCertificatesBundleS3ObjectVersion__&Name=__Name__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2015-12-01

@@ -3,3 +3,4 @@ PUT /2020-05-31/vpc-origin/__Id__
 Content-Type: application/xml
 If-Match: __IfMatch__
 
+<VpcOriginEndpointConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Arn>__Arn__</Arn><HTTPPort>1</HTTPPort><HTTPSPort>1</HTTPSPort><Name>__Name__</Name><OriginProtocolPolicy>http-only</OriginProtocolPolicy><OriginSslProtocols><Items><SslProtocol>SSLv3</SslProtocol><SslProtocol>SSLv3</SslProtocol></Items><Quantity>1</Quantity></OriginSslProtocols></VpcOriginEndpointConfig>

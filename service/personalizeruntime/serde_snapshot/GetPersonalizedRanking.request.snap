@@ -2,4 +2,4 @@ POST /personalize-ranking
 
 Content-Type: application/json
 
-{"campaignArn":"__CampaignArn__","context":{"key0":"__Value__","key1":"__Value__"},"filterArn":"__FilterArn__","filterValues":{"key0":"__Value__","key1":"__Value__"},"inputList":["__Member__","__Member__"],"metadataColumns":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"userId":"__UserId__"}
+{"campaignArn":"__CampaignArn__","context":{"key0":"__Value__"},"filterArn":"__FilterArn__","filterValues":{"key0":"__Value__"},"inputList":["__Member__","__Member__"],"metadataColumns":{"key0":["__Member__","__Member__"]},"userId":"__UserId__"}

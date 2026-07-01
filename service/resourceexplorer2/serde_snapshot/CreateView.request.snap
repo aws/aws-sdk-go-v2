@@ -2,4 +2,4 @@ POST /CreateView
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","Filters":{"FilterString":"__FilterString__"},"IncludedProperties":[{"Name":"__Name__"},{"Name":"__Name__"}],"Scope":"__Scope__","Tags":{"key0":"__Value__","key1":"__Value__"},"ViewName":"__ViewName__"}
+{"ClientToken":"__ClientToken__","Filters":{"FilterString":"__FilterString__"},"IncludedProperties":[{"Name":"__Name__"},{"Name":"__Name__"}],"Scope":"__Scope__","Tags":{"key0":"__Value__"},"ViewName":"__ViewName__"}

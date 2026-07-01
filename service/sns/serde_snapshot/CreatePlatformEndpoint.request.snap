@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreatePlatformEndpoint&Attributes.entry.1.key=key0&Attributes.entry.1.value=__Value__&CustomUserData=__CustomUserData__&PlatformApplicationArn=__PlatformApplicationArn__&Token=__Token__&Version=2010-03-31

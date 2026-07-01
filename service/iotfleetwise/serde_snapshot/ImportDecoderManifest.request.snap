@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: IoTAutobahnControlPlane.ImportDecoderManifest
 
-{"name":"__Name__","networkFileDefinitions":[{"canDbc":{"canDbcFiles":["YmxvYg==","YmxvYg=="],"networkInterface":"__NetworkInterface__","signalsMap":{"key0":"__Value__","key1":"__Value__"}}},{"canDbc":{"canDbcFiles":["YmxvYg==","YmxvYg=="],"networkInterface":"__NetworkInterface__","signalsMap":{"key0":"__Value__","key1":"__Value__"}}}]}
+{"name":"__Name__","networkFileDefinitions":[{"canDbc":{"canDbcFiles":["YmxvYg==","YmxvYg=="],"networkInterface":"__NetworkInterface__","signalsMap":{"key0":"__Value__"}}},{"canDbc":{"canDbcFiles":["YmxvYg==","YmxvYg=="],"networkInterface":"__NetworkInterface__","signalsMap":{"key0":"__Value__"}}}]}

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateDelegationRequest&Description=__Description__&NotificationChannel=__NotificationChannel__&OnlySendByOwner=true&OwnerAccountId=__OwnerAccountId__&Permissions.Parameters.member.1.Name=__Name__&Permissions.Parameters.member.1.Type=string&Permissions.Parameters.member.1.Values.member.1=__Member__&Permissions.Parameters.member.1.Values.member.2=__Member__&Permissions.Parameters.member.2.Name=__Name__&Permissions.Parameters.member.2.Type=string&Permissions.Parameters.member.2.Values.member.1=__Member__&Permissions.Parameters.member.2.Values.member.2=__Member__&Permissions.PolicyTemplateArn=__PolicyTemplateArn__&RedirectUrl=__RedirectUrl__&RequestMessage=__RequestMessage__&RequestorWorkflowId=__RequestorWorkflowId__&SessionDuration=1&Version=2010-05-08

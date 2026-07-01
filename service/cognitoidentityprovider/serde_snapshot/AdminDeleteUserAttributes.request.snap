@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.AdminDeleteUserAttributes
 
-{"UserAttributeNames":["__Member__","__Member__"],"UserPoolId":"__UserPoolId__","Username":"__Username__"}
+{"UserAttributeNames":["__Member__","__Member__"],"Username":"__Username__","UserPoolId":"__UserPoolId__"}

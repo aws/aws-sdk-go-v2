@@ -3,3 +3,4 @@ PUT /?id=__Id__&intelligent-tiering=
 Content-Type: application/xml
 X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 
+<IntelligentTieringConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Filter><And><Prefix>__Prefix__</Prefix><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></And><Prefix>__Prefix__</Prefix><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Filter><Id>__Id__</Id><Status>Enabled</Status><Tiering><AccessTier>ARCHIVE_ACCESS</AccessTier><Days>1</Days></Tiering><Tiering><AccessTier>ARCHIVE_ACCESS</AccessTier><Days>1</Days></Tiering></IntelligentTieringConfiguration>

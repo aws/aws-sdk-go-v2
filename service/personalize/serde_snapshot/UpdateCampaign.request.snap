@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AmazonPersonalize.UpdateCampaign
 
-{"campaignArn":"__CampaignArn__","campaignConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__","key1":"__Value__"},"rankingInfluence":{"key0":1,"key1":1},"syncWithLatestSolutionVersion":true},"minProvisionedTPS":1,"solutionVersionArn":"__SolutionVersionArn__"}
+{"campaignArn":"__CampaignArn__","campaignConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__"},"rankingInfluence":{"key0":1},"syncWithLatestSolutionVersion":true},"minProvisionedTPS":1,"solutionVersionArn":"__SolutionVersionArn__"}

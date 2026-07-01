@@ -2,4 +2,4 @@ PUT /backup-vaults/__BackupVaultName__
 
 Content-Type: application/json
 
-{"BackupVaultTags":{"key0":"__Value__","key1":"__Value__"},"CreatorRequestId":"__CreatorRequestId__","EncryptionKeyArn":"__EncryptionKeyArn__"}
+{"BackupVaultTags":{"key0":"__Value__"},"CreatorRequestId":"__CreatorRequestId__","EncryptionKeyArn":"__EncryptionKeyArn__"}

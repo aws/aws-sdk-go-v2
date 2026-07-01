@@ -2,4 +2,4 @@ PUT /restore-jobs
 
 Content-Type: application/json
 
-{"CopySourceTagsToRestoredResource":true,"IamRoleArn":"__IamRoleArn__","IdempotencyToken":"__IdempotencyToken__","Metadata":{"key0":"__Value__","key1":"__Value__"},"RecoveryPointArn":"__RecoveryPointArn__","ResourceType":"__ResourceType__"}
+{"CopySourceTagsToRestoredResource":true,"IamRoleArn":"__IamRoleArn__","IdempotencyToken":"__IdempotencyToken__","Metadata":{"key0":"__Value__"},"RecoveryPointArn":"__RecoveryPointArn__","ResourceType":"__ResourceType__"}

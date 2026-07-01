@@ -2,4 +2,4 @@ POST /v2/import-policy
 
 Content-Type: application/json
 
-{"availabilitySlo":{"target":1},"clientToken":"__ClientToken__","kmsKeyId":"__KmsKeyId__","multiAzDisasterRecoveryApproach":"ACTIVE_ACTIVE","multiRegionDisasterRecoveryApproach":"ACTIVE_ACTIVE","tags":{"key0":"__Value__","key1":"__Value__"},"v1PolicyArn":"__V1PolicyArn__"}
+{"availabilitySlo":{"target":1},"clientToken":"__ClientToken__","kmsKeyId":"__KmsKeyId__","multiAzDisasterRecoveryApproach":"ACTIVE_ACTIVE","multiRegionDisasterRecoveryApproach":"ACTIVE_ACTIVE","tags":{"key0":"__Value__"},"v1PolicyArn":"__V1PolicyArn__"}

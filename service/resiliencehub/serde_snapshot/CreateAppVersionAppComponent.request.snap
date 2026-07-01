@@ -2,4 +2,4 @@ POST /create-app-version-app-component
 
 Content-Type: application/json
 
-{"additionalInfo":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"appArn":"__AppArn__","clientToken":"__ClientToken__","id":"__Id__","name":"__Name__","type":"__Type__"}
+{"additionalInfo":{"key0":["__Member__","__Member__"]},"appArn":"__AppArn__","clientToken":"__ClientToken__","id":"__Id__","name":"__Name__","type":"__Type__"}

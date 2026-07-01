@@ -2,4 +2,4 @@ POST /v2/vpclinks
 
 Content-Type: application/json
 
-{"name":"__Name__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"name":"__Name__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

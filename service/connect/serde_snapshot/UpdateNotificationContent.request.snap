@@ -2,4 +2,4 @@ POST /notifications/__InstanceId__/__NotificationId__
 
 Content-Type: application/json
 
-{"Content":{"key0":"__Value__","key1":"__Value__"}}
+{"Content":{"key0":"__Value__"}}

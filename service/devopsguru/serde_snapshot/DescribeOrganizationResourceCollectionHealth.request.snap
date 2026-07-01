@@ -2,4 +2,4 @@ POST /organization/health/resource-collection
 
 Content-Type: application/json
 
-{"AccountIds":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","OrganizationResourceCollectionType":"AWS_CLOUD_FORMATION","OrganizationalUnitIds":["__Member__","__Member__"]}
+{"AccountIds":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","OrganizationalUnitIds":["__Member__","__Member__"],"OrganizationResourceCollectionType":"AWS_CLOUD_FORMATION"}

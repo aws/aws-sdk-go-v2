@@ -3,4 +3,4 @@ PUT /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__/resp
 Accept: application/json
 Content-Type: application/json
 
-{"responseModels":{"key0":"__Value__","key1":"__Value__"},"responseParameters":{"key0":true,"key1":true}}
+{"responseModels":{"key0":"__Value__"},"responseParameters":{"key0":true}}

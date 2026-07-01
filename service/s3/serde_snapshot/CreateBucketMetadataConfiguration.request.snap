@@ -5,3 +5,4 @@ Content-Type: application/xml
 X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<MetadataConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><AnnotationTableConfiguration><ConfigurationState>ENABLED</ConfigurationState><EncryptionConfiguration><KmsKeyArn>__KmsKeyArn__</KmsKeyArn><SseAlgorithm>aws:kms</SseAlgorithm></EncryptionConfiguration><Role>__Role__</Role></AnnotationTableConfiguration><InventoryTableConfiguration><ConfigurationState>ENABLED</ConfigurationState><EncryptionConfiguration><KmsKeyArn>__KmsKeyArn__</KmsKeyArn><SseAlgorithm>aws:kms</SseAlgorithm></EncryptionConfiguration></InventoryTableConfiguration><JournalTableConfiguration><EncryptionConfiguration><KmsKeyArn>__KmsKeyArn__</KmsKeyArn><SseAlgorithm>aws:kms</SseAlgorithm></EncryptionConfiguration><RecordExpiration><Days>1</Days><Expiration>ENABLED</Expiration></RecordExpiration></JournalTableConfiguration></MetadataConfiguration>

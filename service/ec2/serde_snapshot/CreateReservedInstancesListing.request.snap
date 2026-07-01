@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateReservedInstancesListing&ClientToken=__ClientToken__&InstanceCount=1&PriceSchedules.1.CurrencyCode=USD&PriceSchedules.1.Price=1&PriceSchedules.1.Term=1&PriceSchedules.2.CurrencyCode=USD&PriceSchedules.2.Price=1&PriceSchedules.2.Term=1&ReservedInstancesId=__ReservedInstancesId__&Version=2016-11-15

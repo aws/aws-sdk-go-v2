@@ -2,4 +2,4 @@ POST /create-resiliency-policy
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","dataLocationConstraint":"AnyLocation","policy":{"key0":{"rpoInSecs":1,"rtoInSecs":1},"key1":{"rpoInSecs":1,"rtoInSecs":1}},"policyDescription":"__PolicyDescription__","policyName":"__PolicyName__","tags":{"key0":"__Value__","key1":"__Value__"},"tier":"MissionCritical"}
+{"clientToken":"__ClientToken__","dataLocationConstraint":"AnyLocation","policy":{"key0":{"rpoInSecs":1,"rtoInSecs":1}},"policyDescription":"__PolicyDescription__","policyName":"__PolicyName__","tags":{"key0":"__Value__"},"tier":"MissionCritical"}

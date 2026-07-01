@@ -3,3 +3,4 @@ PUT /v20180820/accesspoint/__Name__
 Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 
+<CreateAccessPointRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><Bucket>__Bucket__</Bucket><BucketAccountId>__BucketAccountId__</BucketAccountId><PublicAccessBlockConfiguration><BlockPublicAcls>true</BlockPublicAcls><BlockPublicPolicy>true</BlockPublicPolicy><IgnorePublicAcls>true</IgnorePublicAcls><RestrictPublicBuckets>true</RestrictPublicBuckets></PublicAccessBlockConfiguration><Scope><Permissions><Permission>GetObject</Permission><Permission>GetObject</Permission></Permissions><Prefixes><Prefix>__Member__</Prefix><Prefix>__Member__</Prefix></Prefixes></Scope><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags><VpcConfiguration><VpcId>__VpcId__</VpcId></VpcConfiguration></CreateAccessPointRequest>

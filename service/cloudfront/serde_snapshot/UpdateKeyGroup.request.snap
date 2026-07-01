@@ -3,3 +3,4 @@ PUT /2020-05-31/key-group/__Id__
 Content-Type: application/xml
 If-Match: __IfMatch__
 
+<KeyGroupConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Comment>__Comment__</Comment><Items><PublicKey>__Member__</PublicKey><PublicKey>__Member__</PublicKey></Items><Name>__Name__</Name></KeyGroupConfig>

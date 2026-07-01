@@ -2,4 +2,4 @@ POST /groups
 
 Content-Type: application/json
 
-{"Configuration":[{"Parameters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Type":"__Type__"},{"Parameters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Type":"__Type__"}],"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","Name":"__Name__","Owner":"__Owner__","ResourceQuery":{"Query":"__Query__","Type":"TAG_FILTERS_1_0"},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Configuration":[{"Parameters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Type":"__Type__"},{"Parameters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Type":"__Type__"}],"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","Name":"__Name__","Owner":"__Owner__","ResourceQuery":{"Query":"__Query__","Type":"TAG_FILTERS_1_0"},"Tags":{"key0":"__Value__"}}

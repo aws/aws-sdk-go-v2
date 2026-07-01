@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeSecurityGroupReferences&DryRun=true&GroupId.1=__Member__&GroupId.2=__Member__&Version=2016-11-15

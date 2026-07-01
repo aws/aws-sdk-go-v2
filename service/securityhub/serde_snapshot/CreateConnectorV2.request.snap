@@ -2,4 +2,4 @@ POST /connectorsv2
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","Description":"__Description__","KmsKeyArn":"__KmsKeyArn__","Name":"__Name__","Provider":{"JiraCloud":{"ProjectKey":"__ProjectKey__"}},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","Description":"__Description__","KmsKeyArn":"__KmsKeyArn__","Name":"__Name__","Provider":{"JiraCloud":{"ProjectKey":"__ProjectKey__"}},"Tags":{"key0":"__Value__"}}

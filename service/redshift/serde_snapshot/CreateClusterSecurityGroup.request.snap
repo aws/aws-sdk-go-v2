@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateClusterSecurityGroup&ClusterSecurityGroupName=__ClusterSecurityGroupName__&Description=__Description__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&Version=2012-12-01

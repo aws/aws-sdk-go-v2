@@ -2,4 +2,4 @@ POST /authorizer/__AuthorizerName__/test
 
 Content-Type: application/json
 
-{"httpContext":{"headers":{"key0":"__Value__","key1":"__Value__"},"queryString":"__QueryString__"},"mqttContext":{"clientId":"__ClientId__","password":"YmxvYg==","username":"__Username__"},"tlsContext":{"serverName":"__ServerName__"},"token":"__Token__","tokenSignature":"__TokenSignature__"}
+{"httpContext":{"headers":{"key0":"__Value__"},"queryString":"__QueryString__"},"mqttContext":{"clientId":"__ClientId__","password":"YmxvYg==","username":"__Username__"},"tlsContext":{"serverName":"__ServerName__"},"token":"__Token__","tokenSignature":"__TokenSignature__"}

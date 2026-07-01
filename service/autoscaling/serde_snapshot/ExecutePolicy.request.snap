@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ExecutePolicy&AutoScalingGroupName=__AutoScalingGroupName__&BreachThreshold=1&HonorCooldown=true&MetricValue=1&PolicyName=__PolicyName__&Version=2011-01-01

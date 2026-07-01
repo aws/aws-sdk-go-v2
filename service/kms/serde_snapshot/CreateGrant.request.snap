@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TrentService.CreateGrant
 
-{"Constraints":{"EncryptionContextEquals":{"key0":"__Value__","key1":"__Value__"},"EncryptionContextSubset":{"key0":"__Value__","key1":"__Value__"},"SourceArn":"__SourceArn__"},"DryRun":true,"GrantTokens":["__Member__","__Member__"],"GranteePrincipal":"__GranteePrincipal__","GranteeServicePrincipal":"__GranteeServicePrincipal__","KeyId":"__KeyId__","Name":"__Name__","Operations":["Decrypt","Decrypt"],"RetiringPrincipal":"__RetiringPrincipal__","RetiringServicePrincipal":"__RetiringServicePrincipal__"}
+{"Constraints":{"EncryptionContextEquals":{"key0":"__Value__"},"EncryptionContextSubset":{"key0":"__Value__"},"SourceArn":"__SourceArn__"},"DryRun":true,"GranteePrincipal":"__GranteePrincipal__","GranteeServicePrincipal":"__GranteeServicePrincipal__","GrantTokens":["__Member__","__Member__"],"KeyId":"__KeyId__","Name":"__Name__","Operations":["Decrypt","Decrypt"],"RetiringPrincipal":"__RetiringPrincipal__","RetiringServicePrincipal":"__RetiringServicePrincipal__"}

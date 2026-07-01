@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AmazonPersonalize.CreateRecommender
 
-{"datasetGroupArn":"__DatasetGroupArn__","name":"__Name__","recipeArn":"__RecipeArn__","recommenderConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__","key1":"__Value__"},"minRecommendationRequestsPerSecond":1,"trainingDataConfig":{"excludedDatasetColumns":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"includedDatasetColumns":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]}}},"tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}
+{"datasetGroupArn":"__DatasetGroupArn__","name":"__Name__","recipeArn":"__RecipeArn__","recommenderConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__"},"minRecommendationRequestsPerSecond":1,"trainingDataConfig":{"excludedDatasetColumns":{"key0":["__Member__","__Member__"]},"includedDatasetColumns":{"key0":["__Member__","__Member__"]}}},"tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}

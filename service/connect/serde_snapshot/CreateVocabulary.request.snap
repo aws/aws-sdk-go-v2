@@ -2,4 +2,4 @@ POST /vocabulary/__InstanceId__
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","Content":"__Content__","LanguageCode":"ar-AE","Tags":{"key0":"__Value__","key1":"__Value__"},"VocabularyName":"__VocabularyName__"}
+{"ClientToken":"__ClientToken__","Content":"__Content__","LanguageCode":"ar-AE","Tags":{"key0":"__Value__"},"VocabularyName":"__VocabularyName__"}

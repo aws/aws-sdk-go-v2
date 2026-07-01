@@ -3,3 +3,4 @@ PUT /v20180820/accesspoint/__Name__/scope
 Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 
+<PutAccessPointScopeRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><Scope><Permissions><Permission>GetObject</Permission><Permission>GetObject</Permission></Permissions><Prefixes><Prefix>__Member__</Prefix><Prefix>__Member__</Prefix></Prefixes></Scope></PutAccessPointScopeRequest>

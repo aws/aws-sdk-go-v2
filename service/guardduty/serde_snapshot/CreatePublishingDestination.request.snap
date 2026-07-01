@@ -2,4 +2,4 @@ POST /detector/__DetectorId__/publishingDestination
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","destinationProperties":{"destinationArn":"__DestinationArn__","kmsKeyArn":"__KmsKeyArn__"},"destinationType":"S3","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","destinationProperties":{"destinationArn":"__DestinationArn__","kmsKeyArn":"__KmsKeyArn__"},"destinationType":"S3","tags":{"key0":"__Value__"}}

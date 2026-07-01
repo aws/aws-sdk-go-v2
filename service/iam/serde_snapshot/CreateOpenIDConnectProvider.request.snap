@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateOpenIDConnectProvider&ClientIDList.member.1=__Member__&ClientIDList.member.2=__Member__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&ThumbprintList.member.1=__Member__&ThumbprintList.member.2=__Member__&Url=__Url__&Version=2010-05-08

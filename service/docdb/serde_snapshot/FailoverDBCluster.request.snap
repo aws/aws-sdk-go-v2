@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=FailoverDBCluster&DBClusterIdentifier=__DBClusterIdentifier__&TargetDBInstanceIdentifier=__TargetDBInstanceIdentifier__&Version=2014-10-31

@@ -2,4 +2,4 @@ POST /identity-sources
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","IdentitySourceParameters":{"IamIdentityCenter":{"InstanceArn":"__InstanceArn__","Region":"__Region__"}},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","IdentitySourceParameters":{"IamIdentityCenter":{"InstanceArn":"__InstanceArn__","Region":"__Region__"}},"Tags":{"key0":"__Value__"}}

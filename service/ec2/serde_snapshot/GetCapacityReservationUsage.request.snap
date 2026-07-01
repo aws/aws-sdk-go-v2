@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetCapacityReservationUsage&CapacityReservationId=__CapacityReservationId__&DryRun=true&MaxResults=1&NextToken=__NextToken__&Version=2016-11-15

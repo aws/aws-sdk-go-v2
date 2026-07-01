@@ -2,4 +2,4 @@ POST /sol/nslcm/v1/ns_instances
 
 Content-Type: application/json
 
-{"nsDescription":"__NsDescription__","nsName":"__NsName__","nsdInfoId":"__NsdInfoId__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"nsDescription":"__NsDescription__","nsdInfoId":"__NsdInfoId__","nsName":"__NsName__","tags":{"key0":"__Value__"}}

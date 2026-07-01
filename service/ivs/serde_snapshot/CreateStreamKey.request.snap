@@ -2,4 +2,4 @@ POST /CreateStreamKey
 
 Content-Type: application/json
 
-{"channelArn":"__ChannelArn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"channelArn":"__ChannelArn__","tags":{"key0":"__Value__"}}

@@ -11,3 +11,4 @@ X-Amz-Grant-Write: __GrantWrite__
 X-Amz-Grant-Write-Acp: __GrantWriteACP__
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><AccessControlList><Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><DisplayName>__DisplayName__</DisplayName><EmailAddress>__EmailAddress__</EmailAddress><ID>__ID__</ID><URI>__URI__</URI></Grantee><Permission>FULL_CONTROL</Permission></Grant><Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><DisplayName>__DisplayName__</DisplayName><EmailAddress>__EmailAddress__</EmailAddress><ID>__ID__</ID><URI>__URI__</URI></Grantee><Permission>FULL_CONTROL</Permission></Grant></AccessControlList><Owner><DisplayName>__DisplayName__</DisplayName><ID>__ID__</ID></Owner></AccessControlPolicy>

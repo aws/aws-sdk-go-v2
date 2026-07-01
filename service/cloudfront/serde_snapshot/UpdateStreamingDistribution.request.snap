@@ -3,3 +3,4 @@ PUT /2020-05-31/streaming-distribution/__Id__/config
 Content-Type: application/xml
 If-Match: __IfMatch__
 
+<StreamingDistributionConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Aliases><Items><CNAME>__Member__</CNAME><CNAME>__Member__</CNAME></Items><Quantity>1</Quantity></Aliases><CallerReference>__CallerReference__</CallerReference><Comment>__Comment__</Comment><Enabled>true</Enabled><Logging><Bucket>__Bucket__</Bucket><Enabled>true</Enabled><Prefix>__Prefix__</Prefix></Logging><PriceClass>PriceClass_100</PriceClass><S3Origin><DomainName>__DomainName__</DomainName><OriginAccessIdentity>__OriginAccessIdentity__</OriginAccessIdentity></S3Origin><TrustedSigners><Enabled>true</Enabled><Items><AwsAccountNumber>__Member__</AwsAccountNumber><AwsAccountNumber>__Member__</AwsAccountNumber></Items><Quantity>1</Quantity></TrustedSigners></StreamingDistributionConfig>

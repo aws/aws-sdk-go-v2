@@ -2,4 +2,4 @@ PUT /v1/package-group-origin-configuration?domain=__Domain__&domain-owner=__Doma
 
 Content-Type: application/json
 
-{"addAllowedRepositories":[{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"},{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"}],"removeAllowedRepositories":[{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"},{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"}],"restrictions":{"key0":"ALLOW","key1":"ALLOW"}}
+{"addAllowedRepositories":[{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"},{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"}],"removeAllowedRepositories":[{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"},{"originRestrictionType":"EXTERNAL_UPSTREAM","repositoryName":"__RepositoryName__"}],"restrictions":{"key0":"ALLOW"}}

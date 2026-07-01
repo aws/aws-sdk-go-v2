@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyGlobalReplicationGroup&ApplyImmediately=true&AutomaticFailoverEnabled=true&CacheNodeType=__CacheNodeType__&CacheParameterGroupName=__CacheParameterGroupName__&Engine=__Engine__&EngineVersion=__EngineVersion__&GlobalReplicationGroupDescription=__GlobalReplicationGroupDescription__&GlobalReplicationGroupId=__GlobalReplicationGroupId__&Version=2015-02-02
