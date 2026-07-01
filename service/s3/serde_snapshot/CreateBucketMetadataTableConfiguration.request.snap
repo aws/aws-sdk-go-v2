@@ -5,3 +5,4 @@ Content-Type: application/xml
 X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<MetadataTableConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><S3TablesDestination><TableBucketArn>__TableBucketArn__</TableBucketArn><TableName>__TableName__</TableName></S3TablesDestination></MetadataTableConfiguration>

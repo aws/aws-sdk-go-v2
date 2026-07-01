@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyClusterMaintenance&ClusterIdentifier=__ClusterIdentifier__&DeferMaintenance=true&DeferMaintenanceDuration=1&DeferMaintenanceEndTime=2000-01-01T00%3A00%3A00Z&DeferMaintenanceIdentifier=__DeferMaintenanceIdentifier__&DeferMaintenanceStartTime=2000-01-01T00%3A00%3A00Z&Version=2012-12-01

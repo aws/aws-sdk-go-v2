@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: CodePipeline_20150709.PollForJobs
 
-{"actionTypeId":{"category":"Source","owner":"AWS","provider":"__Provider__","version":"__Version__"},"maxBatchSize":1,"queryParam":{"key0":"__Value__","key1":"__Value__"}}
+{"actionTypeId":{"category":"Source","owner":"AWS","provider":"__Provider__","version":"__Version__"},"maxBatchSize":1,"queryParam":{"key0":"__Value__"}}

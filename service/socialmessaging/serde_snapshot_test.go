@@ -7,7 +7,6 @@ package socialmessaging
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
@@ -117,18 +116,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -141,7 +145,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -154,7 +157,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -171,6 +177,9 @@ func serdeNewClient() *Client {
 		Region:             "us-east-1",
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
+}
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
 }
 func TestSerdeCheckSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	input := &AssociateWhatsAppBusinessAccountInput{
@@ -247,6 +256,7 @@ func TestSerdeCheckSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.AssociateWhatsAppBusinessAccount(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -283,6 +293,7 @@ func TestSerdeCheckSnapshot_CreateWhatsAppFlow(t *testing.T) {
 	_, err := svc.CreateWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -312,6 +323,7 @@ func TestSerdeCheckSnapshot_CreateWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.CreateWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -340,18 +352,15 @@ func TestSerdeCheckSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing.
 					PhoneNumber: ptr.String("__PhoneNumber__"),
 					Url: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OtpType:              ptr.String("__OtpType__"),
 					ZeroTapTermsAccepted: ptr.Bool(true),
 					SupportedApps: []map[string]string{
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -360,18 +369,15 @@ func TestSerdeCheckSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing.
 					PhoneNumber: ptr.String("__PhoneNumber__"),
 					Url: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OtpType:              ptr.String("__OtpType__"),
 					ZeroTapTermsAccepted: ptr.Bool(true),
 					SupportedApps: []map[string]string{
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -395,6 +401,7 @@ func TestSerdeCheckSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing.
 	_, err := svc.CreateWhatsAppMessageTemplateFromLibrary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -427,6 +434,7 @@ func TestSerdeCheckSnapshot_CreateWhatsAppMessageTemplateMedia(t *testing.T) {
 	_, err := svc.CreateWhatsAppMessageTemplateMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -456,6 +464,7 @@ func TestSerdeCheckSnapshot_DeleteWhatsAppFlow(t *testing.T) {
 	_, err := svc.DeleteWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -485,6 +494,7 @@ func TestSerdeCheckSnapshot_DeleteWhatsAppMessageMedia(t *testing.T) {
 	_, err := svc.DeleteWhatsAppMessageMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -516,6 +526,7 @@ func TestSerdeCheckSnapshot_DeleteWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.DeleteWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -545,6 +556,7 @@ func TestSerdeCheckSnapshot_DeprecateWhatsAppFlow(t *testing.T) {
 	_, err := svc.DeprecateWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -573,6 +585,7 @@ func TestSerdeCheckSnapshot_DisassociateWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.DisassociateWhatsAppBusinessAccount(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -601,6 +614,7 @@ func TestSerdeCheckSnapshot_GetLinkedWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.GetLinkedWhatsAppBusinessAccount(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -629,6 +643,7 @@ func TestSerdeCheckSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *testi
 	_, err := svc.GetLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -658,6 +673,7 @@ func TestSerdeCheckSnapshot_GetWhatsAppFlow(t *testing.T) {
 	_, err := svc.GetWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -688,6 +704,7 @@ func TestSerdeCheckSnapshot_GetWhatsAppFlowPreview(t *testing.T) {
 	_, err := svc.GetWhatsAppFlowPreview(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -712,7 +729,6 @@ func TestSerdeCheckSnapshot_GetWhatsAppMessageMedia(t *testing.T) {
 			Url: ptr.String("__Url__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		DestinationS3File: &types.S3File{
@@ -729,6 +745,7 @@ func TestSerdeCheckSnapshot_GetWhatsAppMessageMedia(t *testing.T) {
 	_, err := svc.GetWhatsAppMessageMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -760,6 +777,7 @@ func TestSerdeCheckSnapshot_GetWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.GetWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -789,6 +807,7 @@ func TestSerdeCheckSnapshot_ListLinkedWhatsAppBusinessAccounts(t *testing.T) {
 	_, err := svc.ListLinkedWhatsAppBusinessAccounts(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -817,6 +836,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -848,6 +868,7 @@ func TestSerdeCheckSnapshot_ListWhatsAppFlowAssets(t *testing.T) {
 	_, err := svc.ListWhatsAppFlowAssets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -878,6 +899,7 @@ func TestSerdeCheckSnapshot_ListWhatsAppFlows(t *testing.T) {
 	_, err := svc.ListWhatsAppFlows(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -908,6 +930,7 @@ func TestSerdeCheckSnapshot_ListWhatsAppMessageTemplates(t *testing.T) {
 	_, err := svc.ListWhatsAppMessageTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -930,7 +953,6 @@ func TestSerdeCheckSnapshot_ListWhatsAppTemplateLibrary(t *testing.T) {
 		Id:         ptr.String("__Id__"),
 		Filters: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -942,6 +964,7 @@ func TestSerdeCheckSnapshot_ListWhatsAppTemplateLibrary(t *testing.T) {
 	_, err := svc.ListWhatsAppTemplateLibrary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -964,7 +987,6 @@ func TestSerdeCheckSnapshot_PostWhatsAppMessageMedia(t *testing.T) {
 			Url: ptr.String("__Url__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		SourceS3File: &types.S3File{
@@ -981,6 +1003,7 @@ func TestSerdeCheckSnapshot_PostWhatsAppMessageMedia(t *testing.T) {
 	_, err := svc.PostWhatsAppMessageMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1010,6 +1033,7 @@ func TestSerdeCheckSnapshot_PublishWhatsAppFlow(t *testing.T) {
 	_, err := svc.PublishWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1048,6 +1072,7 @@ func TestSerdeCheckSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *testi
 	_, err := svc.PutWhatsAppBusinessAccountEventDestinations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1078,6 +1103,7 @@ func TestSerdeCheckSnapshot_SendWhatsAppMessage(t *testing.T) {
 	_, err := svc.SendWhatsAppMessage(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1116,6 +1142,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1148,6 +1175,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1182,6 +1210,7 @@ func TestSerdeCheckSnapshot_UpdateWhatsAppFlow(t *testing.T) {
 	_, err := svc.UpdateWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1212,6 +1241,7 @@ func TestSerdeCheckSnapshot_UpdateWhatsAppFlowAssets(t *testing.T) {
 	_, err := svc.UpdateWhatsAppFlowAssets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1247,6 +1277,7 @@ func TestSerdeCheckSnapshot_UpdateWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.UpdateWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1336,6 +1367,7 @@ func TestSerdeUpdateSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.AssociateWhatsAppBusinessAccount(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1372,6 +1404,7 @@ func TestSerdeUpdateSnapshot_CreateWhatsAppFlow(t *testing.T) {
 	_, err := svc.CreateWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1401,6 +1434,7 @@ func TestSerdeUpdateSnapshot_CreateWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.CreateWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1429,18 +1463,15 @@ func TestSerdeUpdateSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing
 					PhoneNumber: ptr.String("__PhoneNumber__"),
 					Url: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OtpType:              ptr.String("__OtpType__"),
 					ZeroTapTermsAccepted: ptr.Bool(true),
 					SupportedApps: []map[string]string{
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -1449,18 +1480,15 @@ func TestSerdeUpdateSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing
 					PhoneNumber: ptr.String("__PhoneNumber__"),
 					Url: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OtpType:              ptr.String("__OtpType__"),
 					ZeroTapTermsAccepted: ptr.Bool(true),
 					SupportedApps: []map[string]string{
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -1484,6 +1512,7 @@ func TestSerdeUpdateSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing
 	_, err := svc.CreateWhatsAppMessageTemplateFromLibrary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1516,6 +1545,7 @@ func TestSerdeUpdateSnapshot_CreateWhatsAppMessageTemplateMedia(t *testing.T) {
 	_, err := svc.CreateWhatsAppMessageTemplateMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1545,6 +1575,7 @@ func TestSerdeUpdateSnapshot_DeleteWhatsAppFlow(t *testing.T) {
 	_, err := svc.DeleteWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1574,6 +1605,7 @@ func TestSerdeUpdateSnapshot_DeleteWhatsAppMessageMedia(t *testing.T) {
 	_, err := svc.DeleteWhatsAppMessageMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1605,6 +1637,7 @@ func TestSerdeUpdateSnapshot_DeleteWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.DeleteWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1634,6 +1667,7 @@ func TestSerdeUpdateSnapshot_DeprecateWhatsAppFlow(t *testing.T) {
 	_, err := svc.DeprecateWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1662,6 +1696,7 @@ func TestSerdeUpdateSnapshot_DisassociateWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.DisassociateWhatsAppBusinessAccount(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1690,6 +1725,7 @@ func TestSerdeUpdateSnapshot_GetLinkedWhatsAppBusinessAccount(t *testing.T) {
 	_, err := svc.GetLinkedWhatsAppBusinessAccount(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1718,6 +1754,7 @@ func TestSerdeUpdateSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *test
 	_, err := svc.GetLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1747,6 +1784,7 @@ func TestSerdeUpdateSnapshot_GetWhatsAppFlow(t *testing.T) {
 	_, err := svc.GetWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1777,6 +1815,7 @@ func TestSerdeUpdateSnapshot_GetWhatsAppFlowPreview(t *testing.T) {
 	_, err := svc.GetWhatsAppFlowPreview(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1801,7 +1840,6 @@ func TestSerdeUpdateSnapshot_GetWhatsAppMessageMedia(t *testing.T) {
 			Url: ptr.String("__Url__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		DestinationS3File: &types.S3File{
@@ -1818,6 +1856,7 @@ func TestSerdeUpdateSnapshot_GetWhatsAppMessageMedia(t *testing.T) {
 	_, err := svc.GetWhatsAppMessageMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1849,6 +1888,7 @@ func TestSerdeUpdateSnapshot_GetWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.GetWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1878,6 +1918,7 @@ func TestSerdeUpdateSnapshot_ListLinkedWhatsAppBusinessAccounts(t *testing.T) {
 	_, err := svc.ListLinkedWhatsAppBusinessAccounts(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1906,6 +1947,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1937,6 +1979,7 @@ func TestSerdeUpdateSnapshot_ListWhatsAppFlowAssets(t *testing.T) {
 	_, err := svc.ListWhatsAppFlowAssets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1967,6 +2010,7 @@ func TestSerdeUpdateSnapshot_ListWhatsAppFlows(t *testing.T) {
 	_, err := svc.ListWhatsAppFlows(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1997,6 +2041,7 @@ func TestSerdeUpdateSnapshot_ListWhatsAppMessageTemplates(t *testing.T) {
 	_, err := svc.ListWhatsAppMessageTemplates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2019,7 +2064,6 @@ func TestSerdeUpdateSnapshot_ListWhatsAppTemplateLibrary(t *testing.T) {
 		Id:         ptr.String("__Id__"),
 		Filters: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2031,6 +2075,7 @@ func TestSerdeUpdateSnapshot_ListWhatsAppTemplateLibrary(t *testing.T) {
 	_, err := svc.ListWhatsAppTemplateLibrary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2053,7 +2098,6 @@ func TestSerdeUpdateSnapshot_PostWhatsAppMessageMedia(t *testing.T) {
 			Url: ptr.String("__Url__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		SourceS3File: &types.S3File{
@@ -2070,6 +2114,7 @@ func TestSerdeUpdateSnapshot_PostWhatsAppMessageMedia(t *testing.T) {
 	_, err := svc.PostWhatsAppMessageMedia(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2099,6 +2144,7 @@ func TestSerdeUpdateSnapshot_PublishWhatsAppFlow(t *testing.T) {
 	_, err := svc.PublishWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2137,6 +2183,7 @@ func TestSerdeUpdateSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *test
 	_, err := svc.PutWhatsAppBusinessAccountEventDestinations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2167,6 +2214,7 @@ func TestSerdeUpdateSnapshot_SendWhatsAppMessage(t *testing.T) {
 	_, err := svc.SendWhatsAppMessage(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2205,6 +2253,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2237,6 +2286,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2271,6 +2321,7 @@ func TestSerdeUpdateSnapshot_UpdateWhatsAppFlow(t *testing.T) {
 	_, err := svc.UpdateWhatsAppFlow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2301,6 +2352,7 @@ func TestSerdeUpdateSnapshot_UpdateWhatsAppFlowAssets(t *testing.T) {
 	_, err := svc.UpdateWhatsAppFlowAssets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2336,6 +2388,7 @@ func TestSerdeUpdateSnapshot_UpdateWhatsAppMessageTemplate(t *testing.T) {
 	_, err := svc.UpdateWhatsAppMessageTemplate(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

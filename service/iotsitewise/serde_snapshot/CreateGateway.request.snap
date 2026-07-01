@@ -2,4 +2,4 @@ POST /20200301/gateways
 
 Content-Type: application/json
 
-{"gatewayName":"__GatewayName__","gatewayPlatform":{"greengrass":{"groupArn":"__GroupArn__"},"greengrassV2":{"coreDeviceOperatingSystem":"LINUX_AARCH64","coreDeviceThingName":"__CoreDeviceThingName__"},"siemensIE":{"iotCoreThingName":"__IotCoreThingName__"}},"gatewayVersion":"__GatewayVersion__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"gatewayName":"__GatewayName__","gatewayPlatform":{"greengrass":{"groupArn":"__GroupArn__"},"greengrassV2":{"coreDeviceOperatingSystem":"LINUX_AARCH64","coreDeviceThingName":"__CoreDeviceThingName__"},"siemensIE":{"iotCoreThingName":"__IotCoreThingName__"}},"gatewayVersion":"__GatewayVersion__","tags":{"key0":"__Value__"}}

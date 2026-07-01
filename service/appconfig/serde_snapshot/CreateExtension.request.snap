@@ -3,4 +3,4 @@ POST /extensions
 Content-Type: application/json
 Latest-Version-Number: 1
 
-{"Actions":{"key0":[{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"},{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"}],"key1":[{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"},{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"}]},"Description":"__Description__","Name":"__Name__","Parameters":{"key0":{"Description":"__Description__","Dynamic":true,"Required":true},"key1":{"Description":"__Description__","Dynamic":true,"Required":true}},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Actions":{"key0":[{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"},{"Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__","Uri":"__Uri__"}]},"Description":"__Description__","Name":"__Name__","Parameters":{"key0":{"Description":"__Description__","Dynamic":true,"Required":true}},"Tags":{"key0":"__Value__"}}

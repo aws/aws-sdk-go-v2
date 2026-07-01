@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=BatchModifyClusterSnapshots&Force=true&ManualSnapshotRetentionPeriod=1&SnapshotIdentifierList.String.1=__Member__&SnapshotIdentifierList.String.2=__Member__&Version=2012-12-01

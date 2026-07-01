@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AssociateVpcCidrBlock&AmazonProvidedIpv6CidrBlock=true&CidrBlock=__CidrBlock__&Ipv4IpamPoolId=__Ipv4IpamPoolId__&Ipv4NetmaskLength=1&Ipv6CidrBlock=__Ipv6CidrBlock__&Ipv6CidrBlockNetworkBorderGroup=__Ipv6CidrBlockNetworkBorderGroup__&Ipv6IpamPoolId=__Ipv6IpamPoolId__&Ipv6NetmaskLength=1&Ipv6Pool=__Ipv6Pool__&Version=2016-11-15&VpcId=__VpcId__

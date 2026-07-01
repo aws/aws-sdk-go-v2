@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeAutoScalingInstances&InstanceIds.member.1=__Member__&InstanceIds.member.2=__Member__&MaxRecords=1&NextToken=__NextToken__&Version=2011-01-01

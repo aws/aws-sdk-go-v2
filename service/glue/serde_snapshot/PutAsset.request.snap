@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSGlue.PutAsset
 
-{"AssetTypeId":"__AssetTypeId__","ClientToken":"__ClientToken__","Description":"__Description__","Forms":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"},"key1":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"Identifier":"__Identifier__","Name":"__Name__"}
+{"AssetTypeId":"__AssetTypeId__","ClientToken":"__ClientToken__","Description":"__Description__","Forms":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"Identifier":"__Identifier__","Name":"__Name__"}

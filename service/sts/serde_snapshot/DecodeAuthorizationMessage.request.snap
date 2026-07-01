@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DecodeAuthorizationMessage&EncodedMessage=__EncodedMessage__&Version=2011-06-15

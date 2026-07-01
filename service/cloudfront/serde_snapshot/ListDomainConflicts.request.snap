@@ -2,3 +2,4 @@ POST /2020-05-31/domain-conflicts
 
 Content-Type: application/xml
 
+<ListDomainConflictsRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Domain>__Domain__</Domain><DomainControlValidationResource><DistributionId>__DistributionId__</DistributionId><DistributionTenantId>__DistributionTenantId__</DistributionTenantId></DomainControlValidationResource><Marker>__Marker__</Marker><MaxItems>1</MaxItems></ListDomainConflictsRequest>

@@ -7,7 +7,6 @@ package rum
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -173,6 +179,9 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 	input := &BatchCreateRumMetricDefinitionsInput{
 		AppMonitorName: ptr.String("__AppMonitorName__"),
@@ -185,7 +194,6 @@ func TestSerdeCheckSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 				UnitLabel: ptr.String("__UnitLabel__"),
 				DimensionKeys: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				EventPattern: ptr.String("__EventPattern__"),
 				Namespace:    ptr.String("__Namespace__"),
@@ -196,7 +204,6 @@ func TestSerdeCheckSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 				UnitLabel: ptr.String("__UnitLabel__"),
 				DimensionKeys: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				EventPattern: ptr.String("__EventPattern__"),
 				Namespace:    ptr.String("__Namespace__"),
@@ -212,6 +219,7 @@ func TestSerdeCheckSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 	_, err := svc.BatchCreateRumMetricDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -246,6 +254,7 @@ func TestSerdeCheckSnapshot_BatchDeleteRumMetricDefinitions(t *testing.T) {
 	_, err := svc.BatchDeleteRumMetricDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -278,6 +287,7 @@ func TestSerdeCheckSnapshot_BatchGetRumMetricDefinitions(t *testing.T) {
 	_, err := svc.BatchGetRumMetricDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -303,7 +313,6 @@ func TestSerdeCheckSnapshot_CreateAppMonitor(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		AppMonitorConfiguration: &types.AppMonitorConfiguration{
 			IdentityPoolId: ptr.String("__IdentityPoolId__"),
@@ -349,6 +358,7 @@ func TestSerdeCheckSnapshot_CreateAppMonitor(t *testing.T) {
 	_, err := svc.CreateAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -377,6 +387,7 @@ func TestSerdeCheckSnapshot_DeleteAppMonitor(t *testing.T) {
 	_, err := svc.DeleteAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -406,6 +417,7 @@ func TestSerdeCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -436,6 +448,7 @@ func TestSerdeCheckSnapshot_DeleteRumMetricsDestination(t *testing.T) {
 	_, err := svc.DeleteRumMetricsDestination(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -464,6 +477,7 @@ func TestSerdeCheckSnapshot_GetAppMonitor(t *testing.T) {
 	_, err := svc.GetAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -514,6 +528,7 @@ func TestSerdeCheckSnapshot_GetAppMonitorData(t *testing.T) {
 	_, err := svc.GetAppMonitorData(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -542,6 +557,7 @@ func TestSerdeCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -571,6 +587,7 @@ func TestSerdeCheckSnapshot_ListAppMonitors(t *testing.T) {
 	_, err := svc.ListAppMonitors(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -601,6 +618,7 @@ func TestSerdeCheckSnapshot_ListRumMetricsDestinations(t *testing.T) {
 	_, err := svc.ListRumMetricsDestinations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -629,6 +647,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -659,6 +678,7 @@ func TestSerdeCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -714,6 +734,7 @@ func TestSerdeCheckSnapshot_PutRumEvents(t *testing.T) {
 	_, err := svc.PutRumEvents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -745,6 +766,7 @@ func TestSerdeCheckSnapshot_PutRumMetricsDestination(t *testing.T) {
 	_, err := svc.PutRumMetricsDestination(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -765,7 +787,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -777,6 +798,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -809,6 +831,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -875,6 +898,7 @@ func TestSerdeCheckSnapshot_UpdateAppMonitor(t *testing.T) {
 	_, err := svc.UpdateAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -901,7 +925,6 @@ func TestSerdeCheckSnapshot_UpdateRumMetricDefinition(t *testing.T) {
 			UnitLabel: ptr.String("__UnitLabel__"),
 			DimensionKeys: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			EventPattern: ptr.String("__EventPattern__"),
 			Namespace:    ptr.String("__Namespace__"),
@@ -917,6 +940,7 @@ func TestSerdeCheckSnapshot_UpdateRumMetricDefinition(t *testing.T) {
 	_, err := svc.UpdateRumMetricDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -943,7 +967,6 @@ func TestSerdeUpdateSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 				UnitLabel: ptr.String("__UnitLabel__"),
 				DimensionKeys: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				EventPattern: ptr.String("__EventPattern__"),
 				Namespace:    ptr.String("__Namespace__"),
@@ -954,7 +977,6 @@ func TestSerdeUpdateSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 				UnitLabel: ptr.String("__UnitLabel__"),
 				DimensionKeys: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				EventPattern: ptr.String("__EventPattern__"),
 				Namespace:    ptr.String("__Namespace__"),
@@ -970,6 +992,7 @@ func TestSerdeUpdateSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 	_, err := svc.BatchCreateRumMetricDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1004,6 +1027,7 @@ func TestSerdeUpdateSnapshot_BatchDeleteRumMetricDefinitions(t *testing.T) {
 	_, err := svc.BatchDeleteRumMetricDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1036,6 +1060,7 @@ func TestSerdeUpdateSnapshot_BatchGetRumMetricDefinitions(t *testing.T) {
 	_, err := svc.BatchGetRumMetricDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1061,7 +1086,6 @@ func TestSerdeUpdateSnapshot_CreateAppMonitor(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		AppMonitorConfiguration: &types.AppMonitorConfiguration{
 			IdentityPoolId: ptr.String("__IdentityPoolId__"),
@@ -1107,6 +1131,7 @@ func TestSerdeUpdateSnapshot_CreateAppMonitor(t *testing.T) {
 	_, err := svc.CreateAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1135,6 +1160,7 @@ func TestSerdeUpdateSnapshot_DeleteAppMonitor(t *testing.T) {
 	_, err := svc.DeleteAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1164,6 +1190,7 @@ func TestSerdeUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1194,6 +1221,7 @@ func TestSerdeUpdateSnapshot_DeleteRumMetricsDestination(t *testing.T) {
 	_, err := svc.DeleteRumMetricsDestination(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1222,6 +1250,7 @@ func TestSerdeUpdateSnapshot_GetAppMonitor(t *testing.T) {
 	_, err := svc.GetAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1272,6 +1301,7 @@ func TestSerdeUpdateSnapshot_GetAppMonitorData(t *testing.T) {
 	_, err := svc.GetAppMonitorData(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1300,6 +1330,7 @@ func TestSerdeUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1329,6 +1360,7 @@ func TestSerdeUpdateSnapshot_ListAppMonitors(t *testing.T) {
 	_, err := svc.ListAppMonitors(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1359,6 +1391,7 @@ func TestSerdeUpdateSnapshot_ListRumMetricsDestinations(t *testing.T) {
 	_, err := svc.ListRumMetricsDestinations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1387,6 +1420,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1417,6 +1451,7 @@ func TestSerdeUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1472,6 +1507,7 @@ func TestSerdeUpdateSnapshot_PutRumEvents(t *testing.T) {
 	_, err := svc.PutRumEvents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1503,6 +1539,7 @@ func TestSerdeUpdateSnapshot_PutRumMetricsDestination(t *testing.T) {
 	_, err := svc.PutRumMetricsDestination(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1523,7 +1560,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1535,6 +1571,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1567,6 +1604,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1633,6 +1671,7 @@ func TestSerdeUpdateSnapshot_UpdateAppMonitor(t *testing.T) {
 	_, err := svc.UpdateAppMonitor(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1659,7 +1698,6 @@ func TestSerdeUpdateSnapshot_UpdateRumMetricDefinition(t *testing.T) {
 			UnitLabel: ptr.String("__UnitLabel__"),
 			DimensionKeys: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			EventPattern: ptr.String("__EventPattern__"),
 			Namespace:    ptr.String("__Namespace__"),
@@ -1675,6 +1713,7 @@ func TestSerdeUpdateSnapshot_UpdateRumMetricDefinition(t *testing.T) {
 	_, err := svc.UpdateRumMetricDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

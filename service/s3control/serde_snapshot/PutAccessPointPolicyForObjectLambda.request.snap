@@ -3,3 +3,4 @@ PUT /v20180820/accesspointforobjectlambda/__Name__/policy
 Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 
+<PutAccessPointPolicyForObjectLambdaRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><Policy>__Policy__</Policy></PutAccessPointPolicyForObjectLambdaRequest>

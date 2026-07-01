@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeInstancesHealth&AttributeNames.member.1=HealthStatus&AttributeNames.member.2=HealthStatus&EnvironmentId=__EnvironmentId__&EnvironmentName=__EnvironmentName__&NextToken=__NextToken__&Version=2010-12-01

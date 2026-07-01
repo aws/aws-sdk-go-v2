@@ -2,4 +2,4 @@ POST /domains/__DomainId__/cases
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","fields":[{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"tags":{"key0":"__Value__","key1":"__Value__"},"templateId":"__TemplateId__"}
+{"clientToken":"__ClientToken__","fields":[{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"tags":{"key0":"__Value__"},"templateId":"__TemplateId__"}

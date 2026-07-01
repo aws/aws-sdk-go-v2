@@ -43,7 +43,6 @@ X-Amz-Fwd-Header-X-Amz-Tagging-Count: 1
 X-Amz-Fwd-Header-X-Amz-Version-Id: __VersionId__
 X-Amz-Fwd-Status: 1
 X-Amz-Meta-Key0: __Value__
-X-Amz-Meta-Key1: __Value__
 X-Amz-Request-Route: RequestRoute-value
 X-Amz-Request-Token: __RequestToken__
 

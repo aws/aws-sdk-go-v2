@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteIdentityPolicy&Identity=__Identity__&PolicyName=__PolicyName__&Version=2010-12-01

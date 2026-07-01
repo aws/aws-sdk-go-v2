@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AddTrustStoreRevocations&RevocationContents.member.1.RevocationType=CRL&RevocationContents.member.1.S3Bucket=__S3Bucket__&RevocationContents.member.1.S3Key=__S3Key__&RevocationContents.member.1.S3ObjectVersion=__S3ObjectVersion__&RevocationContents.member.2.RevocationType=CRL&RevocationContents.member.2.S3Bucket=__S3Bucket__&RevocationContents.member.2.S3Key=__S3Key__&RevocationContents.member.2.S3ObjectVersion=__S3ObjectVersion__&TrustStoreArn=__TrustStoreArn__&Version=2015-12-01

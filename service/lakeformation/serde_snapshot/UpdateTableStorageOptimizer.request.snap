@@ -2,4 +2,4 @@ POST /UpdateTableStorageOptimizer
 
 Content-Type: application/json
 
-{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","StorageOptimizerConfig":{"key0":{"key0":"__Value__","key1":"__Value__"},"key1":{"key0":"__Value__","key1":"__Value__"}},"TableName":"__TableName__"}
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","StorageOptimizerConfig":{"key0":{"key0":"__Value__"}},"TableName":"__TableName__"}

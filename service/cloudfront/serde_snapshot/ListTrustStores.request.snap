@@ -2,3 +2,4 @@ POST /2020-05-31/trust-stores
 
 Content-Type: application/xml
 
+<ListTrustStoresRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Marker>__Marker__</Marker><MaxItems>1</MaxItems></ListTrustStoresRequest>

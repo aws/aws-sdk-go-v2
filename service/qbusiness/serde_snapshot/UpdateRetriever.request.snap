@@ -2,4 +2,4 @@ PUT /applications/__ApplicationId__/retrievers/__RetrieverId__
 
 Content-Type: application/json
 
-{"configuration":{"nativeIndexConfiguration":{"boostingOverride":{"key0":{"numberConfiguration":{"boostingLevel":"NONE","boostingType":"PRIORITIZE_LARGER_VALUES"}},"key1":{"numberConfiguration":{"boostingLevel":"NONE","boostingType":"PRIORITIZE_LARGER_VALUES"}}},"indexId":"__IndexId__","version":1}},"displayName":"__DisplayName__","roleArn":"__RoleArn__"}
+{"configuration":{"nativeIndexConfiguration":{"boostingOverride":{"key0":{"numberConfiguration":{"boostingLevel":"NONE","boostingType":"PRIORITIZE_LARGER_VALUES"}}},"indexId":"__IndexId__","version":1}},"displayName":"__DisplayName__","roleArn":"__RoleArn__"}

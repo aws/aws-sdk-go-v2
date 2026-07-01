@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateServerlessCache&CacheUsageLimits.DataStorage.Maximum=1&CacheUsageLimits.DataStorage.Minimum=1&CacheUsageLimits.DataStorage.Unit=GB&CacheUsageLimits.ECPUPerSecond.Maximum=1&CacheUsageLimits.ECPUPerSecond.Minimum=1&DailySnapshotTime=__DailySnapshotTime__&Description=__Description__&Engine=__Engine__&KmsKeyId=__KmsKeyId__&MajorEngineVersion=__MajorEngineVersion__&NetworkType=ipv4&SecurityGroupIds.SecurityGroupId.1=__Member__&SecurityGroupIds.SecurityGroupId.2=__Member__&ServerlessCacheName=__ServerlessCacheName__&SnapshotArnsToRestore.SnapshotArn.1=__Member__&SnapshotArnsToRestore.SnapshotArn.2=__Member__&SnapshotRetentionLimit=1&SubnetIds.SubnetId.1=__Member__&SubnetIds.SubnetId.2=__Member__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&UserGroupId=__UserGroupId__&Version=2015-02-02

@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Logs_20140328.PutLogEvents
 
-{"entity":{"attributes":{"key0":"__Value__","key1":"__Value__"},"keyAttributes":{"key0":"__Value__","key1":"__Value__"}},"logEvents":[{"message":"__Message__","timestamp":1},{"message":"__Message__","timestamp":1}],"logGroupName":"__LogGroupName__","logStreamName":"__LogStreamName__","sequenceToken":"__SequenceToken__"}
+{"entity":{"attributes":{"key0":"__Value__"},"keyAttributes":{"key0":"__Value__"}},"logEvents":[{"message":"__Message__","timestamp":1},{"message":"__Message__","timestamp":1}],"logGroupName":"__LogGroupName__","logStreamName":"__LogStreamName__","sequenceToken":"__SequenceToken__"}

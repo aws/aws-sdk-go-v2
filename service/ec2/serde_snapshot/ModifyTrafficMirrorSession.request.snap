@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyTrafficMirrorSession&Description=__Description__&DryRun=true&PacketLength=1&RemoveField.1=packet-length&RemoveField.2=packet-length&SessionNumber=1&TrafficMirrorFilterId=__TrafficMirrorFilterId__&TrafficMirrorSessionId=__TrafficMirrorSessionId__&TrafficMirrorTargetId=__TrafficMirrorTargetId__&Version=2016-11-15&VirtualNetworkId=1

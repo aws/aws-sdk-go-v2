@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ReplaceTransitGatewayRoute&Blackhole=true&DestinationCidrBlock=__DestinationCidrBlock__&DryRun=true&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&TransitGatewayRouteTableId=__TransitGatewayRouteTableId__&Version=2016-11-15

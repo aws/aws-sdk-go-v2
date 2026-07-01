@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateRole&AssumeRolePolicyDocument=__AssumeRolePolicyDocument__&Description=__Description__&MaxSessionDuration=1&Path=__Path__&PermissionsBoundary=__PermissionsBoundary__&RoleName=__RoleName__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2010-05-08

@@ -2,4 +2,4 @@ POST /environments/__EnvironmentIdentifier__/applications
 
 Content-Type: application/json
 
-{"ApiGatewayProxy":{"EndpointType":"REGIONAL","StageName":"__StageName__"},"ClientToken":"__ClientToken__","Name":"__Name__","ProxyType":"API_GATEWAY","Tags":{"key0":"__Value__","key1":"__Value__"},"VpcId":"__VpcId__"}
+{"ApiGatewayProxy":{"EndpointType":"REGIONAL","StageName":"__StageName__"},"ClientToken":"__ClientToken__","Name":"__Name__","ProxyType":"API_GATEWAY","Tags":{"key0":"__Value__"},"VpcId":"__VpcId__"}

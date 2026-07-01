@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ListStackSetOperationResults&CallAs=SELF&Filters.member.1.Name=OPERATION_RESULT_STATUS&Filters.member.1.Values=__Values__&Filters.member.2.Name=OPERATION_RESULT_STATUS&Filters.member.2.Values=__Values__&MaxResults=1&NextToken=__NextToken__&OperationId=__OperationId__&StackSetName=__StackSetName__&Version=2010-05-15

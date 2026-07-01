@@ -2,4 +2,4 @@ POST /tagStream
 
 Content-Type: application/json
 
-{"StreamARN":"__StreamARN__","StreamName":"__StreamName__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"StreamARN":"__StreamARN__","StreamName":"__StreamName__","Tags":{"key0":"__Value__"}}

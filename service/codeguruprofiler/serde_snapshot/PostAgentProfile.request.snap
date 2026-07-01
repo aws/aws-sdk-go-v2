@@ -2,3 +2,4 @@ POST /profilingGroups/__ProfilingGroupName__/agentProfile?profileToken=__Profile
 
 Content-Type: __ContentType__
 
+blob

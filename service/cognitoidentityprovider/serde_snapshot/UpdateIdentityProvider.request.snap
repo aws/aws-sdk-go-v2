@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.UpdateIdentityProvider
 
-{"AttributeMapping":{"key0":"__Value__","key1":"__Value__"},"IdpIdentifiers":["__Member__","__Member__"],"ProviderDetails":{"key0":"__Value__","key1":"__Value__"},"ProviderName":"__ProviderName__","UserPoolId":"__UserPoolId__"}
+{"AttributeMapping":{"key0":"__Value__"},"IdpIdentifiers":["__Member__","__Member__"],"ProviderDetails":{"key0":"__Value__"},"ProviderName":"__ProviderName__","UserPoolId":"__UserPoolId__"}

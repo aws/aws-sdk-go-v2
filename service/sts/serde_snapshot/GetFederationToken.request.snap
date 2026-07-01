@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetFederationToken&DurationSeconds=1&Name=__Name__&Policy=__Policy__&PolicyArns.member.1.arn=__Arn__&PolicyArns.member.2.arn=__Arn__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2011-06-15

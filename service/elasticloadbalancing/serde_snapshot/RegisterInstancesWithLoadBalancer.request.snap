@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=RegisterInstancesWithLoadBalancer&Instances.member.1.InstanceId=__InstanceId__&Instances.member.2.InstanceId=__InstanceId__&LoadBalancerName=__LoadBalancerName__&Version=2012-06-01

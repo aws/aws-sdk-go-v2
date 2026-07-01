@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetIdentityPolicies&Identity=__Identity__&PolicyNames.member.1=__Member__&PolicyNames.member.2=__Member__&Version=2010-12-01

@@ -2,4 +2,4 @@ POST /readinesschecks
 
 Content-Type: application/json
 
-{"readinessCheckName":"__ReadinessCheckName__","resourceSetName":"__ResourceSetName__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"readinessCheckName":"__ReadinessCheckName__","resourceSetName":"__ResourceSetName__","tags":{"key0":"__Value__"}}

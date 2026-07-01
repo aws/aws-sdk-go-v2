@@ -2,3 +2,4 @@ POST /2020-05-31/connection-function
 
 Content-Type: application/xml
 
+<CreateConnectionFunctionRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ConnectionFunctionCode>YmxvYg==</ConnectionFunctionCode><ConnectionFunctionConfig><Comment>__Comment__</Comment><KeyValueStoreAssociations><Items><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation></Items><Quantity>1</Quantity></KeyValueStoreAssociations><Runtime>cloudfront-js-1.0</Runtime></ConnectionFunctionConfig><Name>__Name__</Name><Tags><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags></CreateConnectionFunctionRequest>

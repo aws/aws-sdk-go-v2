@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSGlue.CreateSchema
 
-{"Compatibility":"NONE","DataFormat":"AVRO","Description":"__Description__","RegistryId":{"RegistryArn":"__RegistryArn__","RegistryName":"__RegistryName__"},"SchemaDefinition":"__SchemaDefinition__","SchemaName":"__SchemaName__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Compatibility":"NONE","DataFormat":"AVRO","Description":"__Description__","RegistryId":{"RegistryArn":"__RegistryArn__","RegistryName":"__RegistryName__"},"SchemaDefinition":"__SchemaDefinition__","SchemaName":"__SchemaName__","Tags":{"key0":"__Value__"}}

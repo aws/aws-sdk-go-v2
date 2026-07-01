@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=RegisterType&ClientRequestToken=__ClientRequestToken__&ExecutionRoleArn=__ExecutionRoleArn__&LoggingConfig.LogGroupName=__LogGroupName__&LoggingConfig.LogRoleArn=__LogRoleArn__&SchemaHandlerPackage=__SchemaHandlerPackage__&Type=RESOURCE&TypeName=__TypeName__&Version=2010-05-15

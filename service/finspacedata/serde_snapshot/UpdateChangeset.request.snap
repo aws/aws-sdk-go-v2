@@ -2,4 +2,4 @@ PUT /datasets/__DatasetId__/changesetsv2/__ChangesetId__
 
 Content-Type: application/x-amz-json-1.1
 
-{"clientToken":"__ClientToken__","formatParams":{"key0":"__Value__","key1":"__Value__"},"sourceParams":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","formatParams":{"key0":"__Value__"},"sourceParams":{"key0":"__Value__"}}

@@ -6,3 +6,4 @@ X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 X-Amz-Mfa: __MFA__
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<VersioningConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><MfaDelete>Enabled</MfaDelete><Status>Enabled</Status></VersioningConfiguration>

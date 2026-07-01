@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DetachNetworkInterface&AttachmentId=__AttachmentId__&DryRun=true&Force=true&Version=2016-11-15

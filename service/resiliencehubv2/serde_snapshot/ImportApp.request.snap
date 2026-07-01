@@ -2,4 +2,4 @@ POST /v2/import-app
 
 Content-Type: application/json
 
-{"associatedSystems":[{"systemArn":"__SystemArn__","systemName":"__SystemName__","userJourneyIds":["__Member__","__Member__"]},{"systemArn":"__SystemArn__","systemName":"__SystemName__","userJourneyIds":["__Member__","__Member__"]}],"clientToken":"__ClientToken__","kmsKeyId":"__KmsKeyId__","policyArn":"__PolicyArn__","skipManuallyAddedResources":true,"tags":{"key0":"__Value__","key1":"__Value__"},"v1AppArn":"__V1AppArn__"}
+{"associatedSystems":[{"systemArn":"__SystemArn__","systemName":"__SystemName__","userJourneyIds":["__Member__","__Member__"]},{"systemArn":"__SystemArn__","systemName":"__SystemName__","userJourneyIds":["__Member__","__Member__"]}],"clientToken":"__ClientToken__","kmsKeyId":"__KmsKeyId__","policyArn":"__PolicyArn__","skipManuallyAddedResources":true,"tags":{"key0":"__Value__"},"v1AppArn":"__V1AppArn__"}

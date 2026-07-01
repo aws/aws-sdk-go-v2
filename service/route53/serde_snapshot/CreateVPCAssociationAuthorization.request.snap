@@ -2,3 +2,4 @@ POST /2013-04-01/hostedzone/__HostedZoneId__/authorizevpcassociation
 
 Content-Type: application/xml
 
+<CreateVPCAssociationAuthorizationRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><VPC><VPCId>__VPCId__</VPCId><VPCRegion>us-east-1</VPCRegion></VPC></CreateVPCAssociationAuthorizationRequest>

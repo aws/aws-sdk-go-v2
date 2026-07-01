@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=RestoreSnapshotFromRecycleBin&DryRun=true&SnapshotId=__SnapshotId__&Version=2016-11-15

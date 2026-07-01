@@ -2,4 +2,4 @@ POST /phone-number/import
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","InstanceId":"__InstanceId__","PhoneNumberDescription":"__PhoneNumberDescription__","SourcePhoneNumberArn":"__SourcePhoneNumberArn__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","InstanceId":"__InstanceId__","PhoneNumberDescription":"__PhoneNumberDescription__","SourcePhoneNumberArn":"__SourcePhoneNumberArn__","Tags":{"key0":"__Value__"}}

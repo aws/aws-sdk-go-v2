@@ -2,3 +2,4 @@ POST /2025-12-01/durable-execution-callbacks/__CallbackId__/succeed
 
 Content-Type: application/octet-stream
 
+blob

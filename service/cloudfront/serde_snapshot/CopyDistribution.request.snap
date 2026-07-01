@@ -4,3 +4,4 @@ Content-Type: application/xml
 If-Match: __IfMatch__
 Staging: true
 
+<CopyDistributionRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CallerReference>__CallerReference__</CallerReference><Enabled>true</Enabled></CopyDistributionRequest>

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeEnvironmentManagedActionHistory&EnvironmentId=__EnvironmentId__&EnvironmentName=__EnvironmentName__&MaxItems=1&NextToken=__NextToken__&Version=2010-12-01

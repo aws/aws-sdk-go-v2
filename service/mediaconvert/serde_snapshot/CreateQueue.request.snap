@@ -2,4 +2,4 @@ POST /2017-08-29/queues
 
 Content-Type: application/json
 
-{"concurrentJobs":1,"description":"__Description__","maximumConcurrentFeeds":1,"name":"__Name__","pricingPlan":"ON_DEMAND","reservationPlanSettings":{"commitment":"ONE_YEAR","renewalType":"AUTO_RENEW","reservedSlots":1},"status":"ACTIVE","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"concurrentJobs":1,"description":"__Description__","maximumConcurrentFeeds":1,"name":"__Name__","pricingPlan":"ON_DEMAND","reservationPlanSettings":{"commitment":"ONE_YEAR","renewalType":"AUTO_RENEW","reservedSlots":1},"status":"ACTIVE","tags":{"key0":"__Value__"}}

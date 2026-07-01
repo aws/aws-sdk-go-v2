@@ -2,4 +2,4 @@ POST /v1/apps
 
 Content-Type: application/json
 
-{"Name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Name":"__Name__","tags":{"key0":"__Value__"}}

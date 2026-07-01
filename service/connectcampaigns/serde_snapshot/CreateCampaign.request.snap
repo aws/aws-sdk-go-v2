@@ -2,4 +2,4 @@ PUT /campaigns
 
 Content-Type: application/json
 
-{"connectInstanceId":"__ConnectInstanceId__","dialerConfig":{"progressiveDialerConfig":{"bandwidthAllocation":1,"dialingCapacity":1}},"name":"__Name__","outboundCallConfig":{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"connectContactFlowId":"__ConnectContactFlowId__","connectQueueId":"__ConnectQueueId__","connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__"},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"connectInstanceId":"__ConnectInstanceId__","dialerConfig":{"progressiveDialerConfig":{"bandwidthAllocation":1,"dialingCapacity":1}},"name":"__Name__","outboundCallConfig":{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"connectContactFlowId":"__ConnectContactFlowId__","connectQueueId":"__ConnectQueueId__","connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__"},"tags":{"key0":"__Value__"}}

@@ -2,4 +2,4 @@ POST /cluster
 
 Content-Type: application/json
 
-{"adminUserName":"__AdminUserName__","adminUserPassword":"__AdminUserPassword__","authType":"PLAIN_TEXT","backupRetentionPeriod":1,"clientToken":"__ClientToken__","clusterName":"__ClusterName__","kmsKeyId":"__KmsKeyId__","preferredBackupWindow":"__PreferredBackupWindow__","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","shardCapacity":1,"shardCount":1,"shardInstanceCount":1,"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"},"vpcSecurityGroupIds":["__Member__","__Member__"]}
+{"adminUserName":"__AdminUserName__","adminUserPassword":"__AdminUserPassword__","authType":"PLAIN_TEXT","backupRetentionPeriod":1,"clientToken":"__ClientToken__","clusterName":"__ClusterName__","kmsKeyId":"__KmsKeyId__","preferredBackupWindow":"__PreferredBackupWindow__","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","shardCapacity":1,"shardCount":1,"shardInstanceCount":1,"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"vpcSecurityGroupIds":["__Member__","__Member__"]}

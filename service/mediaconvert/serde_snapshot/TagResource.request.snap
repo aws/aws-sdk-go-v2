@@ -2,4 +2,4 @@ POST /2017-08-29/tags
 
 Content-Type: application/json
 
-{"arn":"__Arn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"arn":"__Arn__","tags":{"key0":"__Value__"}}

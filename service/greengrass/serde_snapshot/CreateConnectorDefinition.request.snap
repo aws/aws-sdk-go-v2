@@ -3,4 +3,4 @@ POST /greengrass/definition/connectors
 Content-Type: application/json
 X-Amzn-Client-Token: __AmznClientToken__
 
-{"InitialVersion":{"Connectors":[{"ConnectorArn":"__ConnectorArn__","Id":"__Id__","Parameters":{"key0":"__Value__","key1":"__Value__"}},{"ConnectorArn":"__ConnectorArn__","Id":"__Id__","Parameters":{"key0":"__Value__","key1":"__Value__"}}]},"Name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"InitialVersion":{"Connectors":[{"ConnectorArn":"__ConnectorArn__","Id":"__Id__","Parameters":{"key0":"__Value__"}},{"ConnectorArn":"__ConnectorArn__","Id":"__Id__","Parameters":{"key0":"__Value__"}}]},"Name":"__Name__","tags":{"key0":"__Value__"}}

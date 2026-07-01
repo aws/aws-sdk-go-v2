@@ -2,4 +2,4 @@ POST /notification-configurations
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","DestinationName":"__DestinationName__","EventType":"DEVICE_COMMAND","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","DestinationName":"__DestinationName__","EventType":"DEVICE_COMMAND","Tags":{"key0":"__Value__"}}

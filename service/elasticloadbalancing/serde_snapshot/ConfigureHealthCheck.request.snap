@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ConfigureHealthCheck&HealthCheck.HealthyThreshold=1&HealthCheck.Interval=1&HealthCheck.Target=__Target__&HealthCheck.Timeout=1&HealthCheck.UnhealthyThreshold=1&LoadBalancerName=__LoadBalancerName__&Version=2012-06-01

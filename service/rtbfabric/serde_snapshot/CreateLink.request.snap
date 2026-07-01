@@ -2,4 +2,4 @@ POST /gateway/__GatewayId__/create-link
 
 Content-Type: application/json
 
-{"attributes":{"customerProvidedId":"__CustomerProvidedId__","responderErrorMasking":[{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1},{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1}]},"httpResponderAllowed":true,"logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"peerGatewayId":"__PeerGatewayId__","tags":{"key0":"__Value__","key1":"__Value__"},"timeoutInMillis":1}
+{"attributes":{"customerProvidedId":"__CustomerProvidedId__","responderErrorMasking":[{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1},{"action":"NO_BID","httpCode":"__HttpCode__","loggingTypes":["NONE","NONE"],"responseLoggingPercentage":1}]},"httpResponderAllowed":true,"logSettings":{"applicationLogs":{"sampling":{"errorLog":1,"filterLog":1}}},"peerGatewayId":"__PeerGatewayId__","tags":{"key0":"__Value__"},"timeoutInMillis":1}

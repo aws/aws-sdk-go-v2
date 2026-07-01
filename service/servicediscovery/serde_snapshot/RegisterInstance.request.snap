@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Route53AutoNaming_v20170314.RegisterInstance
 
-{"Attributes":{"key0":"__Value__","key1":"__Value__"},"CreatorRequestId":"__CreatorRequestId__","InstanceId":"__InstanceId__","ServiceId":"__ServiceId__"}
+{"Attributes":{"key0":"__Value__"},"CreatorRequestId":"__CreatorRequestId__","InstanceId":"__InstanceId__","ServiceId":"__ServiceId__"}

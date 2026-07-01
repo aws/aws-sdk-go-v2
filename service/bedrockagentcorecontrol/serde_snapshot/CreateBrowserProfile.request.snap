@@ -2,4 +2,4 @@ PUT /browser-profiles
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","tags":{"key0":"__Value__"}}

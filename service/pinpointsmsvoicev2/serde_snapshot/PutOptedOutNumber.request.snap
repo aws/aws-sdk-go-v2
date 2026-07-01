@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: PinpointSMSVoiceV2.PutOptedOutNumber
 
-{"OptOutListName":"__OptOutListName__","OptedOutNumber":"__OptedOutNumber__"}
+{"OptedOutNumber":"__OptedOutNumber__","OptOutListName":"__OptOutListName__"}

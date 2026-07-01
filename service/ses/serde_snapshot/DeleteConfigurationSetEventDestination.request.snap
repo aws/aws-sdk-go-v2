@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteConfigurationSetEventDestination&ConfigurationSetName=__ConfigurationSetName__&EventDestinationName=__EventDestinationName__&Version=2010-12-01

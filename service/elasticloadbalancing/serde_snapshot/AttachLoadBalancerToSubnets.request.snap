@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AttachLoadBalancerToSubnets&LoadBalancerName=__LoadBalancerName__&Subnets.member.1=__Member__&Subnets.member.2=__Member__&Version=2012-06-01

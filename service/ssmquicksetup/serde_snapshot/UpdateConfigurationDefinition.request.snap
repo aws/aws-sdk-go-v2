@@ -2,4 +2,4 @@ PUT /configurationDefinition/__ManagerArn__/__Id__
 
 Content-Type: application/json
 
-{"LocalDeploymentAdministrationRoleArn":"__LocalDeploymentAdministrationRoleArn__","LocalDeploymentExecutionRoleName":"__LocalDeploymentExecutionRoleName__","Parameters":{"key0":"__Value__","key1":"__Value__"},"TypeVersion":"__TypeVersion__"}
+{"LocalDeploymentAdministrationRoleArn":"__LocalDeploymentAdministrationRoleArn__","LocalDeploymentExecutionRoleName":"__LocalDeploymentExecutionRoleName__","Parameters":{"key0":"__Value__"},"TypeVersion":"__TypeVersion__"}

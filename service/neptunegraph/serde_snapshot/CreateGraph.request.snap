@@ -2,4 +2,4 @@ POST /graphs
 
 Content-Type: application/json
 
-{"deletionProtection":true,"graphName":"__GraphName__","kmsKeyIdentifier":"__KmsKeyIdentifier__","provisionedMemory":1,"publicConnectivity":true,"replicaCount":1,"tags":{"key0":"__Value__","key1":"__Value__"},"vectorSearchConfiguration":{"dimension":1}}
+{"deletionProtection":true,"graphName":"__GraphName__","kmsKeyIdentifier":"__KmsKeyIdentifier__","provisionedMemory":1,"publicConnectivity":true,"replicaCount":1,"tags":{"key0":"__Value__"},"vectorSearchConfiguration":{"dimension":1}}

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=Publish&Message=__Message__&MessageAttributes.entry.1.Name=key0&MessageAttributes.entry.1.Value.BinaryValue=YmxvYg%3D%3D&MessageAttributes.entry.1.Value.DataType=__DataType__&MessageAttributes.entry.1.Value.StringValue=__StringValue__&MessageDeduplicationId=__MessageDeduplicationId__&MessageGroupId=__MessageGroupId__&MessageStructure=__MessageStructure__&PhoneNumber=__PhoneNumber__&Subject=__Subject__&TargetArn=__TargetArn__&TopicArn=__TopicArn__&Version=2010-03-31

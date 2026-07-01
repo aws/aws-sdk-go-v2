@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeListenerCertificates&ListenerArn=__ListenerArn__&Marker=__Marker__&PageSize=1&Version=2015-12-01

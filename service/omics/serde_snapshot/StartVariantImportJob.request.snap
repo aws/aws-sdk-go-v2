@@ -2,4 +2,4 @@ POST /import/variant
 
 Content-Type: application/json
 
-{"annotationFields":{"key0":"__Value__","key1":"__Value__"},"destinationName":"__DestinationName__","items":[{"source":"__Source__"},{"source":"__Source__"}],"roleArn":"__RoleArn__","runLeftNormalization":true}
+{"annotationFields":{"key0":"__Value__"},"destinationName":"__DestinationName__","items":[{"source":"__Source__"},{"source":"__Source__"}],"roleArn":"__RoleArn__","runLeftNormalization":true}

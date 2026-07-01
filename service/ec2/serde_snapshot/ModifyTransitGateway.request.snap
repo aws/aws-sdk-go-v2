@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyTransitGateway&Description=__Description__&DryRun=true&Options.AddTransitGatewayCidrBlocks.1=__Member__&Options.AddTransitGatewayCidrBlocks.2=__Member__&Options.AmazonSideAsn=1&Options.AssociationDefaultRouteTableId=__AssociationDefaultRouteTableId__&Options.AutoAcceptSharedAttachments=enable&Options.DefaultRouteTableAssociation=enable&Options.DefaultRouteTablePropagation=enable&Options.DnsSupport=enable&Options.EncryptionSupport=enable&Options.PropagationDefaultRouteTableId=__PropagationDefaultRouteTableId__&Options.RemoveTransitGatewayCidrBlocks.1=__Member__&Options.RemoveTransitGatewayCidrBlocks.2=__Member__&Options.SecurityGroupReferencingSupport=enable&Options.VpnEcmpSupport=enable&TransitGatewayId=__TransitGatewayId__&Version=2016-11-15

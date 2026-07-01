@@ -7,7 +7,6 @@ package health
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -173,6 +179,9 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	input := &DescribeAffectedAccountsForOrganizationInput{
 		EventArn:   ptr.String("__EventArn__"),
@@ -188,6 +197,7 @@ func TestSerdeCheckSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T
 	_, err := svc.DescribeAffectedAccountsForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -231,11 +241,9 @@ func TestSerdeCheckSnapshot_DescribeAffectedEntities(t *testing.T) {
 			Tags: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			StatusCodes: []types.EntityStatusCode{
@@ -256,6 +264,7 @@ func TestSerdeCheckSnapshot_DescribeAffectedEntities(t *testing.T) {
 	_, err := svc.DescribeAffectedEntities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -314,6 +323,7 @@ func TestSerdeCheckSnapshot_DescribeAffectedEntitiesForOrganization(t *testing.T
 	_, err := svc.DescribeAffectedEntitiesForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -345,6 +355,7 @@ func TestSerdeCheckSnapshot_DescribeEntityAggregates(t *testing.T) {
 	_, err := svc.DescribeEntityAggregates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -380,6 +391,7 @@ func TestSerdeCheckSnapshot_DescribeEntityAggregatesForOrganization(t *testing.T
 	_, err := svc.DescribeEntityAggregatesForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -467,11 +479,9 @@ func TestSerdeCheckSnapshot_DescribeEventAggregates(t *testing.T) {
 			Tags: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -496,6 +506,7 @@ func TestSerdeCheckSnapshot_DescribeEventAggregates(t *testing.T) {
 	_, err := svc.DescribeEventAggregates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -528,6 +539,7 @@ func TestSerdeCheckSnapshot_DescribeEventDetails(t *testing.T) {
 	_, err := svc.DescribeEventDetails(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -566,6 +578,7 @@ func TestSerdeCheckSnapshot_DescribeEventDetailsForOrganization(t *testing.T) {
 	_, err := svc.DescribeEventDetailsForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -653,11 +666,9 @@ func TestSerdeCheckSnapshot_DescribeEvents(t *testing.T) {
 			Tags: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -682,6 +693,7 @@ func TestSerdeCheckSnapshot_DescribeEvents(t *testing.T) {
 	_, err := svc.DescribeEvents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -766,6 +778,7 @@ func TestSerdeCheckSnapshot_DescribeEventsForOrganization(t *testing.T) {
 	_, err := svc.DescribeEventsForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -818,6 +831,7 @@ func TestSerdeCheckSnapshot_DescribeEventTypes(t *testing.T) {
 	_, err := svc.DescribeEventTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -844,6 +858,7 @@ func TestSerdeCheckSnapshot_DescribeHealthServiceStatusForOrganization(t *testin
 	_, err := svc.DescribeHealthServiceStatusForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -870,6 +885,7 @@ func TestSerdeCheckSnapshot_DisableHealthServiceAccessForOrganization(t *testing
 	_, err := svc.DisableHealthServiceAccessForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -896,6 +912,7 @@ func TestSerdeCheckSnapshot_EnableHealthServiceAccessForOrganization(t *testing.
 	_, err := svc.EnableHealthServiceAccessForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -925,6 +942,7 @@ func TestSerdeUpdateSnapshot_DescribeAffectedAccountsForOrganization(t *testing.
 	_, err := svc.DescribeAffectedAccountsForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -968,11 +986,9 @@ func TestSerdeUpdateSnapshot_DescribeAffectedEntities(t *testing.T) {
 			Tags: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			StatusCodes: []types.EntityStatusCode{
@@ -993,6 +1009,7 @@ func TestSerdeUpdateSnapshot_DescribeAffectedEntities(t *testing.T) {
 	_, err := svc.DescribeAffectedEntities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1051,6 +1068,7 @@ func TestSerdeUpdateSnapshot_DescribeAffectedEntitiesForOrganization(t *testing.
 	_, err := svc.DescribeAffectedEntitiesForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1082,6 +1100,7 @@ func TestSerdeUpdateSnapshot_DescribeEntityAggregates(t *testing.T) {
 	_, err := svc.DescribeEntityAggregates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1117,6 +1136,7 @@ func TestSerdeUpdateSnapshot_DescribeEntityAggregatesForOrganization(t *testing.
 	_, err := svc.DescribeEntityAggregatesForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1204,11 +1224,9 @@ func TestSerdeUpdateSnapshot_DescribeEventAggregates(t *testing.T) {
 			Tags: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -1233,6 +1251,7 @@ func TestSerdeUpdateSnapshot_DescribeEventAggregates(t *testing.T) {
 	_, err := svc.DescribeEventAggregates(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1265,6 +1284,7 @@ func TestSerdeUpdateSnapshot_DescribeEventDetails(t *testing.T) {
 	_, err := svc.DescribeEventDetails(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1303,6 +1323,7 @@ func TestSerdeUpdateSnapshot_DescribeEventDetailsForOrganization(t *testing.T) {
 	_, err := svc.DescribeEventDetailsForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1390,11 +1411,9 @@ func TestSerdeUpdateSnapshot_DescribeEvents(t *testing.T) {
 			Tags: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -1419,6 +1438,7 @@ func TestSerdeUpdateSnapshot_DescribeEvents(t *testing.T) {
 	_, err := svc.DescribeEvents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1503,6 +1523,7 @@ func TestSerdeUpdateSnapshot_DescribeEventsForOrganization(t *testing.T) {
 	_, err := svc.DescribeEventsForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1555,6 +1576,7 @@ func TestSerdeUpdateSnapshot_DescribeEventTypes(t *testing.T) {
 	_, err := svc.DescribeEventTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1581,6 +1603,7 @@ func TestSerdeUpdateSnapshot_DescribeHealthServiceStatusForOrganization(t *testi
 	_, err := svc.DescribeHealthServiceStatusForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1607,6 +1630,7 @@ func TestSerdeUpdateSnapshot_DisableHealthServiceAccessForOrganization(t *testin
 	_, err := svc.DisableHealthServiceAccessForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1633,6 +1657,7 @@ func TestSerdeUpdateSnapshot_EnableHealthServiceAccessForOrganization(t *testing
 	_, err := svc.EnableHealthServiceAccessForOrganization(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

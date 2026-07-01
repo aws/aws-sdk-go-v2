@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetWebIdentityToken&Audience.member.1=__Member__&Audience.member.2=__Member__&DurationSeconds=1&SigningAlgorithm=__SigningAlgorithm__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2011-06-15

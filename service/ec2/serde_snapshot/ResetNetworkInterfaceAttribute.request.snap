@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ResetNetworkInterfaceAttribute&DryRun=true&NetworkInterfaceId=__NetworkInterfaceId__&SourceDestCheck=__SourceDestCheck__&Version=2016-11-15

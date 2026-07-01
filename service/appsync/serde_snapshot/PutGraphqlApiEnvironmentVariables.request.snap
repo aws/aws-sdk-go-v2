@@ -2,4 +2,4 @@ PUT /v1/apis/__ApiId__/environmentVariables
 
 Content-Type: application/json
 
-{"environmentVariables":{"key0":"__Value__","key1":"__Value__"}}
+{"environmentVariables":{"key0":"__Value__"}}

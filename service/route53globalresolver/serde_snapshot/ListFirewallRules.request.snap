@@ -1,3 +1,3 @@
-GET /firewall-rules?dnsview_id=__DnsViewId__&key0=__Member__&key0=__Member__&key1=__Member__&key1=__Member__&max_results=1&next_token=__NextToken__
+GET /firewall-rules?dnsview_id=__DnsViewId__&key0=__Member__&key0=__Member__&max_results=1&next_token=__NextToken__
 
 

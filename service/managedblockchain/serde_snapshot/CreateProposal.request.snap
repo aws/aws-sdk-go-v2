@@ -2,4 +2,4 @@ POST /networks/__NetworkId__/proposals
 
 Content-Type: application/json
 
-{"Actions":{"Invitations":[{"Principal":"__Principal__"},{"Principal":"__Principal__"}],"Removals":[{"MemberId":"__MemberId__"},{"MemberId":"__MemberId__"}]},"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","MemberId":"__MemberId__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Actions":{"Invitations":[{"Principal":"__Principal__"},{"Principal":"__Principal__"}],"Removals":[{"MemberId":"__MemberId__"},{"MemberId":"__MemberId__"}]},"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","MemberId":"__MemberId__","Tags":{"key0":"__Value__"}}

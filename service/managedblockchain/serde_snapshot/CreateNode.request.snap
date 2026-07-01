@@ -2,4 +2,4 @@ POST /networks/__NetworkId__/nodes
 
 Content-Type: application/json
 
-{"ClientRequestToken":"__ClientRequestToken__","MemberId":"__MemberId__","NodeConfiguration":{"AvailabilityZone":"__AvailabilityZone__","InstanceType":"__InstanceType__","LogPublishingConfiguration":{"Fabric":{"ChaincodeLogs":{"Cloudwatch":{"Enabled":true}},"PeerLogs":{"Cloudwatch":{"Enabled":true}}}},"StateDB":"LevelDB"},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientRequestToken":"__ClientRequestToken__","MemberId":"__MemberId__","NodeConfiguration":{"AvailabilityZone":"__AvailabilityZone__","InstanceType":"__InstanceType__","LogPublishingConfiguration":{"Fabric":{"ChaincodeLogs":{"Cloudwatch":{"Enabled":true}},"PeerLogs":{"Cloudwatch":{"Enabled":true}}}},"StateDB":"LevelDB"},"Tags":{"key0":"__Value__"}}

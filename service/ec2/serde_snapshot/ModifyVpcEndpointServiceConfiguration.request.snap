@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+AcceptanceRequired=true&Action=ModifyVpcEndpointServiceConfiguration&AddGatewayLoadBalancerArn.1=__Member__&AddGatewayLoadBalancerArn.2=__Member__&AddNetworkLoadBalancerArn.1=__Member__&AddNetworkLoadBalancerArn.2=__Member__&AddSupportedIpAddressType.1=__Member__&AddSupportedIpAddressType.2=__Member__&AddSupportedRegion.1=__Member__&AddSupportedRegion.2=__Member__&DryRun=true&PrivateDnsName=__PrivateDnsName__&RemoveGatewayLoadBalancerArn.1=__Member__&RemoveGatewayLoadBalancerArn.2=__Member__&RemoveNetworkLoadBalancerArn.1=__Member__&RemoveNetworkLoadBalancerArn.2=__Member__&RemovePrivateDnsName=true&RemoveSupportedIpAddressType.1=__Member__&RemoveSupportedIpAddressType.2=__Member__&RemoveSupportedRegion.1=__Member__&RemoveSupportedRegion.2=__Member__&ServiceId=__ServiceId__&Version=2016-11-15

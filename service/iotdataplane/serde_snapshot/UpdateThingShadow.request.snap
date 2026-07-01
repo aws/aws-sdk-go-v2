@@ -2,3 +2,4 @@ POST /things/__ThingName__/shadow?name=__ShadowName__
 
 Content-Type: application/octet-stream
 
+blob

@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.AdminUpdateAuthEventFeedback
 
-{"EventId":"__EventId__","FeedbackValue":"Valid","UserPoolId":"__UserPoolId__","Username":"__Username__"}
+{"EventId":"__EventId__","FeedbackValue":"Valid","Username":"__Username__","UserPoolId":"__UserPoolId__"}

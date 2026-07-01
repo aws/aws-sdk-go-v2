@@ -6,3 +6,4 @@ X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
 X-Amz-Request-Payer: requester
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+<ObjectEncryption xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><SSE-KMS><BucketKeyEnabled>true</BucketKeyEnabled><KMSKeyArn>__KMSKeyArn__</KMSKeyArn></SSE-KMS></ObjectEncryption>

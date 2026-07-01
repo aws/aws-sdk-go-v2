@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityService.TagResource
 
-{"ResourceArn":"__ResourceArn__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ResourceArn":"__ResourceArn__","Tags":{"key0":"__Value__"}}

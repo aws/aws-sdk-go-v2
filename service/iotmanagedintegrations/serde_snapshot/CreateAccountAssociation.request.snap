@@ -2,4 +2,4 @@ POST /account-associations
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","ConnectorDestinationId":"__ConnectorDestinationId__","Description":"__Description__","GeneralAuthorization":{"AuthMaterialName":"__AuthMaterialName__"},"Name":"__Name__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","ConnectorDestinationId":"__ConnectorDestinationId__","Description":"__Description__","GeneralAuthorization":{"AuthMaterialName":"__AuthMaterialName__"},"Name":"__Name__","Tags":{"key0":"__Value__"}}

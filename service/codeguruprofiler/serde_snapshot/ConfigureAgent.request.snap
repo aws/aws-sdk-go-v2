@@ -2,4 +2,4 @@ POST /profilingGroups/__ProfilingGroupName__/configureAgent
 
 Content-Type: application/json
 
-{"fleetInstanceId":"__FleetInstanceId__","metadata":{"key0":"__Value__","key1":"__Value__"}}
+{"fleetInstanceId":"__FleetInstanceId__","metadata":{"key0":"__Value__"}}

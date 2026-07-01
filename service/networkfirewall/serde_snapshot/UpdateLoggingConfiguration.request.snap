@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: NetworkFirewall_20201112.UpdateLoggingConfiguration
 
-{"EnableMonitoringDashboard":true,"FirewallArn":"__FirewallArn__","FirewallName":"__FirewallName__","LoggingConfiguration":{"LogDestinationConfigs":[{"LogDestination":{"key0":"__Value__","key1":"__Value__"},"LogDestinationType":"S3","LogType":"ALERT"},{"LogDestination":{"key0":"__Value__","key1":"__Value__"},"LogDestinationType":"S3","LogType":"ALERT"}]}}
+{"EnableMonitoringDashboard":true,"FirewallArn":"__FirewallArn__","FirewallName":"__FirewallName__","LoggingConfiguration":{"LogDestinationConfigs":[{"LogDestination":{"key0":"__Value__"},"LogDestinationType":"S3","LogType":"ALERT"},{"LogDestination":{"key0":"__Value__"},"LogDestinationType":"S3","LogType":"ALERT"}]}}

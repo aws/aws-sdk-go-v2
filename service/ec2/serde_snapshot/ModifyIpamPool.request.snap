@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyIpamPool&AddAllocationResourceTag.1.Key=__Key__&AddAllocationResourceTag.1.Value=__Value__&AddAllocationResourceTag.2.Key=__Key__&AddAllocationResourceTag.2.Value=__Value__&AllocationDefaultNetmaskLength=1&AllocationMaxNetmaskLength=1&AllocationMinNetmaskLength=1&AutoImport=true&ClearAllocationDefaultNetmaskLength=true&Description=__Description__&DryRun=true&IpamPoolId=__IpamPoolId__&RemoveAllocationResourceTag.1.Key=__Key__&RemoveAllocationResourceTag.1.Value=__Value__&RemoveAllocationResourceTag.2.Key=__Key__&RemoveAllocationResourceTag.2.Value=__Value__&Version=2016-11-15

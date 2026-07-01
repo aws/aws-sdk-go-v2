@@ -2,4 +2,4 @@ POST /prod/clusters
 
 Content-Type: application/json
 
-{"clusterType":"ON_PREMISES","instanceRoleArn":"__InstanceRoleArn__","name":"__Name__","networkSettings":{"defaultRoute":"__DefaultRoute__","interfaceMappings":[{"logicalInterfaceName":"__LogicalInterfaceName__","networkId":"__NetworkId__"},{"logicalInterfaceName":"__LogicalInterfaceName__","networkId":"__NetworkId__"}]},"requestId":"__RequestId__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clusterType":"ON_PREMISES","instanceRoleArn":"__InstanceRoleArn__","name":"__Name__","networkSettings":{"defaultRoute":"__DefaultRoute__","interfaceMappings":[{"logicalInterfaceName":"__LogicalInterfaceName__","networkId":"__NetworkId__"},{"logicalInterfaceName":"__LogicalInterfaceName__","networkId":"__NetworkId__"}]},"requestId":"__RequestId__","tags":{"key0":"__Value__"}}

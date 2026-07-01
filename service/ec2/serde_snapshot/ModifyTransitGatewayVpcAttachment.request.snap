@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyTransitGatewayVpcAttachment&AddSubnetIds.1=__Member__&AddSubnetIds.2=__Member__&DryRun=true&Options.ApplianceModeSupport=enable&Options.DnsSupport=enable&Options.Ipv6Support=enable&Options.SecurityGroupReferencingSupport=enable&RemoveSubnetIds.1=__Member__&RemoveSubnetIds.2=__Member__&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&Version=2016-11-15

@@ -3,3 +3,4 @@ POST /v20180820/tags/__ResourceArn__
 Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 
+<TagResourceRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></TagResourceRequest>

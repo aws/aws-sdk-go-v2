@@ -2,4 +2,4 @@ PUT /v1/recommenders/__RecommenderId__
 
 Content-Type: application/json
 
-{"Attributes":{"key0":"__Value__","key1":"__Value__"},"Description":"__Description__","Name":"__Name__","RecommendationProviderIdType":"__RecommendationProviderIdType__","RecommendationProviderRoleArn":"__RecommendationProviderRoleArn__","RecommendationProviderUri":"__RecommendationProviderUri__","RecommendationTransformerUri":"__RecommendationTransformerUri__","RecommendationsDisplayName":"__RecommendationsDisplayName__","RecommendationsPerMessage":1}
+{"Attributes":{"key0":"__Value__"},"Description":"__Description__","Name":"__Name__","RecommendationProviderIdType":"__RecommendationProviderIdType__","RecommendationProviderRoleArn":"__RecommendationProviderRoleArn__","RecommendationProviderUri":"__RecommendationProviderUri__","RecommendationsDisplayName":"__RecommendationsDisplayName__","RecommendationsPerMessage":1,"RecommendationTransformerUri":"__RecommendationTransformerUri__"}

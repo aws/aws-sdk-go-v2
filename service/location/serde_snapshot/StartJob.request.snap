@@ -2,4 +2,4 @@ POST /metadata/v0/jobs
 
 Content-Type: application/json
 
-{"Action":"ValidateAddress","ActionOptions":{"ValidateAddress":{"AdditionalFeatures":["Position","Position"]}},"ClientToken":"__ClientToken__","ExecutionRoleArn":"__ExecutionRoleArn__","InputOptions":{"Format":"Parquet","Location":"__Location__"},"Name":"__Name__","OutputOptions":{"Format":"Parquet","Location":"__Location__"},"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Action":"ValidateAddress","ActionOptions":{"ValidateAddress":{"AdditionalFeatures":["Position","Position"]}},"ClientToken":"__ClientToken__","ExecutionRoleArn":"__ExecutionRoleArn__","InputOptions":{"Format":"Parquet","Location":"__Location__"},"Name":"__Name__","OutputOptions":{"Format":"Parquet","Location":"__Location__"},"Tags":{"key0":"__Value__"}}

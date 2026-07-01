@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: PinpointSMSVoiceV2.SendDestinationNumberVerificationCode
 
-{"ConfigurationSetName":"__ConfigurationSetName__","Context":{"key0":"__Value__","key1":"__Value__"},"DestinationCountryParameters":{"key0":"__Value__","key1":"__Value__"},"LanguageCode":"DE_DE","OriginationIdentity":"__OriginationIdentity__","VerificationChannel":"TEXT","VerifiedDestinationNumberId":"__VerifiedDestinationNumberId__"}
+{"ConfigurationSetName":"__ConfigurationSetName__","Context":{"key0":"__Value__"},"DestinationCountryParameters":{"key0":"__Value__"},"LanguageCode":"DE_DE","OriginationIdentity":"__OriginationIdentity__","VerificationChannel":"TEXT","VerifiedDestinationNumberId":"__VerifiedDestinationNumberId__"}

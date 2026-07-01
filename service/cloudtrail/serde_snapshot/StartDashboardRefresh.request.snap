@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: CloudTrail_20131101.StartDashboardRefresh
 
-{"DashboardId":"__DashboardId__","QueryParameterValues":{"key0":"__Value__","key1":"__Value__"}}
+{"DashboardId":"__DashboardId__","QueryParameterValues":{"key0":"__Value__"}}

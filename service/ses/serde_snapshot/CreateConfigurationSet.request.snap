@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateConfigurationSet&ConfigurationSet.Name=__Name__&Version=2010-12-01

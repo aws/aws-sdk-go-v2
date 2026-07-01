@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=AssumeRole&DurationSeconds=1&ExternalId=__ExternalId__&Policy=__Policy__&PolicyArns.member.1.arn=__Arn__&PolicyArns.member.2.arn=__Arn__&ProvidedContexts.member.1.ContextAssertion=__ContextAssertion__&ProvidedContexts.member.1.ProviderArn=__ProviderArn__&ProvidedContexts.member.2.ContextAssertion=__ContextAssertion__&ProvidedContexts.member.2.ProviderArn=__ProviderArn__&RoleArn=__RoleArn__&RoleSessionName=__RoleSessionName__&SerialNumber=__SerialNumber__&SourceIdentity=__SourceIdentity__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&TokenCode=__TokenCode__&TransitiveTagKeys.member.1=__Member__&TransitiveTagKeys.member.2=__Member__&Version=2011-06-15

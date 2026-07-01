@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSHealth_20160804.DescribeAffectedEntities
 
-{"filter":{"entityArns":["__Member__","__Member__"],"entityValues":["__Member__","__Member__"],"eventArns":["__Member__","__Member__"],"lastUpdatedTimes":[{"from":946684800,"to":946684800},{"from":946684800,"to":946684800}],"statusCodes":["IMPAIRED","IMPAIRED"],"tags":[{"key0":"__Value__","key1":"__Value__"},{"key0":"__Value__","key1":"__Value__"}]},"locale":"__Locale__","maxResults":1,"nextToken":"__NextToken__"}
+{"filter":{"entityArns":["__Member__","__Member__"],"entityValues":["__Member__","__Member__"],"eventArns":["__Member__","__Member__"],"lastUpdatedTimes":[{"from":946684800,"to":946684800},{"from":946684800,"to":946684800}],"statusCodes":["IMPAIRED","IMPAIRED"],"tags":[{"key0":"__Value__"},{"key0":"__Value__"}]},"locale":"__Locale__","maxResults":1,"nextToken":"__NextToken__"}

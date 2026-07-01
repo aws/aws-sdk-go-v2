@@ -3,4 +3,4 @@ POST /restapis/__RestApiId__/deployments
 Accept: application/json
 Content-Type: application/json
 
-{"cacheClusterEnabled":true,"cacheClusterSize":"0.5","canarySettings":{"percentTraffic":1,"stageVariableOverrides":{"key0":"__Value__","key1":"__Value__"},"useStageCache":true},"description":"__Description__","stageDescription":"__StageDescription__","stageName":"__StageName__","tracingEnabled":true,"variables":{"key0":"__Value__","key1":"__Value__"}}
+{"cacheClusterEnabled":true,"cacheClusterSize":"0.5","canarySettings":{"percentTraffic":1,"stageVariableOverrides":{"key0":"__Value__"},"useStageCache":true},"description":"__Description__","stageDescription":"__StageDescription__","stageName":"__StageName__","tracingEnabled":true,"variables":{"key0":"__Value__"}}

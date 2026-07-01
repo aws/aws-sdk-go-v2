@@ -2,4 +2,4 @@ POST /v2/apis/__ApiId__/channelNamespaces
 
 Content-Type: application/json
 
-{"codeHandlers":"__CodeHandlers__","handlerConfigs":{"onPublish":{"behavior":"CODE","integration":{"dataSourceName":"__DataSourceName__","lambdaConfig":{"invokeType":"REQUEST_RESPONSE"}}},"onSubscribe":{"behavior":"CODE","integration":{"dataSourceName":"__DataSourceName__","lambdaConfig":{"invokeType":"REQUEST_RESPONSE"}}}},"name":"__Name__","publishAuthModes":[{"authType":"API_KEY"},{"authType":"API_KEY"}],"subscribeAuthModes":[{"authType":"API_KEY"},{"authType":"API_KEY"}],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"codeHandlers":"__CodeHandlers__","handlerConfigs":{"onPublish":{"behavior":"CODE","integration":{"dataSourceName":"__DataSourceName__","lambdaConfig":{"invokeType":"REQUEST_RESPONSE"}}},"onSubscribe":{"behavior":"CODE","integration":{"dataSourceName":"__DataSourceName__","lambdaConfig":{"invokeType":"REQUEST_RESPONSE"}}}},"name":"__Name__","publishAuthModes":[{"authType":"API_KEY"},{"authType":"API_KEY"}],"subscribeAuthModes":[{"authType":"API_KEY"},{"authType":"API_KEY"}],"tags":{"key0":"__Value__"}}

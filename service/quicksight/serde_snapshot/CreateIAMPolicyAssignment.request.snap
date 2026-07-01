@@ -2,4 +2,4 @@ POST /accounts/__AwsAccountId__/namespaces/__Namespace__/iam-policy-assignments
 
 Content-Type: application/json
 
-{"AssignmentName":"__AssignmentName__","AssignmentStatus":"ENABLED","Identities":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"PolicyArn":"__PolicyArn__"}
+{"AssignmentName":"__AssignmentName__","AssignmentStatus":"ENABLED","Identities":{"key0":["__Member__","__Member__"]},"PolicyArn":"__PolicyArn__"}

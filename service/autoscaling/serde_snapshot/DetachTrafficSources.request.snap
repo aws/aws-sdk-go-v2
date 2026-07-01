@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DetachTrafficSources&AutoScalingGroupName=__AutoScalingGroupName__&TrafficSources.member.1.Identifier=__Identifier__&TrafficSources.member.1.Type=__Type__&TrafficSources.member.2.Identifier=__Identifier__&TrafficSources.member.2.Type=__Type__&Version=2011-01-01

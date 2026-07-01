@@ -2,4 +2,4 @@ PUT /CreateComponent
 
 Content-Type: application/json
 
-{"changeDescription":"__ChangeDescription__","clientToken":"__ClientToken__","data":"__Data__","description":"__Description__","dryRun":true,"kmsKeyId":"__KmsKeyId__","name":"__Name__","platform":"Windows","semanticVersion":"__SemanticVersion__","supportedOsVersions":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"},"uri":"__Uri__"}
+{"changeDescription":"__ChangeDescription__","clientToken":"__ClientToken__","data":"__Data__","description":"__Description__","dryRun":true,"kmsKeyId":"__KmsKeyId__","name":"__Name__","platform":"Windows","semanticVersion":"__SemanticVersion__","supportedOsVersions":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"uri":"__Uri__"}

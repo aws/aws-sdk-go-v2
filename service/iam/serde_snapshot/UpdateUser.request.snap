@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=UpdateUser&NewPath=__NewPath__&NewUserName=__NewUserName__&UserName=__UserName__&Version=2010-05-08

@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TrentService.Decrypt
 
-{"CiphertextBlob":"YmxvYg==","DryRun":true,"DryRunModifiers":["IGNORE_CIPHERTEXT","IGNORE_CIPHERTEXT"],"EncryptionAlgorithm":"SYMMETRIC_DEFAULT","EncryptionContext":{"key0":"__Value__","key1":"__Value__"},"GrantTokens":["__Member__","__Member__"],"KeyId":"__KeyId__","Recipient":{"AttestationDocument":"YmxvYg==","KeyEncryptionAlgorithm":"RSAES_OAEP_SHA_256"}}
+{"CiphertextBlob":"YmxvYg==","DryRun":true,"DryRunModifiers":["IGNORE_CIPHERTEXT","IGNORE_CIPHERTEXT"],"EncryptionAlgorithm":"SYMMETRIC_DEFAULT","EncryptionContext":{"key0":"__Value__"},"GrantTokens":["__Member__","__Member__"],"KeyId":"__KeyId__","Recipient":{"AttestationDocument":"YmxvYg==","KeyEncryptionAlgorithm":"RSAES_OAEP_SHA_256"}}

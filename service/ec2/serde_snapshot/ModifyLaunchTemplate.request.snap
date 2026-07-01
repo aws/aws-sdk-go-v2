@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyLaunchTemplate&ClientToken=__ClientToken__&DryRun=true&LaunchTemplateId=__LaunchTemplateId__&LaunchTemplateName=__LaunchTemplateName__&SetDefaultVersion=__DefaultVersion__&Version=2016-11-15

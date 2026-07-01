@@ -2,4 +2,4 @@ POST /identities/oauth2/token
 
 Content-Type: application/json
 
-{"audiences":["__Member__","__Member__"],"customParameters":{"key0":"__Value__","key1":"__Value__"},"customState":"__CustomState__","forceAuthentication":true,"oauth2Flow":"USER_FEDERATION","resourceCredentialProviderName":"__ResourceCredentialProviderName__","resourceOauth2ReturnUrl":"__ResourceOauth2ReturnUrl__","resources":["__Member__","__Member__"],"scopes":["__Member__","__Member__"],"sessionUri":"__SessionUri__","workloadIdentityToken":"__WorkloadIdentityToken__"}
+{"audiences":["__Member__","__Member__"],"customParameters":{"key0":"__Value__"},"customState":"__CustomState__","forceAuthentication":true,"oauth2Flow":"USER_FEDERATION","resourceCredentialProviderName":"__ResourceCredentialProviderName__","resourceOauth2ReturnUrl":"__ResourceOauth2ReturnUrl__","resources":["__Member__","__Member__"],"scopes":["__Member__","__Member__"],"sessionUri":"__SessionUri__","workloadIdentityToken":"__WorkloadIdentityToken__"}

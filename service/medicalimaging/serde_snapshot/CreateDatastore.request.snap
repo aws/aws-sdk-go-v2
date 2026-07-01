@@ -2,4 +2,4 @@ POST /datastore
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","datastoreName":"__DatastoreName__","kmsKeyArn":"__KmsKeyArn__","lambdaAuthorizerArn":"__LambdaAuthorizerArn__","losslessStorageFormat":"HTJ2K","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","datastoreName":"__DatastoreName__","kmsKeyArn":"__KmsKeyArn__","lambdaAuthorizerArn":"__LambdaAuthorizerArn__","losslessStorageFormat":"HTJ2K","tags":{"key0":"__Value__"}}

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyNetworkInterfaceAttribute&AssociatePublicIpAddress=true&AssociatedSubnetId.1=__Member__&AssociatedSubnetId.2=__Member__&Attachment.AttachmentId=__AttachmentId__&Attachment.DefaultEnaQueueCount=true&Attachment.DeleteOnTermination=true&Attachment.EnaQueueCount=1&ConnectionTrackingSpecification.TcpEstablishedTimeout=1&ConnectionTrackingSpecification.UdpStreamTimeout=1&ConnectionTrackingSpecification.UdpTimeout=1&Description.Value=__Value__&DryRun=true&EnaSrdSpecification.EnaSrdEnabled=true&EnaSrdSpecification.EnaSrdUdpSpecification.EnaSrdUdpEnabled=true&EnablePrimaryIpv6=true&NetworkInterfaceId=__NetworkInterfaceId__&SecurityGroupId.1=__Member__&SecurityGroupId.2=__Member__&SourceDestCheck.Value=true&Version=2016-11-15

@@ -2,4 +2,4 @@ POST /services/__ServiceIdentifier__/listeners
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","defaultAction":{"forward":{"targetGroups":[{"targetGroupIdentifier":"__TargetGroupIdentifier__","weight":1},{"targetGroupIdentifier":"__TargetGroupIdentifier__","weight":1}]}},"name":"__Name__","port":1,"protocol":"HTTP","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","defaultAction":{"forward":{"targetGroups":[{"targetGroupIdentifier":"__TargetGroupIdentifier__","weight":1},{"targetGroupIdentifier":"__TargetGroupIdentifier__","weight":1}]}},"name":"__Name__","port":1,"protocol":"HTTP","tags":{"key0":"__Value__"}}

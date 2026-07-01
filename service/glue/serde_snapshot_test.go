@@ -7,7 +7,6 @@ package glue
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -172,6 +178,9 @@ func serdeNewClient() *Client {
 		Region:             "us-east-1",
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
+}
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
 }
 func TestSerdeCheckSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	input := &AssociateGlossaryTermsInput{
@@ -191,6 +200,7 @@ func TestSerdeCheckSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	_, err := svc.AssociateGlossaryTerms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -226,7 +236,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						{
@@ -235,7 +244,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -253,7 +261,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 						SerializationLibrary: ptr.String("__SerializationLibrary__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					BucketColumns: []string{
@@ -272,7 +279,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SkewedInfo: &types.SkewedInfo{
 						SkewedColumnNames: []string{
@@ -285,7 +291,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 						},
 						SkewedColumnValueLocationMaps: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					StoredAsSubDirectories: true,
@@ -301,7 +306,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -319,7 +323,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						{
@@ -328,7 +331,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -346,7 +348,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 						SerializationLibrary: ptr.String("__SerializationLibrary__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					BucketColumns: []string{
@@ -365,7 +366,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SkewedInfo: &types.SkewedInfo{
 						SkewedColumnNames: []string{
@@ -378,7 +378,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 						},
 						SkewedColumnValueLocationMaps: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					StoredAsSubDirectories: true,
@@ -394,7 +393,6 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -409,6 +407,7 @@ func TestSerdeCheckSnapshot_BatchCreatePartition(t *testing.T) {
 	_, err := svc.BatchCreatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -441,6 +440,7 @@ func TestSerdeCheckSnapshot_BatchDeleteConnection(t *testing.T) {
 	_, err := svc.BatchDeleteConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -485,6 +485,7 @@ func TestSerdeCheckSnapshot_BatchDeletePartition(t *testing.T) {
 	_, err := svc.BatchDeletePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -519,6 +520,7 @@ func TestSerdeCheckSnapshot_BatchDeleteTable(t *testing.T) {
 	_, err := svc.BatchDeleteTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -553,6 +555,7 @@ func TestSerdeCheckSnapshot_BatchDeleteTableVersion(t *testing.T) {
 	_, err := svc.BatchDeleteTableVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -586,6 +589,7 @@ func TestSerdeCheckSnapshot_BatchGetBlueprints(t *testing.T) {
 	_, err := svc.BatchGetBlueprints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -617,6 +621,7 @@ func TestSerdeCheckSnapshot_BatchGetCrawlers(t *testing.T) {
 	_, err := svc.BatchGetCrawlers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -648,6 +653,7 @@ func TestSerdeCheckSnapshot_BatchGetCustomEntityTypes(t *testing.T) {
 	_, err := svc.BatchGetCustomEntityTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -679,6 +685,7 @@ func TestSerdeCheckSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	_, err := svc.BatchGetDataQualityResult(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -710,6 +717,7 @@ func TestSerdeCheckSnapshot_BatchGetDevEndpoints(t *testing.T) {
 	_, err := svc.BatchGetDevEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -743,6 +751,7 @@ func TestSerdeCheckSnapshot_BatchGetIterableForms(t *testing.T) {
 	_, err := svc.BatchGetIterableForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -774,6 +783,7 @@ func TestSerdeCheckSnapshot_BatchGetJobs(t *testing.T) {
 	_, err := svc.BatchGetJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -823,7 +833,6 @@ func TestSerdeCheckSnapshot_BatchGetPartition(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -836,6 +845,7 @@ func TestSerdeCheckSnapshot_BatchGetPartition(t *testing.T) {
 	_, err := svc.BatchGetPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -877,6 +887,7 @@ func TestSerdeCheckSnapshot_BatchGetTableOptimizer(t *testing.T) {
 	_, err := svc.BatchGetTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -908,6 +919,7 @@ func TestSerdeCheckSnapshot_BatchGetTriggers(t *testing.T) {
 	_, err := svc.BatchGetTriggers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -940,6 +952,7 @@ func TestSerdeCheckSnapshot_BatchGetWorkflows(t *testing.T) {
 	_, err := svc.BatchGetWorkflows(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -980,6 +993,7 @@ func TestSerdeCheckSnapshot_BatchPutDataQualityStatisticAnnotation(t *testing.T)
 	_, err := svc.BatchPutDataQualityStatisticAnnotation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1012,6 +1026,7 @@ func TestSerdeCheckSnapshot_BatchStopJobRun(t *testing.T) {
 	_, err := svc.BatchStopJobRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1052,7 +1067,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							{
@@ -1061,7 +1075,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 						},
@@ -1079,7 +1092,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 							SerializationLibrary: ptr.String("__SerializationLibrary__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						BucketColumns: []string{
@@ -1098,7 +1110,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 						},
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SkewedInfo: &types.SkewedInfo{
 							SkewedColumnNames: []string{
@@ -1111,7 +1122,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 							},
 							SkewedColumnValueLocationMaps: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						StoredAsSubDirectories: true,
@@ -1127,7 +1137,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
@@ -1151,7 +1160,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							{
@@ -1160,7 +1168,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 						},
@@ -1178,7 +1185,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 							SerializationLibrary: ptr.String("__SerializationLibrary__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						BucketColumns: []string{
@@ -1197,7 +1203,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 						},
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SkewedInfo: &types.SkewedInfo{
 							SkewedColumnNames: []string{
@@ -1210,7 +1215,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 							},
 							SkewedColumnValueLocationMaps: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						StoredAsSubDirectories: true,
@@ -1226,7 +1230,6 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
@@ -1242,6 +1245,7 @@ func TestSerdeCheckSnapshot_BatchUpdatePartition(t *testing.T) {
 	_, err := svc.BatchUpdatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1270,6 +1274,7 @@ func TestSerdeCheckSnapshot_CancelDataQualityRuleRecommendationRun(t *testing.T)
 	_, err := svc.CancelDataQualityRuleRecommendationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1298,6 +1303,7 @@ func TestSerdeCheckSnapshot_CancelDataQualityRulesetEvaluationRun(t *testing.T) 
 	_, err := svc.CancelDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1327,6 +1333,7 @@ func TestSerdeCheckSnapshot_CancelMLTaskRun(t *testing.T) {
 	_, err := svc.CancelMLTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1357,6 +1364,7 @@ func TestSerdeCheckSnapshot_CancelStatement(t *testing.T) {
 	_, err := svc.CancelStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1386,6 +1394,7 @@ func TestSerdeCheckSnapshot_CheckSchemaVersionValidity(t *testing.T) {
 	_, err := svc.CheckSchemaVersionValidity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1408,7 +1417,6 @@ func TestSerdeCheckSnapshot_CreateBlueprint(t *testing.T) {
 		BlueprintLocation: ptr.String("__BlueprintLocation__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1420,6 +1428,7 @@ func TestSerdeCheckSnapshot_CreateBlueprint(t *testing.T) {
 	_, err := svc.CreateBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1447,7 +1456,6 @@ func TestSerdeCheckSnapshot_CreateCatalog(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetRedshiftCatalog: &types.TargetRedshiftCatalog{
 				CatalogArn: ptr.String("__CatalogArn__"),
@@ -1463,20 +1471,16 @@ func TestSerdeCheckSnapshot_CreateCatalog(t *testing.T) {
 					RoleArn: ptr.String("__RoleArn__"),
 					Compaction: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Retention: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OrphanFileDeletion: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CustomProperties: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
@@ -1524,7 +1528,6 @@ func TestSerdeCheckSnapshot_CreateCatalog(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1536,6 +1539,7 @@ func TestSerdeCheckSnapshot_CreateCatalog(t *testing.T) {
 	_, err := svc.CreateCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1596,6 +1600,7 @@ func TestSerdeCheckSnapshot_CreateClassifier(t *testing.T) {
 	_, err := svc.CreateClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1626,7 +1631,6 @@ func TestSerdeCheckSnapshot_CreateColumnStatisticsTaskSettings(t *testing.T) {
 		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1638,6 +1642,7 @@ func TestSerdeCheckSnapshot_CreateColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.CreateColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1666,19 +1671,15 @@ func TestSerdeCheckSnapshot_CreateConnection(t *testing.T) {
 			},
 			ConnectionProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			SparkProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			AthenaProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PythonProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PhysicalConnectionRequirements: &types.PhysicalConnectionRequirements{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -1699,7 +1700,6 @@ func TestSerdeCheckSnapshot_CreateConnection(t *testing.T) {
 					TokenUrl: ptr.String("__TokenUrl__"),
 					TokenUrlParametersMap: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AuthorizationCodeProperties: &types.AuthorizationCodeProperties{
 						AuthorizationCode: ptr.String("__AuthorizationCode__"),
@@ -1720,7 +1720,6 @@ func TestSerdeCheckSnapshot_CreateConnection(t *testing.T) {
 				},
 				CustomAuthenticationCredentials: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ValidateCredentials: true,
@@ -1731,7 +1730,6 @@ func TestSerdeCheckSnapshot_CreateConnection(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1743,6 +1741,7 @@ func TestSerdeCheckSnapshot_CreateConnection(t *testing.T) {
 	_, err := svc.CreateConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1958,7 +1957,6 @@ func TestSerdeCheckSnapshot_CreateCrawler(t *testing.T) {
 		CrawlerSecurityConfiguration: ptr.String("__CrawlerSecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1970,6 +1968,7 @@ func TestSerdeCheckSnapshot_CreateCrawler(t *testing.T) {
 	_, err := svc.CreateCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1995,7 +1994,6 @@ func TestSerdeCheckSnapshot_CreateCustomEntityType(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2007,6 +2005,7 @@ func TestSerdeCheckSnapshot_CreateCustomEntityType(t *testing.T) {
 	_, err := svc.CreateCustomEntityType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2031,7 +2030,6 @@ func TestSerdeCheckSnapshot_CreateDatabase(t *testing.T) {
 			LocationUri: ptr.String("__LocationUri__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
 				{
@@ -2066,7 +2064,6 @@ func TestSerdeCheckSnapshot_CreateDatabase(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2078,6 +2075,7 @@ func TestSerdeCheckSnapshot_CreateDatabase(t *testing.T) {
 	_, err := svc.CreateDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2100,7 +2098,6 @@ func TestSerdeCheckSnapshot_CreateDataQualityRuleset(t *testing.T) {
 		Ruleset:     ptr.String("__Ruleset__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		TargetTable: &types.DataQualityTargetTable{
 			TableName:    ptr.String("__TableName__"),
@@ -2119,6 +2116,7 @@ func TestSerdeCheckSnapshot_CreateDataQualityRuleset(t *testing.T) {
 	_, err := svc.CreateDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2157,11 +2155,9 @@ func TestSerdeCheckSnapshot_CreateDevEndpoint(t *testing.T) {
 		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Arguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2173,6 +2169,7 @@ func TestSerdeCheckSnapshot_CreateDevEndpoint(t *testing.T) {
 	_, err := svc.CreateDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2203,6 +2200,7 @@ func TestSerdeCheckSnapshot_CreateGlossary(t *testing.T) {
 	_, err := svc.CreateGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2235,6 +2233,7 @@ func TestSerdeCheckSnapshot_CreateGlossaryTerm(t *testing.T) {
 	_, err := svc.CreateGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2268,6 +2267,7 @@ func TestSerdeCheckSnapshot_CreateGlueIdentityCenterConfiguration(t *testing.T) 
 	_, err := svc.CreateGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2293,7 +2293,6 @@ func TestSerdeCheckSnapshot_CreateIntegration(t *testing.T) {
 		KmsKeyId:        ptr.String("__KmsKeyId__"),
 		AdditionalEncryptionContext: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Tags: []types.Tag{
 			{
@@ -2309,7 +2308,6 @@ func TestSerdeCheckSnapshot_CreateIntegration(t *testing.T) {
 			RefreshInterval: ptr.String("__RefreshInterval__"),
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			ContinuousSync: ptr.Bool(true),
 		},
@@ -2323,6 +2321,7 @@ func TestSerdeCheckSnapshot_CreateIntegration(t *testing.T) {
 	_, err := svc.CreateIntegration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2370,6 +2369,7 @@ func TestSerdeCheckSnapshot_CreateIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.CreateIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2427,6 +2427,7 @@ func TestSerdeCheckSnapshot_CreateIntegrationTableProperties(t *testing.T) {
 	_, err := svc.CreateIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2461,11 +2462,9 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 		},
 		DefaultArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		NonOverridableArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Connections: &types.ConnectionsList{
 			Connections: []string{
@@ -2480,7 +2479,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		NotificationProperty: &types.NotificationProperty{
 			NotifyDelayAfter: ptr.Int32(1),
@@ -2546,7 +2544,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 						JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
 						DataTypeMapping: map[string]types.GlueRecordType{
 							"key0": types.GlueRecordType("DATE"),
-							"key1": types.GlueRecordType("DATE"),
 						},
 					},
 					ConnectionTable: ptr.String("__ConnectionTable__"),
@@ -2589,7 +2586,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -2871,7 +2867,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					ConnectionType:  ptr.String("__ConnectionType__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -2915,7 +2910,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -3945,7 +3939,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalHudiOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -3984,7 +3977,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalHudiOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -4025,7 +4017,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalHudiOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 						BoundedSize:      ptr.Int64(1),
@@ -4084,7 +4075,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Database: ptr.String("__Database__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -4147,7 +4137,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Format: types.TargetFormat("json"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -4204,7 +4193,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalDeltaOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -4243,7 +4231,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalDeltaOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -4284,7 +4271,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalDeltaOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 						BoundedSize:      ptr.Int64(1),
@@ -4343,7 +4329,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Database: ptr.String("__Database__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -4406,7 +4391,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Format:                 types.TargetFormat("json"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -4603,7 +4587,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalDataSources: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Ruleset: ptr.String("__Ruleset__"),
 					PublishingOptions: &types.DQResultsPublishingOptions{
@@ -4614,7 +4597,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
 						StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
@@ -4636,7 +4618,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 								Operation: ptr.String("__Operation__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							ConditionExpressions: []types.ConditionExpression{
@@ -4657,7 +4638,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 								Operation: ptr.String("__Operation__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							ConditionExpressions: []types.ConditionExpression{
@@ -4695,7 +4675,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 						},
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SampleQuery:         ptr.String("__SampleQuery__"),
 						PreAction:           ptr.String("__PreAction__"),
@@ -4784,7 +4763,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 						},
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SampleQuery:         ptr.String("__SampleQuery__"),
 						PreAction:           ptr.String("__PreAction__"),
@@ -4832,7 +4810,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -4870,7 +4847,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Inputs: []string{
 						"__Member__",
@@ -4883,7 +4859,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalIcebergOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -4922,7 +4897,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalIcebergOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -4975,7 +4949,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Database: ptr.String("__Database__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -5006,2727 +4979,6 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 					Format: types.TargetFormat("json"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					Compression:            types.IcebergTargetCompressionType("gzip"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3ExcelSource: &types.S3ExcelSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.ParquetCompressionType("snappy"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					NumberRows: ptr.Int64(1),
-					SkipFooter: ptr.Int32(1),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HyperDirectTarget: &types.S3HyperDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Format: types.TargetFormat("json"),
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:        ptr.String("__Path__"),
-					Compression: types.HyperTargetCompressionType("uncompressed"),
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				DynamoDBELTConnectorSource: &types.DynamoDBELTConnectorSource{
-					Name: ptr.String("__Name__"),
-					ConnectionOptions: &types.DDBELTConnectionOptions{
-						DynamodbExport:        types.DdbExportType("ddb"),
-						DynamodbUnnestDDBJson: true,
-						DynamodbTableArn:      ptr.String("__DynamodbTableArn__"),
-						DynamodbS3Bucket:      ptr.String("__DynamodbS3Bucket__"),
-						DynamodbS3Prefix:      ptr.String("__DynamodbS3Prefix__"),
-						DynamodbS3BucketOwner: ptr.String("__DynamodbS3BucketOwner__"),
-						DynamodbStsRoleArn:    ptr.String("__DynamodbStsRoleArn__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-			},
-			"key1": {
-				AthenaConnectorSource: &types.AthenaConnectorSource{
-					Name:            ptr.String("__Name__"),
-					ConnectionName:  ptr.String("__ConnectionName__"),
-					ConnectorName:   ptr.String("__ConnectorName__"),
-					ConnectionType:  ptr.String("__ConnectionType__"),
-					ConnectionTable: ptr.String("__ConnectionTable__"),
-					SchemaName:      ptr.String("__SchemaName__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				JDBCConnectorSource: &types.JDBCConnectorSource{
-					Name:           ptr.String("__Name__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectorName:  ptr.String("__ConnectorName__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					AdditionalOptions: &types.JDBCConnectorOptions{
-						FilterPredicate: ptr.String("__FilterPredicate__"),
-						PartitionColumn: ptr.String("__PartitionColumn__"),
-						LowerBound:      ptr.Int64(1),
-						UpperBound:      ptr.Int64(1),
-						NumPartitions:   ptr.Int64(1),
-						JobBookmarkKeys: []string{
-							"__Member__",
-							"__Member__",
-						},
-						JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
-						DataTypeMapping: map[string]types.GlueRecordType{
-							"key0": types.GlueRecordType("DATE"),
-							"key1": types.GlueRecordType("DATE"),
-						},
-					},
-					ConnectionTable: ptr.String("__ConnectionTable__"),
-					Query:           ptr.String("__Query__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SparkConnectorSource: &types.SparkConnectorSource{
-					Name:           ptr.String("__Name__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectorName:  ptr.String("__ConnectorName__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogSource: &types.CatalogSource{
-					Name:               ptr.String("__Name__"),
-					Database:           ptr.String("__Database__"),
-					Table:              ptr.String("__Table__"),
-					PartitionPredicate: ptr.String("__PartitionPredicate__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				RedshiftSource: &types.RedshiftSource{
-					Name:           ptr.String("__Name__"),
-					Database:       ptr.String("__Database__"),
-					Table:          ptr.String("__Table__"),
-					RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-					TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-				},
-				S3CatalogSource: &types.S3CatalogSource{
-					Name:               ptr.String("__Name__"),
-					Database:           ptr.String("__Database__"),
-					Table:              ptr.String("__Table__"),
-					PartitionPredicate: ptr.String("__PartitionPredicate__"),
-					AdditionalOptions: &types.S3SourceAdditionalOptions{
-						BoundedSize:  ptr.Int64(1),
-						BoundedFiles: ptr.Int64(1),
-					},
-				},
-				S3CsvSource: &types.S3CsvSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.CompressionType("gzip"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					Separator:           types.Separator("comma"),
-					Escaper:             ptr.String("__Escaper__"),
-					QuoteChar:           types.QuoteChar("quote"),
-					Multiline:           ptr.Bool(true),
-					WithHeader:          ptr.Bool(true),
-					WriteHeader:         ptr.Bool(true),
-					SkipFirst:           ptr.Bool(true),
-					OptimizePerformance: true,
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3JsonSource: &types.S3JsonSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.CompressionType("gzip"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					JsonPath:  ptr.String("__JsonPath__"),
-					Multiline: ptr.Bool(true),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3ParquetSource: &types.S3ParquetSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.ParquetCompressionType("snappy"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				RelationalCatalogSource: &types.RelationalCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				DynamoDBCatalogSource: &types.DynamoDBCatalogSource{
-					Name:        ptr.String("__Name__"),
-					Database:    ptr.String("__Database__"),
-					Table:       ptr.String("__Table__"),
-					PitrEnabled: ptr.Bool(true),
-					AdditionalOptions: &types.DDBELTCatalogAdditionalOptions{
-						DynamodbExport:        ptr.String("__DynamodbExport__"),
-						DynamodbUnnestDDBJson: true,
-					},
-				},
-				JDBCConnectorTarget: &types.JDBCConnectorTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					ConnectionName:  ptr.String("__ConnectionName__"),
-					ConnectionTable: ptr.String("__ConnectionTable__"),
-					ConnectorName:   ptr.String("__ConnectorName__"),
-					ConnectionType:  ptr.String("__ConnectionType__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SparkConnectorTarget: &types.SparkConnectorTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectorName:  ptr.String("__ConnectorName__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogTarget: &types.BasicCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				RedshiftTarget: &types.RedshiftTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database:       ptr.String("__Database__"),
-					Table:          ptr.String("__Table__"),
-					RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-					TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-					UpsertRedshiftOptions: &types.UpsertRedshiftTargetOptions{
-						TableLocation:  ptr.String("__TableLocation__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						UpsertKeys: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				S3CatalogTarget: &types.S3CatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				S3GlueParquetTarget: &types.S3GlueParquetTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            types.ParquetCompressionType("snappy"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				S3DirectTarget: &types.S3DirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            ptr.String("__Compression__"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					Format:                 types.TargetFormat("json"),
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				ApplyMapping: &types.ApplyMapping{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Mapping: []types.Mapping{
-						{
-							ToKey: ptr.String("__ToKey__"),
-							FromPath: []string{
-								"__Member__",
-								"__Member__",
-							},
-							FromType: ptr.String("__FromType__"),
-							ToType:   ptr.String("__ToType__"),
-							Dropped:  ptr.Bool(true),
-							Children: []types.Mapping{
-								{},
-								{},
-							},
-						},
-						{
-							ToKey: ptr.String("__ToKey__"),
-							FromPath: []string{
-								"__Member__",
-								"__Member__",
-							},
-							FromType: ptr.String("__FromType__"),
-							ToType:   ptr.String("__ToType__"),
-							Dropped:  ptr.Bool(true),
-							Children: []types.Mapping{
-								{},
-								{},
-							},
-						},
-					},
-				},
-				SelectFields: &types.SelectFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Paths: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				DropFields: &types.DropFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Paths: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				RenameField: &types.RenameField{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					SourcePath: []string{
-						"__Member__",
-						"__Member__",
-					},
-					TargetPath: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				Spigot: &types.Spigot{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Path: ptr.String("__Path__"),
-					Topk: ptr.Int32(1),
-					Prob: ptr.Float64(1.0),
-				},
-				Join: &types.Join{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					JoinType: types.JoinType("equijoin"),
-					Columns: []types.JoinColumn{
-						{
-							From: ptr.String("__From__"),
-							Keys: [][]string{
-								{
-									"__Member__",
-									"__Member__",
-								},
-								{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-						{
-							From: ptr.String("__From__"),
-							Keys: [][]string{
-								{
-									"__Member__",
-									"__Member__",
-								},
-								{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				SplitFields: &types.SplitFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Paths: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				SelectFromCollection: &types.SelectFromCollection{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Index: 1,
-				},
-				FillMissingValues: &types.FillMissingValues{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					ImputedPath: ptr.String("__ImputedPath__"),
-					FilledPath:  ptr.String("__FilledPath__"),
-				},
-				Filter: &types.Filter{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					LogicalOperator: types.FilterLogicalOperator("AND"),
-					Filters: []types.FilterExpression{
-						{
-							Operation: types.FilterOperation("EQ"),
-							Negated:   ptr.Bool(true),
-							Values: []types.FilterValue{
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-						},
-						{
-							Operation: types.FilterOperation("EQ"),
-							Negated:   ptr.Bool(true),
-							Values: []types.FilterValue{
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-						},
-					},
-				},
-				CustomCode: &types.CustomCode{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Code:      ptr.String("__Code__"),
-					ClassName: ptr.String("__ClassName__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SparkSQL: &types.SparkSQL{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					SqlQuery: ptr.String("__SqlQuery__"),
-					SqlAliases: []types.SqlAlias{
-						{
-							From:  ptr.String("__From__"),
-							Alias: ptr.String("__Alias__"),
-						},
-						{
-							From:  ptr.String("__From__"),
-							Alias: ptr.String("__Alias__"),
-						},
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				DirectKinesisSource: &types.DirectKinesisSource{
-					Name:         ptr.String("__Name__"),
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					StreamingOptions: &types.KinesisStreamingSourceOptions{
-						EndpointUrl:              ptr.String("__EndpointUrl__"),
-						StreamName:               ptr.String("__StreamName__"),
-						Classification:           ptr.String("__Classification__"),
-						Delimiter:                ptr.String("__Delimiter__"),
-						StartingPosition:         types.StartingPosition("latest"),
-						MaxFetchTimeInMs:         ptr.Int64(1),
-						MaxFetchRecordsPerShard:  ptr.Int64(1),
-						MaxRecordPerRead:         ptr.Int64(1),
-						AddIdleTimeBetweenReads:  ptr.Bool(true),
-						IdleTimeBetweenReadsInMs: ptr.Int64(1),
-						DescribeShardInterval:    ptr.Int64(1),
-						NumRetries:               ptr.Int32(1),
-						RetryIntervalMs:          ptr.Int64(1),
-						MaxRetryIntervalMs:       ptr.Int64(1),
-						AvoidEmptyBatches:        ptr.Bool(true),
-						StreamArn:                ptr.String("__StreamArn__"),
-						RoleArn:                  ptr.String("__RoleArn__"),
-						RoleSessionName:          ptr.String("__RoleSessionName__"),
-						AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-					},
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				DirectKafkaSource: &types.DirectKafkaSource{
-					Name: ptr.String("__Name__"),
-					StreamingOptions: &types.KafkaStreamingSourceOptions{
-						BootstrapServers:       ptr.String("__BootstrapServers__"),
-						SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-						ConnectionName:         ptr.String("__ConnectionName__"),
-						TopicName:              ptr.String("__TopicName__"),
-						Assign:                 ptr.String("__Assign__"),
-						SubscribePattern:       ptr.String("__SubscribePattern__"),
-						Classification:         ptr.String("__Classification__"),
-						Delimiter:              ptr.String("__Delimiter__"),
-						StartingOffsets:        ptr.String("__StartingOffsets__"),
-						EndingOffsets:          ptr.String("__EndingOffsets__"),
-						PollTimeoutMs:          ptr.Int64(1),
-						NumRetries:             ptr.Int32(1),
-						RetryIntervalMs:        ptr.Int64(1),
-						MaxOffsetsPerTrigger:   ptr.Int64(1),
-						MinPartitions:          ptr.Int32(1),
-						IncludeHeaders:         ptr.Bool(true),
-						AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					},
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				CatalogKinesisSource: &types.CatalogKinesisSource{
-					Name:         ptr.String("__Name__"),
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					Table:        ptr.String("__Table__"),
-					Database:     ptr.String("__Database__"),
-					StreamingOptions: &types.KinesisStreamingSourceOptions{
-						EndpointUrl:              ptr.String("__EndpointUrl__"),
-						StreamName:               ptr.String("__StreamName__"),
-						Classification:           ptr.String("__Classification__"),
-						Delimiter:                ptr.String("__Delimiter__"),
-						StartingPosition:         types.StartingPosition("latest"),
-						MaxFetchTimeInMs:         ptr.Int64(1),
-						MaxFetchRecordsPerShard:  ptr.Int64(1),
-						MaxRecordPerRead:         ptr.Int64(1),
-						AddIdleTimeBetweenReads:  ptr.Bool(true),
-						IdleTimeBetweenReadsInMs: ptr.Int64(1),
-						DescribeShardInterval:    ptr.Int64(1),
-						NumRetries:               ptr.Int32(1),
-						RetryIntervalMs:          ptr.Int64(1),
-						MaxRetryIntervalMs:       ptr.Int64(1),
-						AvoidEmptyBatches:        ptr.Bool(true),
-						StreamArn:                ptr.String("__StreamArn__"),
-						RoleArn:                  ptr.String("__RoleArn__"),
-						RoleSessionName:          ptr.String("__RoleSessionName__"),
-						AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-					},
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				CatalogKafkaSource: &types.CatalogKafkaSource{
-					Name:         ptr.String("__Name__"),
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					Table:        ptr.String("__Table__"),
-					Database:     ptr.String("__Database__"),
-					StreamingOptions: &types.KafkaStreamingSourceOptions{
-						BootstrapServers:       ptr.String("__BootstrapServers__"),
-						SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-						ConnectionName:         ptr.String("__ConnectionName__"),
-						TopicName:              ptr.String("__TopicName__"),
-						Assign:                 ptr.String("__Assign__"),
-						SubscribePattern:       ptr.String("__SubscribePattern__"),
-						Classification:         ptr.String("__Classification__"),
-						Delimiter:              ptr.String("__Delimiter__"),
-						StartingOffsets:        ptr.String("__StartingOffsets__"),
-						EndingOffsets:          ptr.String("__EndingOffsets__"),
-						PollTimeoutMs:          ptr.Int64(1),
-						NumRetries:             ptr.Int32(1),
-						RetryIntervalMs:        ptr.Int64(1),
-						MaxOffsetsPerTrigger:   ptr.Int64(1),
-						MinPartitions:          ptr.Int32(1),
-						IncludeHeaders:         ptr.Bool(true),
-						AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					},
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				DropNullFields: &types.DropNullFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					NullCheckBoxList: &types.NullCheckBoxList{
-						IsEmpty:      ptr.Bool(true),
-						IsNullString: ptr.Bool(true),
-						IsNegOne:     ptr.Bool(true),
-					},
-					NullTextList: []types.NullValueField{
-						{
-							Value: ptr.String("__Value__"),
-							Datatype: &types.Datatype{
-								Id:    ptr.String("__Id__"),
-								Label: ptr.String("__Label__"),
-							},
-						},
-						{
-							Value: ptr.String("__Value__"),
-							Datatype: &types.Datatype{
-								Id:    ptr.String("__Id__"),
-								Label: ptr.String("__Label__"),
-							},
-						},
-					},
-				},
-				Merge: &types.Merge{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Source: ptr.String("__Source__"),
-					PrimaryKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				Union: &types.Union{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					UnionType: types.UnionType("ALL"),
-				},
-				PIIDetection: &types.PIIDetection{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PiiType: types.PiiType("RowAudit"),
-					EntityTypesToDetect: []string{
-						"__Member__",
-						"__Member__",
-					},
-					OutputColumnName:       ptr.String("__OutputColumnName__"),
-					SampleFraction:         ptr.Float64(1.0),
-					ThresholdFraction:      ptr.Float64(1.0),
-					MaskValue:              ptr.String("__MaskValue__"),
-					RedactText:             ptr.String("__RedactText__"),
-					RedactChar:             ptr.String("__RedactChar__"),
-					MatchPattern:           ptr.String("__MatchPattern__"),
-					NumLeftCharsToExclude:  ptr.Int32(1),
-					NumRightCharsToExclude: ptr.Int32(1),
-					DetectionParameters:    ptr.String("__DetectionParameters__"),
-					DetectionSensitivity:   ptr.String("__DetectionSensitivity__"),
-				},
-				Aggregate: &types.Aggregate{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Groups: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Aggs: []types.AggregateOperation{
-						{
-							Column: []string{
-								"__Member__",
-								"__Member__",
-							},
-							AggFunc: types.AggFunction("avg"),
-						},
-						{
-							Column: []string{
-								"__Member__",
-								"__Member__",
-							},
-							AggFunc: types.AggFunction("avg"),
-						},
-					},
-				},
-				DropDuplicates: &types.DropDuplicates{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Columns: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				GovernedCatalogTarget: &types.GovernedCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-				},
-				GovernedCatalogSource: &types.GovernedCatalogSource{
-					Name:               ptr.String("__Name__"),
-					Database:           ptr.String("__Database__"),
-					Table:              ptr.String("__Table__"),
-					PartitionPredicate: ptr.String("__PartitionPredicate__"),
-					AdditionalOptions: &types.S3SourceAdditionalOptions{
-						BoundedSize:  ptr.Int64(1),
-						BoundedFiles: ptr.Int64(1),
-					},
-				},
-				MicrosoftSQLServerCatalogSource: &types.MicrosoftSQLServerCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				MySQLCatalogSource: &types.MySQLCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				OracleSQLCatalogSource: &types.OracleSQLCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				PostgreSQLCatalogSource: &types.PostgreSQLCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				MicrosoftSQLServerCatalogTarget: &types.MicrosoftSQLServerCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				MySQLCatalogTarget: &types.MySQLCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				OracleSQLCatalogTarget: &types.OracleSQLCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				PostgreSQLCatalogTarget: &types.PostgreSQLCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				Route: &types.Route{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupFiltersList: []types.GroupFilters{
-						{
-							GroupName: ptr.String("__GroupName__"),
-							Filters: []types.FilterExpression{
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-							},
-							LogicalOperator: types.FilterLogicalOperator("AND"),
-						},
-						{
-							GroupName: ptr.String("__GroupName__"),
-							Filters: []types.FilterExpression{
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-							},
-							LogicalOperator: types.FilterLogicalOperator("AND"),
-						},
-					},
-				},
-				DynamicTransform: &types.DynamicTransform{
-					Name:          ptr.String("__Name__"),
-					TransformName: ptr.String("__TransformName__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Parameters: []types.TransformConfigParameter{
-						{
-							Name:              ptr.String("__Name__"),
-							Type:              types.ParamType("str"),
-							ValidationRule:    ptr.String("__ValidationRule__"),
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-							Value: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ListType:   types.ParamType("str"),
-							IsOptional: ptr.Bool(true),
-						},
-						{
-							Name:              ptr.String("__Name__"),
-							Type:              types.ParamType("str"),
-							ValidationRule:    ptr.String("__ValidationRule__"),
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-							Value: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ListType:   types.ParamType("str"),
-							IsOptional: ptr.Bool(true),
-						},
-					},
-					FunctionName: ptr.String("__FunctionName__"),
-					Path:         ptr.String("__Path__"),
-					Version:      ptr.String("__Version__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				EvaluateDataQuality: &types.EvaluateDataQuality{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Ruleset: ptr.String("__Ruleset__"),
-					Output:  types.DQTransformOutput("PrimaryInput"),
-					PublishingOptions: &types.DQResultsPublishingOptions{
-						EvaluationContext:        ptr.String("__EvaluationContext__"),
-						ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-						CloudWatchMetricsEnabled: ptr.Bool(true),
-						ResultsPublishingEnabled: ptr.Bool(true),
-					},
-					StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-						StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-					},
-				},
-				S3CatalogHudiSource: &types.S3CatalogHudiSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalHudiOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogHudiSource: &types.CatalogHudiSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalHudiOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HudiSource: &types.S3HudiSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AdditionalHudiOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HudiCatalogTarget: &types.S3HudiCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HudiDirectTarget: &types.S3HudiDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            types.HudiTargetCompressionType("gzip"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Format: types.TargetFormat("json"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				DirectJDBCSource: &types.DirectJDBCSource{
-					Name:           ptr.String("__Name__"),
-					Database:       ptr.String("__Database__"),
-					Table:          ptr.String("__Table__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectionType: types.JDBCConnectionType("sqlserver"),
-					RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3CatalogDeltaSource: &types.S3CatalogDeltaSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalDeltaOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogDeltaSource: &types.CatalogDeltaSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalDeltaOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3DeltaSource: &types.S3DeltaSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AdditionalDeltaOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3DeltaCatalogTarget: &types.S3DeltaCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3DeltaDirectTarget: &types.S3DeltaDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            types.DeltaTargetCompressionType("uncompressed"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					Format:                 types.TargetFormat("json"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				AmazonRedshiftSource: &types.AmazonRedshiftSource{
-					Name: ptr.String("__Name__"),
-					Data: &types.AmazonRedshiftNodeData{
-						AccessType: ptr.String("__AccessType__"),
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Table: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogDatabase: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogTable: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-						CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-						TempDir:               ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						TablePrefix:         ptr.String("__TablePrefix__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						StagingTable: ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-				},
-				AmazonRedshiftTarget: &types.AmazonRedshiftTarget{
-					Name: ptr.String("__Name__"),
-					Data: &types.AmazonRedshiftNodeData{
-						AccessType: ptr.String("__AccessType__"),
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Table: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogDatabase: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogTable: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-						CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-						TempDir:               ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						TablePrefix:         ptr.String("__TablePrefix__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						StagingTable: ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				EvaluateDataQualityMultiFrame: &types.EvaluateDataQualityMultiFrame{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AdditionalDataSources: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					Ruleset: ptr.String("__Ruleset__"),
-					PublishingOptions: &types.DQResultsPublishingOptions{
-						EvaluationContext:        ptr.String("__EvaluationContext__"),
-						ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-						CloudWatchMetricsEnabled: ptr.Bool(true),
-						ResultsPublishingEnabled: ptr.Bool(true),
-					},
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-						StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-					},
-				},
-				Recipe: &types.Recipe{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					RecipeReference: &types.RecipeReference{
-						RecipeArn:     ptr.String("__RecipeArn__"),
-						RecipeVersion: ptr.String("__RecipeVersion__"),
-					},
-					RecipeSteps: []types.RecipeStep{
-						{
-							Action: &types.RecipeAction{
-								Operation: ptr.String("__Operation__"),
-								Parameters: map[string]string{
-									"key0": "__Value__",
-									"key1": "__Value__",
-								},
-							},
-							ConditionExpressions: []types.ConditionExpression{
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-							},
-						},
-						{
-							Action: &types.RecipeAction{
-								Operation: ptr.String("__Operation__"),
-								Parameters: map[string]string{
-									"key0": "__Value__",
-									"key1": "__Value__",
-								},
-							},
-							ConditionExpressions: []types.ConditionExpression{
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-							},
-						},
-					},
-				},
-				SnowflakeSource: &types.SnowflakeSource{
-					Name: ptr.String("__Name__"),
-					Data: &types.SnowflakeNodeData{
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema:   ptr.String("__Schema__"),
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						TempDir:  ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						StagingTable:        ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						AutoPushdown: true,
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SnowflakeTarget: &types.SnowflakeTarget{
-					Name: ptr.String("__Name__"),
-					Data: &types.SnowflakeNodeData{
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema:   ptr.String("__Schema__"),
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						TempDir:  ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						StagingTable:        ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						AutoPushdown: true,
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				ConnectorDataSource: &types.ConnectorDataSource{
-					Name:           ptr.String("__Name__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					Data: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				ConnectorDataTarget: &types.ConnectorDataTarget{
-					Name:           ptr.String("__Name__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					Data: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				S3CatalogIcebergSource: &types.S3CatalogIcebergSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalIcebergOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogIcebergSource: &types.CatalogIcebergSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalIcebergOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3IcebergCatalogTarget: &types.S3IcebergCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				S3IcebergDirectTarget: &types.S3IcebergDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:   ptr.String("__Path__"),
-					Format: types.TargetFormat("json"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -7952,6 +5204,7 @@ func TestSerdeCheckSnapshot_CreateJob(t *testing.T) {
 	_, err := svc.CreateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7979,7 +5232,6 @@ func TestSerdeCheckSnapshot_CreateMLTransform(t *testing.T) {
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			{
@@ -7989,7 +5241,6 @@ func TestSerdeCheckSnapshot_CreateMLTransform(t *testing.T) {
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
@@ -8011,7 +5262,6 @@ func TestSerdeCheckSnapshot_CreateMLTransform(t *testing.T) {
 		MaxRetries:      ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		TransformEncryption: &types.TransformEncryption{
 			MlUserDataEncryption: &types.MLUserDataEncryption{
@@ -8030,6 +5280,7 @@ func TestSerdeCheckSnapshot_CreateMLTransform(t *testing.T) {
 	_, err := svc.CreateMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8064,7 +5315,6 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -8073,7 +5323,6 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -8091,7 +5340,6 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -8110,7 +5358,6 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -8123,7 +5370,6 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -8139,7 +5385,6 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -8153,6 +5398,7 @@ func TestSerdeCheckSnapshot_CreatePartition(t *testing.T) {
 	_, err := svc.CreatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8190,6 +5436,7 @@ func TestSerdeCheckSnapshot_CreatePartitionIndex(t *testing.T) {
 	_, err := svc.CreatePartitionIndex(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8211,7 +5458,6 @@ func TestSerdeCheckSnapshot_CreateRegistry(t *testing.T) {
 		Description:  ptr.String("__Description__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -8223,6 +5469,7 @@ func TestSerdeCheckSnapshot_CreateRegistry(t *testing.T) {
 	_, err := svc.CreateRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8250,7 +5497,6 @@ func TestSerdeCheckSnapshot_CreateSchema(t *testing.T) {
 		Description:   ptr.String("__Description__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		SchemaDefinition: ptr.String("__SchemaDefinition__"),
 	}
@@ -8263,6 +5509,7 @@ func TestSerdeCheckSnapshot_CreateSchema(t *testing.T) {
 	_, err := svc.CreateSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8339,6 +5586,7 @@ func TestSerdeCheckSnapshot_CreateScript(t *testing.T) {
 	_, err := svc.CreateScript(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8391,6 +5639,7 @@ func TestSerdeCheckSnapshot_CreateSecurityConfiguration(t *testing.T) {
 	_, err := svc.CreateSecurityConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8419,7 +5668,6 @@ func TestSerdeCheckSnapshot_CreateSession(t *testing.T) {
 		IdleTimeout: ptr.Int32(1),
 		DefaultArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Connections: &types.ConnectionsList{
 			Connections: []string{
@@ -8434,7 +5682,6 @@ func TestSerdeCheckSnapshot_CreateSession(t *testing.T) {
 		GlueVersion:           ptr.String("__GlueVersion__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		RequestOrigin: ptr.String("__RequestOrigin__"),
 		SessionType:   types.SessionType("LIVY"),
@@ -8448,6 +5695,7 @@ func TestSerdeCheckSnapshot_CreateSession(t *testing.T) {
 	_, err := svc.CreateSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8483,7 +5731,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -8492,7 +5739,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -8510,7 +5756,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -8529,7 +5774,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -8542,7 +5786,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -8563,7 +5806,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				{
@@ -8572,7 +5814,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -8581,7 +5822,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 			TableType:        ptr.String("__TableType__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetTable: &types.TableIdentifier{
 				CatalogId:    ptr.String("__CatalogId__"),
@@ -8709,7 +5949,6 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 					},
 					Properties: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -8724,6 +5963,7 @@ func TestSerdeCheckSnapshot_CreateTable(t *testing.T) {
 	_, err := svc.CreateTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8784,6 +6024,7 @@ func TestSerdeCheckSnapshot_CreateTableOptimizer(t *testing.T) {
 	_, err := svc.CreateTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8829,7 +6070,6 @@ func TestSerdeCheckSnapshot_CreateTrigger(t *testing.T) {
 				JobName: ptr.String("__JobName__"),
 				Arguments: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				Timeout:               ptr.Int32(1),
 				SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -8842,7 +6082,6 @@ func TestSerdeCheckSnapshot_CreateTrigger(t *testing.T) {
 				JobName: ptr.String("__JobName__"),
 				Arguments: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				Timeout:               ptr.Int32(1),
 				SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -8856,7 +6095,6 @@ func TestSerdeCheckSnapshot_CreateTrigger(t *testing.T) {
 		StartOnCreation: true,
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		EventBatchingCondition: &types.EventBatchingCondition{
 			BatchSize:   ptr.Int32(1),
@@ -8872,6 +6110,7 @@ func TestSerdeCheckSnapshot_CreateTrigger(t *testing.T) {
 	_, err := svc.CreateTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8902,27 +6141,9 @@ func TestSerdeCheckSnapshot_CreateUsageProfile(t *testing.T) {
 					MinValue: ptr.String("__MinValue__"),
 					MaxValue: ptr.String("__MaxValue__"),
 				},
-				"key1": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
 			},
 			JobConfiguration: map[string]types.ConfigurationObject{
 				"key0": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
-				"key1": {
 					DefaultValue: ptr.String("__DefaultValue__"),
 					AllowedValues: []string{
 						"__Member__",
@@ -8935,7 +6156,6 @@ func TestSerdeCheckSnapshot_CreateUsageProfile(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -8947,6 +6167,7 @@ func TestSerdeCheckSnapshot_CreateUsageProfile(t *testing.T) {
 	_, err := svc.CreateUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -8993,6 +6214,7 @@ func TestSerdeCheckSnapshot_CreateUserDefinedFunction(t *testing.T) {
 	_, err := svc.CreateUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9014,11 +6236,9 @@ func TestSerdeCheckSnapshot_CreateWorkflow(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		DefaultRunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		MaxConcurrentRuns: ptr.Int32(1),
 	}
@@ -9031,6 +6251,7 @@ func TestSerdeCheckSnapshot_CreateWorkflow(t *testing.T) {
 	_, err := svc.CreateWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9059,6 +6280,7 @@ func TestSerdeCheckSnapshot_DeleteAsset(t *testing.T) {
 	_, err := svc.DeleteAsset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9087,6 +6309,7 @@ func TestSerdeCheckSnapshot_DeleteAssetType(t *testing.T) {
 	_, err := svc.DeleteAssetType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9118,6 +6341,7 @@ func TestSerdeCheckSnapshot_DeleteAttachment(t *testing.T) {
 	_, err := svc.DeleteAttachment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9146,6 +6370,7 @@ func TestSerdeCheckSnapshot_DeleteBlueprint(t *testing.T) {
 	_, err := svc.DeleteBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9174,6 +6399,7 @@ func TestSerdeCheckSnapshot_DeleteCatalog(t *testing.T) {
 	_, err := svc.DeleteCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9202,6 +6428,7 @@ func TestSerdeCheckSnapshot_DeleteClassifier(t *testing.T) {
 	_, err := svc.DeleteClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9237,6 +6464,7 @@ func TestSerdeCheckSnapshot_DeleteColumnStatisticsForPartition(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsForPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9268,6 +6496,7 @@ func TestSerdeCheckSnapshot_DeleteColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsForTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9297,6 +6526,7 @@ func TestSerdeCheckSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9326,6 +6556,7 @@ func TestSerdeCheckSnapshot_DeleteConnection(t *testing.T) {
 	_, err := svc.DeleteConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9354,6 +6585,7 @@ func TestSerdeCheckSnapshot_DeleteConnectionType(t *testing.T) {
 	_, err := svc.DeleteConnectionType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9382,6 +6614,7 @@ func TestSerdeCheckSnapshot_DeleteCrawler(t *testing.T) {
 	_, err := svc.DeleteCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9410,6 +6643,7 @@ func TestSerdeCheckSnapshot_DeleteCustomEntityType(t *testing.T) {
 	_, err := svc.DeleteCustomEntityType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9439,6 +6673,7 @@ func TestSerdeCheckSnapshot_DeleteDatabase(t *testing.T) {
 	_, err := svc.DeleteDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9467,6 +6702,7 @@ func TestSerdeCheckSnapshot_DeleteDataQualityRuleset(t *testing.T) {
 	_, err := svc.DeleteDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9495,6 +6731,7 @@ func TestSerdeCheckSnapshot_DeleteDevEndpoint(t *testing.T) {
 	_, err := svc.DeleteDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9523,6 +6760,7 @@ func TestSerdeCheckSnapshot_DeleteFormType(t *testing.T) {
 	_, err := svc.DeleteFormType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9551,6 +6789,7 @@ func TestSerdeCheckSnapshot_DeleteGlossary(t *testing.T) {
 	_, err := svc.DeleteGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9579,6 +6818,7 @@ func TestSerdeCheckSnapshot_DeleteGlossaryTerm(t *testing.T) {
 	_, err := svc.DeleteGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9605,6 +6845,7 @@ func TestSerdeCheckSnapshot_DeleteGlueIdentityCenterConfiguration(t *testing.T) 
 	_, err := svc.DeleteGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9633,6 +6874,7 @@ func TestSerdeCheckSnapshot_DeleteIntegration(t *testing.T) {
 	_, err := svc.DeleteIntegration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9661,6 +6903,7 @@ func TestSerdeCheckSnapshot_DeleteIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.DeleteIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9690,6 +6933,7 @@ func TestSerdeCheckSnapshot_DeleteIntegrationTableProperties(t *testing.T) {
 	_, err := svc.DeleteIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9718,6 +6962,7 @@ func TestSerdeCheckSnapshot_DeleteJob(t *testing.T) {
 	_, err := svc.DeleteJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9746,6 +6991,7 @@ func TestSerdeCheckSnapshot_DeleteMLTransform(t *testing.T) {
 	_, err := svc.DeleteMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9780,6 +7026,7 @@ func TestSerdeCheckSnapshot_DeletePartition(t *testing.T) {
 	_, err := svc.DeletePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9811,6 +7058,7 @@ func TestSerdeCheckSnapshot_DeletePartitionIndex(t *testing.T) {
 	_, err := svc.DeletePartitionIndex(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9842,6 +7090,7 @@ func TestSerdeCheckSnapshot_DeleteRegistry(t *testing.T) {
 	_, err := svc.DeleteRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9871,6 +7120,7 @@ func TestSerdeCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9903,6 +7153,7 @@ func TestSerdeCheckSnapshot_DeleteSchema(t *testing.T) {
 	_, err := svc.DeleteSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9936,6 +7187,7 @@ func TestSerdeCheckSnapshot_DeleteSchemaVersions(t *testing.T) {
 	_, err := svc.DeleteSchemaVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9964,6 +7216,7 @@ func TestSerdeCheckSnapshot_DeleteSecurityConfiguration(t *testing.T) {
 	_, err := svc.DeleteSecurityConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -9993,6 +7246,7 @@ func TestSerdeCheckSnapshot_DeleteSession(t *testing.T) {
 	_, err := svc.DeleteSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10024,6 +7278,7 @@ func TestSerdeCheckSnapshot_DeleteTable(t *testing.T) {
 	_, err := svc.DeleteTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10055,6 +7310,7 @@ func TestSerdeCheckSnapshot_DeleteTableOptimizer(t *testing.T) {
 	_, err := svc.DeleteTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10086,6 +7342,7 @@ func TestSerdeCheckSnapshot_DeleteTableVersion(t *testing.T) {
 	_, err := svc.DeleteTableVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10114,6 +7371,7 @@ func TestSerdeCheckSnapshot_DeleteTrigger(t *testing.T) {
 	_, err := svc.DeleteTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10142,6 +7400,7 @@ func TestSerdeCheckSnapshot_DeleteUsageProfile(t *testing.T) {
 	_, err := svc.DeleteUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10172,6 +7431,7 @@ func TestSerdeCheckSnapshot_DeleteUserDefinedFunction(t *testing.T) {
 	_, err := svc.DeleteUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10200,6 +7460,7 @@ func TestSerdeCheckSnapshot_DeleteWorkflow(t *testing.T) {
 	_, err := svc.DeleteWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10228,6 +7489,7 @@ func TestSerdeCheckSnapshot_DescribeConnectionType(t *testing.T) {
 	_, err := svc.DescribeConnectionType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10260,6 +7522,7 @@ func TestSerdeCheckSnapshot_DescribeEntity(t *testing.T) {
 	_, err := svc.DescribeEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10291,6 +7554,7 @@ func TestSerdeCheckSnapshot_DescribeInboundIntegrations(t *testing.T) {
 	_, err := svc.DescribeInboundIntegrations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10337,6 +7601,7 @@ func TestSerdeCheckSnapshot_DescribeIntegrations(t *testing.T) {
 	_, err := svc.DescribeIntegrations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10370,6 +7635,7 @@ func TestSerdeCheckSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	_, err := svc.DisassociateGlossaryTerms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10398,6 +7664,7 @@ func TestSerdeCheckSnapshot_GetAsset(t *testing.T) {
 	_, err := svc.GetAsset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10426,6 +7693,7 @@ func TestSerdeCheckSnapshot_GetAssetType(t *testing.T) {
 	_, err := svc.GetAssetType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10456,6 +7724,7 @@ func TestSerdeCheckSnapshot_GetBlueprint(t *testing.T) {
 	_, err := svc.GetBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10485,6 +7754,7 @@ func TestSerdeCheckSnapshot_GetBlueprintRun(t *testing.T) {
 	_, err := svc.GetBlueprintRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10515,6 +7785,7 @@ func TestSerdeCheckSnapshot_GetBlueprintRuns(t *testing.T) {
 	_, err := svc.GetBlueprintRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10543,6 +7814,7 @@ func TestSerdeCheckSnapshot_GetCatalog(t *testing.T) {
 	_, err := svc.GetCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10571,6 +7843,7 @@ func TestSerdeCheckSnapshot_GetCatalogImportStatus(t *testing.T) {
 	_, err := svc.GetCatalogImportStatus(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10604,6 +7877,7 @@ func TestSerdeCheckSnapshot_GetCatalogs(t *testing.T) {
 	_, err := svc.GetCatalogs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10632,6 +7906,7 @@ func TestSerdeCheckSnapshot_GetClassifier(t *testing.T) {
 	_, err := svc.GetClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10661,6 +7936,7 @@ func TestSerdeCheckSnapshot_GetClassifiers(t *testing.T) {
 	_, err := svc.GetClassifiers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10699,6 +7975,7 @@ func TestSerdeCheckSnapshot_GetColumnStatisticsForPartition(t *testing.T) {
 	_, err := svc.GetColumnStatisticsForPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10733,6 +8010,7 @@ func TestSerdeCheckSnapshot_GetColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.GetColumnStatisticsForTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10761,6 +8039,7 @@ func TestSerdeCheckSnapshot_GetColumnStatisticsTaskRun(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10792,6 +8071,7 @@ func TestSerdeCheckSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10821,6 +8101,7 @@ func TestSerdeCheckSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10852,6 +8133,7 @@ func TestSerdeCheckSnapshot_GetConnection(t *testing.T) {
 	_, err := svc.GetConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10891,6 +8173,7 @@ func TestSerdeCheckSnapshot_GetConnections(t *testing.T) {
 	_, err := svc.GetConnections(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10919,6 +8202,7 @@ func TestSerdeCheckSnapshot_GetCrawler(t *testing.T) {
 	_, err := svc.GetCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10952,6 +8236,7 @@ func TestSerdeCheckSnapshot_GetCrawlerMetrics(t *testing.T) {
 	_, err := svc.GetCrawlerMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10981,6 +8266,7 @@ func TestSerdeCheckSnapshot_GetCrawlers(t *testing.T) {
 	_, err := svc.GetCrawlers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11009,6 +8295,7 @@ func TestSerdeCheckSnapshot_GetCustomEntityType(t *testing.T) {
 	_, err := svc.GetCustomEntityType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11039,6 +8326,7 @@ func TestSerdeCheckSnapshot_GetDashboardUrl(t *testing.T) {
 	_, err := svc.GetDashboardUrl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11068,6 +8356,7 @@ func TestSerdeCheckSnapshot_GetDatabase(t *testing.T) {
 	_, err := svc.GetDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11103,6 +8392,7 @@ func TestSerdeCheckSnapshot_GetDatabases(t *testing.T) {
 	_, err := svc.GetDatabases(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11131,6 +8421,7 @@ func TestSerdeCheckSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.GetDataCatalogEncryptionSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11159,6 +8450,7 @@ func TestSerdeCheckSnapshot_GetDataflowGraph(t *testing.T) {
 	_, err := svc.GetDataflowGraph(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11188,6 +8480,7 @@ func TestSerdeCheckSnapshot_GetDataQualityModel(t *testing.T) {
 	_, err := svc.GetDataQualityModel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11217,6 +8510,7 @@ func TestSerdeCheckSnapshot_GetDataQualityModelResult(t *testing.T) {
 	_, err := svc.GetDataQualityModelResult(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11245,6 +8539,7 @@ func TestSerdeCheckSnapshot_GetDataQualityResult(t *testing.T) {
 	_, err := svc.GetDataQualityResult(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11273,6 +8568,7 @@ func TestSerdeCheckSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	_, err := svc.GetDataQualityRuleRecommendationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11301,6 +8597,7 @@ func TestSerdeCheckSnapshot_GetDataQualityRuleset(t *testing.T) {
 	_, err := svc.GetDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11329,6 +8626,7 @@ func TestSerdeCheckSnapshot_GetDataQualityRulesetEvaluationRun(t *testing.T) {
 	_, err := svc.GetDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11357,6 +8655,7 @@ func TestSerdeCheckSnapshot_GetDevEndpoint(t *testing.T) {
 	_, err := svc.GetDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11386,6 +8685,7 @@ func TestSerdeCheckSnapshot_GetDevEndpoints(t *testing.T) {
 	_, err := svc.GetDevEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11410,7 +8710,6 @@ func TestSerdeCheckSnapshot_GetEntityRecords(t *testing.T) {
 		DataStoreApiVersion: ptr.String("__DataStoreApiVersion__"),
 		ConnectionOptions: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		FilterPredicate: ptr.String("__FilterPredicate__"),
 		Limit:           ptr.Int64(1),
@@ -11429,6 +8728,7 @@ func TestSerdeCheckSnapshot_GetEntityRecords(t *testing.T) {
 	_, err := svc.GetEntityRecords(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11457,6 +8757,7 @@ func TestSerdeCheckSnapshot_GetFormType(t *testing.T) {
 	_, err := svc.GetFormType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11485,6 +8786,7 @@ func TestSerdeCheckSnapshot_GetGlossary(t *testing.T) {
 	_, err := svc.GetGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11513,6 +8815,7 @@ func TestSerdeCheckSnapshot_GetGlossaryTerm(t *testing.T) {
 	_, err := svc.GetGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11539,6 +8842,7 @@ func TestSerdeCheckSnapshot_GetGlueIdentityCenterConfiguration(t *testing.T) {
 	_, err := svc.GetGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11567,6 +8871,7 @@ func TestSerdeCheckSnapshot_GetIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.GetIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11596,6 +8901,7 @@ func TestSerdeCheckSnapshot_GetIntegrationTableProperties(t *testing.T) {
 	_, err := svc.GetIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11624,6 +8930,7 @@ func TestSerdeCheckSnapshot_GetJob(t *testing.T) {
 	_, err := svc.GetJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11653,6 +8960,7 @@ func TestSerdeCheckSnapshot_GetJobBookmark(t *testing.T) {
 	_, err := svc.GetJobBookmark(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11683,6 +8991,7 @@ func TestSerdeCheckSnapshot_GetJobRun(t *testing.T) {
 	_, err := svc.GetJobRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11713,6 +9022,7 @@ func TestSerdeCheckSnapshot_GetJobRuns(t *testing.T) {
 	_, err := svc.GetJobRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11742,6 +9052,7 @@ func TestSerdeCheckSnapshot_GetJobs(t *testing.T) {
 	_, err := svc.GetJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11821,6 +9132,7 @@ func TestSerdeCheckSnapshot_GetMapping(t *testing.T) {
 	_, err := svc.GetMapping(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11850,6 +9162,7 @@ func TestSerdeCheckSnapshot_GetMaterializedViewRefreshTaskRun(t *testing.T) {
 	_, err := svc.GetMaterializedViewRefreshTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11879,6 +9192,7 @@ func TestSerdeCheckSnapshot_GetMLTaskRun(t *testing.T) {
 	_, err := svc.GetMLTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11919,6 +9233,7 @@ func TestSerdeCheckSnapshot_GetMLTaskRuns(t *testing.T) {
 	_, err := svc.GetMLTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11947,6 +9262,7 @@ func TestSerdeCheckSnapshot_GetMLTransform(t *testing.T) {
 	_, err := svc.GetMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12000,6 +9316,7 @@ func TestSerdeCheckSnapshot_GetMLTransforms(t *testing.T) {
 	_, err := svc.GetMLTransforms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12042,6 +9359,7 @@ func TestSerdeCheckSnapshot_GetPartition(t *testing.T) {
 	_, err := svc.GetPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12073,6 +9391,7 @@ func TestSerdeCheckSnapshot_GetPartitionIndexes(t *testing.T) {
 	_, err := svc.GetPartitionIndexes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12121,6 +9440,7 @@ func TestSerdeCheckSnapshot_GetPartitions(t *testing.T) {
 	_, err := svc.GetPartitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12211,7 +9531,6 @@ func TestSerdeCheckSnapshot_GetPlan(t *testing.T) {
 		Language: types.Language("PYTHON"),
 		AdditionalPlanOptionsMap: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -12223,6 +9542,7 @@ func TestSerdeCheckSnapshot_GetPlan(t *testing.T) {
 	_, err := svc.GetPlan(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12254,6 +9574,7 @@ func TestSerdeCheckSnapshot_GetRegistry(t *testing.T) {
 	_, err := svc.GetRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12283,6 +9604,7 @@ func TestSerdeCheckSnapshot_GetResourcePolicies(t *testing.T) {
 	_, err := svc.GetResourcePolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12311,6 +9633,7 @@ func TestSerdeCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12343,6 +9666,7 @@ func TestSerdeCheckSnapshot_GetSchema(t *testing.T) {
 	_, err := svc.GetSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12376,6 +9700,7 @@ func TestSerdeCheckSnapshot_GetSchemaByDefinition(t *testing.T) {
 	_, err := svc.GetSchemaByDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12413,6 +9738,7 @@ func TestSerdeCheckSnapshot_GetSchemaVersion(t *testing.T) {
 	_, err := svc.GetSchemaVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12454,6 +9780,7 @@ func TestSerdeCheckSnapshot_GetSchemaVersionsDiff(t *testing.T) {
 	_, err := svc.GetSchemaVersionsDiff(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12482,6 +9809,7 @@ func TestSerdeCheckSnapshot_GetSecurityConfiguration(t *testing.T) {
 	_, err := svc.GetSecurityConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12511,6 +9839,7 @@ func TestSerdeCheckSnapshot_GetSecurityConfigurations(t *testing.T) {
 	_, err := svc.GetSecurityConfigurations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12540,6 +9869,7 @@ func TestSerdeCheckSnapshot_GetSession(t *testing.T) {
 	_, err := svc.GetSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12568,6 +9898,7 @@ func TestSerdeCheckSnapshot_GetSessionEndpoint(t *testing.T) {
 	_, err := svc.GetSessionEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12598,6 +9929,7 @@ func TestSerdeCheckSnapshot_GetStatement(t *testing.T) {
 	_, err := svc.GetStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12643,6 +9975,7 @@ func TestSerdeCheckSnapshot_GetTable(t *testing.T) {
 	_, err := svc.GetTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12674,6 +10007,7 @@ func TestSerdeCheckSnapshot_GetTableOptimizer(t *testing.T) {
 	_, err := svc.GetTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12721,6 +10055,7 @@ func TestSerdeCheckSnapshot_GetTables(t *testing.T) {
 	_, err := svc.GetTables(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12760,6 +10095,7 @@ func TestSerdeCheckSnapshot_GetTableVersion(t *testing.T) {
 	_, err := svc.GetTableVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12800,6 +10136,7 @@ func TestSerdeCheckSnapshot_GetTableVersions(t *testing.T) {
 	_, err := svc.GetTableVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12828,6 +10165,7 @@ func TestSerdeCheckSnapshot_GetTags(t *testing.T) {
 	_, err := svc.GetTags(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12856,6 +10194,7 @@ func TestSerdeCheckSnapshot_GetTrigger(t *testing.T) {
 	_, err := svc.GetTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12886,6 +10225,7 @@ func TestSerdeCheckSnapshot_GetTriggers(t *testing.T) {
 	_, err := svc.GetTriggers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12930,7 +10270,6 @@ func TestSerdeCheckSnapshot_GetUnfilteredPartitionMetadata(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -12943,6 +10282,7 @@ func TestSerdeCheckSnapshot_GetUnfilteredPartitionMetadata(t *testing.T) {
 	_, err := svc.GetUnfilteredPartitionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12990,7 +10330,6 @@ func TestSerdeCheckSnapshot_GetUnfilteredPartitionsMetadata(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -13003,6 +10342,7 @@ func TestSerdeCheckSnapshot_GetUnfilteredPartitionsMetadata(t *testing.T) {
 	_, err := svc.GetUnfilteredPartitionsMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13053,7 +10393,6 @@ func TestSerdeCheckSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -13066,6 +10405,7 @@ func TestSerdeCheckSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 	_, err := svc.GetUnfilteredTableMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13094,6 +10434,7 @@ func TestSerdeCheckSnapshot_GetUsageProfile(t *testing.T) {
 	_, err := svc.GetUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13124,6 +10465,7 @@ func TestSerdeCheckSnapshot_GetUserDefinedFunction(t *testing.T) {
 	_, err := svc.GetUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13157,6 +10499,7 @@ func TestSerdeCheckSnapshot_GetUserDefinedFunctions(t *testing.T) {
 	_, err := svc.GetUserDefinedFunctions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13186,6 +10529,7 @@ func TestSerdeCheckSnapshot_GetWorkflow(t *testing.T) {
 	_, err := svc.GetWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13216,6 +10560,7 @@ func TestSerdeCheckSnapshot_GetWorkflowRun(t *testing.T) {
 	_, err := svc.GetWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13245,6 +10590,7 @@ func TestSerdeCheckSnapshot_GetWorkflowRunProperties(t *testing.T) {
 	_, err := svc.GetWorkflowRunProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13276,6 +10622,7 @@ func TestSerdeCheckSnapshot_GetWorkflowRuns(t *testing.T) {
 	_, err := svc.GetWorkflowRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13304,6 +10651,7 @@ func TestSerdeCheckSnapshot_ImportCatalogToGlue(t *testing.T) {
 	_, err := svc.ImportCatalogToGlue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13333,6 +10681,7 @@ func TestSerdeCheckSnapshot_ListAssetTypes(t *testing.T) {
 	_, err := svc.ListAssetTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13354,7 +10703,6 @@ func TestSerdeCheckSnapshot_ListBlueprints(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -13366,6 +10714,7 @@ func TestSerdeCheckSnapshot_ListBlueprints(t *testing.T) {
 	_, err := svc.ListBlueprints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13395,6 +10744,7 @@ func TestSerdeCheckSnapshot_ListColumnStatisticsTaskRuns(t *testing.T) {
 	_, err := svc.ListColumnStatisticsTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13424,6 +10774,7 @@ func TestSerdeCheckSnapshot_ListConnectionTypes(t *testing.T) {
 	_, err := svc.ListConnectionTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13445,7 +10796,6 @@ func TestSerdeCheckSnapshot_ListCrawlers(t *testing.T) {
 		NextToken:  ptr.String("__NextToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -13457,6 +10807,7 @@ func TestSerdeCheckSnapshot_ListCrawlers(t *testing.T) {
 	_, err := svc.ListCrawlers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13499,6 +10850,7 @@ func TestSerdeCheckSnapshot_ListCrawls(t *testing.T) {
 	_, err := svc.ListCrawls(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13520,7 +10872,6 @@ func TestSerdeCheckSnapshot_ListCustomEntityTypes(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -13532,6 +10883,7 @@ func TestSerdeCheckSnapshot_ListCustomEntityTypes(t *testing.T) {
 	_, err := svc.ListCustomEntityTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13558,7 +10910,6 @@ func TestSerdeCheckSnapshot_ListDataQualityResults(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -13568,7 +10919,6 @@ func TestSerdeCheckSnapshot_ListDataQualityResults(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -13590,6 +10940,7 @@ func TestSerdeCheckSnapshot_ListDataQualityResults(t *testing.T) {
 	_, err := svc.ListDataQualityResults(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13616,7 +10967,6 @@ func TestSerdeCheckSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) 
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -13626,7 +10976,6 @@ func TestSerdeCheckSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) 
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -13646,6 +10995,7 @@ func TestSerdeCheckSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) 
 	_, err := svc.ListDataQualityRuleRecommendationRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13672,7 +11022,6 @@ func TestSerdeCheckSnapshot_ListDataQualityRulesetEvaluationRuns(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -13682,7 +11031,6 @@ func TestSerdeCheckSnapshot_ListDataQualityRulesetEvaluationRuns(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -13703,6 +11051,7 @@ func TestSerdeCheckSnapshot_ListDataQualityRulesetEvaluationRuns(t *testing.T) {
 	_, err := svc.ListDataQualityRulesetEvaluationRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13737,7 +11086,6 @@ func TestSerdeCheckSnapshot_ListDataQualityRulesets(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -13749,6 +11097,7 @@ func TestSerdeCheckSnapshot_ListDataQualityRulesets(t *testing.T) {
 	_, err := svc.ListDataQualityRulesets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13784,6 +11133,7 @@ func TestSerdeCheckSnapshot_ListDataQualityStatisticAnnotations(t *testing.T) {
 	_, err := svc.ListDataQualityStatisticAnnotations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13819,6 +11169,7 @@ func TestSerdeCheckSnapshot_ListDataQualityStatistics(t *testing.T) {
 	_, err := svc.ListDataQualityStatistics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13840,7 +11191,6 @@ func TestSerdeCheckSnapshot_ListDevEndpoints(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -13852,6 +11202,7 @@ func TestSerdeCheckSnapshot_ListDevEndpoints(t *testing.T) {
 	_, err := svc.ListDevEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13884,6 +11235,7 @@ func TestSerdeCheckSnapshot_ListEntities(t *testing.T) {
 	_, err := svc.ListEntities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13913,6 +11265,7 @@ func TestSerdeCheckSnapshot_ListFormTypes(t *testing.T) {
 	_, err := svc.ListFormTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13942,6 +11295,7 @@ func TestSerdeCheckSnapshot_ListGlossaries(t *testing.T) {
 	_, err := svc.ListGlossaries(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13972,6 +11326,7 @@ func TestSerdeCheckSnapshot_ListGlossaryTerms(t *testing.T) {
 	_, err := svc.ListGlossaryTerms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14017,6 +11372,7 @@ func TestSerdeCheckSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	_, err := svc.ListIntegrationResourceProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14048,6 +11404,7 @@ func TestSerdeCheckSnapshot_ListIterableForms(t *testing.T) {
 	_, err := svc.ListIterableForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14069,7 +11426,6 @@ func TestSerdeCheckSnapshot_ListJobs(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -14081,6 +11437,7 @@ func TestSerdeCheckSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14113,6 +11470,7 @@ func TestSerdeCheckSnapshot_ListMaterializedViewRefreshTaskRuns(t *testing.T) {
 	_, err := svc.ListMaterializedViewRefreshTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14158,7 +11516,6 @@ func TestSerdeCheckSnapshot_ListMLTransforms(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -14170,6 +11527,7 @@ func TestSerdeCheckSnapshot_ListMLTransforms(t *testing.T) {
 	_, err := svc.ListMLTransforms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14199,6 +11557,7 @@ func TestSerdeCheckSnapshot_ListRegistries(t *testing.T) {
 	_, err := svc.ListRegistries(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14232,6 +11591,7 @@ func TestSerdeCheckSnapshot_ListSchemas(t *testing.T) {
 	_, err := svc.ListSchemas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14266,6 +11626,7 @@ func TestSerdeCheckSnapshot_ListSchemaVersions(t *testing.T) {
 	_, err := svc.ListSchemaVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14287,7 +11648,6 @@ func TestSerdeCheckSnapshot_ListSessions(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		RequestOrigin: ptr.String("__RequestOrigin__"),
 	}
@@ -14300,6 +11660,7 @@ func TestSerdeCheckSnapshot_ListSessions(t *testing.T) {
 	_, err := svc.ListSessions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14330,6 +11691,7 @@ func TestSerdeCheckSnapshot_ListStatements(t *testing.T) {
 	_, err := svc.ListStatements(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14363,6 +11725,7 @@ func TestSerdeCheckSnapshot_ListTableOptimizerRuns(t *testing.T) {
 	_, err := svc.ListTableOptimizerRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14385,7 +11748,6 @@ func TestSerdeCheckSnapshot_ListTriggers(t *testing.T) {
 		MaxResults:       ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -14397,6 +11759,7 @@ func TestSerdeCheckSnapshot_ListTriggers(t *testing.T) {
 	_, err := svc.ListTriggers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14426,6 +11789,7 @@ func TestSerdeCheckSnapshot_ListUsageProfiles(t *testing.T) {
 	_, err := svc.ListUsageProfiles(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14455,6 +11819,7 @@ func TestSerdeCheckSnapshot_ListWorkflows(t *testing.T) {
 	_, err := svc.ListWorkflows(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14479,7 +11844,6 @@ func TestSerdeCheckSnapshot_ModifyIntegration(t *testing.T) {
 			RefreshInterval: ptr.String("__RefreshInterval__"),
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			ContinuousSync: ptr.Bool(true),
 		},
@@ -14494,6 +11858,7 @@ func TestSerdeCheckSnapshot_ModifyIntegration(t *testing.T) {
 	_, err := svc.ModifyIntegration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14520,10 +11885,6 @@ func TestSerdeCheckSnapshot_PutAsset(t *testing.T) {
 				FormTypeId: ptr.String("__FormTypeId__"),
 				Content:    ptr.String("__Content__"),
 			},
-			"key1": {
-				FormTypeId: ptr.String("__FormTypeId__"),
-				Content:    ptr.String("__Content__"),
-			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -14536,6 +11897,7 @@ func TestSerdeCheckSnapshot_PutAsset(t *testing.T) {
 	_, err := svc.PutAsset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14558,9 +11920,6 @@ func TestSerdeCheckSnapshot_PutAssetType(t *testing.T) {
 			"key0": {
 				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
 			},
-			"key1": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -14573,6 +11932,7 @@ func TestSerdeCheckSnapshot_PutAssetType(t *testing.T) {
 	_, err := svc.PutAssetType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14607,6 +11967,7 @@ func TestSerdeCheckSnapshot_PutAttachment(t *testing.T) {
 	_, err := svc.PutAttachment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14646,6 +12007,7 @@ func TestSerdeCheckSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14675,6 +12037,7 @@ func TestSerdeCheckSnapshot_PutDataQualityProfileAnnotation(t *testing.T) {
 	_, err := svc.PutDataQualityProfileAnnotation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14705,6 +12068,7 @@ func TestSerdeCheckSnapshot_PutFormType(t *testing.T) {
 	_, err := svc.PutFormType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14737,6 +12101,7 @@ func TestSerdeCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14778,6 +12143,7 @@ func TestSerdeCheckSnapshot_PutSchemaVersionMetadata(t *testing.T) {
 	_, err := svc.PutSchemaVersionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14799,7 +12165,6 @@ func TestSerdeCheckSnapshot_PutWorkflowRunProperties(t *testing.T) {
 		RunId: ptr.String("__RunId__"),
 		RunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -14811,6 +12176,7 @@ func TestSerdeCheckSnapshot_PutWorkflowRunProperties(t *testing.T) {
 	_, err := svc.PutWorkflowRunProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -14860,6 +12226,7 @@ func TestSerdeCheckSnapshot_QuerySchemaVersionMetadata(t *testing.T) {
 	_, err := svc.QuerySchemaVersionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15477,105 +12844,12 @@ func TestSerdeCheckSnapshot_RegisterConnectionType(t *testing.T) {
 							Name:          ptr.String("__Name__"),
 							FieldDataType: types.FieldDataType("INT"),
 						},
-						"key1": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
-						},
-					},
-				},
-				"key1": {
-					SourceConfiguration: &types.SourceConfiguration{
-						RequestMethod: types.HTTPMethod("GET"),
-						RequestPath:   ptr.String("__RequestPath__"),
-						RequestParameters: []types.ConnectorProperty{
-							{
-								Name:         ptr.String("__Name__"),
-								KeyOverride:  ptr.String("__KeyOverride__"),
-								Required:     ptr.Bool(true),
-								DefaultValue: ptr.String("__DefaultValue__"),
-								AllowedValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-								PropertyLocation: types.PropertyLocation("HEADER"),
-								PropertyType:     types.PropertyType("USER_INPUT"),
-							},
-							{
-								Name:         ptr.String("__Name__"),
-								KeyOverride:  ptr.String("__KeyOverride__"),
-								Required:     ptr.Bool(true),
-								DefaultValue: ptr.String("__DefaultValue__"),
-								AllowedValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-								PropertyLocation: types.PropertyLocation("HEADER"),
-								PropertyType:     types.PropertyType("USER_INPUT"),
-							},
-						},
-						ResponseConfiguration: &types.ResponseConfiguration{
-							ResultPath: ptr.String("__ResultPath__"),
-							ErrorPath:  ptr.String("__ErrorPath__"),
-						},
-						PaginationConfiguration: &types.PaginationConfiguration{
-							CursorConfiguration: &types.CursorConfiguration{
-								NextPage: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-								LimitParameter: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-							},
-							OffsetConfiguration: &types.OffsetConfiguration{
-								OffsetParameter: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-								LimitParameter: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-							},
-						},
-					},
-					Schema: map[string]types.FieldDefinition{
-						"key0": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
-						},
-						"key1": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
-						},
 					},
 				},
 			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -15587,6 +12861,7 @@ func TestSerdeCheckSnapshot_RegisterConnectionType(t *testing.T) {
 	_, err := svc.RegisterConnectionType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15620,6 +12895,7 @@ func TestSerdeCheckSnapshot_RegisterSchemaVersion(t *testing.T) {
 	_, err := svc.RegisterSchemaVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15661,6 +12937,7 @@ func TestSerdeCheckSnapshot_RemoveSchemaVersionMetadata(t *testing.T) {
 	_, err := svc.RemoveSchemaVersionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15690,6 +12967,7 @@ func TestSerdeCheckSnapshot_ResetJobBookmark(t *testing.T) {
 	_, err := svc.ResetJobBookmark(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15723,6 +13001,7 @@ func TestSerdeCheckSnapshot_ResumeWorkflowRun(t *testing.T) {
 	_, err := svc.ResumeWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15753,6 +13032,7 @@ func TestSerdeCheckSnapshot_RunStatement(t *testing.T) {
 	_, err := svc.RunStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15779,8 +13059,24 @@ func TestSerdeCheckSnapshot_SearchAssets(t *testing.T) {
 		},
 		FilterClause: &types.SearchFilterClauseMemberAndAllFilters{
 			Value: []types.SearchFilterClause{
-				nil,
-				nil,
+				&types.SearchFilterClauseMemberAttributeFilter{
+					Value: types.SearchAttributeFilter{
+						Attribute: ptr.String("__Attribute__"),
+						Operator:  types.SearchFilterOperator("equals"),
+						Value: &types.SearchFilterValueMemberStringValue{
+							Value: "__SearchFilterValueMemberStringValue__",
+						},
+					},
+				},
+				&types.SearchFilterClauseMemberAttributeFilter{
+					Value: types.SearchAttributeFilter{
+						Attribute: ptr.String("__Attribute__"),
+						Operator:  types.SearchFilterOperator("equals"),
+						Value: &types.SearchFilterValueMemberStringValue{
+							Value: "__SearchFilterValueMemberStringValue__",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -15793,6 +13089,7 @@ func TestSerdeCheckSnapshot_SearchAssets(t *testing.T) {
 	_, err := svc.SearchAssets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15848,6 +13145,7 @@ func TestSerdeCheckSnapshot_SearchTables(t *testing.T) {
 	_, err := svc.SearchTables(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15878,6 +13176,7 @@ func TestSerdeCheckSnapshot_StartBlueprintRun(t *testing.T) {
 	_, err := svc.StartBlueprintRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15915,6 +13214,7 @@ func TestSerdeCheckSnapshot_StartColumnStatisticsTaskRun(t *testing.T) {
 	_, err := svc.StartColumnStatisticsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15944,6 +13244,7 @@ func TestSerdeCheckSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T) {
 	_, err := svc.StartColumnStatisticsTaskRunSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15972,6 +13273,7 @@ func TestSerdeCheckSnapshot_StartCrawler(t *testing.T) {
 	_, err := svc.StartCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16000,6 +13302,7 @@ func TestSerdeCheckSnapshot_StartCrawlerSchedule(t *testing.T) {
 	_, err := svc.StartCrawlerSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16025,7 +13328,6 @@ func TestSerdeCheckSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T) 
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -16035,7 +13337,6 @@ func TestSerdeCheckSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T) 
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 			},
@@ -16056,6 +13357,7 @@ func TestSerdeCheckSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T) 
 	_, err := svc.StartDataQualityRuleRecommendationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16081,7 +13383,6 @@ func TestSerdeCheckSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) {
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -16091,7 +13392,6 @@ func TestSerdeCheckSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) {
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 			},
@@ -16119,7 +13419,6 @@ func TestSerdeCheckSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -16129,30 +13428,6 @@ func TestSerdeCheckSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
-				},
-			},
-			"key1": {
-				GlueTable: &types.GlueTable{
-					DatabaseName:   ptr.String("__DatabaseName__"),
-					TableName:      ptr.String("__TableName__"),
-					CatalogId:      ptr.String("__CatalogId__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-				},
-				DataQualityGlueTable: &types.DataQualityGlueTable{
-					DatabaseName:   ptr.String("__DatabaseName__"),
-					TableName:      ptr.String("__TableName__"),
-					CatalogId:      ptr.String("__CatalogId__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -16168,6 +13443,7 @@ func TestSerdeCheckSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) {
 	_, err := svc.StartDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16197,6 +13473,7 @@ func TestSerdeCheckSnapshot_StartExportLabelsTaskRun(t *testing.T) {
 	_, err := svc.StartExportLabelsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16227,6 +13504,7 @@ func TestSerdeCheckSnapshot_StartImportLabelsTaskRun(t *testing.T) {
 	_, err := svc.StartImportLabelsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16249,7 +13527,6 @@ func TestSerdeCheckSnapshot_StartJobRun(t *testing.T) {
 		JobRunId:             ptr.String("__JobRunId__"),
 		Arguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		AllocatedCapacity:     1,
 		Timeout:               ptr.Int32(1),
@@ -16272,6 +13549,7 @@ func TestSerdeCheckSnapshot_StartJobRun(t *testing.T) {
 	_, err := svc.StartJobRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16303,6 +13581,7 @@ func TestSerdeCheckSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16331,6 +13610,7 @@ func TestSerdeCheckSnapshot_StartMLEvaluationTaskRun(t *testing.T) {
 	_, err := svc.StartMLEvaluationTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16360,6 +13640,7 @@ func TestSerdeCheckSnapshot_StartMLLabelingSetGenerationTaskRun(t *testing.T) {
 	_, err := svc.StartMLLabelingSetGenerationTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16388,6 +13669,7 @@ func TestSerdeCheckSnapshot_StartTrigger(t *testing.T) {
 	_, err := svc.StartTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16408,7 +13690,6 @@ func TestSerdeCheckSnapshot_StartWorkflowRun(t *testing.T) {
 		Name: ptr.String("__Name__"),
 		RunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -16420,6 +13701,7 @@ func TestSerdeCheckSnapshot_StartWorkflowRun(t *testing.T) {
 	_, err := svc.StartWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16449,6 +13731,7 @@ func TestSerdeCheckSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	_, err := svc.StopColumnStatisticsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16478,6 +13761,7 @@ func TestSerdeCheckSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T) {
 	_, err := svc.StopColumnStatisticsTaskRunSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16506,6 +13790,7 @@ func TestSerdeCheckSnapshot_StopCrawler(t *testing.T) {
 	_, err := svc.StopCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16534,6 +13819,7 @@ func TestSerdeCheckSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16564,6 +13850,7 @@ func TestSerdeCheckSnapshot_StopMaterializedViewRefreshTaskRun(t *testing.T) {
 	_, err := svc.StopMaterializedViewRefreshTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16593,6 +13880,7 @@ func TestSerdeCheckSnapshot_StopSession(t *testing.T) {
 	_, err := svc.StopSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16621,6 +13909,7 @@ func TestSerdeCheckSnapshot_StopTrigger(t *testing.T) {
 	_, err := svc.StopTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16650,6 +13939,7 @@ func TestSerdeCheckSnapshot_StopWorkflowRun(t *testing.T) {
 	_, err := svc.StopWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16670,7 +13960,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		TagsToAdd: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -16682,6 +13971,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16705,7 +13995,6 @@ func TestSerdeCheckSnapshot_TestConnection(t *testing.T) {
 			ConnectionType: types.ConnectionType("JDBC"),
 			ConnectionProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			AuthenticationConfiguration: &types.AuthenticationConfigurationInput{
 				AuthenticationType: types.AuthenticationType("BASIC"),
@@ -16718,7 +14007,6 @@ func TestSerdeCheckSnapshot_TestConnection(t *testing.T) {
 					TokenUrl: ptr.String("__TokenUrl__"),
 					TokenUrlParametersMap: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AuthorizationCodeProperties: &types.AuthorizationCodeProperties{
 						AuthorizationCode: ptr.String("__AuthorizationCode__"),
@@ -16739,7 +14027,6 @@ func TestSerdeCheckSnapshot_TestConnection(t *testing.T) {
 				},
 				CustomAuthenticationCredentials: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
@@ -16753,6 +14040,7 @@ func TestSerdeCheckSnapshot_TestConnection(t *testing.T) {
 	_, err := svc.TestConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16785,6 +14073,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16815,6 +14104,7 @@ func TestSerdeCheckSnapshot_UpdateBlueprint(t *testing.T) {
 	_, err := svc.UpdateBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16842,7 +14132,6 @@ func TestSerdeCheckSnapshot_UpdateCatalog(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetRedshiftCatalog: &types.TargetRedshiftCatalog{
 				CatalogArn: ptr.String("__CatalogArn__"),
@@ -16858,20 +14147,16 @@ func TestSerdeCheckSnapshot_UpdateCatalog(t *testing.T) {
 					RoleArn: ptr.String("__RoleArn__"),
 					Compaction: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Retention: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OrphanFileDeletion: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CustomProperties: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
@@ -16927,6 +14212,7 @@ func TestSerdeCheckSnapshot_UpdateCatalog(t *testing.T) {
 	_, err := svc.UpdateCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -16987,6 +14273,7 @@ func TestSerdeCheckSnapshot_UpdateClassifier(t *testing.T) {
 	_, err := svc.UpdateClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17131,6 +14418,7 @@ func TestSerdeCheckSnapshot_UpdateColumnStatisticsForPartition(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsForPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17271,6 +14559,7 @@ func TestSerdeCheckSnapshot_UpdateColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsForTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17309,6 +14598,7 @@ func TestSerdeCheckSnapshot_UpdateColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17338,19 +14628,15 @@ func TestSerdeCheckSnapshot_UpdateConnection(t *testing.T) {
 			},
 			ConnectionProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			SparkProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			AthenaProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PythonProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PhysicalConnectionRequirements: &types.PhysicalConnectionRequirements{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -17371,7 +14657,6 @@ func TestSerdeCheckSnapshot_UpdateConnection(t *testing.T) {
 					TokenUrl: ptr.String("__TokenUrl__"),
 					TokenUrlParametersMap: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AuthorizationCodeProperties: &types.AuthorizationCodeProperties{
 						AuthorizationCode: ptr.String("__AuthorizationCode__"),
@@ -17392,7 +14677,6 @@ func TestSerdeCheckSnapshot_UpdateConnection(t *testing.T) {
 				},
 				CustomAuthenticationCredentials: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ValidateCredentials: true,
@@ -17411,6 +14695,7 @@ func TestSerdeCheckSnapshot_UpdateConnection(t *testing.T) {
 	_, err := svc.UpdateConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17634,6 +14919,7 @@ func TestSerdeCheckSnapshot_UpdateCrawler(t *testing.T) {
 	_, err := svc.UpdateCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17663,6 +14949,7 @@ func TestSerdeCheckSnapshot_UpdateCrawlerSchedule(t *testing.T) {
 	_, err := svc.UpdateCrawlerSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17688,7 +14975,6 @@ func TestSerdeCheckSnapshot_UpdateDatabase(t *testing.T) {
 			LocationUri: ptr.String("__LocationUri__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
 				{
@@ -17731,6 +15017,7 @@ func TestSerdeCheckSnapshot_UpdateDatabase(t *testing.T) {
 	_, err := svc.UpdateDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17761,6 +15048,7 @@ func TestSerdeCheckSnapshot_UpdateDataQualityRuleset(t *testing.T) {
 	_, err := svc.UpdateDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17799,7 +15087,6 @@ func TestSerdeCheckSnapshot_UpdateDevEndpoint(t *testing.T) {
 		},
 		AddArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -17811,6 +15098,7 @@ func TestSerdeCheckSnapshot_UpdateDevEndpoint(t *testing.T) {
 	_, err := svc.UpdateDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17842,6 +15130,7 @@ func TestSerdeCheckSnapshot_UpdateGlossary(t *testing.T) {
 	_, err := svc.UpdateGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17874,6 +15163,7 @@ func TestSerdeCheckSnapshot_UpdateGlossaryTerm(t *testing.T) {
 	_, err := svc.UpdateGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17906,6 +15196,7 @@ func TestSerdeCheckSnapshot_UpdateGlueIdentityCenterConfiguration(t *testing.T) 
 	_, err := svc.UpdateGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -17943,6 +15234,7 @@ func TestSerdeCheckSnapshot_UpdateIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.UpdateIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18000,6 +15292,7 @@ func TestSerdeCheckSnapshot_UpdateIntegrationTableProperties(t *testing.T) {
 	_, err := svc.UpdateIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -18035,11 +15328,9 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 			},
 			DefaultArguments: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			NonOverridableArguments: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Connections: &types.ConnectionsList{
 				Connections: []string{
@@ -18116,7 +15407,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 							JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
 							DataTypeMapping: map[string]types.GlueRecordType{
 								"key0": types.GlueRecordType("DATE"),
-								"key1": types.GlueRecordType("DATE"),
 							},
 						},
 						ConnectionTable: ptr.String("__ConnectionTable__"),
@@ -18159,7 +15449,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -18441,7 +15730,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType:  ptr.String("__ConnectionType__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -18485,7 +15773,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -19515,7 +16802,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalHudiOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -19554,7 +16840,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalHudiOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -19595,7 +16880,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalHudiOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 							BoundedSize:      ptr.Int64(1),
@@ -19654,7 +16938,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Database: ptr.String("__Database__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -19717,7 +17000,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Format: types.TargetFormat("json"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -19774,7 +17056,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalDeltaOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -19813,7 +17094,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalDeltaOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -19854,7 +17134,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalDeltaOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 							BoundedSize:      ptr.Int64(1),
@@ -19913,7 +17192,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Database: ptr.String("__Database__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -19976,7 +17254,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Format:                 types.TargetFormat("json"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -20173,7 +17450,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalDataSources: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						Ruleset: ptr.String("__Ruleset__"),
 						PublishingOptions: &types.DQResultsPublishingOptions{
@@ -20184,7 +17460,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
 							StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
@@ -20206,7 +17481,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 									Operation: ptr.String("__Operation__"),
 									Parameters: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								ConditionExpressions: []types.ConditionExpression{
@@ -20227,7 +17501,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 									Operation: ptr.String("__Operation__"),
 									Parameters: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								ConditionExpressions: []types.ConditionExpression{
@@ -20265,7 +17538,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 							},
 							AdditionalOptions: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SampleQuery:         ptr.String("__SampleQuery__"),
 							PreAction:           ptr.String("__PreAction__"),
@@ -20354,7 +17626,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 							},
 							AdditionalOptions: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SampleQuery:         ptr.String("__SampleQuery__"),
 							PreAction:           ptr.String("__PreAction__"),
@@ -20402,7 +17673,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						Data: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -20440,7 +17710,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						Data: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						Inputs: []string{
 							"__Member__",
@@ -20453,7 +17722,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalIcebergOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -20492,7 +17760,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalIcebergOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -20545,7 +17812,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Database: ptr.String("__Database__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -20576,2727 +17842,6 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 						Format: types.TargetFormat("json"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						Compression:            types.IcebergTargetCompressionType("gzip"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3ExcelSource: &types.S3ExcelSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.ParquetCompressionType("snappy"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						NumberRows: ptr.Int64(1),
-						SkipFooter: ptr.Int32(1),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HyperDirectTarget: &types.S3HyperDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Format: types.TargetFormat("json"),
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:        ptr.String("__Path__"),
-						Compression: types.HyperTargetCompressionType("uncompressed"),
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					DynamoDBELTConnectorSource: &types.DynamoDBELTConnectorSource{
-						Name: ptr.String("__Name__"),
-						ConnectionOptions: &types.DDBELTConnectionOptions{
-							DynamodbExport:        types.DdbExportType("ddb"),
-							DynamodbUnnestDDBJson: true,
-							DynamodbTableArn:      ptr.String("__DynamodbTableArn__"),
-							DynamodbS3Bucket:      ptr.String("__DynamodbS3Bucket__"),
-							DynamodbS3Prefix:      ptr.String("__DynamodbS3Prefix__"),
-							DynamodbS3BucketOwner: ptr.String("__DynamodbS3BucketOwner__"),
-							DynamodbStsRoleArn:    ptr.String("__DynamodbStsRoleArn__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-				},
-				"key1": {
-					AthenaConnectorSource: &types.AthenaConnectorSource{
-						Name:            ptr.String("__Name__"),
-						ConnectionName:  ptr.String("__ConnectionName__"),
-						ConnectorName:   ptr.String("__ConnectorName__"),
-						ConnectionType:  ptr.String("__ConnectionType__"),
-						ConnectionTable: ptr.String("__ConnectionTable__"),
-						SchemaName:      ptr.String("__SchemaName__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					JDBCConnectorSource: &types.JDBCConnectorSource{
-						Name:           ptr.String("__Name__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectorName:  ptr.String("__ConnectorName__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						AdditionalOptions: &types.JDBCConnectorOptions{
-							FilterPredicate: ptr.String("__FilterPredicate__"),
-							PartitionColumn: ptr.String("__PartitionColumn__"),
-							LowerBound:      ptr.Int64(1),
-							UpperBound:      ptr.Int64(1),
-							NumPartitions:   ptr.Int64(1),
-							JobBookmarkKeys: []string{
-								"__Member__",
-								"__Member__",
-							},
-							JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
-							DataTypeMapping: map[string]types.GlueRecordType{
-								"key0": types.GlueRecordType("DATE"),
-								"key1": types.GlueRecordType("DATE"),
-							},
-						},
-						ConnectionTable: ptr.String("__ConnectionTable__"),
-						Query:           ptr.String("__Query__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SparkConnectorSource: &types.SparkConnectorSource{
-						Name:           ptr.String("__Name__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectorName:  ptr.String("__ConnectorName__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogSource: &types.CatalogSource{
-						Name:               ptr.String("__Name__"),
-						Database:           ptr.String("__Database__"),
-						Table:              ptr.String("__Table__"),
-						PartitionPredicate: ptr.String("__PartitionPredicate__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					RedshiftSource: &types.RedshiftSource{
-						Name:           ptr.String("__Name__"),
-						Database:       ptr.String("__Database__"),
-						Table:          ptr.String("__Table__"),
-						RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-						TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-					},
-					S3CatalogSource: &types.S3CatalogSource{
-						Name:               ptr.String("__Name__"),
-						Database:           ptr.String("__Database__"),
-						Table:              ptr.String("__Table__"),
-						PartitionPredicate: ptr.String("__PartitionPredicate__"),
-						AdditionalOptions: &types.S3SourceAdditionalOptions{
-							BoundedSize:  ptr.Int64(1),
-							BoundedFiles: ptr.Int64(1),
-						},
-					},
-					S3CsvSource: &types.S3CsvSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.CompressionType("gzip"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						Separator:           types.Separator("comma"),
-						Escaper:             ptr.String("__Escaper__"),
-						QuoteChar:           types.QuoteChar("quote"),
-						Multiline:           ptr.Bool(true),
-						WithHeader:          ptr.Bool(true),
-						WriteHeader:         ptr.Bool(true),
-						SkipFirst:           ptr.Bool(true),
-						OptimizePerformance: true,
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3JsonSource: &types.S3JsonSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.CompressionType("gzip"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						JsonPath:  ptr.String("__JsonPath__"),
-						Multiline: ptr.Bool(true),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3ParquetSource: &types.S3ParquetSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.ParquetCompressionType("snappy"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					RelationalCatalogSource: &types.RelationalCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					DynamoDBCatalogSource: &types.DynamoDBCatalogSource{
-						Name:        ptr.String("__Name__"),
-						Database:    ptr.String("__Database__"),
-						Table:       ptr.String("__Table__"),
-						PitrEnabled: ptr.Bool(true),
-						AdditionalOptions: &types.DDBELTCatalogAdditionalOptions{
-							DynamodbExport:        ptr.String("__DynamodbExport__"),
-							DynamodbUnnestDDBJson: true,
-						},
-					},
-					JDBCConnectorTarget: &types.JDBCConnectorTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						ConnectionName:  ptr.String("__ConnectionName__"),
-						ConnectionTable: ptr.String("__ConnectionTable__"),
-						ConnectorName:   ptr.String("__ConnectorName__"),
-						ConnectionType:  ptr.String("__ConnectionType__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SparkConnectorTarget: &types.SparkConnectorTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectorName:  ptr.String("__ConnectorName__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogTarget: &types.BasicCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					RedshiftTarget: &types.RedshiftTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database:       ptr.String("__Database__"),
-						Table:          ptr.String("__Table__"),
-						RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-						TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-						UpsertRedshiftOptions: &types.UpsertRedshiftTargetOptions{
-							TableLocation:  ptr.String("__TableLocation__"),
-							ConnectionName: ptr.String("__ConnectionName__"),
-							UpsertKeys: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					S3CatalogTarget: &types.S3CatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					S3GlueParquetTarget: &types.S3GlueParquetTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            types.ParquetCompressionType("snappy"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					S3DirectTarget: &types.S3DirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            ptr.String("__Compression__"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						Format:                 types.TargetFormat("json"),
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					ApplyMapping: &types.ApplyMapping{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Mapping: []types.Mapping{
-							{
-								ToKey: ptr.String("__ToKey__"),
-								FromPath: []string{
-									"__Member__",
-									"__Member__",
-								},
-								FromType: ptr.String("__FromType__"),
-								ToType:   ptr.String("__ToType__"),
-								Dropped:  ptr.Bool(true),
-								Children: []types.Mapping{
-									{},
-									{},
-								},
-							},
-							{
-								ToKey: ptr.String("__ToKey__"),
-								FromPath: []string{
-									"__Member__",
-									"__Member__",
-								},
-								FromType: ptr.String("__FromType__"),
-								ToType:   ptr.String("__ToType__"),
-								Dropped:  ptr.Bool(true),
-								Children: []types.Mapping{
-									{},
-									{},
-								},
-							},
-						},
-					},
-					SelectFields: &types.SelectFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Paths: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					DropFields: &types.DropFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Paths: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					RenameField: &types.RenameField{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						SourcePath: []string{
-							"__Member__",
-							"__Member__",
-						},
-						TargetPath: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Spigot: &types.Spigot{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Path: ptr.String("__Path__"),
-						Topk: ptr.Int32(1),
-						Prob: ptr.Float64(1.0),
-					},
-					Join: &types.Join{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						JoinType: types.JoinType("equijoin"),
-						Columns: []types.JoinColumn{
-							{
-								From: ptr.String("__From__"),
-								Keys: [][]string{
-									{
-										"__Member__",
-										"__Member__",
-									},
-									{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-							{
-								From: ptr.String("__From__"),
-								Keys: [][]string{
-									{
-										"__Member__",
-										"__Member__",
-									},
-									{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-						},
-					},
-					SplitFields: &types.SplitFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Paths: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					SelectFromCollection: &types.SelectFromCollection{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Index: 1,
-					},
-					FillMissingValues: &types.FillMissingValues{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						ImputedPath: ptr.String("__ImputedPath__"),
-						FilledPath:  ptr.String("__FilledPath__"),
-					},
-					Filter: &types.Filter{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						LogicalOperator: types.FilterLogicalOperator("AND"),
-						Filters: []types.FilterExpression{
-							{
-								Operation: types.FilterOperation("EQ"),
-								Negated:   ptr.Bool(true),
-								Values: []types.FilterValue{
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-								},
-							},
-							{
-								Operation: types.FilterOperation("EQ"),
-								Negated:   ptr.Bool(true),
-								Values: []types.FilterValue{
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-								},
-							},
-						},
-					},
-					CustomCode: &types.CustomCode{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Code:      ptr.String("__Code__"),
-						ClassName: ptr.String("__ClassName__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SparkSQL: &types.SparkSQL{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						SqlQuery: ptr.String("__SqlQuery__"),
-						SqlAliases: []types.SqlAlias{
-							{
-								From:  ptr.String("__From__"),
-								Alias: ptr.String("__Alias__"),
-							},
-							{
-								From:  ptr.String("__From__"),
-								Alias: ptr.String("__Alias__"),
-							},
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					DirectKinesisSource: &types.DirectKinesisSource{
-						Name:         ptr.String("__Name__"),
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						StreamingOptions: &types.KinesisStreamingSourceOptions{
-							EndpointUrl:              ptr.String("__EndpointUrl__"),
-							StreamName:               ptr.String("__StreamName__"),
-							Classification:           ptr.String("__Classification__"),
-							Delimiter:                ptr.String("__Delimiter__"),
-							StartingPosition:         types.StartingPosition("latest"),
-							MaxFetchTimeInMs:         ptr.Int64(1),
-							MaxFetchRecordsPerShard:  ptr.Int64(1),
-							MaxRecordPerRead:         ptr.Int64(1),
-							AddIdleTimeBetweenReads:  ptr.Bool(true),
-							IdleTimeBetweenReadsInMs: ptr.Int64(1),
-							DescribeShardInterval:    ptr.Int64(1),
-							NumRetries:               ptr.Int32(1),
-							RetryIntervalMs:          ptr.Int64(1),
-							MaxRetryIntervalMs:       ptr.Int64(1),
-							AvoidEmptyBatches:        ptr.Bool(true),
-							StreamArn:                ptr.String("__StreamArn__"),
-							RoleArn:                  ptr.String("__RoleArn__"),
-							RoleSessionName:          ptr.String("__RoleSessionName__"),
-							AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-							FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-						},
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					DirectKafkaSource: &types.DirectKafkaSource{
-						Name: ptr.String("__Name__"),
-						StreamingOptions: &types.KafkaStreamingSourceOptions{
-							BootstrapServers:       ptr.String("__BootstrapServers__"),
-							SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-							ConnectionName:         ptr.String("__ConnectionName__"),
-							TopicName:              ptr.String("__TopicName__"),
-							Assign:                 ptr.String("__Assign__"),
-							SubscribePattern:       ptr.String("__SubscribePattern__"),
-							Classification:         ptr.String("__Classification__"),
-							Delimiter:              ptr.String("__Delimiter__"),
-							StartingOffsets:        ptr.String("__StartingOffsets__"),
-							EndingOffsets:          ptr.String("__EndingOffsets__"),
-							PollTimeoutMs:          ptr.Int64(1),
-							NumRetries:             ptr.Int32(1),
-							RetryIntervalMs:        ptr.Int64(1),
-							MaxOffsetsPerTrigger:   ptr.Int64(1),
-							MinPartitions:          ptr.Int32(1),
-							IncludeHeaders:         ptr.Bool(true),
-							AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						},
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					CatalogKinesisSource: &types.CatalogKinesisSource{
-						Name:         ptr.String("__Name__"),
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						Table:        ptr.String("__Table__"),
-						Database:     ptr.String("__Database__"),
-						StreamingOptions: &types.KinesisStreamingSourceOptions{
-							EndpointUrl:              ptr.String("__EndpointUrl__"),
-							StreamName:               ptr.String("__StreamName__"),
-							Classification:           ptr.String("__Classification__"),
-							Delimiter:                ptr.String("__Delimiter__"),
-							StartingPosition:         types.StartingPosition("latest"),
-							MaxFetchTimeInMs:         ptr.Int64(1),
-							MaxFetchRecordsPerShard:  ptr.Int64(1),
-							MaxRecordPerRead:         ptr.Int64(1),
-							AddIdleTimeBetweenReads:  ptr.Bool(true),
-							IdleTimeBetweenReadsInMs: ptr.Int64(1),
-							DescribeShardInterval:    ptr.Int64(1),
-							NumRetries:               ptr.Int32(1),
-							RetryIntervalMs:          ptr.Int64(1),
-							MaxRetryIntervalMs:       ptr.Int64(1),
-							AvoidEmptyBatches:        ptr.Bool(true),
-							StreamArn:                ptr.String("__StreamArn__"),
-							RoleArn:                  ptr.String("__RoleArn__"),
-							RoleSessionName:          ptr.String("__RoleSessionName__"),
-							AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-							FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-						},
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					CatalogKafkaSource: &types.CatalogKafkaSource{
-						Name:         ptr.String("__Name__"),
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						Table:        ptr.String("__Table__"),
-						Database:     ptr.String("__Database__"),
-						StreamingOptions: &types.KafkaStreamingSourceOptions{
-							BootstrapServers:       ptr.String("__BootstrapServers__"),
-							SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-							ConnectionName:         ptr.String("__ConnectionName__"),
-							TopicName:              ptr.String("__TopicName__"),
-							Assign:                 ptr.String("__Assign__"),
-							SubscribePattern:       ptr.String("__SubscribePattern__"),
-							Classification:         ptr.String("__Classification__"),
-							Delimiter:              ptr.String("__Delimiter__"),
-							StartingOffsets:        ptr.String("__StartingOffsets__"),
-							EndingOffsets:          ptr.String("__EndingOffsets__"),
-							PollTimeoutMs:          ptr.Int64(1),
-							NumRetries:             ptr.Int32(1),
-							RetryIntervalMs:        ptr.Int64(1),
-							MaxOffsetsPerTrigger:   ptr.Int64(1),
-							MinPartitions:          ptr.Int32(1),
-							IncludeHeaders:         ptr.Bool(true),
-							AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						},
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					DropNullFields: &types.DropNullFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						NullCheckBoxList: &types.NullCheckBoxList{
-							IsEmpty:      ptr.Bool(true),
-							IsNullString: ptr.Bool(true),
-							IsNegOne:     ptr.Bool(true),
-						},
-						NullTextList: []types.NullValueField{
-							{
-								Value: ptr.String("__Value__"),
-								Datatype: &types.Datatype{
-									Id:    ptr.String("__Id__"),
-									Label: ptr.String("__Label__"),
-								},
-							},
-							{
-								Value: ptr.String("__Value__"),
-								Datatype: &types.Datatype{
-									Id:    ptr.String("__Id__"),
-									Label: ptr.String("__Label__"),
-								},
-							},
-						},
-					},
-					Merge: &types.Merge{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Source: ptr.String("__Source__"),
-						PrimaryKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					Union: &types.Union{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UnionType: types.UnionType("ALL"),
-					},
-					PIIDetection: &types.PIIDetection{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PiiType: types.PiiType("RowAudit"),
-						EntityTypesToDetect: []string{
-							"__Member__",
-							"__Member__",
-						},
-						OutputColumnName:       ptr.String("__OutputColumnName__"),
-						SampleFraction:         ptr.Float64(1.0),
-						ThresholdFraction:      ptr.Float64(1.0),
-						MaskValue:              ptr.String("__MaskValue__"),
-						RedactText:             ptr.String("__RedactText__"),
-						RedactChar:             ptr.String("__RedactChar__"),
-						MatchPattern:           ptr.String("__MatchPattern__"),
-						NumLeftCharsToExclude:  ptr.Int32(1),
-						NumRightCharsToExclude: ptr.Int32(1),
-						DetectionParameters:    ptr.String("__DetectionParameters__"),
-						DetectionSensitivity:   ptr.String("__DetectionSensitivity__"),
-					},
-					Aggregate: &types.Aggregate{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Groups: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Aggs: []types.AggregateOperation{
-							{
-								Column: []string{
-									"__Member__",
-									"__Member__",
-								},
-								AggFunc: types.AggFunction("avg"),
-							},
-							{
-								Column: []string{
-									"__Member__",
-									"__Member__",
-								},
-								AggFunc: types.AggFunction("avg"),
-							},
-						},
-					},
-					DropDuplicates: &types.DropDuplicates{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Columns: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					GovernedCatalogTarget: &types.GovernedCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-					},
-					GovernedCatalogSource: &types.GovernedCatalogSource{
-						Name:               ptr.String("__Name__"),
-						Database:           ptr.String("__Database__"),
-						Table:              ptr.String("__Table__"),
-						PartitionPredicate: ptr.String("__PartitionPredicate__"),
-						AdditionalOptions: &types.S3SourceAdditionalOptions{
-							BoundedSize:  ptr.Int64(1),
-							BoundedFiles: ptr.Int64(1),
-						},
-					},
-					MicrosoftSQLServerCatalogSource: &types.MicrosoftSQLServerCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					MySQLCatalogSource: &types.MySQLCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					OracleSQLCatalogSource: &types.OracleSQLCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					PostgreSQLCatalogSource: &types.PostgreSQLCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					MicrosoftSQLServerCatalogTarget: &types.MicrosoftSQLServerCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					MySQLCatalogTarget: &types.MySQLCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					OracleSQLCatalogTarget: &types.OracleSQLCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					PostgreSQLCatalogTarget: &types.PostgreSQLCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					Route: &types.Route{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupFiltersList: []types.GroupFilters{
-							{
-								GroupName: ptr.String("__GroupName__"),
-								Filters: []types.FilterExpression{
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								LogicalOperator: types.FilterLogicalOperator("AND"),
-							},
-							{
-								GroupName: ptr.String("__GroupName__"),
-								Filters: []types.FilterExpression{
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								LogicalOperator: types.FilterLogicalOperator("AND"),
-							},
-						},
-					},
-					DynamicTransform: &types.DynamicTransform{
-						Name:          ptr.String("__Name__"),
-						TransformName: ptr.String("__TransformName__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Parameters: []types.TransformConfigParameter{
-							{
-								Name:              ptr.String("__Name__"),
-								Type:              types.ParamType("str"),
-								ValidationRule:    ptr.String("__ValidationRule__"),
-								ValidationMessage: ptr.String("__ValidationMessage__"),
-								Value: []string{
-									"__Member__",
-									"__Member__",
-								},
-								ListType:   types.ParamType("str"),
-								IsOptional: ptr.Bool(true),
-							},
-							{
-								Name:              ptr.String("__Name__"),
-								Type:              types.ParamType("str"),
-								ValidationRule:    ptr.String("__ValidationRule__"),
-								ValidationMessage: ptr.String("__ValidationMessage__"),
-								Value: []string{
-									"__Member__",
-									"__Member__",
-								},
-								ListType:   types.ParamType("str"),
-								IsOptional: ptr.Bool(true),
-							},
-						},
-						FunctionName: ptr.String("__FunctionName__"),
-						Path:         ptr.String("__Path__"),
-						Version:      ptr.String("__Version__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					EvaluateDataQuality: &types.EvaluateDataQuality{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Ruleset: ptr.String("__Ruleset__"),
-						Output:  types.DQTransformOutput("PrimaryInput"),
-						PublishingOptions: &types.DQResultsPublishingOptions{
-							EvaluationContext:        ptr.String("__EvaluationContext__"),
-							ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-							CloudWatchMetricsEnabled: ptr.Bool(true),
-							ResultsPublishingEnabled: ptr.Bool(true),
-						},
-						StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-							StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-						},
-					},
-					S3CatalogHudiSource: &types.S3CatalogHudiSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalHudiOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogHudiSource: &types.CatalogHudiSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalHudiOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HudiSource: &types.S3HudiSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						AdditionalHudiOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HudiCatalogTarget: &types.S3HudiCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HudiDirectTarget: &types.S3HudiDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            types.HudiTargetCompressionType("gzip"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Format: types.TargetFormat("json"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					DirectJDBCSource: &types.DirectJDBCSource{
-						Name:           ptr.String("__Name__"),
-						Database:       ptr.String("__Database__"),
-						Table:          ptr.String("__Table__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectionType: types.JDBCConnectionType("sqlserver"),
-						RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3CatalogDeltaSource: &types.S3CatalogDeltaSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalDeltaOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogDeltaSource: &types.CatalogDeltaSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalDeltaOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3DeltaSource: &types.S3DeltaSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						AdditionalDeltaOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3DeltaCatalogTarget: &types.S3DeltaCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3DeltaDirectTarget: &types.S3DeltaDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            types.DeltaTargetCompressionType("uncompressed"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						Format:                 types.TargetFormat("json"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					AmazonRedshiftSource: &types.AmazonRedshiftSource{
-						Name: ptr.String("__Name__"),
-						Data: &types.AmazonRedshiftNodeData{
-							AccessType: ptr.String("__AccessType__"),
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Table: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogDatabase: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogTable: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-							CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-							TempDir:               ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							TablePrefix:         ptr.String("__TablePrefix__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							StagingTable: ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-					},
-					AmazonRedshiftTarget: &types.AmazonRedshiftTarget{
-						Name: ptr.String("__Name__"),
-						Data: &types.AmazonRedshiftNodeData{
-							AccessType: ptr.String("__AccessType__"),
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Table: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogDatabase: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogTable: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-							CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-							TempDir:               ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							TablePrefix:         ptr.String("__TablePrefix__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							StagingTable: ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					EvaluateDataQualityMultiFrame: &types.EvaluateDataQualityMultiFrame{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						AdditionalDataSources: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						Ruleset: ptr.String("__Ruleset__"),
-						PublishingOptions: &types.DQResultsPublishingOptions{
-							EvaluationContext:        ptr.String("__EvaluationContext__"),
-							ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-							CloudWatchMetricsEnabled: ptr.Bool(true),
-							ResultsPublishingEnabled: ptr.Bool(true),
-						},
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-							StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-						},
-					},
-					Recipe: &types.Recipe{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						RecipeReference: &types.RecipeReference{
-							RecipeArn:     ptr.String("__RecipeArn__"),
-							RecipeVersion: ptr.String("__RecipeVersion__"),
-						},
-						RecipeSteps: []types.RecipeStep{
-							{
-								Action: &types.RecipeAction{
-									Operation: ptr.String("__Operation__"),
-									Parameters: map[string]string{
-										"key0": "__Value__",
-										"key1": "__Value__",
-									},
-								},
-								ConditionExpressions: []types.ConditionExpression{
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-								},
-							},
-							{
-								Action: &types.RecipeAction{
-									Operation: ptr.String("__Operation__"),
-									Parameters: map[string]string{
-										"key0": "__Value__",
-										"key1": "__Value__",
-									},
-								},
-								ConditionExpressions: []types.ConditionExpression{
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-								},
-							},
-						},
-					},
-					SnowflakeSource: &types.SnowflakeSource{
-						Name: ptr.String("__Name__"),
-						Data: &types.SnowflakeNodeData{
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema:   ptr.String("__Schema__"),
-							Table:    ptr.String("__Table__"),
-							Database: ptr.String("__Database__"),
-							TempDir:  ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdditionalOptions: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							StagingTable:        ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							AutoPushdown: true,
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SnowflakeTarget: &types.SnowflakeTarget{
-						Name: ptr.String("__Name__"),
-						Data: &types.SnowflakeNodeData{
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema:   ptr.String("__Schema__"),
-							Table:    ptr.String("__Table__"),
-							Database: ptr.String("__Database__"),
-							TempDir:  ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdditionalOptions: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							StagingTable:        ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							AutoPushdown: true,
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					ConnectorDataSource: &types.ConnectorDataSource{
-						Name:           ptr.String("__Name__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						Data: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					ConnectorDataTarget: &types.ConnectorDataTarget{
-						Name:           ptr.String("__Name__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						Data: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					S3CatalogIcebergSource: &types.S3CatalogIcebergSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalIcebergOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogIcebergSource: &types.CatalogIcebergSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalIcebergOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3IcebergCatalogTarget: &types.S3IcebergCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					S3IcebergDirectTarget: &types.S3IcebergDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:   ptr.String("__Path__"),
-						Format: types.TargetFormat("json"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -23523,6 +18068,7 @@ func TestSerdeCheckSnapshot_UpdateJob(t *testing.T) {
 	_, err := svc.UpdateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23559,6 +18105,7 @@ func TestSerdeCheckSnapshot_UpdateJobFromSourceControl(t *testing.T) {
 	_, err := svc.UpdateJobFromSourceControl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23605,6 +18152,7 @@ func TestSerdeCheckSnapshot_UpdateMLTransform(t *testing.T) {
 	_, err := svc.UpdateMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23643,7 +18191,6 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -23652,7 +18199,6 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -23670,7 +18216,6 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -23689,7 +18234,6 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -23702,7 +18246,6 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -23718,7 +18261,6 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -23732,6 +18274,7 @@ func TestSerdeCheckSnapshot_UpdatePartition(t *testing.T) {
 	_, err := svc.UpdatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23764,6 +18307,7 @@ func TestSerdeCheckSnapshot_UpdateRegistry(t *testing.T) {
 	_, err := svc.UpdateRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23802,6 +18346,7 @@ func TestSerdeCheckSnapshot_UpdateSchema(t *testing.T) {
 	_, err := svc.UpdateSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23838,6 +18383,7 @@ func TestSerdeCheckSnapshot_UpdateSourceControlFromJob(t *testing.T) {
 	_, err := svc.UpdateSourceControlFromJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -23873,7 +18419,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -23882,7 +18427,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -23900,7 +18444,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -23919,7 +18462,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -23932,7 +18474,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -23953,7 +18494,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				{
@@ -23962,7 +18502,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -23971,7 +18510,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 			TableType:        ptr.String("__TableType__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetTable: &types.TableIdentifier{
 				CatalogId:    ptr.String("__CatalogId__"),
@@ -24087,7 +18625,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 							Location: ptr.String("__Location__"),
 							Properties: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Action: types.IcebergUpdateAction("add-schema"),
 							EncryptionKey: &types.IcebergEncryptedKey{
@@ -24096,7 +18633,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 								EncryptedById:        ptr.String("__EncryptedById__"),
 								Properties: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							KeyId: ptr.String("__KeyId__"),
@@ -24167,7 +18703,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 							Location: ptr.String("__Location__"),
 							Properties: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Action: types.IcebergUpdateAction("add-schema"),
 							EncryptionKey: &types.IcebergEncryptedKey{
@@ -24176,7 +18711,6 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 								EncryptedById:        ptr.String("__EncryptedById__"),
 								Properties: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							KeyId: ptr.String("__KeyId__"),
@@ -24195,6 +18729,7 @@ func TestSerdeCheckSnapshot_UpdateTable(t *testing.T) {
 	_, err := svc.UpdateTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24255,6 +18790,7 @@ func TestSerdeCheckSnapshot_UpdateTableOptimizer(t *testing.T) {
 	_, err := svc.UpdateTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24282,7 +18818,6 @@ func TestSerdeCheckSnapshot_UpdateTrigger(t *testing.T) {
 					JobName: ptr.String("__JobName__"),
 					Arguments: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Timeout:               ptr.Int32(1),
 					SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -24295,7 +18830,6 @@ func TestSerdeCheckSnapshot_UpdateTrigger(t *testing.T) {
 					JobName: ptr.String("__JobName__"),
 					Arguments: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Timeout:               ptr.Int32(1),
 					SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -24339,6 +18873,7 @@ func TestSerdeCheckSnapshot_UpdateTrigger(t *testing.T) {
 	_, err := svc.UpdateTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24369,27 +18904,9 @@ func TestSerdeCheckSnapshot_UpdateUsageProfile(t *testing.T) {
 					MinValue: ptr.String("__MinValue__"),
 					MaxValue: ptr.String("__MaxValue__"),
 				},
-				"key1": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
 			},
 			JobConfiguration: map[string]types.ConfigurationObject{
 				"key0": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
-				"key1": {
 					DefaultValue: ptr.String("__DefaultValue__"),
 					AllowedValues: []string{
 						"__Member__",
@@ -24410,6 +18927,7 @@ func TestSerdeCheckSnapshot_UpdateUsageProfile(t *testing.T) {
 	_, err := svc.UpdateUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24457,6 +18975,7 @@ func TestSerdeCheckSnapshot_UpdateUserDefinedFunction(t *testing.T) {
 	_, err := svc.UpdateUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24478,7 +18997,6 @@ func TestSerdeCheckSnapshot_UpdateWorkflow(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		DefaultRunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		MaxConcurrentRuns: ptr.Int32(1),
 	}
@@ -24491,6 +19009,7 @@ func TestSerdeCheckSnapshot_UpdateWorkflow(t *testing.T) {
 	_, err := svc.UpdateWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24523,6 +19042,7 @@ func TestSerdeUpdateSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	_, err := svc.AssociateGlossaryTerms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24558,7 +19078,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						{
@@ -24567,7 +19086,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -24585,7 +19103,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 						SerializationLibrary: ptr.String("__SerializationLibrary__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					BucketColumns: []string{
@@ -24604,7 +19121,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SkewedInfo: &types.SkewedInfo{
 						SkewedColumnNames: []string{
@@ -24617,7 +19133,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 						},
 						SkewedColumnValueLocationMaps: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					StoredAsSubDirectories: true,
@@ -24633,7 +19148,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -24651,7 +19165,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						{
@@ -24660,7 +19173,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 							Comment: ptr.String("__Comment__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -24678,7 +19190,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 						SerializationLibrary: ptr.String("__SerializationLibrary__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					BucketColumns: []string{
@@ -24697,7 +19208,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SkewedInfo: &types.SkewedInfo{
 						SkewedColumnNames: []string{
@@ -24710,7 +19220,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 						},
 						SkewedColumnValueLocationMaps: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					StoredAsSubDirectories: true,
@@ -24726,7 +19235,6 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -24741,6 +19249,7 @@ func TestSerdeUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 	_, err := svc.BatchCreatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24773,6 +19282,7 @@ func TestSerdeUpdateSnapshot_BatchDeleteConnection(t *testing.T) {
 	_, err := svc.BatchDeleteConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24817,6 +19327,7 @@ func TestSerdeUpdateSnapshot_BatchDeletePartition(t *testing.T) {
 	_, err := svc.BatchDeletePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24851,6 +19362,7 @@ func TestSerdeUpdateSnapshot_BatchDeleteTable(t *testing.T) {
 	_, err := svc.BatchDeleteTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24885,6 +19397,7 @@ func TestSerdeUpdateSnapshot_BatchDeleteTableVersion(t *testing.T) {
 	_, err := svc.BatchDeleteTableVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24918,6 +19431,7 @@ func TestSerdeUpdateSnapshot_BatchGetBlueprints(t *testing.T) {
 	_, err := svc.BatchGetBlueprints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24949,6 +19463,7 @@ func TestSerdeUpdateSnapshot_BatchGetCrawlers(t *testing.T) {
 	_, err := svc.BatchGetCrawlers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -24980,6 +19495,7 @@ func TestSerdeUpdateSnapshot_BatchGetCustomEntityTypes(t *testing.T) {
 	_, err := svc.BatchGetCustomEntityTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25011,6 +19527,7 @@ func TestSerdeUpdateSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	_, err := svc.BatchGetDataQualityResult(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25042,6 +19559,7 @@ func TestSerdeUpdateSnapshot_BatchGetDevEndpoints(t *testing.T) {
 	_, err := svc.BatchGetDevEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25075,6 +19593,7 @@ func TestSerdeUpdateSnapshot_BatchGetIterableForms(t *testing.T) {
 	_, err := svc.BatchGetIterableForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25106,6 +19625,7 @@ func TestSerdeUpdateSnapshot_BatchGetJobs(t *testing.T) {
 	_, err := svc.BatchGetJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25155,7 +19675,6 @@ func TestSerdeUpdateSnapshot_BatchGetPartition(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -25168,6 +19687,7 @@ func TestSerdeUpdateSnapshot_BatchGetPartition(t *testing.T) {
 	_, err := svc.BatchGetPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25209,6 +19729,7 @@ func TestSerdeUpdateSnapshot_BatchGetTableOptimizer(t *testing.T) {
 	_, err := svc.BatchGetTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25240,6 +19761,7 @@ func TestSerdeUpdateSnapshot_BatchGetTriggers(t *testing.T) {
 	_, err := svc.BatchGetTriggers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25272,6 +19794,7 @@ func TestSerdeUpdateSnapshot_BatchGetWorkflows(t *testing.T) {
 	_, err := svc.BatchGetWorkflows(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25312,6 +19835,7 @@ func TestSerdeUpdateSnapshot_BatchPutDataQualityStatisticAnnotation(t *testing.T
 	_, err := svc.BatchPutDataQualityStatisticAnnotation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25344,6 +19868,7 @@ func TestSerdeUpdateSnapshot_BatchStopJobRun(t *testing.T) {
 	_, err := svc.BatchStopJobRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25384,7 +19909,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							{
@@ -25393,7 +19917,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 						},
@@ -25411,7 +19934,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 							SerializationLibrary: ptr.String("__SerializationLibrary__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						BucketColumns: []string{
@@ -25430,7 +19952,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 						},
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SkewedInfo: &types.SkewedInfo{
 							SkewedColumnNames: []string{
@@ -25443,7 +19964,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 							},
 							SkewedColumnValueLocationMaps: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						StoredAsSubDirectories: true,
@@ -25459,7 +19979,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
@@ -25483,7 +20002,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							{
@@ -25492,7 +20010,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 								Comment: ptr.String("__Comment__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 						},
@@ -25510,7 +20027,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 							SerializationLibrary: ptr.String("__SerializationLibrary__"),
 							Parameters: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						BucketColumns: []string{
@@ -25529,7 +20045,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 						},
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SkewedInfo: &types.SkewedInfo{
 							SkewedColumnNames: []string{
@@ -25542,7 +20057,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 							},
 							SkewedColumnValueLocationMaps: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						StoredAsSubDirectories: true,
@@ -25558,7 +20072,6 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 					},
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
@@ -25574,6 +20087,7 @@ func TestSerdeUpdateSnapshot_BatchUpdatePartition(t *testing.T) {
 	_, err := svc.BatchUpdatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25602,6 +20116,7 @@ func TestSerdeUpdateSnapshot_CancelDataQualityRuleRecommendationRun(t *testing.T
 	_, err := svc.CancelDataQualityRuleRecommendationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25630,6 +20145,7 @@ func TestSerdeUpdateSnapshot_CancelDataQualityRulesetEvaluationRun(t *testing.T)
 	_, err := svc.CancelDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25659,6 +20175,7 @@ func TestSerdeUpdateSnapshot_CancelMLTaskRun(t *testing.T) {
 	_, err := svc.CancelMLTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25689,6 +20206,7 @@ func TestSerdeUpdateSnapshot_CancelStatement(t *testing.T) {
 	_, err := svc.CancelStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25718,6 +20236,7 @@ func TestSerdeUpdateSnapshot_CheckSchemaVersionValidity(t *testing.T) {
 	_, err := svc.CheckSchemaVersionValidity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25740,7 +20259,6 @@ func TestSerdeUpdateSnapshot_CreateBlueprint(t *testing.T) {
 		BlueprintLocation: ptr.String("__BlueprintLocation__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -25752,6 +20270,7 @@ func TestSerdeUpdateSnapshot_CreateBlueprint(t *testing.T) {
 	_, err := svc.CreateBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25779,7 +20298,6 @@ func TestSerdeUpdateSnapshot_CreateCatalog(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetRedshiftCatalog: &types.TargetRedshiftCatalog{
 				CatalogArn: ptr.String("__CatalogArn__"),
@@ -25795,20 +20313,16 @@ func TestSerdeUpdateSnapshot_CreateCatalog(t *testing.T) {
 					RoleArn: ptr.String("__RoleArn__"),
 					Compaction: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Retention: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OrphanFileDeletion: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CustomProperties: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
@@ -25856,7 +20370,6 @@ func TestSerdeUpdateSnapshot_CreateCatalog(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -25868,6 +20381,7 @@ func TestSerdeUpdateSnapshot_CreateCatalog(t *testing.T) {
 	_, err := svc.CreateCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25928,6 +20442,7 @@ func TestSerdeUpdateSnapshot_CreateClassifier(t *testing.T) {
 	_, err := svc.CreateClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25958,7 +20473,6 @@ func TestSerdeUpdateSnapshot_CreateColumnStatisticsTaskSettings(t *testing.T) {
 		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -25970,6 +20484,7 @@ func TestSerdeUpdateSnapshot_CreateColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.CreateColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -25998,19 +20513,15 @@ func TestSerdeUpdateSnapshot_CreateConnection(t *testing.T) {
 			},
 			ConnectionProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			SparkProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			AthenaProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PythonProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PhysicalConnectionRequirements: &types.PhysicalConnectionRequirements{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -26031,7 +20542,6 @@ func TestSerdeUpdateSnapshot_CreateConnection(t *testing.T) {
 					TokenUrl: ptr.String("__TokenUrl__"),
 					TokenUrlParametersMap: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AuthorizationCodeProperties: &types.AuthorizationCodeProperties{
 						AuthorizationCode: ptr.String("__AuthorizationCode__"),
@@ -26052,7 +20562,6 @@ func TestSerdeUpdateSnapshot_CreateConnection(t *testing.T) {
 				},
 				CustomAuthenticationCredentials: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ValidateCredentials: true,
@@ -26063,7 +20572,6 @@ func TestSerdeUpdateSnapshot_CreateConnection(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -26075,6 +20583,7 @@ func TestSerdeUpdateSnapshot_CreateConnection(t *testing.T) {
 	_, err := svc.CreateConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26290,7 +20799,6 @@ func TestSerdeUpdateSnapshot_CreateCrawler(t *testing.T) {
 		CrawlerSecurityConfiguration: ptr.String("__CrawlerSecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -26302,6 +20810,7 @@ func TestSerdeUpdateSnapshot_CreateCrawler(t *testing.T) {
 	_, err := svc.CreateCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26327,7 +20836,6 @@ func TestSerdeUpdateSnapshot_CreateCustomEntityType(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -26339,6 +20847,7 @@ func TestSerdeUpdateSnapshot_CreateCustomEntityType(t *testing.T) {
 	_, err := svc.CreateCustomEntityType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26363,7 +20872,6 @@ func TestSerdeUpdateSnapshot_CreateDatabase(t *testing.T) {
 			LocationUri: ptr.String("__LocationUri__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
 				{
@@ -26398,7 +20906,6 @@ func TestSerdeUpdateSnapshot_CreateDatabase(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -26410,6 +20917,7 @@ func TestSerdeUpdateSnapshot_CreateDatabase(t *testing.T) {
 	_, err := svc.CreateDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26432,7 +20940,6 @@ func TestSerdeUpdateSnapshot_CreateDataQualityRuleset(t *testing.T) {
 		Ruleset:     ptr.String("__Ruleset__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		TargetTable: &types.DataQualityTargetTable{
 			TableName:    ptr.String("__TableName__"),
@@ -26451,6 +20958,7 @@ func TestSerdeUpdateSnapshot_CreateDataQualityRuleset(t *testing.T) {
 	_, err := svc.CreateDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26489,11 +20997,9 @@ func TestSerdeUpdateSnapshot_CreateDevEndpoint(t *testing.T) {
 		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Arguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -26505,6 +21011,7 @@ func TestSerdeUpdateSnapshot_CreateDevEndpoint(t *testing.T) {
 	_, err := svc.CreateDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26535,6 +21042,7 @@ func TestSerdeUpdateSnapshot_CreateGlossary(t *testing.T) {
 	_, err := svc.CreateGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26567,6 +21075,7 @@ func TestSerdeUpdateSnapshot_CreateGlossaryTerm(t *testing.T) {
 	_, err := svc.CreateGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26600,6 +21109,7 @@ func TestSerdeUpdateSnapshot_CreateGlueIdentityCenterConfiguration(t *testing.T)
 	_, err := svc.CreateGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26625,7 +21135,6 @@ func TestSerdeUpdateSnapshot_CreateIntegration(t *testing.T) {
 		KmsKeyId:        ptr.String("__KmsKeyId__"),
 		AdditionalEncryptionContext: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Tags: []types.Tag{
 			{
@@ -26641,7 +21150,6 @@ func TestSerdeUpdateSnapshot_CreateIntegration(t *testing.T) {
 			RefreshInterval: ptr.String("__RefreshInterval__"),
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			ContinuousSync: ptr.Bool(true),
 		},
@@ -26655,6 +21163,7 @@ func TestSerdeUpdateSnapshot_CreateIntegration(t *testing.T) {
 	_, err := svc.CreateIntegration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26702,6 +21211,7 @@ func TestSerdeUpdateSnapshot_CreateIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.CreateIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26759,6 +21269,7 @@ func TestSerdeUpdateSnapshot_CreateIntegrationTableProperties(t *testing.T) {
 	_, err := svc.CreateIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -26793,11 +21304,9 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 		},
 		DefaultArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		NonOverridableArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Connections: &types.ConnectionsList{
 			Connections: []string{
@@ -26812,7 +21321,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		NotificationProperty: &types.NotificationProperty{
 			NotifyDelayAfter: ptr.Int32(1),
@@ -26878,7 +21386,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 						JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
 						DataTypeMapping: map[string]types.GlueRecordType{
 							"key0": types.GlueRecordType("DATE"),
-							"key1": types.GlueRecordType("DATE"),
 						},
 					},
 					ConnectionTable: ptr.String("__ConnectionTable__"),
@@ -26921,7 +21428,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -27203,7 +21709,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					ConnectionType:  ptr.String("__ConnectionType__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -27247,7 +21752,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -28277,7 +22781,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalHudiOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -28316,7 +22819,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalHudiOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -28357,7 +22859,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalHudiOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 						BoundedSize:      ptr.Int64(1),
@@ -28416,7 +22917,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Database: ptr.String("__Database__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -28479,7 +22979,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Format: types.TargetFormat("json"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -28536,7 +23035,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalDeltaOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -28575,7 +23073,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalDeltaOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -28616,7 +23113,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalDeltaOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 						BoundedSize:      ptr.Int64(1),
@@ -28675,7 +23171,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Database: ptr.String("__Database__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -28738,7 +23233,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Format:                 types.TargetFormat("json"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -28935,7 +23429,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalDataSources: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Ruleset: ptr.String("__Ruleset__"),
 					PublishingOptions: &types.DQResultsPublishingOptions{
@@ -28946,7 +23439,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					},
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
 						StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
@@ -28968,7 +23460,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 								Operation: ptr.String("__Operation__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							ConditionExpressions: []types.ConditionExpression{
@@ -28989,7 +23480,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 								Operation: ptr.String("__Operation__"),
 								Parameters: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							ConditionExpressions: []types.ConditionExpression{
@@ -29027,7 +23517,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 						},
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SampleQuery:         ptr.String("__SampleQuery__"),
 						PreAction:           ptr.String("__PreAction__"),
@@ -29116,7 +23605,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 						},
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SampleQuery:         ptr.String("__SampleQuery__"),
 						PreAction:           ptr.String("__PreAction__"),
@@ -29164,7 +23652,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -29202,7 +23689,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					ConnectionType: ptr.String("__ConnectionType__"),
 					Data: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Inputs: []string{
 						"__Member__",
@@ -29215,7 +23701,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalIcebergOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -29254,7 +23739,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Table:    ptr.String("__Table__"),
 					AdditionalIcebergOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OutputSchemas: []types.GlueSchema{
 						{
@@ -29307,7 +23791,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Database: ptr.String("__Database__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -29338,2727 +23821,6 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 					Format: types.TargetFormat("json"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					Compression:            types.IcebergTargetCompressionType("gzip"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3ExcelSource: &types.S3ExcelSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.ParquetCompressionType("snappy"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					NumberRows: ptr.Int64(1),
-					SkipFooter: ptr.Int32(1),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HyperDirectTarget: &types.S3HyperDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Format: types.TargetFormat("json"),
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:        ptr.String("__Path__"),
-					Compression: types.HyperTargetCompressionType("uncompressed"),
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				DynamoDBELTConnectorSource: &types.DynamoDBELTConnectorSource{
-					Name: ptr.String("__Name__"),
-					ConnectionOptions: &types.DDBELTConnectionOptions{
-						DynamodbExport:        types.DdbExportType("ddb"),
-						DynamodbUnnestDDBJson: true,
-						DynamodbTableArn:      ptr.String("__DynamodbTableArn__"),
-						DynamodbS3Bucket:      ptr.String("__DynamodbS3Bucket__"),
-						DynamodbS3Prefix:      ptr.String("__DynamodbS3Prefix__"),
-						DynamodbS3BucketOwner: ptr.String("__DynamodbS3BucketOwner__"),
-						DynamodbStsRoleArn:    ptr.String("__DynamodbStsRoleArn__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-			},
-			"key1": {
-				AthenaConnectorSource: &types.AthenaConnectorSource{
-					Name:            ptr.String("__Name__"),
-					ConnectionName:  ptr.String("__ConnectionName__"),
-					ConnectorName:   ptr.String("__ConnectorName__"),
-					ConnectionType:  ptr.String("__ConnectionType__"),
-					ConnectionTable: ptr.String("__ConnectionTable__"),
-					SchemaName:      ptr.String("__SchemaName__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				JDBCConnectorSource: &types.JDBCConnectorSource{
-					Name:           ptr.String("__Name__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectorName:  ptr.String("__ConnectorName__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					AdditionalOptions: &types.JDBCConnectorOptions{
-						FilterPredicate: ptr.String("__FilterPredicate__"),
-						PartitionColumn: ptr.String("__PartitionColumn__"),
-						LowerBound:      ptr.Int64(1),
-						UpperBound:      ptr.Int64(1),
-						NumPartitions:   ptr.Int64(1),
-						JobBookmarkKeys: []string{
-							"__Member__",
-							"__Member__",
-						},
-						JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
-						DataTypeMapping: map[string]types.GlueRecordType{
-							"key0": types.GlueRecordType("DATE"),
-							"key1": types.GlueRecordType("DATE"),
-						},
-					},
-					ConnectionTable: ptr.String("__ConnectionTable__"),
-					Query:           ptr.String("__Query__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SparkConnectorSource: &types.SparkConnectorSource{
-					Name:           ptr.String("__Name__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectorName:  ptr.String("__ConnectorName__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogSource: &types.CatalogSource{
-					Name:               ptr.String("__Name__"),
-					Database:           ptr.String("__Database__"),
-					Table:              ptr.String("__Table__"),
-					PartitionPredicate: ptr.String("__PartitionPredicate__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				RedshiftSource: &types.RedshiftSource{
-					Name:           ptr.String("__Name__"),
-					Database:       ptr.String("__Database__"),
-					Table:          ptr.String("__Table__"),
-					RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-					TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-				},
-				S3CatalogSource: &types.S3CatalogSource{
-					Name:               ptr.String("__Name__"),
-					Database:           ptr.String("__Database__"),
-					Table:              ptr.String("__Table__"),
-					PartitionPredicate: ptr.String("__PartitionPredicate__"),
-					AdditionalOptions: &types.S3SourceAdditionalOptions{
-						BoundedSize:  ptr.Int64(1),
-						BoundedFiles: ptr.Int64(1),
-					},
-				},
-				S3CsvSource: &types.S3CsvSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.CompressionType("gzip"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					Separator:           types.Separator("comma"),
-					Escaper:             ptr.String("__Escaper__"),
-					QuoteChar:           types.QuoteChar("quote"),
-					Multiline:           ptr.Bool(true),
-					WithHeader:          ptr.Bool(true),
-					WriteHeader:         ptr.Bool(true),
-					SkipFirst:           ptr.Bool(true),
-					OptimizePerformance: true,
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3JsonSource: &types.S3JsonSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.CompressionType("gzip"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					JsonPath:  ptr.String("__JsonPath__"),
-					Multiline: ptr.Bool(true),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3ParquetSource: &types.S3ParquetSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CompressionType: types.ParquetCompressionType("snappy"),
-					Exclusions: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupSize:      ptr.String("__GroupSize__"),
-					GroupFiles:     ptr.String("__GroupFiles__"),
-					Recurse:        ptr.Bool(true),
-					MaxBand:        ptr.Int32(1),
-					MaxFilesInBand: ptr.Int32(1),
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				RelationalCatalogSource: &types.RelationalCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				DynamoDBCatalogSource: &types.DynamoDBCatalogSource{
-					Name:        ptr.String("__Name__"),
-					Database:    ptr.String("__Database__"),
-					Table:       ptr.String("__Table__"),
-					PitrEnabled: ptr.Bool(true),
-					AdditionalOptions: &types.DDBELTCatalogAdditionalOptions{
-						DynamodbExport:        ptr.String("__DynamodbExport__"),
-						DynamodbUnnestDDBJson: true,
-					},
-				},
-				JDBCConnectorTarget: &types.JDBCConnectorTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					ConnectionName:  ptr.String("__ConnectionName__"),
-					ConnectionTable: ptr.String("__ConnectionTable__"),
-					ConnectorName:   ptr.String("__ConnectorName__"),
-					ConnectionType:  ptr.String("__ConnectionType__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SparkConnectorTarget: &types.SparkConnectorTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectorName:  ptr.String("__ConnectorName__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogTarget: &types.BasicCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				RedshiftTarget: &types.RedshiftTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database:       ptr.String("__Database__"),
-					Table:          ptr.String("__Table__"),
-					RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-					TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-					UpsertRedshiftOptions: &types.UpsertRedshiftTargetOptions{
-						TableLocation:  ptr.String("__TableLocation__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						UpsertKeys: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				S3CatalogTarget: &types.S3CatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				S3GlueParquetTarget: &types.S3GlueParquetTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            types.ParquetCompressionType("snappy"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				S3DirectTarget: &types.S3DirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            ptr.String("__Compression__"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					Format:                 types.TargetFormat("json"),
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				ApplyMapping: &types.ApplyMapping{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Mapping: []types.Mapping{
-						{
-							ToKey: ptr.String("__ToKey__"),
-							FromPath: []string{
-								"__Member__",
-								"__Member__",
-							},
-							FromType: ptr.String("__FromType__"),
-							ToType:   ptr.String("__ToType__"),
-							Dropped:  ptr.Bool(true),
-							Children: []types.Mapping{
-								{},
-								{},
-							},
-						},
-						{
-							ToKey: ptr.String("__ToKey__"),
-							FromPath: []string{
-								"__Member__",
-								"__Member__",
-							},
-							FromType: ptr.String("__FromType__"),
-							ToType:   ptr.String("__ToType__"),
-							Dropped:  ptr.Bool(true),
-							Children: []types.Mapping{
-								{},
-								{},
-							},
-						},
-					},
-				},
-				SelectFields: &types.SelectFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Paths: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				DropFields: &types.DropFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Paths: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				RenameField: &types.RenameField{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					SourcePath: []string{
-						"__Member__",
-						"__Member__",
-					},
-					TargetPath: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				Spigot: &types.Spigot{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Path: ptr.String("__Path__"),
-					Topk: ptr.Int32(1),
-					Prob: ptr.Float64(1.0),
-				},
-				Join: &types.Join{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					JoinType: types.JoinType("equijoin"),
-					Columns: []types.JoinColumn{
-						{
-							From: ptr.String("__From__"),
-							Keys: [][]string{
-								{
-									"__Member__",
-									"__Member__",
-								},
-								{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-						{
-							From: ptr.String("__From__"),
-							Keys: [][]string{
-								{
-									"__Member__",
-									"__Member__",
-								},
-								{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				SplitFields: &types.SplitFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Paths: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				SelectFromCollection: &types.SelectFromCollection{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Index: 1,
-				},
-				FillMissingValues: &types.FillMissingValues{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					ImputedPath: ptr.String("__ImputedPath__"),
-					FilledPath:  ptr.String("__FilledPath__"),
-				},
-				Filter: &types.Filter{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					LogicalOperator: types.FilterLogicalOperator("AND"),
-					Filters: []types.FilterExpression{
-						{
-							Operation: types.FilterOperation("EQ"),
-							Negated:   ptr.Bool(true),
-							Values: []types.FilterValue{
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-						},
-						{
-							Operation: types.FilterOperation("EQ"),
-							Negated:   ptr.Bool(true),
-							Values: []types.FilterValue{
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-								{
-									Type: types.FilterValueType("COLUMNEXTRACTED"),
-									Value: []string{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-						},
-					},
-				},
-				CustomCode: &types.CustomCode{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Code:      ptr.String("__Code__"),
-					ClassName: ptr.String("__ClassName__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SparkSQL: &types.SparkSQL{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					SqlQuery: ptr.String("__SqlQuery__"),
-					SqlAliases: []types.SqlAlias{
-						{
-							From:  ptr.String("__From__"),
-							Alias: ptr.String("__Alias__"),
-						},
-						{
-							From:  ptr.String("__From__"),
-							Alias: ptr.String("__Alias__"),
-						},
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				DirectKinesisSource: &types.DirectKinesisSource{
-					Name:         ptr.String("__Name__"),
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					StreamingOptions: &types.KinesisStreamingSourceOptions{
-						EndpointUrl:              ptr.String("__EndpointUrl__"),
-						StreamName:               ptr.String("__StreamName__"),
-						Classification:           ptr.String("__Classification__"),
-						Delimiter:                ptr.String("__Delimiter__"),
-						StartingPosition:         types.StartingPosition("latest"),
-						MaxFetchTimeInMs:         ptr.Int64(1),
-						MaxFetchRecordsPerShard:  ptr.Int64(1),
-						MaxRecordPerRead:         ptr.Int64(1),
-						AddIdleTimeBetweenReads:  ptr.Bool(true),
-						IdleTimeBetweenReadsInMs: ptr.Int64(1),
-						DescribeShardInterval:    ptr.Int64(1),
-						NumRetries:               ptr.Int32(1),
-						RetryIntervalMs:          ptr.Int64(1),
-						MaxRetryIntervalMs:       ptr.Int64(1),
-						AvoidEmptyBatches:        ptr.Bool(true),
-						StreamArn:                ptr.String("__StreamArn__"),
-						RoleArn:                  ptr.String("__RoleArn__"),
-						RoleSessionName:          ptr.String("__RoleSessionName__"),
-						AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-					},
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				DirectKafkaSource: &types.DirectKafkaSource{
-					Name: ptr.String("__Name__"),
-					StreamingOptions: &types.KafkaStreamingSourceOptions{
-						BootstrapServers:       ptr.String("__BootstrapServers__"),
-						SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-						ConnectionName:         ptr.String("__ConnectionName__"),
-						TopicName:              ptr.String("__TopicName__"),
-						Assign:                 ptr.String("__Assign__"),
-						SubscribePattern:       ptr.String("__SubscribePattern__"),
-						Classification:         ptr.String("__Classification__"),
-						Delimiter:              ptr.String("__Delimiter__"),
-						StartingOffsets:        ptr.String("__StartingOffsets__"),
-						EndingOffsets:          ptr.String("__EndingOffsets__"),
-						PollTimeoutMs:          ptr.Int64(1),
-						NumRetries:             ptr.Int32(1),
-						RetryIntervalMs:        ptr.Int64(1),
-						MaxOffsetsPerTrigger:   ptr.Int64(1),
-						MinPartitions:          ptr.Int32(1),
-						IncludeHeaders:         ptr.Bool(true),
-						AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					},
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				CatalogKinesisSource: &types.CatalogKinesisSource{
-					Name:         ptr.String("__Name__"),
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					Table:        ptr.String("__Table__"),
-					Database:     ptr.String("__Database__"),
-					StreamingOptions: &types.KinesisStreamingSourceOptions{
-						EndpointUrl:              ptr.String("__EndpointUrl__"),
-						StreamName:               ptr.String("__StreamName__"),
-						Classification:           ptr.String("__Classification__"),
-						Delimiter:                ptr.String("__Delimiter__"),
-						StartingPosition:         types.StartingPosition("latest"),
-						MaxFetchTimeInMs:         ptr.Int64(1),
-						MaxFetchRecordsPerShard:  ptr.Int64(1),
-						MaxRecordPerRead:         ptr.Int64(1),
-						AddIdleTimeBetweenReads:  ptr.Bool(true),
-						IdleTimeBetweenReadsInMs: ptr.Int64(1),
-						DescribeShardInterval:    ptr.Int64(1),
-						NumRetries:               ptr.Int32(1),
-						RetryIntervalMs:          ptr.Int64(1),
-						MaxRetryIntervalMs:       ptr.Int64(1),
-						AvoidEmptyBatches:        ptr.Bool(true),
-						StreamArn:                ptr.String("__StreamArn__"),
-						RoleArn:                  ptr.String("__RoleArn__"),
-						RoleSessionName:          ptr.String("__RoleSessionName__"),
-						AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-					},
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				CatalogKafkaSource: &types.CatalogKafkaSource{
-					Name:         ptr.String("__Name__"),
-					WindowSize:   ptr.Int32(1),
-					DetectSchema: ptr.Bool(true),
-					Table:        ptr.String("__Table__"),
-					Database:     ptr.String("__Database__"),
-					StreamingOptions: &types.KafkaStreamingSourceOptions{
-						BootstrapServers:       ptr.String("__BootstrapServers__"),
-						SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-						ConnectionName:         ptr.String("__ConnectionName__"),
-						TopicName:              ptr.String("__TopicName__"),
-						Assign:                 ptr.String("__Assign__"),
-						SubscribePattern:       ptr.String("__SubscribePattern__"),
-						Classification:         ptr.String("__Classification__"),
-						Delimiter:              ptr.String("__Delimiter__"),
-						StartingOffsets:        ptr.String("__StartingOffsets__"),
-						EndingOffsets:          ptr.String("__EndingOffsets__"),
-						PollTimeoutMs:          ptr.Int64(1),
-						NumRetries:             ptr.Int32(1),
-						RetryIntervalMs:        ptr.Int64(1),
-						MaxOffsetsPerTrigger:   ptr.Int64(1),
-						MinPartitions:          ptr.Int32(1),
-						IncludeHeaders:         ptr.Bool(true),
-						AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-						EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-						StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					},
-					DataPreviewOptions: &types.StreamingDataPreviewOptions{
-						PollingTime:        ptr.Int64(1),
-						RecordPollingLimit: ptr.Int64(1),
-					},
-				},
-				DropNullFields: &types.DropNullFields{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					NullCheckBoxList: &types.NullCheckBoxList{
-						IsEmpty:      ptr.Bool(true),
-						IsNullString: ptr.Bool(true),
-						IsNegOne:     ptr.Bool(true),
-					},
-					NullTextList: []types.NullValueField{
-						{
-							Value: ptr.String("__Value__"),
-							Datatype: &types.Datatype{
-								Id:    ptr.String("__Id__"),
-								Label: ptr.String("__Label__"),
-							},
-						},
-						{
-							Value: ptr.String("__Value__"),
-							Datatype: &types.Datatype{
-								Id:    ptr.String("__Id__"),
-								Label: ptr.String("__Label__"),
-							},
-						},
-					},
-				},
-				Merge: &types.Merge{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Source: ptr.String("__Source__"),
-					PrimaryKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				Union: &types.Union{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					UnionType: types.UnionType("ALL"),
-				},
-				PIIDetection: &types.PIIDetection{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PiiType: types.PiiType("RowAudit"),
-					EntityTypesToDetect: []string{
-						"__Member__",
-						"__Member__",
-					},
-					OutputColumnName:       ptr.String("__OutputColumnName__"),
-					SampleFraction:         ptr.Float64(1.0),
-					ThresholdFraction:      ptr.Float64(1.0),
-					MaskValue:              ptr.String("__MaskValue__"),
-					RedactText:             ptr.String("__RedactText__"),
-					RedactChar:             ptr.String("__RedactChar__"),
-					MatchPattern:           ptr.String("__MatchPattern__"),
-					NumLeftCharsToExclude:  ptr.Int32(1),
-					NumRightCharsToExclude: ptr.Int32(1),
-					DetectionParameters:    ptr.String("__DetectionParameters__"),
-					DetectionSensitivity:   ptr.String("__DetectionSensitivity__"),
-				},
-				Aggregate: &types.Aggregate{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Groups: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Aggs: []types.AggregateOperation{
-						{
-							Column: []string{
-								"__Member__",
-								"__Member__",
-							},
-							AggFunc: types.AggFunction("avg"),
-						},
-						{
-							Column: []string{
-								"__Member__",
-								"__Member__",
-							},
-							AggFunc: types.AggFunction("avg"),
-						},
-					},
-				},
-				DropDuplicates: &types.DropDuplicates{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Columns: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				GovernedCatalogTarget: &types.GovernedCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-				},
-				GovernedCatalogSource: &types.GovernedCatalogSource{
-					Name:               ptr.String("__Name__"),
-					Database:           ptr.String("__Database__"),
-					Table:              ptr.String("__Table__"),
-					PartitionPredicate: ptr.String("__PartitionPredicate__"),
-					AdditionalOptions: &types.S3SourceAdditionalOptions{
-						BoundedSize:  ptr.Int64(1),
-						BoundedFiles: ptr.Int64(1),
-					},
-				},
-				MicrosoftSQLServerCatalogSource: &types.MicrosoftSQLServerCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				MySQLCatalogSource: &types.MySQLCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				OracleSQLCatalogSource: &types.OracleSQLCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				PostgreSQLCatalogSource: &types.PostgreSQLCatalogSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				MicrosoftSQLServerCatalogTarget: &types.MicrosoftSQLServerCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				MySQLCatalogTarget: &types.MySQLCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				OracleSQLCatalogTarget: &types.OracleSQLCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				PostgreSQLCatalogTarget: &types.PostgreSQLCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-				},
-				Route: &types.Route{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					GroupFiltersList: []types.GroupFilters{
-						{
-							GroupName: ptr.String("__GroupName__"),
-							Filters: []types.FilterExpression{
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-							},
-							LogicalOperator: types.FilterLogicalOperator("AND"),
-						},
-						{
-							GroupName: ptr.String("__GroupName__"),
-							Filters: []types.FilterExpression{
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-								{
-									Operation: types.FilterOperation("EQ"),
-									Negated:   ptr.Bool(true),
-									Values: []types.FilterValue{
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-										{
-											Type: types.FilterValueType("COLUMNEXTRACTED"),
-											Value: []string{
-												"__Member__",
-												"__Member__",
-											},
-										},
-									},
-								},
-							},
-							LogicalOperator: types.FilterLogicalOperator("AND"),
-						},
-					},
-				},
-				DynamicTransform: &types.DynamicTransform{
-					Name:          ptr.String("__Name__"),
-					TransformName: ptr.String("__TransformName__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Parameters: []types.TransformConfigParameter{
-						{
-							Name:              ptr.String("__Name__"),
-							Type:              types.ParamType("str"),
-							ValidationRule:    ptr.String("__ValidationRule__"),
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-							Value: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ListType:   types.ParamType("str"),
-							IsOptional: ptr.Bool(true),
-						},
-						{
-							Name:              ptr.String("__Name__"),
-							Type:              types.ParamType("str"),
-							ValidationRule:    ptr.String("__ValidationRule__"),
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-							Value: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ListType:   types.ParamType("str"),
-							IsOptional: ptr.Bool(true),
-						},
-					},
-					FunctionName: ptr.String("__FunctionName__"),
-					Path:         ptr.String("__Path__"),
-					Version:      ptr.String("__Version__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				EvaluateDataQuality: &types.EvaluateDataQuality{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Ruleset: ptr.String("__Ruleset__"),
-					Output:  types.DQTransformOutput("PrimaryInput"),
-					PublishingOptions: &types.DQResultsPublishingOptions{
-						EvaluationContext:        ptr.String("__EvaluationContext__"),
-						ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-						CloudWatchMetricsEnabled: ptr.Bool(true),
-						ResultsPublishingEnabled: ptr.Bool(true),
-					},
-					StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-						StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-					},
-				},
-				S3CatalogHudiSource: &types.S3CatalogHudiSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalHudiOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogHudiSource: &types.CatalogHudiSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalHudiOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HudiSource: &types.S3HudiSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AdditionalHudiOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HudiCatalogTarget: &types.S3HudiCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3HudiDirectTarget: &types.S3HudiDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            types.HudiTargetCompressionType("gzip"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Format: types.TargetFormat("json"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				DirectJDBCSource: &types.DirectJDBCSource{
-					Name:           ptr.String("__Name__"),
-					Database:       ptr.String("__Database__"),
-					Table:          ptr.String("__Table__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					ConnectionType: types.JDBCConnectionType("sqlserver"),
-					RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3CatalogDeltaSource: &types.S3CatalogDeltaSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalDeltaOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogDeltaSource: &types.CatalogDeltaSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalDeltaOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3DeltaSource: &types.S3DeltaSource{
-					Name: ptr.String("__Name__"),
-					Paths: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AdditionalDeltaOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-						BoundedSize:      ptr.Int64(1),
-						BoundedFiles:     ptr.Int64(1),
-						EnableSamplePath: ptr.Bool(true),
-						SamplePath:       ptr.String("__SamplePath__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3DeltaCatalogTarget: &types.S3DeltaCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3DeltaDirectTarget: &types.S3DeltaDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:                   ptr.String("__Path__"),
-					Compression:            types.DeltaTargetCompressionType("uncompressed"),
-					NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-					Format:                 types.TargetFormat("json"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						Table:               ptr.String("__Table__"),
-						Database:            ptr.String("__Database__"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				AmazonRedshiftSource: &types.AmazonRedshiftSource{
-					Name: ptr.String("__Name__"),
-					Data: &types.AmazonRedshiftNodeData{
-						AccessType: ptr.String("__AccessType__"),
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Table: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogDatabase: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogTable: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-						CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-						TempDir:               ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						TablePrefix:         ptr.String("__TablePrefix__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						StagingTable: ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-				},
-				AmazonRedshiftTarget: &types.AmazonRedshiftTarget{
-					Name: ptr.String("__Name__"),
-					Data: &types.AmazonRedshiftNodeData{
-						AccessType: ptr.String("__AccessType__"),
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Table: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogDatabase: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogTable: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-						CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-						TempDir:               ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-							{
-								Key:   ptr.String("__Key__"),
-								Value: ptr.String("__Value__"),
-							},
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						TablePrefix:         ptr.String("__TablePrefix__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						StagingTable: ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				EvaluateDataQualityMultiFrame: &types.EvaluateDataQualityMultiFrame{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AdditionalDataSources: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					Ruleset: ptr.String("__Ruleset__"),
-					PublishingOptions: &types.DQResultsPublishingOptions{
-						EvaluationContext:        ptr.String("__EvaluationContext__"),
-						ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-						CloudWatchMetricsEnabled: ptr.Bool(true),
-						ResultsPublishingEnabled: ptr.Bool(true),
-					},
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-						StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-					},
-				},
-				Recipe: &types.Recipe{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					RecipeReference: &types.RecipeReference{
-						RecipeArn:     ptr.String("__RecipeArn__"),
-						RecipeVersion: ptr.String("__RecipeVersion__"),
-					},
-					RecipeSteps: []types.RecipeStep{
-						{
-							Action: &types.RecipeAction{
-								Operation: ptr.String("__Operation__"),
-								Parameters: map[string]string{
-									"key0": "__Value__",
-									"key1": "__Value__",
-								},
-							},
-							ConditionExpressions: []types.ConditionExpression{
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-							},
-						},
-						{
-							Action: &types.RecipeAction{
-								Operation: ptr.String("__Operation__"),
-								Parameters: map[string]string{
-									"key0": "__Value__",
-									"key1": "__Value__",
-								},
-							},
-							ConditionExpressions: []types.ConditionExpression{
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-								{
-									Condition:    ptr.String("__Condition__"),
-									Value:        ptr.String("__Value__"),
-									TargetColumn: ptr.String("__TargetColumn__"),
-								},
-							},
-						},
-					},
-				},
-				SnowflakeSource: &types.SnowflakeSource{
-					Name: ptr.String("__Name__"),
-					Data: &types.SnowflakeNodeData{
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema:   ptr.String("__Schema__"),
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						TempDir:  ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						StagingTable:        ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						AutoPushdown: true,
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				SnowflakeTarget: &types.SnowflakeTarget{
-					Name: ptr.String("__Name__"),
-					Data: &types.SnowflakeNodeData{
-						SourceType: ptr.String("__SourceType__"),
-						Connection: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						Schema:   ptr.String("__Schema__"),
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						TempDir:  ptr.String("__TempDir__"),
-						IamRole: &types.Option{
-							Value:       ptr.String("__Value__"),
-							Label:       ptr.String("__Label__"),
-							Description: ptr.String("__Description__"),
-						},
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SampleQuery:         ptr.String("__SampleQuery__"),
-						PreAction:           ptr.String("__PreAction__"),
-						PostAction:          ptr.String("__PostAction__"),
-						Action:              ptr.String("__Action__"),
-						Upsert:              true,
-						MergeAction:         ptr.String("__MergeAction__"),
-						MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-						MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-						MergeClause:         ptr.String("__MergeClause__"),
-						StagingTable:        ptr.String("__StagingTable__"),
-						SelectedColumns: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-						AutoPushdown: true,
-						TableSchema: []types.Option{
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-						},
-					},
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				ConnectorDataSource: &types.ConnectorDataSource{
-					Name:           ptr.String("__Name__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					Data: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				ConnectorDataTarget: &types.ConnectorDataTarget{
-					Name:           ptr.String("__Name__"),
-					ConnectionType: ptr.String("__ConnectionType__"),
-					Data: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				S3CatalogIcebergSource: &types.S3CatalogIcebergSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalIcebergOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				CatalogIcebergSource: &types.CatalogIcebergSource{
-					Name:     ptr.String("__Name__"),
-					Database: ptr.String("__Database__"),
-					Table:    ptr.String("__Table__"),
-					AdditionalIcebergOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					OutputSchemas: []types.GlueSchema{
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-						{
-							Columns: []types.GlueStudioSchemaColumn{
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-								{
-									Name:           ptr.String("__Name__"),
-									Type:           ptr.String("__Type__"),
-									GlueStudioType: ptr.String("__GlueStudioType__"),
-								},
-							},
-						},
-					},
-				},
-				S3IcebergCatalogTarget: &types.S3IcebergCatalogTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Table:    ptr.String("__Table__"),
-					Database: ptr.String("__Database__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-						EnableUpdateCatalog: ptr.Bool(true),
-						UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-					},
-					AutoDataQuality: &types.AutoDataQuality{
-						IsEnabled:         true,
-						EvaluationContext: ptr.String("__EvaluationContext__"),
-					},
-				},
-				S3IcebergDirectTarget: &types.S3IcebergDirectTarget{
-					Name: ptr.String("__Name__"),
-					Inputs: []string{
-						"__Member__",
-						"__Member__",
-					},
-					PartitionKeys: [][]string{
-						{
-							"__Member__",
-							"__Member__",
-						},
-						{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Path:   ptr.String("__Path__"),
-					Format: types.TargetFormat("json"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 						EnableUpdateCatalog: ptr.Bool(true),
@@ -32284,6 +24046,7 @@ func TestSerdeUpdateSnapshot_CreateJob(t *testing.T) {
 	_, err := svc.CreateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32311,7 +24074,6 @@ func TestSerdeUpdateSnapshot_CreateMLTransform(t *testing.T) {
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			{
@@ -32321,7 +24083,6 @@ func TestSerdeUpdateSnapshot_CreateMLTransform(t *testing.T) {
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
@@ -32343,7 +24104,6 @@ func TestSerdeUpdateSnapshot_CreateMLTransform(t *testing.T) {
 		MaxRetries:      ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		TransformEncryption: &types.TransformEncryption{
 			MlUserDataEncryption: &types.MLUserDataEncryption{
@@ -32362,6 +24122,7 @@ func TestSerdeUpdateSnapshot_CreateMLTransform(t *testing.T) {
 	_, err := svc.CreateMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32396,7 +24157,6 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -32405,7 +24165,6 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -32423,7 +24182,6 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -32442,7 +24200,6 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -32455,7 +24212,6 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -32471,7 +24227,6 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -32485,6 +24240,7 @@ func TestSerdeUpdateSnapshot_CreatePartition(t *testing.T) {
 	_, err := svc.CreatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32522,6 +24278,7 @@ func TestSerdeUpdateSnapshot_CreatePartitionIndex(t *testing.T) {
 	_, err := svc.CreatePartitionIndex(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32543,7 +24300,6 @@ func TestSerdeUpdateSnapshot_CreateRegistry(t *testing.T) {
 		Description:  ptr.String("__Description__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -32555,6 +24311,7 @@ func TestSerdeUpdateSnapshot_CreateRegistry(t *testing.T) {
 	_, err := svc.CreateRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32582,7 +24339,6 @@ func TestSerdeUpdateSnapshot_CreateSchema(t *testing.T) {
 		Description:   ptr.String("__Description__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		SchemaDefinition: ptr.String("__SchemaDefinition__"),
 	}
@@ -32595,6 +24351,7 @@ func TestSerdeUpdateSnapshot_CreateSchema(t *testing.T) {
 	_, err := svc.CreateSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32671,6 +24428,7 @@ func TestSerdeUpdateSnapshot_CreateScript(t *testing.T) {
 	_, err := svc.CreateScript(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32723,6 +24481,7 @@ func TestSerdeUpdateSnapshot_CreateSecurityConfiguration(t *testing.T) {
 	_, err := svc.CreateSecurityConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32751,7 +24510,6 @@ func TestSerdeUpdateSnapshot_CreateSession(t *testing.T) {
 		IdleTimeout: ptr.Int32(1),
 		DefaultArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Connections: &types.ConnectionsList{
 			Connections: []string{
@@ -32766,7 +24524,6 @@ func TestSerdeUpdateSnapshot_CreateSession(t *testing.T) {
 		GlueVersion:           ptr.String("__GlueVersion__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		RequestOrigin: ptr.String("__RequestOrigin__"),
 		SessionType:   types.SessionType("LIVY"),
@@ -32780,6 +24537,7 @@ func TestSerdeUpdateSnapshot_CreateSession(t *testing.T) {
 	_, err := svc.CreateSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -32815,7 +24573,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -32824,7 +24581,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -32842,7 +24598,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -32861,7 +24616,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -32874,7 +24628,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -32895,7 +24648,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				{
@@ -32904,7 +24656,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -32913,7 +24664,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 			TableType:        ptr.String("__TableType__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetTable: &types.TableIdentifier{
 				CatalogId:    ptr.String("__CatalogId__"),
@@ -33041,7 +24791,6 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 					},
 					Properties: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -33056,6 +24805,7 @@ func TestSerdeUpdateSnapshot_CreateTable(t *testing.T) {
 	_, err := svc.CreateTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33116,6 +24866,7 @@ func TestSerdeUpdateSnapshot_CreateTableOptimizer(t *testing.T) {
 	_, err := svc.CreateTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33161,7 +24912,6 @@ func TestSerdeUpdateSnapshot_CreateTrigger(t *testing.T) {
 				JobName: ptr.String("__JobName__"),
 				Arguments: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				Timeout:               ptr.Int32(1),
 				SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -33174,7 +24924,6 @@ func TestSerdeUpdateSnapshot_CreateTrigger(t *testing.T) {
 				JobName: ptr.String("__JobName__"),
 				Arguments: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				Timeout:               ptr.Int32(1),
 				SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -33188,7 +24937,6 @@ func TestSerdeUpdateSnapshot_CreateTrigger(t *testing.T) {
 		StartOnCreation: true,
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		EventBatchingCondition: &types.EventBatchingCondition{
 			BatchSize:   ptr.Int32(1),
@@ -33204,6 +24952,7 @@ func TestSerdeUpdateSnapshot_CreateTrigger(t *testing.T) {
 	_, err := svc.CreateTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33234,27 +24983,9 @@ func TestSerdeUpdateSnapshot_CreateUsageProfile(t *testing.T) {
 					MinValue: ptr.String("__MinValue__"),
 					MaxValue: ptr.String("__MaxValue__"),
 				},
-				"key1": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
 			},
 			JobConfiguration: map[string]types.ConfigurationObject{
 				"key0": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
-				"key1": {
 					DefaultValue: ptr.String("__DefaultValue__"),
 					AllowedValues: []string{
 						"__Member__",
@@ -33267,7 +24998,6 @@ func TestSerdeUpdateSnapshot_CreateUsageProfile(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -33279,6 +25009,7 @@ func TestSerdeUpdateSnapshot_CreateUsageProfile(t *testing.T) {
 	_, err := svc.CreateUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33325,6 +25056,7 @@ func TestSerdeUpdateSnapshot_CreateUserDefinedFunction(t *testing.T) {
 	_, err := svc.CreateUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33346,11 +25078,9 @@ func TestSerdeUpdateSnapshot_CreateWorkflow(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		DefaultRunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		MaxConcurrentRuns: ptr.Int32(1),
 	}
@@ -33363,6 +25093,7 @@ func TestSerdeUpdateSnapshot_CreateWorkflow(t *testing.T) {
 	_, err := svc.CreateWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33391,6 +25122,7 @@ func TestSerdeUpdateSnapshot_DeleteAsset(t *testing.T) {
 	_, err := svc.DeleteAsset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33419,6 +25151,7 @@ func TestSerdeUpdateSnapshot_DeleteAssetType(t *testing.T) {
 	_, err := svc.DeleteAssetType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33450,6 +25183,7 @@ func TestSerdeUpdateSnapshot_DeleteAttachment(t *testing.T) {
 	_, err := svc.DeleteAttachment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33478,6 +25212,7 @@ func TestSerdeUpdateSnapshot_DeleteBlueprint(t *testing.T) {
 	_, err := svc.DeleteBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33506,6 +25241,7 @@ func TestSerdeUpdateSnapshot_DeleteCatalog(t *testing.T) {
 	_, err := svc.DeleteCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33534,6 +25270,7 @@ func TestSerdeUpdateSnapshot_DeleteClassifier(t *testing.T) {
 	_, err := svc.DeleteClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33569,6 +25306,7 @@ func TestSerdeUpdateSnapshot_DeleteColumnStatisticsForPartition(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsForPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33600,6 +25338,7 @@ func TestSerdeUpdateSnapshot_DeleteColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsForTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33629,6 +25368,7 @@ func TestSerdeUpdateSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33658,6 +25398,7 @@ func TestSerdeUpdateSnapshot_DeleteConnection(t *testing.T) {
 	_, err := svc.DeleteConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33686,6 +25427,7 @@ func TestSerdeUpdateSnapshot_DeleteConnectionType(t *testing.T) {
 	_, err := svc.DeleteConnectionType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33714,6 +25456,7 @@ func TestSerdeUpdateSnapshot_DeleteCrawler(t *testing.T) {
 	_, err := svc.DeleteCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33742,6 +25485,7 @@ func TestSerdeUpdateSnapshot_DeleteCustomEntityType(t *testing.T) {
 	_, err := svc.DeleteCustomEntityType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33771,6 +25515,7 @@ func TestSerdeUpdateSnapshot_DeleteDatabase(t *testing.T) {
 	_, err := svc.DeleteDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33799,6 +25544,7 @@ func TestSerdeUpdateSnapshot_DeleteDataQualityRuleset(t *testing.T) {
 	_, err := svc.DeleteDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33827,6 +25573,7 @@ func TestSerdeUpdateSnapshot_DeleteDevEndpoint(t *testing.T) {
 	_, err := svc.DeleteDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33855,6 +25602,7 @@ func TestSerdeUpdateSnapshot_DeleteFormType(t *testing.T) {
 	_, err := svc.DeleteFormType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33883,6 +25631,7 @@ func TestSerdeUpdateSnapshot_DeleteGlossary(t *testing.T) {
 	_, err := svc.DeleteGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33911,6 +25660,7 @@ func TestSerdeUpdateSnapshot_DeleteGlossaryTerm(t *testing.T) {
 	_, err := svc.DeleteGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33937,6 +25687,7 @@ func TestSerdeUpdateSnapshot_DeleteGlueIdentityCenterConfiguration(t *testing.T)
 	_, err := svc.DeleteGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33965,6 +25716,7 @@ func TestSerdeUpdateSnapshot_DeleteIntegration(t *testing.T) {
 	_, err := svc.DeleteIntegration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -33993,6 +25745,7 @@ func TestSerdeUpdateSnapshot_DeleteIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.DeleteIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34022,6 +25775,7 @@ func TestSerdeUpdateSnapshot_DeleteIntegrationTableProperties(t *testing.T) {
 	_, err := svc.DeleteIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34050,6 +25804,7 @@ func TestSerdeUpdateSnapshot_DeleteJob(t *testing.T) {
 	_, err := svc.DeleteJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34078,6 +25833,7 @@ func TestSerdeUpdateSnapshot_DeleteMLTransform(t *testing.T) {
 	_, err := svc.DeleteMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34112,6 +25868,7 @@ func TestSerdeUpdateSnapshot_DeletePartition(t *testing.T) {
 	_, err := svc.DeletePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34143,6 +25900,7 @@ func TestSerdeUpdateSnapshot_DeletePartitionIndex(t *testing.T) {
 	_, err := svc.DeletePartitionIndex(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34174,6 +25932,7 @@ func TestSerdeUpdateSnapshot_DeleteRegistry(t *testing.T) {
 	_, err := svc.DeleteRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34203,6 +25962,7 @@ func TestSerdeUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34235,6 +25995,7 @@ func TestSerdeUpdateSnapshot_DeleteSchema(t *testing.T) {
 	_, err := svc.DeleteSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34268,6 +26029,7 @@ func TestSerdeUpdateSnapshot_DeleteSchemaVersions(t *testing.T) {
 	_, err := svc.DeleteSchemaVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34296,6 +26058,7 @@ func TestSerdeUpdateSnapshot_DeleteSecurityConfiguration(t *testing.T) {
 	_, err := svc.DeleteSecurityConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34325,6 +26088,7 @@ func TestSerdeUpdateSnapshot_DeleteSession(t *testing.T) {
 	_, err := svc.DeleteSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34356,6 +26120,7 @@ func TestSerdeUpdateSnapshot_DeleteTable(t *testing.T) {
 	_, err := svc.DeleteTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34387,6 +26152,7 @@ func TestSerdeUpdateSnapshot_DeleteTableOptimizer(t *testing.T) {
 	_, err := svc.DeleteTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34418,6 +26184,7 @@ func TestSerdeUpdateSnapshot_DeleteTableVersion(t *testing.T) {
 	_, err := svc.DeleteTableVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34446,6 +26213,7 @@ func TestSerdeUpdateSnapshot_DeleteTrigger(t *testing.T) {
 	_, err := svc.DeleteTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34474,6 +26242,7 @@ func TestSerdeUpdateSnapshot_DeleteUsageProfile(t *testing.T) {
 	_, err := svc.DeleteUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34504,6 +26273,7 @@ func TestSerdeUpdateSnapshot_DeleteUserDefinedFunction(t *testing.T) {
 	_, err := svc.DeleteUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34532,6 +26302,7 @@ func TestSerdeUpdateSnapshot_DeleteWorkflow(t *testing.T) {
 	_, err := svc.DeleteWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34560,6 +26331,7 @@ func TestSerdeUpdateSnapshot_DescribeConnectionType(t *testing.T) {
 	_, err := svc.DescribeConnectionType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34592,6 +26364,7 @@ func TestSerdeUpdateSnapshot_DescribeEntity(t *testing.T) {
 	_, err := svc.DescribeEntity(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34623,6 +26396,7 @@ func TestSerdeUpdateSnapshot_DescribeInboundIntegrations(t *testing.T) {
 	_, err := svc.DescribeInboundIntegrations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34669,6 +26443,7 @@ func TestSerdeUpdateSnapshot_DescribeIntegrations(t *testing.T) {
 	_, err := svc.DescribeIntegrations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34702,6 +26477,7 @@ func TestSerdeUpdateSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	_, err := svc.DisassociateGlossaryTerms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34730,6 +26506,7 @@ func TestSerdeUpdateSnapshot_GetAsset(t *testing.T) {
 	_, err := svc.GetAsset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34758,6 +26535,7 @@ func TestSerdeUpdateSnapshot_GetAssetType(t *testing.T) {
 	_, err := svc.GetAssetType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34788,6 +26566,7 @@ func TestSerdeUpdateSnapshot_GetBlueprint(t *testing.T) {
 	_, err := svc.GetBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34817,6 +26596,7 @@ func TestSerdeUpdateSnapshot_GetBlueprintRun(t *testing.T) {
 	_, err := svc.GetBlueprintRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34847,6 +26627,7 @@ func TestSerdeUpdateSnapshot_GetBlueprintRuns(t *testing.T) {
 	_, err := svc.GetBlueprintRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34875,6 +26656,7 @@ func TestSerdeUpdateSnapshot_GetCatalog(t *testing.T) {
 	_, err := svc.GetCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34903,6 +26685,7 @@ func TestSerdeUpdateSnapshot_GetCatalogImportStatus(t *testing.T) {
 	_, err := svc.GetCatalogImportStatus(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34936,6 +26719,7 @@ func TestSerdeUpdateSnapshot_GetCatalogs(t *testing.T) {
 	_, err := svc.GetCatalogs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34964,6 +26748,7 @@ func TestSerdeUpdateSnapshot_GetClassifier(t *testing.T) {
 	_, err := svc.GetClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -34993,6 +26778,7 @@ func TestSerdeUpdateSnapshot_GetClassifiers(t *testing.T) {
 	_, err := svc.GetClassifiers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35031,6 +26817,7 @@ func TestSerdeUpdateSnapshot_GetColumnStatisticsForPartition(t *testing.T) {
 	_, err := svc.GetColumnStatisticsForPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35065,6 +26852,7 @@ func TestSerdeUpdateSnapshot_GetColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.GetColumnStatisticsForTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35093,6 +26881,7 @@ func TestSerdeUpdateSnapshot_GetColumnStatisticsTaskRun(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35124,6 +26913,7 @@ func TestSerdeUpdateSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35153,6 +26943,7 @@ func TestSerdeUpdateSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35184,6 +26975,7 @@ func TestSerdeUpdateSnapshot_GetConnection(t *testing.T) {
 	_, err := svc.GetConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35223,6 +27015,7 @@ func TestSerdeUpdateSnapshot_GetConnections(t *testing.T) {
 	_, err := svc.GetConnections(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35251,6 +27044,7 @@ func TestSerdeUpdateSnapshot_GetCrawler(t *testing.T) {
 	_, err := svc.GetCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35284,6 +27078,7 @@ func TestSerdeUpdateSnapshot_GetCrawlerMetrics(t *testing.T) {
 	_, err := svc.GetCrawlerMetrics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35313,6 +27108,7 @@ func TestSerdeUpdateSnapshot_GetCrawlers(t *testing.T) {
 	_, err := svc.GetCrawlers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35341,6 +27137,7 @@ func TestSerdeUpdateSnapshot_GetCustomEntityType(t *testing.T) {
 	_, err := svc.GetCustomEntityType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35371,6 +27168,7 @@ func TestSerdeUpdateSnapshot_GetDashboardUrl(t *testing.T) {
 	_, err := svc.GetDashboardUrl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35400,6 +27198,7 @@ func TestSerdeUpdateSnapshot_GetDatabase(t *testing.T) {
 	_, err := svc.GetDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35435,6 +27234,7 @@ func TestSerdeUpdateSnapshot_GetDatabases(t *testing.T) {
 	_, err := svc.GetDatabases(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35463,6 +27263,7 @@ func TestSerdeUpdateSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.GetDataCatalogEncryptionSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35491,6 +27292,7 @@ func TestSerdeUpdateSnapshot_GetDataflowGraph(t *testing.T) {
 	_, err := svc.GetDataflowGraph(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35520,6 +27322,7 @@ func TestSerdeUpdateSnapshot_GetDataQualityModel(t *testing.T) {
 	_, err := svc.GetDataQualityModel(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35549,6 +27352,7 @@ func TestSerdeUpdateSnapshot_GetDataQualityModelResult(t *testing.T) {
 	_, err := svc.GetDataQualityModelResult(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35577,6 +27381,7 @@ func TestSerdeUpdateSnapshot_GetDataQualityResult(t *testing.T) {
 	_, err := svc.GetDataQualityResult(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35605,6 +27410,7 @@ func TestSerdeUpdateSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	_, err := svc.GetDataQualityRuleRecommendationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35633,6 +27439,7 @@ func TestSerdeUpdateSnapshot_GetDataQualityRuleset(t *testing.T) {
 	_, err := svc.GetDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35661,6 +27468,7 @@ func TestSerdeUpdateSnapshot_GetDataQualityRulesetEvaluationRun(t *testing.T) {
 	_, err := svc.GetDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35689,6 +27497,7 @@ func TestSerdeUpdateSnapshot_GetDevEndpoint(t *testing.T) {
 	_, err := svc.GetDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35718,6 +27527,7 @@ func TestSerdeUpdateSnapshot_GetDevEndpoints(t *testing.T) {
 	_, err := svc.GetDevEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35742,7 +27552,6 @@ func TestSerdeUpdateSnapshot_GetEntityRecords(t *testing.T) {
 		DataStoreApiVersion: ptr.String("__DataStoreApiVersion__"),
 		ConnectionOptions: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		FilterPredicate: ptr.String("__FilterPredicate__"),
 		Limit:           ptr.Int64(1),
@@ -35761,6 +27570,7 @@ func TestSerdeUpdateSnapshot_GetEntityRecords(t *testing.T) {
 	_, err := svc.GetEntityRecords(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35789,6 +27599,7 @@ func TestSerdeUpdateSnapshot_GetFormType(t *testing.T) {
 	_, err := svc.GetFormType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35817,6 +27628,7 @@ func TestSerdeUpdateSnapshot_GetGlossary(t *testing.T) {
 	_, err := svc.GetGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35845,6 +27657,7 @@ func TestSerdeUpdateSnapshot_GetGlossaryTerm(t *testing.T) {
 	_, err := svc.GetGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35871,6 +27684,7 @@ func TestSerdeUpdateSnapshot_GetGlueIdentityCenterConfiguration(t *testing.T) {
 	_, err := svc.GetGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35899,6 +27713,7 @@ func TestSerdeUpdateSnapshot_GetIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.GetIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35928,6 +27743,7 @@ func TestSerdeUpdateSnapshot_GetIntegrationTableProperties(t *testing.T) {
 	_, err := svc.GetIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35956,6 +27772,7 @@ func TestSerdeUpdateSnapshot_GetJob(t *testing.T) {
 	_, err := svc.GetJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -35985,6 +27802,7 @@ func TestSerdeUpdateSnapshot_GetJobBookmark(t *testing.T) {
 	_, err := svc.GetJobBookmark(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36015,6 +27833,7 @@ func TestSerdeUpdateSnapshot_GetJobRun(t *testing.T) {
 	_, err := svc.GetJobRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36045,6 +27864,7 @@ func TestSerdeUpdateSnapshot_GetJobRuns(t *testing.T) {
 	_, err := svc.GetJobRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36074,6 +27894,7 @@ func TestSerdeUpdateSnapshot_GetJobs(t *testing.T) {
 	_, err := svc.GetJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36153,6 +27974,7 @@ func TestSerdeUpdateSnapshot_GetMapping(t *testing.T) {
 	_, err := svc.GetMapping(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36182,6 +28004,7 @@ func TestSerdeUpdateSnapshot_GetMaterializedViewRefreshTaskRun(t *testing.T) {
 	_, err := svc.GetMaterializedViewRefreshTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36211,6 +28034,7 @@ func TestSerdeUpdateSnapshot_GetMLTaskRun(t *testing.T) {
 	_, err := svc.GetMLTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36251,6 +28075,7 @@ func TestSerdeUpdateSnapshot_GetMLTaskRuns(t *testing.T) {
 	_, err := svc.GetMLTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36279,6 +28104,7 @@ func TestSerdeUpdateSnapshot_GetMLTransform(t *testing.T) {
 	_, err := svc.GetMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36332,6 +28158,7 @@ func TestSerdeUpdateSnapshot_GetMLTransforms(t *testing.T) {
 	_, err := svc.GetMLTransforms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36374,6 +28201,7 @@ func TestSerdeUpdateSnapshot_GetPartition(t *testing.T) {
 	_, err := svc.GetPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36405,6 +28233,7 @@ func TestSerdeUpdateSnapshot_GetPartitionIndexes(t *testing.T) {
 	_, err := svc.GetPartitionIndexes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36453,6 +28282,7 @@ func TestSerdeUpdateSnapshot_GetPartitions(t *testing.T) {
 	_, err := svc.GetPartitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36543,7 +28373,6 @@ func TestSerdeUpdateSnapshot_GetPlan(t *testing.T) {
 		Language: types.Language("PYTHON"),
 		AdditionalPlanOptionsMap: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -36555,6 +28384,7 @@ func TestSerdeUpdateSnapshot_GetPlan(t *testing.T) {
 	_, err := svc.GetPlan(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36586,6 +28416,7 @@ func TestSerdeUpdateSnapshot_GetRegistry(t *testing.T) {
 	_, err := svc.GetRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36615,6 +28446,7 @@ func TestSerdeUpdateSnapshot_GetResourcePolicies(t *testing.T) {
 	_, err := svc.GetResourcePolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36643,6 +28475,7 @@ func TestSerdeUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36675,6 +28508,7 @@ func TestSerdeUpdateSnapshot_GetSchema(t *testing.T) {
 	_, err := svc.GetSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36708,6 +28542,7 @@ func TestSerdeUpdateSnapshot_GetSchemaByDefinition(t *testing.T) {
 	_, err := svc.GetSchemaByDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36745,6 +28580,7 @@ func TestSerdeUpdateSnapshot_GetSchemaVersion(t *testing.T) {
 	_, err := svc.GetSchemaVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36786,6 +28622,7 @@ func TestSerdeUpdateSnapshot_GetSchemaVersionsDiff(t *testing.T) {
 	_, err := svc.GetSchemaVersionsDiff(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36814,6 +28651,7 @@ func TestSerdeUpdateSnapshot_GetSecurityConfiguration(t *testing.T) {
 	_, err := svc.GetSecurityConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36843,6 +28681,7 @@ func TestSerdeUpdateSnapshot_GetSecurityConfigurations(t *testing.T) {
 	_, err := svc.GetSecurityConfigurations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36872,6 +28711,7 @@ func TestSerdeUpdateSnapshot_GetSession(t *testing.T) {
 	_, err := svc.GetSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36900,6 +28740,7 @@ func TestSerdeUpdateSnapshot_GetSessionEndpoint(t *testing.T) {
 	_, err := svc.GetSessionEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36930,6 +28771,7 @@ func TestSerdeUpdateSnapshot_GetStatement(t *testing.T) {
 	_, err := svc.GetStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -36975,6 +28817,7 @@ func TestSerdeUpdateSnapshot_GetTable(t *testing.T) {
 	_, err := svc.GetTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37006,6 +28849,7 @@ func TestSerdeUpdateSnapshot_GetTableOptimizer(t *testing.T) {
 	_, err := svc.GetTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37053,6 +28897,7 @@ func TestSerdeUpdateSnapshot_GetTables(t *testing.T) {
 	_, err := svc.GetTables(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37092,6 +28937,7 @@ func TestSerdeUpdateSnapshot_GetTableVersion(t *testing.T) {
 	_, err := svc.GetTableVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37132,6 +28978,7 @@ func TestSerdeUpdateSnapshot_GetTableVersions(t *testing.T) {
 	_, err := svc.GetTableVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37160,6 +29007,7 @@ func TestSerdeUpdateSnapshot_GetTags(t *testing.T) {
 	_, err := svc.GetTags(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37188,6 +29036,7 @@ func TestSerdeUpdateSnapshot_GetTrigger(t *testing.T) {
 	_, err := svc.GetTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37218,6 +29067,7 @@ func TestSerdeUpdateSnapshot_GetTriggers(t *testing.T) {
 	_, err := svc.GetTriggers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37262,7 +29112,6 @@ func TestSerdeUpdateSnapshot_GetUnfilteredPartitionMetadata(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -37275,6 +29124,7 @@ func TestSerdeUpdateSnapshot_GetUnfilteredPartitionMetadata(t *testing.T) {
 	_, err := svc.GetUnfilteredPartitionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37322,7 +29172,6 @@ func TestSerdeUpdateSnapshot_GetUnfilteredPartitionsMetadata(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -37335,6 +29184,7 @@ func TestSerdeUpdateSnapshot_GetUnfilteredPartitionsMetadata(t *testing.T) {
 	_, err := svc.GetUnfilteredPartitionsMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37385,7 +29235,6 @@ func TestSerdeUpdateSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
 			AdditionalContext: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -37398,6 +29247,7 @@ func TestSerdeUpdateSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 	_, err := svc.GetUnfilteredTableMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37426,6 +29276,7 @@ func TestSerdeUpdateSnapshot_GetUsageProfile(t *testing.T) {
 	_, err := svc.GetUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37456,6 +29307,7 @@ func TestSerdeUpdateSnapshot_GetUserDefinedFunction(t *testing.T) {
 	_, err := svc.GetUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37489,6 +29341,7 @@ func TestSerdeUpdateSnapshot_GetUserDefinedFunctions(t *testing.T) {
 	_, err := svc.GetUserDefinedFunctions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37518,6 +29371,7 @@ func TestSerdeUpdateSnapshot_GetWorkflow(t *testing.T) {
 	_, err := svc.GetWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37548,6 +29402,7 @@ func TestSerdeUpdateSnapshot_GetWorkflowRun(t *testing.T) {
 	_, err := svc.GetWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37577,6 +29432,7 @@ func TestSerdeUpdateSnapshot_GetWorkflowRunProperties(t *testing.T) {
 	_, err := svc.GetWorkflowRunProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37608,6 +29464,7 @@ func TestSerdeUpdateSnapshot_GetWorkflowRuns(t *testing.T) {
 	_, err := svc.GetWorkflowRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37636,6 +29493,7 @@ func TestSerdeUpdateSnapshot_ImportCatalogToGlue(t *testing.T) {
 	_, err := svc.ImportCatalogToGlue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37665,6 +29523,7 @@ func TestSerdeUpdateSnapshot_ListAssetTypes(t *testing.T) {
 	_, err := svc.ListAssetTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37686,7 +29545,6 @@ func TestSerdeUpdateSnapshot_ListBlueprints(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -37698,6 +29556,7 @@ func TestSerdeUpdateSnapshot_ListBlueprints(t *testing.T) {
 	_, err := svc.ListBlueprints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37727,6 +29586,7 @@ func TestSerdeUpdateSnapshot_ListColumnStatisticsTaskRuns(t *testing.T) {
 	_, err := svc.ListColumnStatisticsTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37756,6 +29616,7 @@ func TestSerdeUpdateSnapshot_ListConnectionTypes(t *testing.T) {
 	_, err := svc.ListConnectionTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37777,7 +29638,6 @@ func TestSerdeUpdateSnapshot_ListCrawlers(t *testing.T) {
 		NextToken:  ptr.String("__NextToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -37789,6 +29649,7 @@ func TestSerdeUpdateSnapshot_ListCrawlers(t *testing.T) {
 	_, err := svc.ListCrawlers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37831,6 +29692,7 @@ func TestSerdeUpdateSnapshot_ListCrawls(t *testing.T) {
 	_, err := svc.ListCrawls(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37852,7 +29714,6 @@ func TestSerdeUpdateSnapshot_ListCustomEntityTypes(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -37864,6 +29725,7 @@ func TestSerdeUpdateSnapshot_ListCustomEntityTypes(t *testing.T) {
 	_, err := svc.ListCustomEntityTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37890,7 +29752,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityResults(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -37900,7 +29761,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityResults(t *testing.T) {
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -37922,6 +29782,7 @@ func TestSerdeUpdateSnapshot_ListDataQualityResults(t *testing.T) {
 	_, err := svc.ListDataQualityResults(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -37948,7 +29809,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T)
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -37958,7 +29818,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T)
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -37978,6 +29837,7 @@ func TestSerdeUpdateSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T)
 	_, err := svc.ListDataQualityRuleRecommendationRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38004,7 +29864,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityRulesetEvaluationRuns(t *testing.T) 
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -38014,7 +29873,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityRulesetEvaluationRuns(t *testing.T) 
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -38035,6 +29893,7 @@ func TestSerdeUpdateSnapshot_ListDataQualityRulesetEvaluationRuns(t *testing.T) 
 	_, err := svc.ListDataQualityRulesetEvaluationRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38069,7 +29928,6 @@ func TestSerdeUpdateSnapshot_ListDataQualityRulesets(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -38081,6 +29939,7 @@ func TestSerdeUpdateSnapshot_ListDataQualityRulesets(t *testing.T) {
 	_, err := svc.ListDataQualityRulesets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38116,6 +29975,7 @@ func TestSerdeUpdateSnapshot_ListDataQualityStatisticAnnotations(t *testing.T) {
 	_, err := svc.ListDataQualityStatisticAnnotations(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38151,6 +30011,7 @@ func TestSerdeUpdateSnapshot_ListDataQualityStatistics(t *testing.T) {
 	_, err := svc.ListDataQualityStatistics(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38172,7 +30033,6 @@ func TestSerdeUpdateSnapshot_ListDevEndpoints(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -38184,6 +30044,7 @@ func TestSerdeUpdateSnapshot_ListDevEndpoints(t *testing.T) {
 	_, err := svc.ListDevEndpoints(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38216,6 +30077,7 @@ func TestSerdeUpdateSnapshot_ListEntities(t *testing.T) {
 	_, err := svc.ListEntities(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38245,6 +30107,7 @@ func TestSerdeUpdateSnapshot_ListFormTypes(t *testing.T) {
 	_, err := svc.ListFormTypes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38274,6 +30137,7 @@ func TestSerdeUpdateSnapshot_ListGlossaries(t *testing.T) {
 	_, err := svc.ListGlossaries(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38304,6 +30168,7 @@ func TestSerdeUpdateSnapshot_ListGlossaryTerms(t *testing.T) {
 	_, err := svc.ListGlossaryTerms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38349,6 +30214,7 @@ func TestSerdeUpdateSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	_, err := svc.ListIntegrationResourceProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38380,6 +30246,7 @@ func TestSerdeUpdateSnapshot_ListIterableForms(t *testing.T) {
 	_, err := svc.ListIterableForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38401,7 +30268,6 @@ func TestSerdeUpdateSnapshot_ListJobs(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -38413,6 +30279,7 @@ func TestSerdeUpdateSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38445,6 +30312,7 @@ func TestSerdeUpdateSnapshot_ListMaterializedViewRefreshTaskRuns(t *testing.T) {
 	_, err := svc.ListMaterializedViewRefreshTaskRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38490,7 +30358,6 @@ func TestSerdeUpdateSnapshot_ListMLTransforms(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -38502,6 +30369,7 @@ func TestSerdeUpdateSnapshot_ListMLTransforms(t *testing.T) {
 	_, err := svc.ListMLTransforms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38531,6 +30399,7 @@ func TestSerdeUpdateSnapshot_ListRegistries(t *testing.T) {
 	_, err := svc.ListRegistries(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38564,6 +30433,7 @@ func TestSerdeUpdateSnapshot_ListSchemas(t *testing.T) {
 	_, err := svc.ListSchemas(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38598,6 +30468,7 @@ func TestSerdeUpdateSnapshot_ListSchemaVersions(t *testing.T) {
 	_, err := svc.ListSchemaVersions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38619,7 +30490,6 @@ func TestSerdeUpdateSnapshot_ListSessions(t *testing.T) {
 		MaxResults: ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		RequestOrigin: ptr.String("__RequestOrigin__"),
 	}
@@ -38632,6 +30502,7 @@ func TestSerdeUpdateSnapshot_ListSessions(t *testing.T) {
 	_, err := svc.ListSessions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38662,6 +30533,7 @@ func TestSerdeUpdateSnapshot_ListStatements(t *testing.T) {
 	_, err := svc.ListStatements(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38695,6 +30567,7 @@ func TestSerdeUpdateSnapshot_ListTableOptimizerRuns(t *testing.T) {
 	_, err := svc.ListTableOptimizerRuns(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38717,7 +30590,6 @@ func TestSerdeUpdateSnapshot_ListTriggers(t *testing.T) {
 		MaxResults:       ptr.Int32(1),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -38729,6 +30601,7 @@ func TestSerdeUpdateSnapshot_ListTriggers(t *testing.T) {
 	_, err := svc.ListTriggers(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38758,6 +30631,7 @@ func TestSerdeUpdateSnapshot_ListUsageProfiles(t *testing.T) {
 	_, err := svc.ListUsageProfiles(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38787,6 +30661,7 @@ func TestSerdeUpdateSnapshot_ListWorkflows(t *testing.T) {
 	_, err := svc.ListWorkflows(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38811,7 +30686,6 @@ func TestSerdeUpdateSnapshot_ModifyIntegration(t *testing.T) {
 			RefreshInterval: ptr.String("__RefreshInterval__"),
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			ContinuousSync: ptr.Bool(true),
 		},
@@ -38826,6 +30700,7 @@ func TestSerdeUpdateSnapshot_ModifyIntegration(t *testing.T) {
 	_, err := svc.ModifyIntegration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38852,10 +30727,6 @@ func TestSerdeUpdateSnapshot_PutAsset(t *testing.T) {
 				FormTypeId: ptr.String("__FormTypeId__"),
 				Content:    ptr.String("__Content__"),
 			},
-			"key1": {
-				FormTypeId: ptr.String("__FormTypeId__"),
-				Content:    ptr.String("__Content__"),
-			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -38868,6 +30739,7 @@ func TestSerdeUpdateSnapshot_PutAsset(t *testing.T) {
 	_, err := svc.PutAsset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38890,9 +30762,6 @@ func TestSerdeUpdateSnapshot_PutAssetType(t *testing.T) {
 			"key0": {
 				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
 			},
-			"key1": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -38905,6 +30774,7 @@ func TestSerdeUpdateSnapshot_PutAssetType(t *testing.T) {
 	_, err := svc.PutAssetType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38939,6 +30809,7 @@ func TestSerdeUpdateSnapshot_PutAttachment(t *testing.T) {
 	_, err := svc.PutAttachment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -38978,6 +30849,7 @@ func TestSerdeUpdateSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39007,6 +30879,7 @@ func TestSerdeUpdateSnapshot_PutDataQualityProfileAnnotation(t *testing.T) {
 	_, err := svc.PutDataQualityProfileAnnotation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39037,6 +30910,7 @@ func TestSerdeUpdateSnapshot_PutFormType(t *testing.T) {
 	_, err := svc.PutFormType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39069,6 +30943,7 @@ func TestSerdeUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39110,6 +30985,7 @@ func TestSerdeUpdateSnapshot_PutSchemaVersionMetadata(t *testing.T) {
 	_, err := svc.PutSchemaVersionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39131,7 +31007,6 @@ func TestSerdeUpdateSnapshot_PutWorkflowRunProperties(t *testing.T) {
 		RunId: ptr.String("__RunId__"),
 		RunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -39143,6 +31018,7 @@ func TestSerdeUpdateSnapshot_PutWorkflowRunProperties(t *testing.T) {
 	_, err := svc.PutWorkflowRunProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39192,6 +31068,7 @@ func TestSerdeUpdateSnapshot_QuerySchemaVersionMetadata(t *testing.T) {
 	_, err := svc.QuerySchemaVersionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39809,105 +31686,12 @@ func TestSerdeUpdateSnapshot_RegisterConnectionType(t *testing.T) {
 							Name:          ptr.String("__Name__"),
 							FieldDataType: types.FieldDataType("INT"),
 						},
-						"key1": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
-						},
-					},
-				},
-				"key1": {
-					SourceConfiguration: &types.SourceConfiguration{
-						RequestMethod: types.HTTPMethod("GET"),
-						RequestPath:   ptr.String("__RequestPath__"),
-						RequestParameters: []types.ConnectorProperty{
-							{
-								Name:         ptr.String("__Name__"),
-								KeyOverride:  ptr.String("__KeyOverride__"),
-								Required:     ptr.Bool(true),
-								DefaultValue: ptr.String("__DefaultValue__"),
-								AllowedValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-								PropertyLocation: types.PropertyLocation("HEADER"),
-								PropertyType:     types.PropertyType("USER_INPUT"),
-							},
-							{
-								Name:         ptr.String("__Name__"),
-								KeyOverride:  ptr.String("__KeyOverride__"),
-								Required:     ptr.Bool(true),
-								DefaultValue: ptr.String("__DefaultValue__"),
-								AllowedValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-								PropertyLocation: types.PropertyLocation("HEADER"),
-								PropertyType:     types.PropertyType("USER_INPUT"),
-							},
-						},
-						ResponseConfiguration: &types.ResponseConfiguration{
-							ResultPath: ptr.String("__ResultPath__"),
-							ErrorPath:  ptr.String("__ErrorPath__"),
-						},
-						PaginationConfiguration: &types.PaginationConfiguration{
-							CursorConfiguration: &types.CursorConfiguration{
-								NextPage: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-								LimitParameter: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-							},
-							OffsetConfiguration: &types.OffsetConfiguration{
-								OffsetParameter: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-								LimitParameter: &types.ExtractedParameter{
-									Key:              ptr.String("__Key__"),
-									DefaultValue:     ptr.String("__DefaultValue__"),
-									PropertyLocation: types.PropertyLocation("HEADER"),
-									Value: &types.ResponseExtractionMapping{
-										ContentPath: ptr.String("__ContentPath__"),
-										HeaderKey:   ptr.String("__HeaderKey__"),
-									},
-								},
-							},
-						},
-					},
-					Schema: map[string]types.FieldDefinition{
-						"key0": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
-						},
-						"key1": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
-						},
 					},
 				},
 			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -39919,6 +31703,7 @@ func TestSerdeUpdateSnapshot_RegisterConnectionType(t *testing.T) {
 	_, err := svc.RegisterConnectionType(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39952,6 +31737,7 @@ func TestSerdeUpdateSnapshot_RegisterSchemaVersion(t *testing.T) {
 	_, err := svc.RegisterSchemaVersion(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -39993,6 +31779,7 @@ func TestSerdeUpdateSnapshot_RemoveSchemaVersionMetadata(t *testing.T) {
 	_, err := svc.RemoveSchemaVersionMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40022,6 +31809,7 @@ func TestSerdeUpdateSnapshot_ResetJobBookmark(t *testing.T) {
 	_, err := svc.ResetJobBookmark(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40055,6 +31843,7 @@ func TestSerdeUpdateSnapshot_ResumeWorkflowRun(t *testing.T) {
 	_, err := svc.ResumeWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40085,6 +31874,7 @@ func TestSerdeUpdateSnapshot_RunStatement(t *testing.T) {
 	_, err := svc.RunStatement(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40111,8 +31901,24 @@ func TestSerdeUpdateSnapshot_SearchAssets(t *testing.T) {
 		},
 		FilterClause: &types.SearchFilterClauseMemberAndAllFilters{
 			Value: []types.SearchFilterClause{
-				nil,
-				nil,
+				&types.SearchFilterClauseMemberAttributeFilter{
+					Value: types.SearchAttributeFilter{
+						Attribute: ptr.String("__Attribute__"),
+						Operator:  types.SearchFilterOperator("equals"),
+						Value: &types.SearchFilterValueMemberStringValue{
+							Value: "__SearchFilterValueMemberStringValue__",
+						},
+					},
+				},
+				&types.SearchFilterClauseMemberAttributeFilter{
+					Value: types.SearchAttributeFilter{
+						Attribute: ptr.String("__Attribute__"),
+						Operator:  types.SearchFilterOperator("equals"),
+						Value: &types.SearchFilterValueMemberStringValue{
+							Value: "__SearchFilterValueMemberStringValue__",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -40125,6 +31931,7 @@ func TestSerdeUpdateSnapshot_SearchAssets(t *testing.T) {
 	_, err := svc.SearchAssets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40180,6 +31987,7 @@ func TestSerdeUpdateSnapshot_SearchTables(t *testing.T) {
 	_, err := svc.SearchTables(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40210,6 +32018,7 @@ func TestSerdeUpdateSnapshot_StartBlueprintRun(t *testing.T) {
 	_, err := svc.StartBlueprintRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40247,6 +32056,7 @@ func TestSerdeUpdateSnapshot_StartColumnStatisticsTaskRun(t *testing.T) {
 	_, err := svc.StartColumnStatisticsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40276,6 +32086,7 @@ func TestSerdeUpdateSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T) 
 	_, err := svc.StartColumnStatisticsTaskRunSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40304,6 +32115,7 @@ func TestSerdeUpdateSnapshot_StartCrawler(t *testing.T) {
 	_, err := svc.StartCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40332,6 +32144,7 @@ func TestSerdeUpdateSnapshot_StartCrawlerSchedule(t *testing.T) {
 	_, err := svc.StartCrawlerSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40357,7 +32170,6 @@ func TestSerdeUpdateSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T)
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -40367,7 +32179,6 @@ func TestSerdeUpdateSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T)
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 			},
@@ -40388,6 +32199,7 @@ func TestSerdeUpdateSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T)
 	_, err := svc.StartDataQualityRuleRecommendationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40413,7 +32225,6 @@ func TestSerdeUpdateSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) 
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -40423,7 +32234,6 @@ func TestSerdeUpdateSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) 
 				ConnectionName: ptr.String("__ConnectionName__"),
 				AdditionalOptions: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 			},
@@ -40451,7 +32261,6 @@ func TestSerdeUpdateSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) 
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				DataQualityGlueTable: &types.DataQualityGlueTable{
@@ -40461,30 +32270,6 @@ func TestSerdeUpdateSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) 
 					ConnectionName: ptr.String("__ConnectionName__"),
 					AdditionalOptions: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
-				},
-			},
-			"key1": {
-				GlueTable: &types.GlueTable{
-					DatabaseName:   ptr.String("__DatabaseName__"),
-					TableName:      ptr.String("__TableName__"),
-					CatalogId:      ptr.String("__CatalogId__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-				},
-				DataQualityGlueTable: &types.DataQualityGlueTable{
-					DatabaseName:   ptr.String("__DatabaseName__"),
-					TableName:      ptr.String("__TableName__"),
-					CatalogId:      ptr.String("__CatalogId__"),
-					ConnectionName: ptr.String("__ConnectionName__"),
-					AdditionalOptions: map[string]string{
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 				},
@@ -40500,6 +32285,7 @@ func TestSerdeUpdateSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T) 
 	_, err := svc.StartDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40529,6 +32315,7 @@ func TestSerdeUpdateSnapshot_StartExportLabelsTaskRun(t *testing.T) {
 	_, err := svc.StartExportLabelsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40559,6 +32346,7 @@ func TestSerdeUpdateSnapshot_StartImportLabelsTaskRun(t *testing.T) {
 	_, err := svc.StartImportLabelsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40581,7 +32369,6 @@ func TestSerdeUpdateSnapshot_StartJobRun(t *testing.T) {
 		JobRunId:             ptr.String("__JobRunId__"),
 		Arguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		AllocatedCapacity:     1,
 		Timeout:               ptr.Int32(1),
@@ -40604,6 +32391,7 @@ func TestSerdeUpdateSnapshot_StartJobRun(t *testing.T) {
 	_, err := svc.StartJobRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40635,6 +32423,7 @@ func TestSerdeUpdateSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40663,6 +32452,7 @@ func TestSerdeUpdateSnapshot_StartMLEvaluationTaskRun(t *testing.T) {
 	_, err := svc.StartMLEvaluationTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40692,6 +32482,7 @@ func TestSerdeUpdateSnapshot_StartMLLabelingSetGenerationTaskRun(t *testing.T) {
 	_, err := svc.StartMLLabelingSetGenerationTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40720,6 +32511,7 @@ func TestSerdeUpdateSnapshot_StartTrigger(t *testing.T) {
 	_, err := svc.StartTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40740,7 +32532,6 @@ func TestSerdeUpdateSnapshot_StartWorkflowRun(t *testing.T) {
 		Name: ptr.String("__Name__"),
 		RunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -40752,6 +32543,7 @@ func TestSerdeUpdateSnapshot_StartWorkflowRun(t *testing.T) {
 	_, err := svc.StartWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40781,6 +32573,7 @@ func TestSerdeUpdateSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	_, err := svc.StopColumnStatisticsTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40810,6 +32603,7 @@ func TestSerdeUpdateSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T) {
 	_, err := svc.StopColumnStatisticsTaskRunSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40838,6 +32632,7 @@ func TestSerdeUpdateSnapshot_StopCrawler(t *testing.T) {
 	_, err := svc.StopCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40866,6 +32661,7 @@ func TestSerdeUpdateSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40896,6 +32692,7 @@ func TestSerdeUpdateSnapshot_StopMaterializedViewRefreshTaskRun(t *testing.T) {
 	_, err := svc.StopMaterializedViewRefreshTaskRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40925,6 +32722,7 @@ func TestSerdeUpdateSnapshot_StopSession(t *testing.T) {
 	_, err := svc.StopSession(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40953,6 +32751,7 @@ func TestSerdeUpdateSnapshot_StopTrigger(t *testing.T) {
 	_, err := svc.StopTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -40982,6 +32781,7 @@ func TestSerdeUpdateSnapshot_StopWorkflowRun(t *testing.T) {
 	_, err := svc.StopWorkflowRun(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41002,7 +32802,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		TagsToAdd: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -41014,6 +32813,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41037,7 +32837,6 @@ func TestSerdeUpdateSnapshot_TestConnection(t *testing.T) {
 			ConnectionType: types.ConnectionType("JDBC"),
 			ConnectionProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			AuthenticationConfiguration: &types.AuthenticationConfigurationInput{
 				AuthenticationType: types.AuthenticationType("BASIC"),
@@ -41050,7 +32849,6 @@ func TestSerdeUpdateSnapshot_TestConnection(t *testing.T) {
 					TokenUrl: ptr.String("__TokenUrl__"),
 					TokenUrlParametersMap: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AuthorizationCodeProperties: &types.AuthorizationCodeProperties{
 						AuthorizationCode: ptr.String("__AuthorizationCode__"),
@@ -41071,7 +32869,6 @@ func TestSerdeUpdateSnapshot_TestConnection(t *testing.T) {
 				},
 				CustomAuthenticationCredentials: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 		},
@@ -41085,6 +32882,7 @@ func TestSerdeUpdateSnapshot_TestConnection(t *testing.T) {
 	_, err := svc.TestConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41117,6 +32915,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41147,6 +32946,7 @@ func TestSerdeUpdateSnapshot_UpdateBlueprint(t *testing.T) {
 	_, err := svc.UpdateBlueprint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41174,7 +32974,6 @@ func TestSerdeUpdateSnapshot_UpdateCatalog(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetRedshiftCatalog: &types.TargetRedshiftCatalog{
 				CatalogArn: ptr.String("__CatalogArn__"),
@@ -41190,20 +32989,16 @@ func TestSerdeUpdateSnapshot_UpdateCatalog(t *testing.T) {
 					RoleArn: ptr.String("__RoleArn__"),
 					Compaction: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Retention: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					OrphanFileDeletion: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				CustomProperties: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
@@ -41259,6 +33054,7 @@ func TestSerdeUpdateSnapshot_UpdateCatalog(t *testing.T) {
 	_, err := svc.UpdateCatalog(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41319,6 +33115,7 @@ func TestSerdeUpdateSnapshot_UpdateClassifier(t *testing.T) {
 	_, err := svc.UpdateClassifier(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41463,6 +33260,7 @@ func TestSerdeUpdateSnapshot_UpdateColumnStatisticsForPartition(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsForPartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41603,6 +33401,7 @@ func TestSerdeUpdateSnapshot_UpdateColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsForTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41641,6 +33440,7 @@ func TestSerdeUpdateSnapshot_UpdateColumnStatisticsTaskSettings(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsTaskSettings(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41670,19 +33470,15 @@ func TestSerdeUpdateSnapshot_UpdateConnection(t *testing.T) {
 			},
 			ConnectionProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			SparkProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			AthenaProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PythonProperties: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PhysicalConnectionRequirements: &types.PhysicalConnectionRequirements{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -41703,7 +33499,6 @@ func TestSerdeUpdateSnapshot_UpdateConnection(t *testing.T) {
 					TokenUrl: ptr.String("__TokenUrl__"),
 					TokenUrlParametersMap: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					AuthorizationCodeProperties: &types.AuthorizationCodeProperties{
 						AuthorizationCode: ptr.String("__AuthorizationCode__"),
@@ -41724,7 +33519,6 @@ func TestSerdeUpdateSnapshot_UpdateConnection(t *testing.T) {
 				},
 				CustomAuthenticationCredentials: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ValidateCredentials: true,
@@ -41743,6 +33537,7 @@ func TestSerdeUpdateSnapshot_UpdateConnection(t *testing.T) {
 	_, err := svc.UpdateConnection(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41966,6 +33761,7 @@ func TestSerdeUpdateSnapshot_UpdateCrawler(t *testing.T) {
 	_, err := svc.UpdateCrawler(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -41995,6 +33791,7 @@ func TestSerdeUpdateSnapshot_UpdateCrawlerSchedule(t *testing.T) {
 	_, err := svc.UpdateCrawlerSchedule(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42020,7 +33817,6 @@ func TestSerdeUpdateSnapshot_UpdateDatabase(t *testing.T) {
 			LocationUri: ptr.String("__LocationUri__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			CreateTableDefaultPermissions: []types.PrincipalPermissions{
 				{
@@ -42063,6 +33859,7 @@ func TestSerdeUpdateSnapshot_UpdateDatabase(t *testing.T) {
 	_, err := svc.UpdateDatabase(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42093,6 +33890,7 @@ func TestSerdeUpdateSnapshot_UpdateDataQualityRuleset(t *testing.T) {
 	_, err := svc.UpdateDataQualityRuleset(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42131,7 +33929,6 @@ func TestSerdeUpdateSnapshot_UpdateDevEndpoint(t *testing.T) {
 		},
 		AddArguments: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -42143,6 +33940,7 @@ func TestSerdeUpdateSnapshot_UpdateDevEndpoint(t *testing.T) {
 	_, err := svc.UpdateDevEndpoint(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42174,6 +33972,7 @@ func TestSerdeUpdateSnapshot_UpdateGlossary(t *testing.T) {
 	_, err := svc.UpdateGlossary(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42206,6 +34005,7 @@ func TestSerdeUpdateSnapshot_UpdateGlossaryTerm(t *testing.T) {
 	_, err := svc.UpdateGlossaryTerm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42238,6 +34038,7 @@ func TestSerdeUpdateSnapshot_UpdateGlueIdentityCenterConfiguration(t *testing.T)
 	_, err := svc.UpdateGlueIdentityCenterConfiguration(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42275,6 +34076,7 @@ func TestSerdeUpdateSnapshot_UpdateIntegrationResourceProperty(t *testing.T) {
 	_, err := svc.UpdateIntegrationResourceProperty(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42332,6 +34134,7 @@ func TestSerdeUpdateSnapshot_UpdateIntegrationTableProperties(t *testing.T) {
 	_, err := svc.UpdateIntegrationTableProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -42367,11 +34170,9 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 			},
 			DefaultArguments: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			NonOverridableArguments: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Connections: &types.ConnectionsList{
 				Connections: []string{
@@ -42448,7 +34249,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 							JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
 							DataTypeMapping: map[string]types.GlueRecordType{
 								"key0": types.GlueRecordType("DATE"),
-								"key1": types.GlueRecordType("DATE"),
 							},
 						},
 						ConnectionTable: ptr.String("__ConnectionTable__"),
@@ -42491,7 +34291,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -42773,7 +34572,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType:  ptr.String("__ConnectionType__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -42817,7 +34615,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -43847,7 +35644,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalHudiOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -43886,7 +35682,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalHudiOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -43927,7 +35722,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalHudiOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 							BoundedSize:      ptr.Int64(1),
@@ -43986,7 +35780,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Database: ptr.String("__Database__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -44049,7 +35842,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Format: types.TargetFormat("json"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -44106,7 +35898,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalDeltaOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -44145,7 +35936,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalDeltaOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -44186,7 +35976,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalDeltaOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
 							BoundedSize:      ptr.Int64(1),
@@ -44245,7 +36034,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Database: ptr.String("__Database__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -44308,7 +36096,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Format:                 types.TargetFormat("json"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -44505,7 +36292,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalDataSources: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						Ruleset: ptr.String("__Ruleset__"),
 						PublishingOptions: &types.DQResultsPublishingOptions{
@@ -44516,7 +36302,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						},
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
 							StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
@@ -44538,7 +36323,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 									Operation: ptr.String("__Operation__"),
 									Parameters: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								ConditionExpressions: []types.ConditionExpression{
@@ -44559,7 +36343,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 									Operation: ptr.String("__Operation__"),
 									Parameters: map[string]string{
 										"key0": "__Value__",
-										"key1": "__Value__",
 									},
 								},
 								ConditionExpressions: []types.ConditionExpression{
@@ -44597,7 +36380,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 							},
 							AdditionalOptions: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SampleQuery:         ptr.String("__SampleQuery__"),
 							PreAction:           ptr.String("__PreAction__"),
@@ -44686,7 +36468,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 							},
 							AdditionalOptions: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SampleQuery:         ptr.String("__SampleQuery__"),
 							PreAction:           ptr.String("__PreAction__"),
@@ -44734,7 +36515,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						Data: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -44772,7 +36552,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						ConnectionType: ptr.String("__ConnectionType__"),
 						Data: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						Inputs: []string{
 							"__Member__",
@@ -44785,7 +36564,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalIcebergOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -44824,7 +36602,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Table:    ptr.String("__Table__"),
 						AdditionalIcebergOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						OutputSchemas: []types.GlueSchema{
 							{
@@ -44877,7 +36654,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Database: ptr.String("__Database__"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -44908,2727 +36684,6 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 						Format: types.TargetFormat("json"),
 						AdditionalOptions: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						Compression:            types.IcebergTargetCompressionType("gzip"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3ExcelSource: &types.S3ExcelSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.ParquetCompressionType("snappy"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						NumberRows: ptr.Int64(1),
-						SkipFooter: ptr.Int32(1),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HyperDirectTarget: &types.S3HyperDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Format: types.TargetFormat("json"),
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:        ptr.String("__Path__"),
-						Compression: types.HyperTargetCompressionType("uncompressed"),
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					DynamoDBELTConnectorSource: &types.DynamoDBELTConnectorSource{
-						Name: ptr.String("__Name__"),
-						ConnectionOptions: &types.DDBELTConnectionOptions{
-							DynamodbExport:        types.DdbExportType("ddb"),
-							DynamodbUnnestDDBJson: true,
-							DynamodbTableArn:      ptr.String("__DynamodbTableArn__"),
-							DynamodbS3Bucket:      ptr.String("__DynamodbS3Bucket__"),
-							DynamodbS3Prefix:      ptr.String("__DynamodbS3Prefix__"),
-							DynamodbS3BucketOwner: ptr.String("__DynamodbS3BucketOwner__"),
-							DynamodbStsRoleArn:    ptr.String("__DynamodbStsRoleArn__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-				},
-				"key1": {
-					AthenaConnectorSource: &types.AthenaConnectorSource{
-						Name:            ptr.String("__Name__"),
-						ConnectionName:  ptr.String("__ConnectionName__"),
-						ConnectorName:   ptr.String("__ConnectorName__"),
-						ConnectionType:  ptr.String("__ConnectionType__"),
-						ConnectionTable: ptr.String("__ConnectionTable__"),
-						SchemaName:      ptr.String("__SchemaName__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					JDBCConnectorSource: &types.JDBCConnectorSource{
-						Name:           ptr.String("__Name__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectorName:  ptr.String("__ConnectorName__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						AdditionalOptions: &types.JDBCConnectorOptions{
-							FilterPredicate: ptr.String("__FilterPredicate__"),
-							PartitionColumn: ptr.String("__PartitionColumn__"),
-							LowerBound:      ptr.Int64(1),
-							UpperBound:      ptr.Int64(1),
-							NumPartitions:   ptr.Int64(1),
-							JobBookmarkKeys: []string{
-								"__Member__",
-								"__Member__",
-							},
-							JobBookmarkKeysSortOrder: ptr.String("__JobBookmarkKeysSortOrder__"),
-							DataTypeMapping: map[string]types.GlueRecordType{
-								"key0": types.GlueRecordType("DATE"),
-								"key1": types.GlueRecordType("DATE"),
-							},
-						},
-						ConnectionTable: ptr.String("__ConnectionTable__"),
-						Query:           ptr.String("__Query__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SparkConnectorSource: &types.SparkConnectorSource{
-						Name:           ptr.String("__Name__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectorName:  ptr.String("__ConnectorName__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogSource: &types.CatalogSource{
-						Name:               ptr.String("__Name__"),
-						Database:           ptr.String("__Database__"),
-						Table:              ptr.String("__Table__"),
-						PartitionPredicate: ptr.String("__PartitionPredicate__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					RedshiftSource: &types.RedshiftSource{
-						Name:           ptr.String("__Name__"),
-						Database:       ptr.String("__Database__"),
-						Table:          ptr.String("__Table__"),
-						RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-						TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-					},
-					S3CatalogSource: &types.S3CatalogSource{
-						Name:               ptr.String("__Name__"),
-						Database:           ptr.String("__Database__"),
-						Table:              ptr.String("__Table__"),
-						PartitionPredicate: ptr.String("__PartitionPredicate__"),
-						AdditionalOptions: &types.S3SourceAdditionalOptions{
-							BoundedSize:  ptr.Int64(1),
-							BoundedFiles: ptr.Int64(1),
-						},
-					},
-					S3CsvSource: &types.S3CsvSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.CompressionType("gzip"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						Separator:           types.Separator("comma"),
-						Escaper:             ptr.String("__Escaper__"),
-						QuoteChar:           types.QuoteChar("quote"),
-						Multiline:           ptr.Bool(true),
-						WithHeader:          ptr.Bool(true),
-						WriteHeader:         ptr.Bool(true),
-						SkipFirst:           ptr.Bool(true),
-						OptimizePerformance: true,
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3JsonSource: &types.S3JsonSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.CompressionType("gzip"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						JsonPath:  ptr.String("__JsonPath__"),
-						Multiline: ptr.Bool(true),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3ParquetSource: &types.S3ParquetSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						CompressionType: types.ParquetCompressionType("snappy"),
-						Exclusions: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupSize:      ptr.String("__GroupSize__"),
-						GroupFiles:     ptr.String("__GroupFiles__"),
-						Recurse:        ptr.Bool(true),
-						MaxBand:        ptr.Int32(1),
-						MaxFilesInBand: ptr.Int32(1),
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					RelationalCatalogSource: &types.RelationalCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					DynamoDBCatalogSource: &types.DynamoDBCatalogSource{
-						Name:        ptr.String("__Name__"),
-						Database:    ptr.String("__Database__"),
-						Table:       ptr.String("__Table__"),
-						PitrEnabled: ptr.Bool(true),
-						AdditionalOptions: &types.DDBELTCatalogAdditionalOptions{
-							DynamodbExport:        ptr.String("__DynamodbExport__"),
-							DynamodbUnnestDDBJson: true,
-						},
-					},
-					JDBCConnectorTarget: &types.JDBCConnectorTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						ConnectionName:  ptr.String("__ConnectionName__"),
-						ConnectionTable: ptr.String("__ConnectionTable__"),
-						ConnectorName:   ptr.String("__ConnectorName__"),
-						ConnectionType:  ptr.String("__ConnectionType__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SparkConnectorTarget: &types.SparkConnectorTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectorName:  ptr.String("__ConnectorName__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogTarget: &types.BasicCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					RedshiftTarget: &types.RedshiftTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database:       ptr.String("__Database__"),
-						Table:          ptr.String("__Table__"),
-						RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-						TmpDirIAMRole:  ptr.String("__TmpDirIAMRole__"),
-						UpsertRedshiftOptions: &types.UpsertRedshiftTargetOptions{
-							TableLocation:  ptr.String("__TableLocation__"),
-							ConnectionName: ptr.String("__ConnectionName__"),
-							UpsertKeys: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					S3CatalogTarget: &types.S3CatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					S3GlueParquetTarget: &types.S3GlueParquetTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            types.ParquetCompressionType("snappy"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					S3DirectTarget: &types.S3DirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            ptr.String("__Compression__"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						Format:                 types.TargetFormat("json"),
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					ApplyMapping: &types.ApplyMapping{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Mapping: []types.Mapping{
-							{
-								ToKey: ptr.String("__ToKey__"),
-								FromPath: []string{
-									"__Member__",
-									"__Member__",
-								},
-								FromType: ptr.String("__FromType__"),
-								ToType:   ptr.String("__ToType__"),
-								Dropped:  ptr.Bool(true),
-								Children: []types.Mapping{
-									{},
-									{},
-								},
-							},
-							{
-								ToKey: ptr.String("__ToKey__"),
-								FromPath: []string{
-									"__Member__",
-									"__Member__",
-								},
-								FromType: ptr.String("__FromType__"),
-								ToType:   ptr.String("__ToType__"),
-								Dropped:  ptr.Bool(true),
-								Children: []types.Mapping{
-									{},
-									{},
-								},
-							},
-						},
-					},
-					SelectFields: &types.SelectFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Paths: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					DropFields: &types.DropFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Paths: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					RenameField: &types.RenameField{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						SourcePath: []string{
-							"__Member__",
-							"__Member__",
-						},
-						TargetPath: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					Spigot: &types.Spigot{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Path: ptr.String("__Path__"),
-						Topk: ptr.Int32(1),
-						Prob: ptr.Float64(1.0),
-					},
-					Join: &types.Join{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						JoinType: types.JoinType("equijoin"),
-						Columns: []types.JoinColumn{
-							{
-								From: ptr.String("__From__"),
-								Keys: [][]string{
-									{
-										"__Member__",
-										"__Member__",
-									},
-									{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-							{
-								From: ptr.String("__From__"),
-								Keys: [][]string{
-									{
-										"__Member__",
-										"__Member__",
-									},
-									{
-										"__Member__",
-										"__Member__",
-									},
-								},
-							},
-						},
-					},
-					SplitFields: &types.SplitFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Paths: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					SelectFromCollection: &types.SelectFromCollection{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Index: 1,
-					},
-					FillMissingValues: &types.FillMissingValues{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						ImputedPath: ptr.String("__ImputedPath__"),
-						FilledPath:  ptr.String("__FilledPath__"),
-					},
-					Filter: &types.Filter{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						LogicalOperator: types.FilterLogicalOperator("AND"),
-						Filters: []types.FilterExpression{
-							{
-								Operation: types.FilterOperation("EQ"),
-								Negated:   ptr.Bool(true),
-								Values: []types.FilterValue{
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-								},
-							},
-							{
-								Operation: types.FilterOperation("EQ"),
-								Negated:   ptr.Bool(true),
-								Values: []types.FilterValue{
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-									{
-										Type: types.FilterValueType("COLUMNEXTRACTED"),
-										Value: []string{
-											"__Member__",
-											"__Member__",
-										},
-									},
-								},
-							},
-						},
-					},
-					CustomCode: &types.CustomCode{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Code:      ptr.String("__Code__"),
-						ClassName: ptr.String("__ClassName__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SparkSQL: &types.SparkSQL{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						SqlQuery: ptr.String("__SqlQuery__"),
-						SqlAliases: []types.SqlAlias{
-							{
-								From:  ptr.String("__From__"),
-								Alias: ptr.String("__Alias__"),
-							},
-							{
-								From:  ptr.String("__From__"),
-								Alias: ptr.String("__Alias__"),
-							},
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					DirectKinesisSource: &types.DirectKinesisSource{
-						Name:         ptr.String("__Name__"),
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						StreamingOptions: &types.KinesisStreamingSourceOptions{
-							EndpointUrl:              ptr.String("__EndpointUrl__"),
-							StreamName:               ptr.String("__StreamName__"),
-							Classification:           ptr.String("__Classification__"),
-							Delimiter:                ptr.String("__Delimiter__"),
-							StartingPosition:         types.StartingPosition("latest"),
-							MaxFetchTimeInMs:         ptr.Int64(1),
-							MaxFetchRecordsPerShard:  ptr.Int64(1),
-							MaxRecordPerRead:         ptr.Int64(1),
-							AddIdleTimeBetweenReads:  ptr.Bool(true),
-							IdleTimeBetweenReadsInMs: ptr.Int64(1),
-							DescribeShardInterval:    ptr.Int64(1),
-							NumRetries:               ptr.Int32(1),
-							RetryIntervalMs:          ptr.Int64(1),
-							MaxRetryIntervalMs:       ptr.Int64(1),
-							AvoidEmptyBatches:        ptr.Bool(true),
-							StreamArn:                ptr.String("__StreamArn__"),
-							RoleArn:                  ptr.String("__RoleArn__"),
-							RoleSessionName:          ptr.String("__RoleSessionName__"),
-							AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-							FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-						},
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					DirectKafkaSource: &types.DirectKafkaSource{
-						Name: ptr.String("__Name__"),
-						StreamingOptions: &types.KafkaStreamingSourceOptions{
-							BootstrapServers:       ptr.String("__BootstrapServers__"),
-							SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-							ConnectionName:         ptr.String("__ConnectionName__"),
-							TopicName:              ptr.String("__TopicName__"),
-							Assign:                 ptr.String("__Assign__"),
-							SubscribePattern:       ptr.String("__SubscribePattern__"),
-							Classification:         ptr.String("__Classification__"),
-							Delimiter:              ptr.String("__Delimiter__"),
-							StartingOffsets:        ptr.String("__StartingOffsets__"),
-							EndingOffsets:          ptr.String("__EndingOffsets__"),
-							PollTimeoutMs:          ptr.Int64(1),
-							NumRetries:             ptr.Int32(1),
-							RetryIntervalMs:        ptr.Int64(1),
-							MaxOffsetsPerTrigger:   ptr.Int64(1),
-							MinPartitions:          ptr.Int32(1),
-							IncludeHeaders:         ptr.Bool(true),
-							AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						},
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					CatalogKinesisSource: &types.CatalogKinesisSource{
-						Name:         ptr.String("__Name__"),
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						Table:        ptr.String("__Table__"),
-						Database:     ptr.String("__Database__"),
-						StreamingOptions: &types.KinesisStreamingSourceOptions{
-							EndpointUrl:              ptr.String("__EndpointUrl__"),
-							StreamName:               ptr.String("__StreamName__"),
-							Classification:           ptr.String("__Classification__"),
-							Delimiter:                ptr.String("__Delimiter__"),
-							StartingPosition:         types.StartingPosition("latest"),
-							MaxFetchTimeInMs:         ptr.Int64(1),
-							MaxFetchRecordsPerShard:  ptr.Int64(1),
-							MaxRecordPerRead:         ptr.Int64(1),
-							AddIdleTimeBetweenReads:  ptr.Bool(true),
-							IdleTimeBetweenReadsInMs: ptr.Int64(1),
-							DescribeShardInterval:    ptr.Int64(1),
-							NumRetries:               ptr.Int32(1),
-							RetryIntervalMs:          ptr.Int64(1),
-							MaxRetryIntervalMs:       ptr.Int64(1),
-							AvoidEmptyBatches:        ptr.Bool(true),
-							StreamArn:                ptr.String("__StreamArn__"),
-							RoleArn:                  ptr.String("__RoleArn__"),
-							RoleSessionName:          ptr.String("__RoleSessionName__"),
-							AddRecordTimestamp:       ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics:   ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-							FanoutConsumerARN:        ptr.String("__FanoutConsumerARN__"),
-						},
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					CatalogKafkaSource: &types.CatalogKafkaSource{
-						Name:         ptr.String("__Name__"),
-						WindowSize:   ptr.Int32(1),
-						DetectSchema: ptr.Bool(true),
-						Table:        ptr.String("__Table__"),
-						Database:     ptr.String("__Database__"),
-						StreamingOptions: &types.KafkaStreamingSourceOptions{
-							BootstrapServers:       ptr.String("__BootstrapServers__"),
-							SecurityProtocol:       ptr.String("__SecurityProtocol__"),
-							ConnectionName:         ptr.String("__ConnectionName__"),
-							TopicName:              ptr.String("__TopicName__"),
-							Assign:                 ptr.String("__Assign__"),
-							SubscribePattern:       ptr.String("__SubscribePattern__"),
-							Classification:         ptr.String("__Classification__"),
-							Delimiter:              ptr.String("__Delimiter__"),
-							StartingOffsets:        ptr.String("__StartingOffsets__"),
-							EndingOffsets:          ptr.String("__EndingOffsets__"),
-							PollTimeoutMs:          ptr.Int64(1),
-							NumRetries:             ptr.Int32(1),
-							RetryIntervalMs:        ptr.Int64(1),
-							MaxOffsetsPerTrigger:   ptr.Int64(1),
-							MinPartitions:          ptr.Int32(1),
-							IncludeHeaders:         ptr.Bool(true),
-							AddRecordTimestamp:     ptr.String("__AddRecordTimestamp__"),
-							EmitConsumerLagMetrics: ptr.String("__EmitConsumerLagMetrics__"),
-							StartingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						},
-						DataPreviewOptions: &types.StreamingDataPreviewOptions{
-							PollingTime:        ptr.Int64(1),
-							RecordPollingLimit: ptr.Int64(1),
-						},
-					},
-					DropNullFields: &types.DropNullFields{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						NullCheckBoxList: &types.NullCheckBoxList{
-							IsEmpty:      ptr.Bool(true),
-							IsNullString: ptr.Bool(true),
-							IsNegOne:     ptr.Bool(true),
-						},
-						NullTextList: []types.NullValueField{
-							{
-								Value: ptr.String("__Value__"),
-								Datatype: &types.Datatype{
-									Id:    ptr.String("__Id__"),
-									Label: ptr.String("__Label__"),
-								},
-							},
-							{
-								Value: ptr.String("__Value__"),
-								Datatype: &types.Datatype{
-									Id:    ptr.String("__Id__"),
-									Label: ptr.String("__Label__"),
-								},
-							},
-						},
-					},
-					Merge: &types.Merge{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Source: ptr.String("__Source__"),
-						PrimaryKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					Union: &types.Union{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						UnionType: types.UnionType("ALL"),
-					},
-					PIIDetection: &types.PIIDetection{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PiiType: types.PiiType("RowAudit"),
-						EntityTypesToDetect: []string{
-							"__Member__",
-							"__Member__",
-						},
-						OutputColumnName:       ptr.String("__OutputColumnName__"),
-						SampleFraction:         ptr.Float64(1.0),
-						ThresholdFraction:      ptr.Float64(1.0),
-						MaskValue:              ptr.String("__MaskValue__"),
-						RedactText:             ptr.String("__RedactText__"),
-						RedactChar:             ptr.String("__RedactChar__"),
-						MatchPattern:           ptr.String("__MatchPattern__"),
-						NumLeftCharsToExclude:  ptr.Int32(1),
-						NumRightCharsToExclude: ptr.Int32(1),
-						DetectionParameters:    ptr.String("__DetectionParameters__"),
-						DetectionSensitivity:   ptr.String("__DetectionSensitivity__"),
-					},
-					Aggregate: &types.Aggregate{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Groups: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Aggs: []types.AggregateOperation{
-							{
-								Column: []string{
-									"__Member__",
-									"__Member__",
-								},
-								AggFunc: types.AggFunction("avg"),
-							},
-							{
-								Column: []string{
-									"__Member__",
-									"__Member__",
-								},
-								AggFunc: types.AggFunction("avg"),
-							},
-						},
-					},
-					DropDuplicates: &types.DropDuplicates{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Columns: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					GovernedCatalogTarget: &types.GovernedCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-					},
-					GovernedCatalogSource: &types.GovernedCatalogSource{
-						Name:               ptr.String("__Name__"),
-						Database:           ptr.String("__Database__"),
-						Table:              ptr.String("__Table__"),
-						PartitionPredicate: ptr.String("__PartitionPredicate__"),
-						AdditionalOptions: &types.S3SourceAdditionalOptions{
-							BoundedSize:  ptr.Int64(1),
-							BoundedFiles: ptr.Int64(1),
-						},
-					},
-					MicrosoftSQLServerCatalogSource: &types.MicrosoftSQLServerCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					MySQLCatalogSource: &types.MySQLCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					OracleSQLCatalogSource: &types.OracleSQLCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					PostgreSQLCatalogSource: &types.PostgreSQLCatalogSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					MicrosoftSQLServerCatalogTarget: &types.MicrosoftSQLServerCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					MySQLCatalogTarget: &types.MySQLCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					OracleSQLCatalogTarget: &types.OracleSQLCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					PostgreSQLCatalogTarget: &types.PostgreSQLCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-					},
-					Route: &types.Route{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						GroupFiltersList: []types.GroupFilters{
-							{
-								GroupName: ptr.String("__GroupName__"),
-								Filters: []types.FilterExpression{
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								LogicalOperator: types.FilterLogicalOperator("AND"),
-							},
-							{
-								GroupName: ptr.String("__GroupName__"),
-								Filters: []types.FilterExpression{
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-									{
-										Operation: types.FilterOperation("EQ"),
-										Negated:   ptr.Bool(true),
-										Values: []types.FilterValue{
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-											{
-												Type: types.FilterValueType("COLUMNEXTRACTED"),
-												Value: []string{
-													"__Member__",
-													"__Member__",
-												},
-											},
-										},
-									},
-								},
-								LogicalOperator: types.FilterLogicalOperator("AND"),
-							},
-						},
-					},
-					DynamicTransform: &types.DynamicTransform{
-						Name:          ptr.String("__Name__"),
-						TransformName: ptr.String("__TransformName__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Parameters: []types.TransformConfigParameter{
-							{
-								Name:              ptr.String("__Name__"),
-								Type:              types.ParamType("str"),
-								ValidationRule:    ptr.String("__ValidationRule__"),
-								ValidationMessage: ptr.String("__ValidationMessage__"),
-								Value: []string{
-									"__Member__",
-									"__Member__",
-								},
-								ListType:   types.ParamType("str"),
-								IsOptional: ptr.Bool(true),
-							},
-							{
-								Name:              ptr.String("__Name__"),
-								Type:              types.ParamType("str"),
-								ValidationRule:    ptr.String("__ValidationRule__"),
-								ValidationMessage: ptr.String("__ValidationMessage__"),
-								Value: []string{
-									"__Member__",
-									"__Member__",
-								},
-								ListType:   types.ParamType("str"),
-								IsOptional: ptr.Bool(true),
-							},
-						},
-						FunctionName: ptr.String("__FunctionName__"),
-						Path:         ptr.String("__Path__"),
-						Version:      ptr.String("__Version__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					EvaluateDataQuality: &types.EvaluateDataQuality{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Ruleset: ptr.String("__Ruleset__"),
-						Output:  types.DQTransformOutput("PrimaryInput"),
-						PublishingOptions: &types.DQResultsPublishingOptions{
-							EvaluationContext:        ptr.String("__EvaluationContext__"),
-							ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-							CloudWatchMetricsEnabled: ptr.Bool(true),
-							ResultsPublishingEnabled: ptr.Bool(true),
-						},
-						StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-							StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-						},
-					},
-					S3CatalogHudiSource: &types.S3CatalogHudiSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalHudiOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogHudiSource: &types.CatalogHudiSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalHudiOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HudiSource: &types.S3HudiSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						AdditionalHudiOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HudiCatalogTarget: &types.S3HudiCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3HudiDirectTarget: &types.S3HudiDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            types.HudiTargetCompressionType("gzip"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Format: types.TargetFormat("json"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					DirectJDBCSource: &types.DirectJDBCSource{
-						Name:           ptr.String("__Name__"),
-						Database:       ptr.String("__Database__"),
-						Table:          ptr.String("__Table__"),
-						ConnectionName: ptr.String("__ConnectionName__"),
-						ConnectionType: types.JDBCConnectionType("sqlserver"),
-						RedshiftTmpDir: ptr.String("__RedshiftTmpDir__"),
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3CatalogDeltaSource: &types.S3CatalogDeltaSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalDeltaOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogDeltaSource: &types.CatalogDeltaSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalDeltaOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3DeltaSource: &types.S3DeltaSource{
-						Name: ptr.String("__Name__"),
-						Paths: []string{
-							"__Member__",
-							"__Member__",
-						},
-						AdditionalDeltaOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						AdditionalOptions: &types.S3DirectSourceAdditionalOptions{
-							BoundedSize:      ptr.Int64(1),
-							BoundedFiles:     ptr.Int64(1),
-							EnableSamplePath: ptr.Bool(true),
-							SamplePath:       ptr.String("__SamplePath__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3DeltaCatalogTarget: &types.S3DeltaCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3DeltaDirectTarget: &types.S3DeltaDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:                   ptr.String("__Path__"),
-						Compression:            types.DeltaTargetCompressionType("uncompressed"),
-						NumberTargetPartitions: ptr.String("__NumberTargetPartitions__"),
-						Format:                 types.TargetFormat("json"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-							Table:               ptr.String("__Table__"),
-							Database:            ptr.String("__Database__"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					AmazonRedshiftSource: &types.AmazonRedshiftSource{
-						Name: ptr.String("__Name__"),
-						Data: &types.AmazonRedshiftNodeData{
-							AccessType: ptr.String("__AccessType__"),
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Table: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogDatabase: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogTable: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-							CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-							TempDir:               ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							TablePrefix:         ptr.String("__TablePrefix__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							StagingTable: ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-					},
-					AmazonRedshiftTarget: &types.AmazonRedshiftTarget{
-						Name: ptr.String("__Name__"),
-						Data: &types.AmazonRedshiftNodeData{
-							AccessType: ptr.String("__AccessType__"),
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Table: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogDatabase: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogTable: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							CatalogRedshiftSchema: ptr.String("__CatalogRedshiftSchema__"),
-							CatalogRedshiftTable:  ptr.String("__CatalogRedshiftTable__"),
-							TempDir:               ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdvancedOptions: []types.AmazonRedshiftAdvancedOption{
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-								{
-									Key:   ptr.String("__Key__"),
-									Value: ptr.String("__Value__"),
-								},
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							TablePrefix:         ptr.String("__TablePrefix__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							CrawlerConnection:   ptr.String("__CrawlerConnection__"),
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							StagingTable: ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					EvaluateDataQualityMultiFrame: &types.EvaluateDataQualityMultiFrame{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						AdditionalDataSources: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						Ruleset: ptr.String("__Ruleset__"),
-						PublishingOptions: &types.DQResultsPublishingOptions{
-							EvaluationContext:        ptr.String("__EvaluationContext__"),
-							ResultsS3Prefix:          ptr.String("__ResultsS3Prefix__"),
-							CloudWatchMetricsEnabled: ptr.Bool(true),
-							ResultsPublishingEnabled: ptr.Bool(true),
-						},
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						StopJobOnFailureOptions: &types.DQStopJobOnFailureOptions{
-							StopJobOnFailureTiming: types.DQStopJobOnFailureTiming("Immediate"),
-						},
-					},
-					Recipe: &types.Recipe{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						RecipeReference: &types.RecipeReference{
-							RecipeArn:     ptr.String("__RecipeArn__"),
-							RecipeVersion: ptr.String("__RecipeVersion__"),
-						},
-						RecipeSteps: []types.RecipeStep{
-							{
-								Action: &types.RecipeAction{
-									Operation: ptr.String("__Operation__"),
-									Parameters: map[string]string{
-										"key0": "__Value__",
-										"key1": "__Value__",
-									},
-								},
-								ConditionExpressions: []types.ConditionExpression{
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-								},
-							},
-							{
-								Action: &types.RecipeAction{
-									Operation: ptr.String("__Operation__"),
-									Parameters: map[string]string{
-										"key0": "__Value__",
-										"key1": "__Value__",
-									},
-								},
-								ConditionExpressions: []types.ConditionExpression{
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-									{
-										Condition:    ptr.String("__Condition__"),
-										Value:        ptr.String("__Value__"),
-										TargetColumn: ptr.String("__TargetColumn__"),
-									},
-								},
-							},
-						},
-					},
-					SnowflakeSource: &types.SnowflakeSource{
-						Name: ptr.String("__Name__"),
-						Data: &types.SnowflakeNodeData{
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema:   ptr.String("__Schema__"),
-							Table:    ptr.String("__Table__"),
-							Database: ptr.String("__Database__"),
-							TempDir:  ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdditionalOptions: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							StagingTable:        ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							AutoPushdown: true,
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					SnowflakeTarget: &types.SnowflakeTarget{
-						Name: ptr.String("__Name__"),
-						Data: &types.SnowflakeNodeData{
-							SourceType: ptr.String("__SourceType__"),
-							Connection: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							Schema:   ptr.String("__Schema__"),
-							Table:    ptr.String("__Table__"),
-							Database: ptr.String("__Database__"),
-							TempDir:  ptr.String("__TempDir__"),
-							IamRole: &types.Option{
-								Value:       ptr.String("__Value__"),
-								Label:       ptr.String("__Label__"),
-								Description: ptr.String("__Description__"),
-							},
-							AdditionalOptions: map[string]string{
-								"key0": "__Value__",
-								"key1": "__Value__",
-							},
-							SampleQuery:         ptr.String("__SampleQuery__"),
-							PreAction:           ptr.String("__PreAction__"),
-							PostAction:          ptr.String("__PostAction__"),
-							Action:              ptr.String("__Action__"),
-							Upsert:              true,
-							MergeAction:         ptr.String("__MergeAction__"),
-							MergeWhenMatched:    ptr.String("__MergeWhenMatched__"),
-							MergeWhenNotMatched: ptr.String("__MergeWhenNotMatched__"),
-							MergeClause:         ptr.String("__MergeClause__"),
-							StagingTable:        ptr.String("__StagingTable__"),
-							SelectedColumns: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-							AutoPushdown: true,
-							TableSchema: []types.Option{
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-								{
-									Value:       ptr.String("__Value__"),
-									Label:       ptr.String("__Label__"),
-									Description: ptr.String("__Description__"),
-								},
-							},
-						},
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					ConnectorDataSource: &types.ConnectorDataSource{
-						Name:           ptr.String("__Name__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						Data: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					ConnectorDataTarget: &types.ConnectorDataTarget{
-						Name:           ptr.String("__Name__"),
-						ConnectionType: ptr.String("__ConnectionType__"),
-						Data: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					S3CatalogIcebergSource: &types.S3CatalogIcebergSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalIcebergOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					CatalogIcebergSource: &types.CatalogIcebergSource{
-						Name:     ptr.String("__Name__"),
-						Database: ptr.String("__Database__"),
-						Table:    ptr.String("__Table__"),
-						AdditionalIcebergOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						OutputSchemas: []types.GlueSchema{
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-							{
-								Columns: []types.GlueStudioSchemaColumn{
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-									{
-										Name:           ptr.String("__Name__"),
-										Type:           ptr.String("__Type__"),
-										GlueStudioType: ptr.String("__GlueStudioType__"),
-									},
-								},
-							},
-						},
-					},
-					S3IcebergCatalogTarget: &types.S3IcebergCatalogTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Table:    ptr.String("__Table__"),
-						Database: ptr.String("__Database__"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						SchemaChangePolicy: &types.CatalogSchemaChangePolicy{
-							EnableUpdateCatalog: ptr.Bool(true),
-							UpdateBehavior:      types.UpdateCatalogBehavior("UPDATE_IN_DATABASE"),
-						},
-						AutoDataQuality: &types.AutoDataQuality{
-							IsEnabled:         true,
-							EvaluationContext: ptr.String("__EvaluationContext__"),
-						},
-					},
-					S3IcebergDirectTarget: &types.S3IcebergDirectTarget{
-						Name: ptr.String("__Name__"),
-						Inputs: []string{
-							"__Member__",
-							"__Member__",
-						},
-						PartitionKeys: [][]string{
-							{
-								"__Member__",
-								"__Member__",
-							},
-							{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						Path:   ptr.String("__Path__"),
-						Format: types.TargetFormat("json"),
-						AdditionalOptions: map[string]string{
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 						SchemaChangePolicy: &types.DirectSchemaChangePolicy{
 							EnableUpdateCatalog: ptr.Bool(true),
@@ -47855,6 +36910,7 @@ func TestSerdeUpdateSnapshot_UpdateJob(t *testing.T) {
 	_, err := svc.UpdateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -47891,6 +36947,7 @@ func TestSerdeUpdateSnapshot_UpdateJobFromSourceControl(t *testing.T) {
 	_, err := svc.UpdateJobFromSourceControl(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -47937,6 +36994,7 @@ func TestSerdeUpdateSnapshot_UpdateMLTransform(t *testing.T) {
 	_, err := svc.UpdateMLTransform(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -47975,7 +37033,6 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -47984,7 +37041,6 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -48002,7 +37058,6 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -48021,7 +37076,6 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -48034,7 +37088,6 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -48050,7 +37103,6 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 			},
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			LastAnalyzedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -48064,6 +37116,7 @@ func TestSerdeUpdateSnapshot_UpdatePartition(t *testing.T) {
 	_, err := svc.UpdatePartition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48096,6 +37149,7 @@ func TestSerdeUpdateSnapshot_UpdateRegistry(t *testing.T) {
 	_, err := svc.UpdateRegistry(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48134,6 +37188,7 @@ func TestSerdeUpdateSnapshot_UpdateSchema(t *testing.T) {
 	_, err := svc.UpdateSchema(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48170,6 +37225,7 @@ func TestSerdeUpdateSnapshot_UpdateSourceControlFromJob(t *testing.T) {
 	_, err := svc.UpdateSourceControlFromJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48205,7 +37261,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 					{
@@ -48214,7 +37269,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 						Comment: ptr.String("__Comment__"),
 						Parameters: map[string]string{
 							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -48232,7 +37286,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 					SerializationLibrary: ptr.String("__SerializationLibrary__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				BucketColumns: []string{
@@ -48251,7 +37304,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 				},
 				Parameters: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SkewedInfo: &types.SkewedInfo{
 					SkewedColumnNames: []string{
@@ -48264,7 +37316,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 					},
 					SkewedColumnValueLocationMaps: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				StoredAsSubDirectories: true,
@@ -48285,7 +37336,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				{
@@ -48294,7 +37344,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 					Comment: ptr.String("__Comment__"),
 					Parameters: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -48303,7 +37352,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 			TableType:        ptr.String("__TableType__"),
 			Parameters: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			TargetTable: &types.TableIdentifier{
 				CatalogId:    ptr.String("__CatalogId__"),
@@ -48419,7 +37467,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 							Location: ptr.String("__Location__"),
 							Properties: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Action: types.IcebergUpdateAction("add-schema"),
 							EncryptionKey: &types.IcebergEncryptedKey{
@@ -48428,7 +37475,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 								EncryptedById:        ptr.String("__EncryptedById__"),
 								Properties: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							KeyId: ptr.String("__KeyId__"),
@@ -48499,7 +37545,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 							Location: ptr.String("__Location__"),
 							Properties: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Action: types.IcebergUpdateAction("add-schema"),
 							EncryptionKey: &types.IcebergEncryptedKey{
@@ -48508,7 +37553,6 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 								EncryptedById:        ptr.String("__EncryptedById__"),
 								Properties: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							KeyId: ptr.String("__KeyId__"),
@@ -48527,6 +37571,7 @@ func TestSerdeUpdateSnapshot_UpdateTable(t *testing.T) {
 	_, err := svc.UpdateTable(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48587,6 +37632,7 @@ func TestSerdeUpdateSnapshot_UpdateTableOptimizer(t *testing.T) {
 	_, err := svc.UpdateTableOptimizer(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48614,7 +37660,6 @@ func TestSerdeUpdateSnapshot_UpdateTrigger(t *testing.T) {
 					JobName: ptr.String("__JobName__"),
 					Arguments: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Timeout:               ptr.Int32(1),
 					SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -48627,7 +37672,6 @@ func TestSerdeUpdateSnapshot_UpdateTrigger(t *testing.T) {
 					JobName: ptr.String("__JobName__"),
 					Arguments: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Timeout:               ptr.Int32(1),
 					SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
@@ -48671,6 +37715,7 @@ func TestSerdeUpdateSnapshot_UpdateTrigger(t *testing.T) {
 	_, err := svc.UpdateTrigger(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48701,27 +37746,9 @@ func TestSerdeUpdateSnapshot_UpdateUsageProfile(t *testing.T) {
 					MinValue: ptr.String("__MinValue__"),
 					MaxValue: ptr.String("__MaxValue__"),
 				},
-				"key1": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
 			},
 			JobConfiguration: map[string]types.ConfigurationObject{
 				"key0": {
-					DefaultValue: ptr.String("__DefaultValue__"),
-					AllowedValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
-				"key1": {
 					DefaultValue: ptr.String("__DefaultValue__"),
 					AllowedValues: []string{
 						"__Member__",
@@ -48742,6 +37769,7 @@ func TestSerdeUpdateSnapshot_UpdateUsageProfile(t *testing.T) {
 	_, err := svc.UpdateUsageProfile(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48789,6 +37817,7 @@ func TestSerdeUpdateSnapshot_UpdateUserDefinedFunction(t *testing.T) {
 	_, err := svc.UpdateUserDefinedFunction(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -48810,7 +37839,6 @@ func TestSerdeUpdateSnapshot_UpdateWorkflow(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		DefaultRunProperties: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		MaxConcurrentRuns: ptr.Int32(1),
 	}
@@ -48823,6 +37851,7 @@ func TestSerdeUpdateSnapshot_UpdateWorkflow(t *testing.T) {
 	_, err := svc.UpdateWorkflow(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

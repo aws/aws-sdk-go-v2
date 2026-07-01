@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: PhotonAdminProxyService.CreateAppBlockBuilder
 
-{"AccessEndpoints":[{"EndpointType":"STREAMING","VpceId":"__VpceId__"},{"EndpointType":"STREAMING","VpceId":"__VpceId__"}],"Description":"__Description__","DisableIMDSV1":true,"DisplayName":"__DisplayName__","EnableDefaultInternetAccess":true,"IamRoleArn":"__IamRoleArn__","InstanceType":"__InstanceType__","Name":"__Name__","Platform":"WINDOWS_SERVER_2019","Tags":{"key0":"__Value__","key1":"__Value__"},"VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}
+{"AccessEndpoints":[{"EndpointType":"STREAMING","VpceId":"__VpceId__"},{"EndpointType":"STREAMING","VpceId":"__VpceId__"}],"Description":"__Description__","DisableIMDSV1":true,"DisplayName":"__DisplayName__","EnableDefaultInternetAccess":true,"IamRoleArn":"__IamRoleArn__","InstanceType":"__InstanceType__","Name":"__Name__","Platform":"WINDOWS_SERVER_2019","Tags":{"key0":"__Value__"},"VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}

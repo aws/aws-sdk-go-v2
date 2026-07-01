@@ -3,4 +3,4 @@ POST /create-billing-group
 Content-Type: application/json
 X-Amzn-Client-Token: __ClientToken__
 
-{"AccountGrouping":{"AutoAssociate":true,"LinkedAccountIds":["__Member__","__Member__"],"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"},"ComputationPreference":{"PricingPlanArn":"__PricingPlanArn__"},"Description":"__Description__","Name":"__Name__","PrimaryAccountId":"__PrimaryAccountId__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"AccountGrouping":{"AutoAssociate":true,"LinkedAccountIds":["__Member__","__Member__"],"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"},"ComputationPreference":{"PricingPlanArn":"__PricingPlanArn__"},"Description":"__Description__","Name":"__Name__","PrimaryAccountId":"__PrimaryAccountId__","Tags":{"key0":"__Value__"}}

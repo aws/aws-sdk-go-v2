@@ -2,4 +2,4 @@ POST /bot/__BotName__/alias/__BotAlias__/user/__UserId__/text
 
 Content-Type: application/json
 
-{"activeContexts":[{"name":"__Name__","parameters":{"key0":"__Value__","key1":"__Value__"},"timeToLive":{"timeToLiveInSeconds":1,"turnsToLive":1}},{"name":"__Name__","parameters":{"key0":"__Value__","key1":"__Value__"},"timeToLive":{"timeToLiveInSeconds":1,"turnsToLive":1}}],"inputText":"__InputText__","requestAttributes":{"key0":"__Value__","key1":"__Value__"},"sessionAttributes":{"key0":"__Value__","key1":"__Value__"}}
+{"activeContexts":[{"name":"__Name__","parameters":{"key0":"__Value__"},"timeToLive":{"timeToLiveInSeconds":1,"turnsToLive":1}},{"name":"__Name__","parameters":{"key0":"__Value__"},"timeToLive":{"timeToLiveInSeconds":1,"turnsToLive":1}}],"inputText":"__InputText__","requestAttributes":{"key0":"__Value__"},"sessionAttributes":{"key0":"__Value__"}}

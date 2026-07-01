@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateDBProxyEndpoint&DBProxyEndpointName=__DBProxyEndpointName__&DBProxyName=__DBProxyName__&EndpointNetworkType=IPV4&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&TargetRole=READ_WRITE&Version=2014-10-31&VpcSecurityGroupIds.member.1=__Member__&VpcSecurityGroupIds.member.2=__Member__&VpcSubnetIds.member.1=__Member__&VpcSubnetIds.member.2=__Member__

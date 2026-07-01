@@ -2,4 +2,4 @@ POST /snapshots
 
 Content-Type: application/json
 
-{"graphIdentifier":"__GraphIdentifier__","snapshotName":"__SnapshotName__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"graphIdentifier":"__GraphIdentifier__","snapshotName":"__SnapshotName__","tags":{"key0":"__Value__"}}

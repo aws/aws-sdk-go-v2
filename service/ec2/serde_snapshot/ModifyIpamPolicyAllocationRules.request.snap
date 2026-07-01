@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyIpamPolicyAllocationRules&AllocationRule.1.SourceIpamPoolId=__SourceIpamPoolId__&AllocationRule.2.SourceIpamPoolId=__SourceIpamPoolId__&DryRun=true&IpamPolicyId=__IpamPolicyId__&Locale=__Locale__&ResourceType=alb&Version=2016-11-15

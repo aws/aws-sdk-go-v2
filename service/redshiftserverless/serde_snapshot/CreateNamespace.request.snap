@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: RedshiftServerless.CreateNamespace
 
-{"adminPasswordSecretKmsKeyId":"__AdminPasswordSecretKmsKeyId__","adminUserPassword":"__AdminUserPassword__","adminUsername":"__AdminUsername__","dbName":"__DbName__","defaultIamRoleArn":"__DefaultIamRoleArn__","iamRoles":["__Member__","__Member__"],"kmsKeyId":"__KmsKeyId__","logExports":["useractivitylog","useractivitylog"],"manageAdminPassword":true,"namespaceName":"__NamespaceName__","redshiftIdcApplicationArn":"__RedshiftIdcApplicationArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}
+{"adminPasswordSecretKmsKeyId":"__AdminPasswordSecretKmsKeyId__","adminUsername":"__AdminUsername__","adminUserPassword":"__AdminUserPassword__","dbName":"__DbName__","defaultIamRoleArn":"__DefaultIamRoleArn__","iamRoles":["__Member__","__Member__"],"kmsKeyId":"__KmsKeyId__","logExports":["useractivitylog","useractivitylog"],"manageAdminPassword":true,"namespaceName":"__NamespaceName__","redshiftIdcApplicationArn":"__RedshiftIdcApplicationArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

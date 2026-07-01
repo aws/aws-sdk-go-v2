@@ -4,4 +4,4 @@ Content-Type: application/x-amz-json-1.0
 X-Amz-Target: AmazonSQS.CreateQueue
 X-Amzn-Query-Mode: true
 
-{"Attributes":{"key0":"__Value__","key1":"__Value__"},"QueueName":"__QueueName__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Attributes":{"key0":"__Value__"},"QueueName":"__QueueName__","tags":{"key0":"__Value__"}}

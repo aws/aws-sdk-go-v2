@@ -2,4 +2,4 @@ POST /CreateParticipantToken
 
 Content-Type: application/json
 
-{"attributes":{"key0":"__Value__","key1":"__Value__"},"capabilities":["PUBLISH","PUBLISH"],"duration":1,"stageArn":"__StageArn__","userId":"__UserId__"}
+{"attributes":{"key0":"__Value__"},"capabilities":["PUBLISH","PUBLISH"],"duration":1,"stageArn":"__StageArn__","userId":"__UserId__"}

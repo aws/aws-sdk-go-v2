@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TrentService.ReEncrypt
 
-{"CiphertextBlob":"YmxvYg==","DestinationEncryptionAlgorithm":"SYMMETRIC_DEFAULT","DestinationEncryptionContext":{"key0":"__Value__","key1":"__Value__"},"DestinationKeyId":"__DestinationKeyId__","DryRun":true,"DryRunModifiers":["IGNORE_CIPHERTEXT","IGNORE_CIPHERTEXT"],"GrantTokens":["__Member__","__Member__"],"SourceEncryptionAlgorithm":"SYMMETRIC_DEFAULT","SourceEncryptionContext":{"key0":"__Value__","key1":"__Value__"},"SourceKeyId":"__SourceKeyId__"}
+{"CiphertextBlob":"YmxvYg==","DestinationEncryptionAlgorithm":"SYMMETRIC_DEFAULT","DestinationEncryptionContext":{"key0":"__Value__"},"DestinationKeyId":"__DestinationKeyId__","DryRun":true,"DryRunModifiers":["IGNORE_CIPHERTEXT","IGNORE_CIPHERTEXT"],"GrantTokens":["__Member__","__Member__"],"SourceEncryptionAlgorithm":"SYMMETRIC_DEFAULT","SourceEncryptionContext":{"key0":"__Value__"},"SourceKeyId":"__SourceKeyId__"}

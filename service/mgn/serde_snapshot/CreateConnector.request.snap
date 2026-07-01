@@ -2,4 +2,4 @@ POST /CreateConnector
 
 Content-Type: application/json
 
-{"name":"__Name__","ssmCommandConfig":{"cloudWatchLogGroupName":"__CloudWatchLogGroupName__","cloudWatchOutputEnabled":true,"outputS3BucketName":"__OutputS3BucketName__","s3OutputEnabled":true},"ssmInstanceID":"__SsmInstanceID__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"name":"__Name__","ssmCommandConfig":{"cloudWatchLogGroupName":"__CloudWatchLogGroupName__","cloudWatchOutputEnabled":true,"outputS3BucketName":"__OutputS3BucketName__","s3OutputEnabled":true},"ssmInstanceID":"__SsmInstanceID__","tags":{"key0":"__Value__"}}

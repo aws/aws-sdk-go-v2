@@ -2,3 +2,4 @@ POST /2020-05-31/realtime-log-config
 
 Content-Type: application/xml
 
+<CreateRealtimeLogConfigRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><EndPoints><member><KinesisStreamConfig><RoleARN>__RoleARN__</RoleARN><StreamARN>__StreamARN__</StreamARN></KinesisStreamConfig><StreamType>__StreamType__</StreamType></member><member><KinesisStreamConfig><RoleARN>__RoleARN__</RoleARN><StreamARN>__StreamARN__</StreamARN></KinesisStreamConfig><StreamType>__StreamType__</StreamType></member></EndPoints><Fields><Field>__Member__</Field><Field>__Member__</Field></Fields><Name>__Name__</Name><SamplingRate>1</SamplingRate></CreateRealtimeLogConfigRequest>

@@ -3,4 +3,4 @@ PUT /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__/inte
 Accept: application/json
 Content-Type: application/json
 
-{"contentHandling":"CONVERT_TO_BINARY","responseParameters":{"key0":"__Value__","key1":"__Value__"},"responseTemplates":{"key0":"__Value__","key1":"__Value__"},"selectionPattern":"__SelectionPattern__"}
+{"contentHandling":"CONVERT_TO_BINARY","responseParameters":{"key0":"__Value__"},"responseTemplates":{"key0":"__Value__"},"selectionPattern":"__SelectionPattern__"}

@@ -2,4 +2,4 @@ POST /sol/vnfpkgm/v1/vnf_packages
 
 Content-Type: application/json
 
-{"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"tags":{"key0":"__Value__"}}

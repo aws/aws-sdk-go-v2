@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSCognitoIdentityProviderService.AdminListGroupsForUser
 
-{"Limit":1,"NextToken":"__NextToken__","UserPoolId":"__UserPoolId__","Username":"__Username__"}
+{"Limit":1,"NextToken":"__NextToken__","Username":"__Username__","UserPoolId":"__UserPoolId__"}

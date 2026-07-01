@@ -2,4 +2,4 @@ POST /projects
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","portalId":"__PortalId__","projectDescription":"__ProjectDescription__","projectName":"__ProjectName__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","portalId":"__PortalId__","projectDescription":"__ProjectDescription__","projectName":"__ProjectName__","tags":{"key0":"__Value__"}}

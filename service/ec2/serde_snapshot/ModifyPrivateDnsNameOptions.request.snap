@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyPrivateDnsNameOptions&DryRun=true&EnableResourceNameDnsAAAARecord=true&EnableResourceNameDnsARecord=true&InstanceId=__InstanceId__&PrivateDnsHostnameType=ip-name&Version=2016-11-15

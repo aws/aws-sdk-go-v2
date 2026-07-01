@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=EnableMetricsCollection&AutoScalingGroupName=__AutoScalingGroupName__&Granularity=__Granularity__&Metrics.member.1=__Member__&Metrics.member.2=__Member__&Version=2011-01-01

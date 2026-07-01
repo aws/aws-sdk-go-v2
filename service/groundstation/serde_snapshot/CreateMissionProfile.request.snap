@@ -2,4 +2,4 @@ POST /missionprofile
 
 Content-Type: application/json
 
-{"contactPostPassDurationSeconds":1,"contactPrePassDurationSeconds":1,"dataflowEdges":[["__Member__","__Member__"],["__Member__","__Member__"]],"minimumViableContactDurationSeconds":1,"name":"__Name__","streamsKmsKey":{"kmsKeyArn":"__KmsKeyMemberKmsKeyArn__"},"streamsKmsRole":"__StreamsKmsRole__","tags":{"key0":"__Value__","key1":"__Value__"},"telemetrySinkConfigArn":"__TelemetrySinkConfigArn__","trackingConfigArn":"__TrackingConfigArn__"}
+{"contactPostPassDurationSeconds":1,"contactPrePassDurationSeconds":1,"dataflowEdges":[["__Member__","__Member__"],["__Member__","__Member__"]],"minimumViableContactDurationSeconds":1,"name":"__Name__","streamsKmsKey":{"kmsKeyArn":"__KmsKeyMemberKmsKeyArn__"},"streamsKmsRole":"__StreamsKmsRole__","tags":{"key0":"__Value__"},"telemetrySinkConfigArn":"__TelemetrySinkConfigArn__","trackingConfigArn":"__TrackingConfigArn__"}

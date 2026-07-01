@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetAwsNetworkPerformanceData&DataQuery.1.Destination=__Destination__&DataQuery.1.Id=__Id__&DataQuery.1.Metric=aggregate-latency&DataQuery.1.Period=five-minutes&DataQuery.1.Source=__Source__&DataQuery.1.Statistic=p50&DataQuery.2.Destination=__Destination__&DataQuery.2.Id=__Id__&DataQuery.2.Metric=aggregate-latency&DataQuery.2.Period=five-minutes&DataQuery.2.Source=__Source__&DataQuery.2.Statistic=p50&DryRun=true&EndTime=2000-01-01T00%3A00%3A00Z&MaxResults=1&NextToken=__NextToken__&StartTime=2000-01-01T00%3A00%3A00Z&Version=2016-11-15

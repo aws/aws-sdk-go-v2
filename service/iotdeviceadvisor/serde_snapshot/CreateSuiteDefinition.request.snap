@@ -2,4 +2,4 @@ POST /suiteDefinitions
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","suiteDefinitionConfiguration":{"devicePermissionRoleArn":"__DevicePermissionRoleArn__","devices":[{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"}],"intendedForQualification":true,"isLongDurationTest":true,"protocol":"MqttV3_1_1","rootGroup":"__RootGroup__","suiteDefinitionName":"__SuiteDefinitionName__"},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","suiteDefinitionConfiguration":{"devicePermissionRoleArn":"__DevicePermissionRoleArn__","devices":[{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"}],"intendedForQualification":true,"isLongDurationTest":true,"protocol":"MqttV3_1_1","rootGroup":"__RootGroup__","suiteDefinitionName":"__SuiteDefinitionName__"},"tags":{"key0":"__Value__"}}

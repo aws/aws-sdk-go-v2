@@ -2,4 +2,4 @@ PATCH /investigationGroups/__Identifier__
 
 Content-Type: application/json
 
-{"chatbotNotificationChannel":{"key0":["__Member__","__Member__"],"key1":["__Member__","__Member__"]},"crossAccountConfigurations":[{"sourceRoleArn":"__SourceRoleArn__"},{"sourceRoleArn":"__SourceRoleArn__"}],"encryptionConfiguration":{"kmsKeyId":"__KmsKeyId__","type":"AWS_OWNED_KEY"},"isCloudTrailEventHistoryEnabled":true,"roleArn":"__RoleArn__","tagKeyBoundaries":["__Member__","__Member__"]}
+{"chatbotNotificationChannel":{"key0":["__Member__","__Member__"]},"crossAccountConfigurations":[{"sourceRoleArn":"__SourceRoleArn__"},{"sourceRoleArn":"__SourceRoleArn__"}],"encryptionConfiguration":{"kmsKeyId":"__KmsKeyId__","type":"AWS_OWNED_KEY"},"isCloudTrailEventHistoryEnabled":true,"roleArn":"__RoleArn__","tagKeyBoundaries":["__Member__","__Member__"]}

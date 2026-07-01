@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ListResourceScanResources&MaxResults=1&NextToken=__NextToken__&ResourceIdentifier=__ResourceIdentifier__&ResourceScanId=__ResourceScanId__&ResourceTypePrefix=__ResourceTypePrefix__&TagKey=__TagKey__&TagValue=__TagValue__&Version=2010-05-15

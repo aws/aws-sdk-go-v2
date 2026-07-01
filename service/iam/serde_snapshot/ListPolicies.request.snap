@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ListPolicies&Marker=__Marker__&MaxItems=1&OnlyAttached=true&PathPrefix=__PathPrefix__&PolicyUsageFilter=PermissionsPolicy&Scope=All&Version=2010-05-08

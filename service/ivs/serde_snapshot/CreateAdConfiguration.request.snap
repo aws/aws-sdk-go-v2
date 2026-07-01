@@ -2,4 +2,4 @@ POST /CreateAdConfiguration
 
 Content-Type: application/json
 
-{"mediaTailorPlaybackConfigurations":[{"playbackConfigurationArn":"__PlaybackConfigurationArn__"},{"playbackConfigurationArn":"__PlaybackConfigurationArn__"}],"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"mediaTailorPlaybackConfigurations":[{"playbackConfigurationArn":"__PlaybackConfigurationArn__"},{"playbackConfigurationArn":"__PlaybackConfigurationArn__"}],"name":"__Name__","tags":{"key0":"__Value__"}}

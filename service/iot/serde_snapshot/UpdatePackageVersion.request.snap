@@ -2,4 +2,4 @@ PATCH /packages/__PackageName__/versions/__VersionName__?clientToken=__ClientTok
 
 Content-Type: application/json
 
-{"action":"PUBLISH","artifact":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},"attributes":{"key0":"__Value__","key1":"__Value__"},"description":"__Description__","recipe":"__Recipe__"}
+{"action":"PUBLISH","artifact":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},"attributes":{"key0":"__Value__"},"description":"__Description__","recipe":"__Recipe__"}

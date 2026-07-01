@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateSnapshotSchedule&DryRun=true&NextInvocations=1&ScheduleDefinitions.ScheduleDefinition.1=__Member__&ScheduleDefinitions.ScheduleDefinition.2=__Member__&ScheduleDescription=__ScheduleDescription__&ScheduleIdentifier=__ScheduleIdentifier__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&Version=2012-12-01

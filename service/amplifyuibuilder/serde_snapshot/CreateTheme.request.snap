@@ -2,4 +2,4 @@ POST /app/__AppId__/environment/__EnvironmentName__/themes?clientToken=__ClientT
 
 Content-Type: application/json
 
-{"name":"__Name__","overrides":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}],"tags":{"key0":"__Value__","key1":"__Value__"},"values":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}]}
+{"name":"__Name__","overrides":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}],"tags":{"key0":"__Value__"},"values":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}]}

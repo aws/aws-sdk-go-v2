@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyInstanceCpuOptions&CoreCount=1&DryRun=true&InstanceId=__InstanceId__&NestedVirtualization=enabled&ThreadsPerCore=1&Version=2016-11-15

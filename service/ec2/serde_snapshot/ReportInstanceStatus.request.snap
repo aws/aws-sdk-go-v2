@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ReportInstanceStatus&Description=__Description__&DryRun=true&EndTime=2000-01-01T00%3A00%3A00Z&InstanceId.1=__Member__&InstanceId.2=__Member__&ReasonCode.1=instance-stuck-in-state&ReasonCode.2=instance-stuck-in-state&StartTime=2000-01-01T00%3A00%3A00Z&Status=ok&Version=2016-11-15

@@ -2,3 +2,4 @@ POST /2020-05-31/tagging?Operation=Untag&Resource=__Resource__
 
 Content-Type: application/xml
 
+<TagKeys xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Items><Key>__Member__</Key><Key>__Member__</Key></Items></TagKeys>

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DisassociateAddress&AssociationId=__AssociationId__&DryRun=true&PublicIp=__PublicIp__&Version=2016-11-15

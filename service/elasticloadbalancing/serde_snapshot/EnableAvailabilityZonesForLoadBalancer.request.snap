@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=EnableAvailabilityZonesForLoadBalancer&AvailabilityZones.member.1=__Member__&AvailabilityZones.member.2=__Member__&LoadBalancerName=__LoadBalancerName__&Version=2012-06-01

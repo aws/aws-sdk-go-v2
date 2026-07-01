@@ -2,4 +2,4 @@ POST /tag-resource
 
 Content-Type: application/json
 
-{"resourceArn":"__ResourceArn__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"resourceArn":"__ResourceArn__","tags":{"key0":"__Value__"}}

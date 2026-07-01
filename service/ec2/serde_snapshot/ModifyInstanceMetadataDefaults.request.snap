@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyInstanceMetadataDefaults&DryRun=true&HttpEndpoint=disabled&HttpPutResponseHopLimit=1&HttpTokens=optional&HttpTokensEnforced=disabled&InstanceMetadataTags=disabled&Version=2016-11-15

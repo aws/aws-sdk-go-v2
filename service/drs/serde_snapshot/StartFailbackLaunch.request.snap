@@ -2,4 +2,4 @@ POST /StartFailbackLaunch
 
 Content-Type: application/json
 
-{"recoveryInstanceIDs":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"recoveryInstanceIDs":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

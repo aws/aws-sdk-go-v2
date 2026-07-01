@@ -4,3 +4,4 @@ Content-Md5: W6LdKbkh2xBIK9XIRZbzaw==
 Content-Type: application/xml
 X-Amz-Account-Id: AccountId-value
 
+<SubmitMultiRegionAccessPointRoutesRequest xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><RouteUpdates><Route><Bucket>__Bucket__</Bucket><Region>__Region__</Region><TrafficDialPercentage>1</TrafficDialPercentage></Route><Route><Bucket>__Bucket__</Bucket><Region>__Region__</Region><TrafficDialPercentage>1</TrafficDialPercentage></Route></RouteUpdates></SubmitMultiRegionAccessPointRoutesRequest>

@@ -2,4 +2,4 @@ POST /CreateMembership
 
 Content-Type: application/json
 
-{"agentSpaceId":"__AgentSpaceId__","applicationId":"__ApplicationId__","config":{"user":{"role":"MEMBER"}},"memberType":"USER","membershipId":"__MembershipId__"}
+{"agentSpaceId":"__AgentSpaceId__","applicationId":"__ApplicationId__","config":{"user":{"role":"MEMBER"}},"membershipId":"__MembershipId__","memberType":"USER"}

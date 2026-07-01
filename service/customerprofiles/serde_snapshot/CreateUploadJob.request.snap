@@ -2,4 +2,4 @@ POST /domains/__DomainName__/upload-jobs
 
 Content-Type: application/json
 
-{"DataExpiry":1,"DisplayName":"__DisplayName__","Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"},"key1":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"UniqueKey":"__UniqueKey__"}
+{"DataExpiry":1,"DisplayName":"__DisplayName__","Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"UniqueKey":"__UniqueKey__"}

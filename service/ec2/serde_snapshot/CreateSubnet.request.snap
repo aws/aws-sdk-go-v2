@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateSubnet&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&CidrBlock=__CidrBlock__&DryRun=true&Ipv4IpamPoolId=__Ipv4IpamPoolId__&Ipv4NetmaskLength=1&Ipv6CidrBlock=__Ipv6CidrBlock__&Ipv6IpamPoolId=__Ipv6IpamPoolId__&Ipv6Native=true&Ipv6NetmaskLength=1&OutpostArn=__OutpostArn__&TagSpecification.1.ResourceType=capacity-reservation&TagSpecification.1.Tag.1.Key=__Key__&TagSpecification.1.Tag.1.Value=__Value__&TagSpecification.1.Tag.2.Key=__Key__&TagSpecification.1.Tag.2.Value=__Value__&TagSpecification.2.ResourceType=capacity-reservation&TagSpecification.2.Tag.1.Key=__Key__&TagSpecification.2.Tag.1.Value=__Value__&TagSpecification.2.Tag.2.Key=__Key__&TagSpecification.2.Tag.2.Value=__Value__&Version=2016-11-15&VpcId=__VpcId__

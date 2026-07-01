@@ -2,4 +2,4 @@ POST /CreateRoom
 
 Content-Type: application/json
 
-{"loggingConfigurationIdentifiers":["__Member__","__Member__"],"maximumMessageLength":1,"maximumMessageRatePerSecond":1,"messageReviewHandler":{"fallbackResult":"ALLOW","uri":"__Uri__"},"name":"__Name__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"loggingConfigurationIdentifiers":["__Member__","__Member__"],"maximumMessageLength":1,"maximumMessageRatePerSecond":1,"messageReviewHandler":{"fallbackResult":"ALLOW","uri":"__Uri__"},"name":"__Name__","tags":{"key0":"__Value__"}}

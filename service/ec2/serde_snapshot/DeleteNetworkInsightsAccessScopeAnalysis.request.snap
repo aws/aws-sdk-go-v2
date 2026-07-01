@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteNetworkInsightsAccessScopeAnalysis&DryRun=true&NetworkInsightsAccessScopeAnalysisId=__NetworkInsightsAccessScopeAnalysisId__&Version=2016-11-15

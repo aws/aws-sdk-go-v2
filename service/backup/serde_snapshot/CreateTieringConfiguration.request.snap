@@ -2,4 +2,4 @@ PUT /tiering-configurations
 
 Content-Type: application/json
 
-{"CreatorRequestId":"__CreatorRequestId__","TieringConfiguration":{"BackupVaultName":"__BackupVaultName__","ResourceSelection":[{"ResourceType":"__ResourceType__","Resources":["__Member__","__Member__"],"TieringDownSettingsInDays":1},{"ResourceType":"__ResourceType__","Resources":["__Member__","__Member__"],"TieringDownSettingsInDays":1}],"TieringConfigurationName":"__TieringConfigurationName__"},"TieringConfigurationTags":{"key0":"__Value__","key1":"__Value__"}}
+{"CreatorRequestId":"__CreatorRequestId__","TieringConfiguration":{"BackupVaultName":"__BackupVaultName__","ResourceSelection":[{"Resources":["__Member__","__Member__"],"ResourceType":"__ResourceType__","TieringDownSettingsInDays":1},{"Resources":["__Member__","__Member__"],"ResourceType":"__ResourceType__","TieringDownSettingsInDays":1}],"TieringConfigurationName":"__TieringConfigurationName__"},"TieringConfigurationTags":{"key0":"__Value__"}}

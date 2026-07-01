@@ -7,7 +7,6 @@ package batch
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
@@ -117,18 +116,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -141,7 +145,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -154,7 +157,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -172,6 +178,9 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_CancelJob(t *testing.T) {
 	input := &CancelJobInput{
 		JobId:  ptr.String("__JobId__"),
@@ -186,6 +195,7 @@ func TestSerdeCheckSnapshot_CancelJob(t *testing.T) {
 	_, err := svc.CancelJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -230,7 +240,6 @@ func TestSerdeCheckSnapshot_CreateComputeEnvironment(t *testing.T) {
 			InstanceRole: ptr.String("__InstanceRole__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PlacementGroup:   ptr.String("__PlacementGroup__"),
 			BidPercentage:    ptr.Int32(1),
@@ -284,7 +293,6 @@ func TestSerdeCheckSnapshot_CreateComputeEnvironment(t *testing.T) {
 		ServiceRole: ptr.String("__ServiceRole__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		EksConfiguration: &types.EksConfiguration{
 			EksClusterArn:       ptr.String("__EksClusterArn__"),
@@ -301,6 +309,7 @@ func TestSerdeCheckSnapshot_CreateComputeEnvironment(t *testing.T) {
 	_, err := svc.CreateComputeEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -323,7 +332,6 @@ func TestSerdeCheckSnapshot_CreateConsumableResource(t *testing.T) {
 		ResourceType:           ptr.String("__ResourceType__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -335,6 +343,7 @@ func TestSerdeCheckSnapshot_CreateConsumableResource(t *testing.T) {
 	_, err := svc.CreateConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -379,7 +388,6 @@ func TestSerdeCheckSnapshot_CreateJobQueue(t *testing.T) {
 		JobQueueType: types.JobQueueType("EKS"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		JobStateTimeLimitActions: []types.JobStateTimeLimitAction{
 			{
@@ -405,6 +413,7 @@ func TestSerdeCheckSnapshot_CreateJobQueue(t *testing.T) {
 	_, err := svc.CreateJobQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -444,7 +453,6 @@ func TestSerdeCheckSnapshot_CreateQuotaShare(t *testing.T) {
 		State: types.QuotaShareState("ENABLED"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -456,6 +464,7 @@ func TestSerdeCheckSnapshot_CreateQuotaShare(t *testing.T) {
 	_, err := svc.CreateQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -493,7 +502,6 @@ func TestSerdeCheckSnapshot_CreateSchedulingPolicy(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -505,6 +513,7 @@ func TestSerdeCheckSnapshot_CreateSchedulingPolicy(t *testing.T) {
 	_, err := svc.CreateSchedulingPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -537,7 +546,6 @@ func TestSerdeCheckSnapshot_CreateServiceEnvironment(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -549,6 +557,7 @@ func TestSerdeCheckSnapshot_CreateServiceEnvironment(t *testing.T) {
 	_, err := svc.CreateServiceEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -577,6 +586,7 @@ func TestSerdeCheckSnapshot_DeleteComputeEnvironment(t *testing.T) {
 	_, err := svc.DeleteComputeEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -605,6 +615,7 @@ func TestSerdeCheckSnapshot_DeleteConsumableResource(t *testing.T) {
 	_, err := svc.DeleteConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -633,6 +644,7 @@ func TestSerdeCheckSnapshot_DeleteJobQueue(t *testing.T) {
 	_, err := svc.DeleteJobQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -661,6 +673,7 @@ func TestSerdeCheckSnapshot_DeleteQuotaShare(t *testing.T) {
 	_, err := svc.DeleteQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -689,6 +702,7 @@ func TestSerdeCheckSnapshot_DeleteSchedulingPolicy(t *testing.T) {
 	_, err := svc.DeleteSchedulingPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -717,6 +731,7 @@ func TestSerdeCheckSnapshot_DeleteServiceEnvironment(t *testing.T) {
 	_, err := svc.DeleteServiceEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -745,6 +760,7 @@ func TestSerdeCheckSnapshot_DeregisterJobDefinition(t *testing.T) {
 	_, err := svc.DeregisterJobDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -778,6 +794,7 @@ func TestSerdeCheckSnapshot_DescribeComputeEnvironments(t *testing.T) {
 	_, err := svc.DescribeComputeEnvironments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -806,6 +823,7 @@ func TestSerdeCheckSnapshot_DescribeConsumableResource(t *testing.T) {
 	_, err := svc.DescribeConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -841,6 +859,7 @@ func TestSerdeCheckSnapshot_DescribeJobDefinitions(t *testing.T) {
 	_, err := svc.DescribeJobDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -874,6 +893,7 @@ func TestSerdeCheckSnapshot_DescribeJobQueues(t *testing.T) {
 	_, err := svc.DescribeJobQueues(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -905,6 +925,7 @@ func TestSerdeCheckSnapshot_DescribeJobs(t *testing.T) {
 	_, err := svc.DescribeJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -933,6 +954,7 @@ func TestSerdeCheckSnapshot_DescribeQuotaShare(t *testing.T) {
 	_, err := svc.DescribeQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -964,6 +986,7 @@ func TestSerdeCheckSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	_, err := svc.DescribeSchedulingPolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -997,6 +1020,7 @@ func TestSerdeCheckSnapshot_DescribeServiceEnvironments(t *testing.T) {
 	_, err := svc.DescribeServiceEnvironments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1025,6 +1049,7 @@ func TestSerdeCheckSnapshot_DescribeServiceJob(t *testing.T) {
 	_, err := svc.DescribeServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1053,6 +1078,7 @@ func TestSerdeCheckSnapshot_GetJobQueueSnapshot(t *testing.T) {
 	_, err := svc.GetJobQueueSnapshot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1098,6 +1124,7 @@ func TestSerdeCheckSnapshot_ListConsumableResources(t *testing.T) {
 	_, err := svc.ListConsumableResources(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1147,6 +1174,7 @@ func TestSerdeCheckSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1193,6 +1221,7 @@ func TestSerdeCheckSnapshot_ListJobsByConsumableResource(t *testing.T) {
 	_, err := svc.ListJobsByConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1223,6 +1252,7 @@ func TestSerdeCheckSnapshot_ListQuotaShares(t *testing.T) {
 	_, err := svc.ListQuotaShares(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1252,6 +1282,7 @@ func TestSerdeCheckSnapshot_ListSchedulingPolicies(t *testing.T) {
 	_, err := svc.ListSchedulingPolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1299,6 +1330,7 @@ func TestSerdeCheckSnapshot_ListServiceJobs(t *testing.T) {
 	_, err := svc.ListServiceJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1327,6 +1359,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1348,7 +1381,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 		Type:              types.JobDefinitionType("container"),
 		Parameters: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		SchedulingPriority: ptr.Int32(1),
 		ContainerProperties: &types.ContainerProperties{
@@ -1501,7 +1533,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 				LogDriver: types.LogDriver("json-file"),
 				Options: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SecretOptions: []types.Secret{
 					{
@@ -1698,7 +1729,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 							LogDriver: types.LogDriver("json-file"),
 							Options: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SecretOptions: []types.Secret{
 								{
@@ -1777,7 +1807,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -1827,7 +1856,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -1924,7 +1952,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -1974,7 +2001,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -2137,7 +2163,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -2187,7 +2212,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -2284,7 +2308,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -2334,7 +2357,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -2506,11 +2528,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -2561,11 +2581,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -2618,11 +2636,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -2673,11 +2689,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -2745,11 +2759,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -2921,7 +2933,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 							LogDriver: types.LogDriver("json-file"),
 							Options: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SecretOptions: []types.Secret{
 								{
@@ -3000,7 +3011,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -3050,7 +3060,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -3147,7 +3156,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -3197,7 +3205,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -3360,7 +3367,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -3410,7 +3416,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -3507,7 +3512,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -3557,7 +3561,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -3729,11 +3732,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -3784,11 +3785,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -3841,11 +3840,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -3896,11 +3893,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -3968,11 +3963,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -4017,7 +4010,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		PlatformCapabilities: []types.PlatformCapability{
 			types.PlatformCapability("EC2"),
@@ -4062,11 +4054,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -4117,11 +4107,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -4174,11 +4162,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -4229,11 +4215,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -4301,11 +4285,9 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 				Metadata: &types.EksMetadata{
 					Labels: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Annotations: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Namespace: ptr.String("__Namespace__"),
 				},
@@ -4346,7 +4328,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -4396,7 +4377,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -4493,7 +4473,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -4543,7 +4522,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -4706,7 +4684,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -4756,7 +4733,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -4853,7 +4829,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -4903,7 +4878,6 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -5058,6 +5032,7 @@ func TestSerdeCheckSnapshot_RegisterJobDefinition(t *testing.T) {
 	_, err := svc.RegisterJobDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -5095,7 +5070,6 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 		JobDefinition: ptr.String("__JobDefinition__"),
 		Parameters: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		ContainerOverrides: &types.ContainerOverrides{
 			Vcpus:  ptr.Int32(1),
@@ -5311,11 +5285,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5343,11 +5315,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5377,11 +5347,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5409,11 +5377,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5421,11 +5387,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -5626,11 +5590,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5658,11 +5620,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5692,11 +5652,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5724,11 +5682,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -5736,11 +5692,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -5784,7 +5738,6 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		EksPropertiesOverride: &types.EksPropertiesOverride{
 			PodProperties: &types.EksPodPropertiesOverride{
@@ -5813,11 +5766,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -5845,11 +5796,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -5879,11 +5828,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -5911,11 +5858,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -5923,11 +5868,9 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 				Metadata: &types.EksMetadata{
 					Labels: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Annotations: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Namespace: ptr.String("__Namespace__"),
 				},
@@ -6075,6 +6018,7 @@ func TestSerdeCheckSnapshot_SubmitJob(t *testing.T) {
 	_, err := svc.SubmitJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6120,7 +6064,6 @@ func TestSerdeCheckSnapshot_SubmitServiceJob(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -6133,6 +6076,7 @@ func TestSerdeCheckSnapshot_SubmitServiceJob(t *testing.T) {
 	_, err := svc.SubmitServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6153,7 +6097,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6165,6 +6108,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6194,6 +6138,7 @@ func TestSerdeCheckSnapshot_TerminateJob(t *testing.T) {
 	_, err := svc.TerminateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6223,6 +6168,7 @@ func TestSerdeCheckSnapshot_TerminateServiceJob(t *testing.T) {
 	_, err := svc.TerminateServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6255,6 +6201,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6296,7 +6243,6 @@ func TestSerdeCheckSnapshot_UpdateComputeEnvironment(t *testing.T) {
 			InstanceRole: ptr.String("__InstanceRole__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PlacementGroup: ptr.String("__PlacementGroup__"),
 			BidPercentage:  ptr.Int32(1),
@@ -6365,6 +6311,7 @@ func TestSerdeCheckSnapshot_UpdateComputeEnvironment(t *testing.T) {
 	_, err := svc.UpdateComputeEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6396,6 +6343,7 @@ func TestSerdeCheckSnapshot_UpdateConsumableResource(t *testing.T) {
 	_, err := svc.UpdateConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6461,6 +6409,7 @@ func TestSerdeCheckSnapshot_UpdateJobQueue(t *testing.T) {
 	_, err := svc.UpdateJobQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6507,6 +6456,7 @@ func TestSerdeCheckSnapshot_UpdateQuotaShare(t *testing.T) {
 	_, err := svc.UpdateQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6552,6 +6502,7 @@ func TestSerdeCheckSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 	_, err := svc.UpdateSchedulingPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6591,6 +6542,7 @@ func TestSerdeCheckSnapshot_UpdateServiceEnvironment(t *testing.T) {
 	_, err := svc.UpdateServiceEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6620,6 +6572,7 @@ func TestSerdeCheckSnapshot_UpdateServiceJob(t *testing.T) {
 	_, err := svc.UpdateServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6648,6 +6601,7 @@ func TestSerdeUpdateSnapshot_CancelJob(t *testing.T) {
 	_, err := svc.CancelJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6692,7 +6646,6 @@ func TestSerdeUpdateSnapshot_CreateComputeEnvironment(t *testing.T) {
 			InstanceRole: ptr.String("__InstanceRole__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PlacementGroup:   ptr.String("__PlacementGroup__"),
 			BidPercentage:    ptr.Int32(1),
@@ -6746,7 +6699,6 @@ func TestSerdeUpdateSnapshot_CreateComputeEnvironment(t *testing.T) {
 		ServiceRole: ptr.String("__ServiceRole__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		EksConfiguration: &types.EksConfiguration{
 			EksClusterArn:       ptr.String("__EksClusterArn__"),
@@ -6763,6 +6715,7 @@ func TestSerdeUpdateSnapshot_CreateComputeEnvironment(t *testing.T) {
 	_, err := svc.CreateComputeEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6785,7 +6738,6 @@ func TestSerdeUpdateSnapshot_CreateConsumableResource(t *testing.T) {
 		ResourceType:           ptr.String("__ResourceType__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6797,6 +6749,7 @@ func TestSerdeUpdateSnapshot_CreateConsumableResource(t *testing.T) {
 	_, err := svc.CreateConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6841,7 +6794,6 @@ func TestSerdeUpdateSnapshot_CreateJobQueue(t *testing.T) {
 		JobQueueType: types.JobQueueType("EKS"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		JobStateTimeLimitActions: []types.JobStateTimeLimitAction{
 			{
@@ -6867,6 +6819,7 @@ func TestSerdeUpdateSnapshot_CreateJobQueue(t *testing.T) {
 	_, err := svc.CreateJobQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6906,7 +6859,6 @@ func TestSerdeUpdateSnapshot_CreateQuotaShare(t *testing.T) {
 		State: types.QuotaShareState("ENABLED"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6918,6 +6870,7 @@ func TestSerdeUpdateSnapshot_CreateQuotaShare(t *testing.T) {
 	_, err := svc.CreateQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6955,7 +6908,6 @@ func TestSerdeUpdateSnapshot_CreateSchedulingPolicy(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6967,6 +6919,7 @@ func TestSerdeUpdateSnapshot_CreateSchedulingPolicy(t *testing.T) {
 	_, err := svc.CreateSchedulingPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -6999,7 +6952,6 @@ func TestSerdeUpdateSnapshot_CreateServiceEnvironment(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -7011,6 +6963,7 @@ func TestSerdeUpdateSnapshot_CreateServiceEnvironment(t *testing.T) {
 	_, err := svc.CreateServiceEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7039,6 +6992,7 @@ func TestSerdeUpdateSnapshot_DeleteComputeEnvironment(t *testing.T) {
 	_, err := svc.DeleteComputeEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7067,6 +7021,7 @@ func TestSerdeUpdateSnapshot_DeleteConsumableResource(t *testing.T) {
 	_, err := svc.DeleteConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7095,6 +7050,7 @@ func TestSerdeUpdateSnapshot_DeleteJobQueue(t *testing.T) {
 	_, err := svc.DeleteJobQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7123,6 +7079,7 @@ func TestSerdeUpdateSnapshot_DeleteQuotaShare(t *testing.T) {
 	_, err := svc.DeleteQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7151,6 +7108,7 @@ func TestSerdeUpdateSnapshot_DeleteSchedulingPolicy(t *testing.T) {
 	_, err := svc.DeleteSchedulingPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7179,6 +7137,7 @@ func TestSerdeUpdateSnapshot_DeleteServiceEnvironment(t *testing.T) {
 	_, err := svc.DeleteServiceEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7207,6 +7166,7 @@ func TestSerdeUpdateSnapshot_DeregisterJobDefinition(t *testing.T) {
 	_, err := svc.DeregisterJobDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7240,6 +7200,7 @@ func TestSerdeUpdateSnapshot_DescribeComputeEnvironments(t *testing.T) {
 	_, err := svc.DescribeComputeEnvironments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7268,6 +7229,7 @@ func TestSerdeUpdateSnapshot_DescribeConsumableResource(t *testing.T) {
 	_, err := svc.DescribeConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7303,6 +7265,7 @@ func TestSerdeUpdateSnapshot_DescribeJobDefinitions(t *testing.T) {
 	_, err := svc.DescribeJobDefinitions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7336,6 +7299,7 @@ func TestSerdeUpdateSnapshot_DescribeJobQueues(t *testing.T) {
 	_, err := svc.DescribeJobQueues(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7367,6 +7331,7 @@ func TestSerdeUpdateSnapshot_DescribeJobs(t *testing.T) {
 	_, err := svc.DescribeJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7395,6 +7360,7 @@ func TestSerdeUpdateSnapshot_DescribeQuotaShare(t *testing.T) {
 	_, err := svc.DescribeQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7426,6 +7392,7 @@ func TestSerdeUpdateSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	_, err := svc.DescribeSchedulingPolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7459,6 +7426,7 @@ func TestSerdeUpdateSnapshot_DescribeServiceEnvironments(t *testing.T) {
 	_, err := svc.DescribeServiceEnvironments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7487,6 +7455,7 @@ func TestSerdeUpdateSnapshot_DescribeServiceJob(t *testing.T) {
 	_, err := svc.DescribeServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7515,6 +7484,7 @@ func TestSerdeUpdateSnapshot_GetJobQueueSnapshot(t *testing.T) {
 	_, err := svc.GetJobQueueSnapshot(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7560,6 +7530,7 @@ func TestSerdeUpdateSnapshot_ListConsumableResources(t *testing.T) {
 	_, err := svc.ListConsumableResources(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7609,6 +7580,7 @@ func TestSerdeUpdateSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7655,6 +7627,7 @@ func TestSerdeUpdateSnapshot_ListJobsByConsumableResource(t *testing.T) {
 	_, err := svc.ListJobsByConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7685,6 +7658,7 @@ func TestSerdeUpdateSnapshot_ListQuotaShares(t *testing.T) {
 	_, err := svc.ListQuotaShares(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7714,6 +7688,7 @@ func TestSerdeUpdateSnapshot_ListSchedulingPolicies(t *testing.T) {
 	_, err := svc.ListSchedulingPolicies(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7761,6 +7736,7 @@ func TestSerdeUpdateSnapshot_ListServiceJobs(t *testing.T) {
 	_, err := svc.ListServiceJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7789,6 +7765,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7810,7 +7787,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 		Type:              types.JobDefinitionType("container"),
 		Parameters: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		SchedulingPriority: ptr.Int32(1),
 		ContainerProperties: &types.ContainerProperties{
@@ -7963,7 +7939,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 				LogDriver: types.LogDriver("json-file"),
 				Options: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				SecretOptions: []types.Secret{
 					{
@@ -8160,7 +8135,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 							LogDriver: types.LogDriver("json-file"),
 							Options: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SecretOptions: []types.Secret{
 								{
@@ -8239,7 +8213,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -8289,7 +8262,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -8386,7 +8358,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -8436,7 +8407,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -8599,7 +8569,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -8649,7 +8618,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -8746,7 +8714,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -8796,7 +8763,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -8968,11 +8934,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -9023,11 +8987,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -9080,11 +9042,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -9135,11 +9095,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -9207,11 +9165,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -9383,7 +9339,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 							LogDriver: types.LogDriver("json-file"),
 							Options: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							SecretOptions: []types.Secret{
 								{
@@ -9462,7 +9417,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -9512,7 +9466,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -9609,7 +9562,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -9659,7 +9611,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -9822,7 +9773,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -9872,7 +9822,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -9969,7 +9918,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											Type: types.FirelensConfigurationType("fluentd"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 										},
 										Image: ptr.String("__Image__"),
@@ -10019,7 +9967,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 											LogDriver: types.LogDriver("json-file"),
 											Options: map[string]string{
 												"key0": "__Value__",
-												"key1": "__Value__",
 											},
 											SecretOptions: []types.Secret{
 												{
@@ -10191,11 +10138,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -10246,11 +10191,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -10303,11 +10246,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -10358,11 +10299,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 									VolumeMounts: []types.EksContainerVolumeMount{
@@ -10430,11 +10369,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -10479,7 +10416,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		PlatformCapabilities: []types.PlatformCapability{
 			types.PlatformCapability("EC2"),
@@ -10524,11 +10460,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -10579,11 +10513,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -10636,11 +10568,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -10691,11 +10621,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 						VolumeMounts: []types.EksContainerVolumeMount{
@@ -10763,11 +10691,9 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 				Metadata: &types.EksMetadata{
 					Labels: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Annotations: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Namespace: ptr.String("__Namespace__"),
 				},
@@ -10808,7 +10734,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -10858,7 +10783,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -10955,7 +10879,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -11005,7 +10928,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -11168,7 +11090,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -11218,7 +11139,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -11315,7 +11235,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								Type: types.FirelensConfigurationType("fluentd"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 							},
 							Image: ptr.String("__Image__"),
@@ -11365,7 +11284,6 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 								LogDriver: types.LogDriver("json-file"),
 								Options: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								SecretOptions: []types.Secret{
 									{
@@ -11520,6 +11438,7 @@ func TestSerdeUpdateSnapshot_RegisterJobDefinition(t *testing.T) {
 	_, err := svc.RegisterJobDefinition(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11557,7 +11476,6 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 		JobDefinition: ptr.String("__JobDefinition__"),
 		Parameters: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		ContainerOverrides: &types.ContainerOverrides{
 			Vcpus:  ptr.Int32(1),
@@ -11773,11 +11691,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -11805,11 +11721,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -11839,11 +11753,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -11871,11 +11783,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -11883,11 +11793,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -12088,11 +11996,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -12120,11 +12026,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -12154,11 +12058,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -12186,11 +12088,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 									Resources: &types.EksContainerResourceRequirements{
 										Limits: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 										Requests: map[string]string{
 											"key0": "__Value__",
-											"key1": "__Value__",
 										},
 									},
 								},
@@ -12198,11 +12098,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 							Metadata: &types.EksMetadata{
 								Labels: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Annotations: map[string]string{
 									"key0": "__Value__",
-									"key1": "__Value__",
 								},
 								Namespace: ptr.String("__Namespace__"),
 							},
@@ -12246,7 +12144,6 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		EksPropertiesOverride: &types.EksPropertiesOverride{
 			PodProperties: &types.EksPodPropertiesOverride{
@@ -12275,11 +12172,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -12307,11 +12202,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -12341,11 +12234,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -12373,11 +12264,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 						Resources: &types.EksContainerResourceRequirements{
 							Limits: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 							Requests: map[string]string{
 								"key0": "__Value__",
-								"key1": "__Value__",
 							},
 						},
 					},
@@ -12385,11 +12274,9 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 				Metadata: &types.EksMetadata{
 					Labels: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Annotations: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Namespace: ptr.String("__Namespace__"),
 				},
@@ -12537,6 +12424,7 @@ func TestSerdeUpdateSnapshot_SubmitJob(t *testing.T) {
 	_, err := svc.SubmitJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12582,7 +12470,6 @@ func TestSerdeUpdateSnapshot_SubmitServiceJob(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -12595,6 +12482,7 @@ func TestSerdeUpdateSnapshot_SubmitServiceJob(t *testing.T) {
 	_, err := svc.SubmitServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12615,7 +12503,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -12627,6 +12514,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12656,6 +12544,7 @@ func TestSerdeUpdateSnapshot_TerminateJob(t *testing.T) {
 	_, err := svc.TerminateJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12685,6 +12574,7 @@ func TestSerdeUpdateSnapshot_TerminateServiceJob(t *testing.T) {
 	_, err := svc.TerminateServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12717,6 +12607,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12758,7 +12649,6 @@ func TestSerdeUpdateSnapshot_UpdateComputeEnvironment(t *testing.T) {
 			InstanceRole: ptr.String("__InstanceRole__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			PlacementGroup: ptr.String("__PlacementGroup__"),
 			BidPercentage:  ptr.Int32(1),
@@ -12827,6 +12717,7 @@ func TestSerdeUpdateSnapshot_UpdateComputeEnvironment(t *testing.T) {
 	_, err := svc.UpdateComputeEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12858,6 +12749,7 @@ func TestSerdeUpdateSnapshot_UpdateConsumableResource(t *testing.T) {
 	_, err := svc.UpdateConsumableResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12923,6 +12815,7 @@ func TestSerdeUpdateSnapshot_UpdateJobQueue(t *testing.T) {
 	_, err := svc.UpdateJobQueue(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12969,6 +12862,7 @@ func TestSerdeUpdateSnapshot_UpdateQuotaShare(t *testing.T) {
 	_, err := svc.UpdateQuotaShare(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13014,6 +12908,7 @@ func TestSerdeUpdateSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 	_, err := svc.UpdateSchedulingPolicy(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13053,6 +12948,7 @@ func TestSerdeUpdateSnapshot_UpdateServiceEnvironment(t *testing.T) {
 	_, err := svc.UpdateServiceEnvironment(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -13082,6 +12978,7 @@ func TestSerdeUpdateSnapshot_UpdateServiceJob(t *testing.T) {
 	_, err := svc.UpdateServiceJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

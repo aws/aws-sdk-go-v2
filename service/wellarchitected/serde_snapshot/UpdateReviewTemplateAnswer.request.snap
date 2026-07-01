@@ -2,4 +2,4 @@ PATCH /reviewTemplates/__TemplateArn__/lensReviews/__LensAlias__/answers/__Quest
 
 Content-Type: application/json
 
-{"ChoiceUpdates":{"key0":{"Notes":"__Notes__","Reason":"OUT_OF_SCOPE","Status":"SELECTED"},"key1":{"Notes":"__Notes__","Reason":"OUT_OF_SCOPE","Status":"SELECTED"}},"IsApplicable":true,"Notes":"__Notes__","Reason":"OUT_OF_SCOPE","SelectedChoices":["__Member__","__Member__"]}
+{"ChoiceUpdates":{"key0":{"Notes":"__Notes__","Reason":"OUT_OF_SCOPE","Status":"SELECTED"}},"IsApplicable":true,"Notes":"__Notes__","Reason":"OUT_OF_SCOPE","SelectedChoices":["__Member__","__Member__"]}

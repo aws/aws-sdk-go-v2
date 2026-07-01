@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=GetSMSAttributes&Version=2010-03-31&attributes.member.1=__Member__&attributes.member.2=__Member__

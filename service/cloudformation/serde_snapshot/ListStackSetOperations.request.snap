@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ListStackSetOperations&CallAs=SELF&MaxResults=1&NextToken=__NextToken__&StackSetName=__StackSetName__&Version=2010-05-15

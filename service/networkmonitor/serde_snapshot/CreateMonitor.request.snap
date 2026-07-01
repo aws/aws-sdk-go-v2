@@ -2,4 +2,4 @@ POST /monitors
 
 Content-Type: application/json
 
-{"aggregationPeriod":1,"clientToken":"__ClientToken__","monitorName":"__MonitorName__","probes":[{"destination":"__Destination__","destinationPort":1,"packetSize":1,"probeTags":{"key0":"__Value__","key1":"__Value__"},"protocol":"TCP","sourceArn":"__SourceArn__"},{"destination":"__Destination__","destinationPort":1,"packetSize":1,"probeTags":{"key0":"__Value__","key1":"__Value__"},"protocol":"TCP","sourceArn":"__SourceArn__"}],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"aggregationPeriod":1,"clientToken":"__ClientToken__","monitorName":"__MonitorName__","probes":[{"destination":"__Destination__","destinationPort":1,"packetSize":1,"probeTags":{"key0":"__Value__"},"protocol":"TCP","sourceArn":"__SourceArn__"},{"destination":"__Destination__","destinationPort":1,"packetSize":1,"probeTags":{"key0":"__Value__"},"protocol":"TCP","sourceArn":"__SourceArn__"}],"tags":{"key0":"__Value__"}}

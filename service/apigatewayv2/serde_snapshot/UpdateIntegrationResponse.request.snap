@@ -2,4 +2,4 @@ PATCH /v2/apis/__ApiId__/integrations/__IntegrationId__/integrationresponses/__I
 
 Content-Type: application/json
 
-{"contentHandlingStrategy":"CONVERT_TO_BINARY","integrationResponseKey":"__IntegrationResponseKey__","responseParameters":{"key0":"__Value__","key1":"__Value__"},"responseTemplates":{"key0":"__Value__","key1":"__Value__"},"templateSelectionExpression":"__TemplateSelectionExpression__"}
+{"contentHandlingStrategy":"CONVERT_TO_BINARY","integrationResponseKey":"__IntegrationResponseKey__","responseParameters":{"key0":"__Value__"},"responseTemplates":{"key0":"__Value__"},"templateSelectionExpression":"__TemplateSelectionExpression__"}

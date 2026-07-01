@@ -2,3 +2,4 @@ PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs/__WorkflowRun
 
 Content-Type: application/json
 
+{"clientToken":"__ClientToken__","task":"__Task__","toolSpecs":[{"description":"__Description__","inputSchema":{"json":},"name":"__Name__"},{"description":"__Description__","inputSchema":{"json":},"name":"__Name__"}]}

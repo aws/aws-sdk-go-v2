@@ -2,3 +2,4 @@ POST /2013-04-01/cidrcollection/__Id__
 
 Content-Type: application/xml
 
+<ChangeCidrCollectionRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><Changes><member><Action>PUT</Action><CidrList><Cidr>__Member__</Cidr><Cidr>__Member__</Cidr></CidrList><LocationName>__LocationName__</LocationName></member><member><Action>PUT</Action><CidrList><Cidr>__Member__</Cidr><Cidr>__Member__</Cidr></CidrList><LocationName>__LocationName__</LocationName></member></Changes><CollectionVersion>1</CollectionVersion></ChangeCidrCollectionRequest>

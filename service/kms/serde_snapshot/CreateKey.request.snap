@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TrentService.CreateKey
 
-{"BypassPolicyLockoutSafetyCheck":true,"CustomKeyStoreId":"__CustomKeyStoreId__","CustomerMasterKeySpec":"RSA_2048","Description":"__Description__","KeySpec":"RSA_2048","KeyUsage":"SIGN_VERIFY","MultiRegion":true,"Origin":"AWS_KMS","Policy":"__Policy__","Tags":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}],"XksKeyId":"__XksKeyId__"}
+{"BypassPolicyLockoutSafetyCheck":true,"CustomerMasterKeySpec":"RSA_2048","CustomKeyStoreId":"__CustomKeyStoreId__","Description":"__Description__","KeySpec":"RSA_2048","KeyUsage":"SIGN_VERIFY","MultiRegion":true,"Origin":"AWS_KMS","Policy":"__Policy__","Tags":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}],"XksKeyId":"__XksKeyId__"}

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=CreateCustomVerificationEmailTemplate&FailureRedirectionURL=__FailureRedirectionURL__&FromEmailAddress=__FromEmailAddress__&SuccessRedirectionURL=__SuccessRedirectionURL__&TemplateContent=__TemplateContent__&TemplateName=__TemplateName__&TemplateSubject=__TemplateSubject__&Version=2010-12-01

@@ -2,4 +2,4 @@ POST /monitors/__MonitorName__/probes
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","probe":{"destination":"__Destination__","destinationPort":1,"packetSize":1,"protocol":"TCP","sourceArn":"__SourceArn__","tags":{"key0":"__Value__","key1":"__Value__"}},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"clientToken":"__ClientToken__","probe":{"destination":"__Destination__","destinationPort":1,"packetSize":1,"protocol":"TCP","sourceArn":"__SourceArn__","tags":{"key0":"__Value__"}},"tags":{"key0":"__Value__"}}

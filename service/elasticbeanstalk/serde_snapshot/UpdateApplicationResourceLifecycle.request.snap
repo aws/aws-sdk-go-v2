@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=UpdateApplicationResourceLifecycle&ApplicationName=__ApplicationName__&ResourceLifecycleConfig.ServiceRole=__ServiceRole__&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.DeleteSourceFromS3=true&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.Enabled=true&ResourceLifecycleConfig.VersionLifecycleConfig.MaxAgeRule.MaxAgeInDays=1&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.DeleteSourceFromS3=true&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.Enabled=true&ResourceLifecycleConfig.VersionLifecycleConfig.MaxCountRule.MaxCount=1&Version=2010-12-01

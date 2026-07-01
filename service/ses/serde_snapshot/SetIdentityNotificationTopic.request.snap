@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=SetIdentityNotificationTopic&Identity=__Identity__&NotificationType=Bounce&SnsTopic=__SnsTopic__&Version=2010-12-01

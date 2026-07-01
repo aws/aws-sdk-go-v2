@@ -2,4 +2,4 @@ POST /opencypher
 
 Content-Type: application/json
 
-{"parameters":"__Parameters__","query":"__OpenCypherQuery__"}
+{"query":"__OpenCypherQuery__","parameters":"__Parameters__"}

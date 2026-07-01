@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Textract.CreateAdapter
 
-{"AdapterName":"__AdapterName__","AutoUpdate":"ENABLED","ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","FeatureTypes":["TABLES","TABLES"],"Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"AdapterName":"__AdapterName__","AutoUpdate":"ENABLED","ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","FeatureTypes":["TABLES","TABLES"],"Tags":{"key0":"__Value__"}}

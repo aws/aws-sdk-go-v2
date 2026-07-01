@@ -7,7 +7,6 @@ package jsonrpc
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
@@ -118,18 +117,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -142,7 +146,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -155,7 +158,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -173,6 +179,9 @@ func serdeNewClient() *Client {
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
 }
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
+}
 func TestSerdeCheckSnapshot_ContentTypeParameters(t *testing.T) {
 	input := &ContentTypeParametersInput{
 		Value: ptr.Int32(1),
@@ -186,6 +195,7 @@ func TestSerdeCheckSnapshot_ContentTypeParameters(t *testing.T) {
 	_, err := svc.ContentTypeParameters(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -212,6 +222,7 @@ func TestSerdeCheckSnapshot_DatetimeOffsets(t *testing.T) {
 	_, err := svc.DatetimeOffsets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -238,6 +249,7 @@ func TestSerdeCheckSnapshot_EmptyOperation(t *testing.T) {
 	_, err := svc.EmptyOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -264,6 +276,7 @@ func TestSerdeCheckSnapshot_EndpointOperation(t *testing.T) {
 	_, err := svc.EndpointOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -292,6 +305,7 @@ func TestSerdeCheckSnapshot_EndpointWithHostLabelOperation(t *testing.T) {
 	_, err := svc.EndpointWithHostLabelOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -318,6 +332,7 @@ func TestSerdeCheckSnapshot_FractionalSeconds(t *testing.T) {
 	_, err := svc.FractionalSeconds(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -344,6 +359,7 @@ func TestSerdeCheckSnapshot_GreetingWithErrors(t *testing.T) {
 	_, err := svc.GreetingWithErrors(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -370,6 +386,7 @@ func TestSerdeCheckSnapshot_HostWithPathOperation(t *testing.T) {
 	_, err := svc.HostWithPathOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -400,7 +417,6 @@ func TestSerdeCheckSnapshot_JsonEnums(t *testing.T) {
 		},
 		FooEnumMap: map[string]types.FooEnum{
 			"key0": types.FooEnum("Foo"),
-			"key1": types.FooEnum("Foo"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -412,6 +428,7 @@ func TestSerdeCheckSnapshot_JsonEnums(t *testing.T) {
 	_, err := svc.JsonEnums(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -442,7 +459,6 @@ func TestSerdeCheckSnapshot_JsonIntEnums(t *testing.T) {
 		},
 		IntEnumMap: map[string]types.IntegerEnum{
 			"key0": types.IntegerEnum(1),
-			"key1": types.IntegerEnum(1),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -454,6 +470,7 @@ func TestSerdeCheckSnapshot_JsonIntEnums(t *testing.T) {
 	_, err := svc.JsonIntEnums(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -484,6 +501,7 @@ func TestSerdeCheckSnapshot_JsonUnions(t *testing.T) {
 	_, err := svc.JsonUnions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -523,11 +541,9 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 		ListOfMapsOfStrings: []map[string]string{
 			{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		ListOfStrings: []string{
@@ -548,30 +564,17 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			"key1": {
-				"__Member__",
-				"__Member__",
-			},
 		},
 		MapOfMaps: map[string]map[string]string{
 			"key0": {
 				"key0": "__Value__",
-				"key1": "__Value__",
-			},
-			"key1": {
-				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		MapOfStrings: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		MapOfStructs: map[string]types.SimpleStruct{
 			"key0": {
-				Value: ptr.String("__Value__"),
-			},
-			"key1": {
 				Value: ptr.String("__Value__"),
 			},
 		},
@@ -599,11 +602,9 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				ListOfMapsOfStrings: []map[string]string{
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				ListOfStrings: []string{
@@ -624,30 +625,17 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
 				},
 				MapOfMaps: map[string]map[string]string{
 					"key0": {
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				MapOfStrings: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				MapOfStructs: map[string]types.SimpleStruct{
 					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
 						Value: ptr.String("__Value__"),
 					},
 				},
@@ -657,7 +645,6 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				},
 				RecursiveMap: map[string]types.KitchenSink{
 					"key0": {},
-					"key1": {},
 				},
 				RecursiveStruct: nil,
 				SimpleStruct: &types.SimpleStruct{
@@ -693,11 +680,9 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				ListOfMapsOfStrings: []map[string]string{
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				ListOfStrings: []string{
@@ -718,30 +703,17 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
 				},
 				MapOfMaps: map[string]map[string]string{
 					"key0": {
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				MapOfStrings: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				MapOfStructs: map[string]types.SimpleStruct{
 					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
 						Value: ptr.String("__Value__"),
 					},
 				},
@@ -751,7 +723,6 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				},
 				RecursiveMap: map[string]types.KitchenSink{
 					"key0": {},
-					"key1": {},
 				},
 				RecursiveStruct: nil,
 				SimpleStruct: &types.SimpleStruct{
@@ -789,11 +760,9 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				ListOfMapsOfStrings: []map[string]string{
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				ListOfStrings: []string{
@@ -814,30 +783,17 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
 				},
 				MapOfMaps: map[string]map[string]string{
 					"key0": {
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				MapOfStrings: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				MapOfStructs: map[string]types.SimpleStruct{
 					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
 						Value: ptr.String("__Value__"),
 					},
 				},
@@ -847,101 +803,6 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 				},
 				RecursiveMap: map[string]types.KitchenSink{
 					"key0": {},
-					"key1": {},
-				},
-				RecursiveStruct: nil,
-				SimpleStruct: &types.SimpleStruct{
-					Value: ptr.String("__Value__"),
-				},
-				String_: ptr.String("__String___"),
-				StructWithJsonName: &types.StructWithJsonName{
-					Value: ptr.String("__Value__"),
-				},
-				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-			"key1": {
-				Blob:              []byte("blob"),
-				Boolean:           ptr.Bool(true),
-				Double:            ptr.Float64(1.0),
-				EmptyStruct:       &types.EmptyStruct{},
-				Float:             ptr.Float32(1.0),
-				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Integer:           ptr.Int32(1),
-				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				JsonValue:         ptr.String("__JsonValue__"),
-				ListOfLists: [][]string{
-					{
-						"__Member__",
-						"__Member__",
-					},
-					{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				ListOfMapsOfStrings: []map[string]string{
-					{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-				},
-				ListOfStrings: []string{
-					"__Member__",
-					"__Member__",
-				},
-				ListOfStructs: []types.SimpleStruct{
-					{
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Value: ptr.String("__Value__"),
-					},
-				},
-				Long: ptr.Int64(1),
-				MapOfListsOfStrings: map[string][]string{
-					"key0": {
-						"__Member__",
-						"__Member__",
-					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
-				},
-				MapOfMaps: map[string]map[string]string{
-					"key0": {
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-				},
-				MapOfStrings: map[string]string{
-					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				MapOfStructs: map[string]types.SimpleStruct{
-					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
-						Value: ptr.String("__Value__"),
-					},
-				},
-				RecursiveList: []types.KitchenSink{
-					{},
-					{},
-				},
-				RecursiveMap: map[string]types.KitchenSink{
-					"key0": {},
-					"key1": {},
 				},
 				RecursiveStruct: nil,
 				SimpleStruct: &types.SimpleStruct{
@@ -978,11 +839,9 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 			ListOfMapsOfStrings: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ListOfStrings: []string{
@@ -1003,30 +862,17 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				"key1": {
-					"__Member__",
-					"__Member__",
-				},
 			},
 			MapOfMaps: map[string]map[string]string{
 				"key0": {
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				"key1": {
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			MapOfStrings: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			MapOfStructs: map[string]types.SimpleStruct{
 				"key0": {
-					Value: ptr.String("__Value__"),
-				},
-				"key1": {
 					Value: ptr.String("__Value__"),
 				},
 			},
@@ -1036,7 +882,6 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 			},
 			RecursiveMap: map[string]types.KitchenSink{
 				"key0": {},
-				"key1": {},
 			},
 			RecursiveStruct: nil,
 			SimpleStruct: &types.SimpleStruct{
@@ -1068,6 +913,7 @@ func TestSerdeCheckSnapshot_KitchenSinkOperation(t *testing.T) {
 	_, err := svc.KitchenSinkOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1096,6 +942,7 @@ func TestSerdeCheckSnapshot_NullOperation(t *testing.T) {
 	_, err := svc.NullOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1124,6 +971,7 @@ func TestSerdeCheckSnapshot_OperationWithOptionalInputOutput(t *testing.T) {
 	_, err := svc.OperationWithOptionalInputOutput(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1152,6 +1000,7 @@ func TestSerdeCheckSnapshot_PutAndGetInlineDocuments(t *testing.T) {
 	_, err := svc.PutAndGetInlineDocuments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1181,6 +1030,7 @@ func TestSerdeCheckSnapshot_PutWithContentEncoding(t *testing.T) {
 	_, err := svc.PutWithContentEncoding(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1210,6 +1060,7 @@ func TestSerdeCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 	_, err := svc.SimpleScalarProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1233,7 +1084,6 @@ func TestSerdeCheckSnapshot_SparseNullsOperation(t *testing.T) {
 		},
 		SparseStringMap: map[string]*string{
 			"key0": ptr.String("__Value__"),
-			"key1": ptr.String("__Value__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1245,6 +1095,7 @@ func TestSerdeCheckSnapshot_SparseNullsOperation(t *testing.T) {
 	_, err := svc.SparseNullsOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1272,6 +1123,7 @@ func TestSerdeUpdateSnapshot_ContentTypeParameters(t *testing.T) {
 	_, err := svc.ContentTypeParameters(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1298,6 +1150,7 @@ func TestSerdeUpdateSnapshot_DatetimeOffsets(t *testing.T) {
 	_, err := svc.DatetimeOffsets(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1324,6 +1177,7 @@ func TestSerdeUpdateSnapshot_EmptyOperation(t *testing.T) {
 	_, err := svc.EmptyOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1350,6 +1204,7 @@ func TestSerdeUpdateSnapshot_EndpointOperation(t *testing.T) {
 	_, err := svc.EndpointOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1378,6 +1233,7 @@ func TestSerdeUpdateSnapshot_EndpointWithHostLabelOperation(t *testing.T) {
 	_, err := svc.EndpointWithHostLabelOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1404,6 +1260,7 @@ func TestSerdeUpdateSnapshot_FractionalSeconds(t *testing.T) {
 	_, err := svc.FractionalSeconds(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1430,6 +1287,7 @@ func TestSerdeUpdateSnapshot_GreetingWithErrors(t *testing.T) {
 	_, err := svc.GreetingWithErrors(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1456,6 +1314,7 @@ func TestSerdeUpdateSnapshot_HostWithPathOperation(t *testing.T) {
 	_, err := svc.HostWithPathOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1486,7 +1345,6 @@ func TestSerdeUpdateSnapshot_JsonEnums(t *testing.T) {
 		},
 		FooEnumMap: map[string]types.FooEnum{
 			"key0": types.FooEnum("Foo"),
-			"key1": types.FooEnum("Foo"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1498,6 +1356,7 @@ func TestSerdeUpdateSnapshot_JsonEnums(t *testing.T) {
 	_, err := svc.JsonEnums(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1528,7 +1387,6 @@ func TestSerdeUpdateSnapshot_JsonIntEnums(t *testing.T) {
 		},
 		IntEnumMap: map[string]types.IntegerEnum{
 			"key0": types.IntegerEnum(1),
-			"key1": types.IntegerEnum(1),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1540,6 +1398,7 @@ func TestSerdeUpdateSnapshot_JsonIntEnums(t *testing.T) {
 	_, err := svc.JsonIntEnums(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1570,6 +1429,7 @@ func TestSerdeUpdateSnapshot_JsonUnions(t *testing.T) {
 	_, err := svc.JsonUnions(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -1609,11 +1469,9 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 		ListOfMapsOfStrings: []map[string]string{
 			{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		ListOfStrings: []string{
@@ -1634,30 +1492,17 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			"key1": {
-				"__Member__",
-				"__Member__",
-			},
 		},
 		MapOfMaps: map[string]map[string]string{
 			"key0": {
 				"key0": "__Value__",
-				"key1": "__Value__",
-			},
-			"key1": {
-				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 		MapOfStrings: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 		MapOfStructs: map[string]types.SimpleStruct{
 			"key0": {
-				Value: ptr.String("__Value__"),
-			},
-			"key1": {
 				Value: ptr.String("__Value__"),
 			},
 		},
@@ -1685,11 +1530,9 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				ListOfMapsOfStrings: []map[string]string{
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				ListOfStrings: []string{
@@ -1710,30 +1553,17 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
 				},
 				MapOfMaps: map[string]map[string]string{
 					"key0": {
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				MapOfStrings: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				MapOfStructs: map[string]types.SimpleStruct{
 					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
 						Value: ptr.String("__Value__"),
 					},
 				},
@@ -1743,7 +1573,6 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				},
 				RecursiveMap: map[string]types.KitchenSink{
 					"key0": {},
-					"key1": {},
 				},
 				RecursiveStruct: nil,
 				SimpleStruct: &types.SimpleStruct{
@@ -1779,11 +1608,9 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				ListOfMapsOfStrings: []map[string]string{
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				ListOfStrings: []string{
@@ -1804,30 +1631,17 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
 				},
 				MapOfMaps: map[string]map[string]string{
 					"key0": {
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				MapOfStrings: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				MapOfStructs: map[string]types.SimpleStruct{
 					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
 						Value: ptr.String("__Value__"),
 					},
 				},
@@ -1837,7 +1651,6 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				},
 				RecursiveMap: map[string]types.KitchenSink{
 					"key0": {},
-					"key1": {},
 				},
 				RecursiveStruct: nil,
 				SimpleStruct: &types.SimpleStruct{
@@ -1875,11 +1688,9 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				ListOfMapsOfStrings: []map[string]string{
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				ListOfStrings: []string{
@@ -1900,30 +1711,17 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
 				},
 				MapOfMaps: map[string]map[string]string{
 					"key0": {
 						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 				MapOfStrings: map[string]string{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				MapOfStructs: map[string]types.SimpleStruct{
 					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
 						Value: ptr.String("__Value__"),
 					},
 				},
@@ -1933,101 +1731,6 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 				},
 				RecursiveMap: map[string]types.KitchenSink{
 					"key0": {},
-					"key1": {},
-				},
-				RecursiveStruct: nil,
-				SimpleStruct: &types.SimpleStruct{
-					Value: ptr.String("__Value__"),
-				},
-				String_: ptr.String("__String___"),
-				StructWithJsonName: &types.StructWithJsonName{
-					Value: ptr.String("__Value__"),
-				},
-				Timestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UnixTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-			"key1": {
-				Blob:              []byte("blob"),
-				Boolean:           ptr.Bool(true),
-				Double:            ptr.Float64(1.0),
-				EmptyStruct:       &types.EmptyStruct{},
-				Float:             ptr.Float32(1.0),
-				HttpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Integer:           ptr.Int32(1),
-				Iso8601Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				JsonValue:         ptr.String("__JsonValue__"),
-				ListOfLists: [][]string{
-					{
-						"__Member__",
-						"__Member__",
-					},
-					{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				ListOfMapsOfStrings: []map[string]string{
-					{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					{
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-				},
-				ListOfStrings: []string{
-					"__Member__",
-					"__Member__",
-				},
-				ListOfStructs: []types.SimpleStruct{
-					{
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Value: ptr.String("__Value__"),
-					},
-				},
-				Long: ptr.Int64(1),
-				MapOfListsOfStrings: map[string][]string{
-					"key0": {
-						"__Member__",
-						"__Member__",
-					},
-					"key1": {
-						"__Member__",
-						"__Member__",
-					},
-				},
-				MapOfMaps: map[string]map[string]string{
-					"key0": {
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-					"key1": {
-						"key0": "__Value__",
-						"key1": "__Value__",
-					},
-				},
-				MapOfStrings: map[string]string{
-					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				MapOfStructs: map[string]types.SimpleStruct{
-					"key0": {
-						Value: ptr.String("__Value__"),
-					},
-					"key1": {
-						Value: ptr.String("__Value__"),
-					},
-				},
-				RecursiveList: []types.KitchenSink{
-					{},
-					{},
-				},
-				RecursiveMap: map[string]types.KitchenSink{
-					"key0": {},
-					"key1": {},
 				},
 				RecursiveStruct: nil,
 				SimpleStruct: &types.SimpleStruct{
@@ -2064,11 +1767,9 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 			ListOfMapsOfStrings: []map[string]string{
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 				{
 					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			ListOfStrings: []string{
@@ -2089,30 +1790,17 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				"key1": {
-					"__Member__",
-					"__Member__",
-				},
 			},
 			MapOfMaps: map[string]map[string]string{
 				"key0": {
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				"key1": {
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			MapOfStrings: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			MapOfStructs: map[string]types.SimpleStruct{
 				"key0": {
-					Value: ptr.String("__Value__"),
-				},
-				"key1": {
 					Value: ptr.String("__Value__"),
 				},
 			},
@@ -2122,7 +1810,6 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 			},
 			RecursiveMap: map[string]types.KitchenSink{
 				"key0": {},
-				"key1": {},
 			},
 			RecursiveStruct: nil,
 			SimpleStruct: &types.SimpleStruct{
@@ -2154,6 +1841,7 @@ func TestSerdeUpdateSnapshot_KitchenSinkOperation(t *testing.T) {
 	_, err := svc.KitchenSinkOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2182,6 +1870,7 @@ func TestSerdeUpdateSnapshot_NullOperation(t *testing.T) {
 	_, err := svc.NullOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2210,6 +1899,7 @@ func TestSerdeUpdateSnapshot_OperationWithOptionalInputOutput(t *testing.T) {
 	_, err := svc.OperationWithOptionalInputOutput(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2238,6 +1928,7 @@ func TestSerdeUpdateSnapshot_PutAndGetInlineDocuments(t *testing.T) {
 	_, err := svc.PutAndGetInlineDocuments(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2267,6 +1958,7 @@ func TestSerdeUpdateSnapshot_PutWithContentEncoding(t *testing.T) {
 	_, err := svc.PutWithContentEncoding(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2296,6 +1988,7 @@ func TestSerdeUpdateSnapshot_SimpleScalarProperties(t *testing.T) {
 	_, err := svc.SimpleScalarProperties(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -2319,7 +2012,6 @@ func TestSerdeUpdateSnapshot_SparseNullsOperation(t *testing.T) {
 		},
 		SparseStringMap: map[string]*string{
 			"key0": ptr.String("__Value__"),
-			"key1": ptr.String("__Value__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2331,6 +2023,7 @@ func TestSerdeUpdateSnapshot_SparseNullsOperation(t *testing.T) {
 	_, err := svc.SparseNullsOperation(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

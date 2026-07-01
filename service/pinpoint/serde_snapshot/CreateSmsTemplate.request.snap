@@ -2,4 +2,4 @@ POST /v1/templates/__TemplateName__/sms
 
 Content-Type: application/json
 
-{"Body":"__Body__","DefaultSubstitutions":"__DefaultSubstitutions__","RecommenderId":"__RecommenderId__","TemplateDescription":"__TemplateDescription__","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"Body":"__Body__","DefaultSubstitutions":"__DefaultSubstitutions__","RecommenderId":"__RecommenderId__","tags":{"key0":"__Value__"},"TemplateDescription":"__TemplateDescription__"}

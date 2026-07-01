@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: CloudApiService.ListResourceRequests
 
-{"MaxResults":1,"NextToken":"__NextToken__","ResourceRequestStatusFilter":{"OperationStatuses":["PENDING","PENDING"],"Operations":["CREATE","CREATE"]}}
+{"MaxResults":1,"NextToken":"__NextToken__","ResourceRequestStatusFilter":{"Operations":["CREATE","CREATE"],"OperationStatuses":["PENDING","PENDING"]}}

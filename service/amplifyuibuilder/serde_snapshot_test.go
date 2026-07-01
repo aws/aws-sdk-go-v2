@@ -7,7 +7,6 @@ package amplifyuibuilder
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
@@ -117,18 +116,23 @@ func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]st
 	}
 	sb.WriteString("\n")
 	if len(body) > 0 {
-		var v interface{}
-		if err := json.Unmarshal(body, &v); err == nil {
-			if sorted, err := json.Marshal(v); err == nil {
-				sb.Write(sorted)
-			}
-		}
+		sb.Write(body)
 	}
 	return sb.String()
 }
 
 func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
+	// Leave the snapshot untouched if it's semantically equal to the new one.
+	// Some protocols (rpcv2Cbor) serialize map/struct fields in a nondeterministic
+	// byte order, so a blind rewrite would churn the file on every run.
+	if existing, err := os.ReadFile(serdeSSPath(operation)); err == nil {
+		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+		if strings.HasPrefix(string(existing), prefix) &&
+			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
+			return serdeSnapshotOK{}
+		}
+	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
 	if err != nil {
 		return err
@@ -141,7 +145,6 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
-	content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
 		return serdeSnapshotOK{}
@@ -154,7 +157,10 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 	if err != nil {
 		return err
 	}
-	if content != string(expected) {
+	prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
+	if !strings.HasPrefix(string(expected), prefix) ||
+		!serdeBodyEqual(body, []byte(string(expected)[len(prefix):])) {
+		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
 	return serdeSnapshotOK{}
@@ -171,6 +177,9 @@ func serdeNewClient() *Client {
 		Region:             "us-east-1",
 		EndpointResolverV2: &serdeEndpointResolver{},
 	})
+}
+func serdeBodyEqual(got, expected []byte) bool {
+	return bytes.Equal(got, expected)
 }
 func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 	input := &CreateComponentInput{
@@ -196,53 +205,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 					Model:        ptr.String("__Model__"),
 					Bindings: map[string]types.FormBindingElement{
 						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-					},
-					Event:         ptr.String("__Event__"),
-					UserAttribute: ptr.String("__UserAttribute__"),
-					Concat: []types.ComponentProperty{
-						{},
-						{},
-					},
-					Condition: &types.ComponentConditionProperty{
-						Property:    ptr.String("__Property__"),
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						Then:        nil,
-						Else:        nil,
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Configured:    ptr.Bool(true),
-					Type:          ptr.String("__Type__"),
-					ImportedValue: ptr.String("__ImportedValue__"),
-					ComponentName: ptr.String("__ComponentName__"),
-					Property:      ptr.String("__Property__"),
-				},
-				"key1": {
-					Value: ptr.String("__Value__"),
-					BindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-					Model:        ptr.String("__Model__"),
-					Bindings: map[string]types.FormBindingElement{
-						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
 							Element:  ptr.String("__Element__"),
 							Property: ptr.String("__Property__"),
 						},
@@ -291,53 +253,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -386,10 +301,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -426,10 +337,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -472,10 +379,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -515,10 +418,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -555,10 +454,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -602,10 +497,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -643,53 +534,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -733,410 +577,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -1190,53 +630,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -1285,10 +678,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -1325,10 +714,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -1371,10 +756,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -1414,10 +795,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -1454,10 +831,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -1501,10 +874,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -1542,53 +911,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -1632,410 +954,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -2073,32 +991,20 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -2106,58 +1012,10 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 			Overrides: map[string]map[string]string{
 				"key0": {
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				"key1": {
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
 				"key0": {
-					Type: ptr.String("__Type__"),
-					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
-						Model: ptr.String("__Model__"),
-						Field: ptr.String("__Field__"),
-						Predicates: []types.Predicate{
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-						},
-						UserAttribute: ptr.String("__UserAttribute__"),
-						Bucket:        ptr.String("__Bucket__"),
-						Key:           ptr.String("__Key__"),
-						DefaultValue:  ptr.String("__DefaultValue__"),
-						SlotName:      ptr.String("__SlotName__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-				},
-				"key1": {
 					Type: ptr.String("__Type__"),
 					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
 						Model: ptr.String("__Model__"),
@@ -2233,41 +1091,9 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 						"__Member__",
 					},
 				},
-				"key1": {
-					Model: ptr.String("__Model__"),
-					Sort: []types.SortProperty{
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-					},
-					Predicate: &types.Predicate{
-						Or: []types.Predicate{
-							{},
-							{},
-						},
-						And: []types.Predicate{
-							{},
-							{},
-						},
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Identifiers: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Events: map[string]types.ComponentEvent{
 				"key0": {
@@ -2290,10 +1116,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -2330,10 +1152,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -2376,10 +1194,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -2419,10 +1233,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -2459,10 +1269,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -2506,10 +1312,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -2547,53 +1349,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -2637,410 +1392,6 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-					},
-					BindingEvent: ptr.String("__BindingEvent__"),
-				},
-				"key1": {
-					Action: ptr.String("__Action__"),
-					Parameters: &types.ActionParameters{
-						Type: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Url: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Anchor: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Target: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Global: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Model: ptr.String("__Model__"),
-						Id: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Fields: map[string]types.ComponentProperty{
-							"key0": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-						State: &types.MutationActionSetStateParameter{
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-							Set: &types.ComponentProperty{
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -3083,6 +1434,7 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 	_, err := svc.CreateComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3184,138 +1536,6 @@ func TestSerdeCheckSnapshot_CreateForm(t *testing.T) {
 										Model: ptr.String("__Model__"),
 									},
 								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-							},
-						},
-						Name:     ptr.String("__Name__"),
-						MinValue: ptr.Float32(1.0),
-						MaxValue: ptr.Float32(1.0),
-						Step:     ptr.Float32(1.0),
-						Value:    ptr.String("__Value__"),
-						IsArray:  ptr.Bool(true),
-						FileUploaderConfig: &types.FileUploaderFieldConfig{
-							AccessLevel: types.StorageAccessLevel("public"),
-							AcceptedFileTypes: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ShowThumbnails: ptr.Bool(true),
-							IsResumable:    ptr.Bool(true),
-							MaxFileCount:   ptr.Int32(1),
-							MaxSize:        ptr.Int32(1),
-						},
-					},
-					Validations: []types.FieldValidationConfiguration{
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-					},
-				},
-				"key1": {
-					Label: ptr.String("__Label__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Excluded: ptr.Bool(true),
-					InputType: &types.FieldInputConfig{
-						Type:               ptr.String("__Type__"),
-						Required:           ptr.Bool(true),
-						ReadOnly:           ptr.Bool(true),
-						Placeholder:        ptr.String("__Placeholder__"),
-						DefaultValue:       ptr.String("__DefaultValue__"),
-						DescriptiveText:    ptr.String("__DescriptiveText__"),
-						DefaultChecked:     ptr.Bool(true),
-						DefaultCountryCode: ptr.String("__DefaultCountryCode__"),
-						ValueMappings: &types.ValueMappings{
-							Values: []types.ValueMapping{
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-							},
-							BindingProperties: map[string]types.FormInputBindingPropertiesValue{
-								"key0": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
 							},
 						},
 						Name:     ptr.String("__Name__"),
@@ -3386,16 +1606,6 @@ func TestSerdeCheckSnapshot_CreateForm(t *testing.T) {
 					Orientation: ptr.String("__Orientation__"),
 					Excluded:    ptr.Bool(true),
 				},
-				"key1": {
-					Type: ptr.String("__Type__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Text:        ptr.String("__Text__"),
-					Level:       ptr.Int32(1),
-					Orientation: ptr.String("__Orientation__"),
-					Excluded:    ptr.Bool(true),
-				},
 			},
 			SchemaVersion: ptr.String("__SchemaVersion__"),
 			Cta: &types.FormCTA{
@@ -3424,7 +1634,6 @@ func TestSerdeCheckSnapshot_CreateForm(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			LabelDecorator: types.LabelDecorator("required"),
 		},
@@ -3438,6 +1647,7 @@ func TestSerdeCheckSnapshot_CreateForm(t *testing.T) {
 	_, err := svc.CreateForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3506,7 +1716,6 @@ func TestSerdeCheckSnapshot_CreateTheme(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -3519,6 +1728,7 @@ func TestSerdeCheckSnapshot_CreateTheme(t *testing.T) {
 	_, err := svc.CreateTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3549,6 +1759,7 @@ func TestSerdeCheckSnapshot_DeleteComponent(t *testing.T) {
 	_, err := svc.DeleteComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3579,6 +1790,7 @@ func TestSerdeCheckSnapshot_DeleteForm(t *testing.T) {
 	_, err := svc.DeleteForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3609,6 +1821,7 @@ func TestSerdeCheckSnapshot_DeleteTheme(t *testing.T) {
 	_, err := svc.DeleteTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3642,6 +1855,7 @@ func TestSerdeCheckSnapshot_ExchangeCodeForToken(t *testing.T) {
 	_, err := svc.ExchangeCodeForToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3672,6 +1886,7 @@ func TestSerdeCheckSnapshot_ExportComponents(t *testing.T) {
 	_, err := svc.ExportComponents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3702,6 +1917,7 @@ func TestSerdeCheckSnapshot_ExportForms(t *testing.T) {
 	_, err := svc.ExportForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3732,6 +1948,7 @@ func TestSerdeCheckSnapshot_ExportThemes(t *testing.T) {
 	_, err := svc.ExportThemes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3762,6 +1979,7 @@ func TestSerdeCheckSnapshot_GetCodegenJob(t *testing.T) {
 	_, err := svc.GetCodegenJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3792,6 +2010,7 @@ func TestSerdeCheckSnapshot_GetComponent(t *testing.T) {
 	_, err := svc.GetComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3822,6 +2041,7 @@ func TestSerdeCheckSnapshot_GetForm(t *testing.T) {
 	_, err := svc.GetForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3851,6 +2071,7 @@ func TestSerdeCheckSnapshot_GetMetadata(t *testing.T) {
 	_, err := svc.GetMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3881,6 +2102,7 @@ func TestSerdeCheckSnapshot_GetTheme(t *testing.T) {
 	_, err := svc.GetTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3912,6 +2134,7 @@ func TestSerdeCheckSnapshot_ListCodegenJobs(t *testing.T) {
 	_, err := svc.ListCodegenJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3943,6 +2166,7 @@ func TestSerdeCheckSnapshot_ListComponents(t *testing.T) {
 	_, err := svc.ListComponents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -3974,6 +2198,7 @@ func TestSerdeCheckSnapshot_ListForms(t *testing.T) {
 	_, err := svc.ListForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4002,6 +2227,7 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4033,6 +2259,7 @@ func TestSerdeCheckSnapshot_ListThemes(t *testing.T) {
 	_, err := svc.ListThemes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4066,6 +2293,7 @@ func TestSerdeCheckSnapshot_PutMetadataFlag(t *testing.T) {
 	_, err := svc.PutMetadataFlag(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4098,6 +2326,7 @@ func TestSerdeCheckSnapshot_RefreshToken(t *testing.T) {
 	_, err := svc.RefreshToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4137,7 +2366,6 @@ func TestSerdeCheckSnapshot_StartCodegenJob(t *testing.T) {
 					},
 					Dependencies: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -4147,87 +2375,6 @@ func TestSerdeCheckSnapshot_StartCodegenJob(t *testing.T) {
 					"key0": {
 						Fields: map[string]types.CodegenGenericDataField{
 							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-						},
-						IsJoinTable: ptr.Bool(true),
-						PrimaryKeys: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
-						Fields: map[string]types.CodegenGenericDataField{
-							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
 								DataType:      types.CodegenGenericDataFieldDataType("ID"),
 								DataTypeValue: ptr.String("__DataTypeValue__"),
 								Required:      ptr.Bool(true),
@@ -4266,93 +2413,11 @@ func TestSerdeCheckSnapshot_StartCodegenJob(t *testing.T) {
 							"__Member__",
 						},
 					},
-					"key1": {
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
 				},
 				NonModels: map[string]types.CodegenGenericDataNonModel{
 					"key0": {
 						Fields: map[string]types.CodegenGenericDataField{
 							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-						},
-					},
-					"key1": {
-						Fields: map[string]types.CodegenGenericDataField{
-							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
 								DataType:      types.CodegenGenericDataFieldDataType("ID"),
 								DataTypeValue: ptr.String("__DataTypeValue__"),
 								Required:      ptr.Bool(true),
@@ -4387,7 +2452,6 @@ func TestSerdeCheckSnapshot_StartCodegenJob(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -4400,6 +2464,7 @@ func TestSerdeCheckSnapshot_StartCodegenJob(t *testing.T) {
 	_, err := svc.StartCodegenJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4420,7 +2485,6 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4432,6 +2496,7 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4464,6 +2529,7 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -4505,53 +2571,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 					Model:        ptr.String("__Model__"),
 					Bindings: map[string]types.FormBindingElement{
 						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-					},
-					Event:         ptr.String("__Event__"),
-					UserAttribute: ptr.String("__UserAttribute__"),
-					Concat: []types.ComponentProperty{
-						{},
-						{},
-					},
-					Condition: &types.ComponentConditionProperty{
-						Property:    ptr.String("__Property__"),
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						Then:        nil,
-						Else:        nil,
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Configured:    ptr.Bool(true),
-					Type:          ptr.String("__Type__"),
-					ImportedValue: ptr.String("__ImportedValue__"),
-					ComponentName: ptr.String("__ComponentName__"),
-					Property:      ptr.String("__Property__"),
-				},
-				"key1": {
-					Value: ptr.String("__Value__"),
-					BindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-					Model:        ptr.String("__Model__"),
-					Bindings: map[string]types.FormBindingElement{
-						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
 							Element:  ptr.String("__Element__"),
 							Property: ptr.String("__Property__"),
 						},
@@ -4600,53 +2619,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -4695,10 +2667,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -4735,10 +2703,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -4781,10 +2745,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -4824,10 +2784,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -4864,10 +2820,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -4911,10 +2863,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -4952,53 +2900,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -5042,410 +2943,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -5499,53 +2996,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -5594,10 +3044,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -5634,10 +3080,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -5680,10 +3122,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -5723,10 +3161,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -5763,10 +3197,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -5810,10 +3240,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -5851,53 +3277,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -5941,410 +3320,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -6382,32 +3357,20 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -6415,58 +3378,10 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 			Overrides: map[string]map[string]string{
 				"key0": {
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				"key1": {
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
 				"key0": {
-					Type: ptr.String("__Type__"),
-					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
-						Model: ptr.String("__Model__"),
-						Field: ptr.String("__Field__"),
-						Predicates: []types.Predicate{
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-						},
-						UserAttribute: ptr.String("__UserAttribute__"),
-						Bucket:        ptr.String("__Bucket__"),
-						Key:           ptr.String("__Key__"),
-						DefaultValue:  ptr.String("__DefaultValue__"),
-						SlotName:      ptr.String("__SlotName__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-				},
-				"key1": {
 					Type: ptr.String("__Type__"),
 					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
 						Model: ptr.String("__Model__"),
@@ -6542,37 +3457,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 						"__Member__",
 					},
 				},
-				"key1": {
-					Model: ptr.String("__Model__"),
-					Sort: []types.SortProperty{
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-					},
-					Predicate: &types.Predicate{
-						Or: []types.Predicate{
-							{},
-							{},
-						},
-						And: []types.Predicate{
-							{},
-							{},
-						},
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Identifiers: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
 			},
 			Events: map[string]types.ComponentEvent{
 				"key0": {
@@ -6595,10 +3479,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -6635,10 +3515,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -6681,10 +3557,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -6724,10 +3596,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -6764,10 +3632,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -6811,10 +3675,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -6852,53 +3712,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -6942,410 +3755,6 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-					},
-					BindingEvent: ptr.String("__BindingEvent__"),
-				},
-				"key1": {
-					Action: ptr.String("__Action__"),
-					Parameters: &types.ActionParameters{
-						Type: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Url: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Anchor: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Target: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Global: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Model: ptr.String("__Model__"),
-						Id: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Fields: map[string]types.ComponentProperty{
-							"key0": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-						State: &types.MutationActionSetStateParameter{
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-							Set: &types.ComponentProperty{
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -7388,6 +3797,7 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 	_, err := svc.UpdateComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7490,138 +3900,6 @@ func TestSerdeCheckSnapshot_UpdateForm(t *testing.T) {
 										Model: ptr.String("__Model__"),
 									},
 								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-							},
-						},
-						Name:     ptr.String("__Name__"),
-						MinValue: ptr.Float32(1.0),
-						MaxValue: ptr.Float32(1.0),
-						Step:     ptr.Float32(1.0),
-						Value:    ptr.String("__Value__"),
-						IsArray:  ptr.Bool(true),
-						FileUploaderConfig: &types.FileUploaderFieldConfig{
-							AccessLevel: types.StorageAccessLevel("public"),
-							AcceptedFileTypes: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ShowThumbnails: ptr.Bool(true),
-							IsResumable:    ptr.Bool(true),
-							MaxFileCount:   ptr.Int32(1),
-							MaxSize:        ptr.Int32(1),
-						},
-					},
-					Validations: []types.FieldValidationConfiguration{
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-					},
-				},
-				"key1": {
-					Label: ptr.String("__Label__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Excluded: ptr.Bool(true),
-					InputType: &types.FieldInputConfig{
-						Type:               ptr.String("__Type__"),
-						Required:           ptr.Bool(true),
-						ReadOnly:           ptr.Bool(true),
-						Placeholder:        ptr.String("__Placeholder__"),
-						DefaultValue:       ptr.String("__DefaultValue__"),
-						DescriptiveText:    ptr.String("__DescriptiveText__"),
-						DefaultChecked:     ptr.Bool(true),
-						DefaultCountryCode: ptr.String("__DefaultCountryCode__"),
-						ValueMappings: &types.ValueMappings{
-							Values: []types.ValueMapping{
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-							},
-							BindingProperties: map[string]types.FormInputBindingPropertiesValue{
-								"key0": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
 							},
 						},
 						Name:     ptr.String("__Name__"),
@@ -7692,16 +3970,6 @@ func TestSerdeCheckSnapshot_UpdateForm(t *testing.T) {
 					Orientation: ptr.String("__Orientation__"),
 					Excluded:    ptr.Bool(true),
 				},
-				"key1": {
-					Type: ptr.String("__Type__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Text:        ptr.String("__Text__"),
-					Level:       ptr.Int32(1),
-					Orientation: ptr.String("__Orientation__"),
-					Excluded:    ptr.Bool(true),
-				},
 			},
 			SchemaVersion: ptr.String("__SchemaVersion__"),
 			Cta: &types.FormCTA{
@@ -7740,6 +4008,7 @@ func TestSerdeCheckSnapshot_UpdateForm(t *testing.T) {
 	_, err := svc.UpdateForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7819,6 +4088,7 @@ func TestSerdeCheckSnapshot_UpdateTheme(t *testing.T) {
 	_, err := svc.UpdateTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -7857,53 +4127,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 					Model:        ptr.String("__Model__"),
 					Bindings: map[string]types.FormBindingElement{
 						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-					},
-					Event:         ptr.String("__Event__"),
-					UserAttribute: ptr.String("__UserAttribute__"),
-					Concat: []types.ComponentProperty{
-						{},
-						{},
-					},
-					Condition: &types.ComponentConditionProperty{
-						Property:    ptr.String("__Property__"),
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						Then:        nil,
-						Else:        nil,
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Configured:    ptr.Bool(true),
-					Type:          ptr.String("__Type__"),
-					ImportedValue: ptr.String("__ImportedValue__"),
-					ComponentName: ptr.String("__ComponentName__"),
-					Property:      ptr.String("__Property__"),
-				},
-				"key1": {
-					Value: ptr.String("__Value__"),
-					BindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-					Model:        ptr.String("__Model__"),
-					Bindings: map[string]types.FormBindingElement{
-						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
 							Element:  ptr.String("__Element__"),
 							Property: ptr.String("__Property__"),
 						},
@@ -7952,53 +4175,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -8047,10 +4223,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -8087,10 +4259,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -8133,10 +4301,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -8176,10 +4340,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -8216,10 +4376,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -8263,10 +4419,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -8304,53 +4456,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -8394,410 +4499,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -8851,53 +4552,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -8946,10 +4600,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -8986,10 +4636,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -9032,10 +4678,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -9075,10 +4717,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -9115,10 +4753,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -9162,10 +4796,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -9203,53 +4833,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -9293,410 +4876,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -9734,32 +4913,20 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -9767,58 +4934,10 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 			Overrides: map[string]map[string]string{
 				"key0": {
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				"key1": {
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
 				"key0": {
-					Type: ptr.String("__Type__"),
-					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
-						Model: ptr.String("__Model__"),
-						Field: ptr.String("__Field__"),
-						Predicates: []types.Predicate{
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-						},
-						UserAttribute: ptr.String("__UserAttribute__"),
-						Bucket:        ptr.String("__Bucket__"),
-						Key:           ptr.String("__Key__"),
-						DefaultValue:  ptr.String("__DefaultValue__"),
-						SlotName:      ptr.String("__SlotName__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-				},
-				"key1": {
 					Type: ptr.String("__Type__"),
 					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
 						Model: ptr.String("__Model__"),
@@ -9894,41 +5013,9 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 						"__Member__",
 					},
 				},
-				"key1": {
-					Model: ptr.String("__Model__"),
-					Sort: []types.SortProperty{
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-					},
-					Predicate: &types.Predicate{
-						Or: []types.Predicate{
-							{},
-							{},
-						},
-						And: []types.Predicate{
-							{},
-							{},
-						},
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Identifiers: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			Events: map[string]types.ComponentEvent{
 				"key0": {
@@ -9951,10 +5038,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -9991,10 +5074,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -10037,10 +5116,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -10080,10 +5155,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -10120,10 +5191,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -10167,10 +5234,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -10208,53 +5271,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -10298,410 +5314,6 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-					},
-					BindingEvent: ptr.String("__BindingEvent__"),
-				},
-				"key1": {
-					Action: ptr.String("__Action__"),
-					Parameters: &types.ActionParameters{
-						Type: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Url: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Anchor: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Target: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Global: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Model: ptr.String("__Model__"),
-						Id: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Fields: map[string]types.ComponentProperty{
-							"key0": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-						State: &types.MutationActionSetStateParameter{
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-							Set: &types.ComponentProperty{
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -10744,6 +5356,7 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 	_, err := svc.CreateComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -10845,138 +5458,6 @@ func TestSerdeUpdateSnapshot_CreateForm(t *testing.T) {
 										Model: ptr.String("__Model__"),
 									},
 								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-							},
-						},
-						Name:     ptr.String("__Name__"),
-						MinValue: ptr.Float32(1.0),
-						MaxValue: ptr.Float32(1.0),
-						Step:     ptr.Float32(1.0),
-						Value:    ptr.String("__Value__"),
-						IsArray:  ptr.Bool(true),
-						FileUploaderConfig: &types.FileUploaderFieldConfig{
-							AccessLevel: types.StorageAccessLevel("public"),
-							AcceptedFileTypes: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ShowThumbnails: ptr.Bool(true),
-							IsResumable:    ptr.Bool(true),
-							MaxFileCount:   ptr.Int32(1),
-							MaxSize:        ptr.Int32(1),
-						},
-					},
-					Validations: []types.FieldValidationConfiguration{
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-					},
-				},
-				"key1": {
-					Label: ptr.String("__Label__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Excluded: ptr.Bool(true),
-					InputType: &types.FieldInputConfig{
-						Type:               ptr.String("__Type__"),
-						Required:           ptr.Bool(true),
-						ReadOnly:           ptr.Bool(true),
-						Placeholder:        ptr.String("__Placeholder__"),
-						DefaultValue:       ptr.String("__DefaultValue__"),
-						DescriptiveText:    ptr.String("__DescriptiveText__"),
-						DefaultChecked:     ptr.Bool(true),
-						DefaultCountryCode: ptr.String("__DefaultCountryCode__"),
-						ValueMappings: &types.ValueMappings{
-							Values: []types.ValueMapping{
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-							},
-							BindingProperties: map[string]types.FormInputBindingPropertiesValue{
-								"key0": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
 							},
 						},
 						Name:     ptr.String("__Name__"),
@@ -11047,16 +5528,6 @@ func TestSerdeUpdateSnapshot_CreateForm(t *testing.T) {
 					Orientation: ptr.String("__Orientation__"),
 					Excluded:    ptr.Bool(true),
 				},
-				"key1": {
-					Type: ptr.String("__Type__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Text:        ptr.String("__Text__"),
-					Level:       ptr.Int32(1),
-					Orientation: ptr.String("__Orientation__"),
-					Excluded:    ptr.Bool(true),
-				},
 			},
 			SchemaVersion: ptr.String("__SchemaVersion__"),
 			Cta: &types.FormCTA{
@@ -11085,7 +5556,6 @@ func TestSerdeUpdateSnapshot_CreateForm(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 			LabelDecorator: types.LabelDecorator("required"),
 		},
@@ -11099,6 +5569,7 @@ func TestSerdeUpdateSnapshot_CreateForm(t *testing.T) {
 	_, err := svc.CreateForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11167,7 +5638,6 @@ func TestSerdeUpdateSnapshot_CreateTheme(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -11180,6 +5650,7 @@ func TestSerdeUpdateSnapshot_CreateTheme(t *testing.T) {
 	_, err := svc.CreateTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11210,6 +5681,7 @@ func TestSerdeUpdateSnapshot_DeleteComponent(t *testing.T) {
 	_, err := svc.DeleteComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11240,6 +5712,7 @@ func TestSerdeUpdateSnapshot_DeleteForm(t *testing.T) {
 	_, err := svc.DeleteForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11270,6 +5743,7 @@ func TestSerdeUpdateSnapshot_DeleteTheme(t *testing.T) {
 	_, err := svc.DeleteTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11303,6 +5777,7 @@ func TestSerdeUpdateSnapshot_ExchangeCodeForToken(t *testing.T) {
 	_, err := svc.ExchangeCodeForToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11333,6 +5808,7 @@ func TestSerdeUpdateSnapshot_ExportComponents(t *testing.T) {
 	_, err := svc.ExportComponents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11363,6 +5839,7 @@ func TestSerdeUpdateSnapshot_ExportForms(t *testing.T) {
 	_, err := svc.ExportForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11393,6 +5870,7 @@ func TestSerdeUpdateSnapshot_ExportThemes(t *testing.T) {
 	_, err := svc.ExportThemes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11423,6 +5901,7 @@ func TestSerdeUpdateSnapshot_GetCodegenJob(t *testing.T) {
 	_, err := svc.GetCodegenJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11453,6 +5932,7 @@ func TestSerdeUpdateSnapshot_GetComponent(t *testing.T) {
 	_, err := svc.GetComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11483,6 +5963,7 @@ func TestSerdeUpdateSnapshot_GetForm(t *testing.T) {
 	_, err := svc.GetForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11512,6 +5993,7 @@ func TestSerdeUpdateSnapshot_GetMetadata(t *testing.T) {
 	_, err := svc.GetMetadata(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11542,6 +6024,7 @@ func TestSerdeUpdateSnapshot_GetTheme(t *testing.T) {
 	_, err := svc.GetTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11573,6 +6056,7 @@ func TestSerdeUpdateSnapshot_ListCodegenJobs(t *testing.T) {
 	_, err := svc.ListCodegenJobs(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11604,6 +6088,7 @@ func TestSerdeUpdateSnapshot_ListComponents(t *testing.T) {
 	_, err := svc.ListComponents(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11635,6 +6120,7 @@ func TestSerdeUpdateSnapshot_ListForms(t *testing.T) {
 	_, err := svc.ListForms(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11663,6 +6149,7 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11694,6 +6181,7 @@ func TestSerdeUpdateSnapshot_ListThemes(t *testing.T) {
 	_, err := svc.ListThemes(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11727,6 +6215,7 @@ func TestSerdeUpdateSnapshot_PutMetadataFlag(t *testing.T) {
 	_, err := svc.PutMetadataFlag(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11759,6 +6248,7 @@ func TestSerdeUpdateSnapshot_RefreshToken(t *testing.T) {
 	_, err := svc.RefreshToken(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -11798,7 +6288,6 @@ func TestSerdeUpdateSnapshot_StartCodegenJob(t *testing.T) {
 					},
 					Dependencies: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 				},
 			},
@@ -11808,87 +6297,6 @@ func TestSerdeUpdateSnapshot_StartCodegenJob(t *testing.T) {
 					"key0": {
 						Fields: map[string]types.CodegenGenericDataField{
 							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-						},
-						IsJoinTable: ptr.Bool(true),
-						PrimaryKeys: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					"key1": {
-						Fields: map[string]types.CodegenGenericDataField{
-							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
 								DataType:      types.CodegenGenericDataFieldDataType("ID"),
 								DataTypeValue: ptr.String("__DataTypeValue__"),
 								Required:      ptr.Bool(true),
@@ -11927,93 +6335,11 @@ func TestSerdeUpdateSnapshot_StartCodegenJob(t *testing.T) {
 							"__Member__",
 						},
 					},
-					"key1": {
-						Values: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
 				},
 				NonModels: map[string]types.CodegenGenericDataNonModel{
 					"key0": {
 						Fields: map[string]types.CodegenGenericDataField{
 							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-						},
-					},
-					"key1": {
-						Fields: map[string]types.CodegenGenericDataField{
-							"key0": {
-								DataType:      types.CodegenGenericDataFieldDataType("ID"),
-								DataTypeValue: ptr.String("__DataTypeValue__"),
-								Required:      ptr.Bool(true),
-								ReadOnly:      ptr.Bool(true),
-								IsArray:       ptr.Bool(true),
-								Relationship: &types.CodegenGenericDataRelationshipType{
-									Type:             types.GenericDataRelationshipType("HAS_MANY"),
-									RelatedModelName: ptr.String("__RelatedModelName__"),
-									RelatedModelFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									CanUnlinkAssociatedModel:     ptr.Bool(true),
-									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
-									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
-									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
-									AssociatedFields: []string{
-										"__Member__",
-										"__Member__",
-									},
-									IsHasManyIndex: ptr.Bool(true),
-								},
-							},
-							"key1": {
 								DataType:      types.CodegenGenericDataFieldDataType("ID"),
 								DataTypeValue: ptr.String("__DataTypeValue__"),
 								Required:      ptr.Bool(true),
@@ -12048,7 +6374,6 @@ func TestSerdeUpdateSnapshot_StartCodegenJob(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
-				"key1": "__Value__",
 			},
 		},
 	}
@@ -12061,6 +6386,7 @@ func TestSerdeUpdateSnapshot_StartCodegenJob(t *testing.T) {
 	_, err := svc.StartCodegenJob(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12081,7 +6407,6 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-			"key1": "__Value__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -12093,6 +6418,7 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12125,6 +6451,7 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -12166,53 +6493,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 					Model:        ptr.String("__Model__"),
 					Bindings: map[string]types.FormBindingElement{
 						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-					},
-					Event:         ptr.String("__Event__"),
-					UserAttribute: ptr.String("__UserAttribute__"),
-					Concat: []types.ComponentProperty{
-						{},
-						{},
-					},
-					Condition: &types.ComponentConditionProperty{
-						Property:    ptr.String("__Property__"),
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						Then:        nil,
-						Else:        nil,
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Configured:    ptr.Bool(true),
-					Type:          ptr.String("__Type__"),
-					ImportedValue: ptr.String("__ImportedValue__"),
-					ComponentName: ptr.String("__ComponentName__"),
-					Property:      ptr.String("__Property__"),
-				},
-				"key1": {
-					Value: ptr.String("__Value__"),
-					BindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-						Property: ptr.String("__Property__"),
-						Field:    ptr.String("__Field__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-					Model:        ptr.String("__Model__"),
-					Bindings: map[string]types.FormBindingElement{
-						"key0": {
-							Element:  ptr.String("__Element__"),
-							Property: ptr.String("__Property__"),
-						},
-						"key1": {
 							Element:  ptr.String("__Element__"),
 							Property: ptr.String("__Property__"),
 						},
@@ -12261,53 +6541,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -12356,10 +6589,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -12396,10 +6625,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -12442,10 +6667,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -12485,10 +6706,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -12525,10 +6742,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -12572,10 +6785,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -12613,53 +6822,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -12703,410 +6865,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -13160,53 +6918,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						"key1": {
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -13255,10 +6966,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -13295,10 +7002,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -13341,10 +7044,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -13384,10 +7083,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -13424,10 +7119,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Model:        ptr.String("__Model__"),
 									Bindings: map[string]types.FormBindingElement{
 										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
@@ -13471,10 +7162,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 											Element:  ptr.String("__Element__"),
 											Property: ptr.String("__Property__"),
 										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
 									},
 									Event:         ptr.String("__Event__"),
 									UserAttribute: ptr.String("__UserAttribute__"),
@@ -13512,53 +7199,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -13602,410 +7242,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 										Model:        ptr.String("__Model__"),
 										Bindings: map[string]types.FormBindingElement{
 											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-							},
-							BindingEvent: ptr.String("__BindingEvent__"),
-						},
-						"key1": {
-							Action: ptr.String("__Action__"),
-							Parameters: &types.ActionParameters{
-								Type: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Url: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Anchor: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Target: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Global: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Model: ptr.String("__Model__"),
-								Id: &types.ComponentProperty{
-									Value: ptr.String("__Value__"),
-									BindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-										Property: ptr.String("__Property__"),
-										Field:    ptr.String("__Field__"),
-									},
-									DefaultValue: ptr.String("__DefaultValue__"),
-									Model:        ptr.String("__Model__"),
-									Bindings: map[string]types.FormBindingElement{
-										"key0": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-										"key1": {
-											Element:  ptr.String("__Element__"),
-											Property: ptr.String("__Property__"),
-										},
-									},
-									Event:         ptr.String("__Event__"),
-									UserAttribute: ptr.String("__UserAttribute__"),
-									Concat: []types.ComponentProperty{
-										{},
-										{},
-									},
-									Condition: &types.ComponentConditionProperty{
-										Property:    ptr.String("__Property__"),
-										Field:       ptr.String("__Field__"),
-										Operator:    ptr.String("__Operator__"),
-										Operand:     ptr.String("__Operand__"),
-										Then:        nil,
-										Else:        nil,
-										OperandType: ptr.String("__OperandType__"),
-									},
-									Configured:    ptr.Bool(true),
-									Type:          ptr.String("__Type__"),
-									ImportedValue: ptr.String("__ImportedValue__"),
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-								},
-								Fields: map[string]types.ComponentProperty{
-									"key0": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-									"key1": {
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-										},
-										Event:         ptr.String("__Event__"),
-										UserAttribute: ptr.String("__UserAttribute__"),
-										Concat: []types.ComponentProperty{
-											{},
-											{},
-										},
-										Condition: &types.ComponentConditionProperty{
-											Property:    ptr.String("__Property__"),
-											Field:       ptr.String("__Field__"),
-											Operator:    ptr.String("__Operator__"),
-											Operand:     ptr.String("__Operand__"),
-											Then:        nil,
-											Else:        nil,
-											OperandType: ptr.String("__OperandType__"),
-										},
-										Configured:    ptr.Bool(true),
-										Type:          ptr.String("__Type__"),
-										ImportedValue: ptr.String("__ImportedValue__"),
-										ComponentName: ptr.String("__ComponentName__"),
-										Property:      ptr.String("__Property__"),
-									},
-								},
-								State: &types.MutationActionSetStateParameter{
-									ComponentName: ptr.String("__ComponentName__"),
-									Property:      ptr.String("__Property__"),
-									Set: &types.ComponentProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										DefaultValue: ptr.String("__DefaultValue__"),
-										Model:        ptr.String("__Model__"),
-										Bindings: map[string]types.FormBindingElement{
-											"key0": {
-												Element:  ptr.String("__Element__"),
-												Property: ptr.String("__Property__"),
-											},
-											"key1": {
 												Element:  ptr.String("__Element__"),
 												Property: ptr.String("__Property__"),
 											},
@@ -14043,32 +7279,20 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
 				{
 					VariantValues: map[string]string{
 						"key0": "__Value__",
-						"key1": "__Value__",
 					},
 					Overrides: map[string]map[string]string{
 						"key0": {
 							"key0": "__Value__",
-							"key1": "__Value__",
-						},
-						"key1": {
-							"key0": "__Value__",
-							"key1": "__Value__",
 						},
 					},
 				},
@@ -14076,58 +7300,10 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 			Overrides: map[string]map[string]string{
 				"key0": {
 					"key0": "__Value__",
-					"key1": "__Value__",
-				},
-				"key1": {
-					"key0": "__Value__",
-					"key1": "__Value__",
 				},
 			},
 			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
 				"key0": {
-					Type: ptr.String("__Type__"),
-					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
-						Model: ptr.String("__Model__"),
-						Field: ptr.String("__Field__"),
-						Predicates: []types.Predicate{
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-							{
-								Or: []types.Predicate{
-									{},
-									{},
-								},
-								And: []types.Predicate{
-									{},
-									{},
-								},
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								OperandType: ptr.String("__OperandType__"),
-							},
-						},
-						UserAttribute: ptr.String("__UserAttribute__"),
-						Bucket:        ptr.String("__Bucket__"),
-						Key:           ptr.String("__Key__"),
-						DefaultValue:  ptr.String("__DefaultValue__"),
-						SlotName:      ptr.String("__SlotName__"),
-					},
-					DefaultValue: ptr.String("__DefaultValue__"),
-				},
-				"key1": {
 					Type: ptr.String("__Type__"),
 					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
 						Model: ptr.String("__Model__"),
@@ -14203,37 +7379,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 						"__Member__",
 					},
 				},
-				"key1": {
-					Model: ptr.String("__Model__"),
-					Sort: []types.SortProperty{
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-						{
-							Field:     ptr.String("__Field__"),
-							Direction: types.SortDirection("ASC"),
-						},
-					},
-					Predicate: &types.Predicate{
-						Or: []types.Predicate{
-							{},
-							{},
-						},
-						And: []types.Predicate{
-							{},
-							{},
-						},
-						Field:       ptr.String("__Field__"),
-						Operator:    ptr.String("__Operator__"),
-						Operand:     ptr.String("__Operand__"),
-						OperandType: ptr.String("__OperandType__"),
-					},
-					Identifiers: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
 			},
 			Events: map[string]types.ComponentEvent{
 				"key0": {
@@ -14256,10 +7401,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -14296,10 +7437,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -14342,10 +7479,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -14385,10 +7518,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -14425,10 +7554,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 							Model:        ptr.String("__Model__"),
 							Bindings: map[string]types.FormBindingElement{
 								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
@@ -14472,10 +7597,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 									Element:  ptr.String("__Element__"),
 									Property: ptr.String("__Property__"),
 								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
 							},
 							Event:         ptr.String("__Event__"),
 							UserAttribute: ptr.String("__UserAttribute__"),
@@ -14513,53 +7634,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -14603,410 +7677,6 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 								Model:        ptr.String("__Model__"),
 								Bindings: map[string]types.FormBindingElement{
 									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-					},
-					BindingEvent: ptr.String("__BindingEvent__"),
-				},
-				"key1": {
-					Action: ptr.String("__Action__"),
-					Parameters: &types.ActionParameters{
-						Type: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Url: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Anchor: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Target: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Global: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Model: ptr.String("__Model__"),
-						Id: &types.ComponentProperty{
-							Value: ptr.String("__Value__"),
-							BindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-								Property: ptr.String("__Property__"),
-								Field:    ptr.String("__Field__"),
-							},
-							DefaultValue: ptr.String("__DefaultValue__"),
-							Model:        ptr.String("__Model__"),
-							Bindings: map[string]types.FormBindingElement{
-								"key0": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-								"key1": {
-									Element:  ptr.String("__Element__"),
-									Property: ptr.String("__Property__"),
-								},
-							},
-							Event:         ptr.String("__Event__"),
-							UserAttribute: ptr.String("__UserAttribute__"),
-							Concat: []types.ComponentProperty{
-								{},
-								{},
-							},
-							Condition: &types.ComponentConditionProperty{
-								Property:    ptr.String("__Property__"),
-								Field:       ptr.String("__Field__"),
-								Operator:    ptr.String("__Operator__"),
-								Operand:     ptr.String("__Operand__"),
-								Then:        nil,
-								Else:        nil,
-								OperandType: ptr.String("__OperandType__"),
-							},
-							Configured:    ptr.Bool(true),
-							Type:          ptr.String("__Type__"),
-							ImportedValue: ptr.String("__ImportedValue__"),
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-						},
-						Fields: map[string]types.ComponentProperty{
-							"key0": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-							"key1": {
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-								},
-								Event:         ptr.String("__Event__"),
-								UserAttribute: ptr.String("__UserAttribute__"),
-								Concat: []types.ComponentProperty{
-									{},
-									{},
-								},
-								Condition: &types.ComponentConditionProperty{
-									Property:    ptr.String("__Property__"),
-									Field:       ptr.String("__Field__"),
-									Operator:    ptr.String("__Operator__"),
-									Operand:     ptr.String("__Operand__"),
-									Then:        nil,
-									Else:        nil,
-									OperandType: ptr.String("__OperandType__"),
-								},
-								Configured:    ptr.Bool(true),
-								Type:          ptr.String("__Type__"),
-								ImportedValue: ptr.String("__ImportedValue__"),
-								ComponentName: ptr.String("__ComponentName__"),
-								Property:      ptr.String("__Property__"),
-							},
-						},
-						State: &types.MutationActionSetStateParameter{
-							ComponentName: ptr.String("__ComponentName__"),
-							Property:      ptr.String("__Property__"),
-							Set: &types.ComponentProperty{
-								Value: ptr.String("__Value__"),
-								BindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
-									Property: ptr.String("__Property__"),
-									Field:    ptr.String("__Field__"),
-								},
-								DefaultValue: ptr.String("__DefaultValue__"),
-								Model:        ptr.String("__Model__"),
-								Bindings: map[string]types.FormBindingElement{
-									"key0": {
-										Element:  ptr.String("__Element__"),
-										Property: ptr.String("__Property__"),
-									},
-									"key1": {
 										Element:  ptr.String("__Element__"),
 										Property: ptr.String("__Property__"),
 									},
@@ -15049,6 +7719,7 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 	_, err := svc.UpdateComponent(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15151,138 +7822,6 @@ func TestSerdeUpdateSnapshot_UpdateForm(t *testing.T) {
 										Model: ptr.String("__Model__"),
 									},
 								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-							},
-						},
-						Name:     ptr.String("__Name__"),
-						MinValue: ptr.Float32(1.0),
-						MaxValue: ptr.Float32(1.0),
-						Step:     ptr.Float32(1.0),
-						Value:    ptr.String("__Value__"),
-						IsArray:  ptr.Bool(true),
-						FileUploaderConfig: &types.FileUploaderFieldConfig{
-							AccessLevel: types.StorageAccessLevel("public"),
-							AcceptedFileTypes: []string{
-								"__Member__",
-								"__Member__",
-							},
-							ShowThumbnails: ptr.Bool(true),
-							IsResumable:    ptr.Bool(true),
-							MaxFileCount:   ptr.Int32(1),
-							MaxSize:        ptr.Int32(1),
-						},
-					},
-					Validations: []types.FieldValidationConfiguration{
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-						{
-							Type: ptr.String("__Type__"),
-							StrValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-							NumValues: []int32{
-								1,
-								1,
-							},
-							ValidationMessage: ptr.String("__ValidationMessage__"),
-						},
-					},
-				},
-				"key1": {
-					Label: ptr.String("__Label__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Excluded: ptr.Bool(true),
-					InputType: &types.FieldInputConfig{
-						Type:               ptr.String("__Type__"),
-						Required:           ptr.Bool(true),
-						ReadOnly:           ptr.Bool(true),
-						Placeholder:        ptr.String("__Placeholder__"),
-						DefaultValue:       ptr.String("__DefaultValue__"),
-						DescriptiveText:    ptr.String("__DescriptiveText__"),
-						DefaultChecked:     ptr.Bool(true),
-						DefaultCountryCode: ptr.String("__DefaultCountryCode__"),
-						ValueMappings: &types.ValueMappings{
-							Values: []types.ValueMapping{
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-								{
-									DisplayValue: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-									Value: &types.FormInputValueProperty{
-										Value: ptr.String("__Value__"),
-										BindingProperties: &types.FormInputValuePropertyBindingProperties{
-											Property: ptr.String("__Property__"),
-											Field:    ptr.String("__Field__"),
-										},
-										Concat: []types.FormInputValueProperty{
-											{},
-											{},
-										},
-									},
-								},
-							},
-							BindingProperties: map[string]types.FormInputBindingPropertiesValue{
-								"key0": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
-								"key1": {
-									Type: ptr.String("__Type__"),
-									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
-										Model: ptr.String("__Model__"),
-									},
-								},
 							},
 						},
 						Name:     ptr.String("__Name__"),
@@ -15353,16 +7892,6 @@ func TestSerdeUpdateSnapshot_UpdateForm(t *testing.T) {
 					Orientation: ptr.String("__Orientation__"),
 					Excluded:    ptr.Bool(true),
 				},
-				"key1": {
-					Type: ptr.String("__Type__"),
-					Position: &types.FieldPositionMemberFixed{
-						Value: types.FixedPosition("first"),
-					},
-					Text:        ptr.String("__Text__"),
-					Level:       ptr.Int32(1),
-					Orientation: ptr.String("__Orientation__"),
-					Excluded:    ptr.Bool(true),
-				},
 			},
 			SchemaVersion: ptr.String("__SchemaVersion__"),
 			Cta: &types.FormCTA{
@@ -15401,6 +7930,7 @@ func TestSerdeUpdateSnapshot_UpdateForm(t *testing.T) {
 	_, err := svc.UpdateForm(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)
@@ -15480,6 +8010,7 @@ func TestSerdeUpdateSnapshot_UpdateTheme(t *testing.T) {
 	_, err := svc.UpdateTheme(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
 			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
 				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
 			}, middleware.Before)

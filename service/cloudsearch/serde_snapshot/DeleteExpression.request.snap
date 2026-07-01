@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteExpression&DomainName=__DomainName__&ExpressionName=__ExpressionName__&Version=2013-01-01

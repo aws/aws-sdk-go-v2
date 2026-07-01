@@ -2,4 +2,4 @@ POST /controlpanel
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","ClusterArn":"__ClusterArn__","ControlPanelName":"__ControlPanelName__","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"ClientToken":"__ClientToken__","ClusterArn":"__ClusterArn__","ControlPanelName":"__ControlPanelName__","Tags":{"key0":"__Value__"}}

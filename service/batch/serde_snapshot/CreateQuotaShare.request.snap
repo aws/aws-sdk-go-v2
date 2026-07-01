@@ -2,4 +2,4 @@ POST /v1/createquotashare
 
 Content-Type: application/json
 
-{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"jobQueue":"__JobQueue__","preemptionConfiguration":{"inSharePreemption":"ENABLED"},"quotaShareName":"__QuotaShareName__","resourceSharingConfiguration":{"borrowLimit":1,"strategy":"RESERVE"},"state":"ENABLED","tags":{"key0":"__Value__","key1":"__Value__"}}
+{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"jobQueue":"__JobQueue__","preemptionConfiguration":{"inSharePreemption":"ENABLED"},"quotaShareName":"__QuotaShareName__","resourceSharingConfiguration":{"borrowLimit":1,"strategy":"RESERVE"},"state":"ENABLED","tags":{"key0":"__Value__"}}

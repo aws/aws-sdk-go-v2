@@ -2,4 +2,4 @@ PUT /domains/__DomainId__/templates/__TemplateId__
 
 Content-Type: application/json
 
-{"description":"__Description__","layoutConfiguration":{"defaultLayout":"__DefaultLayout__"},"name":"__Name__","requiredFields":[{"fieldId":"__FieldId__"},{"fieldId":"__FieldId__"}],"rules":[{"caseRuleId":"__CaseRuleId__","fieldId":"__FieldId__"},{"caseRuleId":"__CaseRuleId__","fieldId":"__FieldId__"}],"status":"Active","tagPropagationConfigurations":[{"resourceType":"Cases","tagMap":{"key0":"__Value__","key1":"__Value__"}},{"resourceType":"Cases","tagMap":{"key0":"__Value__","key1":"__Value__"}}]}
+{"description":"__Description__","layoutConfiguration":{"defaultLayout":"__DefaultLayout__"},"name":"__Name__","requiredFields":[{"fieldId":"__FieldId__"},{"fieldId":"__FieldId__"}],"rules":[{"caseRuleId":"__CaseRuleId__","fieldId":"__FieldId__"},{"caseRuleId":"__CaseRuleId__","fieldId":"__FieldId__"}],"status":"Active","tagPropagationConfigurations":[{"resourceType":"Cases","tagMap":{"key0":"__Value__"}},{"resourceType":"Cases","tagMap":{"key0":"__Value__"}}]}

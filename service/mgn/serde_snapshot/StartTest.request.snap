@@ -2,4 +2,4 @@ POST /StartTest
 
 Content-Type: application/json
 
-{"accountID":"__AccountID__","sourceServerIDs":["__Member__","__Member__"],"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"accountID":"__AccountID__","sourceServerIDs":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

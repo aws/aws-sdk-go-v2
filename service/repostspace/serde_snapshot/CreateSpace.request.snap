@@ -2,4 +2,4 @@ POST /spaces
 
 Content-Type: application/json
 
-{"description":"__Description__","name":"__Name__","roleArn":"__RoleArn__","subdomain":"__Subdomain__","supportedEmailDomains":{"allowedDomains":["__Member__","__Member__"],"enabled":"ENABLED"},"tags":{"key0":"__Value__","key1":"__Value__"},"tier":"BASIC","userKMSKey":"__UserKMSKey__"}
+{"description":"__Description__","name":"__Name__","roleArn":"__RoleArn__","subdomain":"__Subdomain__","supportedEmailDomains":{"allowedDomains":["__Member__","__Member__"],"enabled":"ENABLED"},"tags":{"key0":"__Value__"},"tier":"BASIC","userKMSKey":"__UserKMSKey__"}

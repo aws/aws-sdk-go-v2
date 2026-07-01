@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AmazonSSM.UpdateOpsMetadata
 
-{"KeysToDelete":["__Member__","__Member__"],"MetadataToUpdate":{"key0":{"Value":"__Value__"},"key1":{"Value":"__Value__"}},"OpsMetadataArn":"__OpsMetadataArn__"}
+{"KeysToDelete":["__Member__","__Member__"],"MetadataToUpdate":{"key0":{"Value":"__Value__"}},"OpsMetadataArn":"__OpsMetadataArn__"}

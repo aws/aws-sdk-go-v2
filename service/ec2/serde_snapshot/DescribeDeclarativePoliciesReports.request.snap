@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DescribeDeclarativePoliciesReports&DryRun=true&MaxResults=1&NextToken=__NextToken__&ReportId.1=__Member__&ReportId.2=__Member__&Version=2016-11-15

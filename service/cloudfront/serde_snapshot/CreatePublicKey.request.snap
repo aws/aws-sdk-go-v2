@@ -2,3 +2,4 @@ POST /2020-05-31/public-key
 
 Content-Type: application/xml
 
+<PublicKeyConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CallerReference>__CallerReference__</CallerReference><Comment>__Comment__</Comment><EncodedKey>__EncodedKey__</EncodedKey><Name>__Name__</Name></PublicKeyConfig>

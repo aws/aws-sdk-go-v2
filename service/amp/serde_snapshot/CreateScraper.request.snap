@@ -2,4 +2,4 @@ POST /scrapers
 
 Content-Type: application/json
 
-{"alias":"__Alias__","clientToken":"__ClientToken__","destination":{"ampConfiguration":{"workspaceArn":"__WorkspaceArn__"}},"roleConfiguration":{"sourceRoleArn":"__SourceRoleArn__","targetRoleArn":"__TargetRoleArn__"},"scrapeConfiguration":{"configurationBlob":"YmxvYg=="},"source":{"eksConfiguration":{"clusterArn":"__ClusterArn__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}},"tags":{"key0":"__Value__","key1":"__Value__"}}
+{"alias":"__Alias__","clientToken":"__ClientToken__","destination":{"ampConfiguration":{"workspaceArn":"__WorkspaceArn__"}},"roleConfiguration":{"sourceRoleArn":"__SourceRoleArn__","targetRoleArn":"__TargetRoleArn__"},"scrapeConfiguration":{"configurationBlob":"YmxvYg=="},"source":{"eksConfiguration":{"clusterArn":"__ClusterArn__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}},"tags":{"key0":"__Value__"}}

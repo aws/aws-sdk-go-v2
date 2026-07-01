@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=ModifyIpPools&IpamPools.Ipv4IpamPoolId=__Ipv4IpamPoolId__&LoadBalancerArn=__LoadBalancerArn__&RemoveIpamPools.member.1=ipv4&RemoveIpamPools.member.2=ipv4&Version=2015-12-01

@@ -2,3 +2,4 @@ POST /2020-05-31/delete-resource-policy
 
 Content-Type: application/xml
 
+<DeleteResourcePolicyRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ResourceArn>__ResourceArn__</ResourceArn></DeleteResourcePolicyRequest>

@@ -2,3 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
+Action=DeleteLaunchConfiguration&LaunchConfigurationName=__LaunchConfigurationName__&Version=2011-01-01

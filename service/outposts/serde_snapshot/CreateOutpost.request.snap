@@ -2,4 +2,4 @@ POST /outposts
 
 Content-Type: application/json
 
-{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","Description":"__Description__","Name":"__Name__","SiteId":"__SiteId__","SupportedHardwareType":"RACK","Tags":{"key0":"__Value__","key1":"__Value__"}}
+{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","Description":"__Description__","Name":"__Name__","SiteId":"__SiteId__","SupportedHardwareType":"RACK","Tags":{"key0":"__Value__"}}
