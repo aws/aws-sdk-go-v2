@@ -1,3 +1,9 @@
+# v1.179.0 (2026-07-01)
+
+* **Feature**: Adds a new Amazon Connect Service API, SendOutboundWebNotification, that delivers web notifications to end-customer chat widget sessions. Callable only by the Amazon Connect Outbound Campaigns service principal.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.178.0 (2026-06-30)
 
 * **Feature**: Amazon Connect - Added CreateAttachedFile and StartContactConversationalAnalyticsJob APIs to import call recordings and run conversational analytics.

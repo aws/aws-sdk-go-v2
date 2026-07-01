@@ -1,3 +1,8 @@
+# v1.41.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2026-06-30)
 
 * **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol to issue public certificates. ACME is an industry-standard protocol for automating certificate lifecycle on customer-managed infrastructure such as on-premises servers and Kubernetes clusters.

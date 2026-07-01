@@ -1,3 +1,9 @@
+# v1.311.0 (2026-07-01)
+
+* **Feature**: Use declarative policies to enable VPC Encryption Controls across your organization or select accounts. Added AMD SEV-SNP support for EC2 Dedicated Hosts. Managed resource visibility settings control whether AWS-provisioned resources in your account appear in console views and API list operations.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.310.0 (2026-06-30)
 
 * **Feature**: Adds ModifyVpcEndpointPayerResponsibility API, which enables VPC endpoint service owners to modify the billing account for VPC endpoint usage charges at the individual endpoint level

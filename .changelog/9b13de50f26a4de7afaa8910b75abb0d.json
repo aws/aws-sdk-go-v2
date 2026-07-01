@@ -1,8 +1,0 @@
-{
-    "id": "9b13de50-f26a-4de7-afaa-8910b75abb0d",
-    "type": "feature",
-    "description": "Add support for Assurance Assistant APIs for managing compliance inquiries along with tagging features.",
-    "modules": [
-        "service/artifact"
-    ]
-}

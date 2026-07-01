@@ -1,3 +1,9 @@
+# v1.34.8 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Documentation**: Since Amazon Linux 2 (AL2) will reach its end-of-life (EOL) and stop receiving security updates on June 30, 2026, Cloud9 will remove AL2 from AMI options in public API create-environment-ec2.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.7 (2026-06-29)
 
 * No change notes available for this release.

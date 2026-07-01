@@ -1,8 +1,0 @@
-{
-    "id": "861f4de9-2f7f-4bb9-af0b-ac60f8811b1e",
-    "type": "feature",
-    "description": "Adding support for FileSource PhysicalTables.  This adds support for datasets with file sources.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

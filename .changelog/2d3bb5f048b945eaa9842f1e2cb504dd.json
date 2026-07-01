@@ -1,8 +1,0 @@
-{
-    "id": "2d3bb5f0-48b9-45ea-a984-2f1e2cb504dd",
-    "type": "documentation",
-    "description": "Since Amazon Linux 2 (AL2) will reach its end-of-life (EOL) and stop receiving security updates on June 30, 2026, Cloud9 will remove AL2 from AMI options in public API create-environment-ec2.",
-    "modules": [
-        "service/cloud9"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "b0b5b9a1-7bb0-4e2b-9f3e-fcc719fdab96",
-    "type": "feature",
-    "description": "Adds support for integer-second duration normalization and the option to disable explicit weighted prediction.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

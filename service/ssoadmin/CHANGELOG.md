@@ -1,3 +1,8 @@
+# v1.40.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-06-30)
 
 * **Feature**: AWS IAM Identity Center now returns PrimaryRegion and Regions in the ListInstances response, providing information about replicated instances.

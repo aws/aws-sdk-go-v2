@@ -1,3 +1,9 @@
+# v1.94.0 (2026-07-01)
+
+* **Feature**: Adds support for integer-second duration normalization and the option to disable explicit weighted prediction.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.2 (2026-06-29)
 
 * No change notes available for this release.

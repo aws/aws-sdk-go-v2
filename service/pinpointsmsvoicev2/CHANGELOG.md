@@ -1,3 +1,8 @@
+# v1.30.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2026-06-29)
 
 * **Feature**: This launch is an expansion of our Q1 RCS for business launch where we will release an API that supports rich media and interactive messaging elements.

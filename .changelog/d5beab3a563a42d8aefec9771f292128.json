@@ -1,8 +1,0 @@
-{
-    "id": "d5beab3a-563a-42d8-aefe-c9771f292128",
-    "type": "bugfix",
-    "description": "Fix Transfer Manager error logic to preserve the first error found",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}

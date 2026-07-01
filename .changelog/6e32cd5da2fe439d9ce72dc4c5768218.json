@@ -1,8 +1,0 @@
-{
-    "id": "6e32cd5d-a2fe-439d-9ce7-2dc4c5768218",
-    "type": "documentation",
-    "description": "The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs.",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

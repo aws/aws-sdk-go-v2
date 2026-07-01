@@ -1,3 +1,31 @@
+# Release (2026-07-01)
+
+## General Highlights
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.2.13](feature/s3/transfermanager/CHANGELOG.md#v0213-2026-07-01)
+  * **Bug Fix**: Fix Transfer Manager error logic to preserve the first error found
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.17.0](service/artifact/CHANGELOG.md#v1170-2026-07-01)
+  * **Feature**: Add support for Assurance Assistant APIs for managing compliance inquiries along with tagging features.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.34.8](service/cloud9/CHANGELOG.md#v1348-2026-07-01)
+  * **Documentation**: Since Amazon Linux 2 (AL2) will reach its end-of-life (EOL) and stop receiving security updates on June 30, 2026, Cloud9 will remove AL2 from AMI options in public API create-environment-ec2.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.179.0](service/connect/CHANGELOG.md#v11790-2026-07-01)
+  * **Feature**: Adds a new Amazon Connect Service API, SendOutboundWebNotification, that delivers web notifications to end-customer chat widget sessions. Callable only by the Amazon Connect Outbound Campaigns service principal.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.311.0](service/ec2/CHANGELOG.md#v13110-2026-07-01)
+  * **Feature**: Use declarative policies to enable VPC Encryption Controls across your organization or select accounts. Added AMD SEV-SNP support for EC2 Dedicated Hosts. Managed resource visibility settings control whether AWS-provisioned resources in your account appear in console views and API list operations.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.12.0](service/gameliftstreams/CHANGELOG.md#v1120-2026-07-01)
+  * **Feature**: Added CreateStreamSessionAdminShell API operation to enable customers to establish secure terminal connections to the live runtime environment of streaming sessions for troubleshooting purposes.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.37.5](service/marketplacemetering/CHANGELOG.md#v1375-2026-07-01)
+  * **Documentation**: The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.94.0](service/mediaconvert/CHANGELOG.md#v1940-2026-07-01)
+  * **Feature**: Adds support for integer-second duration normalization and the option to disable explicit weighted prediction.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.73.0](service/opensearch/CHANGELOG.md#v1730-2026-07-01)
+  * **Feature**: To create a Mustang domain via the AWS CLI, you must pass EngineMode OPTIMIZED (along with UseCase OBSERVABILITY or MIXED)  without it, the domain defaults to a regular (GENERAL) domain. Also this release includes Insights Feedback API which user can use to provide feedback for Insight API.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.116.0](service/quicksight/CHANGELOG.md#v11160-2026-07-01)
+  * **Feature**: Adding support for FileSource PhysicalTables.  This adds support for datasets with file sources.
+
 # Release (2026-06-30)
 
 ## Module Highlights

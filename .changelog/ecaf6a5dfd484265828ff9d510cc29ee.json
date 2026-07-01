@@ -1,8 +1,0 @@
-{
-    "id": "ecaf6a5d-fd48-4265-828f-f9d510cc29ee",
-    "type": "feature",
-    "description": "Adds a new Amazon Connect Service API, SendOutboundWebNotification, that delivers web notifications to end-customer chat widget sessions. Callable only by the Amazon Connect Outbound Campaigns service principal.",
-    "modules": [
-        "service/connect"
-    ]
-}
