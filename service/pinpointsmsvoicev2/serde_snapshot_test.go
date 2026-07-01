@@ -1189,6 +1189,33 @@ func TestSerdeCheckSnapshot_DeleteRcsAgent(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_DeleteRcsMessageSpendLimitOverride(t *testing.T) {
+	input := &DeleteRcsMessageSpendLimitOverrideInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRcsMessageSpendLimitOverride(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRcsMessageSpendLimitOverride"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_DeleteRegistration(t *testing.T) {
 	input := &DeleteRegistrationInput{
 		RegistrationId: ptr.String("__RegistrationId__"),
@@ -3312,6 +3339,76 @@ func TestSerdeCheckSnapshot_SendNotifyVoiceMessage(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_SendRcsMessage(t *testing.T) {
+	input := &SendRcsMessageInput{
+		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+		OriginationIdentity:    ptr.String("__OriginationIdentity__"),
+		RcsMessageContent: &types.RcsMessageContent{
+			Content: &types.RcsContentMemberTextMessage{
+				Value: types.RcsTextMessage{
+					Body: ptr.String("__Body__"),
+				},
+			},
+			Suggestions: []types.RcsSuggestedAction{
+				&types.RcsSuggestedActionMemberReply{
+					Value: types.RcsReplyAction{
+						Text:         ptr.String("__Text__"),
+						PostbackData: ptr.String("__PostbackData__"),
+					},
+				},
+				&types.RcsSuggestedActionMemberReply{
+					Value: types.RcsReplyAction{
+						Text:         ptr.String("__Text__"),
+						PostbackData: ptr.String("__PostbackData__"),
+					},
+				},
+			},
+		},
+		TimeToLive:         ptr.Int32(1),
+		MessageTrafficType: ptr.String("__MessageTrafficType__"),
+		FallbackConfiguration: &types.RcsFallbackConfiguration{
+			Channel:     types.RcsFallbackChannel("SMS"),
+			MessageBody: ptr.String("__MessageBody__"),
+			MediaUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OriginationIdentity: ptr.String("__OriginationIdentity__"),
+		},
+		ProtectConfigurationId: ptr.String("__ProtectConfigurationId__"),
+		ConfigurationSetName:   ptr.String("__ConfigurationSetName__"),
+		MaxPrice:               ptr.String("__MaxPrice__"),
+		DryRun:                 true,
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		MessageFeedbackEnabled: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendRcsMessage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendRcsMessage"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_SendTextMessage(t *testing.T) {
 	input := &SendTextMessageInput{
 		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
@@ -3570,6 +3667,35 @@ func TestSerdeCheckSnapshot_SetNotifyMessageSpendLimitOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetNotifyMessageSpendLimitOverride"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeCheckSnapshot_SetRcsMessageSpendLimitOverride(t *testing.T) {
+	input := &SetRcsMessageSpendLimitOverrideInput{
+		MonthlyLimit: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SetRcsMessageSpendLimitOverride(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetRcsMessageSpendLimitOverride"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -3968,6 +4094,13 @@ func TestSerdeCheckSnapshot_UpdateRcsAgent(t *testing.T) {
 		TwoWayChannelArn:          ptr.String("__TwoWayChannelArn__"),
 		TwoWayChannelRole:         ptr.String("__TwoWayChannelRole__"),
 		TwoWayEnabled:             ptr.Bool(true),
+		TwoWayMediaS3BucketName:   ptr.String("__TwoWayMediaS3BucketName__"),
+		TwoWayMediaS3KeyPrefix:    ptr.String("__TwoWayMediaS3KeyPrefix__"),
+		TwoWayMediaS3Role:         ptr.String("__TwoWayMediaS3Role__"),
+		TwoWayRcsEventsEnabled: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5055,6 +5188,33 @@ func TestSerdeUpdateSnapshot_DeleteRcsAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRcsAgent"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_DeleteRcsMessageSpendLimitOverride(t *testing.T) {
+	input := &DeleteRcsMessageSpendLimitOverrideInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRcsMessageSpendLimitOverride(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRcsMessageSpendLimitOverride"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -7184,6 +7344,76 @@ func TestSerdeUpdateSnapshot_SendNotifyVoiceMessage(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_SendRcsMessage(t *testing.T) {
+	input := &SendRcsMessageInput{
+		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+		OriginationIdentity:    ptr.String("__OriginationIdentity__"),
+		RcsMessageContent: &types.RcsMessageContent{
+			Content: &types.RcsContentMemberTextMessage{
+				Value: types.RcsTextMessage{
+					Body: ptr.String("__Body__"),
+				},
+			},
+			Suggestions: []types.RcsSuggestedAction{
+				&types.RcsSuggestedActionMemberReply{
+					Value: types.RcsReplyAction{
+						Text:         ptr.String("__Text__"),
+						PostbackData: ptr.String("__PostbackData__"),
+					},
+				},
+				&types.RcsSuggestedActionMemberReply{
+					Value: types.RcsReplyAction{
+						Text:         ptr.String("__Text__"),
+						PostbackData: ptr.String("__PostbackData__"),
+					},
+				},
+			},
+		},
+		TimeToLive:         ptr.Int32(1),
+		MessageTrafficType: ptr.String("__MessageTrafficType__"),
+		FallbackConfiguration: &types.RcsFallbackConfiguration{
+			Channel:     types.RcsFallbackChannel("SMS"),
+			MessageBody: ptr.String("__MessageBody__"),
+			MediaUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OriginationIdentity: ptr.String("__OriginationIdentity__"),
+		},
+		ProtectConfigurationId: ptr.String("__ProtectConfigurationId__"),
+		ConfigurationSetName:   ptr.String("__ConfigurationSetName__"),
+		MaxPrice:               ptr.String("__MaxPrice__"),
+		DryRun:                 true,
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		MessageFeedbackEnabled: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendRcsMessage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendRcsMessage"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_SendTextMessage(t *testing.T) {
 	input := &SendTextMessageInput{
 		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
@@ -7442,6 +7672,35 @@ func TestSerdeUpdateSnapshot_SetNotifyMessageSpendLimitOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetNotifyMessageSpendLimitOverride"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestSerdeUpdateSnapshot_SetRcsMessageSpendLimitOverride(t *testing.T) {
+	input := &SetRcsMessageSpendLimitOverrideInput{
+		MonthlyLimit: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SetRcsMessageSpendLimitOverride(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetRcsMessageSpendLimitOverride"); err != nil {
 		if err != nil && !strings.Contains(err.Error(), "error: success") {
 			t.Fatal(err)
 		}
@@ -7840,6 +8099,13 @@ func TestSerdeUpdateSnapshot_UpdateRcsAgent(t *testing.T) {
 		TwoWayChannelArn:          ptr.String("__TwoWayChannelArn__"),
 		TwoWayChannelRole:         ptr.String("__TwoWayChannelRole__"),
 		TwoWayEnabled:             ptr.Bool(true),
+		TwoWayMediaS3BucketName:   ptr.String("__TwoWayMediaS3BucketName__"),
+		TwoWayMediaS3KeyPrefix:    ptr.String("__TwoWayMediaS3KeyPrefix__"),
+		TwoWayMediaS3Role:         ptr.String("__TwoWayMediaS3Role__"),
+		TwoWayRcsEventsEnabled: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

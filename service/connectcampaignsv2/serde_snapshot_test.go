@@ -1127,11 +1127,29 @@ func TestSerdeCheckSnapshot_PutProfileOutboundRequestBatch(t *testing.T) {
 				ClientToken:    ptr.String("__ClientToken__"),
 				ProfileId:      ptr.String("__ProfileId__"),
 				ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventTriggerContext: &types.EventTriggerContext{
+					SourceEvent: ptr.String("__SourceEvent__"),
+					ChannelContext: &types.ChannelContext{
+						WebNotificationContext: &types.WebNotificationContext{
+							SessionId: ptr.String("__SessionId__"),
+							BrowserId: ptr.String("__BrowserId__"),
+						},
+					},
+				},
 			},
 			{
 				ClientToken:    ptr.String("__ClientToken__"),
 				ProfileId:      ptr.String("__ProfileId__"),
 				ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventTriggerContext: &types.EventTriggerContext{
+					SourceEvent: ptr.String("__SourceEvent__"),
+					ChannelContext: &types.ChannelContext{
+						WebNotificationContext: &types.WebNotificationContext{
+							SessionId: ptr.String("__SessionId__"),
+							BrowserId: ptr.String("__BrowserId__"),
+						},
+					},
+				},
 			},
 		},
 	}
@@ -2734,11 +2752,29 @@ func TestSerdeUpdateSnapshot_PutProfileOutboundRequestBatch(t *testing.T) {
 				ClientToken:    ptr.String("__ClientToken__"),
 				ProfileId:      ptr.String("__ProfileId__"),
 				ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventTriggerContext: &types.EventTriggerContext{
+					SourceEvent: ptr.String("__SourceEvent__"),
+					ChannelContext: &types.ChannelContext{
+						WebNotificationContext: &types.WebNotificationContext{
+							SessionId: ptr.String("__SessionId__"),
+							BrowserId: ptr.String("__BrowserId__"),
+						},
+					},
+				},
 			},
 			{
 				ClientToken:    ptr.String("__ClientToken__"),
 				ProfileId:      ptr.String("__ProfileId__"),
 				ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventTriggerContext: &types.EventTriggerContext{
+					SourceEvent: ptr.String("__SourceEvent__"),
+					ChannelContext: &types.ChannelContext{
+						WebNotificationContext: &types.WebNotificationContext{
+							SessionId: ptr.String("__SessionId__"),
+							BrowserId: ptr.String("__BrowserId__"),
+						},
+					},
+				},
 			},
 		},
 	}

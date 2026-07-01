@@ -1,0 +1,5 @@
+POST /contact/start-conversational-analytics-job/__InstanceId__/__ContactId__
+
+Content-Type: application/json
+
+{"AnalyticsConfiguration":{"LanguageConfiguration":{"LanguageLocale":"__LanguageLocale__"},"RedactionConfiguration":{"Behavior":"Enable","Entities":["__Member__","__Member__"],"MaskMode":"PII","Policy":"None"},"RulesConfiguration":{"Behavior":"Enable"},"SentimentConfiguration":{"Behavior":"Enable"},"SummaryConfiguration":{"SummaryModes":["PostContact","PostContact"]}},"AnalyticsModes":["PostContact","PostContact"],"ClientToken":"__ClientToken__"}

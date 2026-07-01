@@ -5,4 +5,4 @@ Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 X-Amzn-Query-Mode: true
 
-£mDashboardNameq__DashboardName__mDashboardBodyq__DashboardBody__dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__
+£dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__mDashboardNameq__DashboardName__mDashboardBodyq__DashboardBody__

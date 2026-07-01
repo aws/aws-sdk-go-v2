@@ -1,0 +1,5 @@
+POST /v1/compliance-inquiry/create
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","inquiryContent":{"query":"__InquiryContentMemberQuery__"},"name":"__Name__","supportMode":"AI_ONLY","tags":{"key0":"__Value__"}}

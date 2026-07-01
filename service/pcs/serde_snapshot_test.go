@@ -838,6 +838,9 @@ func TestSerdeCheckSnapshot_UpdateCluster(t *testing.T) {
 				Mode: types.SlurmRestMode("STANDARD"),
 			},
 		},
+		Scheduler: &types.UpdateSchedulerRequest{
+			Version: ptr.String("__Version__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1632,6 +1635,9 @@ func TestSerdeUpdateSnapshot_UpdateCluster(t *testing.T) {
 			SlurmRest: &types.UpdateSlurmRestRequest{
 				Mode: types.SlurmRestMode("STANDARD"),
 			},
+		},
+		Scheduler: &types.UpdateSchedulerRequest{
+			Version: ptr.String("__Version__"),
 		},
 	}
 	body := &bytes.Buffer{}

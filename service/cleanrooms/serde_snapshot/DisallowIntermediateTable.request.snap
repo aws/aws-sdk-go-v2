@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/disallowIntermediateTable
+
+Content-Type: application/json
+
+{"includeDescendants":true,"intermediateTableName":"__IntermediateTableName__"}

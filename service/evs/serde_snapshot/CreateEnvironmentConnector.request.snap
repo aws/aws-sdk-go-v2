@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: AmazonElasticVMwareService.CreateEnvironmentConnector
 
-{"applianceFqdn":"__ApplianceFqdn__","clientToken":"__ClientToken__","environmentId":"__EnvironmentId__","secretIdentifier":"__SecretIdentifier__","type":"VCENTER"}
+{"applianceFqdn":"__ApplianceFqdn__","clientToken":"__ClientToken__","environmentId":"__EnvironmentId__","secretIdentifier":"__SecretIdentifier__","type":"OPERATIONS_MANAGER"}

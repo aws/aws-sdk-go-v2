@@ -267,16 +267,6 @@ func TestSerdeCheckSnapshot_CreateEnvironment(t *testing.T) {
 		ServiceAccessSubnetId: ptr.String("__ServiceAccessSubnetId__"),
 		VcfVersion:            types.VcfVersion("VCF-5.2.1"),
 		TermsAccepted:         ptr.Bool(true),
-		LicenseInfo: []types.LicenseInfo{
-			{
-				SolutionKey: ptr.String("__SolutionKey__"),
-				VsanKey:     ptr.String("__VsanKey__"),
-			},
-			{
-				SolutionKey: ptr.String("__SolutionKey__"),
-				VsanKey:     ptr.String("__VsanKey__"),
-			},
-		},
 		InitialVlans: &types.InitialVlans{
 			VmkManagement: &types.InitialVlanInfo{
 				Cidr: ptr.String("__Cidr__"),
@@ -311,6 +301,22 @@ func TestSerdeCheckSnapshot_CreateEnvironment(t *testing.T) {
 			IsHcxPublic:     true,
 			HcxNetworkAclId: ptr.String("__HcxNetworkAclId__"),
 		},
+		ConnectivityInfo: &types.ConnectivityInfo{
+			PrivateRouteServerPeerings: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		LicenseInfo: []types.LicenseInfo{
+			{
+				SolutionKey: ptr.String("__SolutionKey__"),
+				VsanKey:     ptr.String("__VsanKey__"),
+			},
+			{
+				SolutionKey: ptr.String("__SolutionKey__"),
+				VsanKey:     ptr.String("__VsanKey__"),
+			},
+		},
 		Hosts: []types.HostInfoForCreate{
 			{
 				HostName:         ptr.String("__HostName__"),
@@ -325,12 +331,6 @@ func TestSerdeCheckSnapshot_CreateEnvironment(t *testing.T) {
 				InstanceType:     types.InstanceType("i4i.metal"),
 				PlacementGroupId: ptr.String("__PlacementGroupId__"),
 				DedicatedHostId:  ptr.String("__DedicatedHostId__"),
-			},
-		},
-		ConnectivityInfo: &types.ConnectivityInfo{
-			PrivateRouteServerPeerings: []string{
-				"__Member__",
-				"__Member__",
 			},
 		},
 		VcfHostnames: &types.VcfHostnames{
@@ -375,7 +375,7 @@ func TestSerdeCheckSnapshot_CreateEnvironmentConnector(t *testing.T) {
 	input := &CreateEnvironmentConnectorInput{
 		ClientToken:      ptr.String("__ClientToken__"),
 		EnvironmentId:    ptr.String("__EnvironmentId__"),
-		Type:             types.ConnectorType("VCENTER"),
+		Type:             types.ConnectorType("OPERATIONS_MANAGER"),
 		ApplianceFqdn:    ptr.String("__ApplianceFqdn__"),
 		SecretIdentifier: ptr.String("__SecretIdentifier__"),
 	}
@@ -1060,16 +1060,6 @@ func TestSerdeUpdateSnapshot_CreateEnvironment(t *testing.T) {
 		ServiceAccessSubnetId: ptr.String("__ServiceAccessSubnetId__"),
 		VcfVersion:            types.VcfVersion("VCF-5.2.1"),
 		TermsAccepted:         ptr.Bool(true),
-		LicenseInfo: []types.LicenseInfo{
-			{
-				SolutionKey: ptr.String("__SolutionKey__"),
-				VsanKey:     ptr.String("__VsanKey__"),
-			},
-			{
-				SolutionKey: ptr.String("__SolutionKey__"),
-				VsanKey:     ptr.String("__VsanKey__"),
-			},
-		},
 		InitialVlans: &types.InitialVlans{
 			VmkManagement: &types.InitialVlanInfo{
 				Cidr: ptr.String("__Cidr__"),
@@ -1104,6 +1094,22 @@ func TestSerdeUpdateSnapshot_CreateEnvironment(t *testing.T) {
 			IsHcxPublic:     true,
 			HcxNetworkAclId: ptr.String("__HcxNetworkAclId__"),
 		},
+		ConnectivityInfo: &types.ConnectivityInfo{
+			PrivateRouteServerPeerings: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		LicenseInfo: []types.LicenseInfo{
+			{
+				SolutionKey: ptr.String("__SolutionKey__"),
+				VsanKey:     ptr.String("__VsanKey__"),
+			},
+			{
+				SolutionKey: ptr.String("__SolutionKey__"),
+				VsanKey:     ptr.String("__VsanKey__"),
+			},
+		},
 		Hosts: []types.HostInfoForCreate{
 			{
 				HostName:         ptr.String("__HostName__"),
@@ -1118,12 +1124,6 @@ func TestSerdeUpdateSnapshot_CreateEnvironment(t *testing.T) {
 				InstanceType:     types.InstanceType("i4i.metal"),
 				PlacementGroupId: ptr.String("__PlacementGroupId__"),
 				DedicatedHostId:  ptr.String("__DedicatedHostId__"),
-			},
-		},
-		ConnectivityInfo: &types.ConnectivityInfo{
-			PrivateRouteServerPeerings: []string{
-				"__Member__",
-				"__Member__",
 			},
 		},
 		VcfHostnames: &types.VcfHostnames{
@@ -1168,7 +1168,7 @@ func TestSerdeUpdateSnapshot_CreateEnvironmentConnector(t *testing.T) {
 	input := &CreateEnvironmentConnectorInput{
 		ClientToken:      ptr.String("__ClientToken__"),
 		EnvironmentId:    ptr.String("__EnvironmentId__"),
-		Type:             types.ConnectorType("VCENTER"),
+		Type:             types.ConnectorType("OPERATIONS_MANAGER"),
 		ApplianceFqdn:    ptr.String("__ApplianceFqdn__"),
 		SecretIdentifier: ptr.String("__SecretIdentifier__"),
 	}

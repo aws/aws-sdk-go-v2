@@ -1719,6 +1719,7 @@ func TestSerdeCheckSnapshot_TestTelemetryPipeline(t *testing.T) {
 		Configuration: &types.TelemetryPipelineConfiguration{
 			Body: ptr.String("__Body__"),
 		},
+		SignalType: types.SignalType("LOG"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3967,6 +3968,7 @@ func TestSerdeUpdateSnapshot_TestTelemetryPipeline(t *testing.T) {
 		Configuration: &types.TelemetryPipelineConfiguration{
 			Body: ptr.String("__Body__"),
 		},
+		SignalType: types.SignalType("LOG"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

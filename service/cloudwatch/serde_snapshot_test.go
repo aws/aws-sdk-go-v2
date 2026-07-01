@@ -1760,6 +1760,91 @@ func TestSerdeCheckSnapshot_PutInsightRule(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_PutLogAlarm(t *testing.T) {
+	input := &PutLogAlarmInput{
+		AlarmName:        ptr.String("__AlarmName__"),
+		AlarmDescription: ptr.String("__AlarmDescription__"),
+		ScheduledQueryConfiguration: &types.ScheduledQueryConfiguration{
+			QueryString: ptr.String("__QueryString__"),
+			LogGroupIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			QueryARN:              ptr.String("__QueryARN__"),
+			ScheduledQueryRoleARN: ptr.String("__ScheduledQueryRoleARN__"),
+			ScheduleConfiguration: &types.ScheduleConfiguration{
+				ScheduleExpression: ptr.String("__ScheduleExpression__"),
+				StartTimeOffset:    ptr.Int64(1),
+				EndTimeOffset:      ptr.Int64(1),
+			},
+			AggregationExpression: ptr.String("__AggregationExpression__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ActionLogLineCount:   ptr.Int32(1),
+		ActionLogLineRoleArn: ptr.String("__ActionLogLineRoleArn__"),
+		ActionsEnabled:       ptr.Bool(true),
+		OKActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AlarmActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InsufficientDataActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryResultsToEvaluate: ptr.Int32(1),
+		QueryResultsToAlarm:    ptr.Int32(1),
+		Threshold:              ptr.Float64(1.0),
+		ComparisonOperator:     types.ComparisonOperator("GreaterThanOrEqualToThreshold"),
+		TreatMissingData:       ptr.String("__TreatMissingData__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutLogAlarm(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutLogAlarm"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeCheckSnapshot_PutManagedInsightRules(t *testing.T) {
 	input := &PutManagedInsightRulesInput{
 		ManagedRules: []types.ManagedRule{
@@ -1924,6 +2009,11 @@ func TestSerdeCheckSnapshot_PutMetricAlarm(t *testing.T) {
 			},
 		},
 		ThresholdMetricId: ptr.String("__ThresholdMetricId__"),
+		EvaluationWindow: &types.EvaluationWindowMemberWallClockWindow{
+			Value: types.WallClockWindow{
+				Timezone: ptr.String("__Timezone__"),
+			},
+		},
 		EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 			Value: types.AlarmPromQLCriteria{
 				Query:          ptr.String("__Query__"),
@@ -4100,6 +4190,91 @@ func TestSerdeUpdateSnapshot_PutInsightRule(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_PutLogAlarm(t *testing.T) {
+	input := &PutLogAlarmInput{
+		AlarmName:        ptr.String("__AlarmName__"),
+		AlarmDescription: ptr.String("__AlarmDescription__"),
+		ScheduledQueryConfiguration: &types.ScheduledQueryConfiguration{
+			QueryString: ptr.String("__QueryString__"),
+			LogGroupIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			QueryARN:              ptr.String("__QueryARN__"),
+			ScheduledQueryRoleARN: ptr.String("__ScheduledQueryRoleARN__"),
+			ScheduleConfiguration: &types.ScheduleConfiguration{
+				ScheduleExpression: ptr.String("__ScheduleExpression__"),
+				StartTimeOffset:    ptr.Int64(1),
+				EndTimeOffset:      ptr.Int64(1),
+			},
+			AggregationExpression: ptr.String("__AggregationExpression__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ActionLogLineCount:   ptr.Int32(1),
+		ActionLogLineRoleArn: ptr.String("__ActionLogLineRoleArn__"),
+		ActionsEnabled:       ptr.Bool(true),
+		OKActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AlarmActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InsufficientDataActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryResultsToEvaluate: ptr.Int32(1),
+		QueryResultsToAlarm:    ptr.Int32(1),
+		Threshold:              ptr.Float64(1.0),
+		ComparisonOperator:     types.ComparisonOperator("GreaterThanOrEqualToThreshold"),
+		TreatMissingData:       ptr.String("__TreatMissingData__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutLogAlarm(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !strings.Contains(err.Error(), "error: success") {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutLogAlarm"); err != nil {
+		if err != nil && !strings.Contains(err.Error(), "error: success") {
+			t.Fatal(err)
+		}
+	}
+}
+
 func TestSerdeUpdateSnapshot_PutManagedInsightRules(t *testing.T) {
 	input := &PutManagedInsightRulesInput{
 		ManagedRules: []types.ManagedRule{
@@ -4264,6 +4439,11 @@ func TestSerdeUpdateSnapshot_PutMetricAlarm(t *testing.T) {
 			},
 		},
 		ThresholdMetricId: ptr.String("__ThresholdMetricId__"),
+		EvaluationWindow: &types.EvaluationWindowMemberWallClockWindow{
+			Value: types.WallClockWindow{
+				Timezone: ptr.String("__Timezone__"),
+			},
+		},
 		EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 			Value: types.AlarmPromQLCriteria{
 				Query:          ptr.String("__Query__"),

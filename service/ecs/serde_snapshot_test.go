@@ -687,8 +687,13 @@ func TestSerdeCheckSnapshot_CreateService(t *testing.T) {
 		Role:            ptr.String("__Role__"),
 		DeploymentConfiguration: &types.DeploymentConfiguration{
 			DeploymentCircuitBreaker: &types.DeploymentCircuitBreaker{
-				Enable:   true,
-				Rollback: true,
+				Enable:             true,
+				Rollback:           true,
+				ResetOnHealthyTask: ptr.Bool(true),
+				ThresholdConfiguration: &types.ThresholdConfiguration{
+					Type:  types.ThresholdType("COUNT"),
+					Value: 1,
+				},
 			},
 			MaximumPercent:        ptr.Int32(1),
 			MinimumHealthyPercent: ptr.Int32(1),
@@ -5349,8 +5354,13 @@ func TestSerdeCheckSnapshot_UpdateService(t *testing.T) {
 		},
 		DeploymentConfiguration: &types.DeploymentConfiguration{
 			DeploymentCircuitBreaker: &types.DeploymentCircuitBreaker{
-				Enable:   true,
-				Rollback: true,
+				Enable:             true,
+				Rollback:           true,
+				ResetOnHealthyTask: ptr.Bool(true),
+				ThresholdConfiguration: &types.ThresholdConfiguration{
+					Type:  types.ThresholdType("COUNT"),
+					Value: 1,
+				},
 			},
 			MaximumPercent:        ptr.Int32(1),
 			MinimumHealthyPercent: ptr.Int32(1),
@@ -6349,8 +6359,13 @@ func TestSerdeUpdateSnapshot_CreateService(t *testing.T) {
 		Role:            ptr.String("__Role__"),
 		DeploymentConfiguration: &types.DeploymentConfiguration{
 			DeploymentCircuitBreaker: &types.DeploymentCircuitBreaker{
-				Enable:   true,
-				Rollback: true,
+				Enable:             true,
+				Rollback:           true,
+				ResetOnHealthyTask: ptr.Bool(true),
+				ThresholdConfiguration: &types.ThresholdConfiguration{
+					Type:  types.ThresholdType("COUNT"),
+					Value: 1,
+				},
 			},
 			MaximumPercent:        ptr.Int32(1),
 			MinimumHealthyPercent: ptr.Int32(1),
@@ -11011,8 +11026,13 @@ func TestSerdeUpdateSnapshot_UpdateService(t *testing.T) {
 		},
 		DeploymentConfiguration: &types.DeploymentConfiguration{
 			DeploymentCircuitBreaker: &types.DeploymentCircuitBreaker{
-				Enable:   true,
-				Rollback: true,
+				Enable:             true,
+				Rollback:           true,
+				ResetOnHealthyTask: ptr.Bool(true),
+				ThresholdConfiguration: &types.ThresholdConfiguration{
+					Type:  types.ThresholdType("COUNT"),
+					Value: 1,
+				},
 			},
 			MaximumPercent:        ptr.Int32(1),
 			MinimumHealthyPercent: ptr.Int32(1),

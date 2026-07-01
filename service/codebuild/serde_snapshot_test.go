@@ -736,6 +736,7 @@ func TestSerdeCheckSnapshot_CreateProject(t *testing.T) {
 					Message: ptr.String("__Message__"),
 				},
 			},
+			HostKernel: types.HostKernel("LINUX_KERNEL_4"),
 		},
 		ServiceRole:            ptr.String("__ServiceRole__"),
 		TimeoutInMinutes:       ptr.Int32(1),
@@ -2146,6 +2147,7 @@ func TestSerdeCheckSnapshot_StartBuild(t *testing.T) {
 			FleetArn: ptr.String("__FleetArn__"),
 		},
 		AutoRetryLimitOverride: ptr.Int32(1),
+		HostKernelOverride:     types.HostKernel("LINUX_KERNEL_4"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2815,6 +2817,7 @@ func TestSerdeCheckSnapshot_UpdateProject(t *testing.T) {
 					Message: ptr.String("__Message__"),
 				},
 			},
+			HostKernel: types.HostKernel("LINUX_KERNEL_4"),
 		},
 		ServiceRole:            ptr.String("__ServiceRole__"),
 		TimeoutInMinutes:       ptr.Int32(1),
@@ -3616,6 +3619,7 @@ func TestSerdeUpdateSnapshot_CreateProject(t *testing.T) {
 					Message: ptr.String("__Message__"),
 				},
 			},
+			HostKernel: types.HostKernel("LINUX_KERNEL_4"),
 		},
 		ServiceRole:            ptr.String("__ServiceRole__"),
 		TimeoutInMinutes:       ptr.Int32(1),
@@ -5026,6 +5030,7 @@ func TestSerdeUpdateSnapshot_StartBuild(t *testing.T) {
 			FleetArn: ptr.String("__FleetArn__"),
 		},
 		AutoRetryLimitOverride: ptr.Int32(1),
+		HostKernelOverride:     types.HostKernel("LINUX_KERNEL_4"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5695,6 +5700,7 @@ func TestSerdeUpdateSnapshot_UpdateProject(t *testing.T) {
 					Message: ptr.String("__Message__"),
 				},
 			},
+			HostKernel: types.HostKernel("LINUX_KERNEL_4"),
 		},
 		ServiceRole:            ptr.String("__ServiceRole__"),
 		TimeoutInMinutes:       ptr.Int32(1),

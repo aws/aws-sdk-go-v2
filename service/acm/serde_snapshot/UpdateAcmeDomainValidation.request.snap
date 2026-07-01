@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.UpdateAcmeDomainValidation
+
+{"AcmeDomainValidationArn":"__AcmeDomainValidationArn__","PrevalidationOptions":{"DnsPrevalidation":{"DomainScope":{"ExactDomain":"ENABLED","Subdomains":"ENABLED","Wildcards":"ENABLED"},"HostedZoneId":"__HostedZoneId__"}}}
