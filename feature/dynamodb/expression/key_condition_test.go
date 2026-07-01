@@ -338,12 +338,71 @@ func TestKeyAnd(t *testing.T) {
 			},
 		},
 		{
+			name:  "multi-attribute key and",
+			input: Key("foo").Equal(Value(5)).And(Key("bar").Equal(Value("baz"))).And(Key("qux").BeginsWith("corge")),
+			expectedNode: exprNode{
+				children: []exprNode{
+					{
+						children: []exprNode{
+							{
+								names:   []string{"foo"},
+								fmtExpr: "$n",
+							},
+							{
+								values: []types.AttributeValue{
+									&types.AttributeValueMemberN{Value: "5"},
+								},
+								fmtExpr: "$v",
+							},
+						},
+						fmtExpr: "$c = $c",
+					},
+					{
+						children: []exprNode{
+							{
+								names:   []string{"bar"},
+								fmtExpr: "$n",
+							},
+							{
+								values: []types.AttributeValue{
+									&types.AttributeValueMemberS{Value: "baz"},
+								},
+								fmtExpr: "$v",
+							},
+						},
+						fmtExpr: "$c = $c",
+					},
+					{
+						children: []exprNode{
+							{
+								names:   []string{"qux"},
+								fmtExpr: "$n",
+							},
+							{
+								values: []types.AttributeValue{
+									&types.AttributeValueMemberS{Value: "corge"},
+								},
+								fmtExpr: "$v",
+							},
+						},
+						fmtExpr: "begins_with ($c, $c)",
+					},
+				},
+				fmtExpr: "($c) AND ($c) AND ($c)",
+			},
+		},
+		{
+			name:  "multi-attribute non terminal condition is not equal",
+			input: Key("foo").Equal(Value(5)).And(Key("bar").BeginsWith("baz")).And(Key("qux").Equal(Value("corge"))),
+			err:   invalidKeyConditionFormat,
+		},
+		{
 			name:  "first condition is not equal",
 			input: Key("foo").LessThan(Value(5)).And(Key("bar").BeginsWith("baz")),
 			err:   invalidKeyConditionFormat,
 		},
 		{
-			name:  "more then one condition on key",
+			name:  "nested key conditions",
 			input: Key("foo").Equal(Value(5)).And(Key("bar").Equal(Value(1)).And(Key("baz").BeginsWith("yar"))),
 			err:   invalidKeyConditionFormat,
 		},
