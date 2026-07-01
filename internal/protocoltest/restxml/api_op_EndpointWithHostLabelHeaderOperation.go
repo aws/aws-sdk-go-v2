@@ -87,9 +87,6 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -117,7 +114,7 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 	if err = addOpEndpointWithHostLabelHeaderOperationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EndpointWithHostLabelHeaderOperation"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EndpointWithHostLabelHeaderOperation", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

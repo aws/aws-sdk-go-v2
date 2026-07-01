@@ -118,9 +118,6 @@ func (c *Client) addOperationUpdateComputeNodeGroupMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -148,7 +145,7 @@ func (c *Client) addOperationUpdateComputeNodeGroupMiddlewares(stack *middleware
 	if err = addOpUpdateComputeNodeGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateComputeNodeGroup"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateComputeNodeGroup", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

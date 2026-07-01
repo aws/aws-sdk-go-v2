@@ -66,9 +66,6 @@ func (c *Client) addOperationDeleteDatastoreMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -93,7 +90,7 @@ func (c *Client) addOperationDeleteDatastoreMiddlewares(stack *middleware.Stack,
 	if err = addOpDeleteDatastoreValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDatastore"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDatastore", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

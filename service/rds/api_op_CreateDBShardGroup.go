@@ -190,9 +190,6 @@ func (c *Client) addOperationCreateDBShardGroupMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -217,7 +214,7 @@ func (c *Client) addOperationCreateDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addOpCreateDBShardGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateDBShardGroup"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateDBShardGroup", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

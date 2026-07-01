@@ -51,9 +51,6 @@ func (c *Client) addOperationDeleteOpsMetadataMiddlewares(stack *middleware.Stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -78,7 +75,7 @@ func (c *Client) addOperationDeleteOpsMetadataMiddlewares(stack *middleware.Stac
 	if err = addOpDeleteOpsMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteOpsMetadata"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteOpsMetadata", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -180,9 +180,6 @@ func (c *Client) addOperationStartNotebookRunMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -210,7 +207,7 @@ func (c *Client) addOperationStartNotebookRunMiddlewares(stack *middleware.Stack
 	if err = addOpStartNotebookRunValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartNotebookRun"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartNotebookRun", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

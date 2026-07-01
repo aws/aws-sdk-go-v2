@@ -122,9 +122,6 @@ func (c *Client) addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -155,7 +152,7 @@ func (c *Client) addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, o
 	if err = addOpPutJobTaggingValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutJobTagging"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutJobTagging", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

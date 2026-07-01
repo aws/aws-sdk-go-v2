@@ -77,9 +77,6 @@ func (c *Client) addOperationPutConfiguredAudienceModelPolicyMiddlewares(stack *
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -104,7 +101,7 @@ func (c *Client) addOperationPutConfiguredAudienceModelPolicyMiddlewares(stack *
 	if err = addOpPutConfiguredAudienceModelPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutConfiguredAudienceModelPolicy"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutConfiguredAudienceModelPolicy", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

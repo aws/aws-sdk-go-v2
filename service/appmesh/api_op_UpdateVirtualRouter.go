@@ -81,9 +81,6 @@ func (c *Client) addOperationUpdateVirtualRouterMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -111,7 +108,7 @@ func (c *Client) addOperationUpdateVirtualRouterMiddlewares(stack *middleware.St
 	if err = addOpUpdateVirtualRouterValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateVirtualRouter"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateVirtualRouter", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

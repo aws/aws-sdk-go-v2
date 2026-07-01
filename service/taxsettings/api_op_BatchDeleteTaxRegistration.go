@@ -65,9 +65,6 @@ func (c *Client) addOperationBatchDeleteTaxRegistrationMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,7 +89,7 @@ func (c *Client) addOperationBatchDeleteTaxRegistrationMiddlewares(stack *middle
 	if err = addOpBatchDeleteTaxRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchDeleteTaxRegistration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchDeleteTaxRegistration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -68,9 +68,6 @@ func (c *Client) addOperationPurchaseCapacityBlockExtensionMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -95,7 +92,7 @@ func (c *Client) addOperationPurchaseCapacityBlockExtensionMiddlewares(stack *mi
 	if err = addOpPurchaseCapacityBlockExtensionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PurchaseCapacityBlockExtension"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PurchaseCapacityBlockExtension", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

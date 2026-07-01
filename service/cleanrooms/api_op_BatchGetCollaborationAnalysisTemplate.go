@@ -73,9 +73,6 @@ func (c *Client) addOperationBatchGetCollaborationAnalysisTemplateMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -100,7 +97,7 @@ func (c *Client) addOperationBatchGetCollaborationAnalysisTemplateMiddlewares(st
 	if err = addOpBatchGetCollaborationAnalysisTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchGetCollaborationAnalysisTemplate"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchGetCollaborationAnalysisTemplate", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

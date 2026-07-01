@@ -63,9 +63,6 @@ func (c *Client) addOperationDeleteSMSSandboxPhoneNumberMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -90,7 +87,7 @@ func (c *Client) addOperationDeleteSMSSandboxPhoneNumberMiddlewares(stack *middl
 	if err = addOpDeleteSMSSandboxPhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSMSSandboxPhoneNumber"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSMSSandboxPhoneNumber", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

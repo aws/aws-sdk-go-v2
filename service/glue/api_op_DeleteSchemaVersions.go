@@ -84,9 +84,6 @@ func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -111,7 +108,7 @@ func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.S
 	if err = addOpDeleteSchemaVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSchemaVersions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSchemaVersions", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

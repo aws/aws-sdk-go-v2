@@ -78,9 +78,6 @@ func (c *Client) addOperationDescribeMultiplexProgramMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -105,7 +102,7 @@ func (c *Client) addOperationDescribeMultiplexProgramMiddlewares(stack *middlewa
 	if err = addOpDescribeMultiplexProgramValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeMultiplexProgram"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeMultiplexProgram", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

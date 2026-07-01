@@ -64,9 +64,6 @@ func (c *Client) addOperationCreateBlueprintVersionMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -94,7 +91,7 @@ func (c *Client) addOperationCreateBlueprintVersionMiddlewares(stack *middleware
 	if err = addOpCreateBlueprintVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateBlueprintVersion"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateBlueprintVersion", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -70,9 +70,6 @@ func (c *Client) addOperationListConfiguredModelAlgorithmAssociationsMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -97,7 +94,7 @@ func (c *Client) addOperationListConfiguredModelAlgorithmAssociationsMiddlewares
 	if err = addOpListConfiguredModelAlgorithmAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListConfiguredModelAlgorithmAssociations"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListConfiguredModelAlgorithmAssociations", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -83,9 +83,6 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -110,7 +107,7 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 	if err = addOpDescribeReplicationTaskAssessmentRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeReplicationTaskAssessmentRuns"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeReplicationTaskAssessmentRuns", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

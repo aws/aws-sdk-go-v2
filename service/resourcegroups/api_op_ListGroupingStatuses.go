@@ -83,9 +83,6 @@ func (c *Client) addOperationListGroupingStatusesMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -110,7 +107,7 @@ func (c *Client) addOperationListGroupingStatusesMiddlewares(stack *middleware.S
 	if err = addOpListGroupingStatusesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListGroupingStatuses"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListGroupingStatuses", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

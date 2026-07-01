@@ -62,9 +62,6 @@ func (c *Client) addOperationUpdateSubscriberNotificationMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -89,7 +86,7 @@ func (c *Client) addOperationUpdateSubscriberNotificationMiddlewares(stack *midd
 	if err = addOpUpdateSubscriberNotificationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateSubscriberNotification"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateSubscriberNotification", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

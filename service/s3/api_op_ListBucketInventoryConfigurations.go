@@ -163,9 +163,6 @@ func (c *Client) addOperationListBucketInventoryConfigurationsMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -196,7 +193,7 @@ func (c *Client) addOperationListBucketInventoryConfigurationsMiddlewares(stack 
 	if err = addOpListBucketInventoryConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListBucketInventoryConfigurations"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListBucketInventoryConfigurations", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

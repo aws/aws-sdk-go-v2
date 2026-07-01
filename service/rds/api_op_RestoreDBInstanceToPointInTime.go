@@ -689,9 +689,6 @@ func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -716,7 +713,7 @@ func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *mi
 	if err = addOpRestoreDBInstanceToPointInTimeValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RestoreDBInstanceToPointInTime"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RestoreDBInstanceToPointInTime", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

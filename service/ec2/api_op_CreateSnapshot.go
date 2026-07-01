@@ -239,9 +239,6 @@ func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -266,7 +263,7 @@ func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addOpCreateSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateSnapshot"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateSnapshot", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

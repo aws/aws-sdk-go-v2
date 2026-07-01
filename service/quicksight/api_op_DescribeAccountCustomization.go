@@ -130,9 +130,6 @@ func (c *Client) addOperationDescribeAccountCustomizationMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -157,7 +154,7 @@ func (c *Client) addOperationDescribeAccountCustomizationMiddlewares(stack *midd
 	if err = addOpDescribeAccountCustomizationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeAccountCustomization"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeAccountCustomization", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

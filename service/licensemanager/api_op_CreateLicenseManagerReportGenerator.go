@@ -90,9 +90,6 @@ func (c *Client) addOperationCreateLicenseManagerReportGeneratorMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -117,7 +114,7 @@ func (c *Client) addOperationCreateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addOpCreateLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateLicenseManagerReportGenerator"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateLicenseManagerReportGenerator", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

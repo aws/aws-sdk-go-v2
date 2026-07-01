@@ -64,9 +64,6 @@ func (c *Client) addOperationCreateAuthenticationProfileMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,7 +88,7 @@ func (c *Client) addOperationCreateAuthenticationProfileMiddlewares(stack *middl
 	if err = addOpCreateAuthenticationProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateAuthenticationProfile"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateAuthenticationProfile", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -137,9 +137,6 @@ func (c *Client) addOperationListEntitiesForPolicyMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -164,7 +161,7 @@ func (c *Client) addOperationListEntitiesForPolicyMiddlewares(stack *middleware.
 	if err = addOpListEntitiesForPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListEntitiesForPolicy"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListEntitiesForPolicy", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

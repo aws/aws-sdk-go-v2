@@ -88,9 +88,6 @@ func (c *Client) addOperationContinueServiceDeploymentMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -115,7 +112,7 @@ func (c *Client) addOperationContinueServiceDeploymentMiddlewares(stack *middlew
 	if err = addOpContinueServiceDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ContinueServiceDeployment"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ContinueServiceDeployment", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

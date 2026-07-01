@@ -60,9 +60,6 @@ func (c *Client) addOperationDeleteInferenceExperimentMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -87,7 +84,7 @@ func (c *Client) addOperationDeleteInferenceExperimentMiddlewares(stack *middlew
 	if err = addOpDeleteInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteInferenceExperiment"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteInferenceExperiment", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

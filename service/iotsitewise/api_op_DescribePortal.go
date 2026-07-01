@@ -146,9 +146,6 @@ func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -176,7 +173,7 @@ func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, 
 	if err = addOpDescribePortalValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribePortal"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribePortal", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

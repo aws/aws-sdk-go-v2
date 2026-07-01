@@ -88,9 +88,6 @@ func (c *Client) addOperationListAllowedRepositoriesForGroupMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -115,7 +112,7 @@ func (c *Client) addOperationListAllowedRepositoriesForGroupMiddlewares(stack *m
 	if err = addOpListAllowedRepositoriesForGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAllowedRepositoriesForGroup"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAllowedRepositoriesForGroup", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

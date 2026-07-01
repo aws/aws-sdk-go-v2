@@ -91,9 +91,6 @@ func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -118,7 +115,7 @@ func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Sta
 	if err = addOpUpdateLoginProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateLoginProfile"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateLoginProfile", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

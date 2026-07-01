@@ -53,9 +53,6 @@ func (c *Client) addOperationDeleteAudienceGenerationJobMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -80,7 +77,7 @@ func (c *Client) addOperationDeleteAudienceGenerationJobMiddlewares(stack *middl
 	if err = addOpDeleteAudienceGenerationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteAudienceGenerationJob"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteAudienceGenerationJob", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

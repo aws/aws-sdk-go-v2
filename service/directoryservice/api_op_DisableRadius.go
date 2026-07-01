@@ -54,9 +54,6 @@ func (c *Client) addOperationDisableRadiusMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -81,7 +78,7 @@ func (c *Client) addOperationDisableRadiusMiddlewares(stack *middleware.Stack, o
 	if err = addOpDisableRadiusValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisableRadius"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisableRadius", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

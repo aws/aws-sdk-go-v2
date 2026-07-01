@@ -72,9 +72,6 @@ func (c *Client) addOperationListModelMetadataMiddlewares(stack *middleware.Stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,7 +96,7 @@ func (c *Client) addOperationListModelMetadataMiddlewares(stack *middleware.Stac
 	if err = addOpListModelMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListModelMetadata"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListModelMetadata", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -72,9 +72,6 @@ func (c *Client) addOperationGetIdentityProviderByIdentifierMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,7 +96,7 @@ func (c *Client) addOperationGetIdentityProviderByIdentifierMiddlewares(stack *m
 	if err = addOpGetIdentityProviderByIdentifierValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetIdentityProviderByIdentifier"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetIdentityProviderByIdentifier", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

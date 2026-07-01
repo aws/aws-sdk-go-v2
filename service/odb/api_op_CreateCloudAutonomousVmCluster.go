@@ -136,9 +136,6 @@ func (c *Client) addOperationCreateCloudAutonomousVmClusterMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -166,7 +163,7 @@ func (c *Client) addOperationCreateCloudAutonomousVmClusterMiddlewares(stack *mi
 	if err = addOpCreateCloudAutonomousVmClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateCloudAutonomousVmCluster"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateCloudAutonomousVmCluster", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

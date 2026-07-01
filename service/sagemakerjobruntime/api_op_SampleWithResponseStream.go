@@ -75,9 +75,6 @@ func (c *Client) addOperationSampleWithResponseStreamMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,7 +96,7 @@ func (c *Client) addOperationSampleWithResponseStreamMiddlewares(stack *middlewa
 	if err = addOpSampleWithResponseStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SampleWithResponseStream"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SampleWithResponseStream", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

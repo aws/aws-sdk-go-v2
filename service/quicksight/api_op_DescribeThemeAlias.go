@@ -73,9 +73,6 @@ func (c *Client) addOperationDescribeThemeAliasMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -100,7 +97,7 @@ func (c *Client) addOperationDescribeThemeAliasMiddlewares(stack *middleware.Sta
 	if err = addOpDescribeThemeAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeThemeAlias"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeThemeAlias", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

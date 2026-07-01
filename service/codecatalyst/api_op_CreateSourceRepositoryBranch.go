@@ -90,9 +90,6 @@ func (c *Client) addOperationCreateSourceRepositoryBranchMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -111,7 +108,7 @@ func (c *Client) addOperationCreateSourceRepositoryBranchMiddlewares(stack *midd
 	if err = addOpCreateSourceRepositoryBranchValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateSourceRepositoryBranch"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateSourceRepositoryBranch", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

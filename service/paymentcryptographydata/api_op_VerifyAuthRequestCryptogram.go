@@ -140,9 +140,6 @@ func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -167,7 +164,7 @@ func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middl
 	if err = addOpVerifyAuthRequestCryptogramValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "VerifyAuthRequestCryptogram"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "VerifyAuthRequestCryptogram", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

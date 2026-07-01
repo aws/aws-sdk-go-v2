@@ -76,9 +76,6 @@ func (c *Client) addOperationListAIPromptsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -103,7 +100,7 @@ func (c *Client) addOperationListAIPromptsMiddlewares(stack *middleware.Stack, o
 	if err = addOpListAIPromptsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAIPrompts"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAIPrompts", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

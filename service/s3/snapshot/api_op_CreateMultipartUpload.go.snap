@@ -1,7 +1,6 @@
 CreateMultipartUpload
 	Initialize stack step
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
 		OperationInputValidation

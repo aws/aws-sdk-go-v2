@@ -122,9 +122,6 @@ func (c *Client) addOperationGetDataViewMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -152,7 +149,7 @@ func (c *Client) addOperationGetDataViewMiddlewares(stack *middleware.Stack, opt
 	if err = addOpGetDataViewValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetDataView"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetDataView", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

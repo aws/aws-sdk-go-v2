@@ -76,9 +76,6 @@ func (c *Client) addOperationUpdateLogAnomalyDetectorMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -103,7 +100,7 @@ func (c *Client) addOperationUpdateLogAnomalyDetectorMiddlewares(stack *middlewa
 	if err = addOpUpdateLogAnomalyDetectorValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateLogAnomalyDetector"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateLogAnomalyDetector", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

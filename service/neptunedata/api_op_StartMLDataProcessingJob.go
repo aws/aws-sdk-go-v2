@@ -133,9 +133,6 @@ func (c *Client) addOperationStartMLDataProcessingJobMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -160,7 +157,7 @@ func (c *Client) addOperationStartMLDataProcessingJobMiddlewares(stack *middlewa
 	if err = addOpStartMLDataProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMLDataProcessingJob"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMLDataProcessingJob", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -139,9 +139,6 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -169,7 +166,7 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 	if err = addOpStartMatchBackfillValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMatchBackfill"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMatchBackfill", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

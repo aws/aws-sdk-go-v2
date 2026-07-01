@@ -74,9 +74,6 @@ func (c *Client) addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -101,7 +98,7 @@ func (c *Client) addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewa
 	if err = addOpApplySecurityGroupsToClientVpnTargetNetworkValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ApplySecurityGroupsToClientVpnTargetNetwork"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ApplySecurityGroupsToClientVpnTargetNetwork", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

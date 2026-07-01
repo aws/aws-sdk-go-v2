@@ -171,9 +171,6 @@ func (c *Client) addOperationCreateIpamPoolMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -201,7 +198,7 @@ func (c *Client) addOperationCreateIpamPoolMiddlewares(stack *middleware.Stack, 
 	if err = addOpCreateIpamPoolValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateIpamPool"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateIpamPool", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

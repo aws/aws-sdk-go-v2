@@ -77,9 +77,6 @@ func (c *Client) addOperationBatchSuspendUserMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -104,7 +101,7 @@ func (c *Client) addOperationBatchSuspendUserMiddlewares(stack *middleware.Stack
 	if err = addOpBatchSuspendUserValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchSuspendUser"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchSuspendUser", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

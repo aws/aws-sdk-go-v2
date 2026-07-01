@@ -102,9 +102,6 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -129,7 +126,7 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 	if err = addOpUpdateSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateSecurityProfile"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateSecurityProfile", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

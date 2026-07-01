@@ -107,9 +107,6 @@ func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -134,7 +131,7 @@ func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.S
 	if err = addOpCreateFirewallPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateFirewallPolicy"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateFirewallPolicy", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

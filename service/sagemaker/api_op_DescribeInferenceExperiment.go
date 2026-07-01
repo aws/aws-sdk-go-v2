@@ -153,9 +153,6 @@ func (c *Client) addOperationDescribeInferenceExperimentMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -180,7 +177,7 @@ func (c *Client) addOperationDescribeInferenceExperimentMiddlewares(stack *middl
 	if err = addOpDescribeInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeInferenceExperiment"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeInferenceExperiment", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

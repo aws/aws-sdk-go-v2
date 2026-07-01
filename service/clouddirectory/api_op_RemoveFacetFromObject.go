@@ -62,9 +62,6 @@ func (c *Client) addOperationRemoveFacetFromObjectMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -89,7 +86,7 @@ func (c *Client) addOperationRemoveFacetFromObjectMiddlewares(stack *middleware.
 	if err = addOpRemoveFacetFromObjectValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RemoveFacetFromObject"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RemoveFacetFromObject", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

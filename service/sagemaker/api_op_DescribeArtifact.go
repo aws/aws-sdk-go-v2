@@ -87,9 +87,6 @@ func (c *Client) addOperationDescribeArtifactMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -114,7 +111,7 @@ func (c *Client) addOperationDescribeArtifactMiddlewares(stack *middleware.Stack
 	if err = addOpDescribeArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeArtifact"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeArtifact", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

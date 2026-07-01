@@ -64,9 +64,6 @@ func (c *Client) addOperationGetRestoreTestingSelectionMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,7 +88,7 @@ func (c *Client) addOperationGetRestoreTestingSelectionMiddlewares(stack *middle
 	if err = addOpGetRestoreTestingSelectionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetRestoreTestingSelection"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetRestoreTestingSelection", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

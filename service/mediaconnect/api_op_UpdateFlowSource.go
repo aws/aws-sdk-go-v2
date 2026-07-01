@@ -165,9 +165,6 @@ func (c *Client) addOperationUpdateFlowSourceMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -192,7 +189,7 @@ func (c *Client) addOperationUpdateFlowSourceMiddlewares(stack *middleware.Stack
 	if err = addOpUpdateFlowSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFlowSource"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFlowSource", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -60,9 +60,6 @@ func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -87,7 +84,7 @@ func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *midd
 	if err = addOpDeleteCostCategoryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteCostCategoryDefinition"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteCostCategoryDefinition", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

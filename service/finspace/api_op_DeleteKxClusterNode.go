@@ -61,9 +61,6 @@ func (c *Client) addOperationDeleteKxClusterNodeMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,7 +88,7 @@ func (c *Client) addOperationDeleteKxClusterNodeMiddlewares(stack *middleware.St
 	if err = addOpDeleteKxClusterNodeValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteKxClusterNode"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteKxClusterNode", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

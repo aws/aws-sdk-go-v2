@@ -96,9 +96,6 @@ func (c *Client) addOperationCancelAgreementCancellationRequestMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -123,7 +120,7 @@ func (c *Client) addOperationCancelAgreementCancellationRequestMiddlewares(stack
 	if err = addOpCancelAgreementCancellationRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CancelAgreementCancellationRequest"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CancelAgreementCancellationRequest", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

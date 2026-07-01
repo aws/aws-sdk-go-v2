@@ -56,9 +56,6 @@ func (c *Client) addOperationGetAppliedSchemaVersionMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -83,7 +80,7 @@ func (c *Client) addOperationGetAppliedSchemaVersionMiddlewares(stack *middlewar
 	if err = addOpGetAppliedSchemaVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAppliedSchemaVersion"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAppliedSchemaVersion", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -97,9 +97,6 @@ func (c *Client) addOperationDescribeEventDetailsForOrganizationMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -124,7 +121,7 @@ func (c *Client) addOperationDescribeEventDetailsForOrganizationMiddlewares(stac
 	if err = addOpDescribeEventDetailsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeEventDetailsForOrganization"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeEventDetailsForOrganization", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

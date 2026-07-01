@@ -369,9 +369,6 @@ func (c *Client) addOperationAdminInitiateAuthMiddlewares(stack *middleware.Stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -396,7 +393,7 @@ func (c *Client) addOperationAdminInitiateAuthMiddlewares(stack *middleware.Stac
 	if err = addOpAdminInitiateAuthValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AdminInitiateAuth"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AdminInitiateAuth", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -56,9 +56,6 @@ func (c *Client) addOperationDeleteEnvironmentBlueprintMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -83,7 +80,7 @@ func (c *Client) addOperationDeleteEnvironmentBlueprintMiddlewares(stack *middle
 	if err = addOpDeleteEnvironmentBlueprintValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteEnvironmentBlueprint"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteEnvironmentBlueprint", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

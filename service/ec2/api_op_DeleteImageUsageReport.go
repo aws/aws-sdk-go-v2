@@ -65,9 +65,6 @@ func (c *Client) addOperationDeleteImageUsageReportMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,7 +89,7 @@ func (c *Client) addOperationDeleteImageUsageReportMiddlewares(stack *middleware
 	if err = addOpDeleteImageUsageReportValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteImageUsageReport"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteImageUsageReport", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

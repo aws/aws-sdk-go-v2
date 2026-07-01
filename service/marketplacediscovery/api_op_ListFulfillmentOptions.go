@@ -74,9 +74,6 @@ func (c *Client) addOperationListFulfillmentOptionsMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -101,7 +98,7 @@ func (c *Client) addOperationListFulfillmentOptionsMiddlewares(stack *middleware
 	if err = addOpListFulfillmentOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListFulfillmentOptions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListFulfillmentOptions", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

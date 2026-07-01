@@ -60,9 +60,6 @@ func (c *Client) addOperationDeleteSegmentDefinitionMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -87,7 +84,7 @@ func (c *Client) addOperationDeleteSegmentDefinitionMiddlewares(stack *middlewar
 	if err = addOpDeleteSegmentDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSegmentDefinition"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSegmentDefinition", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

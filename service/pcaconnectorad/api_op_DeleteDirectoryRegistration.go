@@ -54,9 +54,6 @@ func (c *Client) addOperationDeleteDirectoryRegistrationMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -81,7 +78,7 @@ func (c *Client) addOperationDeleteDirectoryRegistrationMiddlewares(stack *middl
 	if err = addOpDeleteDirectoryRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDirectoryRegistration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDirectoryRegistration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

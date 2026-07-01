@@ -59,9 +59,6 @@ func (c *Client) addOperationRotateEncryptionKeyMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -86,7 +83,7 @@ func (c *Client) addOperationRotateEncryptionKeyMiddlewares(stack *middleware.St
 	if err = addOpRotateEncryptionKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RotateEncryptionKey"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RotateEncryptionKey", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

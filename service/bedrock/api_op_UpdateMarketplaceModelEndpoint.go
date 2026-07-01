@@ -73,9 +73,6 @@ func (c *Client) addOperationUpdateMarketplaceModelEndpointMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -103,7 +100,7 @@ func (c *Client) addOperationUpdateMarketplaceModelEndpointMiddlewares(stack *mi
 	if err = addOpUpdateMarketplaceModelEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateMarketplaceModelEndpoint"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateMarketplaceModelEndpoint", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

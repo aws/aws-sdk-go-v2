@@ -184,9 +184,6 @@ func (c *Client) addOperationCreateTokenWithIAMMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -211,7 +208,7 @@ func (c *Client) addOperationCreateTokenWithIAMMiddlewares(stack *middleware.Sta
 	if err = addOpCreateTokenWithIAMValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateTokenWithIAM"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateTokenWithIAM", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

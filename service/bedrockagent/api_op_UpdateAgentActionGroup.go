@@ -142,9 +142,6 @@ func (c *Client) addOperationUpdateAgentActionGroupMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -169,7 +166,7 @@ func (c *Client) addOperationUpdateAgentActionGroupMiddlewares(stack *middleware
 	if err = addOpUpdateAgentActionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateAgentActionGroup"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateAgentActionGroup", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

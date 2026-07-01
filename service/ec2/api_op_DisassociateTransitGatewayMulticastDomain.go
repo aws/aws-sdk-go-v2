@@ -72,9 +72,6 @@ func (c *Client) addOperationDisassociateTransitGatewayMulticastDomainMiddleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,7 +96,7 @@ func (c *Client) addOperationDisassociateTransitGatewayMulticastDomainMiddleware
 	if err = addOpDisassociateTransitGatewayMulticastDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateTransitGatewayMulticastDomain"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateTransitGatewayMulticastDomain", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

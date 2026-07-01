@@ -64,9 +64,6 @@ func (c *Client) addOperationRejectDelegationRequestMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,7 +88,7 @@ func (c *Client) addOperationRejectDelegationRequestMiddlewares(stack *middlewar
 	if err = addOpRejectDelegationRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RejectDelegationRequest"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RejectDelegationRequest", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

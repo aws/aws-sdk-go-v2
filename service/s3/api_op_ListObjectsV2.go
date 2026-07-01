@@ -350,9 +350,6 @@ func (c *Client) addOperationListObjectsV2Middlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -383,7 +380,7 @@ func (c *Client) addOperationListObjectsV2Middlewares(stack *middleware.Stack, o
 	if err = addOpListObjectsV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListObjectsV2"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListObjectsV2", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

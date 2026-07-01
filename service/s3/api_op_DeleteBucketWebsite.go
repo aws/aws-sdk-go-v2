@@ -93,9 +93,6 @@ func (c *Client) addOperationDeleteBucketWebsiteMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -126,7 +123,7 @@ func (c *Client) addOperationDeleteBucketWebsiteMiddlewares(stack *middleware.St
 	if err = addOpDeleteBucketWebsiteValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteBucketWebsite"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteBucketWebsite", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

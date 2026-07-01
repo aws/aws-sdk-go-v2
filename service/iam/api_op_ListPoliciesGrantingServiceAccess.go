@@ -126,9 +126,6 @@ func (c *Client) addOperationListPoliciesGrantingServiceAccessMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -153,7 +150,7 @@ func (c *Client) addOperationListPoliciesGrantingServiceAccessMiddlewares(stack 
 	if err = addOpListPoliciesGrantingServiceAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListPoliciesGrantingServiceAccess"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListPoliciesGrantingServiceAccess", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

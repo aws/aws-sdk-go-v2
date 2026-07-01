@@ -78,9 +78,6 @@ func (c *Client) addOperationDetachVerifiedAccessTrustProviderMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -108,7 +105,7 @@ func (c *Client) addOperationDetachVerifiedAccessTrustProviderMiddlewares(stack 
 	if err = addOpDetachVerifiedAccessTrustProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DetachVerifiedAccessTrustProvider"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DetachVerifiedAccessTrustProvider", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

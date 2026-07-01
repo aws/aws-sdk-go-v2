@@ -63,9 +63,6 @@ func (c *Client) addOperationGetQueryRuntimeStatisticsMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -90,7 +87,7 @@ func (c *Client) addOperationGetQueryRuntimeStatisticsMiddlewares(stack *middlew
 	if err = addOpGetQueryRuntimeStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetQueryRuntimeStatistics"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetQueryRuntimeStatistics", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

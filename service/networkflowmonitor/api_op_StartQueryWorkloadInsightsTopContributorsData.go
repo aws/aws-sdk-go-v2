@@ -115,9 +115,6 @@ func (c *Client) addOperationStartQueryWorkloadInsightsTopContributorsDataMiddle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -142,7 +139,7 @@ func (c *Client) addOperationStartQueryWorkloadInsightsTopContributorsDataMiddle
 	if err = addOpStartQueryWorkloadInsightsTopContributorsDataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartQueryWorkloadInsightsTopContributorsData"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartQueryWorkloadInsightsTopContributorsData", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

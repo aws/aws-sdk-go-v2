@@ -162,9 +162,6 @@ func (c *Client) addOperationCreateBlueGreenDeploymentMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -189,7 +186,7 @@ func (c *Client) addOperationCreateBlueGreenDeploymentMiddlewares(stack *middlew
 	if err = addOpCreateBlueGreenDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateBlueGreenDeployment"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateBlueGreenDeployment", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

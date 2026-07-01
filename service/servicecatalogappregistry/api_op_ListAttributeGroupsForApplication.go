@@ -68,9 +68,6 @@ func (c *Client) addOperationListAttributeGroupsForApplicationMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -95,7 +92,7 @@ func (c *Client) addOperationListAttributeGroupsForApplicationMiddlewares(stack 
 	if err = addOpListAttributeGroupsForApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAttributeGroupsForApplication"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAttributeGroupsForApplication", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

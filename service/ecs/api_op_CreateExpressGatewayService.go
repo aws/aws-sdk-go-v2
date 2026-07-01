@@ -180,9 +180,6 @@ func (c *Client) addOperationCreateExpressGatewayServiceMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -207,7 +204,7 @@ func (c *Client) addOperationCreateExpressGatewayServiceMiddlewares(stack *middl
 	if err = addOpCreateExpressGatewayServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateExpressGatewayService"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateExpressGatewayService", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

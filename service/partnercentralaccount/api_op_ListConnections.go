@@ -76,9 +76,6 @@ func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -103,7 +100,7 @@ func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack,
 	if err = addOpListConnectionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListConnections"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListConnections", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

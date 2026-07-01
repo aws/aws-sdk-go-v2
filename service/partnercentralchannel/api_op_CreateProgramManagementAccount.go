@@ -78,9 +78,6 @@ func (c *Client) addOperationCreateProgramManagementAccountMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -108,7 +105,7 @@ func (c *Client) addOperationCreateProgramManagementAccountMiddlewares(stack *mi
 	if err = addOpCreateProgramManagementAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateProgramManagementAccount"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateProgramManagementAccount", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

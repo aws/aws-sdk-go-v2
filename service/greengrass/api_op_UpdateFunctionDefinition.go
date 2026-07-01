@@ -54,9 +54,6 @@ func (c *Client) addOperationUpdateFunctionDefinitionMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -81,7 +78,7 @@ func (c *Client) addOperationUpdateFunctionDefinitionMiddlewares(stack *middlewa
 	if err = addOpUpdateFunctionDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFunctionDefinition"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFunctionDefinition", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

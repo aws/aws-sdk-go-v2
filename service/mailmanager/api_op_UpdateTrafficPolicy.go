@@ -67,9 +67,6 @@ func (c *Client) addOperationUpdateTrafficPolicyMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -94,7 +91,7 @@ func (c *Client) addOperationUpdateTrafficPolicyMiddlewares(stack *middleware.St
 	if err = addOpUpdateTrafficPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateTrafficPolicy"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateTrafficPolicy", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

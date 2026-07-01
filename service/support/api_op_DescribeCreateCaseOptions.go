@@ -100,9 +100,6 @@ func (c *Client) addOperationDescribeCreateCaseOptionsMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -127,7 +124,7 @@ func (c *Client) addOperationDescribeCreateCaseOptionsMiddlewares(stack *middlew
 	if err = addOpDescribeCreateCaseOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeCreateCaseOptions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeCreateCaseOptions", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

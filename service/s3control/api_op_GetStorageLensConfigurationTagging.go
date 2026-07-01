@@ -83,9 +83,6 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -116,7 +113,7 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err = addOpGetStorageLensConfigurationTaggingValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetStorageLensConfigurationTagging"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetStorageLensConfigurationTagging", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

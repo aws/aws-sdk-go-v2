@@ -72,9 +72,6 @@ func (c *Client) addOperationListDistributionsByKeyGroupMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -99,7 +96,7 @@ func (c *Client) addOperationListDistributionsByKeyGroupMiddlewares(stack *middl
 	if err = addOpListDistributionsByKeyGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListDistributionsByKeyGroup"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListDistributionsByKeyGroup", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -74,9 +74,6 @@ func (c *Client) addOperationListAppAssessmentResourceDriftsMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -101,7 +98,7 @@ func (c *Client) addOperationListAppAssessmentResourceDriftsMiddlewares(stack *m
 	if err = addOpListAppAssessmentResourceDriftsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAppAssessmentResourceDrifts"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAppAssessmentResourceDrifts", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

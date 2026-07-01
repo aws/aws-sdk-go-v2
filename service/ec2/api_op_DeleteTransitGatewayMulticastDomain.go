@@ -62,9 +62,6 @@ func (c *Client) addOperationDeleteTransitGatewayMulticastDomainMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -89,7 +86,7 @@ func (c *Client) addOperationDeleteTransitGatewayMulticastDomainMiddlewares(stac
 	if err = addOpDeleteTransitGatewayMulticastDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteTransitGatewayMulticastDomain"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteTransitGatewayMulticastDomain", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

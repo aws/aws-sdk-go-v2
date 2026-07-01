@@ -69,9 +69,6 @@ func (c *Client) addOperationSearchVulnerabilitiesMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -96,7 +93,7 @@ func (c *Client) addOperationSearchVulnerabilitiesMiddlewares(stack *middleware.
 	if err = addOpSearchVulnerabilitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SearchVulnerabilities"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SearchVulnerabilities", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -56,9 +56,6 @@ func (c *Client) addOperationAssociateConfigurationItemsToApplicationMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -83,7 +80,7 @@ func (c *Client) addOperationAssociateConfigurationItemsToApplicationMiddlewares
 	if err = addOpAssociateConfigurationItemsToApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateConfigurationItemsToApplication"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateConfigurationItemsToApplication", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

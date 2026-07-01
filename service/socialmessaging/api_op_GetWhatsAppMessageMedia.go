@@ -81,9 +81,6 @@ func (c *Client) addOperationGetWhatsAppMessageMediaMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -108,7 +105,7 @@ func (c *Client) addOperationGetWhatsAppMessageMediaMiddlewares(stack *middlewar
 	if err = addOpGetWhatsAppMessageMediaValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetWhatsAppMessageMedia"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetWhatsAppMessageMedia", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

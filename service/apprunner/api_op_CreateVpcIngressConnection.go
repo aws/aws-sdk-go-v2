@@ -80,9 +80,6 @@ func (c *Client) addOperationCreateVpcIngressConnectionMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -107,7 +104,7 @@ func (c *Client) addOperationCreateVpcIngressConnectionMiddlewares(stack *middle
 	if err = addOpCreateVpcIngressConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateVpcIngressConnection"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateVpcIngressConnection", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

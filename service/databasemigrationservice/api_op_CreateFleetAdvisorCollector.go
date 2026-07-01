@@ -90,9 +90,6 @@ func (c *Client) addOperationCreateFleetAdvisorCollectorMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -117,7 +114,7 @@ func (c *Client) addOperationCreateFleetAdvisorCollectorMiddlewares(stack *middl
 	if err = addOpCreateFleetAdvisorCollectorValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateFleetAdvisorCollector"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateFleetAdvisorCollector", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -122,9 +122,6 @@ func (c *Client) addOperationCreateReplicationConfigurationMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -149,7 +146,7 @@ func (c *Client) addOperationCreateReplicationConfigurationMiddlewares(stack *mi
 	if err = addOpCreateReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateReplicationConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateReplicationConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

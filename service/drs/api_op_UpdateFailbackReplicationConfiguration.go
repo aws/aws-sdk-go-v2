@@ -67,9 +67,6 @@ func (c *Client) addOperationUpdateFailbackReplicationConfigurationMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -94,7 +91,7 @@ func (c *Client) addOperationUpdateFailbackReplicationConfigurationMiddlewares(s
 	if err = addOpUpdateFailbackReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFailbackReplicationConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFailbackReplicationConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -78,9 +78,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceResourcePolicyMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -114,7 +111,7 @@ func (c *Client) addOperationGetAccessGrantsInstanceResourcePolicyMiddlewares(st
 	if err = addOpGetAccessGrantsInstanceResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAccessGrantsInstanceResourcePolicy"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAccessGrantsInstanceResourcePolicy", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

@@ -69,9 +69,6 @@ func (c *Client) addOperationUpdateDataQualityRulesetMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -96,7 +93,7 @@ func (c *Client) addOperationUpdateDataQualityRulesetMiddlewares(stack *middlewa
 	if err = addOpUpdateDataQualityRulesetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateDataQualityRuleset"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateDataQualityRuleset", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

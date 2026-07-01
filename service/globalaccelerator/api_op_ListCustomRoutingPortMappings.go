@@ -88,9 +88,6 @@ func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -115,7 +112,7 @@ func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *mid
 	if err = addOpListCustomRoutingPortMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListCustomRoutingPortMappings"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListCustomRoutingPortMappings", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -85,9 +85,6 @@ func (c *Client) addOperationDescribeDataSourceAttachmentMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -112,7 +109,7 @@ func (c *Client) addOperationDescribeDataSourceAttachmentMiddlewares(stack *midd
 	if err = addOpDescribeDataSourceAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeDataSourceAttachment"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeDataSourceAttachment", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

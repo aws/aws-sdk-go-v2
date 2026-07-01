@@ -69,9 +69,6 @@ func (c *Client) addOperationCreateWhatsAppMessageTemplateFromLibraryMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -96,7 +93,7 @@ func (c *Client) addOperationCreateWhatsAppMessageTemplateFromLibraryMiddlewares
 	if err = addOpCreateWhatsAppMessageTemplateFromLibraryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateWhatsAppMessageTemplateFromLibrary"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateWhatsAppMessageTemplateFromLibrary", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -85,9 +85,6 @@ func (c *Client) addOperationListKnowledgeBaseDocumentsMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -112,7 +109,7 @@ func (c *Client) addOperationListKnowledgeBaseDocumentsMiddlewares(stack *middle
 	if err = addOpListKnowledgeBaseDocumentsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListKnowledgeBaseDocuments"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListKnowledgeBaseDocuments", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

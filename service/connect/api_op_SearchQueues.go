@@ -83,9 +83,6 @@ func (c *Client) addOperationSearchQueuesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -110,7 +107,7 @@ func (c *Client) addOperationSearchQueuesMiddlewares(stack *middleware.Stack, op
 	if err = addOpSearchQueuesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SearchQueues"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SearchQueues", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

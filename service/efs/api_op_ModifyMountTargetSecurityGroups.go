@@ -69,9 +69,6 @@ func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -96,7 +93,7 @@ func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *m
 	if err = addOpModifyMountTargetSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ModifyMountTargetSecurityGroups"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ModifyMountTargetSecurityGroups", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

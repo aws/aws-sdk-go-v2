@@ -337,9 +337,6 @@ func (c *Client) addOperationCreateChangeSetMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -364,7 +361,7 @@ func (c *Client) addOperationCreateChangeSetMiddlewares(stack *middleware.Stack,
 	if err = addOpCreateChangeSetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateChangeSet"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateChangeSet", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

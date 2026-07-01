@@ -65,9 +65,6 @@ func (c *Client) addOperationDeleteDefaultQBusinessApplicationMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,7 +89,7 @@ func (c *Client) addOperationDeleteDefaultQBusinessApplicationMiddlewares(stack 
 	if err = addOpDeleteDefaultQBusinessApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDefaultQBusinessApplication"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDefaultQBusinessApplication", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

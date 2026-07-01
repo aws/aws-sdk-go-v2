@@ -98,9 +98,6 @@ func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -125,7 +122,7 @@ func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddleware
 	if err = addOpGetAggregateComplianceDetailsByConfigRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAggregateComplianceDetailsByConfigRule"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAggregateComplianceDetailsByConfigRule", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

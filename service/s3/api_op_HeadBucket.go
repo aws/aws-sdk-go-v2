@@ -206,9 +206,6 @@ func (c *Client) addOperationHeadBucketMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -239,7 +236,7 @@ func (c *Client) addOperationHeadBucketMiddlewares(stack *middleware.Stack, opti
 	if err = addOpHeadBucketValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "HeadBucket"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "HeadBucket", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

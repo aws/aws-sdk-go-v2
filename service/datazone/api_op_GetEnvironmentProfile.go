@@ -106,9 +106,6 @@ func (c *Client) addOperationGetEnvironmentProfileMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -133,7 +130,7 @@ func (c *Client) addOperationGetEnvironmentProfileMiddlewares(stack *middleware.
 	if err = addOpGetEnvironmentProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEnvironmentProfile"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEnvironmentProfile", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

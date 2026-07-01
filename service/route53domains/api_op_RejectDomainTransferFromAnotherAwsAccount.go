@@ -75,9 +75,6 @@ func (c *Client) addOperationRejectDomainTransferFromAnotherAwsAccountMiddleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -102,7 +99,7 @@ func (c *Client) addOperationRejectDomainTransferFromAnotherAwsAccountMiddleware
 	if err = addOpRejectDomainTransferFromAnotherAwsAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RejectDomainTransferFromAnotherAwsAccount"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RejectDomainTransferFromAnotherAwsAccount", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

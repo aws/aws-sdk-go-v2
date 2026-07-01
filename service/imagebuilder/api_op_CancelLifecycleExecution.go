@@ -65,9 +65,6 @@ func (c *Client) addOperationCancelLifecycleExecutionMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -95,7 +92,7 @@ func (c *Client) addOperationCancelLifecycleExecutionMiddlewares(stack *middlewa
 	if err = addOpCancelLifecycleExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CancelLifecycleExecution"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CancelLifecycleExecution", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -79,9 +79,6 @@ func (c *Client) addOperationGetRevenueStatisticsSummaryMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -106,7 +103,7 @@ func (c *Client) addOperationGetRevenueStatisticsSummaryMiddlewares(stack *middl
 	if err = addOpGetRevenueStatisticsSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetRevenueStatisticsSummary"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetRevenueStatisticsSummary", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -59,9 +59,6 @@ func (c *Client) addOperationDescribeDocumentClassificationJobMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -86,7 +83,7 @@ func (c *Client) addOperationDescribeDocumentClassificationJobMiddlewares(stack 
 	if err = addOpDescribeDocumentClassificationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeDocumentClassificationJob"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeDocumentClassificationJob", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

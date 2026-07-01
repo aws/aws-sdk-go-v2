@@ -75,9 +75,6 @@ func (c *Client) addOperationGetOnClusterAppUIPresignedURLMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -102,7 +99,7 @@ func (c *Client) addOperationGetOnClusterAppUIPresignedURLMiddlewares(stack *mid
 	if err = addOpGetOnClusterAppUIPresignedURLValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetOnClusterAppUIPresignedURL"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetOnClusterAppUIPresignedURL", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

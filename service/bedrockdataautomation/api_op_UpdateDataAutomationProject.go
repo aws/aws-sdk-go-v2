@@ -89,9 +89,6 @@ func (c *Client) addOperationUpdateDataAutomationProjectMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -116,7 +113,7 @@ func (c *Client) addOperationUpdateDataAutomationProjectMiddlewares(stack *middl
 	if err = addOpUpdateDataAutomationProjectValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateDataAutomationProject"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateDataAutomationProject", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

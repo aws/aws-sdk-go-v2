@@ -182,9 +182,6 @@ func (c *Client) addOperationAssociateConnectionWithLagMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -209,7 +206,7 @@ func (c *Client) addOperationAssociateConnectionWithLagMiddlewares(stack *middle
 	if err = addOpAssociateConnectionWithLagValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateConnectionWithLag"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateConnectionWithLag", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

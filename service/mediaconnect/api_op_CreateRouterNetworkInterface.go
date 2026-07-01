@@ -75,9 +75,6 @@ func (c *Client) addOperationCreateRouterNetworkInterfaceMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -105,7 +102,7 @@ func (c *Client) addOperationCreateRouterNetworkInterfaceMiddlewares(stack *midd
 	if err = addOpCreateRouterNetworkInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateRouterNetworkInterface"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateRouterNetworkInterface", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

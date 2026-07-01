@@ -86,9 +86,6 @@ func (c *Client) addOperationMalformedTimestampBodyHttpDateMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -113,7 +110,7 @@ func (c *Client) addOperationMalformedTimestampBodyHttpDateMiddlewares(stack *mi
 	if err = addOpMalformedTimestampBodyHttpDateValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "MalformedTimestampBodyHttpDate"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "MalformedTimestampBodyHttpDate", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

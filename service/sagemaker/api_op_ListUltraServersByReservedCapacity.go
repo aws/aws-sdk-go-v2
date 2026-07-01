@@ -71,9 +71,6 @@ func (c *Client) addOperationListUltraServersByReservedCapacityMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -98,7 +95,7 @@ func (c *Client) addOperationListUltraServersByReservedCapacityMiddlewares(stack
 	if err = addOpListUltraServersByReservedCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListUltraServersByReservedCapacity"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListUltraServersByReservedCapacity", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

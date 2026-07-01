@@ -104,9 +104,6 @@ func (c *Client) addOperationImportCustomWorkspaceImageMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -131,7 +128,7 @@ func (c *Client) addOperationImportCustomWorkspaceImageMiddlewares(stack *middle
 	if err = addOpImportCustomWorkspaceImageValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ImportCustomWorkspaceImage"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ImportCustomWorkspaceImage", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -55,9 +55,6 @@ func (c *Client) addOperationListVoiceConnectorTerminationCredentialsMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -82,7 +79,7 @@ func (c *Client) addOperationListVoiceConnectorTerminationCredentialsMiddlewares
 	if err = addOpListVoiceConnectorTerminationCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListVoiceConnectorTerminationCredentials"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListVoiceConnectorTerminationCredentials", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

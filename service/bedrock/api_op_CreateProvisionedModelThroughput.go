@@ -116,9 +116,6 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -146,7 +143,7 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 	if err = addOpCreateProvisionedModelThroughputValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateProvisionedModelThroughput"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateProvisionedModelThroughput", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

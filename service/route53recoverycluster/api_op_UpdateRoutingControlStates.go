@@ -94,9 +94,6 @@ func (c *Client) addOperationUpdateRoutingControlStatesMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -121,7 +118,7 @@ func (c *Client) addOperationUpdateRoutingControlStatesMiddlewares(stack *middle
 	if err = addOpUpdateRoutingControlStatesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateRoutingControlStates"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateRoutingControlStates", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

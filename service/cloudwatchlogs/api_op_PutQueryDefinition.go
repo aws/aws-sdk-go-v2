@@ -121,9 +121,6 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -151,7 +148,7 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 	if err = addOpPutQueryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutQueryDefinition"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutQueryDefinition", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

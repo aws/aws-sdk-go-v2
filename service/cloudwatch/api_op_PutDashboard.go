@@ -110,9 +110,6 @@ func (c *Client) addOperationPutDashboardMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -140,7 +137,7 @@ func (c *Client) addOperationPutDashboardMiddlewares(stack *middleware.Stack, op
 	if err = addOpPutDashboardValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutDashboard"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutDashboard", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

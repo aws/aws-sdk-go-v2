@@ -88,9 +88,6 @@ func (c *Client) addOperationCreateVpcBlockPublicAccessExclusionMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -115,7 +112,7 @@ func (c *Client) addOperationCreateVpcBlockPublicAccessExclusionMiddlewares(stac
 	if err = addOpCreateVpcBlockPublicAccessExclusionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateVpcBlockPublicAccessExclusion"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateVpcBlockPublicAccessExclusion", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

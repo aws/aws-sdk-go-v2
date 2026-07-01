@@ -57,9 +57,6 @@ func (c *Client) addOperationDeleteMLInputChannelDataMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -84,7 +81,7 @@ func (c *Client) addOperationDeleteMLInputChannelDataMiddlewares(stack *middlewa
 	if err = addOpDeleteMLInputChannelDataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMLInputChannelData"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMLInputChannelData", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

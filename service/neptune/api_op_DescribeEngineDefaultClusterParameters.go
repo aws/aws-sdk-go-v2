@@ -76,9 +76,6 @@ func (c *Client) addOperationDescribeEngineDefaultClusterParametersMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -103,7 +100,7 @@ func (c *Client) addOperationDescribeEngineDefaultClusterParametersMiddlewares(s
 	if err = addOpDescribeEngineDefaultClusterParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeEngineDefaultClusterParameters"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeEngineDefaultClusterParameters", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

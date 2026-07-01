@@ -120,9 +120,6 @@ func (c *Client) addOperationExportImageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -150,7 +147,7 @@ func (c *Client) addOperationExportImageMiddlewares(stack *middleware.Stack, opt
 	if err = addOpExportImageValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ExportImage"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ExportImage", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

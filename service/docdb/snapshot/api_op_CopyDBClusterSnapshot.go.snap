@@ -2,7 +2,6 @@ CopyDBClusterSnapshot
 	Initialize stack step
 		RegisterServiceMetadata
 		Presign
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

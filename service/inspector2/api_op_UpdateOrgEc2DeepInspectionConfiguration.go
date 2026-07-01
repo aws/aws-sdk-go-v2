@@ -54,9 +54,6 @@ func (c *Client) addOperationUpdateOrgEc2DeepInspectionConfigurationMiddlewares(
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -81,7 +78,7 @@ func (c *Client) addOperationUpdateOrgEc2DeepInspectionConfigurationMiddlewares(
 	if err = addOpUpdateOrgEc2DeepInspectionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateOrgEc2DeepInspectionConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateOrgEc2DeepInspectionConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

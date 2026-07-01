@@ -168,9 +168,6 @@ func (c *Client) addOperationListBucketMetricsConfigurationsMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -201,7 +198,7 @@ func (c *Client) addOperationListBucketMetricsConfigurationsMiddlewares(stack *m
 	if err = addOpListBucketMetricsConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListBucketMetricsConfigurations"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListBucketMetricsConfigurations", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

@@ -114,9 +114,6 @@ func (c *Client) addOperationListSubscriptionGrantsMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -141,7 +138,7 @@ func (c *Client) addOperationListSubscriptionGrantsMiddlewares(stack *middleware
 	if err = addOpListSubscriptionGrantsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListSubscriptionGrants"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListSubscriptionGrants", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -78,9 +78,6 @@ func (c *Client) addOperationCreateServiceSyncConfigMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -105,7 +102,7 @@ func (c *Client) addOperationCreateServiceSyncConfigMiddlewares(stack *middlewar
 	if err = addOpCreateServiceSyncConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateServiceSyncConfig"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateServiceSyncConfig", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

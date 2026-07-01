@@ -63,9 +63,6 @@ func (c *Client) addOperationUpdateWorkspaceThemeMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -90,7 +87,7 @@ func (c *Client) addOperationUpdateWorkspaceThemeMiddlewares(stack *middleware.S
 	if err = addOpUpdateWorkspaceThemeValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateWorkspaceTheme"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateWorkspaceTheme", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

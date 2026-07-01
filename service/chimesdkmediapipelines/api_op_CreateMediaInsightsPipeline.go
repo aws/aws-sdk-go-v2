@@ -80,9 +80,6 @@ func (c *Client) addOperationCreateMediaInsightsPipelineMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -110,7 +107,7 @@ func (c *Client) addOperationCreateMediaInsightsPipelineMiddlewares(stack *middl
 	if err = addOpCreateMediaInsightsPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateMediaInsightsPipeline"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateMediaInsightsPipeline", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

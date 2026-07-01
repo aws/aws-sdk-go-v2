@@ -81,9 +81,6 @@ func (c *Client) addOperationListPlanExecutionEventsMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -111,7 +108,7 @@ func (c *Client) addOperationListPlanExecutionEventsMiddlewares(stack *middlewar
 	if err = addOpListPlanExecutionEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListPlanExecutionEvents"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListPlanExecutionEvents", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

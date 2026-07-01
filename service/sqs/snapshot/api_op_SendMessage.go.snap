@@ -2,7 +2,6 @@ SendMessage
 	Initialize stack step
 		RegisterServiceMetadata
 		SQSValidateMessageChecksum
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

@@ -80,9 +80,6 @@ func (c *Client) addOperationRejectResourceShareInvitationMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -107,7 +104,7 @@ func (c *Client) addOperationRejectResourceShareInvitationMiddlewares(stack *mid
 	if err = addOpRejectResourceShareInvitationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RejectResourceShareInvitation"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RejectResourceShareInvitation", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

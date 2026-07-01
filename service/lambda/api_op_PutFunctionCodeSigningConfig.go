@@ -91,9 +91,6 @@ func (c *Client) addOperationPutFunctionCodeSigningConfigMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -118,7 +115,7 @@ func (c *Client) addOperationPutFunctionCodeSigningConfigMiddlewares(stack *midd
 	if err = addOpPutFunctionCodeSigningConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutFunctionCodeSigningConfig"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutFunctionCodeSigningConfig", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

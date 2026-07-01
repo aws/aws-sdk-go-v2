@@ -107,9 +107,6 @@ func (c *Client) addOperationCreateOauth2CredentialProviderMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -134,7 +131,7 @@ func (c *Client) addOperationCreateOauth2CredentialProviderMiddlewares(stack *mi
 	if err = addOpCreateOauth2CredentialProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOauth2CredentialProvider"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOauth2CredentialProvider", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

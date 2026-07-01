@@ -67,9 +67,6 @@ func (c *Client) addOperationSendPipelineExecutionStepSuccessMiddlewares(stack *
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -97,7 +94,7 @@ func (c *Client) addOperationSendPipelineExecutionStepSuccessMiddlewares(stack *
 	if err = addOpSendPipelineExecutionStepSuccessValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SendPipelineExecutionStepSuccess"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SendPipelineExecutionStepSuccess", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

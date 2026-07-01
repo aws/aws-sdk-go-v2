@@ -86,9 +86,6 @@ func (c *Client) addOperationListDomainUnitsForParentMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -113,7 +110,7 @@ func (c *Client) addOperationListDomainUnitsForParentMiddlewares(stack *middlewa
 	if err = addOpListDomainUnitsForParentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListDomainUnitsForParent"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListDomainUnitsForParent", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -93,9 +93,6 @@ func (c *Client) addOperationUpdateStateMachineAliasMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -120,7 +117,7 @@ func (c *Client) addOperationUpdateStateMachineAliasMiddlewares(stack *middlewar
 	if err = addOpUpdateStateMachineAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateStateMachineAlias"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateStateMachineAlias", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

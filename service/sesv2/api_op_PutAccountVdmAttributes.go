@@ -55,9 +55,6 @@ func (c *Client) addOperationPutAccountVdmAttributesMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -82,7 +79,7 @@ func (c *Client) addOperationPutAccountVdmAttributesMiddlewares(stack *middlewar
 	if err = addOpPutAccountVdmAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutAccountVdmAttributes"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutAccountVdmAttributes", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

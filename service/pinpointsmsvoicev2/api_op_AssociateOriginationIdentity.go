@@ -105,9 +105,6 @@ func (c *Client) addOperationAssociateOriginationIdentityMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -135,7 +132,7 @@ func (c *Client) addOperationAssociateOriginationIdentityMiddlewares(stack *midd
 	if err = addOpAssociateOriginationIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateOriginationIdentity"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateOriginationIdentity", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

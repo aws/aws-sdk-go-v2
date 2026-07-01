@@ -65,9 +65,6 @@ func (c *Client) addOperationAddAttributesToFindingsMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,7 +89,7 @@ func (c *Client) addOperationAddAttributesToFindingsMiddlewares(stack *middlewar
 	if err = addOpAddAttributesToFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AddAttributesToFindings"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AddAttributesToFindings", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

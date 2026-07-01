@@ -123,9 +123,6 @@ func (c *Client) addOperationCreateNetworkAclEntryMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -150,7 +147,7 @@ func (c *Client) addOperationCreateNetworkAclEntryMiddlewares(stack *middleware.
 	if err = addOpCreateNetworkAclEntryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateNetworkAclEntry"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateNetworkAclEntry", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -58,9 +58,6 @@ func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,7 +85,7 @@ func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *mi
 	if err = addOpDescribeEntitiesDetectionV2JobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeEntitiesDetectionV2Job"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeEntitiesDetectionV2Job", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

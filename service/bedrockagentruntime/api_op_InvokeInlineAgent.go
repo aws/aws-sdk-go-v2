@@ -202,9 +202,6 @@ func (c *Client) addOperationInvokeInlineAgentMiddlewares(stack *middleware.Stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeInlineAgentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -226,7 +223,7 @@ func (c *Client) addOperationInvokeInlineAgentMiddlewares(stack *middleware.Stac
 	if err = addOpInvokeInlineAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeInlineAgent"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeInlineAgent", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

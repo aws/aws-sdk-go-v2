@@ -93,9 +93,6 @@ func (c *Client) addOperationAssociateTrunkInterfaceMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -123,7 +120,7 @@ func (c *Client) addOperationAssociateTrunkInterfaceMiddlewares(stack *middlewar
 	if err = addOpAssociateTrunkInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateTrunkInterface"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateTrunkInterface", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

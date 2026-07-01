@@ -145,9 +145,6 @@ func (c *Client) addOperationPutRuleMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -172,7 +169,7 @@ func (c *Client) addOperationPutRuleMiddlewares(stack *middleware.Stack, options
 	if err = addOpPutRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutRule"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutRule", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

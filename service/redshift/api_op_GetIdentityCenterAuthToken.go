@@ -101,9 +101,6 @@ func (c *Client) addOperationGetIdentityCenterAuthTokenMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -128,7 +125,7 @@ func (c *Client) addOperationGetIdentityCenterAuthTokenMiddlewares(stack *middle
 	if err = addOpGetIdentityCenterAuthTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetIdentityCenterAuthToken"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetIdentityCenterAuthToken", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -59,9 +59,6 @@ func (c *Client) addOperationDeleteApprovalRuleTemplateMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -86,7 +83,7 @@ func (c *Client) addOperationDeleteApprovalRuleTemplateMiddlewares(stack *middle
 	if err = addOpDeleteApprovalRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteApprovalRuleTemplate"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteApprovalRuleTemplate", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

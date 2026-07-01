@@ -114,9 +114,6 @@ func (c *Client) addOperationUpdateFirewallDeleteProtectionMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -141,7 +138,7 @@ func (c *Client) addOperationUpdateFirewallDeleteProtectionMiddlewares(stack *mi
 	if err = addOpUpdateFirewallDeleteProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFirewallDeleteProtection"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFirewallDeleteProtection", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

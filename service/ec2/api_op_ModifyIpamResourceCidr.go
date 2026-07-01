@@ -96,9 +96,6 @@ func (c *Client) addOperationModifyIpamResourceCidrMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -123,7 +120,7 @@ func (c *Client) addOperationModifyIpamResourceCidrMiddlewares(stack *middleware
 	if err = addOpModifyIpamResourceCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ModifyIpamResourceCidr"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ModifyIpamResourceCidr", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

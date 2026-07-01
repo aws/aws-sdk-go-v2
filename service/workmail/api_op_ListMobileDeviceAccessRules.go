@@ -57,9 +57,6 @@ func (c *Client) addOperationListMobileDeviceAccessRulesMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -84,7 +81,7 @@ func (c *Client) addOperationListMobileDeviceAccessRulesMiddlewares(stack *middl
 	if err = addOpListMobileDeviceAccessRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListMobileDeviceAccessRules"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListMobileDeviceAccessRules", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

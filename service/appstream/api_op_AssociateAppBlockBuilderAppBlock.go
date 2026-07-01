@@ -61,9 +61,6 @@ func (c *Client) addOperationAssociateAppBlockBuilderAppBlockMiddlewares(stack *
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,7 +85,7 @@ func (c *Client) addOperationAssociateAppBlockBuilderAppBlockMiddlewares(stack *
 	if err = addOpAssociateAppBlockBuilderAppBlockValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateAppBlockBuilderAppBlock"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AssociateAppBlockBuilderAppBlock", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

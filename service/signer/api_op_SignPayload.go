@@ -78,9 +78,6 @@ func (c *Client) addOperationSignPayloadMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -105,7 +102,7 @@ func (c *Client) addOperationSignPayloadMiddlewares(stack *middleware.Stack, opt
 	if err = addOpSignPayloadValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SignPayload"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SignPayload", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

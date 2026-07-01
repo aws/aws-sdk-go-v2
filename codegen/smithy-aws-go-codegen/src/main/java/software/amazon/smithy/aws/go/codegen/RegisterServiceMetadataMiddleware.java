@@ -38,12 +38,13 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
                 "RegisterServiceMetadata", AwsGoDependency.AWS_MIDDLEWARE).build();
 
         goDelegator.useFileWriter("api_client.go", settings.getModuleName(), writer -> {
-            writer.openBlock("func newServiceMetadataMiddleware(region, operation string) $P {", "}",
+            writer.openBlock("func newServiceMetadataMiddleware(region, operation string, requiresLegacyEndpoints bool) $P {", "}",
                     serviceMetadataProvider, () -> {
                         writer.write("return &$T{", serviceMetadataProvider);
                         writer.write("Region: region,");
                         writer.write("ServiceID: ServiceID,");
                         writer.write("OperationName: operation,");
+                        writer.write("RequiresLegacyEndpoints: requiresLegacyEndpoints,");
                         writer.write("}");
                     });
         });
@@ -65,7 +66,8 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
                             .registerBefore(MiddlewareStackStep.INITIALIZE)
                             .functionArguments(ListUtils.of(
                                     SymbolUtils.createValueSymbolBuilder("options.Region").build(),
-                                    SymbolUtils.createValueSymbolBuilder("\"" + opName + "\"").build()
+                                    SymbolUtils.createValueSymbolBuilder("\"" + opName + "\"").build(),
+                                    SymbolUtils.createValueSymbolBuilder("options.EndpointResolver != nil").build()
                             ))
                             .build())
                     .build());

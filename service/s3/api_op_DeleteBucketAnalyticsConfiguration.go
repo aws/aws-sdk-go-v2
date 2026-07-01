@@ -99,9 +99,6 @@ func (c *Client) addOperationDeleteBucketAnalyticsConfigurationMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -132,7 +129,7 @@ func (c *Client) addOperationDeleteBucketAnalyticsConfigurationMiddlewares(stack
 	if err = addOpDeleteBucketAnalyticsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteBucketAnalyticsConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteBucketAnalyticsConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

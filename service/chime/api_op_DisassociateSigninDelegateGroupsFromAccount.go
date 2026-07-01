@@ -57,9 +57,6 @@ func (c *Client) addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -84,7 +81,7 @@ func (c *Client) addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewa
 	if err = addOpDisassociateSigninDelegateGroupsFromAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateSigninDelegateGroupsFromAccount"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateSigninDelegateGroupsFromAccount", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

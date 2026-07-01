@@ -136,9 +136,6 @@ func (c *Client) addOperationGetInstrumentationConfigurationStatusMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -163,7 +160,7 @@ func (c *Client) addOperationGetInstrumentationConfigurationStatusMiddlewares(st
 	if err = addOpGetInstrumentationConfigurationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetInstrumentationConfigurationStatus"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetInstrumentationConfigurationStatus", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

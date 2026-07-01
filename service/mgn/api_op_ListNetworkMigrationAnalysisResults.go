@@ -76,9 +76,6 @@ func (c *Client) addOperationListNetworkMigrationAnalysisResultsMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -103,7 +100,7 @@ func (c *Client) addOperationListNetworkMigrationAnalysisResultsMiddlewares(stac
 	if err = addOpListNetworkMigrationAnalysisResultsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListNetworkMigrationAnalysisResults"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListNetworkMigrationAnalysisResults", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

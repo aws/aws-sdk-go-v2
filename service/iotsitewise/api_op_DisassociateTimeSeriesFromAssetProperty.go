@@ -75,9 +75,6 @@ func (c *Client) addOperationDisassociateTimeSeriesFromAssetPropertyMiddlewares(
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -108,7 +105,7 @@ func (c *Client) addOperationDisassociateTimeSeriesFromAssetPropertyMiddlewares(
 	if err = addOpDisassociateTimeSeriesFromAssetPropertyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateTimeSeriesFromAssetProperty"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateTimeSeriesFromAssetProperty", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

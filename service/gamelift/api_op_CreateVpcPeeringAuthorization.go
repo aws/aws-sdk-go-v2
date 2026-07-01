@@ -123,9 +123,6 @@ func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -153,7 +150,7 @@ func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *mid
 	if err = addOpCreateVpcPeeringAuthorizationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateVpcPeeringAuthorization"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateVpcPeeringAuthorization", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -103,9 +103,6 @@ func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -130,7 +127,7 @@ func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *mi
 	if err = addOpUpdateApiKeyCredentialProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateApiKeyCredentialProvider"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateApiKeyCredentialProvider", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

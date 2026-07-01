@@ -98,9 +98,6 @@ func (c *Client) addOperationGetBucketPolicyStatusMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -131,7 +128,7 @@ func (c *Client) addOperationGetBucketPolicyStatusMiddlewares(stack *middleware.
 	if err = addOpGetBucketPolicyStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetBucketPolicyStatus"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetBucketPolicyStatus", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

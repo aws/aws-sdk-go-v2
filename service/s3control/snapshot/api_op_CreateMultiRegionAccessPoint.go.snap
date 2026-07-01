@@ -4,7 +4,6 @@ CreateMultiRegionAccessPoint
 		S3Control:BackfillInput
 		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

@@ -148,9 +148,6 @@ func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -175,7 +172,7 @@ func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *midd
 	if err = addOpCreateDataSourceFromRedshiftValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateDataSourceFromRedshift"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateDataSourceFromRedshift", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

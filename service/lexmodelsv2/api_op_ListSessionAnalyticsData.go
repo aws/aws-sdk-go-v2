@@ -117,9 +117,6 @@ func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -144,7 +141,7 @@ func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middlewa
 	if err = addOpListSessionAnalyticsDataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListSessionAnalyticsData"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListSessionAnalyticsData", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -155,9 +155,6 @@ func (c *Client) addOperationStartLiveTailMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamStartLiveTailMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -182,7 +179,7 @@ func (c *Client) addOperationStartLiveTailMiddlewares(stack *middleware.Stack, o
 	if err = addOpStartLiveTailValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartLiveTail"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartLiveTail", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -85,9 +85,6 @@ func (c *Client) addOperationEnableKinesisStreamingDestinationMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -118,7 +115,7 @@ func (c *Client) addOperationEnableKinesisStreamingDestinationMiddlewares(stack 
 	if err = addOpEnableKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EnableKinesisStreamingDestination"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EnableKinesisStreamingDestination", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

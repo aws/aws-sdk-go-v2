@@ -630,9 +630,6 @@ func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -657,7 +654,7 @@ func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *midd
 	if err = addOpRestoreDBClusterFromSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RestoreDBClusterFromSnapshot"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RestoreDBClusterFromSnapshot", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

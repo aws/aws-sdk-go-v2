@@ -98,9 +98,6 @@ func (c *Client) addOperationGetProfileHistoryRecordMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -125,7 +122,7 @@ func (c *Client) addOperationGetProfileHistoryRecordMiddlewares(stack *middlewar
 	if err = addOpGetProfileHistoryRecordValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetProfileHistoryRecord"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetProfileHistoryRecord", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

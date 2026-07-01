@@ -62,9 +62,6 @@ func (c *Client) addOperationDisassociateManagedNotificationAdditionalChannelMid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -89,7 +86,7 @@ func (c *Client) addOperationDisassociateManagedNotificationAdditionalChannelMid
 	if err = addOpDisassociateManagedNotificationAdditionalChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateManagedNotificationAdditionalChannel"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisassociateManagedNotificationAdditionalChannel", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

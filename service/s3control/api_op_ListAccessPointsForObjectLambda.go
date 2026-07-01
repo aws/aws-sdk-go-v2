@@ -103,9 +103,6 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -136,7 +133,7 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	if err = addOpListAccessPointsForObjectLambdaValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAccessPointsForObjectLambda"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAccessPointsForObjectLambda", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

@@ -52,9 +52,6 @@ func (c *Client) addOperationDeleteMediaInsightsPipelineConfigurationMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -79,7 +76,7 @@ func (c *Client) addOperationDeleteMediaInsightsPipelineConfigurationMiddlewares
 	if err = addOpDeleteMediaInsightsPipelineConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMediaInsightsPipelineConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMediaInsightsPipelineConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

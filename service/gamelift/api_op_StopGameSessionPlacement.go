@@ -71,9 +71,6 @@ func (c *Client) addOperationStopGameSessionPlacementMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -101,7 +98,7 @@ func (c *Client) addOperationStopGameSessionPlacementMiddlewares(stack *middlewa
 	if err = addOpStopGameSessionPlacementValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StopGameSessionPlacement"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StopGameSessionPlacement", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

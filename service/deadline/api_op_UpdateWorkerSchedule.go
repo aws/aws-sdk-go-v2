@@ -85,9 +85,6 @@ func (c *Client) addOperationUpdateWorkerScheduleMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -115,7 +112,7 @@ func (c *Client) addOperationUpdateWorkerScheduleMiddlewares(stack *middleware.S
 	if err = addOpUpdateWorkerScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateWorkerSchedule"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateWorkerSchedule", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

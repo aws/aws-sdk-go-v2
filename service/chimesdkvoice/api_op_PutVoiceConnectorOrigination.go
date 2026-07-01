@@ -61,9 +61,6 @@ func (c *Client) addOperationPutVoiceConnectorOriginationMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,7 +85,7 @@ func (c *Client) addOperationPutVoiceConnectorOriginationMiddlewares(stack *midd
 	if err = addOpPutVoiceConnectorOriginationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutVoiceConnectorOrigination"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutVoiceConnectorOrigination", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

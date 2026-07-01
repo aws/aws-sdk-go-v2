@@ -61,9 +61,6 @@ func (c *Client) addOperationDeployWorkspaceApplicationsMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,7 +85,7 @@ func (c *Client) addOperationDeployWorkspaceApplicationsMiddlewares(stack *middl
 	if err = addOpDeployWorkspaceApplicationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeployWorkspaceApplications"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeployWorkspaceApplications", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

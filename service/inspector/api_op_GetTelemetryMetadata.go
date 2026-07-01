@@ -59,9 +59,6 @@ func (c *Client) addOperationGetTelemetryMetadataMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -86,7 +83,7 @@ func (c *Client) addOperationGetTelemetryMetadataMiddlewares(stack *middleware.S
 	if err = addOpGetTelemetryMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetTelemetryMetadata"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetTelemetryMetadata", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

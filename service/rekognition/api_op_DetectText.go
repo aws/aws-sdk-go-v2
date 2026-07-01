@@ -99,9 +99,6 @@ func (c *Client) addOperationDetectTextMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -126,7 +123,7 @@ func (c *Client) addOperationDetectTextMiddlewares(stack *middleware.Stack, opti
 	if err = addOpDetectTextValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DetectText"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DetectText", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

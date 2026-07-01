@@ -134,9 +134,6 @@ func (c *Client) addOperationGetContainerServiceMetricDataMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -161,7 +158,7 @@ func (c *Client) addOperationGetContainerServiceMetricDataMiddlewares(stack *mid
 	if err = addOpGetContainerServiceMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetContainerServiceMetricData"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetContainerServiceMetricData", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

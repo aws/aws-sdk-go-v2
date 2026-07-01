@@ -51,9 +51,6 @@ func (c *Client) addOperationDeleteAccessLogSubscriptionMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -78,7 +75,7 @@ func (c *Client) addOperationDeleteAccessLogSubscriptionMiddlewares(stack *middl
 	if err = addOpDeleteAccessLogSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteAccessLogSubscription"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteAccessLogSubscription", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

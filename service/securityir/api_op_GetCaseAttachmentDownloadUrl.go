@@ -65,9 +65,6 @@ func (c *Client) addOperationGetCaseAttachmentDownloadUrlMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,7 +89,7 @@ func (c *Client) addOperationGetCaseAttachmentDownloadUrlMiddlewares(stack *midd
 	if err = addOpGetCaseAttachmentDownloadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetCaseAttachmentDownloadUrl"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetCaseAttachmentDownloadUrl", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

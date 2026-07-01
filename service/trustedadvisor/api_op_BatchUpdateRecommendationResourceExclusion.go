@@ -64,9 +64,6 @@ func (c *Client) addOperationBatchUpdateRecommendationResourceExclusionMiddlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,7 +88,7 @@ func (c *Client) addOperationBatchUpdateRecommendationResourceExclusionMiddlewar
 	if err = addOpBatchUpdateRecommendationResourceExclusionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchUpdateRecommendationResourceExclusion"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchUpdateRecommendationResourceExclusion", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

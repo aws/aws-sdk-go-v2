@@ -80,9 +80,6 @@ func (c *Client) addOperationDisableFastSnapshotRestoresMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -107,7 +104,7 @@ func (c *Client) addOperationDisableFastSnapshotRestoresMiddlewares(stack *middl
 	if err = addOpDisableFastSnapshotRestoresValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisableFastSnapshotRestores"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DisableFastSnapshotRestores", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

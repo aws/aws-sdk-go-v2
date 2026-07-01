@@ -105,9 +105,6 @@ func (c *Client) addOperationDetachClusterNodeVolumeMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -132,7 +129,7 @@ func (c *Client) addOperationDetachClusterNodeVolumeMiddlewares(stack *middlewar
 	if err = addOpDetachClusterNodeVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DetachClusterNodeVolume"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DetachClusterNodeVolume", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

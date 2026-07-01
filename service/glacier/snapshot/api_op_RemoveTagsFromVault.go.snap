@@ -2,7 +2,6 @@ RemoveTagsFromVault
 	Initialize stack step
 		Glacier:DefaultAccountID
 		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

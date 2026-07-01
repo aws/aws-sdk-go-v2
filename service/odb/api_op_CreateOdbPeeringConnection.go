@@ -99,9 +99,6 @@ func (c *Client) addOperationCreateOdbPeeringConnectionMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -129,7 +126,7 @@ func (c *Client) addOperationCreateOdbPeeringConnectionMiddlewares(stack *middle
 	if err = addOpCreateOdbPeeringConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOdbPeeringConnection"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOdbPeeringConnection", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

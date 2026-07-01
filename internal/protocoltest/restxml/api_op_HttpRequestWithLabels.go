@@ -156,9 +156,6 @@ func (c *Client) addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -183,7 +180,7 @@ func (c *Client) addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.
 	if err = addOpHttpRequestWithLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "HttpRequestWithLabels"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "HttpRequestWithLabels", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

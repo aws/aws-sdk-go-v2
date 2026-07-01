@@ -168,9 +168,6 @@ func (c *Client) addOperationGenerateEmbedUrlForAnonymousUserMiddlewares(stack *
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -195,7 +192,7 @@ func (c *Client) addOperationGenerateEmbedUrlForAnonymousUserMiddlewares(stack *
 	if err = addOpGenerateEmbedUrlForAnonymousUserValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GenerateEmbedUrlForAnonymousUser"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GenerateEmbedUrlForAnonymousUser", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

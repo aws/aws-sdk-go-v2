@@ -82,9 +82,6 @@ func (c *Client) addOperationDeauthorizeDataShareMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -109,7 +106,7 @@ func (c *Client) addOperationDeauthorizeDataShareMiddlewares(stack *middleware.S
 	if err = addOpDeauthorizeDataShareValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeauthorizeDataShare"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeauthorizeDataShare", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

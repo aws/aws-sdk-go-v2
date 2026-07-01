@@ -124,9 +124,6 @@ func (c *Client) addOperationGetNetworkResourceRelationshipsMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -151,7 +148,7 @@ func (c *Client) addOperationGetNetworkResourceRelationshipsMiddlewares(stack *m
 	if err = addOpGetNetworkResourceRelationshipsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetNetworkResourceRelationships"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetNetworkResourceRelationships", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

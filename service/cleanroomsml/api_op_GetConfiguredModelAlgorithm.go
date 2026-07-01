@@ -125,9 +125,6 @@ func (c *Client) addOperationGetConfiguredModelAlgorithmMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -152,7 +149,7 @@ func (c *Client) addOperationGetConfiguredModelAlgorithmMiddlewares(stack *middl
 	if err = addOpGetConfiguredModelAlgorithmValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetConfiguredModelAlgorithm"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetConfiguredModelAlgorithm", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

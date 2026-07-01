@@ -123,9 +123,6 @@ func (c *Client) addOperationUpdatePackageVersionsStatusMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -150,7 +147,7 @@ func (c *Client) addOperationUpdatePackageVersionsStatusMiddlewares(stack *middl
 	if err = addOpUpdatePackageVersionsStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdatePackageVersionsStatus"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdatePackageVersionsStatus", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

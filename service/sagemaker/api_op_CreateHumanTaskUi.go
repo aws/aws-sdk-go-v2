@@ -71,9 +71,6 @@ func (c *Client) addOperationCreateHumanTaskUiMiddlewares(stack *middleware.Stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -98,7 +95,7 @@ func (c *Client) addOperationCreateHumanTaskUiMiddlewares(stack *middleware.Stac
 	if err = addOpCreateHumanTaskUiValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateHumanTaskUi"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateHumanTaskUi", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

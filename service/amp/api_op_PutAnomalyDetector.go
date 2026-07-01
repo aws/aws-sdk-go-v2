@@ -103,9 +103,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -133,7 +130,7 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 	if err = addOpPutAnomalyDetectorValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutAnomalyDetector"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutAnomalyDetector", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

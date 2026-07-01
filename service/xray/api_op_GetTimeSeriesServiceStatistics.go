@@ -92,9 +92,6 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -119,7 +116,7 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 	if err = addOpGetTimeSeriesServiceStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetTimeSeriesServiceStatistics"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetTimeSeriesServiceStatistics", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

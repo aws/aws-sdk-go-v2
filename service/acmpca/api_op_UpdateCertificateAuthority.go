@@ -105,9 +105,6 @@ func (c *Client) addOperationUpdateCertificateAuthorityMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -132,7 +129,7 @@ func (c *Client) addOperationUpdateCertificateAuthorityMiddlewares(stack *middle
 	if err = addOpUpdateCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateCertificateAuthority"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateCertificateAuthority", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

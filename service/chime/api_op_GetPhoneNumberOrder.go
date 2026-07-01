@@ -58,9 +58,6 @@ func (c *Client) addOperationGetPhoneNumberOrderMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -85,7 +82,7 @@ func (c *Client) addOperationGetPhoneNumberOrderMiddlewares(stack *middleware.St
 	if err = addOpGetPhoneNumberOrderValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetPhoneNumberOrder"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetPhoneNumberOrder", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

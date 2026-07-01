@@ -133,9 +133,6 @@ func (c *Client) addOperationStartTargetedSentimentDetectionJobMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -163,7 +160,7 @@ func (c *Client) addOperationStartTargetedSentimentDetectionJobMiddlewares(stack
 	if err = addOpStartTargetedSentimentDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartTargetedSentimentDetectionJob"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartTargetedSentimentDetectionJob", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

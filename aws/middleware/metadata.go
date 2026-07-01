@@ -15,6 +15,8 @@ type RegisterServiceMetadata struct {
 	SigningName   string
 	Region        string
 	OperationName string
+
+	RequiresLegacyEndpoints bool
 }
 
 // ID returns the middleware identifier.
@@ -37,6 +39,9 @@ func (s RegisterServiceMetadata) HandleInitialize(
 	}
 	if len(s.OperationName) > 0 {
 		ctx = setOperationName(ctx, s.OperationName)
+	}
+	if s.RequiresLegacyEndpoints {
+		ctx = SetRequiresLegacyEndpoints(ctx, true)
 	}
 	return next.HandleInitialize(ctx, in)
 }

@@ -75,9 +75,6 @@ func (c *Client) addOperationDescribeMaintenanceWindowExecutionTasksMiddlewares(
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -102,7 +99,7 @@ func (c *Client) addOperationDescribeMaintenanceWindowExecutionTasksMiddlewares(
 	if err = addOpDescribeMaintenanceWindowExecutionTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeMaintenanceWindowExecutionTasks"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeMaintenanceWindowExecutionTasks", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

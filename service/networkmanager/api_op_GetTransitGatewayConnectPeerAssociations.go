@@ -70,9 +70,6 @@ func (c *Client) addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -97,7 +94,7 @@ func (c *Client) addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares
 	if err = addOpGetTransitGatewayConnectPeerAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetTransitGatewayConnectPeerAssociations"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetTransitGatewayConnectPeerAssociations", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

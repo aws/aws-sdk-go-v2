@@ -151,9 +151,6 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -181,7 +178,7 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 	if err = addOpCreateOnlineEvaluationConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOnlineEvaluationConfig"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOnlineEvaluationConfig", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

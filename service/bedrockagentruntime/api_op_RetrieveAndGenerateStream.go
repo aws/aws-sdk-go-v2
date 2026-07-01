@@ -99,9 +99,6 @@ func (c *Client) addOperationRetrieveAndGenerateStreamMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamRetrieveAndGenerateStreamMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -123,7 +120,7 @@ func (c *Client) addOperationRetrieveAndGenerateStreamMiddlewares(stack *middlew
 	if err = addOpRetrieveAndGenerateStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RetrieveAndGenerateStream"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RetrieveAndGenerateStream", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -282,9 +282,6 @@ func (c *Client) addOperationGenerateDataKeyPairMiddlewares(stack *middleware.St
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -309,7 +306,7 @@ func (c *Client) addOperationGenerateDataKeyPairMiddlewares(stack *middleware.St
 	if err = addOpGenerateDataKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GenerateDataKeyPair"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GenerateDataKeyPair", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

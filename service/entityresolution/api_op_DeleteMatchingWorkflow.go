@@ -58,9 +58,6 @@ func (c *Client) addOperationDeleteMatchingWorkflowMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -85,7 +82,7 @@ func (c *Client) addOperationDeleteMatchingWorkflowMiddlewares(stack *middleware
 	if err = addOpDeleteMatchingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMatchingWorkflow"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMatchingWorkflow", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

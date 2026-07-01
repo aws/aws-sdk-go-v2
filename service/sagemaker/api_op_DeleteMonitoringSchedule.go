@@ -53,9 +53,6 @@ func (c *Client) addOperationDeleteMonitoringScheduleMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -80,7 +77,7 @@ func (c *Client) addOperationDeleteMonitoringScheduleMiddlewares(stack *middlewa
 	if err = addOpDeleteMonitoringScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMonitoringSchedule"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteMonitoringSchedule", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

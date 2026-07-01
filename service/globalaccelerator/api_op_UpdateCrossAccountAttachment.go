@@ -97,9 +97,6 @@ func (c *Client) addOperationUpdateCrossAccountAttachmentMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -124,7 +121,7 @@ func (c *Client) addOperationUpdateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = addOpUpdateCrossAccountAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateCrossAccountAttachment"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateCrossAccountAttachment", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

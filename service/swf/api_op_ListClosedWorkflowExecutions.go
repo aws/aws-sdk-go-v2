@@ -165,9 +165,6 @@ func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -192,7 +189,7 @@ func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *midd
 	if err = addOpListClosedWorkflowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListClosedWorkflowExecutions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListClosedWorkflowExecutions", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

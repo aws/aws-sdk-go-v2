@@ -140,9 +140,6 @@ func (c *Client) addOperationPutBucketAnalyticsConfigurationMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -173,7 +170,7 @@ func (c *Client) addOperationPutBucketAnalyticsConfigurationMiddlewares(stack *m
 	if err = addOpPutBucketAnalyticsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutBucketAnalyticsConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutBucketAnalyticsConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

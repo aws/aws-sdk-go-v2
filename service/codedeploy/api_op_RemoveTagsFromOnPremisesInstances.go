@@ -58,9 +58,6 @@ func (c *Client) addOperationRemoveTagsFromOnPremisesInstancesMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -85,7 +82,7 @@ func (c *Client) addOperationRemoveTagsFromOnPremisesInstancesMiddlewares(stack 
 	if err = addOpRemoveTagsFromOnPremisesInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RemoveTagsFromOnPremisesInstances"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RemoveTagsFromOnPremisesInstances", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

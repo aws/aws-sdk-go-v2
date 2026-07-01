@@ -52,9 +52,6 @@ func (c *Client) addOperationDeleteSupplementalTaxRegistrationMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -79,7 +76,7 @@ func (c *Client) addOperationDeleteSupplementalTaxRegistrationMiddlewares(stack 
 	if err = addOpDeleteSupplementalTaxRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSupplementalTaxRegistration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteSupplementalTaxRegistration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

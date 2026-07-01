@@ -93,9 +93,6 @@ func (c *Client) addOperationDescribeExtensionPackAssociationsMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -120,7 +117,7 @@ func (c *Client) addOperationDescribeExtensionPackAssociationsMiddlewares(stack 
 	if err = addOpDescribeExtensionPackAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeExtensionPackAssociations"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeExtensionPackAssociations", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

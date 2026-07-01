@@ -126,9 +126,6 @@ func (c *Client) addOperationCreateBucketMetadataTableConfigurationMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -162,7 +159,7 @@ func (c *Client) addOperationCreateBucketMetadataTableConfigurationMiddlewares(s
 	if err = addOpCreateBucketMetadataTableConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateBucketMetadataTableConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateBucketMetadataTableConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

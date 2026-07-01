@@ -100,9 +100,6 @@ func (c *Client) addOperationDescribeIpamExternalResourceVerificationTokensMiddl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -124,7 +121,7 @@ func (c *Client) addOperationDescribeIpamExternalResourceVerificationTokensMiddl
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeIpamExternalResourceVerificationTokens"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeIpamExternalResourceVerificationTokens", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

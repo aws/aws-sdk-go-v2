@@ -66,9 +66,6 @@ func (c *Client) addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares(s
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -93,7 +90,7 @@ func (c *Client) addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares(s
 	if err = addOpDeleteVpcEndpointServiceConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteVpcEndpointServiceConfigurations"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteVpcEndpointServiceConfigurations", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

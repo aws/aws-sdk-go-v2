@@ -136,9 +136,6 @@ func (c *Client) addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -163,7 +160,7 @@ func (c *Client) addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *m
 	if err = addOpUpdateElasticsearchDomainConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateElasticsearchDomainConfig"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateElasticsearchDomainConfig", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

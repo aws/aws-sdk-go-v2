@@ -74,9 +74,6 @@ func (c *Client) addOperationStartNetworkInsightsAccessScopeAnalysisMiddlewares(
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -104,7 +101,7 @@ func (c *Client) addOperationStartNetworkInsightsAccessScopeAnalysisMiddlewares(
 	if err = addOpStartNetworkInsightsAccessScopeAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartNetworkInsightsAccessScopeAnalysis"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartNetworkInsightsAccessScopeAnalysis", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

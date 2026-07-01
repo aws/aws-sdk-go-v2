@@ -1,9 +1,8 @@
 RenameObject
 	Initialize stack step
 		RegisterServiceMetadata
-		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
 		S3Shared:ARNLookup
+		OperationIdempotencyTokenAutoFill
 		SetLogger
 		OperationInputValidation
 	Serialize stack step

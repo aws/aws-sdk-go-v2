@@ -85,9 +85,6 @@ func (c *Client) addOperationAttachClassicLinkVpcMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -112,7 +109,7 @@ func (c *Client) addOperationAttachClassicLinkVpcMiddlewares(stack *middleware.S
 	if err = addOpAttachClassicLinkVpcValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AttachClassicLinkVpc"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AttachClassicLinkVpc", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

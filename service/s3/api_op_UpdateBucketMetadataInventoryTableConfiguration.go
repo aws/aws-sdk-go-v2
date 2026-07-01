@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateBucketMetadataInventoryTableConfigurationMidd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -161,7 +158,7 @@ func (c *Client) addOperationUpdateBucketMetadataInventoryTableConfigurationMidd
 	if err = addOpUpdateBucketMetadataInventoryTableConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateBucketMetadataInventoryTableConfiguration"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateBucketMetadataInventoryTableConfiguration", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

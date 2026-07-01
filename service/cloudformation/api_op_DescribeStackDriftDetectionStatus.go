@@ -134,9 +134,6 @@ func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -161,7 +158,7 @@ func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack 
 	if err = addOpDescribeStackDriftDetectionStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeStackDriftDetectionStatus"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DescribeStackDriftDetectionStatus", options.EndpointResolver != nil), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
