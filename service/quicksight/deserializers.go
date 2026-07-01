@@ -82473,6 +82473,69 @@ func awsRestjson1_deserializeDocumentFieldTooltipItem(v **types.FieldTooltipItem
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFileSource(v **types.FileSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileSource
+	if *v == nil {
+		sv = &types.FileSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DataSourceArn = ptr.String(jtv)
+			}
+
+		case "InputColumns":
+			if err := awsRestjson1_deserializeDocumentInputColumnList(&sv.InputColumns, value); err != nil {
+				return err
+			}
+
+		case "SheetIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SheetIndex = int32(i64)
+			}
+
+		case "UploadSettings":
+			if err := awsRestjson1_deserializeDocumentUploadSettings(&sv.UploadSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilledMapAggregatedFieldWells(v **types.FilledMapAggregatedFieldWells, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -102440,6 +102503,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.PhysicalTableMemberCustomSql{Value: mv}
+			break loop
+
+		case "FileSource":
+			var mv types.FileSource
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFileSource(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PhysicalTableMemberFileSource{Value: mv}
 			break loop
 
 		case "RelationalTable":

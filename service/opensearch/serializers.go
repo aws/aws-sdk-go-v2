@@ -1266,6 +1266,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		}
 	}
 
+	if len(v.EngineMode) > 0 {
+		ok := object.Key("EngineMode")
+		ok.String(string(v.EngineMode))
+	}
+
 	if v.EngineVersion != nil {
 		ok := object.Key("EngineVersion")
 		ok.String(*v.EngineVersion)
@@ -1323,6 +1328,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		if err := awsRestjson1_serializeDocumentTagList(v.TagList, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UseCase) > 0 {
+		ok := object.Key("UseCase")
+		ok.String(string(v.UseCase))
 	}
 
 	if v.VPCOptions != nil {
@@ -4950,6 +4960,104 @@ func awsRestjson1_serializeOpHttpBindingsGetUpgradeStatusInput(v *GetUpgradeStat
 	return nil
 }
 
+type awsRestjson1_serializeOpInsightFeedback struct {
+}
+
+func (*awsRestjson1_serializeOpInsightFeedback) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInsightFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InsightFeedbackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2021-01-01/opensearch/insight-feedback")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentInsightFeedbackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsInsightFeedbackInput(v *InsightFeedbackInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentInsightFeedbackInput(v *InsightFeedbackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entity != nil {
+		ok := object.Key("Entity")
+		if err := awsRestjson1_serializeDocumentInsightFeedbackEntity(v.Entity, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FeedbackText != nil {
+		ok := object.Key("FeedbackText")
+		ok.String(*v.FeedbackText)
+	}
+
+	if v.InsightId != nil {
+		ok := object.Key("InsightId")
+		ok.String(*v.InsightId)
+	}
+
+	if len(v.Thumbs) > 0 {
+		ok := object.Key("Thumbs")
+		ok.String(string(v.Thumbs))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListApplications struct {
 }
 
@@ -7530,6 +7638,11 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 		}
 	}
 
+	if len(v.EngineMode) > 0 {
+		ok := object.Key("EngineMode")
+		ok.String(string(v.EngineMode))
+	}
+
 	if v.IdentityCenterOptions != nil {
 		ok := object.Key("IdentityCenterOptions")
 		if err := awsRestjson1_serializeDocumentIdentityCenterOptionsInput(v.IdentityCenterOptions, ok); err != nil {
@@ -7575,6 +7688,11 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 		if err := awsRestjson1_serializeDocumentSoftwareUpdateOptions(v.SoftwareUpdateOptions, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UseCase) > 0 {
+		ok := object.Key("UseCase")
+		ok.String(string(v.UseCase))
 	}
 
 	if v.VPCOptions != nil {
@@ -9026,6 +9144,23 @@ func awsRestjson1_serializeDocumentIndexSchema(v document.Interface, value smith
 }
 
 func awsRestjson1_serializeDocumentInsightEntity(v *types.InsightEntity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsightFeedbackEntity(v *types.InsightFeedbackEntity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

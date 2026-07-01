@@ -923,9 +923,9 @@ func init() {
 	FlattenedXmlMapWithXmlNameOutput_myMap = FlattenedXmlMapWithXmlNameOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNameOutputMap, &smithytraits.XMLName{Name: "KVP"},
 		&smithytraits.XMLFlattened{})
 
-	FlattenedXmlMapWithXmlNamespaceOutput_myMap = FlattenedXmlMapWithXmlNamespaceOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNamespaceOutputMap, &smithytraits.XMLNamespace{URI: "https://the-member.example.com"},
-		&smithytraits.XMLName{Name: "KVP"},
-		&smithytraits.XMLFlattened{})
+	FlattenedXmlMapWithXmlNamespaceOutput_myMap = FlattenedXmlMapWithXmlNamespaceOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNamespaceOutputMap, &smithytraits.XMLName{Name: "KVP"},
+		&smithytraits.XMLFlattened{},
+		&smithytraits.XMLNamespace{URI: "https://the-member.example.com"})
 
 	FractionalSecondsOutput_datetime = FractionalSecondsOutput.AddMember("datetime", _DateTime)
 

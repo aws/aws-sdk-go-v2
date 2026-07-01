@@ -299,6 +299,9 @@ func ExamplePhysicalTable_outputUsage() {
 	case *types.PhysicalTableMemberCustomSql:
 		_ = v.Value // Value is types.CustomSql
 
+	case *types.PhysicalTableMemberFileSource:
+		_ = v.Value // Value is types.FileSource
+
 	case *types.PhysicalTableMemberRelationalTable:
 		_ = v.Value // Value is types.RelationalTable
 
@@ -317,6 +320,7 @@ func ExamplePhysicalTable_outputUsage() {
 	}
 }
 
+var _ *types.FileSource
 var _ *types.S3Source
 var _ *types.CustomSql
 var _ *types.RelationalTable

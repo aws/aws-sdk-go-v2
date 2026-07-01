@@ -2513,6 +2513,25 @@ func (NotificationStatus) Values() []NotificationStatus {
 	}
 }
 
+type NotificationType string
+
+// Enum values for NotificationType
+const (
+	NotificationTypeWidgetView   NotificationType = "WIDGET_VIEW"
+	NotificationTypeWidgetAction NotificationType = "WIDGET_ACTION"
+)
+
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"WIDGET_VIEW",
+		"WIDGET_ACTION",
+	}
+}
+
 type NumberComparisonType string
 
 // Enum values for NumberComparisonType

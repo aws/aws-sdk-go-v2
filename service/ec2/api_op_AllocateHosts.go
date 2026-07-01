@@ -64,6 +64,9 @@ type AllocateHostsInput struct {
 	// [Ensuring Idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	// The CPU configuration options to apply to the Dedicated Host.
+	CpuOptions *types.HostCpuOptionsRequest
+
 	// Indicates whether to enable or disable host maintenance for the Dedicated Host.
 	// For more information, see [Host maintenance]in the Amazon EC2 User Guide.
 	//

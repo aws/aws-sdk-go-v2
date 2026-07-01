@@ -23,6 +23,10 @@ import (
 // want to use. If you change the files at a later time, you will need to create a
 // new Amazon GameLift Streams application.
 //
+// Creating an application is the only time Amazon GameLift Streams accesses your
+// Amazon S3 bucket. After the application reaches READY status, you can delete
+// the original files from your Amazon S3 bucket without affecting the application.
+//
 // If the request is successful, Amazon GameLift Streams begins to create an
 // application and sets the status to INITIALIZED . When an application reaches
 // READY status, you can use the application to set up stream groups and start

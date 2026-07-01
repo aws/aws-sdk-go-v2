@@ -8880,6 +8880,33 @@ type FieldTooltipItem struct {
 	noSmithyDocumentSerde
 }
 
+// A physical table type that contains the schema and upload settings for a
+// file-based data source.
+type FileSource struct {
+
+	// The Amazon Resource Name (ARN) for the data source.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The column schema of the file.
+	//
+	// This member is required.
+	InputColumns []InputColumn
+
+	// The zero-based index of the sheet to use within the file. For files that
+	// contain multiple sheets, this identifies which sheet to read. Files that contain
+	// a single sheet, or that have no concept of sheets, use sheet 0.
+	//
+	// This member is required.
+	SheetIndex int32
+
+	// Information about the format for the source file.
+	UploadSettings *UploadSettings
+
+	noSmithyDocumentSerde
+}
+
 // The aggregated field well of the filled map.
 type FilledMapAggregatedFieldWells struct {
 
@@ -14863,6 +14890,7 @@ type Permission struct {
 // The following types satisfy this interface:
 //
 //	PhysicalTableMemberCustomSql
+//	PhysicalTableMemberFileSource
 //	PhysicalTableMemberRelationalTable
 //	PhysicalTableMemberS3Source
 //	PhysicalTableMemberSaaSTable
@@ -14879,6 +14907,15 @@ type PhysicalTableMemberCustomSql struct {
 
 func (*PhysicalTableMemberCustomSql) isPhysicalTable() {}
 
+// A physical table type for a file data source.
+type PhysicalTableMemberFileSource struct {
+	Value FileSource
+
+	noSmithyDocumentSerde
+}
+
+func (*PhysicalTableMemberFileSource) isPhysicalTable() {}
+
 // A physical table type for relational data sources.
 type PhysicalTableMemberRelationalTable struct {
 	Value RelationalTable
@@ -14888,7 +14925,7 @@ type PhysicalTableMemberRelationalTable struct {
 
 func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
 
-// A physical table type for as S3 data source.
+// A physical table type for an S3 data source.
 type PhysicalTableMemberS3Source struct {
 	Value S3Source
 

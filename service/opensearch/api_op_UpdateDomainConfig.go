@@ -115,6 +115,10 @@ type UpdateDomainConfigInput struct {
 	// Encryption at rest options for the domain.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
+	// The engine mode for the domain. The engine mode can't be changed after the
+	// domain is created. For valid values, see EngineMode .
+	EngineMode types.EngineMode
+
 	// Specify either dual stack or IPv4 as your IP address type. Dual stack allows
 	// you to share domain resources across IPv4 and IPv6 address types, and is the
 	// recommended option. If your IP address type is currently set to dual stack, you
@@ -139,6 +143,9 @@ type UpdateDomainConfigInput struct {
 
 	// Service software update options for the domain.
 	SoftwareUpdateOptions *types.SoftwareUpdateOptions
+
+	// The primary use case for the domain. For valid values, see DomainUseCase .
+	UseCase types.DomainUseCase
 
 	// Options to specify the subnets and security groups for a VPC endpoint. For more
 	// information, see [Launching your Amazon OpenSearch Service domains using a VPC].

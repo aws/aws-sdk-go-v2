@@ -1010,6 +1010,26 @@ func (m *validateOpGetUpgradeStatus) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInsightFeedback struct {
+}
+
+func (*validateOpInsightFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInsightFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InsightFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInsightFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDataSourceAttachments struct {
 }
 
@@ -1810,6 +1830,10 @@ func addOpGetUpgradeStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUpgradeStatus{}, middleware.After)
 }
 
+func addOpInsightFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInsightFeedback{}, middleware.After)
+}
+
 func addOpListDataSourceAttachmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSourceAttachments{}, middleware.After)
 }
@@ -2092,6 +2116,24 @@ func validateInsightEntity(v *types.InsightEntity) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InsightEntity"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightFeedbackEntity(v *types.InsightFeedbackEntity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightFeedbackEntity"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3314,6 +3356,31 @@ func validateOpGetUpgradeStatusInput(v *GetUpgradeStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetUpgradeStatusInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInsightFeedbackInput(v *InsightFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightFeedbackInput"}
+	if v.Entity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
+	} else if v.Entity != nil {
+		if err := validateInsightFeedbackEntity(v.Entity); err != nil {
+			invalidParams.AddNested("Entity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if len(v.Thumbs) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Thumbs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

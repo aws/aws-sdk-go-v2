@@ -65,6 +65,7 @@
         "api_op_GetPackageVersionHistory.go",
         "api_op_GetUpgradeHistory.go",
         "api_op_GetUpgradeStatus.go",
+        "api_op_InsightFeedback.go",
         "api_op_ListApplications.go",
         "api_op_ListDataSourceAttachments.go",
         "api_op_ListDataSources.go",

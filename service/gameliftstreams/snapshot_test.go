@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateStreamGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateStreamSessionAdminShell(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStreamSessionAdminShell(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateStreamSessionAdminShell")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateStreamSessionConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateStreamSessionConnection(context.Background(), nil, func(o *Options) {
@@ -390,6 +402,18 @@ func TestUpdateSnapshot_CreateStreamGroup(t *testing.T) {
 	_, err := svc.CreateStreamGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateStreamGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateStreamSessionAdminShell(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStreamSessionAdminShell(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateStreamSessionAdminShell")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

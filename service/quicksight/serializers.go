@@ -37920,6 +37920,37 @@ func awsRestjson1_serializeDocumentFieldTooltipItem(v *types.FieldTooltipItem, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFileSource(v *types.FileSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSourceArn != nil {
+		ok := object.Key("DataSourceArn")
+		ok.String(*v.DataSourceArn)
+	}
+
+	if v.InputColumns != nil {
+		ok := object.Key("InputColumns")
+		if err := awsRestjson1_serializeDocumentInputColumnList(v.InputColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("SheetIndex")
+		ok.Integer(v.SheetIndex)
+	}
+
+	if v.UploadSettings != nil {
+		ok := object.Key("UploadSettings")
+		if err := awsRestjson1_serializeDocumentUploadSettings(v.UploadSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilledMapAggregatedFieldWells(v *types.FilledMapAggregatedFieldWells, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -46322,6 +46353,12 @@ func awsRestjson1_serializeDocumentPhysicalTable(v types.PhysicalTable, value sm
 	case *types.PhysicalTableMemberCustomSql:
 		av := object.Key("CustomSql")
 		if err := awsRestjson1_serializeDocumentCustomSql(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.PhysicalTableMemberFileSource:
+		av := object.Key("FileSource")
+		if err := awsRestjson1_serializeDocumentFileSource(&uv.Value, av); err != nil {
 			return err
 		}
 

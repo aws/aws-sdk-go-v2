@@ -1,0 +1,8 @@
+{
+    "id": "0e73ca7f-e613-4f49-9cda-fe2ff40d4073",
+    "type": "feature",
+    "description": "Use declarative policies to enable VPC Encryption Controls across your organization or select accounts. Added AMD SEV-SNP support for EC2 Dedicated Hosts. Managed resource visibility settings control whether AWS-provisioned resources in your account appear in console views and API list operations.",
+    "modules": [
+        "service/ec2"
+    ]
+}

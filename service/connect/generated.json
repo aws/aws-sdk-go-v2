@@ -290,6 +290,7 @@
         "api_op_SearchWorkspaces.go",
         "api_op_SendChatIntegrationEvent.go",
         "api_op_SendOutboundEmail.go",
+        "api_op_SendOutboundWebNotification.go",
         "api_op_StartAttachedFileUpload.go",
         "api_op_StartChatContact.go",
         "api_op_StartContactConversationalAnalyticsJob.go",

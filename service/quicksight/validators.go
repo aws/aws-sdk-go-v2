@@ -12995,6 +12995,28 @@ func validateFieldTooltipItem(v *types.FieldTooltipItem) error {
 	}
 }
 
+func validateFileSource(v *types.FileSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileSource"}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if v.InputColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
+	} else if v.InputColumns != nil {
+		if err := validateInputColumnList(v.InputColumns); err != nil {
+			invalidParams.AddNested("InputColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilledMapAggregatedFieldWells(v *types.FilledMapAggregatedFieldWells) error {
 	if v == nil {
 		return nil
@@ -18304,6 +18326,11 @@ func validatePhysicalTable(v types.PhysicalTable) error {
 	case *types.PhysicalTableMemberCustomSql:
 		if err := validateCustomSql(&uv.Value); err != nil {
 			invalidParams.AddNested("[CustomSql]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PhysicalTableMemberFileSource:
+		if err := validateFileSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[FileSource]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.PhysicalTableMemberRelationalTable:

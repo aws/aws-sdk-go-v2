@@ -2404,6 +2404,17 @@ type ContactSearchSummarySegmentAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
+// Optional attributes used to populate the content of an outbound web
+// notification, such as recommender configuration for personalized content.
+type ContentAttributes struct {
+
+	// Configuration for the recommender used to generate personalized recommendations
+	// for the notification content.
+	RecommenderConfig *RecommenderConfig
+
+	noSmithyDocumentSerde
+}
+
 // An object that can be used to specify Tag conditions inside the SearchFilter .
 // This accepts an OR or AND (List of List) input where:
 //
@@ -8741,6 +8752,27 @@ type RealTimeContactAnalysisTranscriptItemWithContent struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for the recommender used to generate personalized recommendations
+// included in an outbound web notification.
+type RecommenderConfig struct {
+
+	// The name of the Amazon Personalize domain that hosts the recommender.
+	//
+	// This member is required.
+	DomainName *string
+
+	// The name of the recommender used to generate the recommendations.
+	//
+	// This member is required.
+	RecommenderName *string
+
+	// A map of contextual key-value pairs supplied to the recommender to influence
+	// the recommendations returned.
+	Context map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a voice recording, chat transcript, or screen recording.
 type RecordingInfo struct {
 
@@ -11824,6 +11856,57 @@ type VoiceRecordingConfiguration struct {
 
 	// Identifies which track is being recorded.
 	VoiceRecordingTrack VoiceRecordingTrack
+
+	noSmithyDocumentSerde
+}
+
+// The content of an outbound web notification, including the notification type,
+// the view to render, and any optional attributes used to populate the view.
+type WebNotificationContent struct {
+
+	// The type of web notification to send.
+	//
+	// This member is required.
+	Type NotificationType
+
+	// Optional attributes used to populate the notification content, such as
+	// recommender configuration for personalized content.
+	Attributes *ContentAttributes
+
+	// The Amazon Resource Name (ARN) of the view to render for the notification.
+	ViewArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of an outbound web notification. Identifies the campaign and
+// outbound request that triggered the notification.
+type WebNotificationSource struct {
+
+	// Information about the campaign that triggered the web notification, including
+	// the campaign identifier and outbound request identifier.
+	//
+	// This member is required.
+	SourceCampaign *SourceCampaign
+
+	noSmithyDocumentSerde
+}
+
+// The destination for an outbound web notification, specifying the communication
+// widget that delivers the notification and the customer profile of the recipient.
+type WidgetDestination struct {
+
+	// The identifier of the customer profile associated with the browser session that
+	// should receive the notification.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The identifier of the communication widget that delivers the notification to
+	// the customer's browser.
+	//
+	// This member is required.
+	WidgetId *string
 
 	noSmithyDocumentSerde
 }

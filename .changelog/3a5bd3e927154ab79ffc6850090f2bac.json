@@ -1,0 +1,8 @@
+{
+    "id": "3a5bd3e9-2715-4ab7-9ffc-6850090f2bac",
+    "type": "feature",
+    "description": "Added CreateStreamSessionAdminShell API operation to enable customers to establish secure terminal connections to the live runtime environment of streaming sessions for troubleshooting purposes.",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

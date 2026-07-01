@@ -2046,6 +2046,7 @@ func init() {
 	DatetimeOffsetsOutput_datetime = DatetimeOffsetsOutput.AddMember("datetime", _DateTime)
 
 	HostLabelHeaderInput_accountId = HostLabelHeaderInput.AddMember("accountId", smithyprelude.String, &smithytraits.HostLabel{},
+
 		&smithytraits.HTTPHeader{Name: "X-Amz-Account-Id"})
 
 	EndpointWithHostLabelOperationRequest_label = EndpointWithHostLabelOperationRequest.AddMember("label", smithyprelude.String, &smithytraits.HostLabel{})
@@ -2060,9 +2061,9 @@ func init() {
 	FlattenedXmlMapWithXmlNameResponse_myMap = FlattenedXmlMapWithXmlNameResponse.AddMember("myMap", _FlattenedXmlMapWithXmlNameInputOutputMap, &smithytraits.XMLName{Name: "KVP"},
 		&smithytraits.XMLFlattened{})
 
-	FlattenedXmlMapWithXmlNamespaceOutput_myMap = FlattenedXmlMapWithXmlNamespaceOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNamespaceOutputMap, &smithytraits.XMLNamespace{URI: "https://the-member.example.com"},
-		&smithytraits.XMLName{Name: "KVP"},
-		&smithytraits.XMLFlattened{})
+	FlattenedXmlMapWithXmlNamespaceOutput_myMap = FlattenedXmlMapWithXmlNamespaceOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNamespaceOutputMap, &smithytraits.XMLName{Name: "KVP"},
+		&smithytraits.XMLFlattened{},
+		&smithytraits.XMLNamespace{URI: "https://the-member.example.com"})
 
 	FractionalSecondsOutput_datetime = FractionalSecondsOutput.AddMember("datetime", _DateTime)
 
@@ -2112,12 +2113,15 @@ func init() {
 	HttpRequestWithGreedyLabelInPathInput_baz = HttpRequestWithGreedyLabelInPathInput.AddMember("baz", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("memberEpochSeconds", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
+
 		&smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("memberHttpDate", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "http-date"},
+
 		&smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_memberDateTime = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("memberDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+
 		&smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_defaultFormat = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("defaultFormat", smithyprelude.Timestamp, &smithytraits.HTTPLabel{})

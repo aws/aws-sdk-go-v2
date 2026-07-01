@@ -3446,6 +3446,18 @@ func TestCheckSnapshot_SendOutboundEmail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendOutboundWebNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendOutboundWebNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendOutboundWebNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAttachedFileUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAttachedFileUpload(context.Background(), nil, func(o *Options) {
@@ -7926,6 +7938,18 @@ func TestUpdateSnapshot_SendOutboundEmail(t *testing.T) {
 	_, err := svc.SendOutboundEmail(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendOutboundEmail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendOutboundWebNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendOutboundWebNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendOutboundWebNotification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

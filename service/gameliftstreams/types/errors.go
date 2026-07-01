@@ -142,6 +142,35 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The terminal connection to the stream session is not yet available. Wait before
+// retrying the request.
+type StreamSessionAccessNotReadyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StreamSessionAccessNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StreamSessionAccessNotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StreamSessionAccessNotReadyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "StreamSessionAccessNotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *StreamSessionAccessNotReadyException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The request was denied due to request throttling. Retry the request after the
 // suggested wait time.
 type ThrottlingException struct {

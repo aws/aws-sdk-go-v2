@@ -2442,9 +2442,9 @@ type Container struct {
 	Duration *float64
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
-	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, or MPEG-PS. Note that this will be blank
-	// if your media file has a format that the MediaConvert Probe operation does not
-	// recognize.
+	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, or MP3. Note that this will be
+	// blank if your media file has a format that the MediaConvert Probe operation does
+	// not recognize.
 	Format Format
 
 	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
@@ -2925,6 +2925,30 @@ type DolbyVisionLevel6Metadata struct {
 	// Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the
 	// highest frame-average brightness in the entire stream. Measured in nits.
 	MaxFall *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for integer-second duration normalization. When this preprocessor is
+// present, the output duration will be adjusted to an exact integer-second
+// boundary. If the input is within the trim threshold of an integer second,
+// trailing frames are dropped. If within the compression threshold and less than
+// 500ms over the previous integer second, the output is sped up slightly.
+// Otherwise, black frames are padded to the next integer second.
+type DurationControl struct {
+
+	// Required. Denominator of the maximum allowed compression ratio.
+	IntegerDurationMaximumCompressionDenominator *int32
+
+	// Required. Numerator of the maximum allowed compression ratio, defined as
+	// overrun divided by target duration. For example, numerator 5 with denominator
+	// 100 means max 5% compression. Set to 0 to disable compression entirely (only
+	// trim or pad will be used).
+	IntegerDurationMaximumCompressionNumerator *int32
+
+	// Maximum number of fractional milliseconds past an integer second that qualify
+	// for the trim path (frame dropping). Default is 0 (trimming disabled).
+	IntegerDurationTrimThresholdMilliseconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -4025,6 +4049,11 @@ type H264Settings struct {
 
 	// Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
 	EntropyEncoding H264EntropyEncoding
+
+	// Enable or disable explicit weighted prediction for the H.264 encoder. Weighted
+	// prediction improves compression efficiency for content with fading or brightness
+	// changes between frames.
+	ExplicitWeightedPrediction H264ExplicitWeightedPrediction
 
 	// The video encoding method for your MPEG-4 AVC output. Keep the default value,
 	// PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose
@@ -9853,6 +9882,12 @@ type VideoPreprocessor struct {
 
 	// Enable Dolby Vision feature to produce Dolby Vision compatible video output.
 	DolbyVision *DolbyVision
+
+	// Enable integer-second duration normalization. When enabled, the output duration
+	// is adjusted to land on an exact integer-second boundary. The adjustment method
+	// (trim, compress, or pad) is chosen automatically based on how far the input
+	// duration is from the nearest integer second.
+	DurationControl *DurationControl
 
 	// Enable HDR10+ analysis and metadata injection. Compatible with HEVC only.
 	Hdr10Plus *Hdr10Plus

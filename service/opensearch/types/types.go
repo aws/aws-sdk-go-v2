@@ -1149,6 +1149,9 @@ type DomainConfig struct {
 	// Key-value pairs to enable encryption at rest.
 	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
 
+	// The engine mode configured for the domain.
+	EngineMode *EngineModeStatus
+
 	// The OpenSearch or Elasticsearch version that the domain is running.
 	EngineVersion *VersionStatus
 
@@ -1180,6 +1183,9 @@ type DomainConfig struct {
 
 	// Software update options for the domain.
 	SoftwareUpdateOptions *SoftwareUpdateOptionsStatus
+
+	// The use case configured for the domain.
+	UseCase *UseCaseStatus
 
 	// The current VPC options for the domain and the status of any updates to their
 	// configuration.
@@ -1468,6 +1474,9 @@ type DomainStatus struct {
 	//   'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'
 	Endpoints map[string]string
 
+	// The engine mode for the domain.
+	EngineMode EngineMode
+
 	// Version of OpenSearch or Elasticsearch that the domain is running, in the
 	// format Elasticsearch_X.Y or OpenSearch_X.Y .
 	EngineVersion *string
@@ -1510,6 +1519,9 @@ type DomainStatus struct {
 	// Elasticsearch. True if OpenSearch Service is in the process of a version
 	// upgrade. False if the configuration is active.
 	UpgradeProcessing *bool
+
+	// The primary use case for the domain.
+	UseCase DomainUseCase
 
 	// The VPC configuration for the domain.
 	VPCOptions *VPCDerivedInfo
@@ -1649,6 +1661,22 @@ type EncryptionAtRestOptionsStatus struct {
 	Options *EncryptionAtRestOptions
 
 	// The status of the encryption at rest options for the specified domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The status of the engine mode for the domain.
+type EngineModeStatus struct {
+
+	// The engine mode configured for the domain.
+	//
+	// This member is required.
+	Options EngineMode
+
+	// The current status of the engine mode for the domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -1938,6 +1966,23 @@ type InsightEntity struct {
 
 	// The value of the entity. For DomainName , this is the domain name. For Account ,
 	// this is the Amazon Web Services account ID.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the entity for which to submit insight feedback. An entity represents
+// an Amazon OpenSearch Service domain.
+type InsightFeedbackEntity struct {
+
+	// The type of the entity. Possible values are DomainName .
+	//
+	// This member is required.
+	Type InsightFeedbackEntityType
+
+	// The value of the entity, such as a domain name.
+	//
+	// This member is required.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -3159,6 +3204,22 @@ type UpgradeStepItem struct {
 	//
 	//   - Failed
 	UpgradeStepStatus UpgradeStatus
+
+	noSmithyDocumentSerde
+}
+
+// The status of the use case for the domain.
+type UseCaseStatus struct {
+
+	// The use case configured for the domain.
+	//
+	// This member is required.
+	Options DomainUseCase
+
+	// The current status of the use case for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
 
 	noSmithyDocumentSerde
 }

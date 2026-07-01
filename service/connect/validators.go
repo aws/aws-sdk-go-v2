@@ -5590,6 +5590,26 @@ func (m *validateOpSendOutboundEmail) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendOutboundWebNotification struct {
+}
+
+func (*validateOpSendOutboundWebNotification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendOutboundWebNotification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendOutboundWebNotificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendOutboundWebNotificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartAttachedFileUpload struct {
 }
 
@@ -8506,6 +8526,10 @@ func addOpSendOutboundEmailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendOutboundEmail{}, middleware.After)
 }
 
+func addOpSendOutboundWebNotificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendOutboundWebNotification{}, middleware.After)
+}
+
 func addOpStartAttachedFileUploadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAttachedFileUpload{}, middleware.After)
 }
@@ -9282,6 +9306,23 @@ func validateContactReferences(v map[string]types.Reference) error {
 		value := v[key]
 		if err := validateReference(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentAttributes(v *types.ContentAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentAttributes"}
+	if v.RecommenderConfig != nil {
+		if err := validateRecommenderConfig(v.RecommenderConfig); err != nil {
+			invalidParams.AddNested("RecommenderConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11407,6 +11448,24 @@ func validateQuickConnectConfig(v *types.QuickConnectConfig) error {
 	}
 }
 
+func validateRecommenderConfig(v *types.RecommenderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommenderConfig"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.RecommenderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRecurrenceConfig(v *types.RecurrenceConfig) error {
 	if v == nil {
 		return nil
@@ -12442,6 +12501,59 @@ func validateVoiceEnhancementConfigs(v []types.VoiceEnhancementConfig) error {
 		if err := validateVoiceEnhancementConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebNotificationContent(v *types.WebNotificationContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebNotificationContent"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Attributes != nil {
+		if err := validateContentAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebNotificationSource(v *types.WebNotificationSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebNotificationSource"}
+	if v.SourceCampaign == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCampaign"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWidgetDestination(v *types.WidgetDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WidgetDestination"}
+	if v.WidgetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WidgetId"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17874,6 +17986,51 @@ func validateOpSendOutboundEmailInput(v *SendOutboundEmailInput) error {
 	}
 	if len(v.TrafficType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendOutboundWebNotificationInput(v *SendOutboundWebNotificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendOutboundWebNotificationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.BrowserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrowserId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.ExpiresAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpiresAt"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateWebNotificationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateWidgetDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateWebNotificationContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

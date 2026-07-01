@@ -122,6 +122,54 @@ func (AccountAttributeName) Values() []AccountAttributeName {
 	}
 }
 
+type AccountVpcEncryptionControlMode string
+
+// Enum values for AccountVpcEncryptionControlMode
+const (
+	AccountVpcEncryptionControlModeUnmanaged      AccountVpcEncryptionControlMode = "unmanaged"
+	AccountVpcEncryptionControlModeAttemptMonitor AccountVpcEncryptionControlMode = "attempt-monitor"
+	AccountVpcEncryptionControlModeAttemptEnforce AccountVpcEncryptionControlMode = "attempt-enforce"
+)
+
+// Values returns all known values for AccountVpcEncryptionControlMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountVpcEncryptionControlMode) Values() []AccountVpcEncryptionControlMode {
+	return []AccountVpcEncryptionControlMode{
+		"unmanaged",
+		"attempt-monitor",
+		"attempt-enforce",
+	}
+}
+
+type AccountVpcEncryptionControlState string
+
+// Enum values for AccountVpcEncryptionControlState
+const (
+	AccountVpcEncryptionControlStateDefaultState                   AccountVpcEncryptionControlState = "default-state"
+	AccountVpcEncryptionControlStateTransitionsInProgress          AccountVpcEncryptionControlState = "transitions-in-progress"
+	AccountVpcEncryptionControlStateTransitionsPartiallySuccessful AccountVpcEncryptionControlState = "transitions-partially-successful"
+	AccountVpcEncryptionControlStateTransitionsSuccessful          AccountVpcEncryptionControlState = "transitions-successful"
+	AccountVpcEncryptionControlStateTransitionsFailed              AccountVpcEncryptionControlState = "transitions-failed"
+)
+
+// Values returns all known values for AccountVpcEncryptionControlState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountVpcEncryptionControlState) Values() []AccountVpcEncryptionControlState {
+	return []AccountVpcEncryptionControlState{
+		"default-state",
+		"transitions-in-progress",
+		"transitions-partially-successful",
+		"transitions-successful",
+		"transitions-failed",
+	}
+}
+
 type ActivityStatus string
 
 // Enum values for ActivityStatus
@@ -231,6 +279,7 @@ const (
 	AllocationStateReleased                 AllocationState = "released"
 	AllocationStateReleasedPermanentFailure AllocationState = "released-permanent-failure"
 	AllocationStatePending                  AllocationState = "pending"
+	AllocationStateConfiguring              AllocationState = "configuring"
 )
 
 // Values returns all known values for AllocationState. Note that this can be
@@ -245,6 +294,7 @@ func (AllocationState) Values() []AllocationState {
 		"released",
 		"released-permanent-failure",
 		"pending",
+		"configuring",
 	}
 }
 
@@ -348,6 +398,25 @@ func (AllowsMultipleInstanceTypes) Values() []AllowsMultipleInstanceTypes {
 	return []AllowsMultipleInstanceTypes{
 		"on",
 		"off",
+	}
+}
+
+type AmdSevSnp string
+
+// Enum values for AmdSevSnp
+const (
+	AmdSevSnpEnabled  AmdSevSnp = "enabled"
+	AmdSevSnpDisabled AmdSevSnp = "disabled"
+)
+
+// Values returns all known values for AmdSevSnp. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmdSevSnp) Values() []AmdSevSnp {
+	return []AmdSevSnp{
+		"enabled",
+		"disabled",
 	}
 }
 

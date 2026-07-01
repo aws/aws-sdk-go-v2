@@ -3037,12 +3037,15 @@ func init() {
 	HttpRequestWithGreedyLabelInPathInput_baz = HttpRequestWithGreedyLabelInPathInput.AddMember("baz", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("memberEpochSeconds", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
+
 		&smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("memberHttpDate", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "http-date"},
+
 		&smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_memberDateTime = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("memberDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+
 		&smithytraits.HTTPLabel{})
 
 	HttpRequestWithLabelsAndTimestampFormatInput_defaultFormat = HttpRequestWithLabelsAndTimestampFormatInput.AddMember("defaultFormat", smithyprelude.Timestamp, &smithytraits.HTTPLabel{})
@@ -3274,19 +3277,23 @@ func init() {
 	MalformedTimestampBodyHttpDateInput_timestamp = MalformedTimestampBodyHttpDateInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "http-date"})
 
 	MalformedTimestampHeaderDateTimeInput_timestamp = MalformedTimestampHeaderDateTimeInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+
 		&smithytraits.HTTPHeader{Name: "timestamp"})
 
 	MalformedTimestampHeaderDefaultInput_timestamp = MalformedTimestampHeaderDefaultInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "timestamp"})
 
 	MalformedTimestampHeaderEpochInput_timestamp = MalformedTimestampHeaderEpochInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
+
 		&smithytraits.HTTPHeader{Name: "timestamp"})
 
 	MalformedTimestampPathDefaultInput_timestamp = MalformedTimestampPathDefaultInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.HTTPLabel{})
 
 	MalformedTimestampPathEpochInput_timestamp = MalformedTimestampPathEpochInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
+
 		&smithytraits.HTTPLabel{})
 
 	MalformedTimestampPathHttpDateInput_timestamp = MalformedTimestampPathHttpDateInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "http-date"},
+
 		&smithytraits.HTTPLabel{})
 
 	MalformedTimestampQueryDefaultInput_timestamp = MalformedTimestampQueryDefaultInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "timestamp"})

@@ -12,6 +12,7 @@
         "api_op_AssociateApplications.go",
         "api_op_CreateApplication.go",
         "api_op_CreateStreamGroup.go",
+        "api_op_CreateStreamSessionAdminShell.go",
         "api_op_CreateStreamSessionConnection.go",
         "api_op_DeleteApplication.go",
         "api_op_DeleteStreamGroup.go",
