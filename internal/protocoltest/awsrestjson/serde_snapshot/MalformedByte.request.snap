@@ -1,6 +1,0 @@
-POST /MalformedByte/1?byteInQuery=1
-
-Byteinheader: 1
-Content-Type: application/json
-
-{"byteInBody":1}

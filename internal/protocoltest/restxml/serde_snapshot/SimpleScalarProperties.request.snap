@@ -1,6 +1,0 @@
-PUT /SimpleScalarProperties
-
-Content-Type: application/xml
-X-Foo: __Foo__
-
-<SimpleScalarPropertiesRequest><byteValue>1</byteValue><DoubleDribble>1</DoubleDribble><falseBooleanValue>true</falseBooleanValue><floatValue>1</floatValue><integerValue>1</integerValue><longValue>1</longValue><shortValue>1</shortValue><stringValue>__StringValue__</stringValue><trueBooleanValue>true</trueBooleanValue></SimpleScalarPropertiesRequest>

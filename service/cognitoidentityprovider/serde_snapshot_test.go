@@ -2780,6 +2780,38 @@ func TestSerdeCheckSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 	}
 }
 
+func TestSerdeCheckSnapshot_GetProvisionedLimit(t *testing.T) {
+	input := &GetProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProvisionedLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProvisionedLimit"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestSerdeCheckSnapshot_GetSigningCertificate(t *testing.T) {
 	input := &GetSigningCertificateInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -4237,6 +4269,39 @@ func TestSerdeCheckSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateManagedLoginBranding"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestSerdeCheckSnapshot_UpdateProvisionedLimit(t *testing.T) {
+	input := &UpdateProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		RequestedLimitValue: 1,
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProvisionedLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProvisionedLimit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7316,6 +7381,38 @@ func TestSerdeUpdateSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 	}
 }
 
+func TestSerdeUpdateSnapshot_GetProvisionedLimit(t *testing.T) {
+	input := &GetProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProvisionedLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProvisionedLimit"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestSerdeUpdateSnapshot_GetSigningCertificate(t *testing.T) {
 	input := &GetSigningCertificateInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -8773,6 +8870,39 @@ func TestSerdeUpdateSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateManagedLoginBranding"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestSerdeUpdateSnapshot_UpdateProvisionedLimit(t *testing.T) {
+	input := &UpdateProvisionedLimitInput{
+		LimitDefinition: &types.LimitDefinitionType{
+			LimitClass: types.LimitClass("API_CATEGORY"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		RequestedLimitValue: 1,
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProvisionedLimit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProvisionedLimit"); err != nil {
 		t.Fatal(err)
 	}
 }

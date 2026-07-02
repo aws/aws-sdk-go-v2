@@ -1,5 +1,0 @@
-POST /
-
-Content-Type: application/x-www-form-urlencoded
-
-Action=SimpleInputParams&Bam=1&Bar=__Bar__&Baz=true&Boo=1&FloatValue=1&Foo=__Foo__&FooEnum=Foo&HasQueryAndXmlName=__HasQueryAndXmlName__&HasQueryName=__HasQueryName__&QueryName=__DistinctQueryName__&Qux=YmxvYg%3D%3D&UsesXmlName=__UsesXmlName__&Version=2020-01-08&XmlNameOnly=__DistinctXmlName__&queryAndXmlName=__DistinctQueryAndXmlName__

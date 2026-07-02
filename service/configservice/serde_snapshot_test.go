@@ -2984,6 +2984,16 @@ func TestSerdeCheckSnapshot_PutOrganizationConfigRule(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3028,6 +3038,16 @@ func TestSerdeCheckSnapshot_PutOrganizationConformancePack(t *testing.T) {
 		ExcludedAccounts: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6410,6 +6430,16 @@ func TestSerdeUpdateSnapshot_PutOrganizationConfigRule(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6454,6 +6484,16 @@ func TestSerdeUpdateSnapshot_PutOrganizationConformancePack(t *testing.T) {
 		ExcludedAccounts: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

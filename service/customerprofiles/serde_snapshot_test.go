@@ -1072,6 +1072,20 @@ func TestSerdeCheckSnapshot_CreateRecommender(t *testing.T) {
 					"__Member__",
 				},
 			},
+			DiversityConfig: &types.DiversityConfig{
+				DiversityColumns: []types.DiversityColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+				},
+			},
 		},
 		Description:           ptr.String("__Description__"),
 		RecommenderSchemaName: ptr.String("__RecommenderSchemaName__"),
@@ -4832,6 +4846,12 @@ func TestSerdeCheckSnapshot_GetProfileRecommendations(t *testing.T) {
 				"__Member__",
 			},
 		},
+		DiversityConfig: &types.RecommendationDiversityConfig{
+			Enabled: ptr.Bool(true),
+			Values: map[string]int32{
+				"key0": 1,
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7028,7 +7048,22 @@ func TestSerdeCheckSnapshot_UpdateRecommender(t *testing.T) {
 					"__Member__",
 				},
 			},
+			DiversityConfig: &types.DiversityConfig{
+				DiversityColumns: []types.DiversityColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+				},
+			},
 		},
+		RecommenderVersionName: ptr.String("__RecommenderVersionName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7939,6 +7974,20 @@ func TestSerdeUpdateSnapshot_CreateRecommender(t *testing.T) {
 				"key0": {
 					"__Member__",
 					"__Member__",
+				},
+			},
+			DiversityConfig: &types.DiversityConfig{
+				DiversityColumns: []types.DiversityColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
 				},
 			},
 		},
@@ -11701,6 +11750,12 @@ func TestSerdeUpdateSnapshot_GetProfileRecommendations(t *testing.T) {
 				"__Member__",
 			},
 		},
+		DiversityConfig: &types.RecommendationDiversityConfig{
+			Enabled: ptr.Bool(true),
+			Values: map[string]int32{
+				"key0": 1,
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13897,7 +13952,22 @@ func TestSerdeUpdateSnapshot_UpdateRecommender(t *testing.T) {
 					"__Member__",
 				},
 			},
+			DiversityConfig: &types.DiversityConfig{
+				DiversityColumns: []types.DiversityColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						CapType: types.DiversityCapType("PERCENTAGE"),
+						Target:  ptr.String("__Target__"),
+					},
+				},
+			},
 		},
+		RecommenderVersionName: ptr.String("__RecommenderVersionName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

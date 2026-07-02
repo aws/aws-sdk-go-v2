@@ -1,5 +1,0 @@
-POST /XmlMaps
-
-Content-Type: application/xml
-
-<XmlMapsRequest><myMap><entry><key>key0</key><value><hi>__Hi__</hi></value></entry></myMap></XmlMapsRequest>

@@ -1,5 +1,0 @@
-POST /EndpointWithHostLabelOperation
-
-Content-Type: application/xml
-
-<EndpointWithHostLabelOperationRequest><label>Label-value</label></EndpointWithHostLabelOperationRequest>

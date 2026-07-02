@@ -1,5 +1,0 @@
-PUT /HttpPayloadWithUnion
-
-Content-Type: application/xml
-
-<><>__UnionPayloadMemberGreeting__</></>

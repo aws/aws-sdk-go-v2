@@ -1,5 +1,0 @@
-PUT /XmlEmptyStrings
-
-Content-Type: application/xml
-
-<XmlEmptyStringsRequest><emptyString>__EmptyString__</emptyString></XmlEmptyStringsRequest>
