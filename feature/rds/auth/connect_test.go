@@ -22,13 +22,13 @@ func TestBuildAuthToken(t *testing.T) {
 			endpoint:      "https://prod-instance.us-east-1.rds.amazonaws.com:3306",
 			region:        "us-west-2",
 			user:          "mysqlUser",
-			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306/\?Action=connect.*?DBUser=mysqlUser.*`,
 		},
 		{
 			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com:3306",
 			region:        "us-west-2",
 			user:          "mysqlUser",
-			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306/\?Action=connect.*?DBUser=mysqlUser.*`,
 		},
 		{
 			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com",
@@ -64,6 +64,40 @@ func TestBuildAuthToken(t *testing.T) {
 		if re, a := regexp.MustCompile(c.expectedRegex), url; !re.MatchString(a) {
 			t.Errorf("expect %s to match %s", re, a)
 		}
+	}
+}
+
+func TestBuildAuthTokenPath(t *testing.T) {
+	cases := []struct {
+		name     string
+		endpoint string
+	}{
+		{
+			name:     "endpoint without scheme",
+			endpoint: "prod-instance.us-east-1.rds.amazonaws.com:3306",
+		},
+		{
+			name:     "endpoint with https scheme",
+			endpoint: "https://prod-instance.us-east-1.rds.amazonaws.com:3306",
+		},
+		{
+			name:     "postgresql default port",
+			endpoint: "aurora-cluster.cluster-xxx.us-east-1.rds.amazonaws.com:5432",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			creds := &staticCredentials{AccessKey: "AKID", SecretKey: "SECRET", Session: "SESSION"}
+			token, err := auth.BuildAuthToken(context.Background(), c.endpoint, "us-east-1", "dbUser", creds)
+			if err != nil {
+				t.Fatalf("expect no err, got: %v", err)
+			}
+
+			if !strings.Contains(token, "/?") {
+				t.Errorf("expect token to contain '/?' path separator, got: %s", token)
+			}
+		})
 	}
 }
 
