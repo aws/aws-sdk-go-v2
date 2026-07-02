@@ -3,6 +3,7 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -1174,9 +1175,18 @@ func (u *multiUploader) seterr(e error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
-	if u.err == nil {
+	// A context cancellation is usually a downstream symptom of another
+	// failure (e.g. a failed UploadPart cancelling in-flight body reads).
+	// Keep the first non-cancellation error, and allow a real error to
+	// replace a previously stored cancellation error so the root cause is
+	// always the one reported.
+	if u.err == nil || (isCancellationError(u.err) && !isCancellationError(e)) {
 		u.err = e
 	}
+}
+
+func isCancellationError(err error) bool {
+	return errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded)
 }
 
 func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Options)) {

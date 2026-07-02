@@ -1138,11 +1138,11 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 // The contextAwareBody forces the producer goroutine to block in readFillBuf
 // until the context is canceled, then return the context error. This guarantees
 // the producer calls seterr with "read multipart upload data failed" while the
-// worker concurrently calls seterr with the UploadPart error — exercising the
-// first-error-wins invariant in seterr.
+// worker concurrently calls seterr with the UploadPart error. seterr resolves
+// the race in favor of the non-cancellation error regardless of ordering.
 func TestUploadFirstErrorWins(t *testing.T) {
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
-	ctx.Error = fmt.Errorf("secondary context error")
+	ctx.Error = context.Canceled
 	c, _, _ := s3testing.NewUploadLoggingClient(nil)
 	var index atomic.Int64
 	var once sync.Once
@@ -1181,8 +1181,8 @@ func TestUploadFirstErrorWins(t *testing.T) {
 	if err == nil {
 		t.Fatal("expect error, got nil")
 	}
-	if strings.Contains(err.Error(), "secondary context error") {
-		t.Fatalf("secondary error leaked into output: %v", err)
+	if strings.Contains(err.Error(), "read multipart upload data failed") {
+		t.Fatalf("secondary cancellation read error leaked into output: %v", err)
 	}
 	if !strings.Contains(err.Error(), "primary upload part error") {
 		t.Fatalf("expected primary error in output, got: %v", err)
