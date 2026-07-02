@@ -1,5 +1,5 @@
 {
-  "documentation": "Test cases for clock skew correction. Each test defines a sequence of operations on a single client. Each operation defines a sequence of attempts (the retry loop). The SDK under test must use the provided 'clientTime' values instead of the real clock. 'initialClientSkew' is the value of ClientSkew at the start of the test (always 0 for the first operation, carried forward for subsequent operations). After all attempts in an operation complete, 'expectedClientSkew' is asserted.",
+  "documentation": "Test cases for clock skew correction. Each test defines a sequence of operations on a single client. Each operation defines a sequence of attempts (the retry loop). The SDK under test must use the provided 'clientTime' values instead of the real clock. 'initialClientSkew' is the value of ClientSkew at the start of the test (0 for the first operation unless the test specifies otherwise, carried forward for subsequent operations). After all attempts in an operation complete, 'expectedClientSkew' is asserted.",
   "tests": [
     {
       "description": "Clocks agree, request succeeds on first attempt, ClientSkew updated to 0",
