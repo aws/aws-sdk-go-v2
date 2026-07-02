@@ -26,9 +26,10 @@ import (
 
 const serdeSSPrefix = "serde_snapshot"
 
-type serdeSnapshotOK struct{}
-
-func (serdeSnapshotOK) Error() string { return "error: success" }
+// errSerdeSnapshotOK is returned by the capture middleware to abort the request
+// pipeline once the serialized request has been captured, so no network call is
+// made. It is a control signal, not a failure.
+var errSerdeSnapshotOK = errors.New("serde snapshot: request captured")
 
 func serdeCreatePath(path string) (*os.File, error) {
 	if err := os.MkdirAll(serdeSSPrefix, 0700); err != nil && !errors.Is(err, fs.ErrExist) {
@@ -76,7 +77,7 @@ func (m *captureSerdeRequestMiddleware) HandleFinalize(
 		}
 	}
 
-	return middleware.FinalizeOutput{}, middleware.Metadata{}, serdeSnapshotOK{}
+	return middleware.FinalizeOutput{}, middleware.Metadata{}, errSerdeSnapshotOK
 }
 
 func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]string, body []byte) string {
@@ -131,7 +132,7 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
 		if strings.HasPrefix(string(existing), prefix) &&
 			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
-			return serdeSnapshotOK{}
+			return nil
 		}
 	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
@@ -142,13 +143,13 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 	if _, err := f.Write([]byte(content)); err != nil {
 		return err
 	}
-	return serdeSnapshotOK{}
+	return nil
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
-		return serdeSnapshotOK{}
+		return nil
 	}
 	if err != nil {
 		return err
@@ -164,7 +165,7 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
-	return serdeSnapshotOK{}
+	return nil
 }
 
 type serdeEndpointResolver struct{}
@@ -210,13 +211,11 @@ func TestSerdeCheckSnapshot_AddDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -368,13 +367,11 @@ func TestSerdeCheckSnapshot_CreateAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -404,13 +401,11 @@ func TestSerdeCheckSnapshot_CreateAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -442,13 +437,11 @@ func TestSerdeCheckSnapshot_CreateApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -540,13 +533,11 @@ func TestSerdeCheckSnapshot_CreateBrowser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBrowser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -574,13 +565,11 @@ func TestSerdeCheckSnapshot_CreateBrowserProfile(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBrowserProfile"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -639,13 +628,11 @@ func TestSerdeCheckSnapshot_CreateCodeInterpreter(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCodeInterpreter"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -685,13 +672,11 @@ func TestSerdeCheckSnapshot_CreateConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -729,13 +714,11 @@ func TestSerdeCheckSnapshot_CreateDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -759,13 +742,11 @@ func TestSerdeCheckSnapshot_CreateDatasetVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDatasetVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -829,13 +810,11 @@ func TestSerdeCheckSnapshot_CreateEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1014,13 +993,11 @@ func TestSerdeCheckSnapshot_CreateGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1102,13 +1079,11 @@ func TestSerdeCheckSnapshot_CreateGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1199,13 +1174,11 @@ func TestSerdeCheckSnapshot_CreateGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1432,13 +1405,11 @@ func TestSerdeCheckSnapshot_CreateHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1468,13 +1439,11 @@ func TestSerdeCheckSnapshot_CreateHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1663,13 +1632,11 @@ func TestSerdeCheckSnapshot_CreateMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1744,13 +1711,11 @@ func TestSerdeCheckSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1838,13 +1803,11 @@ func TestSerdeCheckSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1883,13 +1846,11 @@ func TestSerdeCheckSnapshot_CreatePaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1933,13 +1894,11 @@ func TestSerdeCheckSnapshot_CreatePaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2045,13 +2004,11 @@ func TestSerdeCheckSnapshot_CreatePaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2084,13 +2041,11 @@ func TestSerdeCheckSnapshot_CreatePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2119,13 +2074,11 @@ func TestSerdeCheckSnapshot_CreatePolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2230,13 +2183,11 @@ func TestSerdeCheckSnapshot_CreateRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2334,13 +2285,11 @@ func TestSerdeCheckSnapshot_CreateRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2370,13 +2319,11 @@ func TestSerdeCheckSnapshot_CreateWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2400,13 +2347,11 @@ func TestSerdeCheckSnapshot_DeleteAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2431,13 +2376,11 @@ func TestSerdeCheckSnapshot_DeleteAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2460,13 +2403,11 @@ func TestSerdeCheckSnapshot_DeleteApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2490,13 +2431,11 @@ func TestSerdeCheckSnapshot_DeleteBrowser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBrowser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2520,13 +2459,11 @@ func TestSerdeCheckSnapshot_DeleteBrowserProfile(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBrowserProfile"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2550,13 +2487,11 @@ func TestSerdeCheckSnapshot_DeleteCodeInterpreter(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCodeInterpreter"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2579,13 +2514,11 @@ func TestSerdeCheckSnapshot_DeleteConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2609,13 +2542,11 @@ func TestSerdeCheckSnapshot_DeleteDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2643,13 +2574,11 @@ func TestSerdeCheckSnapshot_DeleteDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2672,13 +2601,11 @@ func TestSerdeCheckSnapshot_DeleteEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2701,13 +2628,11 @@ func TestSerdeCheckSnapshot_DeleteGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2731,13 +2656,11 @@ func TestSerdeCheckSnapshot_DeleteGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2761,13 +2684,11 @@ func TestSerdeCheckSnapshot_DeleteGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2792,13 +2713,11 @@ func TestSerdeCheckSnapshot_DeleteHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2823,13 +2742,11 @@ func TestSerdeCheckSnapshot_DeleteHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2853,13 +2770,11 @@ func TestSerdeCheckSnapshot_DeleteMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2882,13 +2797,11 @@ func TestSerdeCheckSnapshot_DeleteOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2911,13 +2824,11 @@ func TestSerdeCheckSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2942,13 +2853,11 @@ func TestSerdeCheckSnapshot_DeletePaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2971,13 +2880,11 @@ func TestSerdeCheckSnapshot_DeletePaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3001,13 +2908,11 @@ func TestSerdeCheckSnapshot_DeletePaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3031,13 +2936,11 @@ func TestSerdeCheckSnapshot_DeletePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3060,13 +2963,11 @@ func TestSerdeCheckSnapshot_DeletePolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3089,13 +2990,11 @@ func TestSerdeCheckSnapshot_DeleteRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3119,13 +3018,11 @@ func TestSerdeCheckSnapshot_DeleteRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3148,13 +3045,11 @@ func TestSerdeCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourcePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3177,13 +3072,11 @@ func TestSerdeCheckSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3207,13 +3100,11 @@ func TestSerdeCheckSnapshot_GetAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3237,13 +3128,11 @@ func TestSerdeCheckSnapshot_GetAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3266,13 +3155,11 @@ func TestSerdeCheckSnapshot_GetApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3295,13 +3182,11 @@ func TestSerdeCheckSnapshot_GetBrowser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBrowser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3324,13 +3209,11 @@ func TestSerdeCheckSnapshot_GetBrowserProfile(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBrowserProfile"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3353,13 +3236,11 @@ func TestSerdeCheckSnapshot_GetCodeInterpreter(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCodeInterpreter"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3383,13 +3264,11 @@ func TestSerdeCheckSnapshot_GetConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3413,13 +3292,11 @@ func TestSerdeCheckSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConfigurationBundleVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3443,13 +3320,11 @@ func TestSerdeCheckSnapshot_GetDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3473,13 +3348,11 @@ func TestSerdeCheckSnapshot_GetEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3502,13 +3375,11 @@ func TestSerdeCheckSnapshot_GetGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3532,13 +3403,11 @@ func TestSerdeCheckSnapshot_GetGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3562,13 +3431,11 @@ func TestSerdeCheckSnapshot_GetGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3592,13 +3459,11 @@ func TestSerdeCheckSnapshot_GetHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3622,13 +3487,11 @@ func TestSerdeCheckSnapshot_GetHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3652,13 +3515,11 @@ func TestSerdeCheckSnapshot_GetMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3681,13 +3542,11 @@ func TestSerdeCheckSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3710,13 +3569,11 @@ func TestSerdeCheckSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3740,13 +3597,11 @@ func TestSerdeCheckSnapshot_GetPaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3769,13 +3624,11 @@ func TestSerdeCheckSnapshot_GetPaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3798,13 +3651,11 @@ func TestSerdeCheckSnapshot_GetPaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3828,13 +3679,11 @@ func TestSerdeCheckSnapshot_GetPolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3857,13 +3706,11 @@ func TestSerdeCheckSnapshot_GetPolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3886,13 +3733,11 @@ func TestSerdeCheckSnapshot_GetPolicyEngineSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyEngineSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3916,13 +3761,11 @@ func TestSerdeCheckSnapshot_GetPolicyGeneration(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyGeneration"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3946,13 +3789,11 @@ func TestSerdeCheckSnapshot_GetPolicyGenerationSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyGenerationSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3976,13 +3817,11 @@ func TestSerdeCheckSnapshot_GetPolicySummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicySummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4005,13 +3844,11 @@ func TestSerdeCheckSnapshot_GetRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4035,13 +3872,11 @@ func TestSerdeCheckSnapshot_GetRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4064,13 +3899,11 @@ func TestSerdeCheckSnapshot_GetResourcePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4093,13 +3926,11 @@ func TestSerdeCheckSnapshot_GetTokenVault(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTokenVault"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4122,13 +3953,11 @@ func TestSerdeCheckSnapshot_GetWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4153,13 +3982,11 @@ func TestSerdeCheckSnapshot_ListAgentRuntimeEndpoints(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimeEndpoints"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4183,13 +4010,11 @@ func TestSerdeCheckSnapshot_ListAgentRuntimes(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimes"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4214,13 +4039,11 @@ func TestSerdeCheckSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimeVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4244,13 +4067,11 @@ func TestSerdeCheckSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApiKeyCredentialProviders"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4275,13 +4096,11 @@ func TestSerdeCheckSnapshot_ListBrowserProfiles(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBrowserProfiles"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4306,13 +4125,11 @@ func TestSerdeCheckSnapshot_ListBrowsers(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBrowsers"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4337,13 +4154,11 @@ func TestSerdeCheckSnapshot_ListCodeInterpreters(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCodeInterpreters"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4367,13 +4182,11 @@ func TestSerdeCheckSnapshot_ListConfigurationBundles(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConfigurationBundles"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4403,13 +4216,11 @@ func TestSerdeCheckSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConfigurationBundleVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4435,13 +4246,11 @@ func TestSerdeCheckSnapshot_ListDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4465,13 +4274,11 @@ func TestSerdeCheckSnapshot_ListDatasets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4496,13 +4303,11 @@ func TestSerdeCheckSnapshot_ListDatasetVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4526,13 +4331,11 @@ func TestSerdeCheckSnapshot_ListEvaluators(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvaluators"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4557,13 +4360,11 @@ func TestSerdeCheckSnapshot_ListGatewayRules(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayRules"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4587,13 +4388,11 @@ func TestSerdeCheckSnapshot_ListGateways(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGateways"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4618,13 +4417,11 @@ func TestSerdeCheckSnapshot_ListGatewayTargets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayTargets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4649,13 +4446,11 @@ func TestSerdeCheckSnapshot_ListHarnessEndpoints(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHarnessEndpoints"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4679,13 +4474,11 @@ func TestSerdeCheckSnapshot_ListHarnesses(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHarnesses"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4710,13 +4503,11 @@ func TestSerdeCheckSnapshot_ListHarnessVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHarnessVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4740,13 +4531,11 @@ func TestSerdeCheckSnapshot_ListMemories(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMemories"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4770,13 +4559,11 @@ func TestSerdeCheckSnapshot_ListOauth2CredentialProviders(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOauth2CredentialProviders"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4800,13 +4587,11 @@ func TestSerdeCheckSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOnlineEvaluationConfigs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4831,13 +4616,11 @@ func TestSerdeCheckSnapshot_ListPaymentConnectors(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPaymentConnectors"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4861,13 +4644,11 @@ func TestSerdeCheckSnapshot_ListPaymentCredentialProviders(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPaymentCredentialProviders"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4891,13 +4672,11 @@ func TestSerdeCheckSnapshot_ListPaymentManagers(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPaymentManagers"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4923,13 +4702,11 @@ func TestSerdeCheckSnapshot_ListPolicies(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicies"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4953,13 +4730,11 @@ func TestSerdeCheckSnapshot_ListPolicyEngines(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyEngines"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4983,13 +4758,11 @@ func TestSerdeCheckSnapshot_ListPolicyEngineSummaries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyEngineSummaries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5015,13 +4788,11 @@ func TestSerdeCheckSnapshot_ListPolicyGenerationAssets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyGenerationAssets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5046,13 +4817,11 @@ func TestSerdeCheckSnapshot_ListPolicyGenerations(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyGenerations"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5077,13 +4846,11 @@ func TestSerdeCheckSnapshot_ListPolicyGenerationSummaries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyGenerationSummaries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5109,13 +4876,11 @@ func TestSerdeCheckSnapshot_ListPolicySummaries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicySummaries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5141,13 +4906,11 @@ func TestSerdeCheckSnapshot_ListRegistries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRegistries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5175,13 +4938,11 @@ func TestSerdeCheckSnapshot_ListRegistryRecords(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRegistryRecords"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5204,13 +4965,11 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5234,13 +4993,11 @@ func TestSerdeCheckSnapshot_ListWorkloadIdentities(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListWorkloadIdentities"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5264,13 +5021,11 @@ func TestSerdeCheckSnapshot_PutResourcePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5297,13 +5052,11 @@ func TestSerdeCheckSnapshot_SetTokenVaultCMK(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetTokenVaultCMK"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5334,13 +5087,11 @@ func TestSerdeCheckSnapshot_StartPolicyGeneration(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPolicyGeneration"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5364,13 +5115,11 @@ func TestSerdeCheckSnapshot_SubmitRegistryRecordForApproval(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SubmitRegistryRecordForApproval"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5397,13 +5146,11 @@ func TestSerdeCheckSnapshot_SynchronizeGatewayTargets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SynchronizeGatewayTargets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5429,13 +5176,11 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5462,13 +5207,11 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5620,13 +5363,11 @@ func TestSerdeCheckSnapshot_UpdateAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5653,13 +5394,11 @@ func TestSerdeCheckSnapshot_UpdateAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5688,13 +5427,11 @@ func TestSerdeCheckSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5736,13 +5473,11 @@ func TestSerdeCheckSnapshot_UpdateConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5767,13 +5502,11 @@ func TestSerdeCheckSnapshot_UpdateDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5801,13 +5534,11 @@ func TestSerdeCheckSnapshot_UpdateDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5868,13 +5599,11 @@ func TestSerdeCheckSnapshot_UpdateEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -6058,13 +5787,11 @@ func TestSerdeCheckSnapshot_UpdateGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -6146,13 +5873,11 @@ func TestSerdeCheckSnapshot_UpdateGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -6243,13 +5968,11 @@ func TestSerdeCheckSnapshot_UpdateGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -6479,13 +6202,11 @@ func TestSerdeCheckSnapshot_UpdateHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -6512,13 +6233,11 @@ func TestSerdeCheckSnapshot_UpdateHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -6923,13 +6642,11 @@ func TestSerdeCheckSnapshot_UpdateMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7001,13 +6718,11 @@ func TestSerdeCheckSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7092,13 +6807,11 @@ func TestSerdeCheckSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7137,13 +6850,11 @@ func TestSerdeCheckSnapshot_UpdatePaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7184,13 +6895,11 @@ func TestSerdeCheckSnapshot_UpdatePaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7293,13 +7002,11 @@ func TestSerdeCheckSnapshot_UpdatePaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7333,13 +7040,11 @@ func TestSerdeCheckSnapshot_UpdatePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7365,13 +7070,11 @@ func TestSerdeCheckSnapshot_UpdatePolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7481,13 +7184,11 @@ func TestSerdeCheckSnapshot_UpdateRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7610,13 +7311,11 @@ func TestSerdeCheckSnapshot_UpdateRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7642,13 +7341,11 @@ func TestSerdeCheckSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistryRecordStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7675,13 +7372,11 @@ func TestSerdeCheckSnapshot_UpdateWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 func TestSerdeUpdateSnapshot_AddDatasetExamples(t *testing.T) {
@@ -7712,13 +7407,11 @@ func TestSerdeUpdateSnapshot_AddDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7870,13 +7563,11 @@ func TestSerdeUpdateSnapshot_CreateAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7906,13 +7597,11 @@ func TestSerdeUpdateSnapshot_CreateAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -7944,13 +7633,11 @@ func TestSerdeUpdateSnapshot_CreateApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8042,13 +7729,11 @@ func TestSerdeUpdateSnapshot_CreateBrowser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBrowser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8076,13 +7761,11 @@ func TestSerdeUpdateSnapshot_CreateBrowserProfile(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBrowserProfile"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8141,13 +7824,11 @@ func TestSerdeUpdateSnapshot_CreateCodeInterpreter(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCodeInterpreter"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8187,13 +7868,11 @@ func TestSerdeUpdateSnapshot_CreateConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8231,13 +7910,11 @@ func TestSerdeUpdateSnapshot_CreateDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8261,13 +7938,11 @@ func TestSerdeUpdateSnapshot_CreateDatasetVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDatasetVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8331,13 +8006,11 @@ func TestSerdeUpdateSnapshot_CreateEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8516,13 +8189,11 @@ func TestSerdeUpdateSnapshot_CreateGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8604,13 +8275,11 @@ func TestSerdeUpdateSnapshot_CreateGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8701,13 +8370,11 @@ func TestSerdeUpdateSnapshot_CreateGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8934,13 +8601,11 @@ func TestSerdeUpdateSnapshot_CreateHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -8970,13 +8635,11 @@ func TestSerdeUpdateSnapshot_CreateHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9165,13 +8828,11 @@ func TestSerdeUpdateSnapshot_CreateMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9246,13 +8907,11 @@ func TestSerdeUpdateSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9340,13 +8999,11 @@ func TestSerdeUpdateSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9385,13 +9042,11 @@ func TestSerdeUpdateSnapshot_CreatePaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9435,13 +9090,11 @@ func TestSerdeUpdateSnapshot_CreatePaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9547,13 +9200,11 @@ func TestSerdeUpdateSnapshot_CreatePaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9586,13 +9237,11 @@ func TestSerdeUpdateSnapshot_CreatePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9621,13 +9270,11 @@ func TestSerdeUpdateSnapshot_CreatePolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9732,13 +9379,11 @@ func TestSerdeUpdateSnapshot_CreateRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9836,13 +9481,11 @@ func TestSerdeUpdateSnapshot_CreateRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9872,13 +9515,11 @@ func TestSerdeUpdateSnapshot_CreateWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9902,13 +9543,11 @@ func TestSerdeUpdateSnapshot_DeleteAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9933,13 +9572,11 @@ func TestSerdeUpdateSnapshot_DeleteAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9962,13 +9599,11 @@ func TestSerdeUpdateSnapshot_DeleteApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -9992,13 +9627,11 @@ func TestSerdeUpdateSnapshot_DeleteBrowser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBrowser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10022,13 +9655,11 @@ func TestSerdeUpdateSnapshot_DeleteBrowserProfile(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBrowserProfile"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10052,13 +9683,11 @@ func TestSerdeUpdateSnapshot_DeleteCodeInterpreter(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCodeInterpreter"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10081,13 +9710,11 @@ func TestSerdeUpdateSnapshot_DeleteConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10111,13 +9738,11 @@ func TestSerdeUpdateSnapshot_DeleteDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10145,13 +9770,11 @@ func TestSerdeUpdateSnapshot_DeleteDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10174,13 +9797,11 @@ func TestSerdeUpdateSnapshot_DeleteEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10203,13 +9824,11 @@ func TestSerdeUpdateSnapshot_DeleteGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10233,13 +9852,11 @@ func TestSerdeUpdateSnapshot_DeleteGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10263,13 +9880,11 @@ func TestSerdeUpdateSnapshot_DeleteGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10294,13 +9909,11 @@ func TestSerdeUpdateSnapshot_DeleteHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10325,13 +9938,11 @@ func TestSerdeUpdateSnapshot_DeleteHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10355,13 +9966,11 @@ func TestSerdeUpdateSnapshot_DeleteMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10384,13 +9993,11 @@ func TestSerdeUpdateSnapshot_DeleteOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10413,13 +10020,11 @@ func TestSerdeUpdateSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10444,13 +10049,11 @@ func TestSerdeUpdateSnapshot_DeletePaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10473,13 +10076,11 @@ func TestSerdeUpdateSnapshot_DeletePaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10503,13 +10104,11 @@ func TestSerdeUpdateSnapshot_DeletePaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10533,13 +10132,11 @@ func TestSerdeUpdateSnapshot_DeletePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10562,13 +10159,11 @@ func TestSerdeUpdateSnapshot_DeletePolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10591,13 +10186,11 @@ func TestSerdeUpdateSnapshot_DeleteRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10621,13 +10214,11 @@ func TestSerdeUpdateSnapshot_DeleteRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10650,13 +10241,11 @@ func TestSerdeUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourcePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10679,13 +10268,11 @@ func TestSerdeUpdateSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10709,13 +10296,11 @@ func TestSerdeUpdateSnapshot_GetAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10739,13 +10324,11 @@ func TestSerdeUpdateSnapshot_GetAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10768,13 +10351,11 @@ func TestSerdeUpdateSnapshot_GetApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10797,13 +10378,11 @@ func TestSerdeUpdateSnapshot_GetBrowser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBrowser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10826,13 +10405,11 @@ func TestSerdeUpdateSnapshot_GetBrowserProfile(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBrowserProfile"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10855,13 +10432,11 @@ func TestSerdeUpdateSnapshot_GetCodeInterpreter(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCodeInterpreter"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10885,13 +10460,11 @@ func TestSerdeUpdateSnapshot_GetConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10915,13 +10488,11 @@ func TestSerdeUpdateSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConfigurationBundleVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10945,13 +10516,11 @@ func TestSerdeUpdateSnapshot_GetDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -10975,13 +10544,11 @@ func TestSerdeUpdateSnapshot_GetEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11004,13 +10571,11 @@ func TestSerdeUpdateSnapshot_GetGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11034,13 +10599,11 @@ func TestSerdeUpdateSnapshot_GetGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11064,13 +10627,11 @@ func TestSerdeUpdateSnapshot_GetGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11094,13 +10655,11 @@ func TestSerdeUpdateSnapshot_GetHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11124,13 +10683,11 @@ func TestSerdeUpdateSnapshot_GetHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11154,13 +10711,11 @@ func TestSerdeUpdateSnapshot_GetMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11183,13 +10738,11 @@ func TestSerdeUpdateSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11212,13 +10765,11 @@ func TestSerdeUpdateSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11242,13 +10793,11 @@ func TestSerdeUpdateSnapshot_GetPaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11271,13 +10820,11 @@ func TestSerdeUpdateSnapshot_GetPaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11300,13 +10847,11 @@ func TestSerdeUpdateSnapshot_GetPaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11330,13 +10875,11 @@ func TestSerdeUpdateSnapshot_GetPolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11359,13 +10902,11 @@ func TestSerdeUpdateSnapshot_GetPolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11388,13 +10929,11 @@ func TestSerdeUpdateSnapshot_GetPolicyEngineSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyEngineSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11418,13 +10957,11 @@ func TestSerdeUpdateSnapshot_GetPolicyGeneration(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyGeneration"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11448,13 +10985,11 @@ func TestSerdeUpdateSnapshot_GetPolicyGenerationSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyGenerationSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11478,13 +11013,11 @@ func TestSerdeUpdateSnapshot_GetPolicySummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicySummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11507,13 +11040,11 @@ func TestSerdeUpdateSnapshot_GetRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11537,13 +11068,11 @@ func TestSerdeUpdateSnapshot_GetRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11566,13 +11095,11 @@ func TestSerdeUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11595,13 +11122,11 @@ func TestSerdeUpdateSnapshot_GetTokenVault(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTokenVault"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11624,13 +11149,11 @@ func TestSerdeUpdateSnapshot_GetWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11655,13 +11178,11 @@ func TestSerdeUpdateSnapshot_ListAgentRuntimeEndpoints(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimeEndpoints"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11685,13 +11206,11 @@ func TestSerdeUpdateSnapshot_ListAgentRuntimes(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimes"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11716,13 +11235,11 @@ func TestSerdeUpdateSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRuntimeVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11746,13 +11263,11 @@ func TestSerdeUpdateSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApiKeyCredentialProviders"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11777,13 +11292,11 @@ func TestSerdeUpdateSnapshot_ListBrowserProfiles(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBrowserProfiles"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11808,13 +11321,11 @@ func TestSerdeUpdateSnapshot_ListBrowsers(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBrowsers"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11839,13 +11350,11 @@ func TestSerdeUpdateSnapshot_ListCodeInterpreters(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCodeInterpreters"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11869,13 +11378,11 @@ func TestSerdeUpdateSnapshot_ListConfigurationBundles(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConfigurationBundles"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11905,13 +11412,11 @@ func TestSerdeUpdateSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConfigurationBundleVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11937,13 +11442,11 @@ func TestSerdeUpdateSnapshot_ListDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11967,13 +11470,11 @@ func TestSerdeUpdateSnapshot_ListDatasets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -11998,13 +11499,11 @@ func TestSerdeUpdateSnapshot_ListDatasetVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12028,13 +11527,11 @@ func TestSerdeUpdateSnapshot_ListEvaluators(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvaluators"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12059,13 +11556,11 @@ func TestSerdeUpdateSnapshot_ListGatewayRules(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayRules"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12089,13 +11584,11 @@ func TestSerdeUpdateSnapshot_ListGateways(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGateways"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12120,13 +11613,11 @@ func TestSerdeUpdateSnapshot_ListGatewayTargets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGatewayTargets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12151,13 +11642,11 @@ func TestSerdeUpdateSnapshot_ListHarnessEndpoints(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHarnessEndpoints"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12181,13 +11670,11 @@ func TestSerdeUpdateSnapshot_ListHarnesses(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHarnesses"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12212,13 +11699,11 @@ func TestSerdeUpdateSnapshot_ListHarnessVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHarnessVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12242,13 +11727,11 @@ func TestSerdeUpdateSnapshot_ListMemories(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMemories"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12272,13 +11755,11 @@ func TestSerdeUpdateSnapshot_ListOauth2CredentialProviders(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOauth2CredentialProviders"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12302,13 +11783,11 @@ func TestSerdeUpdateSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOnlineEvaluationConfigs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12333,13 +11812,11 @@ func TestSerdeUpdateSnapshot_ListPaymentConnectors(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPaymentConnectors"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12363,13 +11840,11 @@ func TestSerdeUpdateSnapshot_ListPaymentCredentialProviders(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPaymentCredentialProviders"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12393,13 +11868,11 @@ func TestSerdeUpdateSnapshot_ListPaymentManagers(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPaymentManagers"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12425,13 +11898,11 @@ func TestSerdeUpdateSnapshot_ListPolicies(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicies"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12455,13 +11926,11 @@ func TestSerdeUpdateSnapshot_ListPolicyEngines(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyEngines"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12485,13 +11954,11 @@ func TestSerdeUpdateSnapshot_ListPolicyEngineSummaries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyEngineSummaries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12517,13 +11984,11 @@ func TestSerdeUpdateSnapshot_ListPolicyGenerationAssets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyGenerationAssets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12548,13 +12013,11 @@ func TestSerdeUpdateSnapshot_ListPolicyGenerations(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyGenerations"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12579,13 +12042,11 @@ func TestSerdeUpdateSnapshot_ListPolicyGenerationSummaries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyGenerationSummaries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12611,13 +12072,11 @@ func TestSerdeUpdateSnapshot_ListPolicySummaries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicySummaries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12643,13 +12102,11 @@ func TestSerdeUpdateSnapshot_ListRegistries(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRegistries"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12677,13 +12134,11 @@ func TestSerdeUpdateSnapshot_ListRegistryRecords(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRegistryRecords"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12706,13 +12161,11 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12736,13 +12189,11 @@ func TestSerdeUpdateSnapshot_ListWorkloadIdentities(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListWorkloadIdentities"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12766,13 +12217,11 @@ func TestSerdeUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12799,13 +12248,11 @@ func TestSerdeUpdateSnapshot_SetTokenVaultCMK(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetTokenVaultCMK"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12836,13 +12283,11 @@ func TestSerdeUpdateSnapshot_StartPolicyGeneration(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPolicyGeneration"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12866,13 +12311,11 @@ func TestSerdeUpdateSnapshot_SubmitRegistryRecordForApproval(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SubmitRegistryRecordForApproval"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12899,13 +12342,11 @@ func TestSerdeUpdateSnapshot_SynchronizeGatewayTargets(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SynchronizeGatewayTargets"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12931,13 +12372,11 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -12964,13 +12403,11 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13122,13 +12559,11 @@ func TestSerdeUpdateSnapshot_UpdateAgentRuntime(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentRuntime"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13155,13 +12590,11 @@ func TestSerdeUpdateSnapshot_UpdateAgentRuntimeEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentRuntimeEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13190,13 +12623,11 @@ func TestSerdeUpdateSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApiKeyCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13238,13 +12669,11 @@ func TestSerdeUpdateSnapshot_UpdateConfigurationBundle(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConfigurationBundle"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13269,13 +12698,11 @@ func TestSerdeUpdateSnapshot_UpdateDataset(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDataset"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13303,13 +12730,11 @@ func TestSerdeUpdateSnapshot_UpdateDatasetExamples(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDatasetExamples"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13370,13 +12795,11 @@ func TestSerdeUpdateSnapshot_UpdateEvaluator(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEvaluator"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13560,13 +12983,11 @@ func TestSerdeUpdateSnapshot_UpdateGateway(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGateway"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13648,13 +13069,11 @@ func TestSerdeUpdateSnapshot_UpdateGatewayRule(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGatewayRule"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13745,13 +13164,11 @@ func TestSerdeUpdateSnapshot_UpdateGatewayTarget(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGatewayTarget"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -13981,13 +13398,11 @@ func TestSerdeUpdateSnapshot_UpdateHarness(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHarness"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14014,13 +13429,11 @@ func TestSerdeUpdateSnapshot_UpdateHarnessEndpoint(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHarnessEndpoint"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14425,13 +13838,11 @@ func TestSerdeUpdateSnapshot_UpdateMemory(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMemory"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14503,13 +13914,11 @@ func TestSerdeUpdateSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOauth2CredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14594,13 +14003,11 @@ func TestSerdeUpdateSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOnlineEvaluationConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14639,13 +14046,11 @@ func TestSerdeUpdateSnapshot_UpdatePaymentConnector(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePaymentConnector"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14686,13 +14091,11 @@ func TestSerdeUpdateSnapshot_UpdatePaymentCredentialProvider(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePaymentCredentialProvider"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14795,13 +14198,11 @@ func TestSerdeUpdateSnapshot_UpdatePaymentManager(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePaymentManager"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14835,13 +14236,11 @@ func TestSerdeUpdateSnapshot_UpdatePolicy(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePolicy"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14867,13 +14266,11 @@ func TestSerdeUpdateSnapshot_UpdatePolicyEngine(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePolicyEngine"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -14983,13 +14380,11 @@ func TestSerdeUpdateSnapshot_UpdateRegistry(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistry"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -15112,13 +14507,11 @@ func TestSerdeUpdateSnapshot_UpdateRegistryRecord(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistryRecord"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -15144,13 +14537,11 @@ func TestSerdeUpdateSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistryRecordStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -15177,12 +14568,10 @@ func TestSerdeUpdateSnapshot_UpdateWorkloadIdentity(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateWorkloadIdentity"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }

@@ -26,9 +26,10 @@ import (
 
 const serdeSSPrefix = "serde_snapshot"
 
-type serdeSnapshotOK struct{}
-
-func (serdeSnapshotOK) Error() string { return "error: success" }
+// errSerdeSnapshotOK is returned by the capture middleware to abort the request
+// pipeline once the serialized request has been captured, so no network call is
+// made. It is a control signal, not a failure.
+var errSerdeSnapshotOK = errors.New("serde snapshot: request captured")
 
 func serdeCreatePath(path string) (*os.File, error) {
 	if err := os.MkdirAll(serdeSSPrefix, 0700); err != nil && !errors.Is(err, fs.ErrExist) {
@@ -76,7 +77,7 @@ func (m *captureSerdeRequestMiddleware) HandleFinalize(
 		}
 	}
 
-	return middleware.FinalizeOutput{}, middleware.Metadata{}, serdeSnapshotOK{}
+	return middleware.FinalizeOutput{}, middleware.Metadata{}, errSerdeSnapshotOK
 }
 
 func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]string, body []byte) string {
@@ -131,7 +132,7 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
 		if strings.HasPrefix(string(existing), prefix) &&
 			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
-			return serdeSnapshotOK{}
+			return nil
 		}
 	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
@@ -142,13 +143,13 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 	if _, err := f.Write([]byte(content)); err != nil {
 		return err
 	}
-	return serdeSnapshotOK{}
+	return nil
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
-		return serdeSnapshotOK{}
+		return nil
 	}
 	if err != nil {
 		return err
@@ -164,7 +165,7 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
-	return serdeSnapshotOK{}
+	return nil
 }
 
 type serdeEndpointResolver struct{}
@@ -203,13 +204,11 @@ func TestSerdeCheckSnapshot_CreateGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -236,13 +235,11 @@ func TestSerdeCheckSnapshot_CreateGroupMembership(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGroupMembership"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -359,13 +356,11 @@ func TestSerdeCheckSnapshot_CreateUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -389,13 +384,11 @@ func TestSerdeCheckSnapshot_DeleteGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -419,13 +412,11 @@ func TestSerdeCheckSnapshot_DeleteGroupMembership(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGroupMembership"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -449,13 +440,11 @@ func TestSerdeCheckSnapshot_DeleteUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -479,13 +468,11 @@ func TestSerdeCheckSnapshot_DescribeGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -509,13 +496,11 @@ func TestSerdeCheckSnapshot_DescribeGroupMembership(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGroupMembership"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -543,13 +528,11 @@ func TestSerdeCheckSnapshot_DescribeUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -578,13 +561,11 @@ func TestSerdeCheckSnapshot_GetGroupId(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGroupId"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -611,13 +592,11 @@ func TestSerdeCheckSnapshot_GetGroupMembershipId(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGroupMembershipId"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -646,13 +625,11 @@ func TestSerdeCheckSnapshot_GetUserId(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserId"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -682,13 +659,11 @@ func TestSerdeCheckSnapshot_IsMemberInGroups(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "IsMemberInGroups"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -714,13 +689,11 @@ func TestSerdeCheckSnapshot_ListGroupMemberships(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGroupMemberships"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -748,13 +721,11 @@ func TestSerdeCheckSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGroupMembershipsForMember"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -789,13 +760,11 @@ func TestSerdeCheckSnapshot_ListGroups(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGroups"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -834,13 +803,11 @@ func TestSerdeCheckSnapshot_ListUsers(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListUsers"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -874,13 +841,11 @@ func TestSerdeCheckSnapshot_UpdateGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -914,13 +879,11 @@ func TestSerdeCheckSnapshot_UpdateUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 func TestSerdeUpdateSnapshot_CreateGroup(t *testing.T) {
@@ -944,13 +907,11 @@ func TestSerdeUpdateSnapshot_CreateGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -977,13 +938,11 @@ func TestSerdeUpdateSnapshot_CreateGroupMembership(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGroupMembership"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1100,13 +1059,11 @@ func TestSerdeUpdateSnapshot_CreateUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1130,13 +1087,11 @@ func TestSerdeUpdateSnapshot_DeleteGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1160,13 +1115,11 @@ func TestSerdeUpdateSnapshot_DeleteGroupMembership(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGroupMembership"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1190,13 +1143,11 @@ func TestSerdeUpdateSnapshot_DeleteUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1220,13 +1171,11 @@ func TestSerdeUpdateSnapshot_DescribeGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1250,13 +1199,11 @@ func TestSerdeUpdateSnapshot_DescribeGroupMembership(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGroupMembership"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1284,13 +1231,11 @@ func TestSerdeUpdateSnapshot_DescribeUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1319,13 +1264,11 @@ func TestSerdeUpdateSnapshot_GetGroupId(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGroupId"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1352,13 +1295,11 @@ func TestSerdeUpdateSnapshot_GetGroupMembershipId(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetGroupMembershipId"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1387,13 +1328,11 @@ func TestSerdeUpdateSnapshot_GetUserId(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserId"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1423,13 +1362,11 @@ func TestSerdeUpdateSnapshot_IsMemberInGroups(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "IsMemberInGroups"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1455,13 +1392,11 @@ func TestSerdeUpdateSnapshot_ListGroupMemberships(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGroupMemberships"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1489,13 +1424,11 @@ func TestSerdeUpdateSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGroupMembershipsForMember"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1530,13 +1463,11 @@ func TestSerdeUpdateSnapshot_ListGroups(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGroups"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1575,13 +1506,11 @@ func TestSerdeUpdateSnapshot_ListUsers(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListUsers"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1615,13 +1544,11 @@ func TestSerdeUpdateSnapshot_UpdateGroup(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGroup"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1655,12 +1582,10 @@ func TestSerdeUpdateSnapshot_UpdateUser(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateUser"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }

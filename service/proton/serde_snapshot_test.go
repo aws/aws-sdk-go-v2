@@ -25,9 +25,10 @@ import (
 
 const serdeSSPrefix = "serde_snapshot"
 
-type serdeSnapshotOK struct{}
-
-func (serdeSnapshotOK) Error() string { return "error: success" }
+// errSerdeSnapshotOK is returned by the capture middleware to abort the request
+// pipeline once the serialized request has been captured, so no network call is
+// made. It is a control signal, not a failure.
+var errSerdeSnapshotOK = errors.New("serde snapshot: request captured")
 
 func serdeCreatePath(path string) (*os.File, error) {
 	if err := os.MkdirAll(serdeSSPrefix, 0700); err != nil && !errors.Is(err, fs.ErrExist) {
@@ -75,7 +76,7 @@ func (m *captureSerdeRequestMiddleware) HandleFinalize(
 		}
 	}
 
-	return middleware.FinalizeOutput{}, middleware.Metadata{}, serdeSnapshotOK{}
+	return middleware.FinalizeOutput{}, middleware.Metadata{}, errSerdeSnapshotOK
 }
 
 func serdeFormatRequest(method, rawPath, rawQuery string, header map[string][]string, body []byte) string {
@@ -130,7 +131,7 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 		prefix := serdeFormatRequest(method, rawPath, rawQuery, header, nil)
 		if strings.HasPrefix(string(existing), prefix) &&
 			serdeBodyEqual(body, []byte(string(existing)[len(prefix):])) {
-			return serdeSnapshotOK{}
+			return nil
 		}
 	}
 	f, err := serdeCreatePath(serdeSSPath(operation))
@@ -141,13 +142,13 @@ func serdeUpdateSnapshot(method, rawPath, rawQuery string, header map[string][]s
 	if _, err := f.Write([]byte(content)); err != nil {
 		return err
 	}
-	return serdeSnapshotOK{}
+	return nil
 }
 
 func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]string, body []byte, operation string) error {
 	f, err := os.Open(serdeSSPath(operation))
 	if errors.Is(err, fs.ErrNotExist) {
-		return serdeSnapshotOK{}
+		return nil
 	}
 	if err != nil {
 		return err
@@ -163,7 +164,7 @@ func serdeTestSnapshot(method, rawPath, rawQuery string, header map[string][]str
 		content := serdeFormatRequest(method, rawPath, rawQuery, header, body)
 		return fmt.Errorf("serde snapshot mismatch for %s:\nGOT:\n%s:\nEXPECTED:\n%s", operation, content, string(expected))
 	}
-	return serdeSnapshotOK{}
+	return nil
 }
 
 type serdeEndpointResolver struct{}
@@ -200,13 +201,11 @@ func TestSerdeCheckSnapshot_AcceptEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcceptEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -229,13 +228,11 @@ func TestSerdeCheckSnapshot_CancelComponentDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelComponentDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -258,13 +255,11 @@ func TestSerdeCheckSnapshot_CancelEnvironmentDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelEnvironmentDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -288,13 +283,11 @@ func TestSerdeCheckSnapshot_CancelServiceInstanceDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelServiceInstanceDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -317,13 +310,11 @@ func TestSerdeCheckSnapshot_CancelServicePipelineDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelServicePipelineDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -364,13 +355,11 @@ func TestSerdeCheckSnapshot_CreateComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -417,13 +406,11 @@ func TestSerdeCheckSnapshot_CreateEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -461,13 +448,11 @@ func TestSerdeCheckSnapshot_CreateEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -504,13 +489,11 @@ func TestSerdeCheckSnapshot_CreateEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -552,13 +535,11 @@ func TestSerdeCheckSnapshot_CreateEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -594,13 +575,11 @@ func TestSerdeCheckSnapshot_CreateRepository(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRepository"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -641,13 +620,11 @@ func TestSerdeCheckSnapshot_CreateService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -685,13 +662,11 @@ func TestSerdeCheckSnapshot_CreateServiceInstance(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceInstance"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -718,13 +693,11 @@ func TestSerdeCheckSnapshot_CreateServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -761,13 +734,11 @@ func TestSerdeCheckSnapshot_CreateServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -823,13 +794,11 @@ func TestSerdeCheckSnapshot_CreateServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -857,13 +826,11 @@ func TestSerdeCheckSnapshot_CreateTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -886,13 +853,11 @@ func TestSerdeCheckSnapshot_DeleteComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -915,13 +880,11 @@ func TestSerdeCheckSnapshot_DeleteDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -944,13 +907,11 @@ func TestSerdeCheckSnapshot_DeleteEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -973,13 +934,11 @@ func TestSerdeCheckSnapshot_DeleteEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1002,13 +961,11 @@ func TestSerdeCheckSnapshot_DeleteEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1033,13 +990,11 @@ func TestSerdeCheckSnapshot_DeleteEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1063,13 +1018,11 @@ func TestSerdeCheckSnapshot_DeleteRepository(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRepository"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1092,13 +1045,11 @@ func TestSerdeCheckSnapshot_DeleteService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1121,13 +1072,11 @@ func TestSerdeCheckSnapshot_DeleteServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1150,13 +1099,11 @@ func TestSerdeCheckSnapshot_DeleteServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1181,13 +1128,11 @@ func TestSerdeCheckSnapshot_DeleteServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1211,13 +1156,11 @@ func TestSerdeCheckSnapshot_DeleteTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1238,13 +1181,11 @@ func TestSerdeCheckSnapshot_GetAccountSettings(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccountSettings"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1267,13 +1208,11 @@ func TestSerdeCheckSnapshot_GetComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1300,13 +1239,11 @@ func TestSerdeCheckSnapshot_GetDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1329,13 +1266,11 @@ func TestSerdeCheckSnapshot_GetEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1358,13 +1293,11 @@ func TestSerdeCheckSnapshot_GetEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1387,13 +1320,11 @@ func TestSerdeCheckSnapshot_GetEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1418,13 +1349,11 @@ func TestSerdeCheckSnapshot_GetEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1448,13 +1377,11 @@ func TestSerdeCheckSnapshot_GetRepository(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRepository"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1480,13 +1407,11 @@ func TestSerdeCheckSnapshot_GetRepositorySyncStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRepositorySyncStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1507,13 +1432,11 @@ func TestSerdeCheckSnapshot_GetResourcesSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcesSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1536,13 +1459,11 @@ func TestSerdeCheckSnapshot_GetService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1566,13 +1487,11 @@ func TestSerdeCheckSnapshot_GetServiceInstance(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceInstance"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1596,13 +1515,11 @@ func TestSerdeCheckSnapshot_GetServiceInstanceSyncStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceInstanceSyncStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1626,13 +1543,11 @@ func TestSerdeCheckSnapshot_GetServiceSyncBlockerSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceSyncBlockerSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1655,13 +1570,11 @@ func TestSerdeCheckSnapshot_GetServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1684,13 +1597,11 @@ func TestSerdeCheckSnapshot_GetServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1715,13 +1626,11 @@ func TestSerdeCheckSnapshot_GetServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1745,13 +1654,11 @@ func TestSerdeCheckSnapshot_GetTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1776,13 +1683,11 @@ func TestSerdeCheckSnapshot_GetTemplateSyncStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTemplateSyncStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1807,13 +1712,11 @@ func TestSerdeCheckSnapshot_ListComponentOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListComponentOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1837,13 +1740,11 @@ func TestSerdeCheckSnapshot_ListComponentProvisionedResources(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListComponentProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1870,13 +1771,11 @@ func TestSerdeCheckSnapshot_ListComponents(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListComponents"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1904,13 +1803,11 @@ func TestSerdeCheckSnapshot_ListDeployments(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDeployments"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1940,13 +1837,11 @@ func TestSerdeCheckSnapshot_ListEnvironmentAccountConnections(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentAccountConnections"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -1971,13 +1866,11 @@ func TestSerdeCheckSnapshot_ListEnvironmentOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2001,13 +1894,11 @@ func TestSerdeCheckSnapshot_ListEnvironmentProvisionedResources(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2041,13 +1932,11 @@ func TestSerdeCheckSnapshot_ListEnvironments(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironments"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2071,13 +1960,11 @@ func TestSerdeCheckSnapshot_ListEnvironmentTemplates(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentTemplates"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2103,13 +1990,11 @@ func TestSerdeCheckSnapshot_ListEnvironmentTemplateVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentTemplateVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2133,13 +2018,11 @@ func TestSerdeCheckSnapshot_ListRepositories(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRepositories"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2165,13 +2048,11 @@ func TestSerdeCheckSnapshot_ListRepositorySyncDefinitions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRepositorySyncDefinitions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2197,13 +2078,11 @@ func TestSerdeCheckSnapshot_ListServiceInstanceOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceInstanceOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2228,13 +2107,11 @@ func TestSerdeCheckSnapshot_ListServiceInstanceProvisionedResources(t *testing.T
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceInstanceProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2271,13 +2148,11 @@ func TestSerdeCheckSnapshot_ListServiceInstances(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceInstances"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2302,13 +2177,11 @@ func TestSerdeCheckSnapshot_ListServicePipelineOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServicePipelineOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2332,13 +2205,11 @@ func TestSerdeCheckSnapshot_ListServicePipelineProvisionedResources(t *testing.T
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServicePipelineProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2362,13 +2233,11 @@ func TestSerdeCheckSnapshot_ListServices(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServices"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2392,13 +2261,11 @@ func TestSerdeCheckSnapshot_ListServiceTemplates(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceTemplates"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2424,13 +2291,11 @@ func TestSerdeCheckSnapshot_ListServiceTemplateVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceTemplateVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2455,13 +2320,11 @@ func TestSerdeCheckSnapshot_ListTagsForResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2497,13 +2360,11 @@ func TestSerdeCheckSnapshot_NotifyResourceDeploymentStatusChange(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "NotifyResourceDeploymentStatusChange"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2526,13 +2387,11 @@ func TestSerdeCheckSnapshot_RejectEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RejectEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2565,13 +2424,11 @@ func TestSerdeCheckSnapshot_TagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2598,13 +2455,11 @@ func TestSerdeCheckSnapshot_UntagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2634,13 +2489,11 @@ func TestSerdeCheckSnapshot_UpdateAccountSettings(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccountSettings"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2670,13 +2523,11 @@ func TestSerdeCheckSnapshot_UpdateComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2713,13 +2564,11 @@ func TestSerdeCheckSnapshot_UpdateEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2745,13 +2594,11 @@ func TestSerdeCheckSnapshot_UpdateEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2776,13 +2623,11 @@ func TestSerdeCheckSnapshot_UpdateEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2809,13 +2654,11 @@ func TestSerdeCheckSnapshot_UpdateEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2840,13 +2683,11 @@ func TestSerdeCheckSnapshot_UpdateService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2875,13 +2716,11 @@ func TestSerdeCheckSnapshot_UpdateServiceInstance(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceInstance"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2908,13 +2747,11 @@ func TestSerdeCheckSnapshot_UpdateServicePipeline(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServicePipeline"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2938,13 +2775,11 @@ func TestSerdeCheckSnapshot_UpdateServiceSyncBlocker(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceSyncBlocker"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -2971,13 +2806,11 @@ func TestSerdeCheckSnapshot_UpdateServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3002,13 +2835,11 @@ func TestSerdeCheckSnapshot_UpdateServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3049,13 +2880,11 @@ func TestSerdeCheckSnapshot_UpdateServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3083,13 +2912,11 @@ func TestSerdeCheckSnapshot_UpdateTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 func TestSerdeUpdateSnapshot_AcceptEnvironmentAccountConnection(t *testing.T) {
@@ -3111,13 +2938,11 @@ func TestSerdeUpdateSnapshot_AcceptEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcceptEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3140,13 +2965,11 @@ func TestSerdeUpdateSnapshot_CancelComponentDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelComponentDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3169,13 +2992,11 @@ func TestSerdeUpdateSnapshot_CancelEnvironmentDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelEnvironmentDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3199,13 +3020,11 @@ func TestSerdeUpdateSnapshot_CancelServiceInstanceDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelServiceInstanceDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3228,13 +3047,11 @@ func TestSerdeUpdateSnapshot_CancelServicePipelineDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelServicePipelineDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3275,13 +3092,11 @@ func TestSerdeUpdateSnapshot_CreateComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3328,13 +3143,11 @@ func TestSerdeUpdateSnapshot_CreateEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3372,13 +3185,11 @@ func TestSerdeUpdateSnapshot_CreateEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3415,13 +3226,11 @@ func TestSerdeUpdateSnapshot_CreateEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3463,13 +3272,11 @@ func TestSerdeUpdateSnapshot_CreateEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3505,13 +3312,11 @@ func TestSerdeUpdateSnapshot_CreateRepository(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRepository"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3552,13 +3357,11 @@ func TestSerdeUpdateSnapshot_CreateService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3596,13 +3399,11 @@ func TestSerdeUpdateSnapshot_CreateServiceInstance(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceInstance"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3629,13 +3430,11 @@ func TestSerdeUpdateSnapshot_CreateServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3672,13 +3471,11 @@ func TestSerdeUpdateSnapshot_CreateServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3734,13 +3531,11 @@ func TestSerdeUpdateSnapshot_CreateServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3768,13 +3563,11 @@ func TestSerdeUpdateSnapshot_CreateTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3797,13 +3590,11 @@ func TestSerdeUpdateSnapshot_DeleteComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3826,13 +3617,11 @@ func TestSerdeUpdateSnapshot_DeleteDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3855,13 +3644,11 @@ func TestSerdeUpdateSnapshot_DeleteEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3884,13 +3671,11 @@ func TestSerdeUpdateSnapshot_DeleteEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3913,13 +3698,11 @@ func TestSerdeUpdateSnapshot_DeleteEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3944,13 +3727,11 @@ func TestSerdeUpdateSnapshot_DeleteEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -3974,13 +3755,11 @@ func TestSerdeUpdateSnapshot_DeleteRepository(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRepository"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4003,13 +3782,11 @@ func TestSerdeUpdateSnapshot_DeleteService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4032,13 +3809,11 @@ func TestSerdeUpdateSnapshot_DeleteServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4061,13 +3836,11 @@ func TestSerdeUpdateSnapshot_DeleteServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4092,13 +3865,11 @@ func TestSerdeUpdateSnapshot_DeleteServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4122,13 +3893,11 @@ func TestSerdeUpdateSnapshot_DeleteTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4149,13 +3918,11 @@ func TestSerdeUpdateSnapshot_GetAccountSettings(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccountSettings"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4178,13 +3945,11 @@ func TestSerdeUpdateSnapshot_GetComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4211,13 +3976,11 @@ func TestSerdeUpdateSnapshot_GetDeployment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDeployment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4240,13 +4003,11 @@ func TestSerdeUpdateSnapshot_GetEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4269,13 +4030,11 @@ func TestSerdeUpdateSnapshot_GetEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4298,13 +4057,11 @@ func TestSerdeUpdateSnapshot_GetEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4329,13 +4086,11 @@ func TestSerdeUpdateSnapshot_GetEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4359,13 +4114,11 @@ func TestSerdeUpdateSnapshot_GetRepository(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRepository"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4391,13 +4144,11 @@ func TestSerdeUpdateSnapshot_GetRepositorySyncStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRepositorySyncStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4418,13 +4169,11 @@ func TestSerdeUpdateSnapshot_GetResourcesSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcesSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4447,13 +4196,11 @@ func TestSerdeUpdateSnapshot_GetService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4477,13 +4224,11 @@ func TestSerdeUpdateSnapshot_GetServiceInstance(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceInstance"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4507,13 +4252,11 @@ func TestSerdeUpdateSnapshot_GetServiceInstanceSyncStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceInstanceSyncStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4537,13 +4280,11 @@ func TestSerdeUpdateSnapshot_GetServiceSyncBlockerSummary(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceSyncBlockerSummary"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4566,13 +4307,11 @@ func TestSerdeUpdateSnapshot_GetServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4595,13 +4334,11 @@ func TestSerdeUpdateSnapshot_GetServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4626,13 +4363,11 @@ func TestSerdeUpdateSnapshot_GetServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4656,13 +4391,11 @@ func TestSerdeUpdateSnapshot_GetTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4687,13 +4420,11 @@ func TestSerdeUpdateSnapshot_GetTemplateSyncStatus(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTemplateSyncStatus"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4718,13 +4449,11 @@ func TestSerdeUpdateSnapshot_ListComponentOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListComponentOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4748,13 +4477,11 @@ func TestSerdeUpdateSnapshot_ListComponentProvisionedResources(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListComponentProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4781,13 +4508,11 @@ func TestSerdeUpdateSnapshot_ListComponents(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListComponents"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4815,13 +4540,11 @@ func TestSerdeUpdateSnapshot_ListDeployments(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDeployments"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4851,13 +4574,11 @@ func TestSerdeUpdateSnapshot_ListEnvironmentAccountConnections(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentAccountConnections"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4882,13 +4603,11 @@ func TestSerdeUpdateSnapshot_ListEnvironmentOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4912,13 +4631,11 @@ func TestSerdeUpdateSnapshot_ListEnvironmentProvisionedResources(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4952,13 +4669,11 @@ func TestSerdeUpdateSnapshot_ListEnvironments(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironments"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -4982,13 +4697,11 @@ func TestSerdeUpdateSnapshot_ListEnvironmentTemplates(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentTemplates"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5014,13 +4727,11 @@ func TestSerdeUpdateSnapshot_ListEnvironmentTemplateVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnvironmentTemplateVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5044,13 +4755,11 @@ func TestSerdeUpdateSnapshot_ListRepositories(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRepositories"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5076,13 +4785,11 @@ func TestSerdeUpdateSnapshot_ListRepositorySyncDefinitions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRepositorySyncDefinitions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5108,13 +4815,11 @@ func TestSerdeUpdateSnapshot_ListServiceInstanceOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceInstanceOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5139,13 +4844,11 @@ func TestSerdeUpdateSnapshot_ListServiceInstanceProvisionedResources(t *testing.
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceInstanceProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5182,13 +4885,11 @@ func TestSerdeUpdateSnapshot_ListServiceInstances(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceInstances"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5213,13 +4914,11 @@ func TestSerdeUpdateSnapshot_ListServicePipelineOutputs(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServicePipelineOutputs"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5243,13 +4942,11 @@ func TestSerdeUpdateSnapshot_ListServicePipelineProvisionedResources(t *testing.
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServicePipelineProvisionedResources"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5273,13 +4970,11 @@ func TestSerdeUpdateSnapshot_ListServices(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServices"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5303,13 +4998,11 @@ func TestSerdeUpdateSnapshot_ListServiceTemplates(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceTemplates"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5335,13 +5028,11 @@ func TestSerdeUpdateSnapshot_ListServiceTemplateVersions(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceTemplateVersions"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5366,13 +5057,11 @@ func TestSerdeUpdateSnapshot_ListTagsForResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5408,13 +5097,11 @@ func TestSerdeUpdateSnapshot_NotifyResourceDeploymentStatusChange(t *testing.T) 
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "NotifyResourceDeploymentStatusChange"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5437,13 +5124,11 @@ func TestSerdeUpdateSnapshot_RejectEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RejectEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5476,13 +5161,11 @@ func TestSerdeUpdateSnapshot_TagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5509,13 +5192,11 @@ func TestSerdeUpdateSnapshot_UntagResource(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5545,13 +5226,11 @@ func TestSerdeUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccountSettings"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5581,13 +5260,11 @@ func TestSerdeUpdateSnapshot_UpdateComponent(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateComponent"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5624,13 +5301,11 @@ func TestSerdeUpdateSnapshot_UpdateEnvironment(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironment"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5656,13 +5331,11 @@ func TestSerdeUpdateSnapshot_UpdateEnvironmentAccountConnection(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironmentAccountConnection"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5687,13 +5360,11 @@ func TestSerdeUpdateSnapshot_UpdateEnvironmentTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironmentTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5720,13 +5391,11 @@ func TestSerdeUpdateSnapshot_UpdateEnvironmentTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEnvironmentTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5751,13 +5420,11 @@ func TestSerdeUpdateSnapshot_UpdateService(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateService"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5786,13 +5453,11 @@ func TestSerdeUpdateSnapshot_UpdateServiceInstance(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceInstance"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5819,13 +5484,11 @@ func TestSerdeUpdateSnapshot_UpdateServicePipeline(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServicePipeline"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5849,13 +5512,11 @@ func TestSerdeUpdateSnapshot_UpdateServiceSyncBlocker(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceSyncBlocker"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5882,13 +5543,11 @@ func TestSerdeUpdateSnapshot_UpdateServiceSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5913,13 +5572,11 @@ func TestSerdeUpdateSnapshot_UpdateServiceTemplate(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceTemplate"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5960,13 +5617,11 @@ func TestSerdeUpdateSnapshot_UpdateServiceTemplateVersion(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateServiceTemplateVersion"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }
 
@@ -5994,12 +5649,10 @@ func TestSerdeUpdateSnapshot_UpdateTemplateSyncConfig(t *testing.T) {
 			}, middleware.Before)
 		})
 	})
-	if err != nil && !strings.Contains(err.Error(), "error: success") {
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTemplateSyncConfig"); err != nil {
-		if err != nil && !strings.Contains(err.Error(), "error: success") {
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	}
 }

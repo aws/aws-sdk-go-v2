@@ -1,0 +1,6 @@
+POST /MalformedLong/1?longInQuery=1
+
+Content-Type: application/json
+Longinheader: 1
+
+{"longInBody":1}

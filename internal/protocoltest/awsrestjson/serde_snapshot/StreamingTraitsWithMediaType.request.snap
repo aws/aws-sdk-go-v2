@@ -1,0 +1,4 @@
+POST /StreamingTraitsWithMediaType
+
+X-Foo: __Foo__
+

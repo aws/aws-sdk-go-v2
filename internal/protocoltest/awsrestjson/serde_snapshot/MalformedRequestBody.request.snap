@@ -1,0 +1,5 @@
+POST /MalformedRequestBody
+
+Content-Type: application/json
+
+{"float":1,"int":1}

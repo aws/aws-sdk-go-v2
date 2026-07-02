@@ -1,0 +1,5 @@
+POST /XmlNamespaces
+
+Content-Type: application/xml
+
+<XmlNamespacesRequest xmlns="http://foo.com"><nested><foo xmlns:baz="http://baz.com">__Foo__</foo><values xmlns="http://qux.com"><member xmlns="http://bux.com">__Member__</member><member xmlns="http://bux.com">__Member__</member></values></nested></XmlNamespacesRequest>

@@ -1,0 +1,5 @@
+POST /XmlTimestamps
+
+Content-Type: application/xml
+
+<XmlTimestampsRequest><dateTime>2000-01-01T00:00:00Z</dateTime><dateTimeOnTarget>2000-01-01T00:00:00Z</dateTimeOnTarget><epochSeconds>946684800</epochSeconds><epochSecondsOnTarget>946684800</epochSecondsOnTarget><httpDate>Sat, 01 Jan 2000 00:00:00 GMT</httpDate><httpDateOnTarget>Sat, 01 Jan 2000 00:00:00 GMT</httpDateOnTarget><normal>2000-01-01T00:00:00Z</normal></XmlTimestampsRequest>

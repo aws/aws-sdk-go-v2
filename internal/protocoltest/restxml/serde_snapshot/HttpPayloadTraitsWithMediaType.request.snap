@@ -1,0 +1,6 @@
+POST /HttpPayloadTraitsWithMediaType
+
+Content-Type: text/plain
+X-Foo: __Foo__
+
+blob
