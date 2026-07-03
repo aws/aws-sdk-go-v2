@@ -828,8 +828,15 @@ type uploader struct {
 	partPool     bytesBufferPool
 	objectSize   int64
 	multipleRead bool
+	readerStart  int64
+	readerPos    int64
 
 	progressEmitter *singleObjectProgressEmitter
+}
+
+type readerAtSeeker interface {
+	io.ReaderAt
+	io.Seeker
 }
 
 func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
@@ -854,8 +861,10 @@ func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 		return nil, err
 	}
 
-	u.partPool = newDefaultSlicePool(u.options.PartSizeBytes, u.options.Concurrency+1) // only create the caching pool for multipart upload
-	defer u.partPool.Close()
+	if _, ok := u.in.Body.(readerAtSeeker); !ok {
+		u.partPool = newDefaultSlicePool(u.options.PartSizeBytes, u.options.Concurrency+1) // only create the caching pool for multipart upload
+		defer u.partPool.Close()
+	}
 	mu := multiUploader{
 		uploader: u,
 	}
@@ -878,6 +887,13 @@ func (u *uploader) initSize() error {
 	u.objectSize = -1
 	switch r := u.in.Body.(type) {
 	case io.Seeker:
+		start, err := r.Seek(0, io.SeekCurrent)
+		if err != nil {
+			return err
+		}
+		u.readerStart = start
+		u.readerPos = start
+
 		n, err := types.SeekerLen(r)
 		if err != nil {
 			return err
@@ -931,6 +947,10 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 
 // nextReader reads the next chunk of data from input Body
 func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), error) {
+	if r, ok := u.in.Body.(readerAtSeeker); ok {
+		return u.nextSectionReader(r)
+	}
+
 	if !u.multipleRead {
 		u.multipleRead = true
 		// read first part up to a maximum of PartSize to avoid allocating 8MB buffer out of the gate
@@ -967,6 +987,34 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 		u.partPool.Put(part)
 	}
 	return bytes.NewReader(part[0:n]), n, cleanup, err
+}
+
+func (u *uploader) nextSectionReader(r readerAtSeeker) (io.Reader, int, func(), error) {
+	if !u.multipleRead {
+		u.multipleRead = true
+		if u.objectSize < u.options.MultipartUploadThreshold {
+			n := u.objectSize
+			reader := io.NewSectionReader(r, u.readerPos, n)
+			u.readerPos += n
+			return reader, int(n), func() {}, io.EOF
+		}
+	}
+
+	bytesLeft := u.objectSize - (u.readerPos - u.readerStart)
+	if bytesLeft <= 0 {
+		return bytes.NewReader(nil), 0, func() {}, io.EOF
+	}
+
+	n := u.options.PartSizeBytes
+	var err error
+	if bytesLeft <= n {
+		n = bytesLeft
+		err = io.EOF
+	}
+
+	reader := io.NewSectionReader(r, u.readerPos, n)
+	u.readerPos += n
+	return reader, int(n), func() {}, err
 }
 
 func (u *uploader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
