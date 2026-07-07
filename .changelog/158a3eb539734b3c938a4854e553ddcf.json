@@ -1,0 +1,8 @@
+{
+    "id": "158a3eb5-3973-4b3c-938a-4854e553ddcf",
+    "type": "feature",
+    "description": "Add RequestChecksumCalculation config.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
