@@ -52,6 +52,17 @@ type OperationWithOptionalInputOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithOptionalInputOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithOptionalInputOutputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithOptionalInputOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.OperationWithOptionalInputOutputOutput_Value, *v.Value)
+	}
+}
 func (v *OperationWithOptionalInputOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithOptionalInputOutputOutput, func(s *smithy.Schema) error {
 		switch s {

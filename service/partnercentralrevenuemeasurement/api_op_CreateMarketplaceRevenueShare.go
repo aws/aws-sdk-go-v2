@@ -105,6 +105,38 @@ type CreateMarketplaceRevenueShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMarketplaceRevenueShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMarketplaceRevenueShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMarketplaceRevenueShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_Arn, *v.Arn)
+	}
+	if v.Catalog != "" {
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_Catalog, string(v.Catalog))
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.CreateMarketplaceRevenueShareOutput_CreatedDate, *v.CreatedDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.CreateMarketplaceRevenueShareOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_ProductCode, *v.ProductCode)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_ProductName, *v.ProductName)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.CreateMarketplaceRevenueShareOutput_Revision, *v.Revision)
+	}
+}
 func (v *CreateMarketplaceRevenueShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMarketplaceRevenueShareOutput, func(s *smithy.Schema) error {
 		switch s {

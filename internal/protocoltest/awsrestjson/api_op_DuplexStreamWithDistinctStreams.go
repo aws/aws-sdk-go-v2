@@ -53,6 +53,15 @@ type DuplexStreamWithDistinctStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DuplexStreamWithDistinctStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplexStreamWithDistinctStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplexStreamWithDistinctStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSingletonEventStream(s, schemas.DuplexStreamWithDistinctStreamsOutput_stream, v.Stream)
+}
 func (v *DuplexStreamWithDistinctStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DuplexStreamWithDistinctStreamsOutput, func(s *smithy.Schema) error {
 		switch s {

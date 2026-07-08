@@ -60,6 +60,14 @@ type DuplexStreamWithInitialMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DuplexStreamWithInitialMessagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplexStreamWithInitialMessagesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplexStreamWithInitialMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *DuplexStreamWithInitialMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DuplexStreamWithInitialMessagesOutput, func(s *smithy.Schema) error {
 		switch s {

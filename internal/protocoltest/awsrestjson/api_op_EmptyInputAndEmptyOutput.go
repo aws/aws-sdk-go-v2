@@ -49,6 +49,14 @@ type EmptyInputAndEmptyOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmptyInputAndEmptyOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmptyInputAndEmptyOutputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmptyInputAndEmptyOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *EmptyInputAndEmptyOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmptyInputAndEmptyOutputOutput, func(s *smithy.Schema) error {
 		switch s {

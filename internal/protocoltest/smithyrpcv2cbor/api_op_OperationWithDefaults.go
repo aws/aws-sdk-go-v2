@@ -117,6 +117,79 @@ type OperationWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithDefaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithDefaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithDefaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBlob != nil {
+		s.WriteBlob(schemas.OperationWithDefaultsOutput_defaultBlob, v.DefaultBlob)
+	}
+	if v.DefaultBoolean != nil {
+		s.WriteBool(schemas.OperationWithDefaultsOutput_defaultBoolean, *v.DefaultBoolean)
+	}
+	if v.DefaultByte != nil {
+		s.WriteInt8(schemas.OperationWithDefaultsOutput_defaultByte, *v.DefaultByte)
+	}
+	if v.DefaultDouble != nil {
+		s.WriteFloat64(schemas.OperationWithDefaultsOutput_defaultDouble, *v.DefaultDouble)
+	}
+	if v.DefaultEnum != "" {
+		s.WriteString(schemas.OperationWithDefaultsOutput_defaultEnum, string(v.DefaultEnum))
+	}
+	if v.DefaultFloat != nil {
+		s.WriteFloat32(schemas.OperationWithDefaultsOutput_defaultFloat, *v.DefaultFloat)
+	}
+	if v.DefaultIntEnum != 0 {
+		s.WriteInt32(schemas.OperationWithDefaultsOutput_defaultIntEnum, int32(v.DefaultIntEnum))
+	}
+	if v.DefaultInteger != nil {
+		s.WriteInt32(schemas.OperationWithDefaultsOutput_defaultInteger, *v.DefaultInteger)
+	}
+	serializeTestStringList(s, schemas.OperationWithDefaultsOutput_defaultList, v.DefaultList)
+	if v.DefaultLong != nil {
+		s.WriteInt64(schemas.OperationWithDefaultsOutput_defaultLong, *v.DefaultLong)
+	}
+	serializeTestStringMap(s, schemas.OperationWithDefaultsOutput_defaultMap, v.DefaultMap)
+	if v.DefaultShort != nil {
+		s.WriteInt16(schemas.OperationWithDefaultsOutput_defaultShort, *v.DefaultShort)
+	}
+	if v.DefaultString != nil {
+		s.WriteString(schemas.OperationWithDefaultsOutput_defaultString, *v.DefaultString)
+	}
+	if v.DefaultTimestamp != nil {
+		s.WriteTime(schemas.OperationWithDefaultsOutput_defaultTimestamp, *v.DefaultTimestamp)
+	}
+	if v.EmptyBlob != nil {
+		s.WriteBlob(schemas.OperationWithDefaultsOutput_emptyBlob, v.EmptyBlob)
+	}
+	if v.EmptyString != nil {
+		s.WriteString(schemas.OperationWithDefaultsOutput_emptyString, *v.EmptyString)
+	}
+	if v.FalseBoolean != false {
+		s.WriteBool(schemas.OperationWithDefaultsOutput_falseBoolean, v.FalseBoolean)
+	}
+	if v.ZeroByte != 0 {
+		s.WriteInt8(schemas.OperationWithDefaultsOutput_zeroByte, v.ZeroByte)
+	}
+	if v.ZeroDouble != 0 {
+		s.WriteFloat64(schemas.OperationWithDefaultsOutput_zeroDouble, v.ZeroDouble)
+	}
+	if v.ZeroFloat != 0 {
+		s.WriteFloat32(schemas.OperationWithDefaultsOutput_zeroFloat, v.ZeroFloat)
+	}
+	if v.ZeroInteger != 0 {
+		s.WriteInt32(schemas.OperationWithDefaultsOutput_zeroInteger, v.ZeroInteger)
+	}
+	if v.ZeroLong != 0 {
+		s.WriteInt64(schemas.OperationWithDefaultsOutput_zeroLong, v.ZeroLong)
+	}
+	if v.ZeroShort != 0 {
+		s.WriteInt16(schemas.OperationWithDefaultsOutput_zeroShort, v.ZeroShort)
+	}
+}
 func (v *OperationWithDefaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithDefaultsOutput, func(s *smithy.Schema) error {
 		switch s {

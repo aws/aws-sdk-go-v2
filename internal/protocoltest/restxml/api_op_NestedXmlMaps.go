@@ -56,6 +56,16 @@ type NestedXmlMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NestedXmlMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NestedXmlMapsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NestedXmlMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNestedMap(s, schemas.NestedXmlMapsResponse_flatNestedMap, v.FlatNestedMap)
+	serializeNestedMap(s, schemas.NestedXmlMapsResponse_nestedMap, v.NestedMap)
+}
 func (v *NestedXmlMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NestedXmlMapsResponse, func(s *smithy.Schema) error {
 		switch s {

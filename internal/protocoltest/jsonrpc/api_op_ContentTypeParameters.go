@@ -52,6 +52,14 @@ type ContentTypeParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentTypeParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentTypeParametersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentTypeParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *ContentTypeParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContentTypeParametersOutput, func(s *smithy.Schema) error {
 		switch s {

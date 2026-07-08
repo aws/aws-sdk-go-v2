@@ -56,6 +56,19 @@ type RecursiveShapesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecursiveShapesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecursiveShapesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecursiveShapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.RecursiveShapesResponse_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *RecursiveShapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecursiveShapesResponse, func(s *smithy.Schema) error {
 		switch s {

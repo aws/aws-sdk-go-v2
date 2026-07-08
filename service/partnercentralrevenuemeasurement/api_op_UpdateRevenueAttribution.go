@@ -110,6 +110,29 @@ type UpdateRevenueAttributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRevenueAttributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRevenueAttributionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRevenueAttributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRevenueAttributionOutput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRevenueAttributionOutput_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRevenueAttributionOutput_Id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateRevenueAttributionOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LatestRevision != nil {
+		s.WriteString(schemas.UpdateRevenueAttributionOutput_LatestRevision, *v.LatestRevision)
+	}
+}
 func (v *UpdateRevenueAttributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRevenueAttributionOutput, func(s *smithy.Schema) error {
 		switch s {

@@ -125,6 +125,49 @@ type SimpleScalarPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.SimpleScalarPropertiesResponse_Nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ByteValue != nil {
+		s.WriteInt8(schemas.SimpleScalarPropertiesResponse_byteValue, *v.ByteValue)
+	}
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarPropertiesResponse_doubleValue, *v.DoubleValue)
+	}
+	if v.FalseBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarPropertiesResponse_falseBooleanValue, *v.FalseBooleanValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarPropertiesResponse_floatValue, *v.FloatValue)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.SimpleScalarPropertiesResponse_foo, *v.Foo)
+	}
+	if v.IntegerValue != nil {
+		s.WriteInt32(schemas.SimpleScalarPropertiesResponse_integerValue, *v.IntegerValue)
+	}
+	if v.LongValue != nil {
+		s.WriteInt64(schemas.SimpleScalarPropertiesResponse_longValue, *v.LongValue)
+	}
+	if v.ShortValue != nil {
+		s.WriteInt16(schemas.SimpleScalarPropertiesResponse_shortValue, *v.ShortValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.SimpleScalarPropertiesResponse_stringValue, *v.StringValue)
+	}
+	if v.TrueBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarPropertiesResponse_trueBooleanValue, *v.TrueBooleanValue)
+	}
+}
 func (v *SimpleScalarPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SimpleScalarPropertiesResponse, func(s *smithy.Schema) error {
 		switch s {

@@ -125,6 +125,37 @@ type CreateRevenueAttributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRevenueAttributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRevenueAttributionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRevenueAttributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateRevenueAttributionOutput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRevenueAttributionOutput_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateRevenueAttributionOutput_Id, *v.Id)
+	}
+	if v.MarketplaceProduct != nil {
+		s.WriteStruct(schemas.CreateRevenueAttributionOutput_MarketplaceProduct)
+		v.MarketplaceProduct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRevenueAttributionOutput_Name, *v.Name)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.CreateRevenueAttributionOutput_Revision, *v.Revision)
+	}
+	if v.TenancyModel != "" {
+		s.WriteString(schemas.CreateRevenueAttributionOutput_TenancyModel, string(v.TenancyModel))
+	}
+}
 func (v *CreateRevenueAttributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRevenueAttributionOutput, func(s *smithy.Schema) error {
 		switch s {

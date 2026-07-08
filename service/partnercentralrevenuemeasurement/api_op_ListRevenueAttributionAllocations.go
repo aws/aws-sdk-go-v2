@@ -147,6 +147,18 @@ type ListRevenueAttributionAllocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRevenueAttributionAllocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRevenueAttributionAllocationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRevenueAttributionAllocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRevenueAttributionAllocationsOutput_NextToken, *v.NextToken)
+	}
+	serializeRevenueAttributionAllocationSummaryList(s, schemas.ListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries, v.RevenueAttributionAllocationSummaries)
+}
 func (v *ListRevenueAttributionAllocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRevenueAttributionAllocationsOutput, func(s *smithy.Schema) error {
 		switch s {

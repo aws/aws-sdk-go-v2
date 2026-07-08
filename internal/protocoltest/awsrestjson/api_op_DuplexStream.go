@@ -53,6 +53,14 @@ type DuplexStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DuplexStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplexStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplexStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *DuplexStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DuplexStreamOutput, func(s *smithy.Schema) error {
 		switch s {

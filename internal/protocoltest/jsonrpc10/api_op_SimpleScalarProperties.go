@@ -59,6 +59,20 @@ type SimpleScalarPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarPropertiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarPropertiesOutput_doubleValue, *v.DoubleValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarPropertiesOutput_floatValue, *v.FloatValue)
+	}
+}
 func (v *SimpleScalarPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SimpleScalarPropertiesOutput, func(s *smithy.Schema) error {
 		switch s {

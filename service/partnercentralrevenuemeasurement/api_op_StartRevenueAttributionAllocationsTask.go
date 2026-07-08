@@ -124,6 +124,32 @@ type StartRevenueAttributionAllocationsTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRevenueAttributionAllocationsTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRevenueAttributionAllocationsTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRevenueAttributionAllocationsTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != "" {
+		s.WriteString(schemas.StartRevenueAttributionAllocationsTaskOutput_Catalog, string(v.Catalog))
+	}
+	if v.RevenueAttributionArn != nil {
+		s.WriteString(schemas.StartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn, *v.RevenueAttributionArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.StartRevenueAttributionAllocationsTaskOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartRevenueAttributionAllocationsTaskOutput_Status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartRevenueAttributionAllocationsTaskOutput_TaskId, *v.TaskId)
+	}
+	if v.TotalRevenueAttributionAllocationRecords != nil {
+		s.WriteInt32(schemas.StartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords, *v.TotalRevenueAttributionAllocationRecords)
+	}
+}
 func (v *StartRevenueAttributionAllocationsTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartRevenueAttributionAllocationsTaskOutput, func(s *smithy.Schema) error {
 		switch s {

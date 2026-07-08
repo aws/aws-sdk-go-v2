@@ -63,6 +63,21 @@ type OperationWithNestedStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithNestedStructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithNestedStructureOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithNestedStructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dialog != nil {
+		s.WriteStruct(schemas.OperationWithNestedStructureOutput_dialog)
+		v.Dialog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDialogList(s, schemas.OperationWithNestedStructureOutput_dialogList, v.DialogList)
+	serializeDialogMap(s, schemas.OperationWithNestedStructureOutput_dialogMap, v.DialogMap)
+}
 func (v *OperationWithNestedStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithNestedStructureOutput, func(s *smithy.Schema) error {
 		switch s {

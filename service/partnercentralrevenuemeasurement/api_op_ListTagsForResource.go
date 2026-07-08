@@ -60,6 +60,15 @@ type ListTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.ListTagsForResourceOutput_tags, v.Tags)
+}
 func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsForResourceOutput, func(s *smithy.Schema) error {
 		switch s {

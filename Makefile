@@ -9,7 +9,8 @@ LINT_IGNORE_PRIVATE_METRICS='aws/middleware/private/metrics'
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
-SERDE_SNAPSHOT_TAGS=-tags "serde_snapshot"
+REQUEST_SNAPSHOT_TAGS=-tags "request_snapshot"
+RESPONSE_SNAPSHOT_TAGS=-tags "response_snapshot"
 
 SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
@@ -323,20 +324,35 @@ test-ci-check-snapshot-%:
 		&& go run . -p $(subst _,/,$(subst test-ci-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast ./..."
 
-test-update-serde-snapshot-%:
+test-update-request-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-update-serde-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
-		"go test ${SERDE_SNAPSHOT_TAGS} -run TestSerdeUpdateSnapshot ."
+		&& go run . -p $(subst _,/,$(subst test-update-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestUpdateRequestSnapshot ."
 
-test-check-serde-snapshot-%:
+test-check-request-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-check-serde-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
-		"go test ${SERDE_SNAPSHOT_TAGS} -run TestSerdeCheckSnapshot ."
+		&& go run . -p $(subst _,/,$(subst test-check-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestCheckRequestSnapshot ."
 
-test-ci-check-serde-snapshot-%:
+test-ci-check-request-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-ci-check-serde-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
-		"go test ${SERDE_SNAPSHOT_TAGS} -run TestSerdeCheckSnapshot -failfast ."
+		&& go run . -p $(subst _,/,$(subst test-ci-check-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestCheckRequestSnapshot -failfast ."
+
+test-update-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestUpdateResponseSnapshot ."
+
+test-check-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot ."
+
+test-ci-check-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot -failfast ."
 
 cachedep: cachedep-modules-.
 

@@ -114,6 +114,18 @@ type ListMarketplaceRevenueSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMarketplaceRevenueSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMarketplaceRevenueSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMarketplaceRevenueSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMarketplaceRevenueShareSummaryList(s, schemas.ListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries, v.MarketplaceRevenueShareSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMarketplaceRevenueSharesOutput_NextToken, *v.NextToken)
+	}
+}
 func (v *ListMarketplaceRevenueSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMarketplaceRevenueSharesOutput, func(s *smithy.Schema) error {
 		switch s {

@@ -130,6 +130,61 @@ type GetRevenueAttributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueAttributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueAttributionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueAttributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_Arn, *v.Arn)
+	}
+	if v.Catalog != "" {
+		s.WriteString(schemas.GetRevenueAttributionOutput_Catalog, string(v.Catalog))
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetRevenueAttributionOutput_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_Description, *v.Description)
+	}
+	if v.EffectiveFrom != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_EffectiveFrom, *v.EffectiveFrom)
+	}
+	if v.EffectiveUntil != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_EffectiveUntil, *v.EffectiveUntil)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_Id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetRevenueAttributionOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LatestRevision != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_LatestRevision, *v.LatestRevision)
+	}
+	if v.MarketplaceProduct != nil {
+		s.WriteStruct(schemas.GetRevenueAttributionOutput_MarketplaceProduct)
+		v.MarketplaceProduct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_Name, *v.Name)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.GetRevenueAttributionOutput_Revision, *v.Revision)
+	}
+	if v.TenancyModel != "" {
+		s.WriteString(schemas.GetRevenueAttributionOutput_TenancyModel, string(v.TenancyModel))
+	}
+	if v.TotalActiveRevenueAttributionAllocationCount != nil {
+		s.WriteInt32(schemas.GetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount, *v.TotalActiveRevenueAttributionAllocationCount)
+	}
+	if v.TotalRevenueAttributionAllocationCount != nil {
+		s.WriteInt32(schemas.GetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount, *v.TotalRevenueAttributionAllocationCount)
+	}
+}
 func (v *GetRevenueAttributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRevenueAttributionOutput, func(s *smithy.Schema) error {
 		switch s {

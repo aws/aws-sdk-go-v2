@@ -51,6 +51,15 @@ type FlattenedXmlMapWithXmlNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlattenedXmlMapWithXmlNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlattenedXmlMapWithXmlNameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlattenedXmlMapWithXmlNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlattenedXmlMapWithXmlNameInputOutputMap(s, schemas.FlattenedXmlMapWithXmlNameResponse_myMap, v.MyMap)
+}
 func (v *FlattenedXmlMapWithXmlNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FlattenedXmlMapWithXmlNameResponse, func(s *smithy.Schema) error {
 		switch s {

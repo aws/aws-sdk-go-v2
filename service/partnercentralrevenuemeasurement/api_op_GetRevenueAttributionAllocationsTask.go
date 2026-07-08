@@ -109,6 +109,42 @@ type GetRevenueAttributionAllocationsTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueAttributionAllocationsTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueAttributionAllocationsTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueAttributionAllocationsTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != "" {
+		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_Catalog, string(v.Catalog))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_Description, *v.Description)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetRevenueAttributionAllocationsTaskOutput_EndedAt, *v.EndedAt)
+	}
+	serializeRevenueAttributionAllocationErrorDetailList(s, schemas.GetRevenueAttributionAllocationsTaskOutput_ErrorDetailList, v.ErrorDetailList)
+	if v.RevenueAttributionArn != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn, *v.RevenueAttributionArn)
+	}
+	if v.RevenueAttributionLatestRevision != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision, *v.RevenueAttributionLatestRevision)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetRevenueAttributionAllocationsTaskOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_Status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_TaskId, *v.TaskId)
+	}
+	if v.TotalRevenueAttributionAllocationRecords != nil {
+		s.WriteInt32(schemas.GetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords, *v.TotalRevenueAttributionAllocationRecords)
+	}
+}
 func (v *GetRevenueAttributionAllocationsTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRevenueAttributionAllocationsTaskOutput, func(s *smithy.Schema) error {
 		switch s {

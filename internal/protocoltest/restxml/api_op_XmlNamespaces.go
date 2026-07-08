@@ -55,6 +55,19 @@ type XmlNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlNamespacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.XmlNamespacesResponse_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *XmlNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlNamespacesResponse, func(s *smithy.Schema) error {
 		switch s {

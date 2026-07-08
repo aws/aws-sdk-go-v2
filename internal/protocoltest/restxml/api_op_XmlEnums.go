@@ -83,6 +83,26 @@ type XmlEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEnumsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FooEnum1 != "" {
+		s.WriteString(schemas.XmlEnumsResponse_fooEnum1, string(v.FooEnum1))
+	}
+	if v.FooEnum2 != "" {
+		s.WriteString(schemas.XmlEnumsResponse_fooEnum2, string(v.FooEnum2))
+	}
+	if v.FooEnum3 != "" {
+		s.WriteString(schemas.XmlEnumsResponse_fooEnum3, string(v.FooEnum3))
+	}
+	serializeFooEnumList(s, schemas.XmlEnumsResponse_fooEnumList, v.FooEnumList)
+	serializeFooEnumMap(s, schemas.XmlEnumsResponse_fooEnumMap, v.FooEnumMap)
+	serializeFooEnumSet(s, schemas.XmlEnumsResponse_fooEnumSet, v.FooEnumSet)
+}
 func (v *XmlEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlEnumsResponse, func(s *smithy.Schema) error {
 		switch s {

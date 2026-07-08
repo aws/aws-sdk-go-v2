@@ -37,6 +37,25 @@ func (e *ComplexError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ComplexError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplexError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplexError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Header != nil {
+		s.WriteString(schemas.ComplexError_Header, *v.Header)
+	}
+	if v.Nested != nil {
+		s.WriteStruct(schemas.ComplexError_Nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopLevel != nil {
+		s.WriteString(schemas.ComplexError_TopLevel, *v.TopLevel)
+	}
+}
 func (v *ComplexError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComplexError, func(s *smithy.Schema) error {
 		switch s {
@@ -78,6 +97,17 @@ func (e *ErrorEvent) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ErrorEvent) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ErrorEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ErrorEvent_message, *v.Message)
+	}
+}
 func (v *ErrorEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ErrorEvent, func(s *smithy.Schema) error {
 		switch s {
@@ -115,6 +145,14 @@ func (e *FooError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *FooError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FooError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FooError) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *FooError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FooError, func(s *smithy.Schema) error {
 		switch s {
@@ -148,6 +186,17 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGreeting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidGreeting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidGreeting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidGreeting_Message, *v.Message)
+	}
+}
 func (v *InvalidGreeting) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidGreeting, func(s *smithy.Schema) error {
 		switch s {
@@ -183,6 +232,17 @@ func (e *ServiceUnavailableError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableError_message, *v.Message)
+	}
+}
 func (v *ServiceUnavailableError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceUnavailableError, func(s *smithy.Schema) error {
 		switch s {

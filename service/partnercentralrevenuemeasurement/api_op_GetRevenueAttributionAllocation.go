@@ -149,6 +149,56 @@ type GetRevenueAttributionAllocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueAttributionAllocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueAttributionAllocationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueAttributionAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetRevenueAttributionAllocationOutput_CreatedDate, *v.CreatedDate)
+	}
+	if v.CustomerAwsAccountId != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_CustomerAwsAccountId, *v.CustomerAwsAccountId)
+	}
+	if v.EffectiveFrom != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_EffectiveFrom, *v.EffectiveFrom)
+	}
+	if v.EffectiveUntil != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_EffectiveUntil, *v.EffectiveUntil)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_EntityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_EntityName, *v.EntityName)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_EntityType, string(v.EntityType))
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetRevenueAttributionAllocationOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RevenueAttributionAllocationId != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId, *v.RevenueAttributionAllocationId)
+	}
+	if v.RevenueAttributionIdentifier != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier, *v.RevenueAttributionIdentifier)
+	}
+	if v.RevenueAttributionLatestRevision != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision, *v.RevenueAttributionLatestRevision)
+	}
+	if v.RevenueAttributionRevision != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_RevenueAttributionRevision, *v.RevenueAttributionRevision)
+	}
+	if v.RevenueSharePercent != nil {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_RevenueSharePercent, *v.RevenueSharePercent)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRevenueAttributionAllocationOutput_Status, string(v.Status))
+	}
+}
 func (v *GetRevenueAttributionAllocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRevenueAttributionAllocationOutput, func(s *smithy.Schema) error {
 		switch s {

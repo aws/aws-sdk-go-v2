@@ -112,6 +112,47 @@ type GetMarketplaceRevenueShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMarketplaceRevenueShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMarketplaceRevenueShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMarketplaceRevenueShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_Arn, *v.Arn)
+	}
+	if v.Catalog != "" {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_Catalog, string(v.Catalog))
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetMarketplaceRevenueShareOutput_CreatedDate, *v.CreatedDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetMarketplaceRevenueShareOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LatestRevision != nil {
+		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_LatestRevision, *v.LatestRevision)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_ProductCode, *v.ProductCode)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_ProductName, *v.ProductName)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_Revision, *v.Revision)
+	}
+	if v.TotalActiveMarketplaceRevenueShareAllocationCount != nil {
+		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount, *v.TotalActiveMarketplaceRevenueShareAllocationCount)
+	}
+	if v.TotalMarketplaceRevenueShareAllocationCount != nil {
+		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount, *v.TotalMarketplaceRevenueShareAllocationCount)
+	}
+}
 func (v *GetMarketplaceRevenueShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMarketplaceRevenueShareOutput, func(s *smithy.Schema) error {
 		switch s {

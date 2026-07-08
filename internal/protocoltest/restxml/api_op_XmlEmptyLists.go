@@ -124,6 +124,29 @@ type XmlEmptyListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEmptyListsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEmptyListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.XmlEmptyListsResponse_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.XmlEmptyListsResponse_enumList, v.EnumList)
+	serializeRenamedListMembers(s, schemas.XmlEmptyListsResponse_flattenedList, v.FlattenedList)
+	serializeRenamedListMembers(s, schemas.XmlEmptyListsResponse_flattenedList2, v.FlattenedList2)
+	serializeListWithMemberNamespace(s, schemas.XmlEmptyListsResponse_flattenedListWithMemberNamespace, v.FlattenedListWithMemberNamespace)
+	serializeListWithNamespace(s, schemas.XmlEmptyListsResponse_flattenedListWithNamespace, v.FlattenedListWithNamespace)
+	serializeStructureList(s, schemas.XmlEmptyListsResponse_flattenedStructureList, v.FlattenedStructureList)
+	serializeIntegerEnumList(s, schemas.XmlEmptyListsResponse_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.XmlEmptyListsResponse_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.XmlEmptyListsResponse_nestedStringList, v.NestedStringList)
+	serializeRenamedListMembers(s, schemas.XmlEmptyListsResponse_renamedListMembers, v.RenamedListMembers)
+	serializeStringList(s, schemas.XmlEmptyListsResponse_stringList, v.StringList)
+	serializeStringSet(s, schemas.XmlEmptyListsResponse_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.XmlEmptyListsResponse_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.XmlEmptyListsResponse_timestampList, v.TimestampList)
+}
 func (v *XmlEmptyListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlEmptyListsResponse, func(s *smithy.Schema) error {
 		switch s {

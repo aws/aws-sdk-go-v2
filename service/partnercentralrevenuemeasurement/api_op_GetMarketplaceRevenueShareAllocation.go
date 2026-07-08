@@ -126,6 +126,47 @@ type GetMarketplaceRevenueShareAllocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMarketplaceRevenueShareAllocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMarketplaceRevenueShareAllocationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMarketplaceRevenueShareAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_Arn, *v.Arn)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetMarketplaceRevenueShareAllocationOutput_CreatedDate, *v.CreatedDate)
+	}
+	if v.EffectiveFrom != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_EffectiveFrom, *v.EffectiveFrom)
+	}
+	if v.EffectiveUntil != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_EffectiveUntil, *v.EffectiveUntil)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LatestMarketplaceRevenueShareRevision != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision, *v.LatestMarketplaceRevenueShareRevision)
+	}
+	if v.MarketplaceRevenueShareAllocationId != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId, *v.MarketplaceRevenueShareAllocationId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_ProductName, *v.ProductName)
+	}
+	if v.RevenueSharePercent != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent, *v.RevenueSharePercent)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_Status, string(v.Status))
+	}
+}
 func (v *GetMarketplaceRevenueShareAllocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMarketplaceRevenueShareAllocationOutput, func(s *smithy.Schema) error {
 		switch s {

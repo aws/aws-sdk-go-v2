@@ -51,6 +51,15 @@ type XmlUnionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlUnionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlUnionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlUnionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlUnionShape(s, schemas.XmlUnionsResponse_unionValue, v.UnionValue)
+}
 func (v *XmlUnionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlUnionsResponse, func(s *smithy.Schema) error {
 		switch s {
