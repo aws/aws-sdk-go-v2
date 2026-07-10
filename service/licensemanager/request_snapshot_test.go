@@ -1305,6 +1305,7 @@ func TestCheckRequestSnapshot_CreateLicenseVersion(t *testing.T) {
 		Status:        types.LicenseStatus("AVAILABLE"),
 		ClientToken:   ptr.String("__ClientToken__"),
 		SourceVersion: ptr.String("__SourceVersion__"),
+		ResetUsage:    true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4672,6 +4673,7 @@ func TestUpdateRequestSnapshot_CreateLicenseVersion(t *testing.T) {
 		Status:        types.LicenseStatus("AVAILABLE"),
 		ClientToken:   ptr.String("__ClientToken__"),
 		SourceVersion: ptr.String("__SourceVersion__"),
+		ResetUsage:    true,
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -1036,8 +1036,9 @@ func TestCheckResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 	want := &DescribeAnomalyDetectorsOutput{
 		AnomalyDetectors: []types.AnomalyDetector{
 			{
-				Namespace:  ptr.String("__Namespace__"),
-				MetricName: ptr.String("__MetricName__"),
+				AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+				Namespace:         ptr.String("__Namespace__"),
+				MetricName:        ptr.String("__MetricName__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -1142,8 +1143,9 @@ func TestCheckResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 				},
 			},
 			{
-				Namespace:  ptr.String("__Namespace__"),
-				MetricName: ptr.String("__MetricName__"),
+				AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+				Namespace:         ptr.String("__Namespace__"),
+				MetricName:        ptr.String("__MetricName__"),
 				Dimensions: []types.Dimension{
 					{
 						Name:  ptr.String("__Name__"),
@@ -2123,7 +2125,9 @@ func TestCheckResponseSnapshot_PutAlarmMuteRule(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_PutAnomalyDetector(t *testing.T) {
-	want := &PutAnomalyDetectorOutput{}
+	want := &PutAnomalyDetectorOutput{
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+	}
 	status, header, body, err := serdeRespReadSnapshot("PutAnomalyDetector.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")

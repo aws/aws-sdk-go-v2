@@ -444,6 +444,12 @@ func TestCheckRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2864,6 +2870,12 @@ func TestCheckRequestSnapshot_UpdateCapacityProvider(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3560,6 +3572,12 @@ func TestUpdateRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 			Mode: types.PropagateTagsMode("None"),
 			ExplicitTags: map[string]string{
 				"key0": "__Value__",
+			},
+		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
 			},
 		},
 	}
@@ -5980,6 +5998,12 @@ func TestUpdateRequestSnapshot_UpdateCapacityProvider(t *testing.T) {
 			Mode: types.PropagateTagsMode("None"),
 			ExplicitTags: map[string]string{
 				"key0": "__Value__",
+			},
+		},
+		TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+			LoggingConfig: &types.CapacityProviderLoggingConfig{
+				SystemLogLevel: types.SystemLogLevel("DEBUG"),
+				LogGroup:       ptr.String("__LogGroup__"),
 			},
 		},
 	}

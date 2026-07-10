@@ -9845,6 +9845,84 @@ func TestCheckRequestSnapshot_CreateIngestion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
+	input := &CreateKnowledgeBaseInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		DataSourceArn:   ptr.String("__DataSourceArn__"),
+		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
+			TemplateConfiguration: &types.KbTemplateConfiguration{
+				Template: nil,
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Permissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+			ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+				ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+			},
+			AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+				AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+			},
+			VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+				VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+				VideoExtractionType:   types.VideoExtractionType("AUDIO_TRANSCRIPTION_ONLY"),
+			},
+		},
+		AccessControlConfiguration: &types.AccessControlConfiguration{
+			IsACLEnabled: ptr.Bool(true),
+		},
+		PrimaryOwnerArn: ptr.String("__PrimaryOwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateKnowledgeBase(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateNamespace(t *testing.T) {
 	input := &CreateNamespaceInput{
 		AwsAccountId:  ptr.String("__AwsAccountId__"),
@@ -26557,6 +26635,57 @@ func TestCheckRequestSnapshot_UpdateKeyRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
+	input := &UpdateKnowledgeBaseInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
+			TemplateConfiguration: &types.KbTemplateConfiguration{
+				Template: nil,
+			},
+		},
+		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+			ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+				ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+			},
+			AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+				AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+			},
+			VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+				VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+				VideoExtractionType:   types.VideoExtractionType("AUDIO_TRANSCRIPTION_ONLY"),
+			},
+		},
+		IsEmailNotificationOptedForIngestionFailures: ptr.Bool(true),
+		AccessControlConfiguration: &types.AccessControlConfiguration{
+			IsACLEnabled: ptr.Bool(true),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateKnowledgeBase(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	input := &UpdateKnowledgeBasePermissionsInput{
 		AwsAccountId:    ptr.String("__AwsAccountId__"),
@@ -40412,6 +40541,84 @@ func TestUpdateRequestSnapshot_CreateIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateIngestion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
+	input := &CreateKnowledgeBaseInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		DataSourceArn:   ptr.String("__DataSourceArn__"),
+		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
+			TemplateConfiguration: &types.KbTemplateConfiguration{
+				Template: nil,
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Permissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+			ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+				ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+			},
+			AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+				AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+			},
+			VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+				VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+				VideoExtractionType:   types.VideoExtractionType("AUDIO_TRANSCRIPTION_ONLY"),
+			},
+		},
+		AccessControlConfiguration: &types.AccessControlConfiguration{
+			IsACLEnabled: ptr.Bool(true),
+		},
+		PrimaryOwnerArn: ptr.String("__PrimaryOwnerArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateKnowledgeBase(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBase"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -57124,6 +57331,57 @@ func TestUpdateRequestSnapshot_UpdateKeyRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKeyRegistration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
+	input := &UpdateKnowledgeBaseInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
+			TemplateConfiguration: &types.KbTemplateConfiguration{
+				Template: nil,
+			},
+		},
+		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+			ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+				ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+			},
+			AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+				AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+			},
+			VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+				VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+				VideoExtractionType:   types.VideoExtractionType("AUDIO_TRANSCRIPTION_ONLY"),
+			},
+		},
+		IsEmailNotificationOptedForIngestionFailures: ptr.Bool(true),
+		AccessControlConfiguration: &types.AccessControlConfiguration{
+			IsACLEnabled: ptr.Bool(true),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateKnowledgeBase(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBase"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -848,6 +848,31 @@ func TestCheckResponseSnapshot_CreateIngestion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
+	want := &CreateKnowledgeBaseOutput{
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
+		CreationStatus:   types.DataSetStatus("CREATING"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateKnowledgeBase.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateKnowledgeBase.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateNamespace(t *testing.T) {
 	want := &CreateNamespaceOutput{
 		Arn:            ptr.String("__Arn__"),
@@ -10111,7 +10136,9 @@ func TestCheckResponseSnapshot_DescribeDataSource(t *testing.T) {
 				Type:    types.DataSourceErrorInfoType("ACCESS_DENIED"),
 				Message: ptr.String("__Message__"),
 			},
-			SecretArn: ptr.String("__SecretArn__"),
+			SecretArn:                ptr.String("__SecretArn__"),
+			CredentialStatus:         types.CredentialStatus("CONNECTED"),
+			LastCredentialVerifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		RequestId: ptr.String("__RequestId__"),
 		Status:    1,
@@ -10573,7 +10600,6 @@ func TestCheckResponseSnapshot_DescribeKnowledgeBase(t *testing.T) {
 				TemplateConfiguration: &types.KbTemplateConfiguration{
 					Template: nil,
 				},
-				EventEnabled: ptr.Bool(true),
 			},
 			MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
 				ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
@@ -10586,6 +10612,9 @@ func TestCheckResponseSnapshot_DescribeKnowledgeBase(t *testing.T) {
 					VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
 					VideoExtractionType:   types.VideoExtractionType("AUDIO_TRANSCRIPTION_ONLY"),
 				},
+			},
+			AccessControlConfiguration: &types.AccessControlConfiguration{
+				IsACLEnabled: ptr.Bool(true),
 			},
 			Type:        ptr.String("__Type__"),
 			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -16029,7 +16058,9 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 					Type:    types.DataSourceErrorInfoType("ACCESS_DENIED"),
 					Message: ptr.String("__Message__"),
 				},
-				SecretArn: ptr.String("__SecretArn__"),
+				SecretArn:                ptr.String("__SecretArn__"),
+				CredentialStatus:         types.CredentialStatus("CONNECTED"),
+				LastCredentialVerifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				Arn:             ptr.String("__Arn__"),
@@ -16066,7 +16097,9 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 					Type:    types.DataSourceErrorInfoType("ACCESS_DENIED"),
 					Message: ptr.String("__Message__"),
 				},
-				SecretArn: ptr.String("__SecretArn__"),
+				SecretArn:                ptr.String("__SecretArn__"),
+				CredentialStatus:         types.CredentialStatus("CONNECTED"),
+				LastCredentialVerifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -23112,6 +23145,30 @@ func TestCheckResponseSnapshot_UpdateKeyRegistration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateKeyRegistration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateKnowledgeBase(t *testing.T) {
+	want := &UpdateKnowledgeBaseOutput{
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateKnowledgeBase.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateKnowledgeBase(context.Background(), &UpdateKnowledgeBaseInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateKnowledgeBase.response", err)
 	}
 }
 

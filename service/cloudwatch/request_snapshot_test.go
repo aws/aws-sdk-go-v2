@@ -280,8 +280,9 @@ func TestCheckRequestSnapshot_DeleteAlarms(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteAnomalyDetector(t *testing.T) {
 	input := &DeleteAnomalyDetectorInput{
-		Namespace:  ptr.String("__Namespace__"),
-		MetricName: ptr.String("__MetricName__"),
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
 		Dimensions: []types.Dimension{
 			{
 				Name:  ptr.String("__Name__"),
@@ -629,6 +630,10 @@ func TestCheckRequestSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 
 func TestCheckRequestSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 	input := &DescribeAnomalyDetectorsInput{
+		AnomalyDetectorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 		Namespace:  ptr.String("__Namespace__"),
@@ -2610,8 +2615,9 @@ func TestUpdateRequestSnapshot_DeleteAlarms(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteAnomalyDetector(t *testing.T) {
 	input := &DeleteAnomalyDetectorInput{
-		Namespace:  ptr.String("__Namespace__"),
-		MetricName: ptr.String("__MetricName__"),
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
 		Dimensions: []types.Dimension{
 			{
 				Name:  ptr.String("__Name__"),
@@ -2959,6 +2965,10 @@ func TestUpdateRequestSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 	input := &DescribeAnomalyDetectorsInput{
+		AnomalyDetectorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 		Namespace:  ptr.String("__Namespace__"),

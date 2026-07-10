@@ -396,6 +396,12 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 					"key0": "__Value__",
 				},
 			},
+			TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+				LoggingConfig: &types.CapacityProviderLoggingConfig{
+					SystemLogLevel: types.SystemLogLevel("DEBUG"),
+					LogGroup:       ptr.String("__LogGroup__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCapacityProvider.response")
@@ -882,6 +888,12 @@ func TestCheckResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
 					"key0": "__Value__",
 				},
 			},
+			TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+				LoggingConfig: &types.CapacityProviderLoggingConfig{
+					SystemLogLevel: types.SystemLogLevel("DEBUG"),
+					LogGroup:       ptr.String("__LogGroup__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteCapacityProvider.response")
@@ -1330,6 +1342,12 @@ func TestCheckResponseSnapshot_GetCapacityProvider(t *testing.T) {
 				Mode: types.PropagateTagsMode("None"),
 				ExplicitTags: map[string]string{
 					"key0": "__Value__",
+				},
+			},
+			TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+				LoggingConfig: &types.CapacityProviderLoggingConfig{
+					SystemLogLevel: types.SystemLogLevel("DEBUG"),
+					LogGroup:       ptr.String("__LogGroup__"),
 				},
 			},
 		},
@@ -3112,6 +3130,12 @@ func TestCheckResponseSnapshot_ListCapacityProviders(t *testing.T) {
 						"key0": "__Value__",
 					},
 				},
+				TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+					LoggingConfig: &types.CapacityProviderLoggingConfig{
+						SystemLogLevel: types.SystemLogLevel("DEBUG"),
+						LogGroup:       ptr.String("__LogGroup__"),
+					},
+				},
 			},
 			{
 				CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
@@ -3163,6 +3187,12 @@ func TestCheckResponseSnapshot_ListCapacityProviders(t *testing.T) {
 					Mode: types.PropagateTagsMode("None"),
 					ExplicitTags: map[string]string{
 						"key0": "__Value__",
+					},
+				},
+				TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+					LoggingConfig: &types.CapacityProviderLoggingConfig{
+						SystemLogLevel: types.SystemLogLevel("DEBUG"),
+						LogGroup:       ptr.String("__LogGroup__"),
 					},
 				},
 			},
@@ -5138,6 +5168,12 @@ func TestCheckResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
 				Mode: types.PropagateTagsMode("None"),
 				ExplicitTags: map[string]string{
 					"key0": "__Value__",
+				},
+			},
+			TelemetryConfig: &types.CapacityProviderTelemetryConfig{
+				LoggingConfig: &types.CapacityProviderLoggingConfig{
+					SystemLogLevel: types.SystemLogLevel("DEBUG"),
+					LogGroup:       ptr.String("__LogGroup__"),
 				},
 			},
 		},
