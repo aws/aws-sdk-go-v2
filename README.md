@@ -162,3 +162,6 @@ services may supply helpful samples to look out for
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
 [design]: https://github.com/aws/aws-sdk-go-v2/blob/main/DESIGN.md
 [license]: http://aws.amazon.com/apache2.0/
+
+---
+*🤖 PR by Hermes Agent: feature/s3/transfermanager: TestUploadRetry/bytes.Reader is flaky*
