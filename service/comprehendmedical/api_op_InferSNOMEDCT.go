@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type InferSNOMEDCTInput struct {
 	Text *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InferSNOMEDCTInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferSNOMEDCTRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferSNOMEDCTInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.InferSNOMEDCTRequest_Text, *v.Text)
+	}
 }
 
 type InferSNOMEDCTOutput struct {
@@ -71,13 +85,57 @@ type InferSNOMEDCTOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferSNOMEDCTOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferSNOMEDCTResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferSNOMEDCTOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Characters != nil {
+		s.WriteStruct(schemas.InferSNOMEDCTResponse_Characters)
+		v.Characters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSNOMEDCTEntityList(s, schemas.InferSNOMEDCTResponse_Entities, v.Entities)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.InferSNOMEDCTResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.InferSNOMEDCTResponse_PaginationToken, *v.PaginationToken)
+	}
+	if v.SNOMEDCTDetails != nil {
+		s.WriteStruct(schemas.InferSNOMEDCTResponse_SNOMEDCTDetails)
+		v.SNOMEDCTDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InferSNOMEDCTOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferSNOMEDCTResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferSNOMEDCTResponse_Characters:
+			v.Characters = &types.Characters{}
+			return v.Characters.Deserialize(d)
+		case schemas.InferSNOMEDCTResponse_Entities:
+			return deserializeSNOMEDCTEntityList(d, schemas.InferSNOMEDCTResponse_Entities, &v.Entities)
+		case schemas.InferSNOMEDCTResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.InferSNOMEDCTResponse_ModelVersion, v.ModelVersion)
+		case schemas.InferSNOMEDCTResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.InferSNOMEDCTResponse_PaginationToken, v.PaginationToken)
+		case schemas.InferSNOMEDCTResponse_SNOMEDCTDetails:
+			v.SNOMEDCTDetails = &types.SNOMEDCTDetails{}
+			return v.SNOMEDCTDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInferSNOMEDCTMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpInferSNOMEDCT{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InferSNOMEDCT, schemas.InferSNOMEDCTRequest, schemas.InferSNOMEDCTResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpInferSNOMEDCT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InferSNOMEDCT, schemas.InferSNOMEDCTRequest, schemas.InferSNOMEDCTResponse), output: &InferSNOMEDCTOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

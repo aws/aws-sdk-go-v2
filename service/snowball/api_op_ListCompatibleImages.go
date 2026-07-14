@@ -5,7 +5,9 @@ package snowball
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type ListCompatibleImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompatibleImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompatibleImagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompatibleImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCompatibleImagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompatibleImagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCompatibleImagesOutput struct {
 
 	// A JSON-formatted object that describes a compatible AMI, including the ID and
@@ -63,13 +80,35 @@ type ListCompatibleImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompatibleImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompatibleImagesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompatibleImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompatibleImageList(s, schemas.ListCompatibleImagesResult_CompatibleImages, v.CompatibleImages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompatibleImagesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCompatibleImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCompatibleImagesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCompatibleImagesResult_CompatibleImages:
+			return deserializeCompatibleImageList(d, schemas.ListCompatibleImagesResult_CompatibleImages, &v.CompatibleImages)
+		case schemas.ListCompatibleImagesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCompatibleImagesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListCompatibleImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompatibleImages, schemas.ListCompatibleImagesRequest, schemas.ListCompatibleImagesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListCompatibleImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompatibleImages, schemas.ListCompatibleImagesRequest, schemas.ListCompatibleImagesResult), output: &ListCompatibleImagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

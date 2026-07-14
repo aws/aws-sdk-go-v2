@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DetectPHIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectPHIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectPHIRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectPHIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.DetectPHIRequest_Text, *v.Text)
+	}
+}
+
 type DetectPHIOutput struct {
 
 	// The collection of PHI entities extracted from the input text and their
@@ -65,13 +79,41 @@ type DetectPHIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectPHIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectPHIResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectPHIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.DetectPHIResponse_Entities, v.Entities)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.DetectPHIResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.DetectPHIResponse_PaginationToken, *v.PaginationToken)
+	}
+}
+func (v *DetectPHIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectPHIResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectPHIResponse_Entities:
+			return deserializeEntityList(d, schemas.DetectPHIResponse_Entities, &v.Entities)
+		case schemas.DetectPHIResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.DetectPHIResponse_ModelVersion, v.ModelVersion)
+		case schemas.DetectPHIResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.DetectPHIResponse_PaginationToken, v.PaginationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDetectPHI{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectPHI, schemas.DetectPHIRequest, schemas.DetectPHIResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDetectPHI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectPHI, schemas.DetectPHIRequest, schemas.DetectPHIResponse), output: &DetectPHIOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

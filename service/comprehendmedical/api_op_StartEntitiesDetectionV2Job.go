@@ -5,7 +5,9 @@ package comprehendmedical
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,40 @@ type StartEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEntitiesDetectionV2JobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEntitiesDetectionV2JobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEntitiesDetectionV2JobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartEntitiesDetectionV2JobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionV2JobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionV2JobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartEntitiesDetectionV2JobRequest_JobName, *v.JobName)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.StartEntitiesDetectionV2JobRequest_KMSKey, *v.KMSKey)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartEntitiesDetectionV2JobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionV2JobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartEntitiesDetectionV2JobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this
@@ -82,13 +118,32 @@ type StartEntitiesDetectionV2JobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEntitiesDetectionV2JobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEntitiesDetectionV2JobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEntitiesDetectionV2JobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartEntitiesDetectionV2JobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartEntitiesDetectionV2JobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEntitiesDetectionV2JobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEntitiesDetectionV2JobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionV2JobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEntitiesDetectionV2Job, schemas.StartEntitiesDetectionV2JobRequest, schemas.StartEntitiesDetectionV2JobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEntitiesDetectionV2Job, schemas.StartEntitiesDetectionV2JobRequest, schemas.StartEntitiesDetectionV2JobResponse), output: &StartEntitiesDetectionV2JobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,29 @@ type GetAutoScalingGroupRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoScalingGroupRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoScalingGroupRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoScalingGroupRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetAutoScalingGroupRecommendationsRequest_accountIds, v.AccountIds)
+	serializeAutoScalingGroupArns(s, schemas.GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns, v.AutoScalingGroupArns)
+	serializeFilters(s, schemas.GetAutoScalingGroupRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAutoScalingGroupRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAutoScalingGroupRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetAutoScalingGroupRecommendationsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetAutoScalingGroupRecommendationsOutput struct {
 
 	// An array of objects that describe Auto Scaling group recommendations.
@@ -92,13 +117,38 @@ type GetAutoScalingGroupRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoScalingGroupRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoScalingGroupRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoScalingGroupRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoScalingGroupRecommendations(s, schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations, v.AutoScalingGroupRecommendations)
+	serializeGetRecommendationErrors(s, schemas.GetAutoScalingGroupRecommendationsResponse_errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAutoScalingGroupRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAutoScalingGroupRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutoScalingGroupRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations:
+			return deserializeAutoScalingGroupRecommendations(d, schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations, &v.AutoScalingGroupRecommendations)
+		case schemas.GetAutoScalingGroupRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetAutoScalingGroupRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetAutoScalingGroupRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAutoScalingGroupRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAutoScalingGroupRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoScalingGroupRecommendations, schemas.GetAutoScalingGroupRecommendationsRequest, schemas.GetAutoScalingGroupRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAutoScalingGroupRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoScalingGroupRecommendations, schemas.GetAutoScalingGroupRecommendationsRequest, schemas.GetAutoScalingGroupRecommendationsResponse), output: &GetAutoScalingGroupRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

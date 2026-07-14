@@ -5,7 +5,9 @@ package computeoptimizer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,24 @@ type GetLambdaFunctionRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLambdaFunctionRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLambdaFunctionRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLambdaFunctionRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
+	serializeLambdaFunctionRecommendationFilters(s, schemas.GetLambdaFunctionRecommendationsRequest_filters, v.Filters)
+	serializeFunctionArns(s, schemas.GetLambdaFunctionRecommendationsRequest_functionArns, v.FunctionArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLambdaFunctionRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLambdaFunctionRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetLambdaFunctionRecommendationsOutput struct {
 
 	// An array of objects that describe function recommendations.
@@ -90,13 +110,35 @@ type GetLambdaFunctionRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLambdaFunctionRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLambdaFunctionRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLambdaFunctionRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLambdaFunctionRecommendations(s, schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations, v.LambdaFunctionRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLambdaFunctionRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetLambdaFunctionRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLambdaFunctionRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations:
+			return deserializeLambdaFunctionRecommendations(d, schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations, &v.LambdaFunctionRecommendations)
+		case schemas.GetLambdaFunctionRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLambdaFunctionRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetLambdaFunctionRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLambdaFunctionRecommendations, schemas.GetLambdaFunctionRecommendationsRequest, schemas.GetLambdaFunctionRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetLambdaFunctionRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLambdaFunctionRecommendations, schemas.GetLambdaFunctionRecommendationsRequest, schemas.GetLambdaFunctionRecommendationsResponse), output: &GetLambdaFunctionRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

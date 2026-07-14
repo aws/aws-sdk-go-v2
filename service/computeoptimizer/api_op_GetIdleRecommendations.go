@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,29 @@ type GetIdleRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdleRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdleRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdleRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetIdleRecommendationsRequest_accountIds, v.AccountIds)
+	serializeIdleRecommendationFilters(s, schemas.GetIdleRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetIdleRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIdleRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != nil {
+		s.WriteStruct(schemas.GetIdleRecommendationsRequest_orderBy)
+		v.OrderBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceArns(s, schemas.GetIdleRecommendationsRequest_resourceArns, v.ResourceArns)
+}
+
 type GetIdleRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request.
@@ -81,13 +106,38 @@ type GetIdleRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdleRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdleRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdleRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdleRecommendationErrors(s, schemas.GetIdleRecommendationsResponse_errors, v.Errors)
+	serializeIdleRecommendations(s, schemas.GetIdleRecommendationsResponse_idleRecommendations, v.IdleRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIdleRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetIdleRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdleRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdleRecommendationsResponse_errors:
+			return deserializeIdleRecommendationErrors(d, schemas.GetIdleRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetIdleRecommendationsResponse_idleRecommendations:
+			return deserializeIdleRecommendations(d, schemas.GetIdleRecommendationsResponse_idleRecommendations, &v.IdleRecommendations)
+		case schemas.GetIdleRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetIdleRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdleRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetIdleRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdleRecommendations, schemas.GetIdleRecommendationsRequest, schemas.GetIdleRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetIdleRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdleRecommendations, schemas.GetIdleRecommendationsRequest, schemas.GetIdleRecommendationsResponse), output: &GetIdleRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

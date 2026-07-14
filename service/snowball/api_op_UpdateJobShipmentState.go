@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type UpdateJobShipmentStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobShipmentStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobShipmentStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobShipmentStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateJobShipmentStateRequest_JobId, *v.JobId)
+	}
+	if v.ShipmentState != "" {
+		s.WriteString(schemas.UpdateJobShipmentStateRequest_ShipmentState, string(v.ShipmentState))
+	}
+}
+
 type UpdateJobShipmentStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type UpdateJobShipmentStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobShipmentStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobShipmentStateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobShipmentStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateJobShipmentStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobShipmentStateResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobShipmentStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateJobShipmentState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobShipmentState, schemas.UpdateJobShipmentStateRequest, schemas.UpdateJobShipmentStateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateJobShipmentState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobShipmentState, schemas.UpdateJobShipmentStateRequest, schemas.UpdateJobShipmentStateResult), output: &UpdateJobShipmentStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

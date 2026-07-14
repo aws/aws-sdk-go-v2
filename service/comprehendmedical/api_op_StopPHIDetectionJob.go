@@ -4,6 +4,8 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,18 @@ type StopPHIDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPHIDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPHIDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPHIDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopPHIDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopPHIDetectionJobOutput struct {
 
 	// The identifier of the PHI detection job that was stopped.
@@ -45,13 +59,32 @@ type StopPHIDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPHIDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPHIDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPHIDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopPHIDetectionJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StopPHIDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopPHIDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopPHIDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopPHIDetectionJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopPHIDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPHIDetectionJob, schemas.StopPHIDetectionJobRequest, schemas.StopPHIDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopPHIDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPHIDetectionJob, schemas.StopPHIDetectionJobRequest, schemas.StopPHIDetectionJobResponse), output: &StopPHIDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

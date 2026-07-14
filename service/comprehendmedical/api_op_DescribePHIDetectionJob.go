@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DescribePHIDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePHIDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePHIDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePHIDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribePHIDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribePHIDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a detection job.
@@ -48,13 +62,34 @@ type DescribePHIDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePHIDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePHIDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePHIDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComprehendMedicalAsyncJobProperties != nil {
+		s.WriteStruct(schemas.DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties)
+		v.ComprehendMedicalAsyncJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePHIDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePHIDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties:
+			v.ComprehendMedicalAsyncJobProperties = &types.ComprehendMedicalAsyncJobProperties{}
+			return v.ComprehendMedicalAsyncJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribePHIDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePHIDetectionJob, schemas.DescribePHIDetectionJobRequest, schemas.DescribePHIDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribePHIDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePHIDetectionJob, schemas.DescribePHIDetectionJobRequest, schemas.DescribePHIDetectionJobResponse), output: &DescribePHIDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

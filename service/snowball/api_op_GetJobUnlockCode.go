@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,18 @@ type GetJobUnlockCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobUnlockCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobUnlockCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobUnlockCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetJobUnlockCodeRequest_JobId, *v.JobId)
+	}
+}
+
 type GetJobUnlockCodeOutput struct {
 
 	// The UnlockCode value for the specified job. The UnlockCode value can be
@@ -61,13 +75,32 @@ type GetJobUnlockCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobUnlockCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobUnlockCodeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobUnlockCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UnlockCode != nil {
+		s.WriteString(schemas.GetJobUnlockCodeResult_UnlockCode, *v.UnlockCode)
+	}
+}
+func (v *GetJobUnlockCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobUnlockCodeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobUnlockCodeResult_UnlockCode:
+			v.UnlockCode = new(string)
+			return d.ReadString(schemas.GetJobUnlockCodeResult_UnlockCode, v.UnlockCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobUnlockCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetJobUnlockCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobUnlockCode, schemas.GetJobUnlockCodeRequest, schemas.GetJobUnlockCodeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetJobUnlockCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobUnlockCode, schemas.GetJobUnlockCodeRequest, schemas.GetJobUnlockCodeResult), output: &GetJobUnlockCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,24 @@ type DeleteRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommendationPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommendationPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendationPreferenceNames(s, schemas.DeleteRecommendationPreferencesRequest_recommendationPreferenceNames, v.RecommendationPreferenceNames)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DeleteRecommendationPreferencesRequest_resourceType, string(v.ResourceType))
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.DeleteRecommendationPreferencesRequest_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeleteRecommendationPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +84,26 @@ type DeleteRecommendationPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommendationPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommendationPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommendationPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommendationPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecommendationPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommendationPreferences, schemas.DeleteRecommendationPreferencesRequest, schemas.DeleteRecommendationPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommendationPreferences, schemas.DeleteRecommendationPreferencesRequest, schemas.DeleteRecommendationPreferencesResponse), output: &DeleteRecommendationPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,6 +110,34 @@ type ExportEC2InstanceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportEC2InstanceRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportEC2InstanceRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportEC2InstanceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.ExportEC2InstanceRecommendationsRequest_accountIds, v.AccountIds)
+	serializeExportableInstanceFields(s, schemas.ExportEC2InstanceRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ExportEC2InstanceRecommendationsRequest_fileFormat, string(v.FileFormat))
+	}
+	serializeFilters(s, schemas.ExportEC2InstanceRecommendationsRequest_filters, v.Filters)
+	if v.IncludeMemberAccounts != false {
+		s.WriteBool(schemas.ExportEC2InstanceRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
+	}
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.ExportEC2InstanceRecommendationsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationConfig != nil {
+		s.WriteStruct(schemas.ExportEC2InstanceRecommendationsRequest_s3DestinationConfig)
+		v.S3DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ExportEC2InstanceRecommendationsOutput struct {
 
 	// The identification number of the export job.
@@ -125,13 +155,40 @@ type ExportEC2InstanceRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportEC2InstanceRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportEC2InstanceRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportEC2InstanceRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ExportEC2InstanceRecommendationsResponse_jobId, *v.JobId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.ExportEC2InstanceRecommendationsResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportEC2InstanceRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportEC2InstanceRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportEC2InstanceRecommendationsResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ExportEC2InstanceRecommendationsResponse_jobId, v.JobId)
+		case schemas.ExportEC2InstanceRecommendationsResponse_s3Destination:
+			v.S3Destination = &types.S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportEC2InstanceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportEC2InstanceRecommendations, schemas.ExportEC2InstanceRecommendationsRequest, schemas.ExportEC2InstanceRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportEC2InstanceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportEC2InstanceRecommendations, schemas.ExportEC2InstanceRecommendationsRequest, schemas.ExportEC2InstanceRecommendationsResponse), output: &ExportEC2InstanceRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

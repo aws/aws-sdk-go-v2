@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,29 @@ type GetEC2InstanceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEC2InstanceRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEC2InstanceRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEC2InstanceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetEC2InstanceRecommendationsRequest_accountIds, v.AccountIds)
+	serializeFilters(s, schemas.GetEC2InstanceRecommendationsRequest_filters, v.Filters)
+	serializeInstanceArns(s, schemas.GetEC2InstanceRecommendationsRequest_instanceArns, v.InstanceArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEC2InstanceRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEC2InstanceRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetEC2InstanceRecommendationsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetEC2InstanceRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request.
@@ -90,13 +115,38 @@ type GetEC2InstanceRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEC2InstanceRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEC2InstanceRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEC2InstanceRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetRecommendationErrors(s, schemas.GetEC2InstanceRecommendationsResponse_errors, v.Errors)
+	serializeInstanceRecommendations(s, schemas.GetEC2InstanceRecommendationsResponse_instanceRecommendations, v.InstanceRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEC2InstanceRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetEC2InstanceRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEC2InstanceRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEC2InstanceRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetEC2InstanceRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetEC2InstanceRecommendationsResponse_instanceRecommendations:
+			return deserializeInstanceRecommendations(d, schemas.GetEC2InstanceRecommendationsResponse_instanceRecommendations, &v.InstanceRecommendations)
+		case schemas.GetEC2InstanceRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEC2InstanceRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEC2InstanceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEC2InstanceRecommendations, schemas.GetEC2InstanceRecommendationsRequest, schemas.GetEC2InstanceRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEC2InstanceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEC2InstanceRecommendations, schemas.GetEC2InstanceRecommendationsRequest, schemas.GetEC2InstanceRecommendationsResponse), output: &GetEC2InstanceRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

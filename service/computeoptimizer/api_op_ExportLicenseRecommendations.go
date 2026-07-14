@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,6 +106,29 @@ type ExportLicenseRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLicenseRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLicenseRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLicenseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.ExportLicenseRecommendationsRequest_accountIds, v.AccountIds)
+	serializeExportableLicenseFields(s, schemas.ExportLicenseRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ExportLicenseRecommendationsRequest_fileFormat, string(v.FileFormat))
+	}
+	serializeLicenseRecommendationFilters(s, schemas.ExportLicenseRecommendationsRequest_filters, v.Filters)
+	if v.IncludeMemberAccounts != false {
+		s.WriteBool(schemas.ExportLicenseRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
+	}
+	if v.S3DestinationConfig != nil {
+		s.WriteStruct(schemas.ExportLicenseRecommendationsRequest_s3DestinationConfig)
+		v.S3DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ExportLicenseRecommendationsOutput struct {
 
 	//  The identification number of the export job.
@@ -122,13 +147,40 @@ type ExportLicenseRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLicenseRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLicenseRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLicenseRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ExportLicenseRecommendationsResponse_jobId, *v.JobId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.ExportLicenseRecommendationsResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportLicenseRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportLicenseRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportLicenseRecommendationsResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ExportLicenseRecommendationsResponse_jobId, v.JobId)
+		case schemas.ExportLicenseRecommendationsResponse_s3Destination:
+			v.S3Destination = &types.S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportLicenseRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportLicenseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLicenseRecommendations, schemas.ExportLicenseRecommendationsRequest, schemas.ExportLicenseRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportLicenseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLicenseRecommendations, schemas.ExportLicenseRecommendationsRequest, schemas.ExportLicenseRecommendationsResponse), output: &ExportLicenseRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

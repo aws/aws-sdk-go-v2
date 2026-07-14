@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type CreateReturnShippingLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReturnShippingLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReturnShippingLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReturnShippingLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateReturnShippingLabelRequest_JobId, *v.JobId)
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.CreateReturnShippingLabelRequest_ShippingOption, string(v.ShippingOption))
+	}
+}
+
 type CreateReturnShippingLabelOutput struct {
 
 	// The status information of the task on a Snow device that is being returned to
@@ -55,13 +72,36 @@ type CreateReturnShippingLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReturnShippingLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReturnShippingLabelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReturnShippingLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CreateReturnShippingLabelResult_Status, string(v.Status))
+	}
+}
+func (v *CreateReturnShippingLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReturnShippingLabelResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReturnShippingLabelResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateReturnShippingLabelResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShippingLabelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateReturnShippingLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReturnShippingLabel, schemas.CreateReturnShippingLabelRequest, schemas.CreateReturnShippingLabelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateReturnShippingLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReturnShippingLabel, schemas.CreateReturnShippingLabelRequest, schemas.CreateReturnShippingLabelResult), output: &CreateReturnShippingLabelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

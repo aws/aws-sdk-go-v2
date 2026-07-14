@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,18 @@ type GetJobManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetJobManifestRequest_JobId, *v.JobId)
+	}
+}
+
 type GetJobManifestOutput struct {
 
 	// The Amazon S3 presigned URL for the manifest file associated with the specified
@@ -66,13 +80,32 @@ type GetJobManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobManifestResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestURI != nil {
+		s.WriteString(schemas.GetJobManifestResult_ManifestURI, *v.ManifestURI)
+	}
+}
+func (v *GetJobManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobManifestResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobManifestResult_ManifestURI:
+			v.ManifestURI = new(string)
+			return d.ReadString(schemas.GetJobManifestResult_ManifestURI, v.ManifestURI)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetJobManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobManifest, schemas.GetJobManifestRequest, schemas.GetJobManifestResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetJobManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobManifest, schemas.GetJobManifestRequest, schemas.GetJobManifestResult), output: &GetJobManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

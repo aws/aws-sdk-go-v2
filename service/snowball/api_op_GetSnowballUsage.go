@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,15 @@ type GetSnowballUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnowballUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnowballUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnowballUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetSnowballUsageOutput struct {
 
 	// The service limit for number of Snow devices this account can have at once. The
@@ -48,13 +59,38 @@ type GetSnowballUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnowballUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnowballUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnowballUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnowballLimit != nil {
+		s.WriteInt32(schemas.GetSnowballUsageResult_SnowballLimit, *v.SnowballLimit)
+	}
+	if v.SnowballsInUse != nil {
+		s.WriteInt32(schemas.GetSnowballUsageResult_SnowballsInUse, *v.SnowballsInUse)
+	}
+}
+func (v *GetSnowballUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSnowballUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSnowballUsageResult_SnowballLimit:
+			v.SnowballLimit = new(int32)
+			return d.ReadInt32(schemas.GetSnowballUsageResult_SnowballLimit, v.SnowballLimit)
+		case schemas.GetSnowballUsageResult_SnowballsInUse:
+			v.SnowballsInUse = new(int32)
+			return d.ReadInt32(schemas.GetSnowballUsageResult_SnowballsInUse, v.SnowballsInUse)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSnowballUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetSnowballUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnowballUsage, schemas.GetSnowballUsageRequest, schemas.GetSnowballUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetSnowballUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnowballUsage, schemas.GetSnowballUsageRequest, schemas.GetSnowballUsageResult), output: &GetSnowballUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

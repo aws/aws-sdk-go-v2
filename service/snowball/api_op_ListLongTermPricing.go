@@ -5,7 +5,9 @@ package snowball
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListLongTermPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLongTermPricingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLongTermPricingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLongTermPricingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLongTermPricingRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLongTermPricingRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLongTermPricingOutput struct {
 
 	// Each LongTermPricingEntry object contains a status, ID, and other information
@@ -54,13 +71,35 @@ type ListLongTermPricingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLongTermPricingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLongTermPricingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLongTermPricingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLongTermPricingEntryList(s, schemas.ListLongTermPricingResult_LongTermPricingEntries, v.LongTermPricingEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLongTermPricingResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLongTermPricingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLongTermPricingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLongTermPricingResult_LongTermPricingEntries:
+			return deserializeLongTermPricingEntryList(d, schemas.ListLongTermPricingResult_LongTermPricingEntries, &v.LongTermPricingEntries)
+		case schemas.ListLongTermPricingResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLongTermPricingResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListLongTermPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLongTermPricing, schemas.ListLongTermPricingRequest, schemas.ListLongTermPricingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListLongTermPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLongTermPricing, schemas.ListLongTermPricingRequest, schemas.ListLongTermPricingResult), output: &ListLongTermPricingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

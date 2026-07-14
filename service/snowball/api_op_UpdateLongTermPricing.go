@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type UpdateLongTermPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLongTermPricingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLongTermPricingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLongTermPricingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsLongTermPricingAutoRenew != nil {
+		s.WriteBool(schemas.UpdateLongTermPricingRequest_IsLongTermPricingAutoRenew, *v.IsLongTermPricingAutoRenew)
+	}
+	if v.LongTermPricingId != nil {
+		s.WriteString(schemas.UpdateLongTermPricingRequest_LongTermPricingId, *v.LongTermPricingId)
+	}
+	if v.ReplacementJob != nil {
+		s.WriteString(schemas.UpdateLongTermPricingRequest_ReplacementJob, *v.ReplacementJob)
+	}
+}
+
 type UpdateLongTermPricingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type UpdateLongTermPricingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLongTermPricingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLongTermPricingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLongTermPricingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLongTermPricingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLongTermPricingResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateLongTermPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLongTermPricing, schemas.UpdateLongTermPricingRequest, schemas.UpdateLongTermPricingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateLongTermPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLongTermPricing, schemas.UpdateLongTermPricingRequest, schemas.UpdateLongTermPricingResult), output: &UpdateLongTermPricingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

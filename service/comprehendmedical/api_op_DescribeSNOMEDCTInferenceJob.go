@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DescribeSNOMEDCTInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSNOMEDCTInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSNOMEDCTInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSNOMEDCTInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeSNOMEDCTInferenceJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeSNOMEDCTInferenceJobOutput struct {
 
 	// Provides information about a detection job.
@@ -49,13 +63,34 @@ type DescribeSNOMEDCTInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSNOMEDCTInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSNOMEDCTInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSNOMEDCTInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComprehendMedicalAsyncJobProperties != nil {
+		s.WriteStruct(schemas.DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties)
+		v.ComprehendMedicalAsyncJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSNOMEDCTInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSNOMEDCTInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties:
+			v.ComprehendMedicalAsyncJobProperties = &types.ComprehendMedicalAsyncJobProperties{}
+			return v.ComprehendMedicalAsyncJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSNOMEDCTInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeSNOMEDCTInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSNOMEDCTInferenceJob, schemas.DescribeSNOMEDCTInferenceJobRequest, schemas.DescribeSNOMEDCTInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeSNOMEDCTInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSNOMEDCTInferenceJob, schemas.DescribeSNOMEDCTInferenceJobRequest, schemas.DescribeSNOMEDCTInferenceJobResponse), output: &DescribeSNOMEDCTInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

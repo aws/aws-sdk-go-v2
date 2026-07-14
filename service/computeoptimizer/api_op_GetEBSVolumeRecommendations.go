@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,24 @@ type GetEBSVolumeRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEBSVolumeRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEBSVolumeRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEBSVolumeRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetEBSVolumeRecommendationsRequest_accountIds, v.AccountIds)
+	serializeEBSFilters(s, schemas.GetEBSVolumeRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEBSVolumeRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEBSVolumeRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	serializeVolumeArns(s, schemas.GetEBSVolumeRecommendationsRequest_volumeArns, v.VolumeArns)
+}
+
 type GetEBSVolumeRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request.
@@ -86,13 +106,38 @@ type GetEBSVolumeRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEBSVolumeRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEBSVolumeRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEBSVolumeRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetRecommendationErrors(s, schemas.GetEBSVolumeRecommendationsResponse_errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEBSVolumeRecommendationsResponse_nextToken, *v.NextToken)
+	}
+	serializeVolumeRecommendations(s, schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations, v.VolumeRecommendations)
+}
+func (v *GetEBSVolumeRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEBSVolumeRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEBSVolumeRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetEBSVolumeRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetEBSVolumeRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEBSVolumeRecommendationsResponse_nextToken, v.NextToken)
+		case schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations:
+			return deserializeVolumeRecommendations(d, schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations, &v.VolumeRecommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEBSVolumeRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEBSVolumeRecommendations, schemas.GetEBSVolumeRecommendationsRequest, schemas.GetEBSVolumeRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEBSVolumeRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEBSVolumeRecommendations, schemas.GetEBSVolumeRecommendationsRequest, schemas.GetEBSVolumeRecommendationsResponse), output: &GetEBSVolumeRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

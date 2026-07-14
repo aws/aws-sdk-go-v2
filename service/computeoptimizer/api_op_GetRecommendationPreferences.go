@@ -5,7 +5,9 @@ package computeoptimizer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,29 @@ type GetRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRecommendationPreferencesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendationPreferencesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetRecommendationPreferencesRequest_resourceType, string(v.ResourceType))
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.GetRecommendationPreferencesRequest_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetRecommendationPreferencesOutput struct {
 
 	// The token to use to advance to the next page of recommendation preferences.
@@ -86,13 +111,35 @@ type GetRecommendationPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendationPreferencesResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendationPreferencesDetails(s, schemas.GetRecommendationPreferencesResponse_recommendationPreferencesDetails, v.RecommendationPreferencesDetails)
+}
+func (v *GetRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationPreferencesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRecommendationPreferencesResponse_nextToken, v.NextToken)
+		case schemas.GetRecommendationPreferencesResponse_recommendationPreferencesDetails:
+			return deserializeRecommendationPreferencesDetails(d, schemas.GetRecommendationPreferencesResponse_recommendationPreferencesDetails, &v.RecommendationPreferencesDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendationPreferences, schemas.GetRecommendationPreferencesRequest, schemas.GetRecommendationPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendationPreferences, schemas.GetRecommendationPreferencesRequest, schemas.GetRecommendationPreferencesResponse), output: &GetRecommendationPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

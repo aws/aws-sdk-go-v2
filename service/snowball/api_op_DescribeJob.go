@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DescribeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeJobOutput struct {
 
 	// Information about a specific job, including shipping information, job status,
@@ -53,13 +67,37 @@ type DescribeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobMetadata != nil {
+		s.WriteStruct(schemas.DescribeJobResult_JobMetadata)
+		v.JobMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeJobMetadataList(s, schemas.DescribeJobResult_SubJobMetadata, v.SubJobMetadata)
+}
+func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobResult_JobMetadata:
+			v.JobMetadata = &types.JobMetadata{}
+			return v.JobMetadata.Deserialize(d)
+		case schemas.DescribeJobResult_SubJobMetadata:
+			return deserializeJobMetadataList(d, schemas.DescribeJobResult_SubJobMetadata, &v.SubJobMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobRequest, schemas.DescribeJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobRequest, schemas.DescribeJobResult), output: &DescribeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

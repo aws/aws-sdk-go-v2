@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -64,6 +66,33 @@ type GetRDSDatabaseRecommendationProjectedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDSDatabaseRecommendationProjectedMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDSDatabaseRecommendationProjectedMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_endTime, *v.EndTime)
+	}
+	s.WriteInt32(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_period, v.Period)
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_startTime, *v.StartTime)
+	}
+	if v.Stat != "" {
+		s.WriteString(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_stat, string(v.Stat))
+	}
+}
+
 type GetRDSDatabaseRecommendationProjectedMetricsOutput struct {
 
 	//  An array of objects that describes the projected metrics.
@@ -75,13 +104,29 @@ type GetRDSDatabaseRecommendationProjectedMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRDSDatabaseRecommendedOptionProjectedMetrics(s, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+}
+func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics:
+			return deserializeRDSDatabaseRecommendedOptionProjectedMetrics(d, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, &v.RecommendedOptionProjectedMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRDSDatabaseRecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRDSDatabaseRecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDSDatabaseRecommendationProjectedMetrics, schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRDSDatabaseRecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDSDatabaseRecommendationProjectedMetrics, schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse), output: &GetRDSDatabaseRecommendationProjectedMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

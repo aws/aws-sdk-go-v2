@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +30,50 @@ type AccountEnrollmentStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountEnrollmentStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountEnrollmentStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountEnrollmentStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountEnrollmentStatus_accountId, *v.AccountId)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.AccountEnrollmentStatus_lastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AccountEnrollmentStatus_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AccountEnrollmentStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *AccountEnrollmentStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountEnrollmentStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountEnrollmentStatus_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountEnrollmentStatus_accountId, v.AccountId)
+		case schemas.AccountEnrollmentStatus_lastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.AccountEnrollmentStatus_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.AccountEnrollmentStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.AccountEnrollmentStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.AccountEnrollmentStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AccountEnrollmentStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of an EC2 Auto Scaling group.
@@ -67,6 +113,72 @@ type AutoScalingGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationStrategy != "" {
+		s.WriteString(schemas.AutoScalingGroupConfiguration_allocationStrategy, string(v.AllocationStrategy))
+	}
+	if v.DesiredCapacity != 0 {
+		s.WriteInt32(schemas.AutoScalingGroupConfiguration_desiredCapacity, v.DesiredCapacity)
+	}
+	if v.EstimatedInstanceHourReductionPercentage != nil {
+		s.WriteFloat64(schemas.AutoScalingGroupConfiguration_estimatedInstanceHourReductionPercentage, *v.EstimatedInstanceHourReductionPercentage)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.AutoScalingGroupConfiguration_instanceType, *v.InstanceType)
+	}
+	if v.MaxSize != 0 {
+		s.WriteInt32(schemas.AutoScalingGroupConfiguration_maxSize, v.MaxSize)
+	}
+	if v.MinSize != 0 {
+		s.WriteInt32(schemas.AutoScalingGroupConfiguration_minSize, v.MinSize)
+	}
+	serializeMixedInstanceTypes(s, schemas.AutoScalingGroupConfiguration_mixedInstanceTypes, v.MixedInstanceTypes)
+	if v.Type != "" {
+		s.WriteString(schemas.AutoScalingGroupConfiguration_type, string(v.Type))
+	}
+}
+func (v *AutoScalingGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupConfiguration_allocationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroupConfiguration_allocationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AllocationStrategy = AllocationStrategy(ev)
+			return nil
+		case schemas.AutoScalingGroupConfiguration_desiredCapacity:
+			return d.ReadInt32(schemas.AutoScalingGroupConfiguration_desiredCapacity, &v.DesiredCapacity)
+		case schemas.AutoScalingGroupConfiguration_estimatedInstanceHourReductionPercentage:
+			v.EstimatedInstanceHourReductionPercentage = new(float64)
+			return d.ReadFloat64(schemas.AutoScalingGroupConfiguration_estimatedInstanceHourReductionPercentage, v.EstimatedInstanceHourReductionPercentage)
+		case schemas.AutoScalingGroupConfiguration_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.AutoScalingGroupConfiguration_instanceType, v.InstanceType)
+		case schemas.AutoScalingGroupConfiguration_maxSize:
+			return d.ReadInt32(schemas.AutoScalingGroupConfiguration_maxSize, &v.MaxSize)
+		case schemas.AutoScalingGroupConfiguration_minSize:
+			return d.ReadInt32(schemas.AutoScalingGroupConfiguration_minSize, &v.MinSize)
+		case schemas.AutoScalingGroupConfiguration_mixedInstanceTypes:
+			return deserializeMixedInstanceTypes(d, schemas.AutoScalingGroupConfiguration_mixedInstanceTypes, &v.MixedInstanceTypes)
+		case schemas.AutoScalingGroupConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroupConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AsgType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	An object that describes the estimated monthly savings possible by adopting
 //
 // Compute Optimizer’s Auto Scaling group recommendations. This is based on the
@@ -80,6 +192,37 @@ type AutoScalingGroupEstimatedMonthlySavings struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoScalingGroupEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroupEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.AutoScalingGroupEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.AutoScalingGroupEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *AutoScalingGroupEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroupEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.AutoScalingGroupEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.AutoScalingGroupEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes an Auto Scaling group recommendation.
@@ -170,6 +313,104 @@ type AutoScalingGroupRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingGroupRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroupRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AutoScalingGroupRecommendation_accountId, *v.AccountId)
+	}
+	if v.AutoScalingGroupArn != nil {
+		s.WriteString(schemas.AutoScalingGroupRecommendation_autoScalingGroupArn, *v.AutoScalingGroupArn)
+	}
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.AutoScalingGroupRecommendation_autoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.CurrentConfiguration != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendation_currentConfiguration)
+		v.CurrentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentInstanceGpuInfo != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendation_currentInstanceGpuInfo)
+		v.CurrentInstanceGpuInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentPerformanceRisk != "" {
+		s.WriteString(schemas.AutoScalingGroupRecommendation_currentPerformanceRisk, string(v.CurrentPerformanceRisk))
+	}
+	if v.EffectiveRecommendationPreferences != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendation_effectiveRecommendationPreferences)
+		v.EffectiveRecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.AutoScalingGroupRecommendation_finding, string(v.Finding))
+	}
+	serializeInferredWorkloadTypes(s, schemas.AutoScalingGroupRecommendation_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.AutoScalingGroupRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LookBackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.AutoScalingGroupRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
+	}
+	serializeAutoScalingGroupRecommendationOptions(s, schemas.AutoScalingGroupRecommendation_recommendationOptions, v.RecommendationOptions)
+	serializeUtilizationMetrics(s, schemas.AutoScalingGroupRecommendation_utilizationMetrics, v.UtilizationMetrics)
+}
+func (v *AutoScalingGroupRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AutoScalingGroupRecommendation_accountId, v.AccountId)
+		case schemas.AutoScalingGroupRecommendation_autoScalingGroupArn:
+			v.AutoScalingGroupArn = new(string)
+			return d.ReadString(schemas.AutoScalingGroupRecommendation_autoScalingGroupArn, v.AutoScalingGroupArn)
+		case schemas.AutoScalingGroupRecommendation_autoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.AutoScalingGroupRecommendation_autoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.AutoScalingGroupRecommendation_currentConfiguration:
+			v.CurrentConfiguration = &AutoScalingGroupConfiguration{}
+			return v.CurrentConfiguration.Deserialize(d)
+		case schemas.AutoScalingGroupRecommendation_currentInstanceGpuInfo:
+			v.CurrentInstanceGpuInfo = &GpuInfo{}
+			return v.CurrentInstanceGpuInfo.Deserialize(d)
+		case schemas.AutoScalingGroupRecommendation_currentPerformanceRisk:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroupRecommendation_currentPerformanceRisk, &ev); err != nil {
+				return err
+			}
+			v.CurrentPerformanceRisk = CurrentPerformanceRisk(ev)
+			return nil
+		case schemas.AutoScalingGroupRecommendation_effectiveRecommendationPreferences:
+			v.EffectiveRecommendationPreferences = &EffectiveRecommendationPreferences{}
+			return v.EffectiveRecommendationPreferences.Deserialize(d)
+		case schemas.AutoScalingGroupRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroupRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = Finding(ev)
+			return nil
+		case schemas.AutoScalingGroupRecommendation_inferredWorkloadTypes:
+			return deserializeInferredWorkloadTypes(d, schemas.AutoScalingGroupRecommendation_inferredWorkloadTypes, &v.InferredWorkloadTypes)
+		case schemas.AutoScalingGroupRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.AutoScalingGroupRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.AutoScalingGroupRecommendation_lookBackPeriodInDays:
+			return d.ReadFloat64(schemas.AutoScalingGroupRecommendation_lookBackPeriodInDays, &v.LookBackPeriodInDays)
+		case schemas.AutoScalingGroupRecommendation_recommendationOptions:
+			return deserializeAutoScalingGroupRecommendationOptions(d, schemas.AutoScalingGroupRecommendation_recommendationOptions, &v.RecommendationOptions)
+		case schemas.AutoScalingGroupRecommendation_utilizationMetrics:
+			return deserializeUtilizationMetrics(d, schemas.AutoScalingGroupRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		}
+		return nil
+	})
+}
+
 // Describes a recommendation option for an Auto Scaling group.
 type AutoScalingGroupRecommendationOption struct {
 
@@ -237,6 +478,77 @@ type AutoScalingGroupRecommendationOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingGroupRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroupRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendationOption_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceGpuInfo != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendationOption_instanceGpuInfo)
+		v.InstanceGpuInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MigrationEffort != "" {
+		s.WriteString(schemas.AutoScalingGroupRecommendationOption_migrationEffort, string(v.MigrationEffort))
+	}
+	if v.PerformanceRisk != 0 {
+		s.WriteFloat64(schemas.AutoScalingGroupRecommendationOption_performanceRisk, v.PerformanceRisk)
+	}
+	serializeProjectedUtilizationMetrics(s, schemas.AutoScalingGroupRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.AutoScalingGroupRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.AutoScalingGroupRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoScalingGroupRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupRecommendationOption_configuration:
+			v.Configuration = &AutoScalingGroupConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.AutoScalingGroupRecommendationOption_instanceGpuInfo:
+			v.InstanceGpuInfo = &GpuInfo{}
+			return v.InstanceGpuInfo.Deserialize(d)
+		case schemas.AutoScalingGroupRecommendationOption_migrationEffort:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroupRecommendationOption_migrationEffort, &ev); err != nil {
+				return err
+			}
+			v.MigrationEffort = MigrationEffort(ev)
+			return nil
+		case schemas.AutoScalingGroupRecommendationOption_performanceRisk:
+			return d.ReadFloat64(schemas.AutoScalingGroupRecommendationOption_performanceRisk, &v.PerformanceRisk)
+		case schemas.AutoScalingGroupRecommendationOption_projectedUtilizationMetrics:
+			return deserializeProjectedUtilizationMetrics(d, schemas.AutoScalingGroupRecommendationOption_projectedUtilizationMetrics, &v.ProjectedUtilizationMetrics)
+		case schemas.AutoScalingGroupRecommendationOption_rank:
+			return d.ReadInt32(schemas.AutoScalingGroupRecommendationOption_rank, &v.Rank)
+		case schemas.AutoScalingGroupRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.AutoScalingGroupRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &AutoScalingGroupSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the savings opportunity for Auto Scaling group recommendations after
 //
 // applying the Savings Plans and Reserved Instances discounts.
@@ -258,6 +570,35 @@ type AutoScalingGroupSavingsOpportunityAfterDiscounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingGroupSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroupSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *AutoScalingGroupSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &AutoScalingGroupEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.AutoScalingGroupSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
+}
+
 //	Describes the container configurations within the tasks of your Amazon ECS
 //
 // service.
@@ -275,6 +616,42 @@ type ContainerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.ContainerConfiguration_containerName, *v.ContainerName)
+	}
+	if v.Cpu != nil {
+		s.WriteInt32(schemas.ContainerConfiguration_cpu, *v.Cpu)
+	}
+	if v.MemorySizeConfiguration != nil {
+		s.WriteStruct(schemas.ContainerConfiguration_memorySizeConfiguration)
+		v.MemorySizeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContainerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerConfiguration_containerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.ContainerConfiguration_containerName, v.ContainerName)
+		case schemas.ContainerConfiguration_cpu:
+			v.Cpu = new(int32)
+			return d.ReadInt32(schemas.ContainerConfiguration_cpu, v.Cpu)
+		case schemas.ContainerConfiguration_memorySizeConfiguration:
+			v.MemorySizeConfiguration = &MemorySizeConfiguration{}
+			return v.MemorySizeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	The CPU and memory recommendations for a container within the tasks of your
 //
 // Amazon ECS service.
@@ -290,6 +667,42 @@ type ContainerRecommendation struct {
 	MemorySizeConfiguration *MemorySizeConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.ContainerRecommendation_containerName, *v.ContainerName)
+	}
+	if v.Cpu != nil {
+		s.WriteInt32(schemas.ContainerRecommendation_cpu, *v.Cpu)
+	}
+	if v.MemorySizeConfiguration != nil {
+		s.WriteStruct(schemas.ContainerRecommendation_memorySizeConfiguration)
+		v.MemorySizeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContainerRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerRecommendation_containerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.ContainerRecommendation_containerName, v.ContainerName)
+		case schemas.ContainerRecommendation_cpu:
+			v.Cpu = new(int32)
+			return d.ReadInt32(schemas.ContainerRecommendation_cpu, v.Cpu)
+		case schemas.ContainerRecommendation_memorySizeConfiguration:
+			v.MemorySizeConfiguration = &MemorySizeConfiguration{}
+			return v.MemorySizeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the performance risk ratings for a given resource type.
@@ -315,6 +728,42 @@ type CurrentPerformanceRiskRatings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CurrentPerformanceRiskRatings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CurrentPerformanceRiskRatings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CurrentPerformanceRiskRatings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.High != 0 {
+		s.WriteInt64(schemas.CurrentPerformanceRiskRatings_high, v.High)
+	}
+	if v.Low != 0 {
+		s.WriteInt64(schemas.CurrentPerformanceRiskRatings_low, v.Low)
+	}
+	if v.Medium != 0 {
+		s.WriteInt64(schemas.CurrentPerformanceRiskRatings_medium, v.Medium)
+	}
+	if v.VeryLow != 0 {
+		s.WriteInt64(schemas.CurrentPerformanceRiskRatings_veryLow, v.VeryLow)
+	}
+}
+func (v *CurrentPerformanceRiskRatings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CurrentPerformanceRiskRatings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CurrentPerformanceRiskRatings_high:
+			return d.ReadInt64(schemas.CurrentPerformanceRiskRatings_high, &v.High)
+		case schemas.CurrentPerformanceRiskRatings_low:
+			return d.ReadInt64(schemas.CurrentPerformanceRiskRatings_low, &v.Low)
+		case schemas.CurrentPerformanceRiskRatings_medium:
+			return d.ReadInt64(schemas.CurrentPerformanceRiskRatings_medium, &v.Medium)
+		case schemas.CurrentPerformanceRiskRatings_veryLow:
+			return d.ReadInt64(schemas.CurrentPerformanceRiskRatings_veryLow, &v.VeryLow)
+		}
+		return nil
+	})
+}
+
 //	Defines the various metric parameters that can be customized, such as
 //
 // threshold and headroom.
@@ -335,6 +784,42 @@ type CustomizableMetricParameters struct {
 	Threshold CustomizableMetricThreshold
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomizableMetricParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomizableMetricParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomizableMetricParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Headroom != "" {
+		s.WriteString(schemas.CustomizableMetricParameters_headroom, string(v.Headroom))
+	}
+	if v.Threshold != "" {
+		s.WriteString(schemas.CustomizableMetricParameters_threshold, string(v.Threshold))
+	}
+}
+func (v *CustomizableMetricParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomizableMetricParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomizableMetricParameters_headroom:
+			var ev string
+			if err := d.ReadString(schemas.CustomizableMetricParameters_headroom, &ev); err != nil {
+				return err
+			}
+			v.Headroom = CustomizableMetricHeadroom(ev)
+			return nil
+		case schemas.CustomizableMetricParameters_threshold:
+			var ev string
+			if err := d.ReadString(schemas.CustomizableMetricParameters_threshold, &ev); err != nil {
+				return err
+			}
+			v.Threshold = CustomizableMetricThreshold(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration of the recommended RDS storage.
@@ -359,6 +844,51 @@ type DBStorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DBStorageConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBStorageConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DBStorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != 0 {
+		s.WriteInt32(schemas.DBStorageConfiguration_allocatedStorage, v.AllocatedStorage)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.DBStorageConfiguration_iops, *v.Iops)
+	}
+	if v.MaxAllocatedStorage != nil {
+		s.WriteInt32(schemas.DBStorageConfiguration_maxAllocatedStorage, *v.MaxAllocatedStorage)
+	}
+	if v.StorageThroughput != nil {
+		s.WriteInt32(schemas.DBStorageConfiguration_storageThroughput, *v.StorageThroughput)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.DBStorageConfiguration_storageType, *v.StorageType)
+	}
+}
+func (v *DBStorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBStorageConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBStorageConfiguration_allocatedStorage:
+			return d.ReadInt32(schemas.DBStorageConfiguration_allocatedStorage, &v.AllocatedStorage)
+		case schemas.DBStorageConfiguration_iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.DBStorageConfiguration_iops, v.Iops)
+		case schemas.DBStorageConfiguration_maxAllocatedStorage:
+			v.MaxAllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.DBStorageConfiguration_maxAllocatedStorage, v.MaxAllocatedStorage)
+		case schemas.DBStorageConfiguration_storageThroughput:
+			v.StorageThroughput = new(int32)
+			return d.ReadInt32(schemas.DBStorageConfiguration_storageThroughput, v.StorageThroughput)
+		case schemas.DBStorageConfiguration_storageType:
+			v.StorageType = new(string)
+			return d.ReadString(schemas.DBStorageConfiguration_storageType, v.StorageType)
+		}
+		return nil
+	})
+}
+
 // Describes the effective recommendation preferences for Amazon EBS volumes.
 type EBSEffectiveRecommendationPreferences struct {
 
@@ -370,6 +900,40 @@ type EBSEffectiveRecommendationPreferences struct {
 	SavingsEstimationMode *EBSSavingsEstimationMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *EBSEffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSEffectiveRecommendationPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSEffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.EBSEffectiveRecommendationPreferences_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	if v.SavingsEstimationMode != nil {
+		s.WriteStruct(schemas.EBSEffectiveRecommendationPreferences_savingsEstimationMode)
+		v.SavingsEstimationMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EBSEffectiveRecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSEffectiveRecommendationPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSEffectiveRecommendationPreferences_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.EBSEffectiveRecommendationPreferences_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = LookBackPeriodPreference(ev)
+			return nil
+		case schemas.EBSEffectiveRecommendationPreferences_savingsEstimationMode:
+			v.SavingsEstimationMode = &EBSSavingsEstimationMode{}
+			return v.SavingsEstimationMode.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	An object that describes the estimated monthly savings possible by adopting
@@ -385,6 +949,37 @@ type EBSEstimatedMonthlySavings struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *EBSEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.EBSEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.EBSEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *EBSEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.EBSEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.EBSEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.EBSEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a filter that returns a more specific list of Amazon Elastic Block
@@ -423,6 +1018,35 @@ type EBSFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EBSFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.EBSFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.EBSFilter_values, v.Values)
+}
+func (v *EBSFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.EBSFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = EBSFilterName(ev)
+			return nil
+		case schemas.EBSFilter_values:
+			return deserializeFilterValues(d, schemas.EBSFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 //	Describes the savings estimation mode used for calculating savings opportunity
 //
 // for Amazon EBS volumes.
@@ -433,6 +1057,32 @@ type EBSSavingsEstimationMode struct {
 	Source EBSSavingsEstimationModeSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *EBSSavingsEstimationMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSSavingsEstimationMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSSavingsEstimationMode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.EBSSavingsEstimationMode_source, string(v.Source))
+	}
+}
+func (v *EBSSavingsEstimationMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSSavingsEstimationMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSSavingsEstimationMode_source:
+			var ev string
+			if err := d.ReadString(schemas.EBSSavingsEstimationMode_source, &ev); err != nil {
+				return err
+			}
+			v.Source = EBSSavingsEstimationModeSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Describes the savings opportunity for Amazon EBS volume recommendations after
@@ -451,6 +1101,35 @@ type EBSSavingsOpportunityAfterDiscounts struct {
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *EBSSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.EBSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.EBSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *EBSSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &EBSEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.EBSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.EBSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
 }
 
 // Describes a utilization metric of an Amazon Elastic Block Store (Amazon EBS)
@@ -520,6 +1199,47 @@ type EBSUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EBSUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSUtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.EBSUtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.EBSUtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.EBSUtilizationMetric_value, v.Value)
+	}
+}
+func (v *EBSUtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSUtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSUtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.EBSUtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = EBSMetricName(ev)
+			return nil
+		case schemas.EBSUtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.EBSUtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = MetricStatistic(ev)
+			return nil
+		case schemas.EBSUtilizationMetric_value:
+			return d.ReadFloat64(schemas.EBSUtilizationMetric_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the effective recommendation preferences for Amazon ECS services.
 type ECSEffectiveRecommendationPreferences struct {
 
@@ -531,6 +1251,40 @@ type ECSEffectiveRecommendationPreferences struct {
 	SavingsEstimationMode *ECSSavingsEstimationMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSEffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSEffectiveRecommendationPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSEffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.ECSEffectiveRecommendationPreferences_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	if v.SavingsEstimationMode != nil {
+		s.WriteStruct(schemas.ECSEffectiveRecommendationPreferences_savingsEstimationMode)
+		v.SavingsEstimationMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ECSEffectiveRecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSEffectiveRecommendationPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSEffectiveRecommendationPreferences_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.ECSEffectiveRecommendationPreferences_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = LookBackPeriodPreference(ev)
+			return nil
+		case schemas.ECSEffectiveRecommendationPreferences_savingsEstimationMode:
+			v.SavingsEstimationMode = &ECSSavingsEstimationMode{}
+			return v.SavingsEstimationMode.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Describes the estimated monthly savings possible for Amazon ECS services by
@@ -548,6 +1302,37 @@ type ECSEstimatedMonthlySavings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ECSEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.ECSEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.ECSEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *ECSEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.ECSEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.ECSEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.ECSEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 //	Describes the savings estimation mode used for calculating savings opportunity
 //
 // for Amazon ECS services.
@@ -558,6 +1343,32 @@ type ECSSavingsEstimationMode struct {
 	Source ECSSavingsEstimationModeSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSSavingsEstimationMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSSavingsEstimationMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSSavingsEstimationMode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.ECSSavingsEstimationMode_source, string(v.Source))
+	}
+}
+func (v *ECSSavingsEstimationMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSSavingsEstimationMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSSavingsEstimationMode_source:
+			var ev string
+			if err := d.ReadString(schemas.ECSSavingsEstimationMode_source, &ev); err != nil {
+				return err
+			}
+			v.Source = ECSSavingsEstimationModeSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Describes the savings opportunity for Amazon ECS service recommendations after
@@ -580,6 +1391,35 @@ type ECSSavingsOpportunityAfterDiscounts struct {
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.ECSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.ECSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *ECSSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &ECSEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.ECSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.ECSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
 }
 
 //	Describes the projected metrics of an Amazon ECS service recommendation
@@ -612,6 +1452,41 @@ type ECSServiceProjectedMetric struct {
 	UpperBoundValues []float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSServiceProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricValues(s, schemas.ECSServiceProjectedMetric_lowerBoundValues, v.LowerBoundValues)
+	if v.Name != "" {
+		s.WriteString(schemas.ECSServiceProjectedMetric_name, string(v.Name))
+	}
+	serializeTimestamps(s, schemas.ECSServiceProjectedMetric_timestamps, v.Timestamps)
+	serializeMetricValues(s, schemas.ECSServiceProjectedMetric_upperBoundValues, v.UpperBoundValues)
+}
+func (v *ECSServiceProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceProjectedMetric_lowerBoundValues:
+			return deserializeMetricValues(d, schemas.ECSServiceProjectedMetric_lowerBoundValues, &v.LowerBoundValues)
+		case schemas.ECSServiceProjectedMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceProjectedMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = ECSServiceMetricName(ev)
+			return nil
+		case schemas.ECSServiceProjectedMetric_timestamps:
+			return deserializeTimestamps(d, schemas.ECSServiceProjectedMetric_timestamps, &v.Timestamps)
+		case schemas.ECSServiceProjectedMetric_upperBoundValues:
+			return deserializeMetricValues(d, schemas.ECSServiceProjectedMetric_upperBoundValues, &v.UpperBoundValues)
+		}
+		return nil
+	})
 }
 
 //	Describes the projected utilization metrics of an Amazon ECS service
@@ -657,6 +1532,52 @@ type ECSServiceProjectedUtilizationMetric struct {
 	UpperBoundValue float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSServiceProjectedUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceProjectedUtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceProjectedUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LowerBoundValue != 0 {
+		s.WriteFloat64(schemas.ECSServiceProjectedUtilizationMetric_lowerBoundValue, v.LowerBoundValue)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.ECSServiceProjectedUtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.ECSServiceProjectedUtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.UpperBoundValue != 0 {
+		s.WriteFloat64(schemas.ECSServiceProjectedUtilizationMetric_upperBoundValue, v.UpperBoundValue)
+	}
+}
+func (v *ECSServiceProjectedUtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceProjectedUtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceProjectedUtilizationMetric_lowerBoundValue:
+			return d.ReadFloat64(schemas.ECSServiceProjectedUtilizationMetric_lowerBoundValue, &v.LowerBoundValue)
+		case schemas.ECSServiceProjectedUtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceProjectedUtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = ECSServiceMetricName(ev)
+			return nil
+		case schemas.ECSServiceProjectedUtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceProjectedUtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = ECSServiceMetricStatistic(ev)
+			return nil
+		case schemas.ECSServiceProjectedUtilizationMetric_upperBoundValue:
+			return d.ReadFloat64(schemas.ECSServiceProjectedUtilizationMetric_upperBoundValue, &v.UpperBoundValue)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon ECS service recommendation.
@@ -748,6 +1669,103 @@ type ECSServiceRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ECSServiceRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ECSServiceRecommendation_accountId, *v.AccountId)
+	}
+	if v.CurrentPerformanceRisk != "" {
+		s.WriteString(schemas.ECSServiceRecommendation_currentPerformanceRisk, string(v.CurrentPerformanceRisk))
+	}
+	if v.CurrentServiceConfiguration != nil {
+		s.WriteStruct(schemas.ECSServiceRecommendation_currentServiceConfiguration)
+		v.CurrentServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectiveRecommendationPreferences != nil {
+		s.WriteStruct(schemas.ECSServiceRecommendation_effectiveRecommendationPreferences)
+		v.EffectiveRecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.ECSServiceRecommendation_finding, string(v.Finding))
+	}
+	serializeECSServiceRecommendationFindingReasonCodes(s, schemas.ECSServiceRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.ECSServiceRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.ECSServiceRecommendation_launchType, string(v.LaunchType))
+	}
+	if v.LookbackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.ECSServiceRecommendation_lookbackPeriodInDays, v.LookbackPeriodInDays)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ECSServiceRecommendation_serviceArn, *v.ServiceArn)
+	}
+	serializeECSServiceRecommendationOptions(s, schemas.ECSServiceRecommendation_serviceRecommendationOptions, v.ServiceRecommendationOptions)
+	serializeTags(s, schemas.ECSServiceRecommendation_tags, v.Tags)
+	serializeECSServiceUtilizationMetrics(s, schemas.ECSServiceRecommendation_utilizationMetrics, v.UtilizationMetrics)
+}
+func (v *ECSServiceRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ECSServiceRecommendation_accountId, v.AccountId)
+		case schemas.ECSServiceRecommendation_currentPerformanceRisk:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceRecommendation_currentPerformanceRisk, &ev); err != nil {
+				return err
+			}
+			v.CurrentPerformanceRisk = CurrentPerformanceRisk(ev)
+			return nil
+		case schemas.ECSServiceRecommendation_currentServiceConfiguration:
+			v.CurrentServiceConfiguration = &ServiceConfiguration{}
+			return v.CurrentServiceConfiguration.Deserialize(d)
+		case schemas.ECSServiceRecommendation_effectiveRecommendationPreferences:
+			v.EffectiveRecommendationPreferences = &ECSEffectiveRecommendationPreferences{}
+			return v.EffectiveRecommendationPreferences.Deserialize(d)
+		case schemas.ECSServiceRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = ECSServiceRecommendationFinding(ev)
+			return nil
+		case schemas.ECSServiceRecommendation_findingReasonCodes:
+			return deserializeECSServiceRecommendationFindingReasonCodes(d, schemas.ECSServiceRecommendation_findingReasonCodes, &v.FindingReasonCodes)
+		case schemas.ECSServiceRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ECSServiceRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.ECSServiceRecommendation_launchType:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceRecommendation_launchType, &ev); err != nil {
+				return err
+			}
+			v.LaunchType = ECSServiceLaunchType(ev)
+			return nil
+		case schemas.ECSServiceRecommendation_lookbackPeriodInDays:
+			return d.ReadFloat64(schemas.ECSServiceRecommendation_lookbackPeriodInDays, &v.LookbackPeriodInDays)
+		case schemas.ECSServiceRecommendation_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.ECSServiceRecommendation_serviceArn, v.ServiceArn)
+		case schemas.ECSServiceRecommendation_serviceRecommendationOptions:
+			return deserializeECSServiceRecommendationOptions(d, schemas.ECSServiceRecommendation_serviceRecommendationOptions, &v.ServiceRecommendationOptions)
+		case schemas.ECSServiceRecommendation_tags:
+			return deserializeTags(d, schemas.ECSServiceRecommendation_tags, &v.Tags)
+		case schemas.ECSServiceRecommendation_utilizationMetrics:
+			return deserializeECSServiceUtilizationMetrics(d, schemas.ECSServiceRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		}
+		return nil
+	})
+}
+
 //	Describes a filter that returns a more specific list of Amazon ECS service
 //
 // recommendations. Use this filter with the GetECSServiceRecommendationsaction.
@@ -790,6 +1808,35 @@ type ECSServiceRecommendationFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSServiceRecommendationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceRecommendationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ECSServiceRecommendationFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.ECSServiceRecommendationFilter_values, v.Values)
+}
+func (v *ECSServiceRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceRecommendationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceRecommendationFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceRecommendationFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = ECSServiceRecommendationFilterName(ev)
+			return nil
+		case schemas.ECSServiceRecommendationFilter_values:
+			return deserializeFilterValues(d, schemas.ECSServiceRecommendationFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the recommendation options for an Amazon ECS service.
@@ -839,6 +1886,56 @@ type ECSServiceRecommendationOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ECSServiceRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerRecommendations(s, schemas.ECSServiceRecommendationOption_containerRecommendations, v.ContainerRecommendations)
+	if v.Cpu != nil {
+		s.WriteInt32(schemas.ECSServiceRecommendationOption_cpu, *v.Cpu)
+	}
+	if v.Memory != nil {
+		s.WriteInt32(schemas.ECSServiceRecommendationOption_memory, *v.Memory)
+	}
+	serializeECSServiceProjectedUtilizationMetrics(s, schemas.ECSServiceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.ECSServiceRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.ECSServiceRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ECSServiceRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceRecommendationOption_containerRecommendations:
+			return deserializeContainerRecommendations(d, schemas.ECSServiceRecommendationOption_containerRecommendations, &v.ContainerRecommendations)
+		case schemas.ECSServiceRecommendationOption_cpu:
+			v.Cpu = new(int32)
+			return d.ReadInt32(schemas.ECSServiceRecommendationOption_cpu, v.Cpu)
+		case schemas.ECSServiceRecommendationOption_memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.ECSServiceRecommendationOption_memory, v.Memory)
+		case schemas.ECSServiceRecommendationOption_projectedUtilizationMetrics:
+			return deserializeECSServiceProjectedUtilizationMetrics(d, schemas.ECSServiceRecommendationOption_projectedUtilizationMetrics, &v.ProjectedUtilizationMetrics)
+		case schemas.ECSServiceRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.ECSServiceRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &ECSSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the projected metrics of an Amazon ECS service recommendation
 //
 // option.
@@ -858,6 +1955,35 @@ type ECSServiceRecommendedOptionProjectedMetric struct {
 	RecommendedMemorySize int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ECSServiceRecommendedOptionProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceRecommendedOptionProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceRecommendedOptionProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeECSServiceProjectedMetrics(s, schemas.ECSServiceRecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	if v.RecommendedCpuUnits != 0 {
+		s.WriteInt32(schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits, v.RecommendedCpuUnits)
+	}
+	if v.RecommendedMemorySize != 0 {
+		s.WriteInt32(schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedMemorySize, v.RecommendedMemorySize)
+	}
+}
+func (v *ECSServiceRecommendedOptionProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceRecommendedOptionProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceRecommendedOptionProjectedMetric_projectedMetrics:
+			return deserializeECSServiceProjectedMetrics(d, schemas.ECSServiceRecommendedOptionProjectedMetric_projectedMetrics, &v.ProjectedMetrics)
+		case schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits:
+			return d.ReadInt32(schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits, &v.RecommendedCpuUnits)
+		case schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedMemorySize:
+			return d.ReadInt32(schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedMemorySize, &v.RecommendedMemorySize)
+		}
+		return nil
+	})
 }
 
 //	Describes the utilization metric of an Amazon ECS service.
@@ -898,6 +2024,47 @@ type ECSServiceUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ECSServiceUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ECSServiceUtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ECSServiceUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ECSServiceUtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.ECSServiceUtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.ECSServiceUtilizationMetric_value, v.Value)
+	}
+}
+func (v *ECSServiceUtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ECSServiceUtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ECSServiceUtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceUtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = ECSServiceMetricName(ev)
+			return nil
+		case schemas.ECSServiceUtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.ECSServiceUtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = ECSServiceMetricStatistic(ev)
+			return nil
+		case schemas.ECSServiceUtilizationMetric_value:
+			return d.ReadFloat64(schemas.ECSServiceUtilizationMetric_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 //	Describes the effective preferred resources that Compute Optimizer considers
 //
 // as rightsizing recommendation candidates.
@@ -920,6 +2087,41 @@ type EffectivePreferredResource struct {
 	Name PreferredResourceName
 
 	noSmithyDocumentSerde
+}
+
+func (v *EffectivePreferredResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EffectivePreferredResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EffectivePreferredResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePreferredResourceValues(s, schemas.EffectivePreferredResource_effectiveIncludeList, v.EffectiveIncludeList)
+	serializePreferredResourceValues(s, schemas.EffectivePreferredResource_excludeList, v.ExcludeList)
+	serializePreferredResourceValues(s, schemas.EffectivePreferredResource_includeList, v.IncludeList)
+	if v.Name != "" {
+		s.WriteString(schemas.EffectivePreferredResource_name, string(v.Name))
+	}
+}
+func (v *EffectivePreferredResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EffectivePreferredResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EffectivePreferredResource_effectiveIncludeList:
+			return deserializePreferredResourceValues(d, schemas.EffectivePreferredResource_effectiveIncludeList, &v.EffectiveIncludeList)
+		case schemas.EffectivePreferredResource_excludeList:
+			return deserializePreferredResourceValues(d, schemas.EffectivePreferredResource_excludeList, &v.ExcludeList)
+		case schemas.EffectivePreferredResource_includeList:
+			return deserializePreferredResourceValues(d, schemas.EffectivePreferredResource_includeList, &v.IncludeList)
+		case schemas.EffectivePreferredResource_name:
+			var ev string
+			if err := d.ReadString(schemas.EffectivePreferredResource_name, &ev); err != nil {
+				return err
+			}
+			v.Name = PreferredResourceName(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the effective recommendation preferences for a resource.
@@ -988,6 +2190,77 @@ type EffectiveRecommendationPreferences struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EffectiveRecommendationPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCpuVendorArchitectures(s, schemas.EffectiveRecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	if v.EnhancedInfrastructureMetrics != "" {
+		s.WriteString(schemas.EffectiveRecommendationPreferences_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
+	}
+	if v.ExternalMetricsPreference != nil {
+		s.WriteStruct(schemas.EffectiveRecommendationPreferences_externalMetricsPreference)
+		v.ExternalMetricsPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferredWorkloadTypes != "" {
+		s.WriteString(schemas.EffectiveRecommendationPreferences_inferredWorkloadTypes, string(v.InferredWorkloadTypes))
+	}
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.EffectiveRecommendationPreferences_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	serializeEffectivePreferredResources(s, schemas.EffectiveRecommendationPreferences_preferredResources, v.PreferredResources)
+	if v.SavingsEstimationMode != nil {
+		s.WriteStruct(schemas.EffectiveRecommendationPreferences_savingsEstimationMode)
+		v.SavingsEstimationMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUtilizationPreferences(s, schemas.EffectiveRecommendationPreferences_utilizationPreferences, v.UtilizationPreferences)
+}
+func (v *EffectiveRecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EffectiveRecommendationPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EffectiveRecommendationPreferences_cpuVendorArchitectures:
+			return deserializeCpuVendorArchitectures(d, schemas.EffectiveRecommendationPreferences_cpuVendorArchitectures, &v.CpuVendorArchitectures)
+		case schemas.EffectiveRecommendationPreferences_enhancedInfrastructureMetrics:
+			var ev string
+			if err := d.ReadString(schemas.EffectiveRecommendationPreferences_enhancedInfrastructureMetrics, &ev); err != nil {
+				return err
+			}
+			v.EnhancedInfrastructureMetrics = EnhancedInfrastructureMetrics(ev)
+			return nil
+		case schemas.EffectiveRecommendationPreferences_externalMetricsPreference:
+			v.ExternalMetricsPreference = &ExternalMetricsPreference{}
+			return v.ExternalMetricsPreference.Deserialize(d)
+		case schemas.EffectiveRecommendationPreferences_inferredWorkloadTypes:
+			var ev string
+			if err := d.ReadString(schemas.EffectiveRecommendationPreferences_inferredWorkloadTypes, &ev); err != nil {
+				return err
+			}
+			v.InferredWorkloadTypes = InferredWorkloadTypesPreference(ev)
+			return nil
+		case schemas.EffectiveRecommendationPreferences_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.EffectiveRecommendationPreferences_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = LookBackPeriodPreference(ev)
+			return nil
+		case schemas.EffectiveRecommendationPreferences_preferredResources:
+			return deserializeEffectivePreferredResources(d, schemas.EffectiveRecommendationPreferences_preferredResources, &v.PreferredResources)
+		case schemas.EffectiveRecommendationPreferences_savingsEstimationMode:
+			v.SavingsEstimationMode = &InstanceSavingsEstimationMode{}
+			return v.SavingsEstimationMode.Deserialize(d)
+		case schemas.EffectiveRecommendationPreferences_utilizationPreferences:
+			return deserializeUtilizationPreferences(d, schemas.EffectiveRecommendationPreferences_utilizationPreferences, &v.UtilizationPreferences)
+		}
+		return nil
+	})
+}
+
 // Describes a filter that returns a more specific list of account enrollment
 // statuses. Use this filter with the GetEnrollmentStatusesForOrganizationaction.
 type EnrollmentFilter struct {
@@ -1004,6 +2277,35 @@ type EnrollmentFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnrollmentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrollmentFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrollmentFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.EnrollmentFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.EnrollmentFilter_values, v.Values)
+}
+func (v *EnrollmentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrollmentFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrollmentFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.EnrollmentFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = EnrollmentFilterName(ev)
+			return nil
+		case schemas.EnrollmentFilter_values:
+			return deserializeFilterValues(d, schemas.EnrollmentFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the estimated monthly savings amount possible, based on On-Demand
@@ -1024,6 +2326,37 @@ type EstimatedMonthlySavings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.EstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.EstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *EstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.EstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.EstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.EstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the destination of the recommendations export and metadata files.
 type ExportDestination struct {
 
@@ -1035,6 +2368,30 @@ type ExportDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.ExportDestination_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportDestination_s3:
+			v.S3 = &S3Destination{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the external metrics preferences for EC2 rightsizing
 //
 // recommendations.
@@ -1044,6 +2401,32 @@ type ExternalMetricsPreference struct {
 	Source ExternalMetricsSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExternalMetricsPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalMetricsPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalMetricsPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.ExternalMetricsPreference_source, string(v.Source))
+	}
+}
+func (v *ExternalMetricsPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalMetricsPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalMetricsPreference_source:
+			var ev string
+			if err := d.ReadString(schemas.ExternalMetricsPreference_source, &ev); err != nil {
+				return err
+			}
+			v.Source = ExternalMetricsSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Describes Compute Optimizer's integration status with your chosen external
@@ -1060,6 +2443,38 @@ type ExternalMetricStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExternalMetricStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalMetricStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalMetricStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.ExternalMetricStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExternalMetricStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *ExternalMetricStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalMetricStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalMetricStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.ExternalMetricStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = ExternalMetricStatusCode(ev)
+			return nil
+		case schemas.ExternalMetricStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExternalMetricStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // Describes a filter that returns a more specific list of recommendations. Use
@@ -1183,6 +2598,35 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.Filter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.Filter_values, v.Values)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_name:
+			var ev string
+			if err := d.ReadString(schemas.Filter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = FilterName(ev)
+			return nil
+		case schemas.Filter_values:
+			return deserializeFilterValues(d, schemas.Filter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes an error experienced when getting recommendations.
 //
 // For example, an error is returned if you request recommendations for an
@@ -1202,6 +2646,40 @@ type GetRecommendationError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.GetRecommendationError_code, *v.Code)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetRecommendationError_identifier, *v.Identifier)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetRecommendationError_message, *v.Message)
+	}
+}
+func (v *GetRecommendationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.GetRecommendationError_code, v.Code)
+		case schemas.GetRecommendationError_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.GetRecommendationError_identifier, v.Identifier)
+		case schemas.GetRecommendationError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetRecommendationError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Describes the GPU accelerators for the instance type.
 type Gpu struct {
 
@@ -1215,6 +2693,32 @@ type Gpu struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Gpu) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Gpu)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Gpu) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GpuCount != 0 {
+		s.WriteInt32(schemas.Gpu_gpuCount, v.GpuCount)
+	}
+	if v.GpuMemorySizeInMiB != 0 {
+		s.WriteInt32(schemas.Gpu_gpuMemorySizeInMiB, v.GpuMemorySizeInMiB)
+	}
+}
+func (v *Gpu) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Gpu, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Gpu_gpuCount:
+			return d.ReadInt32(schemas.Gpu_gpuCount, &v.GpuCount)
+		case schemas.Gpu_gpuMemorySizeInMiB:
+			return d.ReadInt32(schemas.Gpu_gpuMemorySizeInMiB, &v.GpuMemorySizeInMiB)
+		}
+		return nil
+	})
+}
+
 // Describes the GPU accelerator settings for the instance type.
 type GpuInfo struct {
 
@@ -1222,6 +2726,25 @@ type GpuInfo struct {
 	Gpus []Gpu
 
 	noSmithyDocumentSerde
+}
+
+func (v *GpuInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GpuInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GpuInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGpus(s, schemas.GpuInfo_gpus, v.Gpus)
+}
+func (v *GpuInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GpuInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GpuInfo_gpus:
+			return deserializeGpus(d, schemas.GpuInfo_gpus, &v.Gpus)
+		}
+		return nil
+	})
 }
 
 // Describes the dimension of an idle resource utilization metric.
@@ -1236,6 +2759,31 @@ type IdleDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdleDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.IdleDimension_key, *v.Key)
+	}
+	serializeIdleDimensionValues(s, schemas.IdleDimension_values, v.Values)
+}
+func (v *IdleDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleDimension_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.IdleDimension_key, v.Key)
+		case schemas.IdleDimension_values:
+			return deserializeIdleDimensionValues(d, schemas.IdleDimension_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes the estimated monthly savings possible for idle resources by adopting
 // Compute Optimizer recommendations.
 type IdleEstimatedMonthlySavings struct {
@@ -1247,6 +2795,37 @@ type IdleEstimatedMonthlySavings struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdleEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.IdleEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.IdleEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *IdleEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.IdleEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.IdleEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.IdleEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes an Idle resource recommendation.
@@ -1291,6 +2870,99 @@ type IdleRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdleRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.IdleRecommendation_accountId, *v.AccountId)
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.IdleRecommendation_finding, string(v.Finding))
+	}
+	if v.FindingDescription != nil {
+		s.WriteString(schemas.IdleRecommendation_findingDescription, *v.FindingDescription)
+	}
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.IdleRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LookBackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.IdleRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.IdleRecommendation_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.IdleRecommendation_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.IdleRecommendation_resourceType, string(v.ResourceType))
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.IdleRecommendation_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.IdleRecommendation_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.IdleRecommendation_tags, v.Tags)
+	serializeIdleUtilizationMetrics(s, schemas.IdleRecommendation_utilizationMetrics, v.UtilizationMetrics)
+}
+func (v *IdleRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.IdleRecommendation_accountId, v.AccountId)
+		case schemas.IdleRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.IdleRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = IdleFinding(ev)
+			return nil
+		case schemas.IdleRecommendation_findingDescription:
+			v.FindingDescription = new(string)
+			return d.ReadString(schemas.IdleRecommendation_findingDescription, v.FindingDescription)
+		case schemas.IdleRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.IdleRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.IdleRecommendation_lookBackPeriodInDays:
+			return d.ReadFloat64(schemas.IdleRecommendation_lookBackPeriodInDays, &v.LookBackPeriodInDays)
+		case schemas.IdleRecommendation_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.IdleRecommendation_resourceArn, v.ResourceArn)
+		case schemas.IdleRecommendation_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.IdleRecommendation_resourceId, v.ResourceId)
+		case schemas.IdleRecommendation_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.IdleRecommendation_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = IdleRecommendationResourceType(ev)
+			return nil
+		case schemas.IdleRecommendation_savingsOpportunity:
+			v.SavingsOpportunity = &IdleSavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.IdleRecommendation_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &IdleSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		case schemas.IdleRecommendation_tags:
+			return deserializeTags(d, schemas.IdleRecommendation_tags, &v.Tags)
+		case schemas.IdleRecommendation_utilizationMetrics:
+			return deserializeIdleUtilizationMetrics(d, schemas.IdleRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		}
+		return nil
+	})
+}
+
 // Returns of list of resources that doesn't have idle recommendations.
 type IdleRecommendationError struct {
 
@@ -1307,6 +2979,50 @@ type IdleRecommendationError struct {
 	ResourceType IdleRecommendationResourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdleRecommendationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleRecommendationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleRecommendationError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.IdleRecommendationError_code, *v.Code)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.IdleRecommendationError_identifier, *v.Identifier)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.IdleRecommendationError_message, *v.Message)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.IdleRecommendationError_resourceType, string(v.ResourceType))
+	}
+}
+func (v *IdleRecommendationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleRecommendationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleRecommendationError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.IdleRecommendationError_code, v.Code)
+		case schemas.IdleRecommendationError_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.IdleRecommendationError_identifier, v.Identifier)
+		case schemas.IdleRecommendationError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IdleRecommendationError_message, v.Message)
+		case schemas.IdleRecommendationError_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.IdleRecommendationError_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = IdleRecommendationResourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a filter that returns a more specific list of idle resource
@@ -1339,6 +3055,35 @@ type IdleRecommendationFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdleRecommendationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleRecommendationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.IdleRecommendationFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.IdleRecommendationFilter_values, v.Values)
+}
+func (v *IdleRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleRecommendationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleRecommendationFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.IdleRecommendationFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = IdleRecommendationFilterName(ev)
+			return nil
+		case schemas.IdleRecommendationFilter_values:
+			return deserializeFilterValues(d, schemas.IdleRecommendationFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes the savings opportunity for idle resource recommendations.
 type IdleSavingsOpportunity struct {
 
@@ -1351,6 +3096,35 @@ type IdleSavingsOpportunity struct {
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdleSavingsOpportunity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleSavingsOpportunity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleSavingsOpportunity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.IdleSavingsOpportunity_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.IdleSavingsOpportunity_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *IdleSavingsOpportunity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleSavingsOpportunity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleSavingsOpportunity_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &IdleEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.IdleSavingsOpportunity_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.IdleSavingsOpportunity_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
 }
 
 // Describes the savings opportunity for idle resource recommendations after
@@ -1373,6 +3147,35 @@ type IdleSavingsOpportunityAfterDiscounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdleSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.IdleSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.IdleSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *IdleSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &IdleEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.IdleSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.IdleSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
+}
+
 // Describes the findings summary of the idle resources.
 type IdleSummary struct {
 
@@ -1383,6 +3186,37 @@ type IdleSummary struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.IdleSummary_name, string(v.Name))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.IdleSummary_value, v.Value)
+	}
+}
+func (v *IdleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleSummary_name:
+			var ev string
+			if err := d.ReadString(schemas.IdleSummary_name, &ev); err != nil {
+				return err
+			}
+			v.Name = IdleFinding(ev)
+			return nil
+		case schemas.IdleSummary_value:
+			return d.ReadFloat64(schemas.IdleSummary_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the utilization metric of an idle resource.
@@ -1414,6 +3248,50 @@ type IdleUtilizationMetric struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdleUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdleUtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdleUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdleDimensions(s, schemas.IdleUtilizationMetric_dimensions, v.Dimensions)
+	if v.Name != "" {
+		s.WriteString(schemas.IdleUtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.IdleUtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.IdleUtilizationMetric_value, v.Value)
+	}
+}
+func (v *IdleUtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdleUtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdleUtilizationMetric_dimensions:
+			return deserializeIdleDimensions(d, schemas.IdleUtilizationMetric_dimensions, &v.Dimensions)
+		case schemas.IdleUtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.IdleUtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = IdleMetricName(ev)
+			return nil
+		case schemas.IdleUtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.IdleUtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = MetricStatistic(ev)
+			return nil
+		case schemas.IdleUtilizationMetric_value:
+			return d.ReadFloat64(schemas.IdleUtilizationMetric_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 //	The estimated monthly savings after you adjust the configurations of your
@@ -1458,6 +3336,33 @@ type InferredWorkloadSaving struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferredWorkloadSaving) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferredWorkloadSaving)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferredWorkloadSaving) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.InferredWorkloadSaving_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInferredWorkloadTypes(s, schemas.InferredWorkloadSaving_inferredWorkloadTypes, v.InferredWorkloadTypes)
+}
+func (v *InferredWorkloadSaving) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferredWorkloadSaving, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferredWorkloadSaving_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &EstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.InferredWorkloadSaving_inferredWorkloadTypes:
+			return deserializeInferredWorkloadTypes(d, schemas.InferredWorkloadSaving_inferredWorkloadTypes, &v.InferredWorkloadTypes)
+		}
+		return nil
+	})
+}
+
 //	An object that describes the estimated monthly savings possible by adopting
 //
 // Compute Optimizer’s Amazon EC2 instance recommendations. This is based on the
@@ -1471,6 +3376,37 @@ type InstanceEstimatedMonthlySavings struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.InstanceEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.InstanceEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *InstanceEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.InstanceEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.InstanceEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.InstanceEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon EC2 instance recommendation.
@@ -1692,6 +3628,139 @@ type InstanceRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InstanceRecommendation_accountId, *v.AccountId)
+	}
+	if v.CurrentInstanceGpuInfo != nil {
+		s.WriteStruct(schemas.InstanceRecommendation_currentInstanceGpuInfo)
+		v.CurrentInstanceGpuInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentInstanceType != nil {
+		s.WriteString(schemas.InstanceRecommendation_currentInstanceType, *v.CurrentInstanceType)
+	}
+	if v.CurrentPerformanceRisk != "" {
+		s.WriteString(schemas.InstanceRecommendation_currentPerformanceRisk, string(v.CurrentPerformanceRisk))
+	}
+	if v.EffectiveRecommendationPreferences != nil {
+		s.WriteStruct(schemas.InstanceRecommendation_effectiveRecommendationPreferences)
+		v.EffectiveRecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExternalMetricStatus != nil {
+		s.WriteStruct(schemas.InstanceRecommendation_externalMetricStatus)
+		v.ExternalMetricStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.InstanceRecommendation_finding, string(v.Finding))
+	}
+	serializeInstanceRecommendationFindingReasonCodes(s, schemas.InstanceRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.Idle != "" {
+		s.WriteString(schemas.InstanceRecommendation_idle, string(v.Idle))
+	}
+	serializeInferredWorkloadTypes(s, schemas.InstanceRecommendation_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.InstanceRecommendation_instanceArn, *v.InstanceArn)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.InstanceRecommendation_instanceName, *v.InstanceName)
+	}
+	if v.InstanceState != "" {
+		s.WriteString(schemas.InstanceRecommendation_instanceState, string(v.InstanceState))
+	}
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.InstanceRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LookBackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.InstanceRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
+	}
+	serializeRecommendationOptions(s, schemas.InstanceRecommendation_recommendationOptions, v.RecommendationOptions)
+	serializeRecommendationSources(s, schemas.InstanceRecommendation_recommendationSources, v.RecommendationSources)
+	serializeTags(s, schemas.InstanceRecommendation_tags, v.Tags)
+	serializeUtilizationMetrics(s, schemas.InstanceRecommendation_utilizationMetrics, v.UtilizationMetrics)
+}
+func (v *InstanceRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.InstanceRecommendation_accountId, v.AccountId)
+		case schemas.InstanceRecommendation_currentInstanceGpuInfo:
+			v.CurrentInstanceGpuInfo = &GpuInfo{}
+			return v.CurrentInstanceGpuInfo.Deserialize(d)
+		case schemas.InstanceRecommendation_currentInstanceType:
+			v.CurrentInstanceType = new(string)
+			return d.ReadString(schemas.InstanceRecommendation_currentInstanceType, v.CurrentInstanceType)
+		case schemas.InstanceRecommendation_currentPerformanceRisk:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRecommendation_currentPerformanceRisk, &ev); err != nil {
+				return err
+			}
+			v.CurrentPerformanceRisk = CurrentPerformanceRisk(ev)
+			return nil
+		case schemas.InstanceRecommendation_effectiveRecommendationPreferences:
+			v.EffectiveRecommendationPreferences = &EffectiveRecommendationPreferences{}
+			return v.EffectiveRecommendationPreferences.Deserialize(d)
+		case schemas.InstanceRecommendation_externalMetricStatus:
+			v.ExternalMetricStatus = &ExternalMetricStatus{}
+			return v.ExternalMetricStatus.Deserialize(d)
+		case schemas.InstanceRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = Finding(ev)
+			return nil
+		case schemas.InstanceRecommendation_findingReasonCodes:
+			return deserializeInstanceRecommendationFindingReasonCodes(d, schemas.InstanceRecommendation_findingReasonCodes, &v.FindingReasonCodes)
+		case schemas.InstanceRecommendation_idle:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRecommendation_idle, &ev); err != nil {
+				return err
+			}
+			v.Idle = InstanceIdle(ev)
+			return nil
+		case schemas.InstanceRecommendation_inferredWorkloadTypes:
+			return deserializeInferredWorkloadTypes(d, schemas.InstanceRecommendation_inferredWorkloadTypes, &v.InferredWorkloadTypes)
+		case schemas.InstanceRecommendation_instanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.InstanceRecommendation_instanceArn, v.InstanceArn)
+		case schemas.InstanceRecommendation_instanceName:
+			v.InstanceName = new(string)
+			return d.ReadString(schemas.InstanceRecommendation_instanceName, v.InstanceName)
+		case schemas.InstanceRecommendation_instanceState:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRecommendation_instanceState, &ev); err != nil {
+				return err
+			}
+			v.InstanceState = InstanceState(ev)
+			return nil
+		case schemas.InstanceRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.InstanceRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.InstanceRecommendation_lookBackPeriodInDays:
+			return d.ReadFloat64(schemas.InstanceRecommendation_lookBackPeriodInDays, &v.LookBackPeriodInDays)
+		case schemas.InstanceRecommendation_recommendationOptions:
+			return deserializeRecommendationOptions(d, schemas.InstanceRecommendation_recommendationOptions, &v.RecommendationOptions)
+		case schemas.InstanceRecommendation_recommendationSources:
+			return deserializeRecommendationSources(d, schemas.InstanceRecommendation_recommendationSources, &v.RecommendationSources)
+		case schemas.InstanceRecommendation_tags:
+			return deserializeTags(d, schemas.InstanceRecommendation_tags, &v.Tags)
+		case schemas.InstanceRecommendation_utilizationMetrics:
+			return deserializeUtilizationMetrics(d, schemas.InstanceRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		}
+		return nil
+	})
+}
+
 // Describes a recommendation option for an Amazon EC2 instance.
 type InstanceRecommendationOption struct {
 
@@ -1827,6 +3896,78 @@ type InstanceRecommendationOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceGpuInfo != nil {
+		s.WriteStruct(schemas.InstanceRecommendationOption_instanceGpuInfo)
+		v.InstanceGpuInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceRecommendationOption_instanceType, *v.InstanceType)
+	}
+	if v.MigrationEffort != "" {
+		s.WriteString(schemas.InstanceRecommendationOption_migrationEffort, string(v.MigrationEffort))
+	}
+	if v.PerformanceRisk != 0 {
+		s.WriteFloat64(schemas.InstanceRecommendationOption_performanceRisk, v.PerformanceRisk)
+	}
+	serializePlatformDifferences(s, schemas.InstanceRecommendationOption_platformDifferences, v.PlatformDifferences)
+	serializeProjectedUtilizationMetrics(s, schemas.InstanceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.InstanceRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.InstanceRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.InstanceRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRecommendationOption_instanceGpuInfo:
+			v.InstanceGpuInfo = &GpuInfo{}
+			return v.InstanceGpuInfo.Deserialize(d)
+		case schemas.InstanceRecommendationOption_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceRecommendationOption_instanceType, v.InstanceType)
+		case schemas.InstanceRecommendationOption_migrationEffort:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRecommendationOption_migrationEffort, &ev); err != nil {
+				return err
+			}
+			v.MigrationEffort = MigrationEffort(ev)
+			return nil
+		case schemas.InstanceRecommendationOption_performanceRisk:
+			return d.ReadFloat64(schemas.InstanceRecommendationOption_performanceRisk, &v.PerformanceRisk)
+		case schemas.InstanceRecommendationOption_platformDifferences:
+			return deserializePlatformDifferences(d, schemas.InstanceRecommendationOption_platformDifferences, &v.PlatformDifferences)
+		case schemas.InstanceRecommendationOption_projectedUtilizationMetrics:
+			return deserializeProjectedUtilizationMetrics(d, schemas.InstanceRecommendationOption_projectedUtilizationMetrics, &v.ProjectedUtilizationMetrics)
+		case schemas.InstanceRecommendationOption_rank:
+			return d.ReadInt32(schemas.InstanceRecommendationOption_rank, &v.Rank)
+		case schemas.InstanceRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.InstanceRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &InstanceSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the savings estimation mode used for calculating savings opportunity
 //
 // for Amazon EC2 instances.
@@ -1837,6 +3978,32 @@ type InstanceSavingsEstimationMode struct {
 	Source InstanceSavingsEstimationModeSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceSavingsEstimationMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceSavingsEstimationMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceSavingsEstimationMode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.InstanceSavingsEstimationMode_source, string(v.Source))
+	}
+}
+func (v *InstanceSavingsEstimationMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceSavingsEstimationMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceSavingsEstimationMode_source:
+			var ev string
+			if err := d.ReadString(schemas.InstanceSavingsEstimationMode_source, &ev); err != nil {
+				return err
+			}
+			v.Source = InstanceSavingsEstimationModeSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Describes the savings opportunity for instance recommendations after applying
@@ -1858,6 +4025,35 @@ type InstanceSavingsOpportunityAfterDiscounts struct {
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.InstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.InstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *InstanceSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &InstanceEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.InstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.InstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
 }
 
 // Describes a filter that returns a more specific list of recommendation export
@@ -1891,6 +4087,35 @@ type JobFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.JobFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.JobFilter_values, v.Values)
+}
+func (v *JobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.JobFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = JobFilterName(ev)
+			return nil
+		case schemas.JobFilter_values:
+			return deserializeFilterValues(d, schemas.JobFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes the effective recommendation preferences for Lambda functions.
 type LambdaEffectiveRecommendationPreferences struct {
 
@@ -1899,6 +4124,30 @@ type LambdaEffectiveRecommendationPreferences struct {
 	SavingsEstimationMode *LambdaSavingsEstimationMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaEffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaEffectiveRecommendationPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaEffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SavingsEstimationMode != nil {
+		s.WriteStruct(schemas.LambdaEffectiveRecommendationPreferences_savingsEstimationMode)
+		v.SavingsEstimationMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LambdaEffectiveRecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaEffectiveRecommendationPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaEffectiveRecommendationPreferences_savingsEstimationMode:
+			v.SavingsEstimationMode = &LambdaSavingsEstimationMode{}
+			return v.SavingsEstimationMode.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Describes the estimated monthly savings possible for Lambda functions by
@@ -1916,6 +4165,37 @@ type LambdaEstimatedMonthlySavings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.LambdaEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.LambdaEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *LambdaEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.LambdaEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.LambdaEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.LambdaEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes a projected utilization metric of an Lambda function recommendation
 // option.
 type LambdaFunctionMemoryProjectedMetric struct {
@@ -1930,6 +4210,47 @@ type LambdaFunctionMemoryProjectedMetric struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionMemoryProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionMemoryProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionMemoryProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.LambdaFunctionMemoryProjectedMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.LambdaFunctionMemoryProjectedMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.LambdaFunctionMemoryProjectedMetric_value, v.Value)
+	}
+}
+func (v *LambdaFunctionMemoryProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionMemoryProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionMemoryProjectedMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionMemoryProjectedMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = LambdaFunctionMemoryMetricName(ev)
+			return nil
+		case schemas.LambdaFunctionMemoryProjectedMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionMemoryProjectedMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = LambdaFunctionMemoryMetricStatistic(ev)
+			return nil
+		case schemas.LambdaFunctionMemoryProjectedMetric_value:
+			return d.ReadFloat64(schemas.LambdaFunctionMemoryProjectedMetric_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a recommendation option for an Lambda function.
@@ -1958,6 +4279,51 @@ type LambdaFunctionMemoryRecommendationOption struct {
 	SavingsOpportunityAfterDiscounts *LambdaSavingsOpportunityAfterDiscounts
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionMemoryRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionMemoryRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionMemoryRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemorySize != 0 {
+		s.WriteInt32(schemas.LambdaFunctionMemoryRecommendationOption_memorySize, v.MemorySize)
+	}
+	serializeLambdaFunctionMemoryProjectedMetrics(s, schemas.LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.LambdaFunctionMemoryRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.LambdaFunctionMemoryRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.LambdaFunctionMemoryRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LambdaFunctionMemoryRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionMemoryRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionMemoryRecommendationOption_memorySize:
+			return d.ReadInt32(schemas.LambdaFunctionMemoryRecommendationOption_memorySize, &v.MemorySize)
+		case schemas.LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics:
+			return deserializeLambdaFunctionMemoryProjectedMetrics(d, schemas.LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics, &v.ProjectedUtilizationMetrics)
+		case schemas.LambdaFunctionMemoryRecommendationOption_rank:
+			return d.ReadInt32(schemas.LambdaFunctionMemoryRecommendationOption_rank, &v.Rank)
+		case schemas.LambdaFunctionMemoryRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.LambdaFunctionMemoryRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &LambdaSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an Lambda function recommendation.
@@ -2063,6 +4429,101 @@ type LambdaFunctionRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.LambdaFunctionRecommendation_accountId, *v.AccountId)
+	}
+	if v.CurrentMemorySize != 0 {
+		s.WriteInt32(schemas.LambdaFunctionRecommendation_currentMemorySize, v.CurrentMemorySize)
+	}
+	if v.CurrentPerformanceRisk != "" {
+		s.WriteString(schemas.LambdaFunctionRecommendation_currentPerformanceRisk, string(v.CurrentPerformanceRisk))
+	}
+	if v.EffectiveRecommendationPreferences != nil {
+		s.WriteStruct(schemas.LambdaFunctionRecommendation_effectiveRecommendationPreferences)
+		v.EffectiveRecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.LambdaFunctionRecommendation_finding, string(v.Finding))
+	}
+	serializeLambdaFunctionRecommendationFindingReasonCodes(s, schemas.LambdaFunctionRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.LambdaFunctionRecommendation_functionArn, *v.FunctionArn)
+	}
+	if v.FunctionVersion != nil {
+		s.WriteString(schemas.LambdaFunctionRecommendation_functionVersion, *v.FunctionVersion)
+	}
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.LambdaFunctionRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LookbackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.LambdaFunctionRecommendation_lookbackPeriodInDays, v.LookbackPeriodInDays)
+	}
+	serializeLambdaFunctionMemoryRecommendationOptions(s, schemas.LambdaFunctionRecommendation_memorySizeRecommendationOptions, v.MemorySizeRecommendationOptions)
+	if v.NumberOfInvocations != 0 {
+		s.WriteInt64(schemas.LambdaFunctionRecommendation_numberOfInvocations, v.NumberOfInvocations)
+	}
+	serializeTags(s, schemas.LambdaFunctionRecommendation_tags, v.Tags)
+	serializeLambdaFunctionUtilizationMetrics(s, schemas.LambdaFunctionRecommendation_utilizationMetrics, v.UtilizationMetrics)
+}
+func (v *LambdaFunctionRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.LambdaFunctionRecommendation_accountId, v.AccountId)
+		case schemas.LambdaFunctionRecommendation_currentMemorySize:
+			return d.ReadInt32(schemas.LambdaFunctionRecommendation_currentMemorySize, &v.CurrentMemorySize)
+		case schemas.LambdaFunctionRecommendation_currentPerformanceRisk:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionRecommendation_currentPerformanceRisk, &ev); err != nil {
+				return err
+			}
+			v.CurrentPerformanceRisk = CurrentPerformanceRisk(ev)
+			return nil
+		case schemas.LambdaFunctionRecommendation_effectiveRecommendationPreferences:
+			v.EffectiveRecommendationPreferences = &LambdaEffectiveRecommendationPreferences{}
+			return v.EffectiveRecommendationPreferences.Deserialize(d)
+		case schemas.LambdaFunctionRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = LambdaFunctionRecommendationFinding(ev)
+			return nil
+		case schemas.LambdaFunctionRecommendation_findingReasonCodes:
+			return deserializeLambdaFunctionRecommendationFindingReasonCodes(d, schemas.LambdaFunctionRecommendation_findingReasonCodes, &v.FindingReasonCodes)
+		case schemas.LambdaFunctionRecommendation_functionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.LambdaFunctionRecommendation_functionArn, v.FunctionArn)
+		case schemas.LambdaFunctionRecommendation_functionVersion:
+			v.FunctionVersion = new(string)
+			return d.ReadString(schemas.LambdaFunctionRecommendation_functionVersion, v.FunctionVersion)
+		case schemas.LambdaFunctionRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.LambdaFunctionRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.LambdaFunctionRecommendation_lookbackPeriodInDays:
+			return d.ReadFloat64(schemas.LambdaFunctionRecommendation_lookbackPeriodInDays, &v.LookbackPeriodInDays)
+		case schemas.LambdaFunctionRecommendation_memorySizeRecommendationOptions:
+			return deserializeLambdaFunctionMemoryRecommendationOptions(d, schemas.LambdaFunctionRecommendation_memorySizeRecommendationOptions, &v.MemorySizeRecommendationOptions)
+		case schemas.LambdaFunctionRecommendation_numberOfInvocations:
+			return d.ReadInt64(schemas.LambdaFunctionRecommendation_numberOfInvocations, &v.NumberOfInvocations)
+		case schemas.LambdaFunctionRecommendation_tags:
+			return deserializeTags(d, schemas.LambdaFunctionRecommendation_tags, &v.Tags)
+		case schemas.LambdaFunctionRecommendation_utilizationMetrics:
+			return deserializeLambdaFunctionUtilizationMetrics(d, schemas.LambdaFunctionRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		}
+		return nil
+	})
+}
+
 // Describes a filter that returns a more specific list of Lambda function
 // recommendations. Use this filter with the GetLambdaFunctionRecommendationsaction.
 //
@@ -2108,6 +4569,35 @@ type LambdaFunctionRecommendationFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionRecommendationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionRecommendationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.LambdaFunctionRecommendationFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.LambdaFunctionRecommendationFilter_values, v.Values)
+}
+func (v *LambdaFunctionRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionRecommendationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionRecommendationFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionRecommendationFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = LambdaFunctionRecommendationFilterName(ev)
+			return nil
+		case schemas.LambdaFunctionRecommendationFilter_values:
+			return deserializeFilterValues(d, schemas.LambdaFunctionRecommendationFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes a utilization metric of an Lambda function.
 type LambdaFunctionUtilizationMetric struct {
 
@@ -2143,6 +4633,47 @@ type LambdaFunctionUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionUtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.LambdaFunctionUtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.LambdaFunctionUtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.LambdaFunctionUtilizationMetric_value, v.Value)
+	}
+}
+func (v *LambdaFunctionUtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionUtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionUtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionUtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = LambdaFunctionMetricName(ev)
+			return nil
+		case schemas.LambdaFunctionUtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionUtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = LambdaFunctionMetricStatistic(ev)
+			return nil
+		case schemas.LambdaFunctionUtilizationMetric_value:
+			return d.ReadFloat64(schemas.LambdaFunctionUtilizationMetric_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 //	Describes the savings estimation used for calculating savings opportunity for
 //
 // Lambda functions.
@@ -2153,6 +4684,32 @@ type LambdaSavingsEstimationMode struct {
 	Source LambdaSavingsEstimationModeSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaSavingsEstimationMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaSavingsEstimationMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaSavingsEstimationMode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.LambdaSavingsEstimationMode_source, string(v.Source))
+	}
+}
+func (v *LambdaSavingsEstimationMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaSavingsEstimationMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaSavingsEstimationMode_source:
+			var ev string
+			if err := d.ReadString(schemas.LambdaSavingsEstimationMode_source, &ev); err != nil {
+				return err
+			}
+			v.Source = LambdaSavingsEstimationModeSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Describes the savings opportunity for Lambda functions recommendations after
@@ -2174,6 +4731,35 @@ type LambdaSavingsOpportunityAfterDiscounts struct {
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.LambdaSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.LambdaSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *LambdaSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &LambdaEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.LambdaSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.LambdaSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a license for an Amazon EC2 instance.
@@ -2205,6 +4791,78 @@ type LicenseConfiguration struct {
 	OperatingSystem *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LicenseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceType != nil {
+		s.WriteString(schemas.LicenseConfiguration_instanceType, *v.InstanceType)
+	}
+	if v.LicenseEdition != "" {
+		s.WriteString(schemas.LicenseConfiguration_licenseEdition, string(v.LicenseEdition))
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.LicenseConfiguration_licenseModel, string(v.LicenseModel))
+	}
+	if v.LicenseName != "" {
+		s.WriteString(schemas.LicenseConfiguration_licenseName, string(v.LicenseName))
+	}
+	if v.LicenseVersion != nil {
+		s.WriteString(schemas.LicenseConfiguration_licenseVersion, *v.LicenseVersion)
+	}
+	serializeMetricsSource(s, schemas.LicenseConfiguration_metricsSource, v.MetricsSource)
+	if v.NumberOfCores != 0 {
+		s.WriteInt32(schemas.LicenseConfiguration_numberOfCores, v.NumberOfCores)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteString(schemas.LicenseConfiguration_operatingSystem, *v.OperatingSystem)
+	}
+}
+func (v *LicenseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseConfiguration_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.LicenseConfiguration_instanceType, v.InstanceType)
+		case schemas.LicenseConfiguration_licenseEdition:
+			var ev string
+			if err := d.ReadString(schemas.LicenseConfiguration_licenseEdition, &ev); err != nil {
+				return err
+			}
+			v.LicenseEdition = LicenseEdition(ev)
+			return nil
+		case schemas.LicenseConfiguration_licenseModel:
+			var ev string
+			if err := d.ReadString(schemas.LicenseConfiguration_licenseModel, &ev); err != nil {
+				return err
+			}
+			v.LicenseModel = LicenseModel(ev)
+			return nil
+		case schemas.LicenseConfiguration_licenseName:
+			var ev string
+			if err := d.ReadString(schemas.LicenseConfiguration_licenseName, &ev); err != nil {
+				return err
+			}
+			v.LicenseName = LicenseName(ev)
+			return nil
+		case schemas.LicenseConfiguration_licenseVersion:
+			v.LicenseVersion = new(string)
+			return d.ReadString(schemas.LicenseConfiguration_licenseVersion, v.LicenseVersion)
+		case schemas.LicenseConfiguration_metricsSource:
+			return deserializeMetricsSource(d, schemas.LicenseConfiguration_metricsSource, &v.MetricsSource)
+		case schemas.LicenseConfiguration_numberOfCores:
+			return d.ReadInt32(schemas.LicenseConfiguration_numberOfCores, &v.NumberOfCores)
+		case schemas.LicenseConfiguration_operatingSystem:
+			v.OperatingSystem = new(string)
+			return d.ReadString(schemas.LicenseConfiguration_operatingSystem, v.OperatingSystem)
+		}
+		return nil
+	})
 }
 
 // Describes a license recommendation for an EC2 instance.
@@ -2270,6 +4928,72 @@ type LicenseRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LicenseRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.LicenseRecommendation_accountId, *v.AccountId)
+	}
+	if v.CurrentLicenseConfiguration != nil {
+		s.WriteStruct(schemas.LicenseRecommendation_currentLicenseConfiguration)
+		v.CurrentLicenseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.LicenseRecommendation_finding, string(v.Finding))
+	}
+	serializeLicenseFindingReasonCodes(s, schemas.LicenseRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.LicenseRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	serializeLicenseRecommendationOptions(s, schemas.LicenseRecommendation_licenseRecommendationOptions, v.LicenseRecommendationOptions)
+	if v.LookbackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.LicenseRecommendation_lookbackPeriodInDays, v.LookbackPeriodInDays)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.LicenseRecommendation_resourceArn, *v.ResourceArn)
+	}
+	serializeTags(s, schemas.LicenseRecommendation_tags, v.Tags)
+}
+func (v *LicenseRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.LicenseRecommendation_accountId, v.AccountId)
+		case schemas.LicenseRecommendation_currentLicenseConfiguration:
+			v.CurrentLicenseConfiguration = &LicenseConfiguration{}
+			return v.CurrentLicenseConfiguration.Deserialize(d)
+		case schemas.LicenseRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.LicenseRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = LicenseFinding(ev)
+			return nil
+		case schemas.LicenseRecommendation_findingReasonCodes:
+			return deserializeLicenseFindingReasonCodes(d, schemas.LicenseRecommendation_findingReasonCodes, &v.FindingReasonCodes)
+		case schemas.LicenseRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.LicenseRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.LicenseRecommendation_licenseRecommendationOptions:
+			return deserializeLicenseRecommendationOptions(d, schemas.LicenseRecommendation_licenseRecommendationOptions, &v.LicenseRecommendationOptions)
+		case schemas.LicenseRecommendation_lookbackPeriodInDays:
+			return d.ReadFloat64(schemas.LicenseRecommendation_lookbackPeriodInDays, &v.LookbackPeriodInDays)
+		case schemas.LicenseRecommendation_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.LicenseRecommendation_resourceArn, v.ResourceArn)
+		case schemas.LicenseRecommendation_tags:
+			return deserializeTags(d, schemas.LicenseRecommendation_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 //	Describes a filter that returns a more specific list of license
 //
 // recommendations. Use this filter with the GetLicenseRecommendation action.
@@ -2314,6 +5038,35 @@ type LicenseRecommendationFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LicenseRecommendationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseRecommendationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.LicenseRecommendationFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.LicenseRecommendationFilter_values, v.Values)
+}
+func (v *LicenseRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseRecommendationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseRecommendationFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.LicenseRecommendationFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = LicenseRecommendationFilterName(ev)
+			return nil
+		case schemas.LicenseRecommendationFilter_values:
+			return deserializeFilterValues(d, schemas.LicenseRecommendationFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes the recommendation options for licenses.
 type LicenseRecommendationOption struct {
 
@@ -2354,6 +5107,61 @@ type LicenseRecommendationOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LicenseRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseEdition != "" {
+		s.WriteString(schemas.LicenseRecommendationOption_licenseEdition, string(v.LicenseEdition))
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.LicenseRecommendationOption_licenseModel, string(v.LicenseModel))
+	}
+	if v.OperatingSystem != nil {
+		s.WriteString(schemas.LicenseRecommendationOption_operatingSystem, *v.OperatingSystem)
+	}
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.LicenseRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.LicenseRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LicenseRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseRecommendationOption_licenseEdition:
+			var ev string
+			if err := d.ReadString(schemas.LicenseRecommendationOption_licenseEdition, &ev); err != nil {
+				return err
+			}
+			v.LicenseEdition = LicenseEdition(ev)
+			return nil
+		case schemas.LicenseRecommendationOption_licenseModel:
+			var ev string
+			if err := d.ReadString(schemas.LicenseRecommendationOption_licenseModel, &ev); err != nil {
+				return err
+			}
+			v.LicenseModel = LicenseModel(ev)
+			return nil
+		case schemas.LicenseRecommendationOption_operatingSystem:
+			v.OperatingSystem = new(string)
+			return d.ReadString(schemas.LicenseRecommendationOption_operatingSystem, v.OperatingSystem)
+		case schemas.LicenseRecommendationOption_rank:
+			return d.ReadInt32(schemas.LicenseRecommendationOption_rank, &v.Rank)
+		case schemas.LicenseRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The memory size configurations of a container.
 type MemorySizeConfiguration struct {
 
@@ -2364,6 +5172,34 @@ type MemorySizeConfiguration struct {
 	MemoryReservation *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MemorySizeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemorySizeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemorySizeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Memory != nil {
+		s.WriteInt32(schemas.MemorySizeConfiguration_memory, *v.Memory)
+	}
+	if v.MemoryReservation != nil {
+		s.WriteInt32(schemas.MemorySizeConfiguration_memoryReservation, *v.MemoryReservation)
+	}
+}
+func (v *MemorySizeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemorySizeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemorySizeConfiguration_memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.MemorySizeConfiguration_memory, v.Memory)
+		case schemas.MemorySizeConfiguration_memoryReservation:
+			v.MemoryReservation = new(int32)
+			return d.ReadInt32(schemas.MemorySizeConfiguration_memoryReservation, v.MemoryReservation)
+		}
+		return nil
+	})
 }
 
 //	The list of metric sources required to generate recommendations for commercial
@@ -2380,6 +5216,38 @@ type MetricSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Provider != "" {
+		s.WriteString(schemas.MetricSource_provider, string(v.Provider))
+	}
+	if v.ProviderArn != nil {
+		s.WriteString(schemas.MetricSource_providerArn, *v.ProviderArn)
+	}
+}
+func (v *MetricSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricSource_provider:
+			var ev string
+			if err := d.ReadString(schemas.MetricSource_provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = MetricSourceProvider(ev)
+			return nil
+		case schemas.MetricSource_providerArn:
+			v.ProviderArn = new(string)
+			return d.ReadString(schemas.MetricSource_providerArn, v.ProviderArn)
+		}
+		return nil
+	})
+}
+
 // Describes how the recommendations are ordered.
 type OrderBy struct {
 
@@ -2390,6 +5258,42 @@ type OrderBy struct {
 	Order Order
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrderBy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrderBy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrderBy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimension != "" {
+		s.WriteString(schemas.OrderBy_dimension, string(v.Dimension))
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.OrderBy_order, string(v.Order))
+	}
+}
+func (v *OrderBy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrderBy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrderBy_dimension:
+			var ev string
+			if err := d.ReadString(schemas.OrderBy_dimension, &ev); err != nil {
+				return err
+			}
+			v.Dimension = Dimension(ev)
+			return nil
+		case schemas.OrderBy_order:
+			var ev string
+			if err := d.ReadString(schemas.OrderBy_order, &ev); err != nil {
+				return err
+			}
+			v.Order = Order(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	The preference to control which resource type values are considered when
@@ -2425,6 +5329,38 @@ type PreferredResource struct {
 	Name PreferredResourceName
 
 	noSmithyDocumentSerde
+}
+
+func (v *PreferredResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreferredResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreferredResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePreferredResourceValues(s, schemas.PreferredResource_excludeList, v.ExcludeList)
+	serializePreferredResourceValues(s, schemas.PreferredResource_includeList, v.IncludeList)
+	if v.Name != "" {
+		s.WriteString(schemas.PreferredResource_name, string(v.Name))
+	}
+}
+func (v *PreferredResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreferredResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreferredResource_excludeList:
+			return deserializePreferredResourceValues(d, schemas.PreferredResource_excludeList, &v.ExcludeList)
+		case schemas.PreferredResource_includeList:
+			return deserializePreferredResourceValues(d, schemas.PreferredResource_includeList, &v.IncludeList)
+		case schemas.PreferredResource_name:
+			var ev string
+			if err := d.ReadString(schemas.PreferredResource_name, &ev); err != nil {
+				return err
+			}
+			v.Name = PreferredResourceName(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a projected utilization metric of a recommendation option, such as an
@@ -2489,6 +5425,38 @@ type ProjectedMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ProjectedMetric_name, string(v.Name))
+	}
+	serializeTimestamps(s, schemas.ProjectedMetric_timestamps, v.Timestamps)
+	serializeMetricValues(s, schemas.ProjectedMetric_values, v.Values)
+}
+func (v *ProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectedMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.ProjectedMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = MetricName(ev)
+			return nil
+		case schemas.ProjectedMetric_timestamps:
+			return deserializeTimestamps(d, schemas.ProjectedMetric_timestamps, &v.Timestamps)
+		case schemas.ProjectedMetric_values:
+			return deserializeMetricValues(d, schemas.ProjectedMetric_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 //	Describes the projected metrics of an Amazon Aurora and RDS database
 //
 // recommendation option.
@@ -2508,6 +5476,38 @@ type RDSDatabaseProjectedMetric struct {
 	Values []float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSDatabaseProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDatabaseProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDatabaseProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.RDSDatabaseProjectedMetric_name, string(v.Name))
+	}
+	serializeTimestamps(s, schemas.RDSDatabaseProjectedMetric_timestamps, v.Timestamps)
+	serializeMetricValues(s, schemas.RDSDatabaseProjectedMetric_values, v.Values)
+}
+func (v *RDSDatabaseProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDatabaseProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDatabaseProjectedMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.RDSDatabaseProjectedMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = RDSDBMetricName(ev)
+			return nil
+		case schemas.RDSDatabaseProjectedMetric_timestamps:
+			return deserializeTimestamps(d, schemas.RDSDatabaseProjectedMetric_timestamps, &v.Timestamps)
+		case schemas.RDSDatabaseProjectedMetric_values:
+			return deserializeMetricValues(d, schemas.RDSDatabaseProjectedMetric_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 //	Describes the projected metrics of an Amazon Aurora and RDS database
@@ -2530,6 +5530,36 @@ type RDSDatabaseRecommendedOptionProjectedMetric struct {
 	RecommendedDBInstanceClass *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSDatabaseRecommendedOptionProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDatabaseRecommendedOptionProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDatabaseRecommendedOptionProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRDSDatabaseProjectedMetrics(s, schemas.RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.RDSDatabaseRecommendedOptionProjectedMetric_rank, v.Rank)
+	}
+	if v.RecommendedDBInstanceClass != nil {
+		s.WriteString(schemas.RDSDatabaseRecommendedOptionProjectedMetric_recommendedDBInstanceClass, *v.RecommendedDBInstanceClass)
+	}
+}
+func (v *RDSDatabaseRecommendedOptionProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDatabaseRecommendedOptionProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics:
+			return deserializeRDSDatabaseProjectedMetrics(d, schemas.RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics, &v.ProjectedMetrics)
+		case schemas.RDSDatabaseRecommendedOptionProjectedMetric_rank:
+			return d.ReadInt32(schemas.RDSDatabaseRecommendedOptionProjectedMetric_rank, &v.Rank)
+		case schemas.RDSDatabaseRecommendedOptionProjectedMetric_recommendedDBInstanceClass:
+			v.RecommendedDBInstanceClass = new(string)
+			return d.ReadString(schemas.RDSDatabaseRecommendedOptionProjectedMetric_recommendedDBInstanceClass, v.RecommendedDBInstanceClass)
+		}
+		return nil
+	})
 }
 
 // Describes the recommendation options for a DB instance.
@@ -2577,6 +5607,57 @@ type RDSDBInstanceRecommendationOption struct {
 	SavingsOpportunityAfterDiscounts *RDSInstanceSavingsOpportunityAfterDiscounts
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSDBInstanceRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDBInstanceRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDBInstanceRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbInstanceClass != nil {
+		s.WriteString(schemas.RDSDBInstanceRecommendationOption_dbInstanceClass, *v.DbInstanceClass)
+	}
+	if v.PerformanceRisk != 0 {
+		s.WriteFloat64(schemas.RDSDBInstanceRecommendationOption_performanceRisk, v.PerformanceRisk)
+	}
+	serializeRDSDBProjectedUtilizationMetrics(s, schemas.RDSDBInstanceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.RDSDBInstanceRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.RDSDBInstanceRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.RDSDBInstanceRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RDSDBInstanceRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDBInstanceRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDBInstanceRecommendationOption_dbInstanceClass:
+			v.DbInstanceClass = new(string)
+			return d.ReadString(schemas.RDSDBInstanceRecommendationOption_dbInstanceClass, v.DbInstanceClass)
+		case schemas.RDSDBInstanceRecommendationOption_performanceRisk:
+			return d.ReadFloat64(schemas.RDSDBInstanceRecommendationOption_performanceRisk, &v.PerformanceRisk)
+		case schemas.RDSDBInstanceRecommendationOption_projectedUtilizationMetrics:
+			return deserializeRDSDBProjectedUtilizationMetrics(d, schemas.RDSDBInstanceRecommendationOption_projectedUtilizationMetrics, &v.ProjectedUtilizationMetrics)
+		case schemas.RDSDBInstanceRecommendationOption_rank:
+			return d.ReadInt32(schemas.RDSDBInstanceRecommendationOption_rank, &v.Rank)
+		case schemas.RDSDBInstanceRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.RDSDBInstanceRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &RDSInstanceSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon Aurora and RDS database recommendation.
@@ -2668,6 +5749,159 @@ type RDSDBRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSDBRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDBRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDBRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RDSDBRecommendation_accountId, *v.AccountId)
+	}
+	if v.CurrentDBInstanceClass != nil {
+		s.WriteString(schemas.RDSDBRecommendation_currentDBInstanceClass, *v.CurrentDBInstanceClass)
+	}
+	if v.CurrentInstancePerformanceRisk != "" {
+		s.WriteString(schemas.RDSDBRecommendation_currentInstancePerformanceRisk, string(v.CurrentInstancePerformanceRisk))
+	}
+	if v.CurrentStorageConfiguration != nil {
+		s.WriteStruct(schemas.RDSDBRecommendation_currentStorageConfiguration)
+		v.CurrentStorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation != "" {
+		s.WriteString(schemas.RDSDBRecommendation_currentStorageEstimatedMonthlyVolumeIOPsCostVariation, string(v.CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation))
+	}
+	if v.DbClusterIdentifier != nil {
+		s.WriteString(schemas.RDSDBRecommendation_dbClusterIdentifier, *v.DbClusterIdentifier)
+	}
+	if v.EffectiveRecommendationPreferences != nil {
+		s.WriteStruct(schemas.RDSDBRecommendation_effectiveRecommendationPreferences)
+		v.EffectiveRecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.RDSDBRecommendation_engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.RDSDBRecommendation_engineVersion, *v.EngineVersion)
+	}
+	if v.Idle != "" {
+		s.WriteString(schemas.RDSDBRecommendation_idle, string(v.Idle))
+	}
+	if v.InstanceFinding != "" {
+		s.WriteString(schemas.RDSDBRecommendation_instanceFinding, string(v.InstanceFinding))
+	}
+	serializeRDSInstanceFindingReasonCodes(s, schemas.RDSDBRecommendation_instanceFindingReasonCodes, v.InstanceFindingReasonCodes)
+	serializeRDSDBInstanceRecommendationOptions(s, schemas.RDSDBRecommendation_instanceRecommendationOptions, v.InstanceRecommendationOptions)
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.RDSDBRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LookbackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.RDSDBRecommendation_lookbackPeriodInDays, v.LookbackPeriodInDays)
+	}
+	if v.PromotionTier != nil {
+		s.WriteInt32(schemas.RDSDBRecommendation_promotionTier, *v.PromotionTier)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RDSDBRecommendation_resourceArn, *v.ResourceArn)
+	}
+	if v.StorageFinding != "" {
+		s.WriteString(schemas.RDSDBRecommendation_storageFinding, string(v.StorageFinding))
+	}
+	serializeRDSStorageFindingReasonCodes(s, schemas.RDSDBRecommendation_storageFindingReasonCodes, v.StorageFindingReasonCodes)
+	serializeRDSDBStorageRecommendationOptions(s, schemas.RDSDBRecommendation_storageRecommendationOptions, v.StorageRecommendationOptions)
+	serializeTags(s, schemas.RDSDBRecommendation_tags, v.Tags)
+	serializeRDSDBUtilizationMetrics(s, schemas.RDSDBRecommendation_utilizationMetrics, v.UtilizationMetrics)
+}
+func (v *RDSDBRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDBRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDBRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RDSDBRecommendation_accountId, v.AccountId)
+		case schemas.RDSDBRecommendation_currentDBInstanceClass:
+			v.CurrentDBInstanceClass = new(string)
+			return d.ReadString(schemas.RDSDBRecommendation_currentDBInstanceClass, v.CurrentDBInstanceClass)
+		case schemas.RDSDBRecommendation_currentInstancePerformanceRisk:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBRecommendation_currentInstancePerformanceRisk, &ev); err != nil {
+				return err
+			}
+			v.CurrentInstancePerformanceRisk = RDSCurrentInstancePerformanceRisk(ev)
+			return nil
+		case schemas.RDSDBRecommendation_currentStorageConfiguration:
+			v.CurrentStorageConfiguration = &DBStorageConfiguration{}
+			return v.CurrentStorageConfiguration.Deserialize(d)
+		case schemas.RDSDBRecommendation_currentStorageEstimatedMonthlyVolumeIOPsCostVariation:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBRecommendation_currentStorageEstimatedMonthlyVolumeIOPsCostVariation, &ev); err != nil {
+				return err
+			}
+			v.CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation = RDSEstimatedMonthlyVolumeIOPsCostVariation(ev)
+			return nil
+		case schemas.RDSDBRecommendation_dbClusterIdentifier:
+			v.DbClusterIdentifier = new(string)
+			return d.ReadString(schemas.RDSDBRecommendation_dbClusterIdentifier, v.DbClusterIdentifier)
+		case schemas.RDSDBRecommendation_effectiveRecommendationPreferences:
+			v.EffectiveRecommendationPreferences = &RDSEffectiveRecommendationPreferences{}
+			return v.EffectiveRecommendationPreferences.Deserialize(d)
+		case schemas.RDSDBRecommendation_engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.RDSDBRecommendation_engine, v.Engine)
+		case schemas.RDSDBRecommendation_engineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.RDSDBRecommendation_engineVersion, v.EngineVersion)
+		case schemas.RDSDBRecommendation_idle:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBRecommendation_idle, &ev); err != nil {
+				return err
+			}
+			v.Idle = Idle(ev)
+			return nil
+		case schemas.RDSDBRecommendation_instanceFinding:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBRecommendation_instanceFinding, &ev); err != nil {
+				return err
+			}
+			v.InstanceFinding = RDSInstanceFinding(ev)
+			return nil
+		case schemas.RDSDBRecommendation_instanceFindingReasonCodes:
+			return deserializeRDSInstanceFindingReasonCodes(d, schemas.RDSDBRecommendation_instanceFindingReasonCodes, &v.InstanceFindingReasonCodes)
+		case schemas.RDSDBRecommendation_instanceRecommendationOptions:
+			return deserializeRDSDBInstanceRecommendationOptions(d, schemas.RDSDBRecommendation_instanceRecommendationOptions, &v.InstanceRecommendationOptions)
+		case schemas.RDSDBRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RDSDBRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.RDSDBRecommendation_lookbackPeriodInDays:
+			return d.ReadFloat64(schemas.RDSDBRecommendation_lookbackPeriodInDays, &v.LookbackPeriodInDays)
+		case schemas.RDSDBRecommendation_promotionTier:
+			v.PromotionTier = new(int32)
+			return d.ReadInt32(schemas.RDSDBRecommendation_promotionTier, v.PromotionTier)
+		case schemas.RDSDBRecommendation_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.RDSDBRecommendation_resourceArn, v.ResourceArn)
+		case schemas.RDSDBRecommendation_storageFinding:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBRecommendation_storageFinding, &ev); err != nil {
+				return err
+			}
+			v.StorageFinding = RDSStorageFinding(ev)
+			return nil
+		case schemas.RDSDBRecommendation_storageFindingReasonCodes:
+			return deserializeRDSStorageFindingReasonCodes(d, schemas.RDSDBRecommendation_storageFindingReasonCodes, &v.StorageFindingReasonCodes)
+		case schemas.RDSDBRecommendation_storageRecommendationOptions:
+			return deserializeRDSDBStorageRecommendationOptions(d, schemas.RDSDBRecommendation_storageRecommendationOptions, &v.StorageRecommendationOptions)
+		case schemas.RDSDBRecommendation_tags:
+			return deserializeTags(d, schemas.RDSDBRecommendation_tags, &v.Tags)
+		case schemas.RDSDBRecommendation_utilizationMetrics:
+			return deserializeRDSDBUtilizationMetrics(d, schemas.RDSDBRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		}
+		return nil
+	})
+}
+
 //	Describes a filter that returns a more specific list of DB instance
 //
 // recommendations. Use this filter with the GetECSServiceRecommendationsaction.
@@ -2697,6 +5931,35 @@ type RDSDBRecommendationFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSDBRecommendationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDBRecommendationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDBRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.RDSDBRecommendationFilter_name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.RDSDBRecommendationFilter_values, v.Values)
+}
+func (v *RDSDBRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDBRecommendationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDBRecommendationFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBRecommendationFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = RDSDBRecommendationFilterName(ev)
+			return nil
+		case schemas.RDSDBRecommendationFilter_values:
+			return deserializeFilterValues(d, schemas.RDSDBRecommendationFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the recommendation options for DB storage.
@@ -2742,6 +6005,61 @@ type RDSDBStorageRecommendationOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSDBStorageRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDBStorageRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDBStorageRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlyVolumeIOPsCostVariation != "" {
+		s.WriteString(schemas.RDSDBStorageRecommendationOption_estimatedMonthlyVolumeIOPsCostVariation, string(v.EstimatedMonthlyVolumeIOPsCostVariation))
+	}
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.RDSDBStorageRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.RDSDBStorageRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.RDSDBStorageRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.RDSDBStorageRecommendationOption_storageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RDSDBStorageRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDBStorageRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDBStorageRecommendationOption_estimatedMonthlyVolumeIOPsCostVariation:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBStorageRecommendationOption_estimatedMonthlyVolumeIOPsCostVariation, &ev); err != nil {
+				return err
+			}
+			v.EstimatedMonthlyVolumeIOPsCostVariation = RDSEstimatedMonthlyVolumeIOPsCostVariation(ev)
+			return nil
+		case schemas.RDSDBStorageRecommendationOption_rank:
+			return d.ReadInt32(schemas.RDSDBStorageRecommendationOption_rank, &v.Rank)
+		case schemas.RDSDBStorageRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.RDSDBStorageRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &RDSStorageSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		case schemas.RDSDBStorageRecommendationOption_storageConfiguration:
+			v.StorageConfiguration = &DBStorageConfiguration{}
+			return v.StorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the utilization metric of an Amazon Aurora and RDS database.
 //
 // To determine the performance difference between your current DB instance and
@@ -2774,6 +6092,47 @@ type RDSDBUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSDBUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDBUtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDBUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.RDSDBUtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.RDSDBUtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.RDSDBUtilizationMetric_value, v.Value)
+	}
+}
+func (v *RDSDBUtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDBUtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDBUtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBUtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = RDSDBMetricName(ev)
+			return nil
+		case schemas.RDSDBUtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.RDSDBUtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = RDSDBMetricStatistic(ev)
+			return nil
+		case schemas.RDSDBUtilizationMetric_value:
+			return d.ReadFloat64(schemas.RDSDBUtilizationMetric_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 //	Describes the effective recommendation preferences for Amazon Aurora and RDS
 //
 // databases.
@@ -2804,6 +6163,53 @@ type RDSEffectiveRecommendationPreferences struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSEffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSEffectiveRecommendationPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSEffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCpuVendorArchitectures(s, schemas.RDSEffectiveRecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	if v.EnhancedInfrastructureMetrics != "" {
+		s.WriteString(schemas.RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
+	}
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.RDSEffectiveRecommendationPreferences_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	if v.SavingsEstimationMode != nil {
+		s.WriteStruct(schemas.RDSEffectiveRecommendationPreferences_savingsEstimationMode)
+		v.SavingsEstimationMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RDSEffectiveRecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSEffectiveRecommendationPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSEffectiveRecommendationPreferences_cpuVendorArchitectures:
+			return deserializeCpuVendorArchitectures(d, schemas.RDSEffectiveRecommendationPreferences_cpuVendorArchitectures, &v.CpuVendorArchitectures)
+		case schemas.RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics:
+			var ev string
+			if err := d.ReadString(schemas.RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics, &ev); err != nil {
+				return err
+			}
+			v.EnhancedInfrastructureMetrics = EnhancedInfrastructureMetrics(ev)
+			return nil
+		case schemas.RDSEffectiveRecommendationPreferences_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.RDSEffectiveRecommendationPreferences_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = LookBackPeriodPreference(ev)
+			return nil
+		case schemas.RDSEffectiveRecommendationPreferences_savingsEstimationMode:
+			v.SavingsEstimationMode = &RDSSavingsEstimationMode{}
+			return v.SavingsEstimationMode.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the estimated monthly savings possible for DB instances by adopting
 //
 // Compute Optimizer recommendations. This is based on DB instance pricing after
@@ -2817,6 +6223,37 @@ type RDSInstanceEstimatedMonthlySavings struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSInstanceEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSInstanceEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSInstanceEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.RDSInstanceEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.RDSInstanceEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *RDSInstanceEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSInstanceEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSInstanceEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.RDSInstanceEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.RDSInstanceEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.RDSInstanceEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 //	Describes the savings opportunity for DB instance recommendations after
@@ -2840,6 +6277,35 @@ type RDSInstanceSavingsOpportunityAfterDiscounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSInstanceSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSInstanceSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSInstanceSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.RDSInstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.RDSInstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *RDSInstanceSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSInstanceSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSInstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &RDSInstanceEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.RDSInstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.RDSInstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
+}
+
 //	Describes the savings estimation mode used for calculating savings opportunity
 //
 // for DB instances.
@@ -2849,6 +6315,32 @@ type RDSSavingsEstimationMode struct {
 	Source RDSSavingsEstimationModeSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSSavingsEstimationMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSSavingsEstimationMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSSavingsEstimationMode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.RDSSavingsEstimationMode_source, string(v.Source))
+	}
+}
+func (v *RDSSavingsEstimationMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSSavingsEstimationMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSSavingsEstimationMode_source:
+			var ev string
+			if err := d.ReadString(schemas.RDSSavingsEstimationMode_source, &ev); err != nil {
+				return err
+			}
+			v.Source = RDSSavingsEstimationModeSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Describes the estimated monthly savings possible for DB instance storage by
@@ -2864,6 +6356,37 @@ type RDSStorageEstimatedMonthlySavings struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSStorageEstimatedMonthlySavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSStorageEstimatedMonthlySavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSStorageEstimatedMonthlySavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.RDSStorageEstimatedMonthlySavings_currency, string(v.Currency))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.RDSStorageEstimatedMonthlySavings_value, v.Value)
+	}
+}
+func (v *RDSStorageEstimatedMonthlySavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSStorageEstimatedMonthlySavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSStorageEstimatedMonthlySavings_currency:
+			var ev string
+			if err := d.ReadString(schemas.RDSStorageEstimatedMonthlySavings_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.RDSStorageEstimatedMonthlySavings_value:
+			return d.ReadFloat64(schemas.RDSStorageEstimatedMonthlySavings_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 //	Describes the savings opportunity for Amazon RDS storage recommendations after
@@ -2888,6 +6411,35 @@ type RDSStorageSavingsOpportunityAfterDiscounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSStorageSavingsOpportunityAfterDiscounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSStorageSavingsOpportunityAfterDiscounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSStorageSavingsOpportunityAfterDiscounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.RDSStorageSavingsOpportunityAfterDiscounts_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.RDSStorageSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *RDSStorageSavingsOpportunityAfterDiscounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSStorageSavingsOpportunityAfterDiscounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSStorageSavingsOpportunityAfterDiscounts_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &RDSStorageEstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.RDSStorageSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.RDSStorageSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
+}
+
 // A summary of a finding reason code.
 type ReasonCodeSummary struct {
 
@@ -2898,6 +6450,37 @@ type ReasonCodeSummary struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReasonCodeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReasonCodeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReasonCodeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ReasonCodeSummary_name, string(v.Name))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.ReasonCodeSummary_value, v.Value)
+	}
+}
+func (v *ReasonCodeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReasonCodeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReasonCodeSummary_name:
+			var ev string
+			if err := d.ReadString(schemas.ReasonCodeSummary_name, &ev); err != nil {
+				return err
+			}
+			v.Name = FindingReasonCode(ev)
+			return nil
+		case schemas.ReasonCodeSummary_value:
+			return d.ReadFloat64(schemas.ReasonCodeSummary_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a recommendation export job.
@@ -2931,6 +6514,74 @@ type RecommendationExportJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationExportJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationExportJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationExportJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.RecommendationExportJob_creationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.RecommendationExportJob_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.RecommendationExportJob_failureReason, *v.FailureReason)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.RecommendationExportJob_jobId, *v.JobId)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.RecommendationExportJob_lastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.RecommendationExportJob_resourceType, string(v.ResourceType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RecommendationExportJob_status, string(v.Status))
+	}
+}
+func (v *RecommendationExportJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationExportJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationExportJob_creationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RecommendationExportJob_creationTimestamp, v.CreationTimestamp)
+		case schemas.RecommendationExportJob_destination:
+			v.Destination = &ExportDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.RecommendationExportJob_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.RecommendationExportJob_failureReason, v.FailureReason)
+		case schemas.RecommendationExportJob_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.RecommendationExportJob_jobId, v.JobId)
+		case schemas.RecommendationExportJob_lastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RecommendationExportJob_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.RecommendationExportJob_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationExportJob_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		case schemas.RecommendationExportJob_status:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationExportJob_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the recommendation preferences to return in the response of a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, GetEC2RecommendationProjectedMetrics, GetRDSDatabaseRecommendations,
 // and GetRDSDatabaseRecommendationProjectedMetricsrequest.
 type RecommendationPreferences struct {
@@ -2951,6 +6602,25 @@ type RecommendationPreferences struct {
 	CpuVendorArchitectures []CpuVendorArchitecture
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCpuVendorArchitectures(s, schemas.RecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+}
+func (v *RecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationPreferences_cpuVendorArchitectures:
+			return deserializeCpuVendorArchitectures(d, schemas.RecommendationPreferences_cpuVendorArchitectures, &v.CpuVendorArchitectures)
+		}
+		return nil
+	})
 }
 
 // Describes a recommendation preference.
@@ -3026,6 +6696,94 @@ type RecommendationPreferencesDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationPreferencesDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationPreferencesDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationPreferencesDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnhancedInfrastructureMetrics != "" {
+		s.WriteString(schemas.RecommendationPreferencesDetail_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
+	}
+	if v.ExternalMetricsPreference != nil {
+		s.WriteStruct(schemas.RecommendationPreferencesDetail_externalMetricsPreference)
+		v.ExternalMetricsPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferredWorkloadTypes != "" {
+		s.WriteString(schemas.RecommendationPreferencesDetail_inferredWorkloadTypes, string(v.InferredWorkloadTypes))
+	}
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.RecommendationPreferencesDetail_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	serializeEffectivePreferredResources(s, schemas.RecommendationPreferencesDetail_preferredResources, v.PreferredResources)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.RecommendationPreferencesDetail_resourceType, string(v.ResourceType))
+	}
+	if v.SavingsEstimationMode != "" {
+		s.WriteString(schemas.RecommendationPreferencesDetail_savingsEstimationMode, string(v.SavingsEstimationMode))
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.RecommendationPreferencesDetail_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUtilizationPreferences(s, schemas.RecommendationPreferencesDetail_utilizationPreferences, v.UtilizationPreferences)
+}
+func (v *RecommendationPreferencesDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationPreferencesDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationPreferencesDetail_enhancedInfrastructureMetrics:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationPreferencesDetail_enhancedInfrastructureMetrics, &ev); err != nil {
+				return err
+			}
+			v.EnhancedInfrastructureMetrics = EnhancedInfrastructureMetrics(ev)
+			return nil
+		case schemas.RecommendationPreferencesDetail_externalMetricsPreference:
+			v.ExternalMetricsPreference = &ExternalMetricsPreference{}
+			return v.ExternalMetricsPreference.Deserialize(d)
+		case schemas.RecommendationPreferencesDetail_inferredWorkloadTypes:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationPreferencesDetail_inferredWorkloadTypes, &ev); err != nil {
+				return err
+			}
+			v.InferredWorkloadTypes = InferredWorkloadTypesPreference(ev)
+			return nil
+		case schemas.RecommendationPreferencesDetail_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationPreferencesDetail_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = LookBackPeriodPreference(ev)
+			return nil
+		case schemas.RecommendationPreferencesDetail_preferredResources:
+			return deserializeEffectivePreferredResources(d, schemas.RecommendationPreferencesDetail_preferredResources, &v.PreferredResources)
+		case schemas.RecommendationPreferencesDetail_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationPreferencesDetail_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		case schemas.RecommendationPreferencesDetail_savingsEstimationMode:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationPreferencesDetail_savingsEstimationMode, &ev); err != nil {
+				return err
+			}
+			v.SavingsEstimationMode = SavingsEstimationMode(ev)
+			return nil
+		case schemas.RecommendationPreferencesDetail_scope:
+			v.Scope = &Scope{}
+			return v.Scope.Deserialize(d)
+		case schemas.RecommendationPreferencesDetail_utilizationPreferences:
+			return deserializeUtilizationPreferences(d, schemas.RecommendationPreferencesDetail_utilizationPreferences, &v.UtilizationPreferences)
+		}
+		return nil
+	})
+}
+
 // Describes the source of a recommendation, such as an Amazon EC2 instance or
 // Auto Scaling group.
 type RecommendationSource struct {
@@ -3037,6 +6795,38 @@ type RecommendationSource struct {
 	RecommendationSourceType RecommendationSourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationSourceArn != nil {
+		s.WriteString(schemas.RecommendationSource_recommendationSourceArn, *v.RecommendationSourceArn)
+	}
+	if v.RecommendationSourceType != "" {
+		s.WriteString(schemas.RecommendationSource_recommendationSourceType, string(v.RecommendationSourceType))
+	}
+}
+func (v *RecommendationSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationSource_recommendationSourceArn:
+			v.RecommendationSourceArn = new(string)
+			return d.ReadString(schemas.RecommendationSource_recommendationSourceArn, v.RecommendationSourceArn)
+		case schemas.RecommendationSource_recommendationSourceType:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSource_recommendationSourceType, &ev); err != nil {
+				return err
+			}
+			v.RecommendationSourceType = RecommendationSourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A summary of a recommendation.
@@ -3109,6 +6899,79 @@ type RecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RecommendationSummary_accountId, *v.AccountId)
+	}
+	if v.AggregatedSavingsOpportunity != nil {
+		s.WriteStruct(schemas.RecommendationSummary_aggregatedSavingsOpportunity)
+		v.AggregatedSavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentPerformanceRiskRatings != nil {
+		s.WriteStruct(schemas.RecommendationSummary_currentPerformanceRiskRatings)
+		v.CurrentPerformanceRiskRatings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleSavingsOpportunity != nil {
+		s.WriteStruct(schemas.RecommendationSummary_idleSavingsOpportunity)
+		v.IdleSavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdleSummaries(s, schemas.RecommendationSummary_idleSummaries, v.IdleSummaries)
+	serializeInferredWorkloadSavings(s, schemas.RecommendationSummary_inferredWorkloadSavings, v.InferredWorkloadSavings)
+	if v.RecommendationResourceType != "" {
+		s.WriteString(schemas.RecommendationSummary_recommendationResourceType, string(v.RecommendationResourceType))
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.RecommendationSummary_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSummaries(s, schemas.RecommendationSummary_summaries, v.Summaries)
+}
+func (v *RecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RecommendationSummary_accountId, v.AccountId)
+		case schemas.RecommendationSummary_aggregatedSavingsOpportunity:
+			v.AggregatedSavingsOpportunity = &SavingsOpportunity{}
+			return v.AggregatedSavingsOpportunity.Deserialize(d)
+		case schemas.RecommendationSummary_currentPerformanceRiskRatings:
+			v.CurrentPerformanceRiskRatings = &CurrentPerformanceRiskRatings{}
+			return v.CurrentPerformanceRiskRatings.Deserialize(d)
+		case schemas.RecommendationSummary_idleSavingsOpportunity:
+			v.IdleSavingsOpportunity = &SavingsOpportunity{}
+			return v.IdleSavingsOpportunity.Deserialize(d)
+		case schemas.RecommendationSummary_idleSummaries:
+			return deserializeIdleSummaries(d, schemas.RecommendationSummary_idleSummaries, &v.IdleSummaries)
+		case schemas.RecommendationSummary_inferredWorkloadSavings:
+			return deserializeInferredWorkloadSavings(d, schemas.RecommendationSummary_inferredWorkloadSavings, &v.InferredWorkloadSavings)
+		case schemas.RecommendationSummary_recommendationResourceType:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_recommendationResourceType, &ev); err != nil {
+				return err
+			}
+			v.RecommendationResourceType = RecommendationSourceType(ev)
+			return nil
+		case schemas.RecommendationSummary_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.RecommendationSummary_summaries:
+			return deserializeSummaries(d, schemas.RecommendationSummary_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
+
 // Describes a projected utilization metric of a recommendation option.
 //
 // The Cpu and Memory metrics are the only projected utilization metrics returned
@@ -3137,6 +7000,36 @@ type RecommendedOptionProjectedMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendedOptionProjectedMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendedOptionProjectedMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendedOptionProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProjectedMetrics(s, schemas.RecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.RecommendedOptionProjectedMetric_rank, v.Rank)
+	}
+	if v.RecommendedInstanceType != nil {
+		s.WriteString(schemas.RecommendedOptionProjectedMetric_recommendedInstanceType, *v.RecommendedInstanceType)
+	}
+}
+func (v *RecommendedOptionProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendedOptionProjectedMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendedOptionProjectedMetric_projectedMetrics:
+			return deserializeProjectedMetrics(d, schemas.RecommendedOptionProjectedMetric_projectedMetrics, &v.ProjectedMetrics)
+		case schemas.RecommendedOptionProjectedMetric_rank:
+			return d.ReadInt32(schemas.RecommendedOptionProjectedMetric_rank, &v.Rank)
+		case schemas.RecommendedOptionProjectedMetric_recommendedInstanceType:
+			v.RecommendedInstanceType = new(string)
+			return d.ReadString(schemas.RecommendedOptionProjectedMetric_recommendedInstanceType, v.RecommendedInstanceType)
+		}
+		return nil
+	})
+}
+
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
 // and object keys of a recommendations export file, and its associated metadata
 // file.
@@ -3156,6 +7049,40 @@ type S3Destination struct {
 	MetadataKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Destination_bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3Destination_key, *v.Key)
+	}
+	if v.MetadataKey != nil {
+		s.WriteString(schemas.S3Destination_metadataKey, *v.MetadataKey)
+	}
+}
+func (v *S3Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Destination_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Destination_bucket, v.Bucket)
+		case schemas.S3Destination_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3Destination_key, v.Key)
+		case schemas.S3Destination_metadataKey:
+			v.MetadataKey = new(string)
+			return d.ReadString(schemas.S3Destination_metadataKey, v.MetadataKey)
+		}
+		return nil
+	})
 }
 
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
@@ -3179,6 +7106,34 @@ type S3DestinationConfig struct {
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DestinationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3DestinationConfig_bucket, *v.Bucket)
+	}
+	if v.KeyPrefix != nil {
+		s.WriteString(schemas.S3DestinationConfig_keyPrefix, *v.KeyPrefix)
+	}
+}
+func (v *S3DestinationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationConfig_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3DestinationConfig_bucket, v.Bucket)
+		case schemas.S3DestinationConfig_keyPrefix:
+			v.KeyPrefix = new(string)
+			return d.ReadString(schemas.S3DestinationConfig_keyPrefix, v.KeyPrefix)
+		}
+		return nil
+	})
 }
 
 // Describes the savings opportunity for recommendations of a given resource type
@@ -3210,6 +7165,35 @@ type SavingsOpportunity struct {
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsOpportunity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsOpportunity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsOpportunity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.SavingsOpportunity_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityPercentage != 0 {
+		s.WriteFloat64(schemas.SavingsOpportunity_savingsOpportunityPercentage, v.SavingsOpportunityPercentage)
+	}
+}
+func (v *SavingsOpportunity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsOpportunity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsOpportunity_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &EstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.SavingsOpportunity_savingsOpportunityPercentage:
+			return d.ReadFloat64(schemas.SavingsOpportunity_savingsOpportunityPercentage, &v.SavingsOpportunityPercentage)
+		}
+		return nil
+	})
 }
 
 // Describes the scope of a recommendation preference.
@@ -3262,6 +7246,38 @@ type Scope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Scope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Scope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Scope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.Scope_name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Scope_value, *v.Value)
+	}
+}
+func (v *Scope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Scope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Scope_name:
+			var ev string
+			if err := d.ReadString(schemas.Scope_name, &ev); err != nil {
+				return err
+			}
+			v.Name = ScopeName(ev)
+			return nil
+		case schemas.Scope_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Scope_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The Amazon ECS service configurations used for recommendations.
 type ServiceConfiguration struct {
 
@@ -3301,6 +7317,53 @@ type ServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfiguration != "" {
+		s.WriteString(schemas.ServiceConfiguration_autoScalingConfiguration, string(v.AutoScalingConfiguration))
+	}
+	serializeContainerConfigurations(s, schemas.ServiceConfiguration_containerConfigurations, v.ContainerConfigurations)
+	if v.Cpu != nil {
+		s.WriteInt32(schemas.ServiceConfiguration_cpu, *v.Cpu)
+	}
+	if v.Memory != nil {
+		s.WriteInt32(schemas.ServiceConfiguration_memory, *v.Memory)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.ServiceConfiguration_taskDefinitionArn, *v.TaskDefinitionArn)
+	}
+}
+func (v *ServiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceConfiguration_autoScalingConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.ServiceConfiguration_autoScalingConfiguration, &ev); err != nil {
+				return err
+			}
+			v.AutoScalingConfiguration = AutoScalingConfiguration(ev)
+			return nil
+		case schemas.ServiceConfiguration_containerConfigurations:
+			return deserializeContainerConfigurations(d, schemas.ServiceConfiguration_containerConfigurations, &v.ContainerConfigurations)
+		case schemas.ServiceConfiguration_cpu:
+			v.Cpu = new(int32)
+			return d.ReadInt32(schemas.ServiceConfiguration_cpu, v.Cpu)
+		case schemas.ServiceConfiguration_memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.ServiceConfiguration_memory, v.Memory)
+		case schemas.ServiceConfiguration_taskDefinitionArn:
+			v.TaskDefinitionArn = new(string)
+			return d.ReadString(schemas.ServiceConfiguration_taskDefinitionArn, v.TaskDefinitionArn)
+		}
+		return nil
+	})
+}
+
 // The summary of a recommendation.
 type Summary struct {
 
@@ -3316,6 +7379,40 @@ type Summary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Summary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Summary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Summary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.Summary_name, string(v.Name))
+	}
+	serializeReasonCodeSummaries(s, schemas.Summary_reasonCodeSummaries, v.ReasonCodeSummaries)
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.Summary_value, v.Value)
+	}
+}
+func (v *Summary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Summary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Summary_name:
+			var ev string
+			if err := d.ReadString(schemas.Summary_name, &ev); err != nil {
+				return err
+			}
+			v.Name = Finding(ev)
+			return nil
+		case schemas.Summary_reasonCodeSummaries:
+			return deserializeReasonCodeSummaries(d, schemas.Summary_reasonCodeSummaries, &v.ReasonCodeSummaries)
+		case schemas.Summary_value:
+			return d.ReadFloat64(schemas.Summary_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // A list of tag key and value pairs that you define.
 type Tag struct {
 
@@ -3328,6 +7425,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a utilization metric of a resource, such as an Amazon EC2 instance.
@@ -3458,6 +7583,47 @@ type UtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UtilizationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UtilizationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.UtilizationMetric_name, string(v.Name))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.UtilizationMetric_statistic, string(v.Statistic))
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.UtilizationMetric_value, v.Value)
+	}
+}
+func (v *UtilizationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UtilizationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UtilizationMetric_name:
+			var ev string
+			if err := d.ReadString(schemas.UtilizationMetric_name, &ev); err != nil {
+				return err
+			}
+			v.Name = MetricName(ev)
+			return nil
+		case schemas.UtilizationMetric_statistic:
+			var ev string
+			if err := d.ReadString(schemas.UtilizationMetric_statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = MetricStatistic(ev)
+			return nil
+		case schemas.UtilizationMetric_value:
+			return d.ReadFloat64(schemas.UtilizationMetric_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 //	The preference to control the resource’s CPU utilization threshold, CPU
 //
 // utilization headroom, and memory utilization headroom.
@@ -3472,6 +7638,40 @@ type UtilizationPreference struct {
 	MetricParameters *CustomizableMetricParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *UtilizationPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UtilizationPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UtilizationPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != "" {
+		s.WriteString(schemas.UtilizationPreference_metricName, string(v.MetricName))
+	}
+	if v.MetricParameters != nil {
+		s.WriteStruct(schemas.UtilizationPreference_metricParameters)
+		v.MetricParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UtilizationPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UtilizationPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UtilizationPreference_metricName:
+			var ev string
+			if err := d.ReadString(schemas.UtilizationPreference_metricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = CustomizableMetricName(ev)
+			return nil
+		case schemas.UtilizationPreference_metricParameters:
+			v.MetricParameters = &CustomizableMetricParameters{}
+			return v.MetricParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
@@ -3512,6 +7712,59 @@ type VolumeConfiguration struct {
 	VolumeType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RootVolume != nil {
+		s.WriteBool(schemas.VolumeConfiguration_rootVolume, *v.RootVolume)
+	}
+	if v.VolumeBaselineIOPS != 0 {
+		s.WriteInt32(schemas.VolumeConfiguration_volumeBaselineIOPS, v.VolumeBaselineIOPS)
+	}
+	if v.VolumeBaselineThroughput != 0 {
+		s.WriteInt32(schemas.VolumeConfiguration_volumeBaselineThroughput, v.VolumeBaselineThroughput)
+	}
+	if v.VolumeBurstIOPS != 0 {
+		s.WriteInt32(schemas.VolumeConfiguration_volumeBurstIOPS, v.VolumeBurstIOPS)
+	}
+	if v.VolumeBurstThroughput != 0 {
+		s.WriteInt32(schemas.VolumeConfiguration_volumeBurstThroughput, v.VolumeBurstThroughput)
+	}
+	if v.VolumeSize != 0 {
+		s.WriteInt32(schemas.VolumeConfiguration_volumeSize, v.VolumeSize)
+	}
+	if v.VolumeType != nil {
+		s.WriteString(schemas.VolumeConfiguration_volumeType, *v.VolumeType)
+	}
+}
+func (v *VolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeConfiguration_rootVolume:
+			v.RootVolume = new(bool)
+			return d.ReadBool(schemas.VolumeConfiguration_rootVolume, v.RootVolume)
+		case schemas.VolumeConfiguration_volumeBaselineIOPS:
+			return d.ReadInt32(schemas.VolumeConfiguration_volumeBaselineIOPS, &v.VolumeBaselineIOPS)
+		case schemas.VolumeConfiguration_volumeBaselineThroughput:
+			return d.ReadInt32(schemas.VolumeConfiguration_volumeBaselineThroughput, &v.VolumeBaselineThroughput)
+		case schemas.VolumeConfiguration_volumeBurstIOPS:
+			return d.ReadInt32(schemas.VolumeConfiguration_volumeBurstIOPS, &v.VolumeBurstIOPS)
+		case schemas.VolumeConfiguration_volumeBurstThroughput:
+			return d.ReadInt32(schemas.VolumeConfiguration_volumeBurstThroughput, &v.VolumeBurstThroughput)
+		case schemas.VolumeConfiguration_volumeSize:
+			return d.ReadInt32(schemas.VolumeConfiguration_volumeSize, &v.VolumeSize)
+		case schemas.VolumeConfiguration_volumeType:
+			v.VolumeType = new(string)
+			return d.ReadString(schemas.VolumeConfiguration_volumeType, v.VolumeType)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
@@ -3566,6 +7819,90 @@ type VolumeRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VolumeRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.VolumeRecommendation_accountId, *v.AccountId)
+	}
+	if v.CurrentConfiguration != nil {
+		s.WriteStruct(schemas.VolumeRecommendation_currentConfiguration)
+		v.CurrentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentPerformanceRisk != "" {
+		s.WriteString(schemas.VolumeRecommendation_currentPerformanceRisk, string(v.CurrentPerformanceRisk))
+	}
+	if v.EffectiveRecommendationPreferences != nil {
+		s.WriteStruct(schemas.VolumeRecommendation_effectiveRecommendationPreferences)
+		v.EffectiveRecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Finding != "" {
+		s.WriteString(schemas.VolumeRecommendation_finding, string(v.Finding))
+	}
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.VolumeRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.LookBackPeriodInDays != 0 {
+		s.WriteFloat64(schemas.VolumeRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
+	}
+	serializeTags(s, schemas.VolumeRecommendation_tags, v.Tags)
+	serializeEBSUtilizationMetrics(s, schemas.VolumeRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.VolumeArn != nil {
+		s.WriteString(schemas.VolumeRecommendation_volumeArn, *v.VolumeArn)
+	}
+	serializeVolumeRecommendationOptions(s, schemas.VolumeRecommendation_volumeRecommendationOptions, v.VolumeRecommendationOptions)
+}
+func (v *VolumeRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeRecommendation_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.VolumeRecommendation_accountId, v.AccountId)
+		case schemas.VolumeRecommendation_currentConfiguration:
+			v.CurrentConfiguration = &VolumeConfiguration{}
+			return v.CurrentConfiguration.Deserialize(d)
+		case schemas.VolumeRecommendation_currentPerformanceRisk:
+			var ev string
+			if err := d.ReadString(schemas.VolumeRecommendation_currentPerformanceRisk, &ev); err != nil {
+				return err
+			}
+			v.CurrentPerformanceRisk = CurrentPerformanceRisk(ev)
+			return nil
+		case schemas.VolumeRecommendation_effectiveRecommendationPreferences:
+			v.EffectiveRecommendationPreferences = &EBSEffectiveRecommendationPreferences{}
+			return v.EffectiveRecommendationPreferences.Deserialize(d)
+		case schemas.VolumeRecommendation_finding:
+			var ev string
+			if err := d.ReadString(schemas.VolumeRecommendation_finding, &ev); err != nil {
+				return err
+			}
+			v.Finding = EBSFinding(ev)
+			return nil
+		case schemas.VolumeRecommendation_lastRefreshTimestamp:
+			v.LastRefreshTimestamp = new(time.Time)
+			return d.ReadTime(schemas.VolumeRecommendation_lastRefreshTimestamp, v.LastRefreshTimestamp)
+		case schemas.VolumeRecommendation_lookBackPeriodInDays:
+			return d.ReadFloat64(schemas.VolumeRecommendation_lookBackPeriodInDays, &v.LookBackPeriodInDays)
+		case schemas.VolumeRecommendation_tags:
+			return deserializeTags(d, schemas.VolumeRecommendation_tags, &v.Tags)
+		case schemas.VolumeRecommendation_utilizationMetrics:
+			return deserializeEBSUtilizationMetrics(d, schemas.VolumeRecommendation_utilizationMetrics, &v.UtilizationMetrics)
+		case schemas.VolumeRecommendation_volumeArn:
+			v.VolumeArn = new(string)
+			return d.ReadString(schemas.VolumeRecommendation_volumeArn, v.VolumeArn)
+		case schemas.VolumeRecommendation_volumeRecommendationOptions:
+			return deserializeVolumeRecommendationOptions(d, schemas.VolumeRecommendation_volumeRecommendationOptions, &v.VolumeRecommendationOptions)
+		}
+		return nil
+	})
+}
+
 // Describes a recommendation option for an Amazon Elastic Block Store (Amazon
 // EBS) instance.
 type VolumeRecommendationOption struct {
@@ -3601,6 +7938,56 @@ type VolumeRecommendationOption struct {
 	SavingsOpportunityAfterDiscounts *EBSSavingsOpportunityAfterDiscounts
 
 	noSmithyDocumentSerde
+}
+
+func (v *VolumeRecommendationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeRecommendationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.VolumeRecommendationOption_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceRisk != 0 {
+		s.WriteFloat64(schemas.VolumeRecommendationOption_performanceRisk, v.PerformanceRisk)
+	}
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.VolumeRecommendationOption_rank, v.Rank)
+	}
+	if v.SavingsOpportunity != nil {
+		s.WriteStruct(schemas.VolumeRecommendationOption_savingsOpportunity)
+		v.SavingsOpportunity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsOpportunityAfterDiscounts != nil {
+		s.WriteStruct(schemas.VolumeRecommendationOption_savingsOpportunityAfterDiscounts)
+		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VolumeRecommendationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeRecommendationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeRecommendationOption_configuration:
+			v.Configuration = &VolumeConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.VolumeRecommendationOption_performanceRisk:
+			return d.ReadFloat64(schemas.VolumeRecommendationOption_performanceRisk, &v.PerformanceRisk)
+		case schemas.VolumeRecommendationOption_rank:
+			return d.ReadInt32(schemas.VolumeRecommendationOption_rank, &v.Rank)
+		case schemas.VolumeRecommendationOption_savingsOpportunity:
+			v.SavingsOpportunity = &SavingsOpportunity{}
+			return v.SavingsOpportunity.Deserialize(d)
+		case schemas.VolumeRecommendationOption_savingsOpportunityAfterDiscounts:
+			v.SavingsOpportunityAfterDiscounts = &EBSSavingsOpportunityAfterDiscounts{}
+			return v.SavingsOpportunityAfterDiscounts.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

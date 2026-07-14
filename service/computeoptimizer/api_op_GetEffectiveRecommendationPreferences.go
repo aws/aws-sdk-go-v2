@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type GetEffectiveRecommendationPreferencesInput struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEffectiveRecommendationPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveRecommendationPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetEffectiveRecommendationPreferencesRequest_resourceArn, *v.ResourceArn)
+	}
 }
 
 type GetEffectiveRecommendationPreferencesOutput struct {
@@ -119,13 +133,60 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEffectiveRecommendationPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveRecommendationPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveRecommendationPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnhancedInfrastructureMetrics != "" {
+		s.WriteString(schemas.GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
+	}
+	if v.ExternalMetricsPreference != nil {
+		s.WriteStruct(schemas.GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference)
+		v.ExternalMetricsPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	serializeEffectivePreferredResources(s, schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources, v.PreferredResources)
+	serializeUtilizationPreferences(s, schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences, v.UtilizationPreferences)
+}
+func (v *GetEffectiveRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEffectiveRecommendationPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics:
+			var ev string
+			if err := d.ReadString(schemas.GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics, &ev); err != nil {
+				return err
+			}
+			v.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(ev)
+			return nil
+		case schemas.GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference:
+			v.ExternalMetricsPreference = &types.ExternalMetricsPreference{}
+			return v.ExternalMetricsPreference.Deserialize(d)
+		case schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = types.LookBackPeriodPreference(ev)
+			return nil
+		case schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources:
+			return deserializeEffectivePreferredResources(d, schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources, &v.PreferredResources)
+		case schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences:
+			return deserializeUtilizationPreferences(d, schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences, &v.UtilizationPreferences)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveRecommendationPreferences, schemas.GetEffectiveRecommendationPreferencesRequest, schemas.GetEffectiveRecommendationPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveRecommendationPreferences, schemas.GetEffectiveRecommendationPreferencesRequest, schemas.GetEffectiveRecommendationPreferencesResponse), output: &GetEffectiveRecommendationPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

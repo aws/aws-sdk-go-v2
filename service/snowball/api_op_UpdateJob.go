@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +85,56 @@ type UpdateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.UpdateJobRequest_AddressId, *v.AddressId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateJobRequest_Description, *v.Description)
+	}
+	if v.ForwardingAddressId != nil {
+		s.WriteString(schemas.UpdateJobRequest_ForwardingAddressId, *v.ForwardingAddressId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateJobRequest_JobId, *v.JobId)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_OnDeviceServiceConfiguration)
+		v.OnDeviceServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PickupDetails != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_PickupDetails)
+		v.PickupDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.UpdateJobRequest_RoleARN, *v.RoleARN)
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.UpdateJobRequest_ShippingOption, string(v.ShippingOption))
+	}
+	if v.SnowballCapacityPreference != "" {
+		s.WriteString(schemas.UpdateJobRequest_SnowballCapacityPreference, string(v.SnowballCapacityPreference))
+	}
+}
+
 type UpdateJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -90,13 +142,26 @@ type UpdateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, schemas.UpdateJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, schemas.UpdateJobResult), output: &UpdateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

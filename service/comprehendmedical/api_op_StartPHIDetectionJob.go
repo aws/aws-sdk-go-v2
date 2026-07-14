@@ -5,7 +5,9 @@ package comprehendmedical
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,40 @@ type StartPHIDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPHIDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPHIDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPHIDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartPHIDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartPHIDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartPHIDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartPHIDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.StartPHIDetectionJobRequest_KMSKey, *v.KMSKey)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartPHIDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartPHIDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartPHIDetectionJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this
@@ -79,13 +115,32 @@ type StartPHIDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPHIDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPHIDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPHIDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartPHIDetectionJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartPHIDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPHIDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPHIDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartPHIDetectionJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartPHIDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPHIDetectionJob, schemas.StartPHIDetectionJobRequest, schemas.StartPHIDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartPHIDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPHIDetectionJob, schemas.StartPHIDetectionJobRequest, schemas.StartPHIDetectionJobResponse), output: &StartPHIDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -60,6 +62,28 @@ type GetECSServiceRecommendationProjectedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetECSServiceRecommendationProjectedMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetECSServiceRecommendationProjectedMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetECSServiceRecommendationProjectedMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetECSServiceRecommendationProjectedMetricsRequest_endTime, *v.EndTime)
+	}
+	s.WriteInt32(schemas.GetECSServiceRecommendationProjectedMetricsRequest_period, v.Period)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.GetECSServiceRecommendationProjectedMetricsRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetECSServiceRecommendationProjectedMetricsRequest_startTime, *v.StartTime)
+	}
+	if v.Stat != "" {
+		s.WriteString(schemas.GetECSServiceRecommendationProjectedMetricsRequest_stat, string(v.Stat))
+	}
+}
+
 type GetECSServiceRecommendationProjectedMetricsOutput struct {
 
 	//  An array of objects that describes the projected metrics.
@@ -71,13 +95,29 @@ type GetECSServiceRecommendationProjectedMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetECSServiceRecommendationProjectedMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetECSServiceRecommendationProjectedMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetECSServiceRecommendationProjectedMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeECSServiceRecommendedOptionProjectedMetrics(s, schemas.GetECSServiceRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+}
+func (v *GetECSServiceRecommendationProjectedMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetECSServiceRecommendationProjectedMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetECSServiceRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics:
+			return deserializeECSServiceRecommendedOptionProjectedMetrics(d, schemas.GetECSServiceRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, &v.RecommendedOptionProjectedMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetECSServiceRecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetECSServiceRecommendationProjectedMetrics, schemas.GetECSServiceRecommendationProjectedMetricsRequest, schemas.GetECSServiceRecommendationProjectedMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetECSServiceRecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetECSServiceRecommendationProjectedMetrics, schemas.GetECSServiceRecommendationProjectedMetricsRequest, schemas.GetECSServiceRecommendationProjectedMetricsResponse), output: &GetECSServiceRecommendationProjectedMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
