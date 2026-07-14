@@ -1,0 +1,11 @@
+{
+    "id": "f5381fd4-dcab-4140-936b-55718aaa9b5d",
+    "type": "feature",
+    "description": "Enable schema-based serialization.",
+    "modules": [
+        "service/comprehendmedical",
+        "service/computeoptimizer",
+        "service/marketplaceentitlementservice",
+        "service/snowball"
+    ]
+}
