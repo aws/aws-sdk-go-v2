@@ -1246,8 +1246,8 @@ func TestUploadWithContextCanceledWhenComplete(t *testing.T) {
 }
 
 func TestUploadRetry(t *testing.T) {
-	const part, retries = 3, 10
-	testFile, testFileCleanup, err := createTempFile(t, defaultPartSizeBytes*part)
+	const parts, retries, partSizeBytes = 3, 10, 1024
+	testFile, testFileCleanup, err := createTempFile(t, partSizeBytes*parts)
 	if err != nil {
 		t.Fatalf("failed to create test file, %v", err)
 	}
@@ -1258,21 +1258,21 @@ func TestUploadRetry(t *testing.T) {
 		PartHandlers func(testing.TB) []http.Handler
 	}{
 		"bytes.Buffer": {
-			Body: bytes.NewBuffer(make([]byte, defaultPartSizeBytes*part)),
+			Body: bytes.NewBuffer(make([]byte, partSizeBytes*parts)),
 			PartHandlers: func(tb testing.TB) []http.Handler {
-				return buildFailHandlers(tb, part, retries)
+				return buildFailHandlers(tb, parts, retries)
 			},
 		},
 		"bytes.Reader": {
-			Body: bytes.NewReader(make([]byte, defaultPartSizeBytes*part)),
+			Body: bytes.NewReader(make([]byte, partSizeBytes*parts)),
 			PartHandlers: func(tb testing.TB) []http.Handler {
-				return buildFailHandlers(tb, part, retries)
+				return buildFailHandlers(tb, parts, retries)
 			},
 		},
 		"os.File": {
 			Body: testFile,
 			PartHandlers: func(tb testing.TB) []http.Handler {
-				return buildFailHandlers(tb, part, retries)
+				return buildFailHandlers(tb, parts, retries)
 			},
 		},
 	}
@@ -1294,7 +1294,12 @@ func TestUploadRetry(t *testing.T) {
 				}),
 			})
 
-			uploader := New(client)
+			uploader := New(client, func(o *Options) {
+				// Small parts keep the retry test fast while the mock server verifies
+				// the same multipart and request-body rewind behavior.
+				o.PartSizeBytes = partSizeBytes
+				o.MultipartUploadThreshold = partSizeBytes
+			})
 			_, err := uploader.UploadObject(context.Background(), &UploadObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),
