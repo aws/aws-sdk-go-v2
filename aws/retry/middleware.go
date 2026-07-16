@@ -252,8 +252,8 @@ func (r *Attempt) handleAttempt(
 	}
 
 	if !r.DisableClockSkewCorrection {
-		observedSkew, hasObservedSkew := awsmiddle.GetAttemptSkew(metadata)
-		err = wrapAsClockSkew(err, observedSkew, hasObservedSkew, retryMetadata.AttemptClockSkew)
+		candidateSkew, hasCandidateSkew := awsmiddle.GetAttemptSkew(metadata)
+		err = wrapAsClockSkew(err, candidateSkew, hasCandidateSkew, retryMetadata.AttemptClockSkew)
 	}
 
 	//------------------------------
@@ -341,19 +341,22 @@ var clockSkewCodes = map[string]struct{}{
 }
 
 // wrapAsClockSkew classifies err as a retryable clock skew error when its code
-// is a known clock skew code and either:
-//   - the absolute skew observed from the response Date header exceeds the
-//     detection threshold, OR
-//   - the absolute AttemptSkew applied to signing exceeds the detection
-//     threshold and a valid skew candidate was observed from the response.
+// is a known clock skew code and the signing time diverges from the server
+// time by more than the detection threshold.
 //
-// The second condition handles stale offset healing: the client had previously
-// stored a large skew correction that is now causing signing failures. The
-// fresh candidate from the response Date header will replace it on retry.
+// The signing time is now() + attemptSkew. The server time is now() +
+// candidateSkew (derived from the response Date header). The signing error is:
 //
-// If no skew was observed (the Date header was absent, unparseable, or
+//	|attemptSkew - candidateSkew| > skewThreshold
+//
+// This single check covers both fresh skew detection (attemptSkew is zero on
+// first attempt, so the error equals |candidateSkew|) and stale offset healing
+// (attemptSkew is large but the server and client clocks have realigned, so
+// candidateSkew is near zero).
+//
+// If no candidate was observed (the Date header was absent, unparseable, or
 // discarded as untrusted), the error is not treated as clock skew.
-func wrapAsClockSkew(err error, observedSkew time.Duration, hasObservedSkew bool, attemptSkew time.Duration) error {
+func wrapAsClockSkew(err error, candidateSkew time.Duration, hasCandidateSkew bool, attemptSkew time.Duration) error {
 	var v interface{ ErrorCode() string }
 	if !errors.As(err, &v) {
 		return err
@@ -363,15 +366,11 @@ func wrapAsClockSkew(err error, observedSkew time.Duration, hasObservedSkew bool
 		return err
 	}
 
-	if !hasObservedSkew {
+	if !hasCandidateSkew {
 		return err
 	}
 
-	if absDuration(observedSkew) > skewThreshold {
-		return &retryableClockSkewError{Err: err}
-	}
-
-	if absDuration(attemptSkew) > skewThreshold {
+	if absDuration(attemptSkew-candidateSkew) > skewThreshold {
 		return &retryableClockSkewError{Err: err}
 	}
 

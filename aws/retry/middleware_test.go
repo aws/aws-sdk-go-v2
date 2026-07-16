@@ -507,42 +507,60 @@ func TestClockSkew(t *testing.T) {
 	defer restoreSleep()
 
 	cases := map[string]struct {
-		skew        time.Duration
-		err         error
-		disabled    bool
-		shouldRetry bool
+		clientSkew   time.Duration
+		observedSkew time.Duration
+		err          error
+		disabled     bool
+		shouldRetry  bool
 	}{
 		"no skew and any error no retry": {
-			skew:        time.Duration(0),
-			err:         fmt.Errorf("any error"),
-			shouldRetry: false,
+			clientSkew:   time.Duration(0),
+			observedSkew: time.Duration(0),
+			err:          fmt.Errorf("any error"),
+			shouldRetry:  false,
 		},
 		"no skew wrong error code no retry": {
-			skew:        time.Duration(0),
-			err:         errorCodeImplementer{"any"},
-			shouldRetry: false,
+			clientSkew:   time.Duration(0),
+			observedSkew: time.Duration(0),
+			err:          errorCodeImplementer{"any"},
+			shouldRetry:  false,
 		},
 		"skewed retryable error code does retry": {
-			skew:        5 * time.Minute,
-			err:         errorCodeImplementer{"SignatureDoesNotMatch"},
-			shouldRetry: true,
+			clientSkew:   0,
+			observedSkew: 5 * time.Minute,
+			err:          errorCodeImplementer{"SignatureDoesNotMatch"},
+			shouldRetry:  true,
 		},
 		"low skew retryable error code no retry": {
-			skew:        3 * time.Minute,
-			err:         errorCodeImplementer{"SignatureDoesNotMatch"},
-			shouldRetry: false,
+			clientSkew:   0,
+			observedSkew: 3 * time.Minute,
+			err:          errorCodeImplementer{"SignatureDoesNotMatch"},
+			shouldRetry:  false,
+		},
+		"stale offset retries when candidate diverges from server": {
+			clientSkew:   5 * time.Minute,
+			observedSkew: 0,
+			err:          errorCodeImplementer{"SignatureDoesNotMatch"},
+			shouldRetry:  true,
+		},
+		"matching offset does not retry": {
+			clientSkew:   5 * time.Minute,
+			observedSkew: 5 * time.Minute,
+			err:          errorCodeImplementer{"SignatureDoesNotMatch"},
+			shouldRetry:  false,
 		},
 		"disabled does not retry skew error": {
-			skew:        5 * time.Minute,
-			err:         errorCodeImplementer{"SignatureDoesNotMatch"},
-			disabled:    true,
-			shouldRetry: false,
+			clientSkew:   0,
+			observedSkew: 5 * time.Minute,
+			err:          errorCodeImplementer{"SignatureDoesNotMatch"},
+			disabled:     true,
+			shouldRetry:  false,
 		},
 	}
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
 			skew := &atomic.Int64{}
-			skew.Store(tt.skew.Nanoseconds())
+			skew.Store(tt.clientSkew.Nanoseconds())
 			am := NewAttemptMiddleware(NewStandard(func(s *StandardOptions) {
 			}), func(i any) any { return i }, func(m *Attempt) {
 				m.ClientSkew = skew
@@ -553,7 +571,7 @@ func TestClockSkew(t *testing.T) {
 				func(ctx context.Context, in middleware.FinalizeInput) (
 					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 				) {
-					return out, observedSkewMetadata(t, tt.skew), tt.err
+					return out, observedSkewMetadata(t, tt.observedSkew), tt.err
 				}))
 			if err == nil {
 				t.Errorf("Exected return from next middleware, got none")
