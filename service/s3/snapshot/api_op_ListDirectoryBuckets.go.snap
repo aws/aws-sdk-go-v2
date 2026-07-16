@@ -1,9 +1,6 @@
 ListDirectoryBuckets
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
 		S3Shared:ARNLookup
-		SetLogger
 	Serialize stack step
 		putBucketContext
 		setOperationInput
@@ -17,7 +14,6 @@ ListDirectoryBuckets
 		isExpressUserAgent
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -38,8 +34,6 @@ ListDirectoryBuckets
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

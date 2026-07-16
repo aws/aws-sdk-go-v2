@@ -1,8 +1,5 @@
 DescribeAppVersionAppComponent
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -10,7 +7,6 @@ DescribeAppVersionAppComponent
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -29,8 +25,6 @@ DescribeAppVersionAppComponent
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

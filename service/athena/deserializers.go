@@ -32,6 +32,10 @@ func (m *awsAwsjson11_deserializeOpBatchGetNamedQuery) HandleDeserialize(ctx con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -40,8 +44,7 @@ func (m *awsAwsjson11_deserializeOpBatchGetNamedQuery) HandleDeserialize(ctx con
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -146,6 +149,10 @@ func (m *awsAwsjson11_deserializeOpBatchGetPreparedStatement) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -154,8 +161,7 @@ func (m *awsAwsjson11_deserializeOpBatchGetPreparedStatement) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -260,6 +266,10 @@ func (m *awsAwsjson11_deserializeOpBatchGetQueryExecution) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -268,8 +278,7 @@ func (m *awsAwsjson11_deserializeOpBatchGetQueryExecution) HandleDeserialize(ctx
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -374,6 +383,10 @@ func (m *awsAwsjson11_deserializeOpCancelCapacityReservation) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -382,8 +395,7 @@ func (m *awsAwsjson11_deserializeOpCancelCapacityReservation) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -488,6 +500,10 @@ func (m *awsAwsjson11_deserializeOpCreateCapacityReservation) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -496,8 +512,7 @@ func (m *awsAwsjson11_deserializeOpCreateCapacityReservation) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -602,6 +617,10 @@ func (m *awsAwsjson11_deserializeOpCreateDataCatalog) HandleDeserialize(ctx cont
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -610,8 +629,7 @@ func (m *awsAwsjson11_deserializeOpCreateDataCatalog) HandleDeserialize(ctx cont
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -716,6 +734,10 @@ func (m *awsAwsjson11_deserializeOpCreateNamedQuery) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -724,8 +746,7 @@ func (m *awsAwsjson11_deserializeOpCreateNamedQuery) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -830,6 +851,10 @@ func (m *awsAwsjson11_deserializeOpCreateNotebook) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -838,8 +863,7 @@ func (m *awsAwsjson11_deserializeOpCreateNotebook) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -947,6 +971,10 @@ func (m *awsAwsjson11_deserializeOpCreatePreparedStatement) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -955,8 +983,7 @@ func (m *awsAwsjson11_deserializeOpCreatePreparedStatement) HandleDeserialize(ct
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1061,6 +1088,10 @@ func (m *awsAwsjson11_deserializeOpCreatePresignedNotebookUrl) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1069,8 +1100,7 @@ func (m *awsAwsjson11_deserializeOpCreatePresignedNotebookUrl) HandleDeserialize
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1178,6 +1208,10 @@ func (m *awsAwsjson11_deserializeOpCreateWorkGroup) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1186,8 +1220,7 @@ func (m *awsAwsjson11_deserializeOpCreateWorkGroup) HandleDeserialize(ctx contex
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1292,6 +1325,10 @@ func (m *awsAwsjson11_deserializeOpDeleteCapacityReservation) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1300,8 +1337,7 @@ func (m *awsAwsjson11_deserializeOpDeleteCapacityReservation) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1406,6 +1442,10 @@ func (m *awsAwsjson11_deserializeOpDeleteDataCatalog) HandleDeserialize(ctx cont
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1414,8 +1454,7 @@ func (m *awsAwsjson11_deserializeOpDeleteDataCatalog) HandleDeserialize(ctx cont
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1520,6 +1559,10 @@ func (m *awsAwsjson11_deserializeOpDeleteNamedQuery) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1528,8 +1571,7 @@ func (m *awsAwsjson11_deserializeOpDeleteNamedQuery) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1634,6 +1676,10 @@ func (m *awsAwsjson11_deserializeOpDeleteNotebook) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1642,8 +1688,7 @@ func (m *awsAwsjson11_deserializeOpDeleteNotebook) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1751,6 +1796,10 @@ func (m *awsAwsjson11_deserializeOpDeletePreparedStatement) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1759,8 +1808,7 @@ func (m *awsAwsjson11_deserializeOpDeletePreparedStatement) HandleDeserialize(ct
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1868,6 +1916,10 @@ func (m *awsAwsjson11_deserializeOpDeleteWorkGroup) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1876,8 +1928,7 @@ func (m *awsAwsjson11_deserializeOpDeleteWorkGroup) HandleDeserialize(ctx contex
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -1982,6 +2033,10 @@ func (m *awsAwsjson11_deserializeOpExportNotebook) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1990,8 +2045,7 @@ func (m *awsAwsjson11_deserializeOpExportNotebook) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2099,6 +2153,10 @@ func (m *awsAwsjson11_deserializeOpGetCalculationExecution) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2107,8 +2165,7 @@ func (m *awsAwsjson11_deserializeOpGetCalculationExecution) HandleDeserialize(ct
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2216,6 +2273,10 @@ func (m *awsAwsjson11_deserializeOpGetCalculationExecutionCode) HandleDeserializ
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2224,8 +2285,7 @@ func (m *awsAwsjson11_deserializeOpGetCalculationExecutionCode) HandleDeserializ
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2333,6 +2393,10 @@ func (m *awsAwsjson11_deserializeOpGetCalculationExecutionStatus) HandleDeserial
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2341,8 +2405,7 @@ func (m *awsAwsjson11_deserializeOpGetCalculationExecutionStatus) HandleDeserial
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2450,6 +2513,10 @@ func (m *awsAwsjson11_deserializeOpGetCapacityAssignmentConfiguration) HandleDes
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2458,8 +2525,7 @@ func (m *awsAwsjson11_deserializeOpGetCapacityAssignmentConfiguration) HandleDes
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2564,6 +2630,10 @@ func (m *awsAwsjson11_deserializeOpGetCapacityReservation) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2572,8 +2642,7 @@ func (m *awsAwsjson11_deserializeOpGetCapacityReservation) HandleDeserialize(ctx
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2678,6 +2747,10 @@ func (m *awsAwsjson11_deserializeOpGetDatabase) HandleDeserialize(ctx context.Co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2686,8 +2759,7 @@ func (m *awsAwsjson11_deserializeOpGetDatabase) HandleDeserialize(ctx context.Co
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2795,6 +2867,10 @@ func (m *awsAwsjson11_deserializeOpGetDataCatalog) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2803,8 +2879,7 @@ func (m *awsAwsjson11_deserializeOpGetDataCatalog) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -2909,6 +2984,10 @@ func (m *awsAwsjson11_deserializeOpGetNamedQuery) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2917,8 +2996,7 @@ func (m *awsAwsjson11_deserializeOpGetNamedQuery) HandleDeserialize(ctx context.
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3023,6 +3101,10 @@ func (m *awsAwsjson11_deserializeOpGetNotebookMetadata) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3031,8 +3113,7 @@ func (m *awsAwsjson11_deserializeOpGetNotebookMetadata) HandleDeserialize(ctx co
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3140,6 +3221,10 @@ func (m *awsAwsjson11_deserializeOpGetPreparedStatement) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3148,8 +3233,7 @@ func (m *awsAwsjson11_deserializeOpGetPreparedStatement) HandleDeserialize(ctx c
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3257,6 +3341,10 @@ func (m *awsAwsjson11_deserializeOpGetQueryExecution) HandleDeserialize(ctx cont
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3265,8 +3353,7 @@ func (m *awsAwsjson11_deserializeOpGetQueryExecution) HandleDeserialize(ctx cont
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3371,6 +3458,10 @@ func (m *awsAwsjson11_deserializeOpGetQueryResults) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3379,8 +3470,7 @@ func (m *awsAwsjson11_deserializeOpGetQueryResults) HandleDeserialize(ctx contex
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3488,6 +3578,10 @@ func (m *awsAwsjson11_deserializeOpGetQueryRuntimeStatistics) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3496,8 +3590,7 @@ func (m *awsAwsjson11_deserializeOpGetQueryRuntimeStatistics) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3602,6 +3695,10 @@ func (m *awsAwsjson11_deserializeOpGetResourceDashboard) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3610,8 +3707,7 @@ func (m *awsAwsjson11_deserializeOpGetResourceDashboard) HandleDeserialize(ctx c
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3719,6 +3815,10 @@ func (m *awsAwsjson11_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3727,8 +3827,7 @@ func (m *awsAwsjson11_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3836,6 +3935,10 @@ func (m *awsAwsjson11_deserializeOpGetSessionEndpoint) HandleDeserialize(ctx con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3844,8 +3947,7 @@ func (m *awsAwsjson11_deserializeOpGetSessionEndpoint) HandleDeserialize(ctx con
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -3953,6 +4055,10 @@ func (m *awsAwsjson11_deserializeOpGetSessionStatus) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3961,8 +4067,7 @@ func (m *awsAwsjson11_deserializeOpGetSessionStatus) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4070,6 +4175,10 @@ func (m *awsAwsjson11_deserializeOpGetTableMetadata) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4078,8 +4187,7 @@ func (m *awsAwsjson11_deserializeOpGetTableMetadata) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4187,6 +4295,10 @@ func (m *awsAwsjson11_deserializeOpGetWorkGroup) HandleDeserialize(ctx context.C
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4195,8 +4307,7 @@ func (m *awsAwsjson11_deserializeOpGetWorkGroup) HandleDeserialize(ctx context.C
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4301,6 +4412,10 @@ func (m *awsAwsjson11_deserializeOpImportNotebook) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4309,8 +4424,7 @@ func (m *awsAwsjson11_deserializeOpImportNotebook) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4418,6 +4532,10 @@ func (m *awsAwsjson11_deserializeOpListApplicationDPUSizes) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4426,8 +4544,7 @@ func (m *awsAwsjson11_deserializeOpListApplicationDPUSizes) HandleDeserialize(ct
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4535,6 +4652,10 @@ func (m *awsAwsjson11_deserializeOpListCalculationExecutions) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4543,8 +4664,7 @@ func (m *awsAwsjson11_deserializeOpListCalculationExecutions) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4652,6 +4772,10 @@ func (m *awsAwsjson11_deserializeOpListCapacityReservations) HandleDeserialize(c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4660,8 +4784,7 @@ func (m *awsAwsjson11_deserializeOpListCapacityReservations) HandleDeserialize(c
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4766,6 +4889,10 @@ func (m *awsAwsjson11_deserializeOpListDatabases) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4774,8 +4901,7 @@ func (m *awsAwsjson11_deserializeOpListDatabases) HandleDeserialize(ctx context.
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4883,6 +5009,10 @@ func (m *awsAwsjson11_deserializeOpListDataCatalogs) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4891,8 +5021,7 @@ func (m *awsAwsjson11_deserializeOpListDataCatalogs) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -4997,6 +5126,10 @@ func (m *awsAwsjson11_deserializeOpListEngineVersions) HandleDeserialize(ctx con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5005,8 +5138,7 @@ func (m *awsAwsjson11_deserializeOpListEngineVersions) HandleDeserialize(ctx con
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5111,6 +5243,10 @@ func (m *awsAwsjson11_deserializeOpListExecutors) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5119,8 +5255,7 @@ func (m *awsAwsjson11_deserializeOpListExecutors) HandleDeserialize(ctx context.
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5228,6 +5363,10 @@ func (m *awsAwsjson11_deserializeOpListNamedQueries) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5236,8 +5375,7 @@ func (m *awsAwsjson11_deserializeOpListNamedQueries) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5342,6 +5480,10 @@ func (m *awsAwsjson11_deserializeOpListNotebookMetadata) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5350,8 +5492,7 @@ func (m *awsAwsjson11_deserializeOpListNotebookMetadata) HandleDeserialize(ctx c
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5459,6 +5600,10 @@ func (m *awsAwsjson11_deserializeOpListNotebookSessions) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5467,8 +5612,7 @@ func (m *awsAwsjson11_deserializeOpListNotebookSessions) HandleDeserialize(ctx c
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5576,6 +5720,10 @@ func (m *awsAwsjson11_deserializeOpListPreparedStatements) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5584,8 +5732,7 @@ func (m *awsAwsjson11_deserializeOpListPreparedStatements) HandleDeserialize(ctx
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5690,6 +5837,10 @@ func (m *awsAwsjson11_deserializeOpListQueryExecutions) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5698,8 +5849,7 @@ func (m *awsAwsjson11_deserializeOpListQueryExecutions) HandleDeserialize(ctx co
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5804,6 +5954,10 @@ func (m *awsAwsjson11_deserializeOpListSessions) HandleDeserialize(ctx context.C
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5812,8 +5966,7 @@ func (m *awsAwsjson11_deserializeOpListSessions) HandleDeserialize(ctx context.C
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -5921,6 +6074,10 @@ func (m *awsAwsjson11_deserializeOpListTableMetadata) HandleDeserialize(ctx cont
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -5929,8 +6086,7 @@ func (m *awsAwsjson11_deserializeOpListTableMetadata) HandleDeserialize(ctx cont
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6038,6 +6194,10 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6046,8 +6206,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6155,6 +6314,10 @@ func (m *awsAwsjson11_deserializeOpListWorkGroups) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6163,8 +6326,7 @@ func (m *awsAwsjson11_deserializeOpListWorkGroups) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6269,6 +6431,10 @@ func (m *awsAwsjson11_deserializeOpPutCapacityAssignmentConfiguration) HandleDes
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6277,8 +6443,7 @@ func (m *awsAwsjson11_deserializeOpPutCapacityAssignmentConfiguration) HandleDes
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6383,6 +6548,10 @@ func (m *awsAwsjson11_deserializeOpStartCalculationExecution) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6391,8 +6560,7 @@ func (m *awsAwsjson11_deserializeOpStartCalculationExecution) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6500,6 +6668,10 @@ func (m *awsAwsjson11_deserializeOpStartQueryExecution) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6508,8 +6680,7 @@ func (m *awsAwsjson11_deserializeOpStartQueryExecution) HandleDeserialize(ctx co
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6617,6 +6788,10 @@ func (m *awsAwsjson11_deserializeOpStartSession) HandleDeserialize(ctx context.C
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6625,8 +6800,7 @@ func (m *awsAwsjson11_deserializeOpStartSession) HandleDeserialize(ctx context.C
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6740,6 +6914,10 @@ func (m *awsAwsjson11_deserializeOpStopCalculationExecution) HandleDeserialize(c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6748,8 +6926,7 @@ func (m *awsAwsjson11_deserializeOpStopCalculationExecution) HandleDeserialize(c
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6857,6 +7034,10 @@ func (m *awsAwsjson11_deserializeOpStopQueryExecution) HandleDeserialize(ctx con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6865,8 +7046,7 @@ func (m *awsAwsjson11_deserializeOpStopQueryExecution) HandleDeserialize(ctx con
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -6971,6 +7151,10 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6979,8 +7163,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7088,6 +7271,10 @@ func (m *awsAwsjson11_deserializeOpTerminateSession) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7096,8 +7283,7 @@ func (m *awsAwsjson11_deserializeOpTerminateSession) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7205,6 +7391,10 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7213,8 +7403,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7322,6 +7511,10 @@ func (m *awsAwsjson11_deserializeOpUpdateCapacityReservation) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7330,8 +7523,7 @@ func (m *awsAwsjson11_deserializeOpUpdateCapacityReservation) HandleDeserialize(
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7436,6 +7628,10 @@ func (m *awsAwsjson11_deserializeOpUpdateDataCatalog) HandleDeserialize(ctx cont
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7444,8 +7640,7 @@ func (m *awsAwsjson11_deserializeOpUpdateDataCatalog) HandleDeserialize(ctx cont
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7550,6 +7745,10 @@ func (m *awsAwsjson11_deserializeOpUpdateNamedQuery) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7558,8 +7757,7 @@ func (m *awsAwsjson11_deserializeOpUpdateNamedQuery) HandleDeserialize(ctx conte
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7664,6 +7862,10 @@ func (m *awsAwsjson11_deserializeOpUpdateNotebook) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7672,8 +7874,7 @@ func (m *awsAwsjson11_deserializeOpUpdateNotebook) HandleDeserialize(ctx context
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7781,6 +7982,10 @@ func (m *awsAwsjson11_deserializeOpUpdateNotebookMetadata) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7789,8 +7994,7 @@ func (m *awsAwsjson11_deserializeOpUpdateNotebookMetadata) HandleDeserialize(ctx
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -7898,6 +8102,10 @@ func (m *awsAwsjson11_deserializeOpUpdatePreparedStatement) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -7906,8 +8114,7 @@ func (m *awsAwsjson11_deserializeOpUpdatePreparedStatement) HandleDeserialize(ct
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 
@@ -8015,6 +8222,10 @@ func (m *awsAwsjson11_deserializeOpUpdateWorkGroup) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	response, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, response, true, err)
+
 	if err != nil {
 		return out, metadata, err
 	}
@@ -8023,8 +8234,7 @@ func (m *awsAwsjson11_deserializeOpUpdateWorkGroup) HandleDeserialize(ctx contex
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if response == nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
 

@@ -72,6 +72,10 @@ func (m *awsRestjson1_serializeOpAssociateWhatsAppBusinessAccount) HandleSeriali
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -161,6 +165,10 @@ func (m *awsRestjson1_serializeOpCreateWhatsAppFlow) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -270,6 +278,10 @@ func (m *awsRestjson1_serializeOpCreateWhatsAppMessageTemplate) HandleSerialize(
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -355,6 +367,10 @@ func (m *awsRestjson1_serializeOpCreateWhatsAppMessageTemplateFromLibrary) Handl
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -444,6 +460,10 @@ func (m *awsRestjson1_serializeOpCreateWhatsAppMessageTemplateMedia) HandleSeria
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -525,6 +545,10 @@ func (m *awsRestjson1_serializeOpDeleteWhatsAppFlow) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -595,6 +619,10 @@ func (m *awsRestjson1_serializeOpDeleteWhatsAppMessageMedia) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -664,6 +692,10 @@ func (m *awsRestjson1_serializeOpDeleteWhatsAppMessageTemplate) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -750,6 +782,10 @@ func (m *awsRestjson1_serializeOpDeprecateWhatsAppFlow) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -829,6 +865,10 @@ func (m *awsRestjson1_serializeOpDisassociateWhatsAppBusinessAccount) HandleSeri
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -894,6 +934,10 @@ func (m *awsRestjson1_serializeOpGetLinkedWhatsAppBusinessAccount) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -961,6 +1005,10 @@ func (m *awsRestjson1_serializeOpGetLinkedWhatsAppBusinessAccountPhoneNumber) Ha
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1026,6 +1074,10 @@ func (m *awsRestjson1_serializeOpGetWhatsAppFlow) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1096,6 +1148,10 @@ func (m *awsRestjson1_serializeOpGetWhatsAppFlowPreview) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1177,6 +1233,10 @@ func (m *awsRestjson1_serializeOpGetWhatsAppMessageMedia) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1276,6 +1336,10 @@ func (m *awsRestjson1_serializeOpGetWhatsAppMessageTemplate) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1354,6 +1418,10 @@ func (m *awsRestjson1_serializeOpListLinkedWhatsAppBusinessAccounts) HandleSeria
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1424,6 +1492,10 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1489,6 +1561,10 @@ func (m *awsRestjson1_serializeOpListWhatsAppFlowAssets) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1568,6 +1644,10 @@ func (m *awsRestjson1_serializeOpListWhatsAppFlows) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1641,6 +1721,10 @@ func (m *awsRestjson1_serializeOpListWhatsAppMessageTemplates) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1726,6 +1810,10 @@ func (m *awsRestjson1_serializeOpListWhatsAppTemplateLibrary) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1824,6 +1912,10 @@ func (m *awsRestjson1_serializeOpPostWhatsAppMessageMedia) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1919,6 +2011,10 @@ func (m *awsRestjson1_serializeOpPublishWhatsAppFlow) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2004,6 +2100,10 @@ func (m *awsRestjson1_serializeOpPutWhatsAppBusinessAccountEventDestinations) Ha
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2092,6 +2192,10 @@ func (m *awsRestjson1_serializeOpSendWhatsAppMessage) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2184,6 +2288,10 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2272,6 +2380,10 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2359,6 +2471,10 @@ func (m *awsRestjson1_serializeOpUpdateWhatsAppFlow) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2458,6 +2574,10 @@ func (m *awsRestjson1_serializeOpUpdateWhatsAppFlowAssets) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2548,6 +2668,10 @@ func (m *awsRestjson1_serializeOpUpdateWhatsAppMessageTemplate) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
 
@@ -105,12 +104,6 @@ func (c *Client) addOperationListAccessPointsForDirectoryBucketsMiddlewares(stac
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -120,12 +113,6 @@ func (c *Client) addOperationListAccessPointsForDirectoryBucketsMiddlewares(stac
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
@@ -133,9 +120,6 @@ func (c *Client) addOperationListAccessPointsForDirectoryBucketsMiddlewares(stac
 		return err
 	}
 	if err = addOpListAccessPointsForDirectoryBucketsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAccessPointsForDirectoryBuckets"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

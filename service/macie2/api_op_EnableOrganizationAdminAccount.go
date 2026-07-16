@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Designates an account as the delegated Amazon Macie administrator account for
@@ -58,12 +57,6 @@ func (c *Client) addOperationEnableOrganizationAdminAccountMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -73,12 +66,6 @@ func (c *Client) addOperationEnableOrganizationAdminAccountMiddlewares(stack *mi
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -86,9 +73,6 @@ func (c *Client) addOperationEnableOrganizationAdminAccountMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpEnableOrganizationAdminAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "EnableOrganizationAdminAccount"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -78,6 +78,10 @@ func (m *awsRestjson1_serializeOpCreateAct) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -202,6 +206,10 @@ func (m *awsRestjson1_serializeOpCreateSession) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -300,6 +308,10 @@ func (m *awsRestjson1_serializeOpCreateWorkflowDefinition) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -403,6 +415,10 @@ func (m *awsRestjson1_serializeOpCreateWorkflowRun) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -503,6 +519,10 @@ func (m *awsRestjson1_serializeOpDeleteWorkflowDefinition) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -573,6 +593,10 @@ func (m *awsRestjson1_serializeOpDeleteWorkflowRun) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -654,6 +678,10 @@ func (m *awsRestjson1_serializeOpGetWorkflowDefinition) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -724,6 +752,10 @@ func (m *awsRestjson1_serializeOpGetWorkflowRun) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -815,6 +847,10 @@ func (m *awsRestjson1_serializeOpInvokeActStep) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -944,6 +980,10 @@ func (m *awsRestjson1_serializeOpListActs) HandleSerialize(ctx context.Context, 
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1043,6 +1083,10 @@ func (m *awsRestjson1_serializeOpListModels) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1119,6 +1163,10 @@ func (m *awsRestjson1_serializeOpListSessions) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1231,6 +1279,10 @@ func (m *awsRestjson1_serializeOpListWorkflowDefinitions) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1323,6 +1375,10 @@ func (m *awsRestjson1_serializeOpListWorkflowRuns) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1425,6 +1481,10 @@ func (m *awsRestjson1_serializeOpUpdateAct) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1553,6 +1613,10 @@ func (m *awsRestjson1_serializeOpUpdateWorkflowRun) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()

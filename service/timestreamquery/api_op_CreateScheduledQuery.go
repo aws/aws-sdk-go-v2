@@ -8,7 +8,6 @@ import (
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Create a scheduled query that will be run on your behalf at the configured
@@ -131,12 +130,6 @@ func (c *Client) addOperationCreateScheduledQueryMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,12 +137,6 @@ func (c *Client) addOperationCreateScheduledQueryMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpCreateScheduledQueryDiscoverEndpointMiddleware(stack, options, c); err != nil {
@@ -162,9 +149,6 @@ func (c *Client) addOperationCreateScheduledQueryMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateScheduledQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateScheduledQuery"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

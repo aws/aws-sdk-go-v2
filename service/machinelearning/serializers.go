@@ -73,6 +73,10 @@ func (m *awsAwsjson11_serializeOpAddTags) HandleSerialize(ctx context.Context, i
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -133,6 +137,10 @@ func (m *awsAwsjson11_serializeOpCreateBatchPrediction) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -195,6 +203,10 @@ func (m *awsAwsjson11_serializeOpCreateDataSourceFromRDS) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -255,6 +267,10 @@ func (m *awsAwsjson11_serializeOpCreateDataSourceFromRedshift) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -317,6 +333,10 @@ func (m *awsAwsjson11_serializeOpCreateDataSourceFromS3) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -377,6 +397,10 @@ func (m *awsAwsjson11_serializeOpCreateEvaluation) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -439,6 +463,10 @@ func (m *awsAwsjson11_serializeOpCreateMLModel) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -499,6 +527,10 @@ func (m *awsAwsjson11_serializeOpCreateRealtimeEndpoint) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -561,6 +593,10 @@ func (m *awsAwsjson11_serializeOpDeleteBatchPrediction) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -621,6 +657,10 @@ func (m *awsAwsjson11_serializeOpDeleteDataSource) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -683,6 +723,10 @@ func (m *awsAwsjson11_serializeOpDeleteEvaluation) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -743,6 +787,10 @@ func (m *awsAwsjson11_serializeOpDeleteMLModel) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -805,6 +853,10 @@ func (m *awsAwsjson11_serializeOpDeleteRealtimeEndpoint) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -865,6 +917,10 @@ func (m *awsAwsjson11_serializeOpDeleteTags) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -927,6 +983,10 @@ func (m *awsAwsjson11_serializeOpDescribeBatchPredictions) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -987,6 +1047,10 @@ func (m *awsAwsjson11_serializeOpDescribeDataSources) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1049,6 +1113,10 @@ func (m *awsAwsjson11_serializeOpDescribeEvaluations) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1109,6 +1177,10 @@ func (m *awsAwsjson11_serializeOpDescribeMLModels) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1171,6 +1243,10 @@ func (m *awsAwsjson11_serializeOpDescribeTags) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1231,6 +1307,10 @@ func (m *awsAwsjson11_serializeOpGetBatchPrediction) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1293,6 +1373,10 @@ func (m *awsAwsjson11_serializeOpGetDataSource) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1353,6 +1437,10 @@ func (m *awsAwsjson11_serializeOpGetEvaluation) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1415,6 +1503,10 @@ func (m *awsAwsjson11_serializeOpGetMLModel) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1475,6 +1567,10 @@ func (m *awsAwsjson11_serializeOpPredict) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1537,6 +1633,10 @@ func (m *awsAwsjson11_serializeOpUpdateBatchPrediction) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1597,6 +1697,10 @@ func (m *awsAwsjson11_serializeOpUpdateDataSource) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1659,6 +1763,10 @@ func (m *awsAwsjson11_serializeOpUpdateEvaluation) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1719,6 +1827,10 @@ func (m *awsAwsjson11_serializeOpUpdateMLModel) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()

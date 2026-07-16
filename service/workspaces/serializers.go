@@ -72,6 +72,10 @@ func (m *awsAwsjson11_serializeOpAcceptAccountLinkInvitation) HandleSerialize(ct
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -132,6 +136,10 @@ func (m *awsAwsjson11_serializeOpAssociateConnectionAlias) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -194,6 +202,10 @@ func (m *awsAwsjson11_serializeOpAssociateIpGroups) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -254,6 +266,10 @@ func (m *awsAwsjson11_serializeOpAssociateWorkspaceApplication) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -316,6 +332,10 @@ func (m *awsAwsjson11_serializeOpAuthorizeIpRules) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -376,6 +396,10 @@ func (m *awsAwsjson11_serializeOpCopyWorkspaceImage) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -438,6 +462,10 @@ func (m *awsAwsjson11_serializeOpCreateAccountLinkInvitation) HandleSerialize(ct
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -498,6 +526,10 @@ func (m *awsAwsjson11_serializeOpCreateConnectClientAddIn) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -560,6 +592,10 @@ func (m *awsAwsjson11_serializeOpCreateConnectionAlias) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -620,6 +656,10 @@ func (m *awsAwsjson11_serializeOpCreateIpGroup) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -682,6 +722,10 @@ func (m *awsAwsjson11_serializeOpCreateStandbyWorkspaces) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -742,6 +786,10 @@ func (m *awsAwsjson11_serializeOpCreateTags) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -804,6 +852,10 @@ func (m *awsAwsjson11_serializeOpCreateUpdatedWorkspaceImage) HandleSerialize(ct
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -864,6 +916,10 @@ func (m *awsAwsjson11_serializeOpCreateWorkspaceBundle) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -926,6 +982,10 @@ func (m *awsAwsjson11_serializeOpCreateWorkspaceImage) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -986,6 +1046,10 @@ func (m *awsAwsjson11_serializeOpCreateWorkspaces) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1048,6 +1112,10 @@ func (m *awsAwsjson11_serializeOpCreateWorkspacesPool) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1108,6 +1176,10 @@ func (m *awsAwsjson11_serializeOpDeleteAccountLinkInvitation) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1170,6 +1242,10 @@ func (m *awsAwsjson11_serializeOpDeleteClientBranding) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1230,6 +1306,10 @@ func (m *awsAwsjson11_serializeOpDeleteConnectClientAddIn) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1292,6 +1372,10 @@ func (m *awsAwsjson11_serializeOpDeleteConnectionAlias) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1352,6 +1436,10 @@ func (m *awsAwsjson11_serializeOpDeleteIpGroup) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1414,6 +1502,10 @@ func (m *awsAwsjson11_serializeOpDeleteTags) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1474,6 +1566,10 @@ func (m *awsAwsjson11_serializeOpDeleteWorkspaceBundle) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1536,6 +1632,10 @@ func (m *awsAwsjson11_serializeOpDeleteWorkspaceImage) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1596,6 +1696,10 @@ func (m *awsAwsjson11_serializeOpDeployWorkspaceApplications) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1658,6 +1762,10 @@ func (m *awsAwsjson11_serializeOpDeregisterWorkspaceDirectory) HandleSerialize(c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1718,6 +1826,10 @@ func (m *awsAwsjson11_serializeOpDescribeAccount) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1780,6 +1892,10 @@ func (m *awsAwsjson11_serializeOpDescribeAccountModifications) HandleSerialize(c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1840,6 +1956,10 @@ func (m *awsAwsjson11_serializeOpDescribeApplicationAssociations) HandleSerializ
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -1902,6 +2022,10 @@ func (m *awsAwsjson11_serializeOpDescribeApplications) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -1962,6 +2086,10 @@ func (m *awsAwsjson11_serializeOpDescribeBundleAssociations) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2024,6 +2152,10 @@ func (m *awsAwsjson11_serializeOpDescribeClientBranding) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2084,6 +2216,10 @@ func (m *awsAwsjson11_serializeOpDescribeClientProperties) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2146,6 +2282,10 @@ func (m *awsAwsjson11_serializeOpDescribeConnectClientAddIns) HandleSerialize(ct
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2206,6 +2346,10 @@ func (m *awsAwsjson11_serializeOpDescribeConnectionAliases) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2268,6 +2412,10 @@ func (m *awsAwsjson11_serializeOpDescribeConnectionAliasPermissions) HandleSeria
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2328,6 +2476,10 @@ func (m *awsAwsjson11_serializeOpDescribeCustomWorkspaceImageImport) HandleSeria
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2390,6 +2542,10 @@ func (m *awsAwsjson11_serializeOpDescribeImageAssociations) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2450,6 +2606,10 @@ func (m *awsAwsjson11_serializeOpDescribeIpGroups) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2512,6 +2672,10 @@ func (m *awsAwsjson11_serializeOpDescribeTags) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2572,6 +2736,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceAssociations) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2634,6 +2802,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceBundles) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2694,6 +2866,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceDirectories) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2756,6 +2932,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceImagePermissions) HandleSerial
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2816,6 +2996,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceImages) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -2878,6 +3062,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaces) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -2938,6 +3126,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspacesConnectionStatus) HandleSeria
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3000,6 +3192,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceSnapshots) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3060,6 +3256,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspacesPools) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3122,6 +3322,10 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspacesPoolSessions) HandleSerialize
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3182,6 +3386,10 @@ func (m *awsAwsjson11_serializeOpDisassociateConnectionAlias) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3244,6 +3452,10 @@ func (m *awsAwsjson11_serializeOpDisassociateIpGroups) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3304,6 +3516,10 @@ func (m *awsAwsjson11_serializeOpDisassociateWorkspaceApplication) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3366,6 +3582,10 @@ func (m *awsAwsjson11_serializeOpGetAccountLink) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3426,6 +3646,10 @@ func (m *awsAwsjson11_serializeOpImportClientBranding) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3488,6 +3712,10 @@ func (m *awsAwsjson11_serializeOpImportCustomWorkspaceImage) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3548,6 +3776,10 @@ func (m *awsAwsjson11_serializeOpImportWorkspaceImage) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3610,6 +3842,10 @@ func (m *awsAwsjson11_serializeOpListAccountLinks) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3670,6 +3906,10 @@ func (m *awsAwsjson11_serializeOpListAvailableManagementCidrRanges) HandleSerial
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3732,6 +3972,10 @@ func (m *awsAwsjson11_serializeOpMigrateWorkspace) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3792,6 +4036,10 @@ func (m *awsAwsjson11_serializeOpModifyAccount) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3854,6 +4102,10 @@ func (m *awsAwsjson11_serializeOpModifyCertificateBasedAuthProperties) HandleSer
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -3914,6 +4166,10 @@ func (m *awsAwsjson11_serializeOpModifyClientProperties) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -3976,6 +4232,10 @@ func (m *awsAwsjson11_serializeOpModifyEndpointEncryptionMode) HandleSerialize(c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4036,6 +4296,10 @@ func (m *awsAwsjson11_serializeOpModifySamlProperties) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4098,6 +4362,10 @@ func (m *awsAwsjson11_serializeOpModifySelfservicePermissions) HandleSerialize(c
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4158,6 +4426,10 @@ func (m *awsAwsjson11_serializeOpModifyStreamingProperties) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4220,6 +4492,10 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceAccessProperties) HandleSerializ
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4280,6 +4556,10 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceCreationProperties) HandleSerial
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4342,6 +4622,10 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceProperties) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4402,6 +4686,10 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceState) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4464,6 +4752,10 @@ func (m *awsAwsjson11_serializeOpRebootWorkspaces) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4524,6 +4816,10 @@ func (m *awsAwsjson11_serializeOpRebuildWorkspaces) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4586,6 +4882,10 @@ func (m *awsAwsjson11_serializeOpRegisterWorkspaceDirectory) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4646,6 +4946,10 @@ func (m *awsAwsjson11_serializeOpRejectAccountLinkInvitation) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4708,6 +5012,10 @@ func (m *awsAwsjson11_serializeOpRestoreWorkspace) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4768,6 +5076,10 @@ func (m *awsAwsjson11_serializeOpRevokeIpRules) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4830,6 +5142,10 @@ func (m *awsAwsjson11_serializeOpStartWorkspaces) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -4890,6 +5206,10 @@ func (m *awsAwsjson11_serializeOpStartWorkspacesPool) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -4952,6 +5272,10 @@ func (m *awsAwsjson11_serializeOpStopWorkspaces) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -5012,6 +5336,10 @@ func (m *awsAwsjson11_serializeOpStopWorkspacesPool) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -5074,6 +5402,10 @@ func (m *awsAwsjson11_serializeOpTerminateWorkspaces) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -5134,6 +5466,10 @@ func (m *awsAwsjson11_serializeOpTerminateWorkspacesPool) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -5196,6 +5532,10 @@ func (m *awsAwsjson11_serializeOpTerminateWorkspacesPoolSession) HandleSerialize
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -5256,6 +5596,10 @@ func (m *awsAwsjson11_serializeOpUpdateConnectClientAddIn) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -5318,6 +5662,10 @@ func (m *awsAwsjson11_serializeOpUpdateConnectionAliasPermission) HandleSerializ
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -5378,6 +5726,10 @@ func (m *awsAwsjson11_serializeOpUpdateRulesOfIpGroup) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()
@@ -5440,6 +5792,10 @@ func (m *awsAwsjson11_serializeOpUpdateWorkspaceBundle) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -5501,6 +5857,10 @@ func (m *awsAwsjson11_serializeOpUpdateWorkspaceImagePermission) HandleSerialize
 	}
 	in.Request = request
 
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
@@ -5561,6 +5921,10 @@ func (m *awsAwsjson11_serializeOpUpdateWorkspacesPool) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	in.Request = request
+
+	if err := smithyhttp.ComputeRequestContentLength(request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	endTimer()
 	span.End()

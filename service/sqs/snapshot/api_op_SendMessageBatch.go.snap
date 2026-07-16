@@ -1,9 +1,6 @@
 SendMessageBatch
 	Initialize stack step
-		RegisterServiceMetadata
 		SQSValidateMessageChecksum
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -11,7 +8,6 @@ SendMessageBatch
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -30,8 +26,6 @@ SendMessageBatch
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

@@ -5,7 +5,6 @@ package pinpointemail
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) PutDedicatedIpWarmupAttributes(ctx context.Context, params *PutDedicatedIpWarmupAttributesInput, optFns ...func(*Options)) (*PutDedicatedIpWarmupAttributesOutput, error) {
@@ -60,12 +59,6 @@ func (c *Client) addOperationPutDedicatedIpWarmupAttributesMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -75,19 +68,10 @@ func (c *Client) addOperationPutDedicatedIpWarmupAttributesMiddlewares(stack *mi
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDedicatedIpWarmupAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutDedicatedIpWarmupAttributes"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

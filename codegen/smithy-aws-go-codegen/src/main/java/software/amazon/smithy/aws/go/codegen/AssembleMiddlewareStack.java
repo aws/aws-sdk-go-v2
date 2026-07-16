@@ -68,15 +68,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                         .isCommon(true)
                         .build(),
 
-                // Add ContentLengthMiddleware to operation stack
-                RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) ->
-                                EventStreamIndex.of(model).getInputInfo(operation).isEmpty())
-                        .registerMiddleware(
-                                MiddlewareRegistrar.builder()
-                                        .resolvedFunction(buildPackageSymbol("addComputeContentLength"))
-                                        .build()
-                        ).build(),
+                // Request content length is now computed inline in the generated
+                // operation serializer (see smithy-go ComputeRequestContentLength),
+                // so no standalone ComputeContentLength middleware is registered.
 
                 // Add endpoint serialize middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -273,13 +267,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
 
     private Writable addMiddleware() {
         return goTemplate("""
-                $D $D $D
+                $D $D
                 func addClientRequestID(stack *middleware.Stack) error {
                     return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
-                }
-
-                func addComputeContentLength(stack *middleware.Stack) error {
-                    return stack.Build.Insert(&smithyhttp.ComputeContentLength{}, "ClientRequestID", middleware.After)
                 }
 
                 func addRawResponseToMetadata(stack *middleware.Stack) error {
@@ -293,7 +283,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 func addSpanRetryLoop(stack *middleware.Stack, options Options) error {
                     return stack.Finalize.Insert(&spanRetryLoop{options: options}, "Retry", middleware.Before)
                 }
-                """, SmithyGoDependency.SMITHY_MIDDLEWARE, AwsGoDependency.AWS_MIDDLEWARE, SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
+                """, SmithyGoDependency.SMITHY_MIDDLEWARE, AwsGoDependency.AWS_MIDDLEWARE);
     }
 
     private Writable addSigV4XMiddleware() {

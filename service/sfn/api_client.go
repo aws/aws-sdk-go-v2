@@ -265,6 +265,9 @@ func (c *Client) invokeOperation(
 
 	finalizeClientEndpointResolverOptions(&options)
 
+	ctx = middleware.SetLogger(ctx, options.Logger)
+	ctx = resolveServiceMetadata(ctx, options, opID)
+
 	if err := c.addCommonMiddlewares(stack, options, opID); err != nil {
 		return nil, metadata, err
 	}
@@ -381,9 +384,6 @@ func (c *Client) addCommonMiddlewares(stack *middleware.Stack, options Options, 
 	if err := addProtocolFinalizerMiddlewares(stack, options, operation); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
-	if err := addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err := addClientRequestID(stack); err != nil {
 		return err
 	}
@@ -436,39 +436,11 @@ func resolveAuthSchemes(options *Options) {
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
-type legacyEndpointContextSetter struct {
-	LegacyResolver EndpointResolver
-}
-
-func (*legacyEndpointContextSetter) ID() string {
-	return "legacyEndpointContextSetter"
-}
-
-func (m *legacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.LegacyResolver != nil {
-		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
-	}
-
-	return next.HandleInitialize(ctx, in)
-
-}
-func addlegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
-	return stack.Initialize.Add(&legacyEndpointContextSetter{
-		LegacyResolver: o.EndpointResolver,
-	}, middleware.Before)
-}
-
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {
 		return
 	}
 	o.Logger = logging.Nop{}
-}
-
-func addSetLoggerMiddleware(stack *middleware.Stack, o Options) error {
-	return middleware.AddSetLoggerMiddleware(stack, o.Logger)
 }
 
 func setResolvedDefaultsMode(o *Options) {
@@ -687,10 +659,6 @@ func addClientRequestID(stack *middleware.Stack) error {
 	return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
 }
 
-func addComputeContentLength(stack *middleware.Stack) error {
-	return stack.Build.Insert(&smithyhttp.ComputeContentLength{}, "ClientRequestID", middleware.After)
-}
-
 func addRawResponseToMetadata(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
 }
@@ -899,12 +867,14 @@ type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
 }
 
-func newServiceMetadataMiddleware(region, operation string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: operation,
+func resolveServiceMetadata(ctx context.Context, options Options, operation string) context.Context {
+	ctx = awsmiddleware.SetServiceID(ctx, ServiceID)
+	ctx = awsmiddleware.SetRegion(ctx, options.Region)
+	ctx = awsmiddleware.SetOperationName(ctx, operation)
+	if options.EndpointResolver != nil {
+		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
 	}
+	return ctx
 }
 
 func addRecursionDetection(stack *middleware.Stack) error {

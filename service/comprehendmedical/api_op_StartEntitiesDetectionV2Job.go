@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an asynchronous medical entity detection job for a collection of
@@ -147,12 +146,6 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -160,12 +153,6 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -178,9 +165,6 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpStartEntitiesDetectionV2JobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartEntitiesDetectionV2Job"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

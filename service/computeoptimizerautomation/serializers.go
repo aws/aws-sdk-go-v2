@@ -60,6 +60,10 @@ func (m *smithyRpcv2cbor_serializeOpAssociateAccounts) HandleSerialize(ctx conte
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -109,6 +113,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateAutomationRule) HandleSerialize(ctx co
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -160,6 +168,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteAutomationRule) HandleSerialize(ctx co
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -209,6 +221,10 @@ func (m *smithyRpcv2cbor_serializeOpDisassociateAccounts) HandleSerialize(ctx co
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -260,6 +276,10 @@ func (m *smithyRpcv2cbor_serializeOpGetAutomationEvent) HandleSerialize(ctx cont
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -309,6 +329,10 @@ func (m *smithyRpcv2cbor_serializeOpGetAutomationRule) HandleSerialize(ctx conte
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -360,6 +384,10 @@ func (m *smithyRpcv2cbor_serializeOpGetEnrollmentConfiguration) HandleSerialize(
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -409,6 +437,10 @@ func (m *smithyRpcv2cbor_serializeOpListAccounts) HandleSerialize(ctx context.Co
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -460,6 +492,10 @@ func (m *smithyRpcv2cbor_serializeOpListAutomationEvents) HandleSerialize(ctx co
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -509,6 +545,10 @@ func (m *smithyRpcv2cbor_serializeOpListAutomationEventSteps) HandleSerialize(ct
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -560,6 +600,10 @@ func (m *smithyRpcv2cbor_serializeOpListAutomationEventSummaries) HandleSerializ
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -609,6 +653,10 @@ func (m *smithyRpcv2cbor_serializeOpListAutomationRulePreview) HandleSerialize(c
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -660,6 +708,10 @@ func (m *smithyRpcv2cbor_serializeOpListAutomationRulePreviewSummaries) HandleSe
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -709,6 +761,10 @@ func (m *smithyRpcv2cbor_serializeOpListAutomationRules) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -760,6 +816,10 @@ func (m *smithyRpcv2cbor_serializeOpListRecommendedActions) HandleSerialize(ctx 
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -809,6 +869,10 @@ func (m *smithyRpcv2cbor_serializeOpListRecommendedActionSummaries) HandleSerial
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -860,6 +924,10 @@ func (m *smithyRpcv2cbor_serializeOpListTagsForResource) HandleSerialize(ctx con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -909,6 +977,10 @@ func (m *smithyRpcv2cbor_serializeOpRollbackAutomationEvent) HandleSerialize(ctx
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -960,6 +1032,10 @@ func (m *smithyRpcv2cbor_serializeOpStartAutomationEvent) HandleSerialize(ctx co
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1009,6 +1085,10 @@ func (m *smithyRpcv2cbor_serializeOpTagResource) HandleSerialize(ctx context.Con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1060,6 +1140,10 @@ func (m *smithyRpcv2cbor_serializeOpUntagResource) HandleSerialize(ctx context.C
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1110,6 +1194,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateAutomationRule) HandleSerialize(ctx co
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1159,6 +1247,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateEnrollmentConfiguration) HandleSeriali
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()

@@ -5,7 +5,6 @@ package sfn
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Used by workers to retrieve a task (with the specified activity ARN) which has
@@ -82,12 +81,6 @@ func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -97,12 +90,6 @@ func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack,
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addSetLongPollingContext(stack, options); err != nil {
 		return err
 	}
@@ -110,9 +97,6 @@ func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpGetActivityTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetActivityTask"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -9,7 +9,6 @@ import (
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies the specified DB snapshot. The source DB snapshot must be in the
@@ -248,12 +247,6 @@ func (c *Client) addOperationCopyDBSnapshotMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -263,12 +256,6 @@ func (c *Client) addOperationCopyDBSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCopyDBSnapshotPresignURLMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -276,9 +263,6 @@ func (c *Client) addOperationCopyDBSnapshotMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCopyDBSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CopyDBSnapshot"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

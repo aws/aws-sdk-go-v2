@@ -29,6 +29,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonInstance) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -38,8 +42,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonInstance) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -94,6 +97,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonSubscription) HandleDeserialize
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -103,8 +110,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonSubscription) HandleDeserialize
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -159,6 +165,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressList) HandleDeserialize(ctx c
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -168,8 +178,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressList) HandleDeserialize(ctx c
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -224,6 +233,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressListImportJob) HandleDeserial
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -233,8 +246,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressListImportJob) HandleDeserial
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -289,6 +301,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateArchive) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -298,8 +314,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateArchive) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -354,6 +369,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateIngressPoint) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -363,8 +382,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateIngressPoint) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -419,6 +437,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRelay) HandleDeserialize(ctx context
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -428,8 +450,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRelay) HandleDeserialize(ctx context
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -484,6 +505,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRuleSet) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -493,8 +518,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRuleSet) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -549,6 +573,10 @@ func (m *smithyRpcv2cbor_deserializeOpCreateTrafficPolicy) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -558,8 +586,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateTrafficPolicy) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -614,6 +641,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonInstance) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -623,8 +654,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonInstance) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -663,6 +693,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonSubscription) HandleDeserialize
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -672,8 +706,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonSubscription) HandleDeserialize
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -712,6 +745,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddressList) HandleDeserialize(ctx c
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -721,8 +758,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddressList) HandleDeserialize(ctx c
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -761,6 +797,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteArchive) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -770,8 +810,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteArchive) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -810,6 +849,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteIngressPoint) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -819,8 +862,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteIngressPoint) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -859,6 +901,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRelay) HandleDeserialize(ctx context
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -868,8 +914,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRelay) HandleDeserialize(ctx context
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -908,6 +953,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRuleSet) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -917,8 +966,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRuleSet) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -957,6 +1005,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteTrafficPolicy) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -966,8 +1018,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteTrafficPolicy) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1006,6 +1057,10 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterMemberFromAddressList) HandleDes
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1015,8 +1070,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterMemberFromAddressList) HandleDes
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1055,6 +1109,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonInstance) HandleDeserialize(ctx co
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1064,8 +1122,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonInstance) HandleDeserialize(ctx co
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1120,6 +1177,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonSubscription) HandleDeserialize(ct
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1129,8 +1190,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonSubscription) HandleDeserialize(ct
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1185,6 +1245,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressList) HandleDeserialize(ctx cont
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1194,8 +1258,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressList) HandleDeserialize(ctx cont
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1250,6 +1313,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressListImportJob) HandleDeserialize
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1259,8 +1326,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressListImportJob) HandleDeserialize
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1315,6 +1381,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchive) HandleDeserialize(ctx context.
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1324,8 +1394,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchive) HandleDeserialize(ctx context.
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1380,6 +1449,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveExport) HandleDeserialize(ctx co
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1389,8 +1462,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveExport) HandleDeserialize(ctx co
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1445,6 +1517,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessage) HandleDeserialize(ctx c
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1454,8 +1530,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessage) HandleDeserialize(ctx c
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1510,6 +1585,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessageContent) HandleDeserializ
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1519,8 +1598,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessageContent) HandleDeserializ
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1575,6 +1653,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearch) HandleDeserialize(ctx co
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1584,8 +1666,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearch) HandleDeserialize(ctx co
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1640,6 +1721,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearchResults) HandleDeserialize
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1649,8 +1734,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearchResults) HandleDeserialize
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1705,6 +1789,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetIngressPoint) HandleDeserialize(ctx con
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1714,8 +1802,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetIngressPoint) HandleDeserialize(ctx con
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1770,6 +1857,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetMemberOfAddressList) HandleDeserialize(
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1779,8 +1870,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetMemberOfAddressList) HandleDeserialize(
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1835,6 +1925,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetRelay) HandleDeserialize(ctx context.Co
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1844,8 +1938,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetRelay) HandleDeserialize(ctx context.Co
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1900,6 +1993,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetRuleSet) HandleDeserialize(ctx context.
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1909,8 +2006,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetRuleSet) HandleDeserialize(ctx context.
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -1965,6 +2061,10 @@ func (m *smithyRpcv2cbor_deserializeOpGetTrafficPolicy) HandleDeserialize(ctx co
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -1974,8 +2074,7 @@ func (m *smithyRpcv2cbor_deserializeOpGetTrafficPolicy) HandleDeserialize(ctx co
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2030,6 +2129,10 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonInstances) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2039,8 +2142,7 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonInstances) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2095,6 +2197,10 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonSubscriptions) HandleDeserialize(
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2104,8 +2210,7 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonSubscriptions) HandleDeserialize(
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2160,6 +2265,10 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressListImportJobs) HandleDeseriali
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2169,8 +2278,7 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressListImportJobs) HandleDeseriali
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2225,6 +2333,10 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressLists) HandleDeserialize(ctx co
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2234,8 +2346,7 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressLists) HandleDeserialize(ctx co
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2290,6 +2401,10 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveExports) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2299,8 +2414,7 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveExports) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2355,6 +2469,10 @@ func (m *smithyRpcv2cbor_deserializeOpListArchives) HandleDeserialize(ctx contex
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2364,8 +2482,7 @@ func (m *smithyRpcv2cbor_deserializeOpListArchives) HandleDeserialize(ctx contex
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2420,6 +2537,10 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveSearches) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2429,8 +2550,7 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveSearches) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2485,6 +2605,10 @@ func (m *smithyRpcv2cbor_deserializeOpListIngressPoints) HandleDeserialize(ctx c
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2494,8 +2618,7 @@ func (m *smithyRpcv2cbor_deserializeOpListIngressPoints) HandleDeserialize(ctx c
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2550,6 +2673,10 @@ func (m *smithyRpcv2cbor_deserializeOpListMembersOfAddressList) HandleDeserializ
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2559,8 +2686,7 @@ func (m *smithyRpcv2cbor_deserializeOpListMembersOfAddressList) HandleDeserializ
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2615,6 +2741,10 @@ func (m *smithyRpcv2cbor_deserializeOpListRelays) HandleDeserialize(ctx context.
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2624,8 +2754,7 @@ func (m *smithyRpcv2cbor_deserializeOpListRelays) HandleDeserialize(ctx context.
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2680,6 +2809,10 @@ func (m *smithyRpcv2cbor_deserializeOpListRuleSets) HandleDeserialize(ctx contex
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2689,8 +2822,7 @@ func (m *smithyRpcv2cbor_deserializeOpListRuleSets) HandleDeserialize(ctx contex
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2745,6 +2877,10 @@ func (m *smithyRpcv2cbor_deserializeOpListTagsForResource) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2754,8 +2890,7 @@ func (m *smithyRpcv2cbor_deserializeOpListTagsForResource) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2810,6 +2945,10 @@ func (m *smithyRpcv2cbor_deserializeOpListTrafficPolicies) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2819,8 +2958,7 @@ func (m *smithyRpcv2cbor_deserializeOpListTrafficPolicies) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2875,6 +3013,10 @@ func (m *smithyRpcv2cbor_deserializeOpRegisterMemberToAddressList) HandleDeseria
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2884,8 +3026,7 @@ func (m *smithyRpcv2cbor_deserializeOpRegisterMemberToAddressList) HandleDeseria
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2924,6 +3065,10 @@ func (m *smithyRpcv2cbor_deserializeOpStartAddressListImportJob) HandleDeseriali
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2933,8 +3078,7 @@ func (m *smithyRpcv2cbor_deserializeOpStartAddressListImportJob) HandleDeseriali
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -2973,6 +3117,10 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveExport) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -2982,8 +3130,7 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveExport) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3038,6 +3185,10 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveSearch) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3047,8 +3198,7 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveSearch) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3103,6 +3253,10 @@ func (m *smithyRpcv2cbor_deserializeOpStopAddressListImportJob) HandleDeserializ
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3112,8 +3266,7 @@ func (m *smithyRpcv2cbor_deserializeOpStopAddressListImportJob) HandleDeserializ
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3152,6 +3305,10 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveExport) HandleDeserialize(ctx c
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3161,8 +3318,7 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveExport) HandleDeserialize(ctx c
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3201,6 +3357,10 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveSearch) HandleDeserialize(ctx c
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3210,8 +3370,7 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveSearch) HandleDeserialize(ctx c
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3250,6 +3409,10 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3259,8 +3422,7 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3299,6 +3461,10 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3308,8 +3474,7 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3348,6 +3513,10 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateArchive) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3357,8 +3526,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateArchive) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3397,6 +3565,10 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateIngressPoint) HandleDeserialize(ctx 
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3406,8 +3578,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateIngressPoint) HandleDeserialize(ctx 
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3446,6 +3617,10 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRelay) HandleDeserialize(ctx context
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3455,8 +3630,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRelay) HandleDeserialize(ctx context
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3495,6 +3669,10 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRuleSet) HandleDeserialize(ctx conte
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3504,8 +3682,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRuleSet) HandleDeserialize(ctx conte
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
@@ -3544,6 +3721,10 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateTrafficPolicy) HandleDeserialize(ctx
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 
+	// Close the body on every exit path in place of the standalone close middleware.
+	resp, _ := out.RawResponse.(*smithyhttp.Response)
+	defer smithyhttp.DrainAndCloseResponseBody(ctx, resp, true, err)
+
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
@@ -3553,8 +3734,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateTrafficPolicy) HandleDeserialize(ctx
 		return out, metadata, err
 	}
 
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
+	if resp == nil {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 

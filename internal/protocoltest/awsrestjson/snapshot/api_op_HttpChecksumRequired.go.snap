@@ -1,8 +1,5 @@
 HttpChecksumRequired
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint
@@ -10,7 +7,6 @@ HttpChecksumRequired
 	Build stack step
 		ContentChecksum
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -29,8 +25,6 @@ HttpChecksumRequired
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

@@ -2,9 +2,6 @@ DeleteAccessPointScope
 	Initialize stack step
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		stashOperationInput
@@ -16,7 +13,6 @@ DeleteAccessPointScope
 	Build stack step
 		stashOperationInput
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -36,8 +32,6 @@ DeleteAccessPointScope
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

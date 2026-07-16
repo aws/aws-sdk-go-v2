@@ -83,12 +83,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceForPrefixMiddlewares(stack *
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -96,12 +90,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceForPrefixMiddlewares(stack *
 		return err
 	}
 	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
@@ -117,9 +105,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceForPrefixMiddlewares(stack *
 		return err
 	}
 	if err = addOpGetAccessGrantsInstanceForPrefixValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAccessGrantsInstanceForPrefix"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

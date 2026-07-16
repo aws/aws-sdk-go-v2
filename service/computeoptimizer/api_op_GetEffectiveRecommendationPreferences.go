@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the recommendation preferences that are in effect for a given resource,
@@ -190,12 +189,6 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -205,12 +198,6 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
@@ -218,9 +205,6 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 		return err
 	}
 	if err = addOpGetEffectiveRecommendationPreferencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEffectiveRecommendationPreferences"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

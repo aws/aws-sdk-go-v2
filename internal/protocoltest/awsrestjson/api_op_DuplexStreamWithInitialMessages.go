@@ -109,9 +109,6 @@ func (c *Client) addOperationDuplexStreamWithInitialMessagesMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opDuplexStreamWithInitialMessagesMiddleware(stack); err != nil {
 		return err
 	}
@@ -131,9 +128,6 @@ func (c *Client) addOperationDuplexStreamWithInitialMessagesMiddlewares(stack *m
 		return err
 	}
 	if err = addOpDuplexStreamWithInitialMessagesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DuplexStreamWithInitialMessages"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

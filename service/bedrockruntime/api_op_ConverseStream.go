@@ -207,13 +207,7 @@ func (c *Client) addOperationConverseStreamMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamConverseStreamMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -229,9 +223,6 @@ func (c *Client) addOperationConverseStreamMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpConverseStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ConverseStream"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

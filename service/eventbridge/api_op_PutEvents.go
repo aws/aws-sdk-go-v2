@@ -7,7 +7,6 @@ import (
 	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends custom events to Amazon EventBridge so that they can be matched to rules.
@@ -93,12 +92,6 @@ func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -108,12 +101,6 @@ func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, optio
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addPutEventsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
@@ -121,9 +108,6 @@ func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpPutEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutEvents"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -1,8 +1,5 @@
 OutputStream
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint
@@ -10,7 +7,6 @@ OutputStream
 	Build stack step
 		EventStreamBuildMiddleware
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

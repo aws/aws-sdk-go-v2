@@ -104,13 +104,7 @@ func (c *Client) addOperationOutputStreamWithInitialResponseMiddlewares(stack *m
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opOutputStreamWithInitialResponseMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -123,9 +117,6 @@ func (c *Client) addOperationOutputStreamWithInitialResponseMiddlewares(stack *m
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "OutputStreamWithInitialResponse"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

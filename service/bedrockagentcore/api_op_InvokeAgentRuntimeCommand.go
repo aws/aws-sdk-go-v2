@@ -157,16 +157,10 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeAgentRuntimeCommandMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addEventStreamBuild_opInvokeAgentRuntimeCommandMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -185,9 +179,6 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpInvokeAgentRuntimeCommandValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeAgentRuntimeCommand"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

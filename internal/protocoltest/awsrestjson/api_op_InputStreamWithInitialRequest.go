@@ -93,9 +93,6 @@ func (c *Client) addOperationInputStreamWithInitialRequestMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -112,9 +109,6 @@ func (c *Client) addOperationInputStreamWithInitialRequestMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpInputStreamWithInitialRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InputStreamWithInitialRequest"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

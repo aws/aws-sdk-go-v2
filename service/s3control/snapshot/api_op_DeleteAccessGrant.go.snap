@@ -2,9 +2,6 @@ DeleteAccessGrant
 	Initialize stack step
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		stashOperationInput
@@ -17,7 +14,6 @@ DeleteAccessGrant
 		stashOperationInput
 		ContentChecksum
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -39,8 +35,6 @@ DeleteAccessGrant
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

@@ -122,9 +122,6 @@ func (c *Client) addOperationStartMedicalScribeListeningSessionMiddlewares(stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamStartMedicalScribeListeningSessionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -156,9 +153,6 @@ func (c *Client) addOperationStartMedicalScribeListeningSessionMiddlewares(stack
 		return err
 	}
 	if err = addOpStartMedicalScribeListeningSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartMedicalScribeListeningSession"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

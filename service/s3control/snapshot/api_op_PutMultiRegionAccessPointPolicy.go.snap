@@ -2,10 +2,7 @@ PutMultiRegionAccessPointPolicy
 	Initialize stack step
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
-		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		stashOperationInput
@@ -18,7 +15,6 @@ PutMultiRegionAccessPointPolicy
 		stashOperationInput
 		ContentChecksum
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -40,8 +36,6 @@ PutMultiRegionAccessPointPolicy
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

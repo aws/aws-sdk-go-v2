@@ -3,7 +3,6 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.protocol.AwsRpc2CborProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
-import software.amazon.smithy.go.codegen.integration.HttpProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.utils.ListUtils;
@@ -22,13 +21,10 @@ public class AddProtocols implements GoIntegration {
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        List<RuntimeClientPlugin> plugins = HttpProtocolUtils.getCloseResponseClientPlugins((model, service) -> {
-            // All AWS protocols are HTTP based currently. When protocol is added that is not it must be
-            // excluded if the service is configured for that protocol.
-            return true;
-        });
-
-        return plugins;
+        // Response-body close is now emitted inline in the generated operation
+        // deserializer (see smithy-go DrainAndCloseResponseBody), so no standalone
+        // close-response-body middleware is registered on the stack.
+        return ListUtils.of();
     }
 
     @Override

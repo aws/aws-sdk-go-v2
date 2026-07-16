@@ -1,9 +1,6 @@
 InitiateVaultLock
 	Initialize stack step
 		Glacier:DefaultAccountID
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		Glacier:APIVersion
@@ -12,7 +9,6 @@ InitiateVaultLock
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
@@ -32,8 +28,6 @@ InitiateVaultLock
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

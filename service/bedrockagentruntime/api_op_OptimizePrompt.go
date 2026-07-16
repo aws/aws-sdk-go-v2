@@ -69,13 +69,7 @@ func (c *Client) addOperationOptimizePromptMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamOptimizePromptMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -91,9 +85,6 @@ func (c *Client) addOperationOptimizePromptMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpOptimizePromptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "OptimizePrompt"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

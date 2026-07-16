@@ -101,16 +101,10 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamSendMessageMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addEventStreamBuild_opSendMessageMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -129,9 +123,6 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpSendMessageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "SendMessage"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

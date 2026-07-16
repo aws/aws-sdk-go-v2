@@ -8,7 +8,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) PutWithContentEncoding(ctx context.Context, params *PutWithContentEncodingInput, optFns ...func(*Options)) (*PutWithContentEncodingOutput, error) {
@@ -79,12 +78,6 @@ func (c *Client) addOperationPutWithContentEncodingMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -94,12 +87,6 @@ func (c *Client) addOperationPutWithContentEncodingMiddlewares(stack *middleware
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addIsRequestCompressionUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -107,9 +94,6 @@ func (c *Client) addOperationPutWithContentEncodingMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOperationPutWithContentEncodingRequestCompressionMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutWithContentEncoding"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

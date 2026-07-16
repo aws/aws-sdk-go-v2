@@ -60,6 +60,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateAddonInstance) HandleSerialize(ctx con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -109,6 +113,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateAddonSubscription) HandleSerialize(ctx
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -160,6 +168,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateAddressList) HandleSerialize(ctx conte
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -209,6 +221,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateAddressListImportJob) HandleSerialize(
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -260,6 +276,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateArchive) HandleSerialize(ctx context.C
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -309,6 +329,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateIngressPoint) HandleSerialize(ctx cont
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -360,6 +384,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateRelay) HandleSerialize(ctx context.Con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -409,6 +437,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateRuleSet) HandleSerialize(ctx context.C
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -460,6 +492,10 @@ func (m *smithyRpcv2cbor_serializeOpCreateTrafficPolicy) HandleSerialize(ctx con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -509,6 +545,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteAddonInstance) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -560,6 +600,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteAddonSubscription) HandleSerialize(ctx
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -609,6 +653,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteAddressList) HandleSerialize(ctx conte
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -660,6 +708,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteArchive) HandleSerialize(ctx context.C
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -709,6 +761,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteIngressPoint) HandleSerialize(ctx cont
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -760,6 +816,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteRelay) HandleSerialize(ctx context.Con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -809,6 +869,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteRuleSet) HandleSerialize(ctx context.C
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -860,6 +924,10 @@ func (m *smithyRpcv2cbor_serializeOpDeleteTrafficPolicy) HandleSerialize(ctx con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -909,6 +977,10 @@ func (m *smithyRpcv2cbor_serializeOpDeregisterMemberFromAddressList) HandleSeria
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -960,6 +1032,10 @@ func (m *smithyRpcv2cbor_serializeOpGetAddonInstance) HandleSerialize(ctx contex
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1009,6 +1085,10 @@ func (m *smithyRpcv2cbor_serializeOpGetAddonSubscription) HandleSerialize(ctx co
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1060,6 +1140,10 @@ func (m *smithyRpcv2cbor_serializeOpGetAddressList) HandleSerialize(ctx context.
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1109,6 +1193,10 @@ func (m *smithyRpcv2cbor_serializeOpGetAddressListImportJob) HandleSerialize(ctx
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1160,6 +1248,10 @@ func (m *smithyRpcv2cbor_serializeOpGetArchive) HandleSerialize(ctx context.Cont
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1209,6 +1301,10 @@ func (m *smithyRpcv2cbor_serializeOpGetArchiveExport) HandleSerialize(ctx contex
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1260,6 +1356,10 @@ func (m *smithyRpcv2cbor_serializeOpGetArchiveMessage) HandleSerialize(ctx conte
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1309,6 +1409,10 @@ func (m *smithyRpcv2cbor_serializeOpGetArchiveMessageContent) HandleSerialize(ct
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1360,6 +1464,10 @@ func (m *smithyRpcv2cbor_serializeOpGetArchiveSearch) HandleSerialize(ctx contex
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1409,6 +1517,10 @@ func (m *smithyRpcv2cbor_serializeOpGetArchiveSearchResults) HandleSerialize(ctx
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1460,6 +1572,10 @@ func (m *smithyRpcv2cbor_serializeOpGetIngressPoint) HandleSerialize(ctx context
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1509,6 +1625,10 @@ func (m *smithyRpcv2cbor_serializeOpGetMemberOfAddressList) HandleSerialize(ctx 
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1560,6 +1680,10 @@ func (m *smithyRpcv2cbor_serializeOpGetRelay) HandleSerialize(ctx context.Contex
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1609,6 +1733,10 @@ func (m *smithyRpcv2cbor_serializeOpGetRuleSet) HandleSerialize(ctx context.Cont
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1660,6 +1788,10 @@ func (m *smithyRpcv2cbor_serializeOpGetTrafficPolicy) HandleSerialize(ctx contex
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1709,6 +1841,10 @@ func (m *smithyRpcv2cbor_serializeOpListAddonInstances) HandleSerialize(ctx cont
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1760,6 +1896,10 @@ func (m *smithyRpcv2cbor_serializeOpListAddonSubscriptions) HandleSerialize(ctx 
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1809,6 +1949,10 @@ func (m *smithyRpcv2cbor_serializeOpListAddressListImportJobs) HandleSerialize(c
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1860,6 +2004,10 @@ func (m *smithyRpcv2cbor_serializeOpListAddressLists) HandleSerialize(ctx contex
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -1909,6 +2057,10 @@ func (m *smithyRpcv2cbor_serializeOpListArchiveExports) HandleSerialize(ctx cont
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -1960,6 +2112,10 @@ func (m *smithyRpcv2cbor_serializeOpListArchives) HandleSerialize(ctx context.Co
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2009,6 +2165,10 @@ func (m *smithyRpcv2cbor_serializeOpListArchiveSearches) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2060,6 +2220,10 @@ func (m *smithyRpcv2cbor_serializeOpListIngressPoints) HandleSerialize(ctx conte
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2109,6 +2273,10 @@ func (m *smithyRpcv2cbor_serializeOpListMembersOfAddressList) HandleSerialize(ct
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2160,6 +2328,10 @@ func (m *smithyRpcv2cbor_serializeOpListRelays) HandleSerialize(ctx context.Cont
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2209,6 +2381,10 @@ func (m *smithyRpcv2cbor_serializeOpListRuleSets) HandleSerialize(ctx context.Co
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2260,6 +2436,10 @@ func (m *smithyRpcv2cbor_serializeOpListTagsForResource) HandleSerialize(ctx con
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2309,6 +2489,10 @@ func (m *smithyRpcv2cbor_serializeOpListTrafficPolicies) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2360,6 +2544,10 @@ func (m *smithyRpcv2cbor_serializeOpRegisterMemberToAddressList) HandleSerialize
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2409,6 +2597,10 @@ func (m *smithyRpcv2cbor_serializeOpStartAddressListImportJob) HandleSerialize(c
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2460,6 +2652,10 @@ func (m *smithyRpcv2cbor_serializeOpStartArchiveExport) HandleSerialize(ctx cont
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2509,6 +2705,10 @@ func (m *smithyRpcv2cbor_serializeOpStartArchiveSearch) HandleSerialize(ctx cont
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2560,6 +2760,10 @@ func (m *smithyRpcv2cbor_serializeOpStopAddressListImportJob) HandleSerialize(ct
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2609,6 +2813,10 @@ func (m *smithyRpcv2cbor_serializeOpStopArchiveExport) HandleSerialize(ctx conte
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2660,6 +2868,10 @@ func (m *smithyRpcv2cbor_serializeOpStopArchiveSearch) HandleSerialize(ctx conte
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2709,6 +2921,10 @@ func (m *smithyRpcv2cbor_serializeOpTagResource) HandleSerialize(ctx context.Con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2760,6 +2976,10 @@ func (m *smithyRpcv2cbor_serializeOpUntagResource) HandleSerialize(ctx context.C
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2809,6 +3029,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateArchive) HandleSerialize(ctx context.C
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2860,6 +3084,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateIngressPoint) HandleSerialize(ctx cont
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -2909,6 +3137,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateRelay) HandleSerialize(ctx context.Con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
@@ -2960,6 +3192,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateRuleSet) HandleSerialize(ctx context.C
 
 	in.Request = req
 
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
+
 	endTimer()
 	span.End()
 
@@ -3009,6 +3245,10 @@ func (m *smithyRpcv2cbor_serializeOpUpdateTrafficPolicy) HandleSerialize(ctx con
 	}
 
 	in.Request = req
+
+	if err := smithyhttp.ComputeRequestContentLength(req); err != nil {
+		return out, metadata, fmt.Errorf("compute content length: %w", err)
+	}
 
 	endTimer()
 	span.End()
