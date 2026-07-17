@@ -1,3 +1,7 @@
+# v1.31.0 (2026-07-16)
+
+* **Feature**: Marked CreateProxySession, DeleteProxySession, GetProxySession, ListProxySessions, UpdateProxySession, PutVoiceConnectorProxy, DeleteVoiceConnectorProxy, and GetVoiceConnectorProxy as deprecated.
+
 # v1.30.1 (2026-07-13)
 
 * No change notes available for this release.

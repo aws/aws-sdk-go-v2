@@ -1,4 +1,4 @@
-UpdateGlobalSettings
+GetEstimatedWaterAllocation
 	Initialize stack step
 		RegisterServiceMetadata
 		legacyEndpointContextSetter

@@ -220,22 +220,6 @@ type CancelStepsInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the certificate authority used to establish an mTLS connection to the
-// Spark Connect server when connecting directly over VPC peering.
-type CertificateAuthority struct {
-
-	// The Amazon Resource Name (ARN) of the certificate authority in Amazon Web
-	// Services Private CA that issued the Spark Connect server certificate.
-	CertificateArn *string
-
-	// The PEM-encoded root CA certificate data. Provide this certificate to your
-	// client's trust store when connecting directly to the Spark Connect server over
-	// VPC peering.
-	CertificateData *string
-
-	noSmithyDocumentSerde
-}
-
 // The definition of a CloudWatch metric alarm, which determines when an automatic
 // scaling activity is triggered. When the defined alarm conditions are satisfied,
 // scaling activity begins.
@@ -2663,10 +2647,6 @@ type Session struct {
 
 	// The Amazon Web Services account ID that owns the session.
 	AccountId *string
-
-	// The certificate authority used to establish an mTLS connection to the Spark
-	// Connect server when connecting directly over VPC peering.
-	CertificateAuthority *CertificateAuthority
 
 	// The date and time that the session was created.
 	CreatedAt *time.Time

@@ -1,3 +1,7 @@
+# v1.48.0 (2026-07-16)
+
+* **Feature**: Adds support for returning the task UUID (universally unique identifier) in GetRunTask and ListRunTasks responses
+
 # v1.47.1 (2026-07-13)
 
 * No change notes available for this release.

@@ -7776,55 +7776,6 @@ func awsAwsjson11_deserializeDocumentCancelStepsInfoList(v *[]types.CancelStepsI
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCertificateAuthority(v **types.CertificateAuthority, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.CertificateAuthority
-	if *v == nil {
-		sv = &types.CertificateAuthority{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "CertificateArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
-				}
-				sv.CertificateArn = ptr.String(jtv)
-			}
-
-		case "CertificateData":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
-				}
-				sv.CertificateData = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsjson11_deserializeDocumentCloudWatchAlarmDefinition(v **types.CloudWatchAlarmDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13890,11 +13841,6 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
-			}
-
-		case "CertificateAuthority":
-			if err := awsAwsjson11_deserializeDocumentCertificateAuthority(&sv.CertificateAuthority, value); err != nil {
-				return err
 			}
 
 		case "ClusterId":

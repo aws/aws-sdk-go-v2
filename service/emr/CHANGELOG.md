@@ -1,3 +1,7 @@
+# v1.63.0 (2026-07-16)
+
+* **Feature**: Amazon EMR updates the Session object returned by GetSession API
+
 # v1.62.1 (2026-07-13)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.259.0 (2026-07-16)
+
+* **Feature**: Release support for g7 instance type for SageMaker inference endpoints.
+
 # v1.258.1 (2026-07-13)
 
 * No change notes available for this release.

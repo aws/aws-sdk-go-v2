@@ -1,3 +1,7 @@
+# v1.64.2 (2026-07-16)
+
+* **Documentation**: Amazon Redshift - Added support for rg.large and rg.12xlarge node types in CreateCluster, ModifyCluster, and ResizeCluster API operations.
+
 # v1.64.1 (2026-07-13)
 
 * No change notes available for this release.

@@ -193,6 +193,92 @@ func TestCheckResponseSnapshot_GetEstimatedCarbonEmissionsDimensionValues(t *tes
 	}
 }
 
+func TestCheckResponseSnapshot_GetEstimatedWaterAllocation(t *testing.T) {
+	want := &GetEstimatedWaterAllocationOutput{
+		Results: []types.EstimatedWaterAllocation{
+			{
+				TimePeriod: &types.TimePeriod{
+					Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				DimensionsValues: map[string]string{
+					"key0": "__Value__",
+				},
+				ModelVersion: ptr.String("__ModelVersion__"),
+				AllocationValues: map[string]types.WaterAllocation{
+					"key0": {
+						Value: ptr.Float64(1.0),
+						Unit:  types.WaterAllocationUnit("m3"),
+					},
+				},
+			},
+			{
+				TimePeriod: &types.TimePeriod{
+					Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				DimensionsValues: map[string]string{
+					"key0": "__Value__",
+				},
+				ModelVersion: ptr.String("__ModelVersion__"),
+				AllocationValues: map[string]types.WaterAllocation{
+					"key0": {
+						Value: ptr.Float64(1.0),
+						Unit:  types.WaterAllocationUnit("m3"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEstimatedWaterAllocation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEstimatedWaterAllocation(context.Background(), &GetEstimatedWaterAllocationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEstimatedWaterAllocation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetEstimatedWaterAllocationDimensionValues(t *testing.T) {
+	want := &GetEstimatedWaterAllocationDimensionValuesOutput{
+		Results: []types.DimensionEntry{
+			{
+				Dimension: types.Dimension("USAGE_ACCOUNT_ID"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Dimension: types.Dimension("USAGE_ACCOUNT_ID"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEstimatedWaterAllocationDimensionValues.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), &GetEstimatedWaterAllocationDimensionValuesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEstimatedWaterAllocationDimensionValues.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),

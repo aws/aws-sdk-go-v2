@@ -2,4 +2,4 @@ POST /voice-connector-groups
 
 Content-Type: application/json
 
-{"Name":"__Name__","VoiceConnectorItems":[{"Priority":1,"VoiceConnectorId":"__VoiceConnectorId__"},{"Priority":1,"VoiceConnectorId":"__VoiceConnectorId__"}]}
+{"CallDistributionType":"PriorityWeightedDistribution","Name":"__Name__","VoiceConnectorItems":[{"Priority":1,"VoiceConnectorId":"__VoiceConnectorId__"},{"Priority":1,"VoiceConnectorId":"__VoiceConnectorId__"}]}

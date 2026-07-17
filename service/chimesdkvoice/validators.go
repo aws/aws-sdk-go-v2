@@ -1470,6 +1470,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateGlobalSettings struct {
+}
+
+func (*validateOpUpdateGlobalSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGlobalSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGlobalSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGlobalSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePhoneNumber struct {
 }
 
@@ -1982,6 +2002,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateGlobalSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGlobalSettings{}, middleware.After)
+}
+
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
@@ -2222,9 +2246,6 @@ func validateVoiceConnectorItem(v *types.VoiceConnectorItem) error {
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
 	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2423,6 +2444,9 @@ func validateOpCreateSipRuleInput(v *CreateSipRuleInput) error {
 	}
 	if v.TriggerValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TriggerValue"))
+	}
+	if v.TargetApplications == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetApplications"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3494,6 +3518,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGlobalSettingsInput(v *UpdateGlobalSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlobalSettingsInput"}
+	if v.VoiceConnector == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnector"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

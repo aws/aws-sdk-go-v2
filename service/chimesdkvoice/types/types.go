@@ -292,6 +292,8 @@ type PhoneNumber struct {
 	// The phone number's order ID.
 	OrderId *string
 
+	PhoneNumberArn *string
+
 	// The phone number's ID.
 	PhoneNumberId *string
 
@@ -389,7 +391,7 @@ type PhoneNumberOrder struct {
 
 	// The Firm Order Commitment (FOC) date for phone number porting orders. This
 	// field is null if a phone number order is not a porting order.
-	FocDate *time.Time
+	FocDate *string
 
 	// The type of phone number being ordered, local or toll-free.
 	OrderType PhoneNumberOrderType
@@ -805,8 +807,7 @@ type VoiceConnector struct {
 	// The Voice Connector's name.
 	Name *string
 
-	// The type of network of the Voice Connector. Either IPv4 only or dual-stack
-	// (IPv4 and IPv6).
+	// The type of network for the Voice Connector.
 	NetworkType NetworkType
 
 	// The outbound host name for the Voice Connector.
@@ -832,6 +833,7 @@ type VoiceConnector struct {
 // a group. This creates a fault tolerant mechanism for fallback in case of
 // availability events.
 type VoiceConnectorGroup struct {
+	CallDistributionType CallDistributionType
 
 	// The Voice Connector group's creation time stamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
@@ -859,17 +861,15 @@ type VoiceConnectorGroup struct {
 // settings. Limit: 3 VoiceConnectorItems per Voice Connector group.
 type VoiceConnectorItem struct {
 
-	// The priority setting of a Voice Connector item. Calls are routed to hosts in
-	// priority order, with 1 as the highest priority. When hosts have equal priority,
-	// the system distributes calls among them based on their relative weight.
-	//
-	// This member is required.
-	Priority *int32
-
 	// The Voice Connector ID.
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	// The priority setting of a Voice Connector item. Calls are routed to hosts in
+	// priority order, with 1 as the highest priority. When hosts have equal priority,
+	// the system distributes calls among them based on their relative weight.
+	Priority *int32
 
 	noSmithyDocumentSerde
 }

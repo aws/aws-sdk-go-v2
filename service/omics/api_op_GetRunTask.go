@@ -95,6 +95,9 @@ type GetRunTaskOutput struct {
 	// The task's ID.
 	TaskId *string
 
+	// The universally unique identifier (UUID) for the workflow task.
+	Uuid *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

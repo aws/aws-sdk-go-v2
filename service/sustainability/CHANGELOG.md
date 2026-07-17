@@ -1,3 +1,7 @@
+# v1.3.0 (2026-07-16)
+
+* **Feature**: Adds support for retrieving estimated water allocation data.
+
 # v1.2.1 (2026-07-13)
 
 * No change notes available for this release.

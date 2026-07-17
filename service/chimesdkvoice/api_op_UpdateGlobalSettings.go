@@ -29,6 +29,8 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 type UpdateGlobalSettingsInput struct {
 
 	// The Voice Connector settings.
+	//
+	// This member is required.
 	VoiceConnector *types.VoiceConnectorSettings
 
 	noSmithyDocumentSerde
@@ -73,6 +75,9 @@ func (c *Client) addOperationUpdateGlobalSettingsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpUpdateGlobalSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateGlobalSettings"), middleware.Before); err != nil {

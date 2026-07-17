@@ -1822,6 +1822,7 @@ func TestCheckResponseSnapshot_GetRunTask(t *testing.T) {
 			ImageDigest: ptr.String("__ImageDigest__"),
 			SourceImage: ptr.String("__SourceImage__"),
 		},
+		Uuid: ptr.String("__Uuid__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRunTask.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2968,6 +2969,7 @@ func TestCheckResponseSnapshot_ListRunTasks(t *testing.T) {
 				StopTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Gpus:         ptr.Int32(1),
 				InstanceType: ptr.String("__InstanceType__"),
+				Uuid:         ptr.String("__Uuid__"),
 			},
 			{
 				TaskId:       ptr.String("__TaskId__"),
@@ -2982,6 +2984,7 @@ func TestCheckResponseSnapshot_ListRunTasks(t *testing.T) {
 				StopTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Gpus:         ptr.Int32(1),
 				InstanceType: ptr.String("__InstanceType__"),
+				Uuid:         ptr.String("__Uuid__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

@@ -10,6 +10,13 @@ import (
 
 // Deletes the specified proxy session from the specified Amazon Chime SDK Voice
 // Connector.
+//
+// End of support notice: On April 7, 2026, AWS will end support for Amazon Chime
+// SDK proxy sessions.
+//
+// Deprecated: End of support notice: On April 7, 2026, AWS ended support for
+// Amazon Chime SDK proxy sessions. For more information, refer to
+// https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteProxySession.html
 func (c *Client) DeleteProxySession(ctx context.Context, params *DeleteProxySessionInput, optFns ...func(*Options)) (*DeleteProxySessionOutput, error) {
 	if params == nil {
 		params = &DeleteProxySessionInput{}

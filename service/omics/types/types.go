@@ -2011,6 +2011,9 @@ type TaskListItem struct {
 	// The task's ID.
 	TaskId *string
 
+	// The universally unique identifier (UUID) for the workflow task.
+	Uuid *string
+
 	noSmithyDocumentSerde
 }
 

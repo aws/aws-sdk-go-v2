@@ -10,55 +10,50 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns estimated carbon emission values based on customer grouping and
+// Returns estimated water allocation values based on customer grouping and
 // filtering parameters. We recommend using pagination to ensure that the operation
 // returns quickly and successfully.
-func (c *Client) GetEstimatedCarbonEmissions(ctx context.Context, params *GetEstimatedCarbonEmissionsInput, optFns ...func(*Options)) (*GetEstimatedCarbonEmissionsOutput, error) {
+func (c *Client) GetEstimatedWaterAllocation(ctx context.Context, params *GetEstimatedWaterAllocationInput, optFns ...func(*Options)) (*GetEstimatedWaterAllocationOutput, error) {
 	if params == nil {
-		params = &GetEstimatedCarbonEmissionsInput{}
+		params = &GetEstimatedWaterAllocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEstimatedCarbonEmissions", params, optFns, c.addOperationGetEstimatedCarbonEmissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEstimatedWaterAllocation", params, optFns, c.addOperationGetEstimatedWaterAllocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEstimatedCarbonEmissionsOutput)
+	out := result.(*GetEstimatedWaterAllocationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEstimatedCarbonEmissionsInput struct {
+type GetEstimatedWaterAllocationInput struct {
 
-	//  The date range for fetching estimated carbon emissions. The range must include
-	// the start date of a month for that month's data to be included in the response.
+	//  The date range for fetching estimated water allocation. The range must include
+	// the start date of a year for that year's data to be included in the response.
 	//
 	// This member is required.
 	TimePeriod *types.TimePeriod
 
-	// The emission types to include in the results. If absent, returns
-	// TOTAL_LBM_CARBON_EMISSIONS and TOTAL_MBM_CARBON_EMISSIONS emissions types.
-	EmissionsTypes []types.EmissionsType
+	// The allocation types to include in the results. If absent, returns
+	// TOTAL_WATER_WITHDRAWALS allocation types.
+	AllocationTypes []types.WaterAllocationType
 
-	//  The criteria for filtering estimated carbon emissions. To determine which
-	// dimensions are available to be filtered by, you can first call GetEstimatedCarbonEmissionsDimensionValues
+	//  The criteria for filtering estimated water allocation. To determine which
+	// dimensions are available to be filtered by, you can first call GetEstimatedWaterAllocationDimensionValues
 	FilterBy *types.FilterExpression
 
-	//  The time granularity for the results. If absent, uses MONTHLY time
-	// granularity. The smallest supported granularity for carbon emissions is MONTHLY
-	// .
+	// The time granularity for the results. Only YEARLY_CALENDAR time granularity is
+	// currently supported for water allocation. Defaults to YEARLY_CALENDAR if absent.
 	//
 	// If requesting partial time periods, data will be returned based on the smallest
 	// supported granularity. For example, requesting 2025-04-01T00:00:00Z to
-	// 2026-04-01T00:00:00Z with YEARLY_CALENDAR granularity will return the last 9
-	// months for 2025 and the first 3 months of 2026.
+	// 2026-04-01T00:00:00Z with YEARLY_CALENDAR will return all the data for 2026
+	// only.
 	Granularity types.TimeGranularity
 
-	// Configuration for fiscal year calculations when using YEARLY_FISCAL or
-	// QUARTERLY_FISCAL granularity.
-	GranularityConfiguration *types.GranularityConfiguration
-
-	// The dimensions available for grouping estimated carbon emissions.
+	// The dimensions available for grouping estimated water allocation.
 	GroupBy []types.Dimension
 
 	// The maximum number of results to return in a single call. Default is 1000.
@@ -71,12 +66,12 @@ type GetEstimatedCarbonEmissionsInput struct {
 	noSmithyDocumentSerde
 }
 
-type GetEstimatedCarbonEmissionsOutput struct {
+type GetEstimatedWaterAllocationOutput struct {
 
 	// The result of the requested inputs.
 	//
 	// This member is required.
-	Results []types.EstimatedCarbonEmissions
+	Results []types.EstimatedWaterAllocation
 
 	// The pagination token indicating there are additional pages available. You can
 	// use the token in a following request to fetch the next set of results.
@@ -88,12 +83,12 @@ type GetEstimatedCarbonEmissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedCarbonEmissions{}, middleware.After)
+func (c *Client) addOperationGetEstimatedWaterAllocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedWaterAllocation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEstimatedCarbonEmissions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEstimatedWaterAllocation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -122,10 +117,10 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middl
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetEstimatedCarbonEmissionsValidationMiddleware(stack); err != nil {
+	if err = addOpGetEstimatedWaterAllocationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEstimatedCarbonEmissions"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEstimatedWaterAllocation"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,9 +141,9 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middl
 	return nil
 }
 
-// GetEstimatedCarbonEmissionsPaginatorOptions is the paginator options for
-// GetEstimatedCarbonEmissions
-type GetEstimatedCarbonEmissionsPaginatorOptions struct {
+// GetEstimatedWaterAllocationPaginatorOptions is the paginator options for
+// GetEstimatedWaterAllocation
+type GetEstimatedWaterAllocationPaginatorOptions struct {
 	// The maximum number of results to return in a single call. Default is 1000.
 	Limit int32
 
@@ -157,24 +152,24 @@ type GetEstimatedCarbonEmissionsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// GetEstimatedCarbonEmissionsPaginator is a paginator for
-// GetEstimatedCarbonEmissions
-type GetEstimatedCarbonEmissionsPaginator struct {
-	options   GetEstimatedCarbonEmissionsPaginatorOptions
-	client    GetEstimatedCarbonEmissionsAPIClient
-	params    *GetEstimatedCarbonEmissionsInput
+// GetEstimatedWaterAllocationPaginator is a paginator for
+// GetEstimatedWaterAllocation
+type GetEstimatedWaterAllocationPaginator struct {
+	options   GetEstimatedWaterAllocationPaginatorOptions
+	client    GetEstimatedWaterAllocationAPIClient
+	params    *GetEstimatedWaterAllocationInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewGetEstimatedCarbonEmissionsPaginator returns a new
-// GetEstimatedCarbonEmissionsPaginator
-func NewGetEstimatedCarbonEmissionsPaginator(client GetEstimatedCarbonEmissionsAPIClient, params *GetEstimatedCarbonEmissionsInput, optFns ...func(*GetEstimatedCarbonEmissionsPaginatorOptions)) *GetEstimatedCarbonEmissionsPaginator {
+// NewGetEstimatedWaterAllocationPaginator returns a new
+// GetEstimatedWaterAllocationPaginator
+func NewGetEstimatedWaterAllocationPaginator(client GetEstimatedWaterAllocationAPIClient, params *GetEstimatedWaterAllocationInput, optFns ...func(*GetEstimatedWaterAllocationPaginatorOptions)) *GetEstimatedWaterAllocationPaginator {
 	if params == nil {
-		params = &GetEstimatedCarbonEmissionsInput{}
+		params = &GetEstimatedWaterAllocationInput{}
 	}
 
-	options := GetEstimatedCarbonEmissionsPaginatorOptions{}
+	options := GetEstimatedWaterAllocationPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -183,7 +178,7 @@ func NewGetEstimatedCarbonEmissionsPaginator(client GetEstimatedCarbonEmissionsA
 		fn(&options)
 	}
 
-	return &GetEstimatedCarbonEmissionsPaginator{
+	return &GetEstimatedWaterAllocationPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -193,12 +188,12 @@ func NewGetEstimatedCarbonEmissionsPaginator(client GetEstimatedCarbonEmissionsA
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *GetEstimatedCarbonEmissionsPaginator) HasMorePages() bool {
+func (p *GetEstimatedWaterAllocationPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next GetEstimatedCarbonEmissions page.
-func (p *GetEstimatedCarbonEmissionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEstimatedCarbonEmissionsOutput, error) {
+// NextPage retrieves the next GetEstimatedWaterAllocation page.
+func (p *GetEstimatedWaterAllocationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEstimatedWaterAllocationOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -215,7 +210,7 @@ func (p *GetEstimatedCarbonEmissionsPaginator) NextPage(ctx context.Context, opt
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.GetEstimatedCarbonEmissions(ctx, &params, optFns...)
+	result, err := p.client.GetEstimatedWaterAllocation(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -234,10 +229,10 @@ func (p *GetEstimatedCarbonEmissionsPaginator) NextPage(ctx context.Context, opt
 	return result, nil
 }
 
-// GetEstimatedCarbonEmissionsAPIClient is a client that implements the
-// GetEstimatedCarbonEmissions operation.
-type GetEstimatedCarbonEmissionsAPIClient interface {
-	GetEstimatedCarbonEmissions(context.Context, *GetEstimatedCarbonEmissionsInput, ...func(*Options)) (*GetEstimatedCarbonEmissionsOutput, error)
+// GetEstimatedWaterAllocationAPIClient is a client that implements the
+// GetEstimatedWaterAllocation operation.
+type GetEstimatedWaterAllocationAPIClient interface {
+	GetEstimatedWaterAllocation(context.Context, *GetEstimatedWaterAllocationInput, ...func(*Options)) (*GetEstimatedWaterAllocationOutput, error)
 }
 
-var _ GetEstimatedCarbonEmissionsAPIClient = (*Client)(nil)
+var _ GetEstimatedWaterAllocationAPIClient = (*Client)(nil)

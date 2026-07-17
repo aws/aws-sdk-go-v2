@@ -568,6 +568,7 @@ func TestCheckRequestSnapshot_CreateVoiceConnectorGroup(t *testing.T) {
 				Priority:         ptr.Int32(1),
 			},
 		},
+		CallDistributionType: types.CallDistributionType("PriorityWeightedDistribution"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3007,6 +3008,7 @@ func TestCheckRequestSnapshot_UpdateVoiceConnectorGroup(t *testing.T) {
 				Priority:         ptr.Int32(1),
 			},
 		},
+		CallDistributionType: types.CallDistributionType("PriorityWeightedDistribution"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3506,6 +3508,7 @@ func TestUpdateRequestSnapshot_CreateVoiceConnectorGroup(t *testing.T) {
 				Priority:         ptr.Int32(1),
 			},
 		},
+		CallDistributionType: types.CallDistributionType("PriorityWeightedDistribution"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5945,6 +5948,7 @@ func TestUpdateRequestSnapshot_UpdateVoiceConnectorGroup(t *testing.T) {
 				Priority:         ptr.Int32(1),
 			},
 		},
+		CallDistributionType: types.CallDistributionType("PriorityWeightedDistribution"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

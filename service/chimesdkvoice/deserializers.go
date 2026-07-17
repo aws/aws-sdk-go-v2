@@ -1860,6 +1860,9 @@ func awsRestjson1_deserializeOpErrorCreateVoiceConnectorGroup(response *smithyht
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
 
@@ -5462,6 +5465,9 @@ func awsRestjson1_deserializeOpErrorGetSipMediaApplicationAlexaSkillConfiguratio
 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("GoneException", errorCode):
+		return awsRestjson1_deserializeErrorGoneException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
@@ -9248,6 +9254,9 @@ func awsRestjson1_deserializeOpErrorListSipRules(response *smithyhttp.Response, 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceFailureException", errorCode):
 		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
 
@@ -10641,6 +10650,9 @@ func awsRestjson1_deserializeOpErrorPutSipMediaApplicationAlexaSkillConfiguratio
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
+	case strings.EqualFold("GoneException", errorCode):
+		return awsRestjson1_deserializeErrorGoneException(response, errorBody)
+
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
@@ -11488,6 +11500,9 @@ func awsRestjson1_deserializeOpErrorPutVoiceConnectorOrigination(response *smith
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
@@ -16077,7 +16092,7 @@ func awsRestjson1_deserializeDocumentCallDetails(v **types.CallDetails, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected VoiceConnectorId to be of type string, got %T instead", value)
 				}
 				sv.VoiceConnectorId = ptr.String(jtv)
 			}
@@ -17320,6 +17335,15 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				sv.OrderId = ptr.String(jtv)
 			}
 
+		case "PhoneNumberArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PhoneNumberArn = ptr.String(jtv)
+			}
+
 		case "PhoneNumberId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17803,13 +17827,9 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrder(v **types.PhoneNumberOrder
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Iso8601Timestamp to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				t, err := smithytime.ParseDateTime(jtv)
-				if err != nil {
-					return err
-				}
-				sv.FocDate = ptr.Time(t)
+				sv.FocDate = ptr.String(jtv)
 			}
 
 		case "OrderedPhoneNumbers":
@@ -18150,7 +18170,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected VoiceConnectorId to be of type string, got %T instead", value)
 				}
 				sv.VoiceConnectorId = ptr.String(jtv)
 			}
@@ -19928,7 +19948,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected VoiceConnectorId to be of type string, got %T instead", value)
 				}
 				sv.VoiceConnectorId = ptr.String(jtv)
 			}
@@ -20000,6 +20020,15 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 
 	for key, value := range shape {
 		switch key {
+		case "CallDistributionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CallDistributionType to be of type string, got %T instead", value)
+				}
+				sv.CallDistributionType = types.CallDistributionType(jtv)
+			}
+
 		case "CreatedTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20140,7 +20169,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorItem(v **types.VoiceConnector
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected VoiceConnectorId to be of type string, got %T instead", value)
 				}
 				sv.VoiceConnectorId = ptr.String(jtv)
 			}
@@ -20248,7 +20277,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorSettings(v **types.VoiceConne
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
 				}
 				sv.CdrBucket = ptr.String(jtv)
 			}

@@ -99,8 +99,8 @@ type CreateClusterInput struct {
 	// The node type to be provisioned for the cluster. For information about node
 	// types, go to [Working with Clusters]in the Amazon Redshift Cluster Management Guide.
 	//
-	// Valid Values: dc2.large | dc2.8xlarge | rg.xlarge | rg.4xlarge | ra3.large |
-	// ra3.xlplus | ra3.4xlarge | ra3.16xlarge
+	// Valid Values: dc2.large | dc2.8xlarge | rg.large | rg.xlarge | rg.4xlarge |
+	// rg.12xlarge | ra3.large | ra3.xlplus | ra3.4xlarge | ra3.16xlarge
 	//
 	// [Working with Clusters]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
 	//

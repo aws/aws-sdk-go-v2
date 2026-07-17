@@ -10510,6 +10510,15 @@ func awsRestjson1_deserializeOpDocumentGetRunTaskOutput(v **GetRunTaskOutput, va
 				sv.TaskId = ptr.String(jtv)
 			}
 
+		case "uuid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskUuid to be of type string, got %T instead", value)
+				}
+				sv.Uuid = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -27334,6 +27343,15 @@ func awsRestjson1_deserializeDocumentTaskListItem(v **types.TaskListItem, value 
 					return fmt.Errorf("expected TaskId to be of type string, got %T instead", value)
 				}
 				sv.TaskId = ptr.String(jtv)
+			}
+
+		case "uuid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskUuid to be of type string, got %T instead", value)
+				}
+				sv.Uuid = ptr.String(jtv)
 			}
 
 		default:

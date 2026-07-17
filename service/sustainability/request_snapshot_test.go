@@ -270,6 +270,91 @@ func TestCheckRequestSnapshot_GetEstimatedCarbonEmissionsDimensionValues(t *test
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_GetEstimatedWaterAllocation(t *testing.T) {
+	input := &GetEstimatedWaterAllocationInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AllocationTypes: []types.WaterAllocationType{
+			types.WaterAllocationType("TOTAL_WATER_WITHDRAWALS"),
+			types.WaterAllocationType("TOTAL_WATER_WITHDRAWALS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEstimatedWaterAllocation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEstimatedWaterAllocation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetEstimatedWaterAllocationDimensionValues(t *testing.T) {
+	input := &GetEstimatedWaterAllocationDimensionValuesInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Dimensions: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEstimatedWaterAllocationDimensionValues"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_GetEstimatedCarbonEmissions(t *testing.T) {
 	input := &GetEstimatedCarbonEmissionsInput{
 		TimePeriod: &types.TimePeriod{
@@ -354,6 +439,91 @@ func TestUpdateRequestSnapshot_GetEstimatedCarbonEmissionsDimensionValues(t *tes
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEstimatedCarbonEmissionsDimensionValues"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetEstimatedWaterAllocation(t *testing.T) {
+	input := &GetEstimatedWaterAllocationInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		GroupBy: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		FilterBy: &types.FilterExpression{
+			Dimensions: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AllocationTypes: []types.WaterAllocationType{
+			types.WaterAllocationType("TOTAL_WATER_WITHDRAWALS"),
+			types.WaterAllocationType("TOTAL_WATER_WITHDRAWALS"),
+		},
+		Granularity: types.TimeGranularity("YEARLY_CALENDAR"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEstimatedWaterAllocation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEstimatedWaterAllocation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetEstimatedWaterAllocationDimensionValues(t *testing.T) {
+	input := &GetEstimatedWaterAllocationDimensionValuesInput{
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			End:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Dimensions: []types.Dimension{
+			types.Dimension("USAGE_ACCOUNT_ID"),
+			types.Dimension("USAGE_ACCOUNT_ID"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEstimatedWaterAllocationDimensionValues"); err != nil {
 		t.Fatal(err)
 	}
 }

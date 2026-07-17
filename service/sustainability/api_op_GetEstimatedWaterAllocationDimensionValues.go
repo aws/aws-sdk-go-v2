@@ -13,31 +13,30 @@ import (
 // Returns the possible dimension values available for a customer's account. We
 // recommend using pagination to ensure that the operation returns quickly and
 // successfully.
-func (c *Client) GetEstimatedCarbonEmissionsDimensionValues(ctx context.Context, params *GetEstimatedCarbonEmissionsDimensionValuesInput, optFns ...func(*Options)) (*GetEstimatedCarbonEmissionsDimensionValuesOutput, error) {
+func (c *Client) GetEstimatedWaterAllocationDimensionValues(ctx context.Context, params *GetEstimatedWaterAllocationDimensionValuesInput, optFns ...func(*Options)) (*GetEstimatedWaterAllocationDimensionValuesOutput, error) {
 	if params == nil {
-		params = &GetEstimatedCarbonEmissionsDimensionValuesInput{}
+		params = &GetEstimatedWaterAllocationDimensionValuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEstimatedCarbonEmissionsDimensionValues", params, optFns, c.addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEstimatedWaterAllocationDimensionValues", params, optFns, c.addOperationGetEstimatedWaterAllocationDimensionValuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEstimatedCarbonEmissionsDimensionValuesOutput)
+	out := result.(*GetEstimatedWaterAllocationDimensionValuesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEstimatedCarbonEmissionsDimensionValuesInput struct {
+type GetEstimatedWaterAllocationDimensionValuesInput struct {
 
-	// The dimensions available for grouping estimated carbon emissions.
+	// The dimensions available for grouping estimated water allocation.
 	//
 	// This member is required.
 	Dimensions []types.Dimension
 
 	//  The date range for fetching the dimension values. The range must include the
-	// start date of a month for that month's dimensions to be included in the
-	// response.
+	// start date of a year for that year's data to be included in the response.
 	//
 	// This member is required.
 	TimePeriod *types.TimePeriod
@@ -52,14 +51,16 @@ type GetEstimatedCarbonEmissionsDimensionValuesInput struct {
 	noSmithyDocumentSerde
 }
 
-type GetEstimatedCarbonEmissionsDimensionValuesOutput struct {
+type GetEstimatedWaterAllocationDimensionValuesOutput struct {
+
+	// The list of possible dimensions over which the allocation data is aggregated.
+	//
+	// This member is required.
+	Results []types.DimensionEntry
 
 	// The pagination token indicating there are additional pages available. You can
 	// use the token in a following request to fetch the next set of results.
 	NextToken *string
-
-	// The list of possible dimensions over which the emissions data is aggregated.
-	Results []types.DimensionEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,12 +68,12 @@ type GetEstimatedCarbonEmissionsDimensionValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedCarbonEmissionsDimensionValues{}, middleware.After)
+func (c *Client) addOperationGetEstimatedWaterAllocationDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedWaterAllocationDimensionValues{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEstimatedCarbonEmissionsDimensionValues{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEstimatedWaterAllocationDimensionValues{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -101,10 +102,10 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewar
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetEstimatedCarbonEmissionsDimensionValuesValidationMiddleware(stack); err != nil {
+	if err = addOpGetEstimatedWaterAllocationDimensionValuesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEstimatedCarbonEmissionsDimensionValues"), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetEstimatedWaterAllocationDimensionValues"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,9 +126,9 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewar
 	return nil
 }
 
-// GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions is the paginator
-// options for GetEstimatedCarbonEmissionsDimensionValues
-type GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions struct {
+// GetEstimatedWaterAllocationDimensionValuesPaginatorOptions is the paginator
+// options for GetEstimatedWaterAllocationDimensionValues
+type GetEstimatedWaterAllocationDimensionValuesPaginatorOptions struct {
 	// The maximum number of results to return in a single call. Default is 1000.
 	Limit int32
 
@@ -136,24 +137,24 @@ type GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// GetEstimatedCarbonEmissionsDimensionValuesPaginator is a paginator for
-// GetEstimatedCarbonEmissionsDimensionValues
-type GetEstimatedCarbonEmissionsDimensionValuesPaginator struct {
-	options   GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions
-	client    GetEstimatedCarbonEmissionsDimensionValuesAPIClient
-	params    *GetEstimatedCarbonEmissionsDimensionValuesInput
+// GetEstimatedWaterAllocationDimensionValuesPaginator is a paginator for
+// GetEstimatedWaterAllocationDimensionValues
+type GetEstimatedWaterAllocationDimensionValuesPaginator struct {
+	options   GetEstimatedWaterAllocationDimensionValuesPaginatorOptions
+	client    GetEstimatedWaterAllocationDimensionValuesAPIClient
+	params    *GetEstimatedWaterAllocationDimensionValuesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewGetEstimatedCarbonEmissionsDimensionValuesPaginator returns a new
-// GetEstimatedCarbonEmissionsDimensionValuesPaginator
-func NewGetEstimatedCarbonEmissionsDimensionValuesPaginator(client GetEstimatedCarbonEmissionsDimensionValuesAPIClient, params *GetEstimatedCarbonEmissionsDimensionValuesInput, optFns ...func(*GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions)) *GetEstimatedCarbonEmissionsDimensionValuesPaginator {
+// NewGetEstimatedWaterAllocationDimensionValuesPaginator returns a new
+// GetEstimatedWaterAllocationDimensionValuesPaginator
+func NewGetEstimatedWaterAllocationDimensionValuesPaginator(client GetEstimatedWaterAllocationDimensionValuesAPIClient, params *GetEstimatedWaterAllocationDimensionValuesInput, optFns ...func(*GetEstimatedWaterAllocationDimensionValuesPaginatorOptions)) *GetEstimatedWaterAllocationDimensionValuesPaginator {
 	if params == nil {
-		params = &GetEstimatedCarbonEmissionsDimensionValuesInput{}
+		params = &GetEstimatedWaterAllocationDimensionValuesInput{}
 	}
 
-	options := GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions{}
+	options := GetEstimatedWaterAllocationDimensionValuesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -162,7 +163,7 @@ func NewGetEstimatedCarbonEmissionsDimensionValuesPaginator(client GetEstimatedC
 		fn(&options)
 	}
 
-	return &GetEstimatedCarbonEmissionsDimensionValuesPaginator{
+	return &GetEstimatedWaterAllocationDimensionValuesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -172,12 +173,12 @@ func NewGetEstimatedCarbonEmissionsDimensionValuesPaginator(client GetEstimatedC
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *GetEstimatedCarbonEmissionsDimensionValuesPaginator) HasMorePages() bool {
+func (p *GetEstimatedWaterAllocationDimensionValuesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next GetEstimatedCarbonEmissionsDimensionValues page.
-func (p *GetEstimatedCarbonEmissionsDimensionValuesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEstimatedCarbonEmissionsDimensionValuesOutput, error) {
+// NextPage retrieves the next GetEstimatedWaterAllocationDimensionValues page.
+func (p *GetEstimatedWaterAllocationDimensionValuesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEstimatedWaterAllocationDimensionValuesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -194,7 +195,7 @@ func (p *GetEstimatedCarbonEmissionsDimensionValuesPaginator) NextPage(ctx conte
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.GetEstimatedCarbonEmissionsDimensionValues(ctx, &params, optFns...)
+	result, err := p.client.GetEstimatedWaterAllocationDimensionValues(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -213,10 +214,10 @@ func (p *GetEstimatedCarbonEmissionsDimensionValuesPaginator) NextPage(ctx conte
 	return result, nil
 }
 
-// GetEstimatedCarbonEmissionsDimensionValuesAPIClient is a client that implements
-// the GetEstimatedCarbonEmissionsDimensionValues operation.
-type GetEstimatedCarbonEmissionsDimensionValuesAPIClient interface {
-	GetEstimatedCarbonEmissionsDimensionValues(context.Context, *GetEstimatedCarbonEmissionsDimensionValuesInput, ...func(*Options)) (*GetEstimatedCarbonEmissionsDimensionValuesOutput, error)
+// GetEstimatedWaterAllocationDimensionValuesAPIClient is a client that implements
+// the GetEstimatedWaterAllocationDimensionValues operation.
+type GetEstimatedWaterAllocationDimensionValuesAPIClient interface {
+	GetEstimatedWaterAllocationDimensionValues(context.Context, *GetEstimatedWaterAllocationDimensionValuesInput, ...func(*Options)) (*GetEstimatedWaterAllocationDimensionValuesOutput, error)
 }
 
-var _ GetEstimatedCarbonEmissionsDimensionValuesAPIClient = (*Client)(nil)
+var _ GetEstimatedWaterAllocationDimensionValuesAPIClient = (*Client)(nil)

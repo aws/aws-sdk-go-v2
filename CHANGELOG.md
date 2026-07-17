@@ -1,3 +1,24 @@
+# Release (2026-07-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.31.0](service/chimesdkvoice/CHANGELOG.md#v1310-2026-07-16)
+  * **Feature**: Marked CreateProxySession, DeleteProxySession, GetProxySession, ListProxySessions, UpdateProxySession, PutVoiceConnectorProxy, DeleteVoiceConnectorProxy, and GetVoiceConnectorProxy as deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.63.0](service/emr/CHANGELOG.md#v1630-2026-07-16)
+  * **Feature**: Amazon EMR updates the Session object returned by GetSession API
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.48.0](service/omics/CHANGELOG.md#v1480-2026-07-16)
+  * **Feature**: Adds support for returning the task UUID (universally unique identifier) in GetRunTask and ListRunTasks responses
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.64.2](service/redshift/CHANGELOG.md#v1642-2026-07-16)
+  * **Documentation**: Amazon Redshift - Added support for rg.large and rg.12xlarge node types in CreateCluster, ModifyCluster, and ResizeCluster API operations.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.105.2](service/s3/CHANGELOG.md#v11052-2026-07-16)
+  * **Documentation**: Documentation update for removing the 30 day minimum restriction for transition to Standard-IA or OneZone-IA storage classes
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.259.0](service/sagemaker/CHANGELOG.md#v12590-2026-07-16)
+  * **Feature**: Release support for g7 instance type for SageMaker inference endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/sustainability`: [v1.3.0](service/sustainability/CHANGELOG.md#v130-2026-07-16)
+  * **Feature**: Adds support for retrieving estimated water allocation data.
+
 # Release (2026-07-15)
 
 ## Module Highlights

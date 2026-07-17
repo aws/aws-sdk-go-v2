@@ -76,10 +76,42 @@ type EstimatedCarbonEmissions struct {
 	noSmithyDocumentSerde
 }
 
-// Filters emission values by specific dimension values.
+// Contains estimated water allocation data for a specific time period and
+// dimension grouping.
+type EstimatedWaterAllocation struct {
+
+	// The allocation values for the requested water allocation types.
+	//
+	// This member is required.
+	AllocationValues map[string]WaterAllocation
+
+	// The dimensions used to group water allocation values.
+	//
+	// This member is required.
+	DimensionsValues map[string]string
+
+	// The semantic version-formatted string that indicates the methodology version
+	// used to calculate the water allocation values.
+	//
+	// The AWS Sustainability service reflects the most recent model version for every
+	// month. You will not see two entries for the same month with different
+	// ModelVersion values.
+	//
+	// This member is required.
+	ModelVersion *string
+
+	// The reporting period for water allocation values.
+	//
+	// This member is required.
+	TimePeriod *TimePeriod
+
+	noSmithyDocumentSerde
+}
+
+// Filters environmental impact values by specific dimension values.
 type FilterExpression struct {
 
-	// Filters emission values by specific dimension values.
+	// Filters environmental impact values by specific dimension values.
 	Dimensions map[string][]string
 
 	noSmithyDocumentSerde
@@ -111,6 +143,22 @@ type TimePeriod struct {
 	//
 	// This member is required.
 	Start *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a water allocation quantity with its value and unit of measurement.
+type WaterAllocation struct {
+
+	// The unit of measurement for the allocation value.
+	//
+	// This member is required.
+	Unit WaterAllocationUnit
+
+	// The numeric value of the allocation quantity.
+	//
+	// This member is required.
+	Value *float64
 
 	noSmithyDocumentSerde
 }

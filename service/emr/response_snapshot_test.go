@@ -1501,11 +1501,7 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 				},
 			},
 			SessionIdleTimeoutInMinutes: ptr.Int64(1),
-			CertificateAuthority: &types.CertificateAuthority{
-				CertificateArn:  ptr.String("__CertificateArn__"),
-				CertificateData: ptr.String("__CertificateData__"),
-			},
-			ServerUrl: ptr.String("__ServerUrl__"),
+			ServerUrl:                   ptr.String("__ServerUrl__"),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -2745,11 +2741,7 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 					},
 				},
 				SessionIdleTimeoutInMinutes: ptr.Int64(1),
-				CertificateAuthority: &types.CertificateAuthority{
-					CertificateArn:  ptr.String("__CertificateArn__"),
-					CertificateData: ptr.String("__CertificateData__"),
-				},
-				ServerUrl: ptr.String("__ServerUrl__"),
+				ServerUrl:                   ptr.String("__ServerUrl__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -2828,11 +2820,7 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 					},
 				},
 				SessionIdleTimeoutInMinutes: ptr.Int64(1),
-				CertificateAuthority: &types.CertificateAuthority{
-					CertificateArn:  ptr.String("__CertificateArn__"),
-					CertificateData: ptr.String("__CertificateData__"),
-				},
-				ServerUrl: ptr.String("__ServerUrl__"),
+				ServerUrl:                   ptr.String("__ServerUrl__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),

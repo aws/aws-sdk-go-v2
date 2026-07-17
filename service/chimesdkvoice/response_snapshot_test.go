@@ -254,7 +254,7 @@ func TestCheckResponseSnapshot_CreatePhoneNumberOrder(t *testing.T) {
 			},
 			CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			FocDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FocDate:          ptr.String("__FocDate__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePhoneNumberOrder.response")
@@ -474,6 +474,7 @@ func TestCheckResponseSnapshot_CreateVoiceConnectorGroup(t *testing.T) {
 			CreatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			VoiceConnectorGroupArn: ptr.String("__VoiceConnectorGroupArn__"),
+			CallDistributionType:   types.CallDistributionType("PriorityWeightedDistribution"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateVoiceConnectorGroup.response")
@@ -929,6 +930,7 @@ func TestCheckResponseSnapshot_GetPhoneNumber(t *testing.T) {
 		PhoneNumber: &types.PhoneNumber{
 			PhoneNumberId:   ptr.String("__PhoneNumberId__"),
 			E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+			PhoneNumberArn:  ptr.String("__PhoneNumberArn__"),
 			Country:         ptr.String("__Country__"),
 			Type:            types.PhoneNumberType("Local"),
 			ProductType:     types.PhoneNumberProductType("VoiceConnector"),
@@ -998,7 +1000,7 @@ func TestCheckResponseSnapshot_GetPhoneNumberOrder(t *testing.T) {
 			},
 			CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			FocDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FocDate:          ptr.String("__FocDate__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPhoneNumberOrder.response")
@@ -1377,6 +1379,7 @@ func TestCheckResponseSnapshot_GetVoiceConnectorGroup(t *testing.T) {
 			CreatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			VoiceConnectorGroupArn: ptr.String("__VoiceConnectorGroupArn__"),
+			CallDistributionType:   types.CallDistributionType("PriorityWeightedDistribution"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetVoiceConnectorGroup.response")
@@ -1717,7 +1720,7 @@ func TestCheckResponseSnapshot_ListPhoneNumberOrders(t *testing.T) {
 				},
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				FocDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FocDate:          ptr.String("__FocDate__"),
 			},
 			{
 				PhoneNumberOrderId: ptr.String("__PhoneNumberOrderId__"),
@@ -1736,7 +1739,7 @@ func TestCheckResponseSnapshot_ListPhoneNumberOrders(t *testing.T) {
 				},
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				FocDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FocDate:          ptr.String("__FocDate__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1764,6 +1767,7 @@ func TestCheckResponseSnapshot_ListPhoneNumbers(t *testing.T) {
 			{
 				PhoneNumberId:   ptr.String("__PhoneNumberId__"),
 				E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+				PhoneNumberArn:  ptr.String("__PhoneNumberArn__"),
 				Country:         ptr.String("__Country__"),
 				Type:            types.PhoneNumberType("Local"),
 				ProductType:     types.PhoneNumberProductType("VoiceConnector"),
@@ -1799,6 +1803,7 @@ func TestCheckResponseSnapshot_ListPhoneNumbers(t *testing.T) {
 			{
 				PhoneNumberId:   ptr.String("__PhoneNumberId__"),
 				E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+				PhoneNumberArn:  ptr.String("__PhoneNumberArn__"),
 				Country:         ptr.String("__Country__"),
 				Type:            types.PhoneNumberType("Local"),
 				ProductType:     types.PhoneNumberProductType("VoiceConnector"),
@@ -2139,6 +2144,7 @@ func TestCheckResponseSnapshot_ListVoiceConnectorGroups(t *testing.T) {
 				CreatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				VoiceConnectorGroupArn: ptr.String("__VoiceConnectorGroupArn__"),
+				CallDistributionType:   types.CallDistributionType("PriorityWeightedDistribution"),
 			},
 			{
 				VoiceConnectorGroupId: ptr.String("__VoiceConnectorGroupId__"),
@@ -2156,6 +2162,7 @@ func TestCheckResponseSnapshot_ListVoiceConnectorGroups(t *testing.T) {
 				CreatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				VoiceConnectorGroupArn: ptr.String("__VoiceConnectorGroupArn__"),
+				CallDistributionType:   types.CallDistributionType("PriorityWeightedDistribution"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2625,6 +2632,7 @@ func TestCheckResponseSnapshot_RestorePhoneNumber(t *testing.T) {
 		PhoneNumber: &types.PhoneNumber{
 			PhoneNumberId:   ptr.String("__PhoneNumberId__"),
 			E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+			PhoneNumberArn:  ptr.String("__PhoneNumberArn__"),
 			Country:         ptr.String("__Country__"),
 			Type:            types.PhoneNumberType("Local"),
 			ProductType:     types.PhoneNumberProductType("VoiceConnector"),
@@ -2879,6 +2887,7 @@ func TestCheckResponseSnapshot_UpdatePhoneNumber(t *testing.T) {
 		PhoneNumber: &types.PhoneNumber{
 			PhoneNumberId:   ptr.String("__PhoneNumberId__"),
 			E164PhoneNumber: ptr.String("__E164PhoneNumber__"),
+			PhoneNumberArn:  ptr.String("__PhoneNumberArn__"),
 			Country:         ptr.String("__Country__"),
 			Type:            types.PhoneNumberType("Local"),
 			ProductType:     types.PhoneNumberProductType("VoiceConnector"),
@@ -3148,6 +3157,7 @@ func TestCheckResponseSnapshot_UpdateVoiceConnectorGroup(t *testing.T) {
 			CreatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			VoiceConnectorGroupArn: ptr.String("__VoiceConnectorGroupArn__"),
+			CallDistributionType:   types.CallDistributionType("PriorityWeightedDistribution"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateVoiceConnectorGroup.response")

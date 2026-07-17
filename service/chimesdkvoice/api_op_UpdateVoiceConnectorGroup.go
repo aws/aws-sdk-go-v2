@@ -42,6 +42,8 @@ type UpdateVoiceConnectorGroupInput struct {
 	// This member is required.
 	VoiceConnectorItems []types.VoiceConnectorItem
 
+	CallDistributionType types.CallDistributionType
+
 	noSmithyDocumentSerde
 }
 

@@ -1103,6 +1103,11 @@ func awsRestjson1_serializeOpDocumentCreateVoiceConnectorGroupInput(v *CreateVoi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.CallDistributionType) > 0 {
+		ok := object.Key("CallDistributionType")
+		ok.String(string(v.CallDistributionType))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -7731,6 +7736,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVoiceConnectorGroupInput(v *Updat
 func awsRestjson1_serializeOpDocumentUpdateVoiceConnectorGroupInput(v *UpdateVoiceConnectorGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.CallDistributionType) > 0 {
+		ok := object.Key("CallDistributionType")
+		ok.String(string(v.CallDistributionType))
+	}
 
 	if v.Name != nil {
 		ok := object.Key("Name")
