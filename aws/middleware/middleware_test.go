@@ -144,6 +144,26 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			ExpectServerTime:  time.Date(2020, 3, 5, 22, 25, 15, 0, time.UTC),
 			ExpectAttemptSkew: -2 * time.Second,
 		},
+		"cached response with Age header skips skew": {
+			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
+			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
+				out.RawResponse = &smithyhttp.Response{
+					Response: &http.Response{
+						StatusCode: 200,
+						Header: http.Header{
+							"Date": []string{"Thu, 05 Mar 2020 12:00:00 GMT"},
+							"Age":  []string{"14400"},
+						},
+					},
+				}
+				return out, m, err
+			},
+			ResponseAt: func() time.Time {
+				return time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC)
+			},
+			ExpectResponseAt: time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC),
+			// ServerTime and AttemptSkew should NOT be set for cached responses
+		},
 	}
 
 	for name, c := range cases {
